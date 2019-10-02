@@ -8,6 +8,17 @@
     <title>Document</title>
 </head>
 <body>
+    <script type="module">
+        import {sanitize} from "./src/expressions.js";
 
+        // const result = sanitize("property1 == 'a'");
+        // console.log(result);
+
+        // const result = sanitize("${model.property1} - ${model.property2}");
+        // console.log(result);
+
+        const result = sanitize("${model.property1.toUpper()} - ${model.property2}");
+        console.log(result);
+    </script>
 </body>
 </html>
