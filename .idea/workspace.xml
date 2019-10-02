@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/expression.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/expressions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/expression.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,6 +20,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -38,7 +41,33 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Jest.sanitize - expression">
+    <configuration name="sanitize - composite" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/expression.test.js" />
+      <test-names>
+        <test-name value="sanitize - composite" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="sanitize - expression" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/expression.test.js" />
+      <test-names>
+        <test-name value="sanitize - expression" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -52,6 +81,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.sanitize - expression" />
+        <item itemvalue="Jest.sanitize - composite" />
       </list>
     </recent_temporary>
   </component>
@@ -66,7 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1570033006722</updated>
       <workItem from="1570033007793" duration="1795000" />
-      <workItem from="1570041602022" duration="5419000" />
+      <workItem from="1570041602022" duration="6794000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -82,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570046977506</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="adding tests">
+      <created>1570047051236</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1570047051236</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +139,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="expressions working" />
-    <option name="LAST_COMMIT_MESSAGE" value="expressions working" />
+    <MESSAGE value="adding tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding tests" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/expressions.js</url>
+          <line>38</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/expressions.js</url>
+          <line>7</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

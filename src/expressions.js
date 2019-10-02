@@ -7,6 +7,7 @@ export function sanitize(exp) {
     const tokens = tokenize(exp);
     const properties = [];
     const prefix = "context.";
+    const isLiteral = exp.indexOf("${") != -1;
 
     let oldToken = null;
     let path = [];
@@ -20,8 +21,11 @@ export function sanitize(exp) {
             oldToken = token;
 
             if (path.length > 0) {
-                indexes.push(i - path.length);
-                properties.push(extractProperty(`${path.join("")}`));
+                if (isLiteral == false || oldToken == "}") {
+                    indexes.push(i - path.length);
+                    properties.push(extractProperty(`${path.join("")}`));
+                }
+
                 path.length = 0;
             }
 
@@ -86,6 +90,10 @@ function tokenize(exp) {
         else {
             word.push(char);
         }
+    }
+
+    if (word.length > 0) {
+        tokens.push(word.join(""));
     }
 
     return tokens;
