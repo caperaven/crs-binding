@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/compiler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/compiler.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/expressions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/compiler.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/expression.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,8 +45,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration name="compile - calculate" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.sanitize - single">
+    <configuration name="compile - expression with function" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
@@ -56,20 +55,7 @@
       <scope-kind value="TEST" />
       <test-file value="$PROJECT_DIR$/test/compiler.test.js" />
       <test-names>
-        <test-name value="compile - calculate" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="compile - expression" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/compiler.test.js" />
-      <test-names>
-        <test-name value="compile - expression" />
+        <test-name value="compile - expression with function" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -86,7 +72,30 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
+    <configuration name="compile - with function" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/compiler.test.js" />
+      <test-names>
+        <test-name value="compile - with function" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="sanitize - single" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/expression.test.js" />
+      <test-names>
+        <test-name value="sanitize - single" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -101,11 +110,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.compile - calculate" />
-        <item itemvalue="Jest.compile - expression" />
+        <item itemvalue="Jest.sanitize - single" />
         <item itemvalue="Jest.compile - get value" />
+        <item itemvalue="Jest.compile - expression with function" />
+        <item itemvalue="Jest.compile - with function" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +129,7 @@
       <option name="presentableId" value="Default" />
       <updated>1570033006722</updated>
       <workItem from="1570033007793" duration="1795000" />
-      <workItem from="1570041602022" duration="7849000" />
+      <workItem from="1570041602022" duration="9755000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -150,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570048449159</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="adding tests">
+      <created>1570049500917</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1570049500917</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

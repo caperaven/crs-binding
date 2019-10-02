@@ -1,5 +1,11 @@
 import {sanitize} from "./../src/expressions.js"
 
+test("sanitize - single", () => {
+   const result = sanitize("name");
+   expect(result.properties[0]).toBe("name");
+   expect(result.expression).toBe("context.name");
+});
+
 test("sanitize - simple", () => {
    const result = sanitize("property1 == 'a'");
    expect(result.properties.indexOf("property1")).not.toBe("-1");

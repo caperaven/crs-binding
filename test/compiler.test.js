@@ -23,3 +23,13 @@ test ('compile - calculate', () => {
    const fn = compile("${10 + age}");
    expect(fn({age: 10})).toBe("20");
 });
+
+test('compile - get value', () => {
+   const fn = compile("name");
+   expect(fn({name: "test"})).toBe("test");
+});
+
+test('compile - expression with function', () => {
+    const fn = compile("${name.toUpperCase()}");
+    expect(fn({name: "test"})).toBe("TEST");
+});

@@ -4,9 +4,18 @@
  * @returns {{expression: *, properties: *}}
  */
 export function sanitize(exp) {
-    const tokens = tokenize(exp);
-    const properties = [];
     const prefix = "context.";
+    const tokens = tokenize(exp);
+
+    if (tokens.length == 1) {
+        return {
+            isLiteral: false,
+            expression: `${prefix}${exp}`,
+            properties: [exp]
+        }
+    }
+
+    const properties = [];
     const isLiteral = exp.indexOf("${") != -1;
 
     let oldToken = null;
