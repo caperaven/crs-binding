@@ -41,6 +41,7 @@ export function sanitize(exp) {
     }
 
     return {
+        isLiteral: isLiteral,
         expression: tokens.join(""),
         properties: properties
     }
