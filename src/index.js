@@ -1,5 +1,6 @@
 import {compile} from "./compiler.js";
 
 window.crsbinding = {
-    compile: compile
+    _expFn: new Map(),
+    compile: compile,
 };

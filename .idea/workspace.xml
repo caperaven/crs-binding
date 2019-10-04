@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/publish.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/compiler.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,20 +45,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.sanitize - single">
-    <configuration name="compile - get value" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/compiler.test.js" />
-      <test-names>
-        <test-name value="compile - get value" />
-      </test-names>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="sanitize - single" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -70,6 +57,9 @@
       <test-names>
         <test-name value="sanitize - single" />
       </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -104,11 +94,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.test" />
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.sanitize - single" />
-        <item itemvalue="Jest.compile - get value" />
       </list>
     </recent_temporary>
   </component>
@@ -129,7 +119,9 @@
       <workItem from="1570173606881" duration="782000" />
       <workItem from="1570185937965" duration="147000" />
       <workItem from="1570187652195" duration="5000" />
-      <workItem from="1570189544275" duration="1677000" />
+      <workItem from="1570189544275" duration="1895000" />
+      <workItem from="1570191496846" duration="45000" />
+      <workItem from="1570195159123" duration="1086000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -187,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570190944003</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed binding issue with single property expression">
+      <created>1570191432035</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1570191432035</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

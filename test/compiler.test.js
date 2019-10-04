@@ -1,7 +1,15 @@
 import {compile} from "./../src/compiler.js";
 
+beforeAll(() => {
+    global.crsbinding = {
+        _expFn: new Map()
+    }
+});
+
 test("compile - get value", () => {
+    compile("property1 == 'a'");
     const fn = compile("property1 == 'a'");
+
     expect(fn({
         property1: 'a'
     })).toBe(true);
