@@ -32,7 +32,7 @@ function get(obj, prop) {
 }
 
 function set(obj, prop, value) {
-    if (obj._disposing == true) return false;
+    if (prop == "_disposing" || obj._disposing == true) return true;
 
     const backup = Reflect.get(obj, BACKUP);
     const oldValue = Reflect.get(obj, prop);

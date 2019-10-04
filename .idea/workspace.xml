@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/3.observe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,20 +43,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.observer - releaseObserved">
-    <configuration name="enableEvents - on -&gt; notifyPropertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/event-mixin.test.js" />
-      <test-names>
-        <test-name value="enableEvents - on -&gt; notifyPropertyChanged" />
-      </test-names>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Jest.observer - subObjects">
     <configuration name="observer - releaseObserved" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -70,6 +54,19 @@
       <test-file value="$PROJECT_DIR$/test/observer.test.js" />
       <test-names>
         <test-name value="observer - releaseObserved" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="observer - subObjects" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/observer.test.js" />
+      <test-names>
+        <test-name value="observer - subObjects" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -98,11 +95,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.observer - subObjects" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.observer - releaseObserved" />
         <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="Jest.enableEvents - on -&gt; notifyPropertyChanged" />
       </list>
     </recent_temporary>
   </component>
@@ -274,5 +271,17 @@
     <MESSAGE value="adding cache of expressions on compiler" />
     <MESSAGE value="adding events" />
     <option name="LAST_COMMIT_MESSAGE" value="adding events" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/observer.test.js</url>
+          <line>66</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
