@@ -1,0 +1,46 @@
+<!doctype html>
+<body>
+    <div id="name"></div>
+    <div id="lastName"></div>
+
+    <script type="module">
+        import {enableEvents, disableEvents} from "../dist/event-mixin.js";
+
+        class Person {
+            get firstName() {
+                return this._firstName;
+            }
+
+            set firstName(newValue) {
+                this._firstName = newValue;
+                this.notifyPropertyChanged("firstName");
+            }
+
+            get lastName() {
+                return this._lastName;
+            }
+
+            set lastName(newValue) {
+                this._lastName = newValue;
+                this.notifyPropertyChanged("lastName");
+            }
+
+            constructor() {
+                enableEvents(this);
+            }
+
+            dispose() {
+                disableEvents(this);
+            }
+        }
+
+        const john = new Person();
+        john.on("firstName", () => document.querySelector("#name").innerText = john.firstName);
+        john.on("lastName", () => document.querySelector("#lastName").innerText = john.lastName);
+
+        john.firstName = "John";
+        john.lastName = "Doe";
+        john.dispose();
+    </script>
+</body>
+</html>
