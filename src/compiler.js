@@ -16,7 +16,10 @@ export function compileExp(exp) {
         count: 1
     });
 
-    return fn;
+    return {
+        function: fn,
+        parameters: san
+    }
 }
 
 export function releaseExp(exp) {

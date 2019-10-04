@@ -15,7 +15,11 @@ export function disableEvents(obj) {
     delete obj.notifyPropertyChanged;
 }
 
-function when() {
+function when(exp, callback) {
+    let functions = this.__events.get(exp) || [];
+    functions = [...functions, callback];
+    this.__events.set(exp, functions);
+
 
 }
 
