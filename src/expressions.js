@@ -3,7 +3,7 @@
  * @param exp
  * @returns {{expression: *, properties: *}}
  */
-export function sanitize(exp) {
+export function sanitizeExp(exp) {
     const prefix = "context.";
     const tokens = tokenize(exp);
 

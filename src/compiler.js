@@ -1,4 +1,4 @@
-import {sanitize} from "./expressions.js";
+import {sanitizeExp} from "./expressions.js";
 
 export function compileExp(exp) {
     if (crsbinding._expFn.has(exp)) {
@@ -7,7 +7,7 @@ export function compileExp(exp) {
         return x.fn;
     }
 
-    const san = sanitize(exp);
+    const san = sanitizeExp(exp);
     const src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
     const fn = new Function("context", src);
 

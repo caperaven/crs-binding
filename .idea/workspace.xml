@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/observer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/observer.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/event-mixin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/event-mixin.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/expressions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/expression.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,16 +49,16 @@
     </option>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration name="observer - propertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="enableEvents - on -&gt; notifyPropertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/observer.test.js" />
+      <test-file value="$PROJECT_DIR$/test/event-mixin.test.js" />
       <test-names>
-        <test-name value="observer - propertyChanged" />
+        <test-name value="enableEvents - on -&gt; notifyPropertyChanged" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -101,9 +105,9 @@
       <list>
         <item itemvalue="npm.test" />
         <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Jest.enableEvents - on -&gt; notifyPropertyChanged" />
         <item itemvalue="Jest.observer - propertyChanged: complex object" />
         <item itemvalue="Jest.observer - subObjects" />
-        <item itemvalue="Jest.observer - propertyChanged" />
       </list>
     </recent_temporary>
   </component>
@@ -126,7 +130,7 @@
       <workItem from="1570187652195" duration="5000" />
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
-      <workItem from="1570195159123" duration="10738000" />
+      <workItem from="1570195159123" duration="12521000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -212,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570198385483</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="adding cache of expressions on compiler">
+      <created>1570207061914</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1570207061914</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +243,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="expressions working" />
     <MESSAGE value="adding tests" />
     <MESSAGE value="fixed binding issue with single property expression" />
