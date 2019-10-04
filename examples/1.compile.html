@@ -1,0 +1,23 @@
+<!doctype html>
+<body>
+    <section>
+        <h2>Compiled expression result</h2>
+        <div id="result"></div>
+    </section>
+
+    <script>
+        function loaded() {
+            document.querySelector("#result").innerText = crsbinding.compile("${firstName} ${lastName} is ${age} old and lives at \"${address.street}\"")({
+                firstName: "John",
+                lastName: "Doe",
+                age: 20,
+                address: {
+                    street: "No Where"
+                }
+            });
+        }
+    </script>
+
+    <script src="./../dist/crs-binding.min.js" onload="loaded()"></script>
+</body>
+</html>
