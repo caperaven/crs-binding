@@ -1,28 +1,30 @@
 {
-  "name": "crs-binding",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
-    "@babel/preset-env": "^7.6.0",
-    "@types/jest": "^24.0.18",
-    "babel-jest": "^24.9.0",
-    "babel-minify": "^0.5.1",
-    "babel-preset-minify": "^0.5.1",
-    "glob": "^7.1.4",
-    "jest": "^24.9.0",
-    "mkdirp": "^0.5.1"
-  }
+    "name": "crs-binding",
+    "version": "0.0.2",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "example": "examples"
+    },
+    "scripts": {
+        "test": "jest",
+        "bundle": "rollup -c",
+        "build-publish": "rollup -c & node build/publish.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.6.0",
+        "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/preset-env": "^7.6.0",
+        "@types/jest": "^24.0.18",
+        "babel-jest": "^24.9.0",
+        "glob": "^7.1.4",
+        "jest": "^24.9.0",
+        "mkdirp": "^0.5.1",
+        "rollup": "^1.23.0",
+        "rollup-plugin-terser": "^5.1.2"
+    }
 }
