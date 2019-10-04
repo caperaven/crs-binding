@@ -1,6 +1,6 @@
-import {compile} from "./compiler.js";
+import {compileExp} from "./compiler.js";
 
 window.crsbinding = {
     _expFn: new Map(),
-    compile: compile,
+    compile: compileExp,
 };

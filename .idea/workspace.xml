@@ -121,7 +121,7 @@
       <workItem from="1570187652195" duration="5000" />
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
-      <workItem from="1570195159123" duration="1086000" />
+      <workItem from="1570195159123" duration="2666000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -186,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570191432035</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="adding cache of expressions on compiler">
+      <created>1570196387754</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1570196387754</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +216,7 @@
     <MESSAGE value="expressions working" />
     <MESSAGE value="adding tests" />
     <MESSAGE value="fixed binding issue with single property expression" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed binding issue with single property expression" />
+    <MESSAGE value="adding cache of expressions on compiler" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding cache of expressions on compiler" />
   </component>
 </project>

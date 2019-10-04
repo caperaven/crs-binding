@@ -1,8 +1,10 @@
 import {sanitize} from "./expressions.js";
 
-export function compile(exp) {
+export function compileExp(exp) {
     if (crsbinding._expFn.has(exp)) {
-        return crsbinding._expFn.get(exp).fn;
+        const x = crsbinding._expFn.get(exp);
+        x.count += 1;
+        return x.fn;
     }
 
     const san = sanitize(exp);
@@ -15,4 +17,15 @@ export function compile(exp) {
     });
 
     return fn;
+}
+
+export function releaseExp(exp) {
+    if (crsbinding._expFn.has(exp)) {
+        const x = crsbinding._expFn.get(exp);
+        x.count -= 1;
+
+        if (x.count == 0) {
+            crsbinding._expFn.delete(exp);
+        }
+    }
 }

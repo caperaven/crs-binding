@@ -1,4 +1,4 @@
-import {compile} from "./../src/compiler.js";
+import {compileExp, releaseExp} from "./../src/compiler.js";
 
 beforeAll(() => {
     global.crsbinding = {
@@ -6,9 +6,22 @@ beforeAll(() => {
     }
 });
 
-test("compile - get value", () => {
-    compile("property1 == 'a'");
-    const fn = compile("property1 == 'a'");
+test("releaseExp - count down", () => {
+    const exp = "property1 == 'a'";
+    compileExp(exp);
+    compileExp(exp);
+
+    expect(global.crsbinding._expFn.get(exp).count).toEqual(2);
+
+    releaseExp(exp);
+    expect(global.crsbinding._expFn.get("property1 == 'a'").count).toEqual(1);
+    releaseExp(exp);
+    expect(global.crsbinding._expFn.get("property1 == 'a'")).toBeUndefined();
+});
+
+test("compileExp - get value", () => {
+    const exp = "property1 == 'a'";
+    const fn = compileExp(exp);
 
     expect(fn({
         property1: 'a'
@@ -19,25 +32,25 @@ test("compile - get value", () => {
     })).toBe(false);
 });
 
-test ('compile - expression', () => {
-    const fn = compile("${name} is ${age} years old");
+test ('compileExp - expression', () => {
+    const fn = compileExp("${name} is ${age} years old");
     expect(fn({
         name: "John",
         age: 10
     })).toBe("John is 10 years old");
 });
 
-test ('compile - calculate', () => {
-   const fn = compile("${10 + age}");
+test ('compileExp - calculate', () => {
+   const fn = compileExp("${10 + age}");
    expect(fn({age: 10})).toBe("20");
 });
 
-test('compile - get value', () => {
-   const fn = compile("name");
+test('compileExp - get value', () => {
+   const fn = compileExp("name");
    expect(fn({name: "test"})).toBe("test");
 });
 
-test('compile - expression with function', () => {
-    const fn = compile("${name.toUpperCase()}");
+test('compileExp - expression with function', () => {
+    const fn = compileExp("${name.toUpperCase()}");
     expect(fn({name: "test"})).toBe("TEST");
 });
