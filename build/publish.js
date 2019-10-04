@@ -8,6 +8,7 @@ class Publish {
         const instance = new Publish();
         instance.copyFiles("./dist/*.*");
         instance.copyFiles("./readme.md");
+        instance.copyFiles("./examples/*.html", "examples");
         instance.bumpVersion();
     }
     
@@ -15,10 +16,11 @@ class Publish {
         mkdirp.sync(path.resolve("./publish"));
     }
 
-    async copyFiles(query) {
+    async copyFiles(query, folder) {
         const files = await this.getFiles(query);
         for (let file of files) {
-            const target = "./publish/"; //path.dirname(file).split("./").join("./publish/");
+            const target = folder != null ? `./publish/${folder}/` : `./publish/`;
+
             const fileName = path.basename(file);
             this.initFolder(target);
             fs.copyFileSync(file, `${target}/${fileName}`);
