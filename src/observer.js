@@ -39,6 +39,8 @@ function set(obj, prop, value) {
 
     Reflect.set(obj, prop, value);
 
+    obj.notifyPropertyChanged(prop);
+
     if (obj.propertyChanged != null) {
         obj.propertyChanged(value, oldValue);
     }

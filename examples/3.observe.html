@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<body>
+    <div id="name"></div>
+    <div id="lastName"></div>
+
+    <script>
+        function loaded() {
+            const obj = crsbinding.observe({
+                firstName: "name",
+                lastName: "lastName"
+            });
+
+            obj.on("firstName", () => document.querySelector("#name").innerText = obj.firstName);
+            obj.on("lastName", () => document.querySelector("#lastName").innerText = obj.lastName);
+
+            obj.firstName = "John";
+            obj.lastName = "Doe";
+
+            crsbinding.releaseObserved(obj);
+        }
+    </script>
+
+    <script src="./../dist/crs-binding.js" onload="loaded()"></script>
+</body>
+</html>
