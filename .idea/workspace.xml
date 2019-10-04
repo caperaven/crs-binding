@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/observer.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +44,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
+  <component name="RunManager" selected="Jest.observer - releaseObserved">
     <configuration name="enableEvents - on -&gt; notifyPropertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -58,7 +58,7 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="observer - propertyChanged: complex object" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="observer - releaseObserved" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
@@ -67,7 +67,7 @@
       <scope-kind value="TEST" />
       <test-file value="$PROJECT_DIR$/test/observer.test.js" />
       <test-names>
-        <test-name value="observer - propertyChanged: complex object" />
+        <test-name value="observer - releaseObserved" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -96,11 +96,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
+        <item itemvalue="Jest.observer - releaseObserved" />
         <item itemvalue="npm.test" />
         <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.enableEvents - on -&gt; notifyPropertyChanged" />
-        <item itemvalue="Jest.observer - propertyChanged: complex object" />
       </list>
     </recent_temporary>
   </component>
@@ -123,7 +123,7 @@
       <workItem from="1570187652195" duration="5000" />
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
-      <workItem from="1570195159123" duration="12760000" />
+      <workItem from="1570195159123" duration="13498000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -223,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570208846895</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="adding events">
+      <created>1570209076964</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1570209076964</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -5,6 +5,8 @@ export function observe(obj) {
     Reflect.set(obj, PROXY, true);
     Reflect.set(obj, BACKUP, {});
 
+    crsbinding.enableEvents(obj);
+
     const proxy = new Proxy(obj, {
         get: get,
         set: set
@@ -14,6 +16,8 @@ export function observe(obj) {
 }
 
 export function releaseObserved(obj) {
+    crsbinding.disableEvents(obj);
+
     if (obj.dispose != null) {
         obj._disposing = true;
         obj.dispose();
