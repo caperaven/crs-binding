@@ -13,7 +13,7 @@ export default [
     {
         input: "src/events/event-mixin.js",
         output: [
-            {file: 'dist/event-mixin.js', format: 'es'}
+            {file: 'dist/crs-event-mixin.js', format: 'es'}
         ],
         plugins: [
             terser()
@@ -22,7 +22,7 @@ export default [
     {
         input: "src/binding/bindable-element.js",
         output: [
-            {file: 'dist/bindable-element.js', format: 'es', sourcemap: false}
+            {file: 'dist/crs-bindable-element.js', format: 'es', sourcemap: false}
         ],
         plugins: [
             terser()
