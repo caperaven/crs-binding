@@ -1,0 +1,16 @@
+<h2>${title}</h2>
+
+<p>
+    Paragraph
+</p>
+
+<input value.bind="title" data-type="text">
+<input value.two-way="title" data-type="text">
+<input value.one-way="title" data-type="text">
+<input value.once="title" data-type="text">
+
+<input aria-hidden.when="title == 'a' ? true : false" data-type="text">
+
+<button click.call="btnClicked"></button>
+<button click.call="btnClicked($event)"></button>
+<button click.call="btnClicked('hello world')"></button>
