@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/4.when.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/4.when.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/event-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/event-mixin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/binding-expressions.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/binding-expressions.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +123,7 @@
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
       <workItem from="1570195159123" duration="16273000" />
-      <workItem from="1570260885007" duration="6548000" />
+      <workItem from="1570260885007" duration="7955000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -275,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570262972267</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="event clean up with tests">
+      <created>1570308589998</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1570308589998</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,18 +306,7 @@
     <MESSAGE value="fixed binding issue with single property expression" />
     <MESSAGE value="adding cache of expressions on compiler" />
     <MESSAGE value="adding events" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding events" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/event-mixin.js</url>
-          <line>35</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="event clean up with tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="event clean up with tests" />
   </component>
 </project>
