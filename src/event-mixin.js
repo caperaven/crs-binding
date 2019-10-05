@@ -7,13 +7,22 @@ export function enableEvents(obj) {
     obj.when = when;
     obj.on = on;
     obj.notifyPropertyChanged = notifyPropertyChanged;
+
+    obj.removeOn = removeOn;
+    obj.removeWhen = removeWhen;
 }
 
 export function disableEvents(obj) {
     obj.__events.clear();
-    obj.__conditions.clear();
-
     delete obj.__events;
+
+    obj.__conditions.forEach((cnd) => {
+        delete cnd.fn;
+        delete cnd.properties;
+    });
+    obj.__conditions.clear();
+    delete obj.__conditions;
+
     delete obj.when;
     delete obj.on;
     delete obj.notifyPropertyChanged;
@@ -45,10 +54,35 @@ function when(exp, callback) {
     }
 }
 
+function removeWhen(exp, callback) {
+    this.removeOn(exp, callback);
+    const cnd = this.__conditions.get(exp);
+    for (let property of cnd.properties) {
+        this.removeOn(property, cnd.fn);
+    }
+
+    delete cnd.fn;
+    delete cnd.properties;
+    this.__conditions.delete(exp);
+}
+
 function on(property, callback) {
     let functions = this.__events.get(property) || [];
     functions = [...functions, callback];
     this.__events.set(property, functions);
+}
+
+function removeOn(property, callback) {
+    const functions = this.__events.get(property) || [];
+    const index = functions.indexOf(callback);
+
+    if (index != -1) {
+        functions.splice(index, 1);
+    }
+
+    if (functions.length == 0) {
+        this.__events.delete(property);
+    }
 }
 
 function notifyPropertyChanged(property) {

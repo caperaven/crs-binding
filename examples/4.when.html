@@ -8,10 +8,13 @@
                 lastName: "lastName"
             });
 
-            obj.when("firstName == 'John' && lastName == 'Doe'", () => alert("this is the one"));
+            const fn = () => alert("this is the one");
+            obj.when("firstName == 'John' && lastName == 'Doe'", fn);
 
             obj.firstName = "John";
             obj.lastName = "Doe";
+
+            obj.removeWhen("firstName == 'John' && lastName == 'Doe'", fn);
 
             crsbinding.releaseObserved(obj);
         }

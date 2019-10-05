@@ -4,22 +4,22 @@ export function compileExp(exp) {
     if (crsbinding._expFn.has(exp)) {
         const x = crsbinding._expFn.get(exp);
         x.count += 1;
-        return x.fn;
+        return x;
     }
 
     const san = sanitizeExp(exp);
     const src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
     const fn = new Function("context", src);
 
-    crsbinding._expFn.set(exp, {
-        fn: fn,
-        count: 1
-    });
-
-    return {
+    const result = {
         function: fn,
-        parameters: san
-    }
+        parameters: san,
+        count: 1
+    };
+
+    crsbinding._expFn.set(exp, result);
+
+    return result;
 }
 
 export function releaseExp(exp) {
