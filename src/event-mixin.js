@@ -1,5 +1,8 @@
+import {compileExp} from "./compiler.js"
+
 export function enableEvents(obj) {
     obj.__events = new Map();
+    obj.__conditions = new Map();
 
     obj.when = when;
     obj.on = on;
@@ -8,6 +11,7 @@ export function enableEvents(obj) {
 
 export function disableEvents(obj) {
     obj.__events.clear();
+    obj.__conditions.clear();
 
     delete obj.__events;
     delete obj.when;
@@ -20,7 +24,23 @@ function when(exp, callback) {
     functions = [...functions, callback];
     this.__events.set(exp, functions);
 
+    const cmp = compileExp(exp);
+    let fn = this.__conditions.get(exp);
+    if (fn == null) {
+        fn = () => {
+            if (cmp.function(this) == true) {
+                for (let call of functions) {
+                    call();
+                }
+            }
+        };
+        this.__conditions.set(exp, fn);
+    }
 
+    const properties = cmp.parameters.properties;
+    for (let property of properties) {
+        this.on(property, fn);
+    }
 }
 
 function on(property, callback) {
@@ -34,6 +54,6 @@ function notifyPropertyChanged(property) {
 
     const functions = this.__events.get(property);
     for(let fn of functions) {
-        fn();
+        fn(property, this[property]);
     }
 }

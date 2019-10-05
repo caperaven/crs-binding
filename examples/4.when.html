@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<body>
+    <script>
+        function loaded() {
+            const obj = crsbinding.observe({
+                firstName: "name",
+                lastName: "lastName"
+            });
+
+            obj.when("firstName == 'John' && lastName == 'Doe'", () => alert("this is the one"));
+
+            obj.firstName = "John";
+            obj.lastName = "Doe";
+
+            crsbinding.releaseObserved(obj);
+        }
+    </script>
+
+    <script src="./../dist/crs-binding.js" onload="loaded()"></script>
+</body>
+</html>
