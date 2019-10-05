@@ -1,7 +1,7 @@
-import {compileExp, releaseExp} from "./compiler.js";
-import {enableEvents, disableEvents} from "./event-mixin.js";
-import {observe, releaseObserved} from "./observer.js";
-import {sanitizeExp} from "./expressions.js";
+import {compileExp, releaseExp} from "./events/compiler.js";
+import {enableEvents, disableEvents} from "./events/event-mixin.js";
+import {observe, releaseObserved} from "./events/observer.js";
+import {sanitizeExp} from "./events/expressions.js";
 
 window.crsbinding = {
     _expFn: new Map(),

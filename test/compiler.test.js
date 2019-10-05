@@ -1,4 +1,4 @@
-import {compileExp, releaseExp} from "./../src/compiler.js";
+import {compileExp, releaseExp} from "../src/events/compiler.js";
 
 beforeAll(() => {
     global.crsbinding = {

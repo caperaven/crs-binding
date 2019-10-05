@@ -1,4 +1,4 @@
-import {sanitizeExp} from "./../src/expressions.js"
+import {sanitizeExp} from "../src/events/expressions.js"
 
 test("sanitizeExp - single", () => {
    const result = sanitizeExp("name");

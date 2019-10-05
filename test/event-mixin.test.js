@@ -1,4 +1,4 @@
-import {enableEvents, disableEvents} from "../src/event-mixin.js";
+import {enableEvents, disableEvents} from "../src/events/event-mixin.js";
 
 beforeAll(() => {
     global.crsbinding = {

@@ -1,5 +1,5 @@
-import {observe, releaseObserved} from "./../src/observer.js"
-import {enableEvents, disableEvents} from "../src/event-mixin.js";
+import {observe, releaseObserved} from "../src/events/observer.js"
+import {enableEvents, disableEvents} from "../src/events/event-mixin.js";
 
 beforeAll(() => {
     global.crsbinding = {

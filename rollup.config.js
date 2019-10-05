@@ -11,7 +11,7 @@ export default [
         ]
     },
     {
-        input: "src/event-mixin.js",
+        input: "src/events/event-mixin.js",
         output: [
             {file: 'dist/event-mixin.js', format: 'es'}
         ],

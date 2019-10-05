@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/binding-expressions.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/binding-expressions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/expressions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/compiler.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/event-mixin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/expression.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/observer.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +33,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -96,8 +106,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.disableEvents remove conditions" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.when / removeWhen" />
@@ -124,7 +134,7 @@
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
       <workItem from="1570195159123" duration="16273000" />
-      <workItem from="1570260885007" duration="8136000" />
+      <workItem from="1570260885007" duration="8665000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -287,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570310025618</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="update documentation">
+      <created>1570310325413</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1570310325413</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
