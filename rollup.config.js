@@ -22,7 +22,7 @@ export default [
     {
         input: "src/binding/bindable-element.js",
         output: [
-            {file: 'dist/bindable-element.js', format: 'es', sourcemap: true}
+            {file: 'dist/bindable-element.js', format: 'es', sourcemap: false}
         ],
         plugins: [
             terser()
