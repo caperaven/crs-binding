@@ -4,7 +4,7 @@ export default [
     {
         input: "src/index.js",
         output: [
-            {file: 'dist/crs-binding.js', format: 'es', sourcemap: true}
+            {file: 'dist/crs-binding.js', format: 'es', sourcemap: false}
         ],
         plugins: [
             terser()

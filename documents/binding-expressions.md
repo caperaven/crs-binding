@@ -11,14 +11,12 @@ Triggers are each time a property changes.
 Events trigger only when a condition expression is met.
 
 ### Defining a trigger
-
 ```js
 const obj = observe(model);
 obj.on("property1", (newValue, oldValue) => console.log(`${newValue} - ${oldValue}`));
 ```
 
 ### Defining a event
-
 ```js
 const obj = observer(model);
 obj.when("property1 == 'a'", (newValue, oldValue) => console.log(`${newValue} - ${oldValue}`));

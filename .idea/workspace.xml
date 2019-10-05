@@ -4,6 +4,7 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/documents/binding-expressions.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/binding-expressions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,11 +96,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.disableEvents remove conditions" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.when / removeWhen" />
-        <item itemvalue="npm.bundle" />
       </list>
     </recent_temporary>
   </component>
@@ -123,7 +124,7 @@
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
       <workItem from="1570195159123" duration="16273000" />
-      <workItem from="1570260885007" duration="7955000" />
+      <workItem from="1570260885007" duration="8136000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -279,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570308589998</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="update documentation">
+      <created>1570310025618</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1570310025618</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +315,7 @@
     <MESSAGE value="adding cache of expressions on compiler" />
     <MESSAGE value="adding events" />
     <MESSAGE value="event clean up with tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="event clean up with tests" />
+    <MESSAGE value="update documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="update documentation" />
   </component>
 </project>
