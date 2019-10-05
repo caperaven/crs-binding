@@ -25,21 +25,23 @@ function when(exp, callback) {
     this.__events.set(exp, functions);
 
     const cmp = compileExp(exp);
-    let fn = this.__conditions.get(exp);
-    if (fn == null) {
-        fn = () => {
+    let cond = this.__conditions.get(exp);
+    if (cond == null) {
+        const fn = () => {
             if (cmp.function(this) == true) {
                 for (let call of functions) {
                     call();
                 }
             }
         };
-        this.__conditions.set(exp, fn);
+
+        cond = {fn: fn, properties: cmp.parameters.properties.slice(0)};
+        this.__conditions.set(exp, cond);
     }
 
     const properties = cmp.parameters.properties;
     for (let property of properties) {
-        this.on(property, fn);
+        this.on(property, cond.fn);
     }
 }
 
