@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,19 +60,6 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="call provider - constructor" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider-test.js" />
-      <test-names>
-        <test-name value="call provider - constructor" />
-      </test-names>
-      <method v="2" />
-    </configuration>
     <configuration name="call provider - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -100,6 +86,16 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="bundle" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -112,11 +108,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.call provider - event" />
         <item itemvalue="Jest.call provider - dispose" />
         <item itemvalue="Jest.call provider - constructor (1)" />
-        <item itemvalue="Jest.call provider - constructor" />
       </list>
     </recent_temporary>
   </component>
@@ -144,7 +140,7 @@
       <workItem from="1570382977282" duration="367000" />
       <workItem from="1570428313376" duration="5524000" />
       <workItem from="1570433853711" duration="51000" />
-      <workItem from="1570455693386" duration="14991000" />
+      <workItem from="1570455693386" duration="16009000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -398,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570471079242</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="add delegate provider">
+      <created>1570471413451</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1570471413451</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
