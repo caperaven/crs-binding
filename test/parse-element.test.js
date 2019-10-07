@@ -1,4 +1,4 @@
-import {parseElements, parseElement, parseAttributes, parseAttribute} from "../src/binding/parse-element.js";
+import {parseElements, parseElement, parseAttributes, parseAttribute, releaseBinding} from "../src/binding/parse-element.js";
 import {ProviderManager} from "../src/binding/provider-manager.js";
 
 let element;
@@ -102,7 +102,6 @@ test("parseAttribute - call", async () => {
 
 test("parseElement - check provider manager and also release element", async () => {
     const context = {firstName: "John"};
-
     await parseElement(element, context).catch(error => throw new Error(error));
     expect(crsbinding.providerManager.items.size).toEqual(1);
 
@@ -111,4 +110,10 @@ test("parseElement - check provider manager and also release element", async () 
 
     // just for code completion, there is a bug in the tests where it does not reflect dynamic properties set.
     await crsbinding.providerManager.releaseElement(element);
+});
+
+test("releaseBinding", async () => {
+    crsbinding.providerManager.releaseElement = jest.fn();
+    await releaseBinding(element);
+    expect(crsbinding.providerManager.releaseElement).toBeCalled();
 });

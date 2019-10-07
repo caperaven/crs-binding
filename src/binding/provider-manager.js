@@ -18,7 +18,7 @@ export class ProviderManager {
 
     async releaseElement(element) {
         for (let child of element.children || []) {
-            this.releaseElement(child);
+            await this.releaseElement(child);
         }
 
         if (element.__providers == null) return;

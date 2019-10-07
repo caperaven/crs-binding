@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/bindable-element.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-manager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-manager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/parse-element.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.bindable element - connectedCallback (1)">
+  <component name="RunManager" selected="Jest.releaseBinding">
     <configuration name="bindable element - connectedCallback (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -60,37 +61,23 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="bindable element - connectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="releaseBinding" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/bindable-element.tests.js" />
+      <test-file value="$PROJECT_DIR$/test/parse-element.test.js" />
       <test-names>
-        <test-name value="bindable element - connectedCallback" />
+        <test-name value="releaseBinding" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="bindable-element.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/bindable-element.test.js" />
+    <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/binding/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="bindable-element.tests.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/bindable-element.tests.js" />
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -105,11 +92,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.bindable element - connectedCallback (1)" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.bindable-element.test.js" />
-        <item itemvalue="Jest.bindable-element.tests.js" />
-        <item itemvalue="Jest.bindable element - connectedCallback" />
+        <item itemvalue="Jest.releaseBinding" />
+        <item itemvalue="JavaScript Debug.index.html (1)" />
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Jest.bindable element - connectedCallback (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -137,7 +124,7 @@
       <workItem from="1570382977282" duration="367000" />
       <workItem from="1570428313376" duration="5524000" />
       <workItem from="1570433853711" duration="51000" />
-      <workItem from="1570455693386" duration="8465000" />
+      <workItem from="1570455693386" duration="9182000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -363,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570461788488</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="bind provider manager added">
+      <created>1570464179097</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1570464179097</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

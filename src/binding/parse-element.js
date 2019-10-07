@@ -31,6 +31,6 @@ export async function parseAttribute(attr, context) {
     return provider;
 }
 
-export function releaseBinding(element) {
-    console.log(element);
+export async function releaseBinding(element) {
+    await crsbinding.providerManager.releaseElement(element);
 }
