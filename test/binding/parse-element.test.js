@@ -1,5 +1,5 @@
-import {parseElements, parseElement, parseAttributes, parseAttribute, releaseBinding} from "../src/binding/parse-element.js";
-import {ProviderManager} from "../src/binding/provider-manager.js";
+import {parseElements, parseElement, parseAttributes, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
+import {ProviderManager} from "../../src/binding/provider-manager.js";
 
 let element;
 

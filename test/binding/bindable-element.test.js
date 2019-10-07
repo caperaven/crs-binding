@@ -23,7 +23,7 @@ beforeEach(async () => {
         })
     };
 
-    const module = await import("./../src/binding/bindable-element.js");
+    const module = await import("../../src/binding/bindable-element.js");
     class MyBind extends module.BindableElement {
         get name() {
             return this.getProperty("name");

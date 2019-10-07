@@ -25,10 +25,12 @@ module.exports = {
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: [
-    "src/index.js"
+      "src/index.js",
+      "/src/idle/idleCallback.js",
+      "/src/idle/idleTaskManager.js"
   ],
 
-  // A list of reporter names that Jest uses when writing coverage reports
+  // A _list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",
   //   "text",
@@ -113,7 +115,7 @@ module.exports = {
   // The root directory that Jest should scan for tests and modules within
   // rootDir: null,
 
-  // A list of paths to directories that Jest should use to search for files in
+  // A _list of paths to directories that Jest should use to search for files in
   // roots: [
   //   "<rootDir>"
   // ],
@@ -124,10 +126,10 @@ module.exports = {
   // The paths to modules that run some code to configure or set up the testing environment before each test
   // setupFiles: [],
 
-  // A list of paths to modules that run some code to configure or set up the testing framework before each test
+  // A _list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
 
-  // A list of paths to snapshot serializer modules Jest should use for snapshot testing
+  // A _list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
