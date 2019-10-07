@@ -45,5 +45,9 @@ test("call provider - dispose", () => {
     expect(instance._context).toBeUndefined();
     expect(instance._property).toBeUndefined();
     expect(instance._value).toBeUndefined();
+});
 
+test("call provider - event", () => {
+    instance.event();
+    expect(crsbinding.idleTaskManager.add).toBeCalled();
 });
