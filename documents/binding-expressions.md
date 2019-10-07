@@ -59,10 +59,9 @@ enableEvents is typically used inside a custom component where you want to lever
 observe is used in cases of data models.
 
 ## dom
+attribute.bind      // same as two-way just a shorthand version
 attribute.two-way   // two way binding  
 attribute.one-way   // one way binding  
 attribute.once      // once off binding - inflate  
 attribute.when      // conditional binding  
 event.call          // delegate  
-
-

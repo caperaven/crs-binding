@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/2.events.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/2.events.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/component/test-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/binding-expressions.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/binding-expressions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/event-mixin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/expression.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,12 +27,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -46,8 +48,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration name="disableEvents remove conditions" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.Unnamed">
+    <configuration name="Unnamed" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/expression.test.js" />
+      <test-names>
+        <test-name value="" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="enableEvents - on -&gt; notifyPropertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
@@ -56,20 +71,7 @@
       <scope-kind value="TEST" />
       <test-file value="$PROJECT_DIR$/test/event-mixin.test.js" />
       <test-names>
-        <test-name value="disableEvents remove conditions" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="parseAttribute" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/parse-element.test.js" />
-      <test-names>
-        <test-name value="parseAttribute" />
+        <test-name value="enableEvents - on -&gt; notifyPropertyChanged" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -98,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.Unnamed" />
         <item itemvalue="npm.bundle" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.parseAttribute" />
-        <item itemvalue="Jest.disableEvents remove conditions" />
+        <item itemvalue="Jest.enableEvents - on -&gt; notifyPropertyChanged" />
       </list>
     </recent_temporary>
   </component>
@@ -126,7 +128,9 @@
       <workItem from="1570189544275" duration="1895000" />
       <workItem from="1570191496846" duration="45000" />
       <workItem from="1570195159123" duration="16273000" />
-      <workItem from="1570260885007" duration="15678000" />
+      <workItem from="1570260885007" duration="15713000" />
+      <workItem from="1570382977282" duration="367000" />
+      <workItem from="1570428313376" duration="5152000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -317,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570317538889</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="add binding providers">
+      <created>1570317706002</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1570317706002</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,5 +360,17 @@
     <MESSAGE value="moved files around a bit" />
     <MESSAGE value="add binding providers" />
     <option name="LAST_COMMIT_MESSAGE" value="add binding providers" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/events/expressions.js</url>
+          <line>25</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

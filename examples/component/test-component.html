@@ -1,3 +1,13 @@
+<style>
+    input, button {
+        display: block;
+    }
+
+    button {
+        width: 100px;
+    }
+</style>
+
 <h2>${title}</h2>
 
 <p>
@@ -11,6 +21,6 @@
 
 <input aria-hidden.when="title == 'a' ? true : false" data-type="text">
 
-<button click.call="btnClicked"></button>
-<button click.call="btnClicked($event)"></button>
-<button click.call="btnClicked('hello world')"></button>
+<button click.call="btnClicked">Normal</button>
+<button click.call="btnClicked($event)">With Event</button>
+<button click.call="btnClicked('hello world')">With Parameters</button>

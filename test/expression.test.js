@@ -34,3 +34,11 @@ test("sanitizeExp - expression", () => {
    expect(result.expression).toBe("${1 + 1 + context.property1}");
    expect(result.isLiteral).toBe(true);
 });
+
+test("", () => {
+   const result = sanitizeExp("${firstName.trim().toLowerCase()} > ${lastName.trim().toLowerCase()}");
+   expect(result.expression).toBe("${context.firstName.trim().toLowerCase()} > ${context.lastName.trim().toLowerCase()}");
+   expect(result.properties[0]).toBe("firstName");
+   expect(result.properties[1]).toBe("lastName");
+   expect(result.isLiteral).toBe(true);
+});

@@ -18,6 +18,7 @@ test ("enableEvents - on -> notifyPropertyChanged", () => {
     expect(obj.when).not.toBeNull();
     expect(obj.notifyPropertyChanged).not.toBeNull();
     expect(obj.__events).not.toBeNull();
+    expect(obj.__conditions).not.toBeNull();
 
     let propertyChanged = false;
     obj.on("property", () => propertyChanged = true);
@@ -33,6 +34,7 @@ test ("enableEvents - on -> notifyPropertyChanged", () => {
     expect(obj.when).toBeUndefined();
     expect(obj.notifyPropertyChanged).toBeUndefined();
     expect(obj.__events).toBeUndefined();
+    expect(obj.__conditions).toBeUndefined();
 });
 
 test("when / removeWhen", () => {
