@@ -25,7 +25,9 @@ beforeEach(() => {
                 ],
                 children: []
             }
-        ]
+        ],
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn()
     }
 });
 

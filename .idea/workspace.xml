@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/idle/idleCallback.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/idle/idleTaskManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/compiler.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/event-mixin.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/expression.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observer.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,27 +50,43 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.task manager - add">
-    <configuration name="idelTaskManager.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/idle/idelTaskManager.test.js" />
-      <method v="2" />
-    </configuration>
-    <configuration name="populate window with polyfills" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.call provider - dispose">
+    <configuration name="call provider - constructor (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/idle/idleCallback.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
       <test-names>
-        <test-name value="populate window with polyfills" />
+        <test-name value="call provider - constructor" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="call provider - constructor" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider-test.js" />
+      <test-names>
+        <test-name value="call provider - constructor" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="call provider - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
+      <test-names>
+        <test-name value="call provider - dispose" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -93,19 +103,6 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="task manager - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/idle/idelTaskManager.test.js" />
-      <test-names>
-        <test-name value="task manager - dispose" />
-      </test-names>
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -119,10 +116,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.call provider - dispose" />
+        <item itemvalue="Jest.call provider - constructor (1)" />
+        <item itemvalue="Jest.call provider - constructor" />
         <item itemvalue="Jest.task manager - add" />
-        <item itemvalue="Jest.task manager - dispose" />
-        <item itemvalue="Jest.idelTaskManager.test.js" />
-        <item itemvalue="Jest.populate window with polyfills" />
       </list>
     </recent_temporary>
   </component>
@@ -150,7 +147,7 @@
       <workItem from="1570382977282" duration="367000" />
       <workItem from="1570428313376" duration="5524000" />
       <workItem from="1570433853711" duration="51000" />
-      <workItem from="1570455693386" duration="11683000" />
+      <workItem from="1570455693386" duration="14670000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -390,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570464891818</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="bind provider manager added">
+      <created>1570467406553</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1570467406553</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -20,6 +20,10 @@ class TestComponent extends BindableElement {
     async disconnectedCallback() {
         super.disconnectedCallback();
     }
+
+    btnClicked(...args) {
+        console.log(args);
+    }
 }
 
 customElements.define("test-component", TestComponent);
