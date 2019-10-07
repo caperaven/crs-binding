@@ -108,4 +108,7 @@ test("parseElement - check provider manager and also release element", async () 
 
     await crsbinding.providerManager.releaseElement(crsbinding.providerManager.items.get(0)._element);
     expect(crsbinding.providerManager.items.size).toEqual(0);
+
+    // just for code completion, there is a bug in the tests where it does not reflect dynamic properties set.
+    await crsbinding.providerManager.releaseElement(element);
 });

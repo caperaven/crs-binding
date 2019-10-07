@@ -19,7 +19,7 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(prop, value) {
-        this[`_prop`] = value;
+        this[`_${prop}`] = value;
         this.notifyPropertyChanged(prop);
     }
 }
