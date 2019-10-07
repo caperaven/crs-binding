@@ -1,4 +1,4 @@
-import {BindableElement} from "../../dist/crs-bindable-element.js";
+import {BindableElement} from "./../../src/binding/bindable-element.js";
 
 class TestComponent extends BindableElement {
     get html() {

@@ -7,7 +7,7 @@ export async function parseElements(collection, context) {
 }
 
 export async function parseElement(element, context) {
-    await parseElements(element.children);
+    await parseElements(element.children, context);
 
     const attributes = Array.from(element.attributes);
     const boundAttributes = attributes.filter(attr => attr.name.indexOf(".") != -1);
@@ -26,7 +26,7 @@ export async function parseAttribute(attr, context) {
     const prop = parts[0];
     const prov = parts[1];
 
-    const provider = ProviderFactory[prov]();
+    const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value);
 
     return provider;
 }
