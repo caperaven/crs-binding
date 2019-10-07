@@ -1,18 +1,26 @@
 import {parseElements, parseElement, parseAttributes, parseAttribute} from "../src/binding/parse-element.js";
+import {ProviderManager} from "../src/binding/provider-manager.js";
 
 let element;
 
 beforeEach(() => {
+    global.crsbinding = {
+        providerManager: new ProviderManager()
+    };
+
     element = {
         nodeName: "div",
         attributes: [],
         children: [
             {
                 nodeName: "input",
+                __providers: [],
                 attributes: [
                     {
                         "name": "value.bind",
-                        "value": "firstName"
+                        "value": "firstName",
+                        "ownerElement": {
+                        }
                     }
                 ],
                 children: []
@@ -92,9 +100,12 @@ test("parseAttribute - call", async () => {
     expect(provider._value).not.toBeNull();
 });
 
-test("parseElement", async () => {
+test("parseElement - check provider manager and also release element", async () => {
     const context = {firstName: "John"};
-    await parseElement(element, context);
 
-    // expect this  element to be on the montiroing object
+    await parseElement(element, context).catch(error => throw new Error(error));
+    expect(crsbinding.providerManager.items.size).toEqual(1);
+
+    await crsbinding.providerManager.releaseElement(crsbinding.providerManager.items.get(0)._element);
+    expect(crsbinding.providerManager.items.size).toEqual(0);
 });

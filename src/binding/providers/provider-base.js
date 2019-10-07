@@ -4,6 +4,8 @@ export class ProviderBase {
         this._context = context;
         this._property = property;
         this._value = value;
+
+        crsbinding.providerManager.register(this).catch(error => console.error(error));
     }
 
     dispose() {

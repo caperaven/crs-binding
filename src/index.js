@@ -3,6 +3,7 @@ import {enableEvents, disableEvents} from "./events/event-mixin.js";
 import {observe, releaseObserved} from "./events/observer.js";
 import {sanitizeExp} from "./events/expressions.js";
 import {parseElement, releaseBinding} from "./binding/parse-element.js";
+import {ProviderManager} from "./binding/provider-manager.js";
 
 window.crsbinding = {
     _expFn: new Map(),
@@ -14,5 +15,6 @@ window.crsbinding = {
     observe: observe,
     releaseObserved: releaseObserved,
     parseElement: parseElement,
-    releaseBinding: releaseBinding
+    releaseBinding: releaseBinding,
+    providerManager: new ProviderManager()
 };
