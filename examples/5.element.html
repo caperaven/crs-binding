@@ -7,6 +7,11 @@
         import "./../src/index.js";
         //import "./../dist/crs-binding.js";
         import "./component/test-component.js";
+
+        const element = document.querySelector("test-component");
+        element.addEventListener("ready", () => {
+            element.title = "Johan Rabie";
+        })
     </script>
 </body>
 </html>

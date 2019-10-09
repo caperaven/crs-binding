@@ -1,7 +1,5 @@
-import {ProviderBase} from "./provider-base.js";
+import {OneWayProvider} from "./one-way-provider.js";
 
-export class BindProvider extends ProviderBase {
-    constructor(element, context, property, value) {
-        super(element, context, property, value);
-    }
+export class BindProvider extends OneWayProvider {
+
 }

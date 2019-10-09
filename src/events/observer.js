@@ -2,8 +2,8 @@ const PROXY = "_isProxy";
 const BACKUP = "__backup";
 
 export function observe(obj) {
-    Reflect.set(obj, PROXY, true);
-    Reflect.set(obj, BACKUP, {});
+    obj[PROXY] = true;
+    obj[BACKUP] = {};
 
     crsbinding.enableEvents(obj);
 
@@ -28,16 +28,16 @@ export function releaseObserved(obj) {
 }
 
 function get(obj, prop) {
-    return Reflect.get(obj, prop);
+    return obj[prop];
 }
 
 function set(obj, prop, value) {
     if (prop == "_disposing" || obj._disposing == true) return true;
 
-    const backup = Reflect.get(obj, BACKUP);
-    const oldValue = Reflect.get(obj, prop);
+    const backup = obj[BACKUP];
+    const oldValue = obj[prop];
 
-    Reflect.set(obj, prop, value);
+    obj[prop] = value;
 
     obj.notifyPropertyChanged(prop);
 
@@ -49,12 +49,12 @@ function set(obj, prop, value) {
         releaseObserved(oldValue);
     }
     else {
-        Reflect.set(backup, prop, oldValue);
+        backup[prop] = oldValue;
     }
 
     return true;
 }
 
 function isProxy(obj) {
-    return obj && typeof obj == "object" && Reflect.get(obj, PROXY) == true;
+    return obj && typeof obj == "object" && obj[PROXY] == true;
 }

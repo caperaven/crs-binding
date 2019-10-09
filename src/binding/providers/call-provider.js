@@ -3,7 +3,6 @@ import {ProviderBase} from "./provider-base.js";
 export class CallProvider extends ProviderBase {
     constructor(element, context, property, value) {
         super(element, context, property, value);
-        this.initialize();
         this._eventHandler = this.event.bind(this);
         this._element.addEventListener(this._property, this._eventHandler);
     }

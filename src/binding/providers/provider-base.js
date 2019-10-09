@@ -6,6 +6,7 @@ export class ProviderBase {
         this._value = value;
 
         crsbinding.providerManager.register(this);
+        this.initialize();
     }
 
     dispose() {
@@ -13,5 +14,11 @@ export class ProviderBase {
         delete this._context;
         delete this._property;
         delete this._value;
+    }
+
+    /**
+     * Override to perform starting process
+     */
+    initialize() {
     }
 }
