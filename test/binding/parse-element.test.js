@@ -27,12 +27,16 @@ beforeEach(() => {
         children: [
             {
                 nodeName: "input",
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
                 __providers: [],
                 attributes: [
                     {
                         "name": "value.bind",
                         "value": "firstName",
                         "ownerElement": {
+                            addEventListener: jest.fn(),
+                            removeEventListener: jest.fn(),
                         }
                     }
                 ],

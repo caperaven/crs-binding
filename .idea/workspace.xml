@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,17 +46,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration name="parse-element.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Jest.parseAttribute">
     <configuration name="parseAttribute - call" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -67,6 +57,19 @@
       <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
       <test-names>
         <test-name value="parseAttribute - call" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="parseAttribute" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
+      <test-names>
+        <test-name value="parseAttribute" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -98,11 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.parseAttribute" />
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.parseAttribute - call" />
         <item itemvalue="Jest.parseElement - check provider manager and also release element" />
-        <item itemvalue="Jest.parse-element.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -132,7 +135,8 @@
       <workItem from="1570433853711" duration="51000" />
       <workItem from="1570455693386" duration="16274000" />
       <workItem from="1570618125714" duration="8000" />
-      <workItem from="1570624555134" duration="8908000" />
+      <workItem from="1570624555134" duration="9519000" />
+      <workItem from="1570636969603" duration="412000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -414,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570634915554</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="added two way binding">
+      <created>1570635642316</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1570635642316</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,6 +461,7 @@
     <MESSAGE value="add delegate provider" />
     <MESSAGE value="added one way binding" />
     <MESSAGE value="added one way binding and updated tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="added one way binding and updated tests" />
+    <MESSAGE value="added two way binding" />
+    <option name="LAST_COMMIT_MESSAGE" value="added two way binding" />
   </component>
 </project>
