@@ -13,6 +13,10 @@ export async function parseElement(element, context) {
     const boundAttributes = attributes.filter(attr => attr.name.indexOf(".") != -1);
 
     await parseAttributes(boundAttributes, context);
+
+    if (element.children.length == 0 && element.innerText.indexOf("${") != -1) {
+        ProviderFactory["inner"](element, context);
+    }
 }
 
 export async function parseAttributes(collection, context) {

@@ -3,6 +3,7 @@ import {OneWayProvider} from "./providers/one-way-provider.js";
 import {OnceProvider} from "./providers/once-provider.js";
 import {WhenProvider} from "./providers/when-provider.js";
 import {CallProvider} from "./providers/call-provider.js";
+import {InnerProvider} from "./providers/inner-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value) {
@@ -27,5 +28,9 @@ export class ProviderFactory {
 
     static "call"(element, context, property, value) {
         return new CallProvider(element, context, property, value);
+    }
+
+    static "inner"(element, context) {
+        return new InnerProvider(element, context);
     }
 }
