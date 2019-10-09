@@ -26,9 +26,7 @@ export async function parseAttribute(attr, context) {
     const prop = parts[0];
     const prov = parts[1];
 
-    const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value);
-
-    return provider;
+    return ProviderFactory[prov](attr.ownerElement, context, prop, attr.value);
 }
 
 export async function releaseBinding(element) {

@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/crsbinding.mock.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/element.mock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/once-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/once-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.Bind provider - date">
+  <component name="RunManager" selected="Jest.Once provider - execute">
     <configuration name="Bind provider - change" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -88,14 +90,17 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="bind-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="Once provider - execute" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" />
+      <test-names>
+        <test-name value="Once provider - execute" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -111,10 +116,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.Once provider - execute" />
         <item itemvalue="Jest.Bind provider - date" />
         <item itemvalue="Jest.Bind provider - change" />
         <item itemvalue="Jest.Bind provider - dispose" />
-        <item itemvalue="Jest.bind-provider.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +150,7 @@
       <workItem from="1570455693386" duration="16274000" />
       <workItem from="1570618125714" duration="8000" />
       <workItem from="1570624555134" duration="9519000" />
-      <workItem from="1570636969603" duration="1711000" />
+      <workItem from="1570636969603" duration="2237000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -441,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570637403336</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="added bind tests">
+      <created>1570638696619</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1570638696619</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,6 +491,7 @@
     <MESSAGE value="added one way binding and updated tests" />
     <MESSAGE value="added two way binding" />
     <MESSAGE value="add two way binding" />
-    <option name="LAST_COMMIT_MESSAGE" value="add two way binding" />
+    <MESSAGE value="added bind tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="added bind tests" />
   </component>
 </project>

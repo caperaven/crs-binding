@@ -87,13 +87,7 @@ test("parseAttribute", async () => {
 test("parseAttribute - once", async () => {
     const attr = {name: "value.once", value: "firstName", ownerElement: element};
     const provider = await parseAttribute(attr, context);
-
-    expect(provider).not.toBeNull();
-    expect(provider.constructor.name).toBe("OnceProvider");
-    expect(provider._element).not.toBeNull();
-    expect(provider._context).not.toBeNull();
-    expect(provider._property).not.toBeNull();
-    expect(provider._value).not.toBeNull();
+    expect(provider).toBeNull();
 });
 
 test("parseAttribute - when", async () => {

@@ -1,5 +1,4 @@
-import {ProviderBase} from "./provider-base.js";
-
-export class OnceProvider extends ProviderBase {
-
+export function OnceProvider(element, context, property, value) {
+    element[property] = context[value];
+    return null;
 }

@@ -18,7 +18,7 @@ export class ProviderFactory {
     }
 
     static "once"(element, context, property, value) {
-        return new OnceProvider(element, context, property, value);
+        return OnceProvider(element, context, property, value);
     }
 
     static "when"(element, context, property, value) {
