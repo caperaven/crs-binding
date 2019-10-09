@@ -2,24 +2,24 @@ import {ProviderBase} from "./provider-base.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
-        this._context.removeOn(this._value, this.exp.function);
+        this._context.removeOn(this._value, this._exp.function);
 
-        delete this.expObj;
-        crsbinding.releaseExp(this.exp);
+        delete this._expObj;
+        crsbinding.releaseExp(this._exp);
 
-        this.propertyChangedHandler = null;
-        this.exp = null;
+        this._eventHandler = null;
+        this._exp = null;
         super.dispose();
     }
 
     initialize() {
-        this.propertyChangedHandler = this.propertyChanged.bind(this);
-        this.exp = `element["${this._property}"] = value`;
-        this.expObj = crsbinding.compileExp(this.exp, ["element", "value"], false);
-        this._context.on(this._value, this.propertyChangedHandler);
+        this._eventHandler = this.propertyChanged.bind(this);
+        this._exp = `element["${this._property}"] = value`;
+        this._expObj = crsbinding.compileExp(this._exp, ["element", "value"], false);
+        this._context.on(this._value, this._eventHandler);
     }
 
     propertyChanged(property, value) {
-        this.expObj.function(this._context, this._element, value);
+        crsbinding.idleTaskManager.add(this._expObj.function(this._context, this._element, value));
     }
 }

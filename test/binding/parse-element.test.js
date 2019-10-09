@@ -1,12 +1,25 @@
 import {parseElements, parseElement, parseAttributes, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
 import {ProviderManager} from "../../src/binding/provider-manager.js";
+import {compileExp, releaseExp} from "./../../src/events/compiler.js";
+import {observe} from "../../src/events/observer.js";
+import {disableEvents, enableEvents} from "../../src/events/event-mixin.js";
 
 let element;
+let context;
 
 beforeEach(() => {
     global.crsbinding = {
+        _expFn: new Map(),
+        enableEvents: enableEvents,
+        disableEvents: disableEvents,
+        compileExp: compileExp,
+        releaseExp: releaseExp,
         providerManager: new ProviderManager()
     };
+
+    context = observe({
+        "firstName": null
+    });
 
     element = {
         nodeName: "div",
@@ -33,7 +46,7 @@ beforeEach(() => {
 
 test("parseAttribute", async () => {
     const attr = {name: "value.bind", value: "firstName", ownerElement: element};
-    const provider = await parseAttribute(attr, {firstName: "John"});
+    const provider = await parseAttribute(attr, context);
 
     expect(provider).not.toBeNull();
     expect(provider.constructor.name).toBe("BindProvider");
@@ -45,7 +58,7 @@ test("parseAttribute", async () => {
 
 test("parseAttribute", async () => {
     const attr = {name: "value.two-way", value: "firstName", ownerElement: element};
-    const provider = await parseAttribute(attr, {firstName: "John"});
+    const provider = await parseAttribute(attr, context);
 
     expect(provider).not.toBeNull();
     expect(provider.constructor.name).toBe("BindProvider");
@@ -57,7 +70,7 @@ test("parseAttribute", async () => {
 
 test("parseAttribute", async () => {
     const attr = {name: "value.one-way", value: "firstName", ownerElement: element};
-    const provider = await parseAttribute(attr, {firstName: "John"});
+    const provider = await parseAttribute(attr, context);
 
     expect(provider).not.toBeNull();
     expect(provider.constructor.name).toBe("OneWayProvider");
@@ -69,7 +82,7 @@ test("parseAttribute", async () => {
 
 test("parseAttribute - once", async () => {
     const attr = {name: "value.once", value: "firstName", ownerElement: element};
-    const provider = await parseAttribute(attr, {firstName: "John"});
+    const provider = await parseAttribute(attr, context);
 
     expect(provider).not.toBeNull();
     expect(provider.constructor.name).toBe("OnceProvider");
@@ -81,7 +94,7 @@ test("parseAttribute - once", async () => {
 
 test("parseAttribute - when", async () => {
     const attr = {name: "value.when", value: "firstName", ownerElement: element};
-    const provider = await parseAttribute(attr, {firstName: "John"});
+    const provider = await parseAttribute(attr, context);
 
     expect(provider).not.toBeNull();
     expect(provider.constructor.name).toBe("WhenProvider");    expect(provider._element).not.toBeNull();
@@ -103,7 +116,6 @@ test("parseAttribute - call", async () => {
 });
 
 test("parseElement - check provider manager and also release element", async () => {
-    const context = {firstName: "John"};
     await parseElement(element, context).catch(error => throw new Error(error));
     expect(crsbinding.providerManager.items.size).toEqual(1);
 

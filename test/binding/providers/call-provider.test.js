@@ -5,6 +5,7 @@ let element;
 let context;
 
 beforeEach(() => {
+
     global.crsbinding = {
         idleTaskManager: {
             add: jest.fn()

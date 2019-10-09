@@ -1,8 +1,9 @@
-jest.disableAutomock();
-
 let instance;
 
 beforeEach(async () => {
+    global.CustomEvent = class {
+    };
+
     global.crsbinding = {
         enableEvents: jest.fn(),
         parseElement: jest.fn(),
@@ -35,6 +36,7 @@ beforeEach(async () => {
     }
 
     instance = new MyBind();
+    instance.dispatchEvent = jest.fn();
     instance.notifyPropertyChanged = jest.fn();
     instance.getAttribute = jest.fn();
 });
@@ -44,6 +46,7 @@ test("bindable element - connectedCallback", async () => {
     expect(instance.innerHTML).toBe("Hello World");
     expect(crsbinding.enableEvents).toBeCalled();
     expect(crsbinding.parseElement).toBeCalled();
+    expect(instance.dispatchEvent).toBeCalled();
 });
 
 test("bindable element - disconnectedCallback", async () => {

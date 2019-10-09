@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/idle/idleTaskManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/idle/idleTaskManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,54 +52,54 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.call provider - event">
-    <configuration name="call provider - constructor (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.parseAttribute - call">
+    <configuration name="bindable element - connectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/bindable-element.test.js" />
       <test-names>
-        <test-name value="call provider - constructor" />
+        <test-name value="bindable element - connectedCallback" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="call provider - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="parse-element.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="parseAttribute - call" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
       <test-names>
-        <test-name value="call provider - dispose" />
+        <test-name value="parseAttribute - call" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="call provider - event" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="parseElement - check provider manager and also release element" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
       <test-names>
-        <test-name value="call provider - event" />
+        <test-name value="parseElement - check provider manager and also release element" />
       </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="bundle" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -119,10 +115,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
-        <item itemvalue="npm.bundle" />
-        <item itemvalue="Jest.call provider - event" />
-        <item itemvalue="Jest.call provider - dispose" />
-        <item itemvalue="Jest.call provider - constructor (1)" />
+        <item itemvalue="Jest.parseAttribute - call" />
+        <item itemvalue="Jest.parseElement - check provider manager and also release element" />
+        <item itemvalue="Jest.parse-element.test.js" />
+        <item itemvalue="Jest.bindable element - connectedCallback" />
       </list>
     </recent_temporary>
   </component>
@@ -152,7 +148,7 @@
       <workItem from="1570433853711" duration="51000" />
       <workItem from="1570455693386" duration="16274000" />
       <workItem from="1570618125714" duration="8000" />
-      <workItem from="1570624555134" duration="4349000" />
+      <workItem from="1570624555134" duration="8169000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -420,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570472644105</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="added one way binding">
+      <created>1570631097550</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1570631097550</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,6 +457,7 @@
     <MESSAGE value="adding expression test" />
     <MESSAGE value="bind provider manager added" />
     <MESSAGE value="add delegate provider" />
-    <option name="LAST_COMMIT_MESSAGE" value="add delegate provider" />
+    <MESSAGE value="added one way binding" />
+    <option name="LAST_COMMIT_MESSAGE" value="added one way binding" />
   </component>
 </project>

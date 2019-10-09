@@ -23,13 +23,23 @@ export class IdleTaskManager {
      * @private
      */
     _processQueue() {
+        if (window.requestIdleCallback == null) return this._runNextFunction();
+
         this.processing = true;
         window.requestIdleCallback(deadline => {
             while((deadline.timeRemaining() > 0 || deadline.didTimeout) && this._list.length) {
-                let fn = this._list.shift();
-                fn();
+                this._runNextFunction();
             }
             this.processing = false;
         }, {timeout: 1000})
+    }
+
+    /**
+     * Shift the list and run the function
+     * @private
+     */
+    _runNextFunction() {
+        let fn = this._list.shift();
+        fn && fn();
     }
 }
