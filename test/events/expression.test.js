@@ -35,10 +35,17 @@ test("sanitizeExp - expression", () => {
    expect(result.isLiteral).toBe(true);
 });
 
-test("", () => {
+test("sanitizeExp - multiple functions", () => {
    const result = sanitizeExp("${firstName.trim().toLowerCase()} > ${lastName.trim().toLowerCase()}");
    expect(result.expression).toBe("${context.firstName.trim().toLowerCase()} > ${context.lastName.trim().toLowerCase()}");
    expect(result.properties[0]).toBe("firstName");
    expect(result.properties[1]).toBe("lastName");
    expect(result.isLiteral).toBe(true);
+});
+
+test("sanitizeExp - conditional value", () => {
+   const result = sanitizeExp("title == 'a' ? true : false");
+   expect(result.expression).toBe("context.title == 'a' ? true : false");
+   expect(result.properties.length).toBe(1);
+   expect(result.properties[0]).toBe("title");
 });
