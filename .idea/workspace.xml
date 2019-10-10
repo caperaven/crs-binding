@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/update.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/crsbinding.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/crsbinding.mock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/6.paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +19,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../baremetalweb" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -142,7 +135,7 @@
       <workItem from="1570618125714" duration="8000" />
       <workItem from="1570624555134" duration="9519000" />
       <workItem from="1570636969603" duration="13563000" />
-      <workItem from="1570718381743" duration="4975000" />
+      <workItem from="1570718381743" duration="7094000" />
     </task>
     <task id="LOCAL-00001" summary="expressions working">
       <created>1570046901730</created>
@@ -480,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570720052331</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="add paths test file and updateUI function">
+      <created>1570723378413</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1570723378413</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,6 +523,7 @@
     <MESSAGE value="when provider tests" />
     <MESSAGE value="added inner provider" />
     <MESSAGE value="updated tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated tests" />
+    <MESSAGE value="add paths test file and updateUI function" />
+    <option name="LAST_COMMIT_MESSAGE" value="add paths test file and updateUI function" />
   </component>
 </project>

@@ -30,6 +30,10 @@ export class ProviderFactory {
         return new CallProvider(element, context, property, value);
     }
 
+    static "delegate"(element, context, property, value) {
+        return new CallProvider(element, context, property, value);
+    }
+
     static "inner"(element, context) {
         return new InnerProvider(element, context);
     }

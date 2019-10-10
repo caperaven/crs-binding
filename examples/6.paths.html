@@ -28,6 +28,14 @@
 
         <label>Age:</label>
         <input type="number" value.bind="age">
+
+        <label>Street 1</label>
+        <input value.bind="address.street1">
+
+        <label>Street 2</label>
+        <input value.bind="address.street1">
+
+        <button click.call="addAddress">Add Address</button>
     </div>
 
     <script type="module">
@@ -36,7 +44,14 @@
         const viewModel = crsbinding.observe({
             firstName: "John",
             lastName:  "Doe",
-            age: 30
+            age: 30,
+
+            addAddress: () => {
+                viewModel.address = {
+                    street1: "street1",
+                    street2: "street2"
+                }
+            }
         });
 
         async function parse() {
