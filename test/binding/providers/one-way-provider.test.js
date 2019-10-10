@@ -2,6 +2,7 @@ import {OneWayProvider} from "../../../src/binding/providers/one-way-provider.js
 import {observe, releaseObserved} from "../../../src/events/observer.js";
 import {enableEvents, disableEvents} from "../../../src/events/event-mixin.js";
 import {compileExp} from "./../../../src/events/compiler.js";
+import {ElementMock} from "../../element.mock.js";
 
 let instance;
 let element;
@@ -32,9 +33,7 @@ beforeEach(async () => {
         releaseExp: jest.fn()
     };
 
-    element = {
-        value: null
-    };
+    element = new ElementMock();
 
     context = observe({
         "firstName": null

@@ -1,6 +1,6 @@
 import {WhenProvider} from "./../../../src/binding/providers/when-provider.js";
-import {ElementMock} from "../../element.mock";
-import {observe} from "../../../src/events/observer";
+import {ElementMock} from "../../element.mock.js";
+import {observe} from "../../../src/events/observer.js";
 
 let instance;
 let instanceAttr;

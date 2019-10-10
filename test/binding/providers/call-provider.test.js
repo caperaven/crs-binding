@@ -1,4 +1,5 @@
 import {CallProvider} from "./../../../src/binding/providers/call-provider.js"
+import {ElementMock} from "../../element.mock.js";
 
 let instance;
 let element;
@@ -15,10 +16,7 @@ beforeEach(() => {
         }
     };
 
-    element = {
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
-    };
+    element = new ElementMock();
 
     context = {
         doSomething: jest.fn()

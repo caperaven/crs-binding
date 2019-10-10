@@ -3,6 +3,7 @@ import {ProviderManager} from "../../src/binding/provider-manager.js";
 import {compileExp, releaseExp} from "./../../src/events/compiler.js";
 import {observe} from "../../src/events/observer.js";
 import {disableEvents, enableEvents} from "../../src/events/event-mixin.js";
+import {ElementMock} from "../element.mock";
 
 let element;
 let context;
@@ -21,31 +22,16 @@ beforeEach(() => {
         "firstName": null
     });
 
-    element = {
-        nodeName: "div",
-        attributes: [],
-        children: [
-            {
-                nodeName: "input",
-                addEventListener: jest.fn(),
-                removeEventListener: jest.fn(),
-                __providers: [],
-                attributes: [
-                    {
-                        "name": "value.bind",
-                        "value": "firstName",
-                        "ownerElement": {
-                            addEventListener: jest.fn(),
-                            removeEventListener: jest.fn(),
-                        }
-                    }
-                ],
-                children: []
-            }
-        ],
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
-    }
+    element = new ElementMock();
+    element.children.push(new ElementMock());
+    element.children[0].attributes.push({
+        "name": "value.bind",
+        "value": "firstName",
+        "ownerElement": {
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn(),
+        }
+    });
 });
 
 test("parseAttribute", async () => {
@@ -114,7 +100,7 @@ test("parseAttribute - call", async () => {
 });
 
 test("parseElement - check provider manager and also release element", async () => {
-    await parseElement(element, context).catch(error => throw new Error(error));
+    await parseElement(element, context);
     expect(crsbinding.providerManager.items.size).toEqual(1);
 
     await crsbinding.providerManager.releaseElement(crsbinding.providerManager.items.get(0)._element);

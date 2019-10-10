@@ -1,14 +1,13 @@
 import {OnceProvider} from "./../../../src/binding/providers/once-provider.js"
+import {ElementMock} from "../../element.mock.js";
 
 test("Once provider - execute", () => {
-   const element = {
-       value: null
-   };
+    const element = new ElementMock();
 
-   const context = {
+    const context = {
        firstName: "John"
-   };
+    };
 
     OnceProvider(element, context, "value", "firstName");
-   expect(element.value).toBe("John");
+    expect(element.value).toBe("John");
 });
