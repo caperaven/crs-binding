@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/6.paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/expressions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/expression.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,15 +48,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.updateUI (1)">
-    <configuration name="bind-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.sanitizeExp - path">
+    <configuration name="sanitizeExp - path" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/events/expression.test.js" />
+      <test-names>
+        <test-name value="sanitizeExp - path" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="updateUI (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -99,11 +103,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.sanitizeExp - path" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.updateUI (1)" />
         <item itemvalue="Node.js.update.test.js" />
         <item itemvalue="Jest.updateUI" />
-        <item itemvalue="Jest.bind-provider.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -135,14 +139,7 @@
       <workItem from="1570618125714" duration="8000" />
       <workItem from="1570624555134" duration="9519000" />
       <workItem from="1570636969603" duration="13563000" />
-      <workItem from="1570718381743" duration="7094000" />
-    </task>
-    <task id="LOCAL-00001" summary="expressions working">
-      <created>1570046901730</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1570046901730</updated>
+      <workItem from="1570718381743" duration="12244000" />
     </task>
     <task id="LOCAL-00002" summary="expressions working">
       <created>1570046977506</created>
@@ -480,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570723378413</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="add paths test file and updateUI function">
+      <created>1570725783962</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1570725783962</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

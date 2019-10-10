@@ -6,10 +6,15 @@ export class OneWayProvider extends ProviderBase {
 
         crsbinding.releaseExp(this._expObj);
         delete this._expObj;
-        crsbinding.releaseExp(this._exp);
+
+        if (this._getObj != null) {
+            crsbinding.releaseExp(this._getObj);
+            delete this._getObj;
+        }
+
+        delete this._exp;
 
         this._eventHandler = null;
-        this._exp = null;
         super.dispose();
     }
 
@@ -24,10 +29,48 @@ export class OneWayProvider extends ProviderBase {
         }
 
         this._expObj = crsbinding.compileExp(this._exp, ["element", "value"], false);
-        this._context.on(this._value, this._eventHandler);
+
+        if (this._value.indexOf(".") != -1) {
+            this._getObj = crsbinding.compileExp(this._value);
+        }
+
+        if (this._value.indexOf(".") == -1) {
+            this._listenOn(this._context, this._value);
+        }
+        else {
+            this._listenOnPath();
+        }
     }
 
-    propertyChanged(property, value) {
-        crsbinding.idleTaskManager.add(this._expObj.function(this._context, this._element, value));
+    _listenOnPath() {
+        let obj = this._context;
+        const parts = this._value.split(".");
+
+        for (let i = 0; i < parts.length; i++) {
+            const part = parts[i];
+            if (i == parts.length -1) {
+                this._listenOn(obj, part);
+            }
+            else {
+                if (obj[part] == null) {
+                    obj[part] = crsbinding.observe({})
+                }
+
+                this._listenOn(obj, part);
+                obj = obj[part];
+            }
+        }
+    }
+
+    _listenOn(context, property) {
+        context.on(property, this._eventHandler);
+    }
+
+    propertyChanged(prop, value) {
+        let v = value;
+        if (this._getObj != null) {
+            v = this._getObj.function(this._context);
+        }
+        crsbinding.idleTaskManager.add(this._expObj.function(this._context, this._element, v));
     }
 }

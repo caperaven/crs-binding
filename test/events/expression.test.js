@@ -49,3 +49,8 @@ test("sanitizeExp - conditional value", () => {
    expect(result.properties.length).toBe(1);
    expect(result.properties[0]).toBe("title");
 });
+
+test ("sanitizeExp - path", () => {
+   const result = sanitizeExp("address.street");
+   expect(result.expression).toBe("context.address.street");
+});

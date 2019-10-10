@@ -45,6 +45,10 @@ export function sanitizeExp(exp) {
         oldToken = token;
     }
 
+    if (indexes.length == 0 && exp.indexOf(".") != -1) {
+        indexes.push(0);
+    }
+
     for (let i = 0; i < indexes.length; i++) {
         tokens.splice(i + indexes[i], 0, prefix);
     }
