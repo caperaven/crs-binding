@@ -13,8 +13,10 @@ export function enableEvents(obj) {
 }
 
 export function disableEvents(obj) {
-    obj.__events.clear();
-    delete obj.__events;
+    if (obj.__events != null) {
+        obj.__events.clear();
+        delete obj.__events;
+    }
 
     obj.__conditions.forEach((cnd) => {
         delete cnd.fn;

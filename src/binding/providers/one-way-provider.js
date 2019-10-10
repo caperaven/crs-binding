@@ -22,10 +22,10 @@ export class OneWayProvider extends ProviderBase {
         this._eventHandler = this.propertyChanged.bind(this);
 
         if (this._property.indexOf("-") == -1) {
-            this._exp = `requestAnimationFrame(() => element["${this._property}"] = value)`;
+            this._exp = `requestAnimationFrame(() => element["${this._property}"] = value || "")`;
         }
         else {
-            this._exp = `element.setAttribute("${this._property}", value)`;
+            this._exp = `element.setAttribute("${this._property}", value || "")`;
         }
 
         this._expObj = crsbinding.compileExp(this._exp, ["element", "value"], false);
