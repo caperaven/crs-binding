@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        label {
+            display: block;
+        }
+
+        input {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: none" id="container">
+        <h2>${firstName} ${lastName} ${age}</h2>
+
+        <label>First Name:</label>
+        <input value.bind="firstName">
+
+        <label>Last Name:</label>
+        <input value.bind="lastName">
+
+        <label>Age:</label>
+        <input type="number" value.bind="age">
+    </div>
+
+    <script type="module">
+        import "./../src/index.js";
+
+        const viewModel = crsbinding.observe({
+            firstName: "John",
+            lastName:  "Doe",
+            age: 30
+        });
+
+        async function parse() {
+            await crsbinding.parseElement(document.documentElement, viewModel);
+            crsbinding.updateUI(viewModel);
+            document.getElementById("container").style.display = "block";
+        }
+
+        parse().catch(error => console.error(error));
+    </script>
+</body>
+</html>

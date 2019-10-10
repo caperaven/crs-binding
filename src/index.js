@@ -5,6 +5,7 @@ import {sanitizeExp} from "./events/expressions.js";
 import {parseElement, releaseBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./binding/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
+import {updateUI} from "./events/update.js";
 
 window.crsbinding = {
     _expFn: new Map(),
@@ -18,5 +19,6 @@ window.crsbinding = {
     parseElement: parseElement,
     releaseBinding: releaseBinding,
     providerManager: new ProviderManager(),
-    idleTaskManager: new IdleTaskManager()
+    idleTaskManager: new IdleTaskManager(),
+    updateUI: updateUI
 };

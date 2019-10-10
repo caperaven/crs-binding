@@ -18,6 +18,7 @@ beforeEach(async () => {
     };
 
     global.window = {};
+    global.requestAnimationFrame = (callback) => callback();
 
     const idleModule = await import("../../../src/idle/idleTaskManager.js");
 
