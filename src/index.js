@@ -9,16 +9,16 @@ import {updateUI} from "./events/update.js";
 
 window.crsbinding = {
     _expFn: new Map(),
+    idleTaskManager: new IdleTaskManager(),
     sanitizeExp: sanitizeExp,
     compileExp: compileExp,
     releaseExp: releaseExp,
+    providerManager: new ProviderManager(),
+    updateUI: updateUI,
     enableEvents: enableEvents,
     disableEvents: disableEvents,
     observe: observe,
     releaseObserved: releaseObserved,
-    parseElement: parseElement,
     releaseBinding: releaseBinding,
-    providerManager: new ProviderManager(),
-    idleTaskManager: new IdleTaskManager(),
-    updateUI: updateUI
+    parseElement: parseElement
 };
