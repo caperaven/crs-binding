@@ -3,13 +3,6 @@ import {compileExp} from "./compiler.js"
 export function enableEvents(obj) {
     obj.__events = new Map();
     obj.__conditions = new Map();
-
-    obj.when = when;
-    obj.on = on;
-    obj.notifyPropertyChanged = notifyPropertyChanged;
-
-    obj.removeOn = removeOn;
-    obj.removeWhen = removeWhen;
 }
 
 export function disableEvents(obj) {
@@ -24,16 +17,12 @@ export function disableEvents(obj) {
     });
     obj.__conditions.clear();
     delete obj.__conditions;
-
-    delete obj.when;
-    delete obj.on;
-    delete obj.notifyPropertyChanged;
 }
 
-function when(exp, callback) {
+export function when(obj, exp, callback) {
     let functions = this.__events.get(exp) || [];
     functions = [...functions, callback];
-    this.__events.set(exp, functions);
+    obj.__events.set(exp, functions);
 
     const cmp = compileExp(exp);
     let cond = this.__conditions.get(exp);
@@ -47,35 +36,35 @@ function when(exp, callback) {
         };
 
         cond = {fn: fn, properties: cmp.parameters.properties.slice(0)};
-        this.__conditions.set(exp, cond);
+        obj.__conditions.set(exp, cond);
     }
 
     const properties = cmp.parameters.properties;
     for (let property of properties) {
-        this.on(property, cond.fn);
+        obj.on(property, cond.fn);
     }
 }
 
-function removeWhen(exp, callback) {
-    this.removeOn(exp, callback);
-    const cnd = this.__conditions.get(exp);
+export function removeWhen(obj, exp, callback) {
+    crsbinding.events.removeOn(exp, callback);
+    const cnd = obj.__conditions.get(exp);
     for (let property of cnd.properties) {
-        this.removeOn(property, cnd.fn);
+        crsbinding.events.removeOn(property, cnd.fn);
     }
 
     delete cnd.fn;
     delete cnd.properties;
-    this.__conditions.delete(exp);
+    obj.__conditions.delete(exp);
 }
 
-function on(property, callback) {
-    let functions = this.__events.get(property) || [];
+export function on(obj, property, callback) {
+    let functions = obj.__events.get(property) || [];
     functions = [...functions, callback];
-    this.__events.set(property, functions);
+    obj.__events.set(property, functions);
 }
 
-function removeOn(property, callback) {
-    const functions = this.__events.get(property) || [];
+export function removeOn(obj, property, callback) {
+    const functions = obj.__events.get(property) || [];
     const index = functions.indexOf(callback);
 
     if (index != -1) {
@@ -83,14 +72,14 @@ function removeOn(property, callback) {
     }
 
     if (functions.length == 0) {
-        this.__events.delete(property);
+        obj.__events.delete(property);
     }
 }
 
-function notifyPropertyChanged(property) {
-    if (this.__events.has(property) == false) return;
+export function notifyPropertyChanged(obj, property) {
+    if (obj.__events.has(property) == false) return;
 
-    const functions = this.__events.get(property);
+    const functions = obj.__events.get(property);
     for(let fn of functions) {
         fn(property, this[property]);
     }

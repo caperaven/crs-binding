@@ -1,4 +1,3 @@
-import "./idleCallback.js";
 export class IdleTaskManager {
     constructor() {
         this.processing = false;

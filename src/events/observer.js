@@ -5,7 +5,7 @@ export function observe(obj, prior) {
     obj[PROXY] = true;
     obj[BACKUP] = {};
 
-    crsbinding.enableEvents(obj);
+    crsbinding.events.enableEvents(obj);
 
     if (prior != null) {
         obj.__events = prior.__events;
@@ -21,7 +21,7 @@ export function observe(obj, prior) {
 }
 
 export function releaseObserved(obj) {
-    crsbinding.disableEvents(obj);
+    crsbinding.events.disableEvents(obj);
 
     if (obj.dispose != null) {
         obj._disposing = true;
@@ -53,7 +53,7 @@ function setSingle(obj, prop, value) {
 
     obj[prop] = createProxyValue(obj[prop], value);
 
-    obj.notifyPropertyChanged(prop);
+    crsbinding.events.notifyPropertyChanged(obj, prop);
 
     if (obj.propertyChanged != null) {
         obj.propertyChanged(value, oldValue);

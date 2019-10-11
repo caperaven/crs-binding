@@ -3,6 +3,6 @@ export function updateUI(context) {
 
     const keys = Object.keys(context);
     for (let key of keys) {
-        context.notifyPropertyChanged(key);
+        crsbinding.events.notifyPropertyChanged(context, key);
     }
 }

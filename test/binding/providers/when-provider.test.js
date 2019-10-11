@@ -14,10 +14,7 @@ let expObjSpy;
 
 beforeEach(async ()=> {
     global.window = {};
-
-    const crsbindingModule = await import("./../../crsbinding.mock.js");
-
-    global.crsbinding = crsbindingModule.crsbindingMock;
+    global.crsbinding = (await import("./../../crsbinding.mock.js")).crsbindingMock;
 
     element = new ElementMock();
 
@@ -25,8 +22,8 @@ beforeEach(async ()=> {
         "firstName": null
     });
 
-    onSpy = jest.spyOn(context, "on");
-    removeOnSpy = jest.spyOn(context, "removeOn");
+    onSpy = jest.spyOn(crsbinding.events, "on");
+    removeOnSpy = jest.spyOn(crsbinding.events, "removeOn");
     releaseExpSpy = jest.spyOn(crsbinding, "releaseExp");
     idleTaskManagerSpy = jest.spyOn(crsbinding.idleTaskManager, "add");
 

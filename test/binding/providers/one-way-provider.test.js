@@ -1,8 +1,7 @@
 import {OneWayProvider} from "../../../src/binding/providers/one-way-provider.js";
 import {observe, releaseObserved} from "../../../src/events/observer.js";
-import {enableEvents, disableEvents} from "../../../src/events/event-mixin.js";
-import {compileExp} from "./../../../src/events/compiler.js";
 import {ElementMock} from "../../element.mock.js";
+import {crsbindingMock} from "../../crsbinding.mock.js";
 
 let instance;
 let element;
@@ -20,19 +19,7 @@ beforeEach(async () => {
     global.window = {};
     global.requestAnimationFrame = (callback) => callback();
 
-    const idleModule = await import("../../../src/idle/idleTaskManager.js");
-
-    global.crsbinding = {
-        _expFn: new Map(),
-        enableEvents: enableEvents,
-        disableEvents: disableEvents,
-        idleTaskManager: new idleModule.IdleTaskManager(),
-        providerManager: {
-            register: jest.fn()
-        },
-        compileExp: compileExp,
-        releaseExp: jest.fn()
-    };
+    global.crsbinding = crsbindingMock;
 
     element = new ElementMock();
 
@@ -40,8 +27,8 @@ beforeEach(async () => {
         "firstName": null
     });
 
-    onSpy = jest.spyOn(context, "on");
-    removedSpy = jest.spyOn(context, "removeOn");
+    onSpy = jest.spyOn(crsbinding.events, "on");
+    removedSpy = jest.spyOn(crsbinding.events, "removeOn");
     idleTaskManagerSpy = jest.spyOn(crsbinding.idleTaskManager, "add");
     instance = new OneWayProvider(element, context, "value", "firstName");
 });
@@ -62,10 +49,11 @@ test("One Way Provider - construction", () => {
 });
 
 test("One Way Provider - dispose", () => {
-    const removed = jest.fn(context.removeOn);
+    const releaseExpSpy = jest.spyOn(crsbinding, "releaseExp");
+
     instance.dispose();
     expect(removedSpy).toHaveBeenCalled();
-    expect(crsbinding.releaseExp).toBeCalled();
+    expect(releaseExpSpy).toHaveBeenCalled();
 
     expect(instance._element).toBeUndefined();
     expect(instance._context).toBeUndefined();

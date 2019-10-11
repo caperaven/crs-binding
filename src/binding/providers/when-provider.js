@@ -46,7 +46,7 @@ export class WhenProvider extends ProviderBase {
         this._getValueFn = crsbinding.compileExp(this._value);
 
         for (let prop of this._getValueFn.parameters.properties) {
-            this._context.on(prop, this._eventHandler);
+            crsbinding.events.on(this._context, prop, this._eventHandler);
         }
     }
 }

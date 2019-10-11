@@ -1,11 +1,7 @@
-import {enableEvents, disableEvents} from "../../src/events/event-mixin.js";
+import {crsbindingMock} from "./../crsbinding.mock.js";
 
 beforeAll(() => {
-    global.crsbinding = {
-        _expFn: new Map(),
-        enableEvents: enableEvents,
-        disableEvents: disableEvents
-    }
+    global.crsbinding = crsbindingMock;
 });
 
 test ("enableEvents - on -> notifyPropertyChanged", () => {
@@ -13,26 +9,20 @@ test ("enableEvents - on -> notifyPropertyChanged", () => {
         property: "value"
     };
 
-    enableEvents(obj);
-    expect(obj.on).not.toBeNull();
-    expect(obj.when).not.toBeNull();
-    expect(obj.notifyPropertyChanged).not.toBeNull();
+    crsbinding.events.enableEvents(obj);
     expect(obj.__events).not.toBeNull();
     expect(obj.__conditions).not.toBeNull();
 
     let propertyChanged = false;
-    obj.on("property", () => propertyChanged = true);
+    crsbinding.events.on(obj, "property", () => propertyChanged = true);
 
-    obj.notifyPropertyChanged("notThere");
+    crsbinding.events.notifyPropertyChanged(obj, "notThere");
     expect(propertyChanged).toBe(false);
 
-    obj.notifyPropertyChanged("property");
+    crsbinding.events.notifyPropertyChanged(obj, "property");
     expect(propertyChanged).toBe(true);
 
-    disableEvents(obj);
-    expect(obj.on).toBeUndefined();
-    expect(obj.when).toBeUndefined();
-    expect(obj.notifyPropertyChanged).toBeUndefined();
+    crsbinding.events.disableEvents(obj);
     expect(obj.__events).toBeUndefined();
     expect(obj.__conditions).toBeUndefined();
 });
@@ -42,22 +32,22 @@ test("when / removeWhen", () => {
         property: "value"
     };
 
-    enableEvents(obj);
+    crsbinding.events.enableEvents(obj);
 
     let whenFired = false;
     const fn = () => whenFired = true;
     const exp = "property == 'test'";
 
-    obj.when(exp, fn);
+    crsbinding.events.when(obj, exp, fn);
     obj.property = "test";
-    obj.notifyPropertyChanged("property");
+    crsbinding.event.notifyPropertyChanged(obj, "property");
 
     expect(obj.__events.size).toBe(2);
     expect(obj.__conditions.size).toBe(1);
 
     expect(whenFired).toBe(true);
 
-    obj.removeWhen(exp, fn);
+    crsbinding.removeWhen(obj, exp, fn);
 
     expect(obj.__events.size).toBe(0);
     expect(obj.__conditions.size).toBe(0);
@@ -68,15 +58,15 @@ test("disableEvents remove conditions", () => {
         property: "value"
     };
 
-    enableEvents(obj);
+    crsbinding.events.enableEvents(obj);
 
     let whenFired = false;
     const fn = () => whenFired = true;
     const exp = "property == 'test'";
 
-    obj.when(exp, fn);
+    crsbinding.events.when(obj, exp, fn);
     obj.property = "test";
-    obj.notifyPropertyChanged("property");
+    crsbinding.events.notifyPropertyChanged("property");
 
     expect(obj.__events.size).toBe(2);
     expect(obj.__conditions.size).toBe(1);

@@ -6,12 +6,11 @@ import {sanitizeExp} from "../src/events/expressions.js";
 import {observe, releaseObserved} from "../src/events/observer.js";
 import {parseElement, releaseBinding} from "../src/binding/parse-element.js";
 import {updateUI} from "../src/events/update.js";
+import {notifyPropertyChanged, on, removeOn, removeWhen, when} from "../src/events/event-mixin.js";
 
 export const crsbindingMock = {
     _expFn: new Map(),
     idleTaskManager: new IdleTaskManager(),
-    enableEvents: enableEvents,
-    disableEvents: disableEvents,
     providerManager: new ProviderManager(),
     compileExp: compileExp,
     releaseExp: releaseExp,
@@ -20,5 +19,14 @@ export const crsbindingMock = {
     releaseObserved: releaseObserved,
     parseElement: parseElement,
     releaseBinding: releaseBinding,
-    updateUI: updateUI
+    updateUI: updateUI,
+    events: {
+        enableEvents: enableEvents,
+        disableEvents: disableEvents,
+        when: when,
+        on: on,
+        notifyPropertyChanged: notifyPropertyChanged,
+        removeOn: removeOn,
+        removeWhen: removeWhen
+    }
 };

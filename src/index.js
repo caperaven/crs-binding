@@ -6,6 +6,7 @@ import {parseElement, releaseBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./binding/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {updateUI} from "./events/update.js";
+import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
 
 window.crsbinding = {
     _expFn: new Map(),
@@ -15,10 +16,18 @@ window.crsbinding = {
     releaseExp: releaseExp,
     providerManager: new ProviderManager(),
     updateUI: updateUI,
-    enableEvents: enableEvents,
-    disableEvents: disableEvents,
     observe: observe,
     releaseObserved: releaseObserved,
     releaseBinding: releaseBinding,
-    parseElement: parseElement
+    parseElement: parseElement,
+
+    events: {
+        enableEvents: enableEvents,
+        disableEvents: disableEvents,
+        when: when,
+        on: on,
+        notifyPropertyChanged: notifyPropertyChanged,
+        removeOn: removeOn,
+        removeWhen: removeWhen
+    }
 };

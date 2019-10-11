@@ -11,7 +11,7 @@ beforeEach(async () =>{
         firstName: "John"
     });
 
-    notifyPropertyChangedSpy = jest.spyOn(context, "notifyPropertyChanged");
+    notifyPropertyChangedSpy = jest.spyOn(crsbinding.events, "notifyPropertyChanged");
 });
 
 test("updateUI", () => {

@@ -1,15 +1,12 @@
+import {crsbindingMock} from "./../crsbinding.mock.js";
+
 let instance;
 
 beforeEach(async () => {
     global.CustomEvent = class {
     };
 
-    global.crsbinding = {
-        enableEvents: jest.fn(),
-        parseElement: jest.fn(),
-        disableEvents: jest.fn(),
-        releaseBinding: jest.fn()
-    };
+    global.crsbinding = crsbindingMock;
 
     global.HTMLElement = class {
     };
@@ -44,7 +41,7 @@ beforeEach(async () => {
 test("bindable element - connectedCallback", async () => {
     await instance.connectedCallback();
     expect(instance.innerHTML).toBe("Hello World");
-    expect(crsbinding.enableEvents).toBeCalled();
+    expect(crsbinding.events.enableEvents).toBeCalled();
     expect(crsbinding.parseElement).toBeCalled();
     expect(instance.dispatchEvent).toBeCalled();
 });

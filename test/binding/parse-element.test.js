@@ -1,22 +1,13 @@
-import {parseElements, parseElement, parseAttributes, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
-import {ProviderManager} from "../../src/binding/provider-manager.js";
-import {compileExp, releaseExp} from "./../../src/events/compiler.js";
+import {parseElement, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
 import {observe} from "../../src/events/observer.js";
-import {disableEvents, enableEvents} from "../../src/events/event-mixin.js";
 import {ElementMock} from "../element.mock";
+import {crsbindingMock} from "./../crsbinding.mock.js";
 
 let element;
 let context;
 
 beforeEach(() => {
-    global.crsbinding = {
-        _expFn: new Map(),
-        enableEvents: enableEvents,
-        disableEvents: disableEvents,
-        compileExp: compileExp,
-        releaseExp: releaseExp,
-        providerManager: new ProviderManager()
-    };
+    global.crsbinding = crsbindingMock;
 
     context = observe({
         "firstName": null
@@ -101,7 +92,7 @@ test("parseAttribute - call", async () => {
 
 test("parseElement - check provider manager and also release element", async () => {
     await parseElement(element, context);
-    expect(crsbinding.providerManager.items.size).toEqual(1);
+    expect(crsbinding.providerManager.items.size).toEqual(6);
 
     await crsbinding.providerManager.releaseElement(crsbinding.providerManager.items.get(0)._element);
     expect(crsbinding.providerManager.items.size).toEqual(0);

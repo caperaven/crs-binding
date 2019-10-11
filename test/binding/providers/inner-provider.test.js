@@ -18,7 +18,7 @@ beforeEach(async () => {
         firstName: "John"
     });
 
-    onspy = jest.spyOn(context, "on");
+    onspy = jest.spyOn(crsbinding.events, "on");
 
     instance = new InnerProvider(element, context);
 

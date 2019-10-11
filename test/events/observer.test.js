@@ -1,11 +1,8 @@
 import {observe, releaseObserved} from "../../src/events/observer.js"
-import {enableEvents, disableEvents} from "../../src/events/event-mixin.js";
+import {crsbindingMock} from "./../crsbinding.mock.js";
 
 beforeAll(() => {
-    global.crsbinding = {
-        enableEvents: enableEvents,
-        disableEvents: disableEvents
-    }
+    global.crsbinding = crsbindingMock
 });
 
 test("observer", () => {

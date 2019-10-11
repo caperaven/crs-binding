@@ -7,7 +7,7 @@ export class InnerProvider {
         this._expObj = crsbinding.compileExp(element.innerText);
 
         for (let prop of this._expObj.parameters.properties) {
-            this._context.on(prop, this._eventHandler);
+            crsbinding.events.on(this._context, prop, this._eventHandler);
         }
     }
 

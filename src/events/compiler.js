@@ -1,5 +1,3 @@
-import {sanitizeExp} from "./expressions.js";
-
 export function compileExp(exp, parameters = [], sanitize = true) {
     if (crsbinding._expFn.has(exp)) {
         const x = crsbinding._expFn.get(exp);
@@ -11,7 +9,7 @@ export function compileExp(exp, parameters = [], sanitize = true) {
     let san;
 
     if (sanitize == true) {
-        san = sanitizeExp(exp);
+        san = crsbinding.sanitizeExp(exp);
         src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
     }
 

@@ -1,9 +1,8 @@
 import {compileExp, releaseExp} from "../../src/events/compiler.js";
+import {crsbindingMock} from "../crsbinding.mock.js";
 
 beforeAll(() => {
-    global.crsbinding = {
-        _expFn: new Map()
-    }
+    global.crsbinding = crsbindingMock
 });
 
 test("releaseExp - count down", () => {
