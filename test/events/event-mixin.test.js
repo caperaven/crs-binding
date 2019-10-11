@@ -40,14 +40,14 @@ test("when / removeWhen", () => {
 
     crsbinding.events.when(obj, exp, fn);
     obj.property = "test";
-    crsbinding.event.notifyPropertyChanged(obj, "property");
+    crsbinding.events.notifyPropertyChanged(obj, "property");
 
     expect(obj.__events.size).toBe(2);
     expect(obj.__conditions.size).toBe(1);
 
     expect(whenFired).toBe(true);
 
-    crsbinding.removeWhen(obj, exp, fn);
+    crsbinding.events.removeWhen(obj, exp, fn);
 
     expect(obj.__events.size).toBe(0);
     expect(obj.__conditions.size).toBe(0);
@@ -66,7 +66,7 @@ test("disableEvents remove conditions", () => {
 
     crsbinding.events.when(obj, exp, fn);
     obj.property = "test";
-    crsbinding.events.notifyPropertyChanged("property");
+    crsbinding.events.notifyPropertyChanged(obj, "property");
 
     expect(obj.__events.size).toBe(2);
     expect(obj.__conditions.size).toBe(1);
@@ -75,7 +75,7 @@ test("disableEvents remove conditions", () => {
 
     const events = obj.__events;
     const conditions = obj.__conditions;
-    disableEvents(obj);
+    crsbinding.events.disableEvents(obj);
 
     expect(events.size).toBe(0);
     expect(conditions.size).toBe(0);

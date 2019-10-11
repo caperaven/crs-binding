@@ -11,12 +11,14 @@ export function disableEvents(obj) {
         delete obj.__events;
     }
 
-    obj.__conditions.forEach((cnd) => {
-        delete cnd.fn;
-        delete cnd.properties;
-    });
-    obj.__conditions.clear();
-    delete obj.__conditions;
+    if (obj.__conditions) {
+        obj.__conditions.forEach((cnd) => {
+            delete cnd.fn;
+            delete cnd.properties;
+        });
+        obj.__conditions.clear();
+        delete obj.__conditions;
+    }
 }
 
 export function when(obj, exp, callback) {
@@ -49,7 +51,7 @@ export function removeWhen(obj, exp, callback) {
     crsbinding.events.removeOn(obj, exp, callback);
     const cnd = obj.__conditions.get(exp);
     for (let property of cnd.properties) {
-        crsbinding.events.removeOn(property, cnd.fn);
+        crsbinding.events.removeOn(obj, property, cnd.fn);
     }
 
     delete cnd.fn;

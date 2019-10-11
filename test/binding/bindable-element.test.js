@@ -33,30 +33,39 @@ beforeEach(async () => {
     }
 
     instance = new MyBind();
+    instance.connectedCallback();
     instance.dispatchEvent = jest.fn();
     instance.notifyPropertyChanged = jest.fn();
     instance.getAttribute = jest.fn();
 });
 
 test("bindable element - connectedCallback", async () => {
+    const enableEventsSpy = jest.spyOn(crsbinding.events, "enableEvents");
+    const parseElementSpy = jest.spyOn(crsbinding, "parseElement");
+
     await instance.connectedCallback();
     expect(instance.innerHTML).toBe("Hello World");
-    expect(crsbinding.events.enableEvents).toBeCalled();
-    expect(crsbinding.parseElement).toBeCalled();
+    expect(enableEventsSpy).toHaveBeenCalled();
+    expect(parseElementSpy).toHaveBeenCalled();
     expect(instance.dispatchEvent).toBeCalled();
 });
 
 test("bindable element - disconnectedCallback", async () => {
+    const disableEventsSpy = jest.spyOn(crsbinding.events, "disableEvents");
+    const releaseBinding = jest.spyOn(crsbinding, "releaseBinding");
+
     await instance.disconnectedCallback();
-    expect(crsbinding.disableEvents).toBeCalled();
-    expect(crsbinding.releaseBinding).toBeCalled();
+    expect(disableEventsSpy).toHaveBeenCalled();
+    expect(releaseBinding).toHaveBeenCalled();
 });
 
 test( "bindable element - get and set property", () => {
+    let notifyPropertyChangedSpy = jest.spyOn(crsbinding.events, "notifyPropertyChanged");
+
     const name = instance.name;
     expect(instance.getAttribute).toBeCalled();
 
     instance.name = "John";
     expect(instance.name).toEqual("John");
-    expect(instance.notifyPropertyChanged).toBeCalled();
+    expect(notifyPropertyChangedSpy).toHaveBeenCalled();
 });

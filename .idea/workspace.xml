@@ -4,7 +4,10 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/when-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/when-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/event-mixin.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.when-provider.js">
+  <component name="RunManager" selected="Jest.bindable element - disconnectedCallback">
     <configuration name="One Way Privider - property changed" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -61,27 +64,30 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="One Way Provider - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="bindable element - disconnectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/bindable-element.test.js" />
       <test-names>
-        <test-name value="One Way Provider - dispose" />
+        <test-name value="bindable element - disconnectedCallback" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="one-way-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="bindable element - get and set property" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/bindable-element.test.js" />
+      <test-names>
+        <test-name value="bindable element - get and set property" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="when-provider.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="when-provider.js" working-dir="$PROJECT_DIR$/src/binding/providers">
@@ -100,10 +106,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.bindable element - disconnectedCallback" />
+        <item itemvalue="Jest.bindable element - get and set property" />
         <item itemvalue="Node.js.when-provider.js" />
         <item itemvalue="Jest.One Way Privider - property changed" />
-        <item itemvalue="Jest.One Way Provider - dispose" />
-        <item itemvalue="Jest.one-way-provider.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -138,14 +144,7 @@
       <workItem from="1570718381743" duration="16354000" />
       <workItem from="1570776296677" duration="1729000" />
       <workItem from="1570790521532" duration="6000" />
-      <workItem from="1570792882325" duration="11278000" />
-    </task>
-    <task id="LOCAL-00009" summary="fixed binding issue with single property expression">
-      <created>1570191432035</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1570191432035</updated>
+      <workItem from="1570792882325" duration="13771000" />
     </task>
     <task id="LOCAL-00010" summary="adding cache of expressions on compiler">
       <created>1570196387754</created>
@@ -483,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570803686815</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="clean up objects">
+      <created>1570804185559</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1570804185559</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
