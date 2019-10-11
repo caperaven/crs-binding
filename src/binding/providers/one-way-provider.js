@@ -12,7 +12,7 @@ export class OneWayProvider extends ProviderBase {
             delete this._getObj;
         }
 
-        delete this._exp;
+        this._exp = null;
 
         this._eventHandler = null;
         super.dispose();

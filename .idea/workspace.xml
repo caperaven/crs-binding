@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,9 +99,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.test" />
         <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.sanitizeExp - path" />
-        <item itemvalue="npm.test" />
         <item itemvalue="Jest.updateUI (1)" />
         <item itemvalue="Node.js.update.test.js" />
       </list>
@@ -139,14 +138,7 @@
       <workItem from="1570718381743" duration="16354000" />
       <workItem from="1570776296677" duration="1729000" />
       <workItem from="1570790521532" duration="6000" />
-      <workItem from="1570792882325" duration="1945000" />
-    </task>
-    <task id="LOCAL-00004" summary="adding tests">
-      <created>1570048449159</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1570048449159</updated>
+      <workItem from="1570792882325" duration="2522000" />
     </task>
     <task id="LOCAL-00005" summary="adding tests">
       <created>1570049500917</created>
@@ -484,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570741473537</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="add paths test file and updateUI function">
+      <created>1570794878896</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1570794878896</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

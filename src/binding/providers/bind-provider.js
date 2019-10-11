@@ -5,7 +5,7 @@ export class BindProvider extends OneWayProvider {
         this._element.removeEventListener("change", this._changeHandler);
         this._changeHandler = null;
 
-        this.releaseExp(this._setObj);
+        crsbinding.releaseExp(this._setObj);
         delete this._setObj;
 
         super.dispose();
