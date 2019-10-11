@@ -4,7 +4,7 @@
     <div id="lastName"></div>
 
     <script type="module">
-        import {enableEvents, disableEvents} from "../dist/crs-event-mixin.js";
+        import "./../src/index.js";
 
         class Person {
             get firstName() {
@@ -13,7 +13,7 @@
 
             set firstName(newValue) {
                 this._firstName = newValue;
-                this.notifyPropertyChanged("firstName");
+                crsbinding.events.notifyPropertyChanged(this, "firstName");
             }
 
             get lastName() {
@@ -22,21 +22,21 @@
 
             set lastName(newValue) {
                 this._lastName = newValue;
-                this.notifyPropertyChanged("lastName");
+                crsbinding.events.notifyPropertyChanged(this, "lastName");
             }
 
             constructor() {
-                enableEvents(this);
+                crsbinding.events.enableEvents(this);
             }
 
             dispose() {
-                disableEvents(this);
+                crsbinding.events.disableEvents(this);
             }
         }
 
         const john = new Person();
-        john.on("firstName", () => document.querySelector("#name").innerText = john.firstName);
-        john.on("lastName", () => document.querySelector("#lastName").innerText = john.lastName);
+        crsbinding.events.on(john, "firstName", () => document.querySelector("#name").innerText = john.firstName);
+        crsbinding.events.on(john, "lastName", () => document.querySelector("#lastName").innerText = john.lastName);
 
         john.firstName = "John";
         john.lastName = "Doe";

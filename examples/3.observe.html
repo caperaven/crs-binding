@@ -11,8 +11,8 @@
                 lastName: "lastName"
             });
 
-            obj.on("firstName", () => document.querySelector("#name").innerText = obj.firstName);
-            obj.on("lastName", () => document.querySelector("#lastName").innerText = obj.lastName);
+            crsbinding.events.on(obj, "firstName", () => document.querySelector("#name").innerText = obj.firstName);
+            crsbinding.events.on(obj, "lastName", () => document.querySelector("#lastName").innerText = obj.lastName);
 
             obj.firstName = "John";
             obj.lastName = "Doe";
@@ -21,6 +21,6 @@
         }
     </script>
 
-    <script src="./../dist/crs-binding.js" onload="loaded()"></script>
+    <script src="./../src/index.js" onload="loaded()" type="module"></script>
 </body>
 </html>

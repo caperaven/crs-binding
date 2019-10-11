@@ -3,26 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/2.events.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/2.events.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/3.observe.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3.observe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/4.when.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/4.when.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/when-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/when-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/update.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/idle/idleTaskManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/idle/idleTaskManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/when-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/when-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/crsbinding.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/crsbinding.mock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/compiler.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/event-mixin.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observer.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/update.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,14 +150,7 @@
       <workItem from="1570718381743" duration="16354000" />
       <workItem from="1570776296677" duration="1729000" />
       <workItem from="1570790521532" duration="6000" />
-      <workItem from="1570792882325" duration="9036000" />
-    </task>
-    <task id="LOCAL-00007" summary="fixed binding issue with single property expression">
-      <created>1570190161047</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1570190161047</updated>
+      <workItem from="1570792882325" duration="10708000" />
     </task>
     <task id="LOCAL-00008" summary="fixed binding issue with single property expression">
       <created>1570190944003</created>
@@ -508,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570795787395</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="add paths test file and updateUI function">
+      <created>1570802082240</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1570802082240</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

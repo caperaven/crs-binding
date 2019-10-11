@@ -21,6 +21,6 @@ export class BindableElement extends HTMLElement {
 
     setProperty(prop, value) {
         this[`_${prop}`] = value;
-        this.notifyPropertyChanged(prop);
+        crsbinding.events.notifyPropertyChanged(this, prop);
     }
 }

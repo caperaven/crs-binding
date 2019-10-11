@@ -20,15 +20,15 @@ export function disableEvents(obj) {
 }
 
 export function when(obj, exp, callback) {
-    let functions = this.__events.get(exp) || [];
+    let functions = obj.__events.get(exp) || [];
     functions = [...functions, callback];
     obj.__events.set(exp, functions);
 
     const cmp = compileExp(exp);
-    let cond = this.__conditions.get(exp);
+    let cond = obj.__conditions.get(exp);
     if (cond == null) {
         const fn = () => {
-            if (cmp.function(this) == true) {
+            if (cmp.function(obj) == true) {
                 for (let call of functions) {
                     call();
                 }
@@ -41,12 +41,12 @@ export function when(obj, exp, callback) {
 
     const properties = cmp.parameters.properties;
     for (let property of properties) {
-        obj.on(property, cond.fn);
+        crsbinding.events.on(obj, property, cond.fn);
     }
 }
 
 export function removeWhen(obj, exp, callback) {
-    crsbinding.events.removeOn(exp, callback);
+    crsbinding.events.removeOn(obj, exp, callback);
     const cnd = obj.__conditions.get(exp);
     for (let property of cnd.properties) {
         crsbinding.events.removeOn(property, cnd.fn);
@@ -81,6 +81,6 @@ export function notifyPropertyChanged(obj, property) {
 
     const functions = obj.__events.get(property);
     for(let fn of functions) {
-        fn(property, this[property]);
+        fn(property, obj[property]);
     }
 }
