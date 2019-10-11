@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/event-mixin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,19 +50,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Jest.bindable element - disconnectedCallback">
-    <configuration name="One Way Privider - property changed" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" />
-      <test-names>
-        <test-name value="One Way Privider - property changed" />
-      </test-names>
-      <method v="2" />
-    </configuration>
     <configuration name="bindable element - disconnectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -90,7 +76,24 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="when-provider.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="when-provider.js" working-dir="$PROJECT_DIR$/src/binding/providers">
+    <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build-publish" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="bundle" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -105,11 +108,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.bindable element - disconnectedCallback" />
         <item itemvalue="Jest.bindable element - get and set property" />
-        <item itemvalue="Node.js.when-provider.js" />
-        <item itemvalue="Jest.One Way Privider - property changed" />
       </list>
     </recent_temporary>
   </component>
@@ -144,14 +147,7 @@
       <workItem from="1570718381743" duration="16354000" />
       <workItem from="1570776296677" duration="1729000" />
       <workItem from="1570790521532" duration="6000" />
-      <workItem from="1570792882325" duration="13771000" />
-    </task>
-    <task id="LOCAL-00010" summary="adding cache of expressions on compiler">
-      <created>1570196387754</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1570196387754</updated>
+      <workItem from="1570792882325" duration="14925000" />
     </task>
     <task id="LOCAL-00011" summary="adding cache of expressions on compiler">
       <created>1570197960178</created>
@@ -489,7 +485,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570804185559</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="clean up objects and tests">
+      <created>1570806703308</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1570806703308</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +537,8 @@
     <MESSAGE value="updated tests" />
     <MESSAGE value="add paths test file and updateUI function" />
     <MESSAGE value="clean up objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up objects" />
+    <MESSAGE value="clean up objects and tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up objects and tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -4,7 +4,7 @@ export default [
     {
         input: "src/index.js",
         output: [
-            {file: 'dist/crs-binding.js', format: 'es', sourcemap: true}
+            {file: 'dist/crs-binding.js', format: 'es', sourcemap: false}
         ],
         plugins: [
             terser()
@@ -13,7 +13,7 @@ export default [
     {
         input: "src/events/event-mixin.js",
         output: [
-            {file: 'dist/crs-event-mixin.js', format: 'es', sourcemap: true}
+            {file: 'dist/crs-event-mixin.js', format: 'es', sourcemap: false}
         ],
         plugins: [
             terser()
@@ -22,7 +22,7 @@ export default [
     {
         input: "src/binding/bindable-element.js",
         output: [
-            {file: 'dist/crs-bindable-element.js', format: 'es', sourcemap: true}
+            {file: 'dist/crs-bindable-element.js', format: 'es', sourcemap: false}
         ],
         plugins: [
             terser()
