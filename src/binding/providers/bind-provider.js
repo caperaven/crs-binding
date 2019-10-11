@@ -4,6 +4,10 @@ export class BindProvider extends OneWayProvider {
     dispose() {
         this._element.removeEventListener("change", this._changeHandler);
         this._changeHandler = null;
+
+        this.releaseExp(this._setObj);
+        delete this._setObj;
+
         super.dispose();
     }
 
@@ -11,6 +15,8 @@ export class BindProvider extends OneWayProvider {
         super.initialize();
         this._changeHandler = this._change.bind(this);
         this._element.addEventListener("change", this._changeHandler);
+
+        this._setObj = crsbinding.compileExp(`context.${this._value} = value`, ["value"], false);
     }
 
     _change(event) {
@@ -22,7 +28,7 @@ export class BindProvider extends OneWayProvider {
             value = this[typeFn](value);
         }
 
-        this._context[this._value] = value;
+        this._setObj.function(this._context, value);
     }
 
     _number(value) {

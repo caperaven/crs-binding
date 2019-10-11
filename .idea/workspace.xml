@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/lib/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +20,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../baremetalweb" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pragma/test-package-component" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -75,20 +75,17 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="updateUI" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/events/update.js" />
-      <test-names>
-        <test-name value="updateUI" />
-      </test-names>
+    <configuration name="update.test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="update.test.js" working-dir="$PROJECT_DIR$/src/events">
       <method v="2" />
     </configuration>
-    <configuration name="update.test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="update.test.js" working-dir="$PROJECT_DIR$/src/events">
+    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="bundle" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -103,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.sanitizeExp - path" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.updateUI (1)" />
         <item itemvalue="Node.js.update.test.js" />
-        <item itemvalue="Jest.updateUI" />
       </list>
     </recent_temporary>
   </component>
@@ -139,14 +136,10 @@
       <workItem from="1570618125714" duration="8000" />
       <workItem from="1570624555134" duration="9519000" />
       <workItem from="1570636969603" duration="13563000" />
-      <workItem from="1570718381743" duration="15639000" />
-    </task>
-    <task id="LOCAL-00003" summary="adding tests">
-      <created>1570047051236</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1570047051236</updated>
+      <workItem from="1570718381743" duration="16354000" />
+      <workItem from="1570776296677" duration="1729000" />
+      <workItem from="1570790521532" duration="6000" />
+      <workItem from="1570792882325" duration="1945000" />
     </task>
     <task id="LOCAL-00004" summary="adding tests">
       <created>1570048449159</created>
@@ -484,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570738061666</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="add paths test file and updateUI function">
+      <created>1570741473537</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1570741473537</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
