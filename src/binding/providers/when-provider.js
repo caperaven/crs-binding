@@ -3,7 +3,7 @@ import {ProviderBase} from "./provider-base.js";
 export class WhenProvider extends ProviderBase {
     dispose() {
         for (let prop of this._getValueFn.parameters.properties) {
-            this._context.removeOn(prop, this._eventHandler);
+            crsbinding.events.removeOn(this._context, prop, this._eventHandler);
         }
 
         this._eventHandler = null;

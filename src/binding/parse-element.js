@@ -1,7 +1,7 @@
 import {ProviderFactory} from "./provider-factory.js";
 
 export async function parseElements(collection, context) {
-    for (let element of collection) {
+    for (let element of collection || []) {
         await parseElement(element, context);
     }
 }
