@@ -39,7 +39,7 @@ function get(obj, prop) {
 function set(obj, prop, value) {
     if (prop == "_disposing" || obj._disposing == true) return true;
 
-    if (value.indexOf && value.indexOf(".") > 0) {
+    if (value != null && value.indexOf && value.indexOf(".") > 0) {
         return setOnPath(obj, prop, value);
     }
     else {

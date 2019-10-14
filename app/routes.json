@@ -1,0 +1,18 @@
+{
+  "default": "welcome",
+  "root": "app",
+  "auto-nav": true,
+  "routes": [
+    {
+      "title": "Welcome",
+      "hash": "#welcome",
+      "view": "welcome",
+      "html-only": true
+    },
+    {
+      "title": "View 2",
+      "hash": "#view2",
+      "view": "view2"
+    }
+  ]
+}

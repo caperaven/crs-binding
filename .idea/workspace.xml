@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/view2/view2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/view2/view2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,20 +29,20 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pragma/test-package-component" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding\test\binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\test\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -108,8 +116,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.bundle" />
+        <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.bindable element - disconnectedCallback" />
         <item itemvalue="Jest.bindable element - get and set property" />
@@ -147,14 +155,10 @@
       <workItem from="1570718381743" duration="16354000" />
       <workItem from="1570776296677" duration="1729000" />
       <workItem from="1570790521532" duration="6000" />
-      <workItem from="1570792882325" duration="14925000" />
-    </task>
-    <task id="LOCAL-00011" summary="adding cache of expressions on compiler">
-      <created>1570197960178</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1570197960178</updated>
+      <workItem from="1570792882325" duration="15133000" />
+      <workItem from="1570809011143" duration="987000" />
+      <workItem from="1570810880897" duration="2475000" />
+      <workItem from="1571082363820" duration="2573000" />
     </task>
     <task id="LOCAL-00012" summary="adding cache of expressions on compiler">
       <created>1570198385483</created>
@@ -492,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570806703308</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="release1">
+      <created>1570807838102</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1570807838102</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +549,8 @@
     <MESSAGE value="add paths test file and updateUI function" />
     <MESSAGE value="clean up objects" />
     <MESSAGE value="clean up objects and tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up objects and tests" />
+    <MESSAGE value="release1" />
+    <option name="LAST_COMMIT_MESSAGE" value="release1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -546,13 +558,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js</url>
           <line>67</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/binding/providers/one-way-provider.js</url>
           <line>71</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

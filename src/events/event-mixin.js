@@ -7,6 +7,9 @@ export function enableEvents(obj) {
 
 export function disableEvents(obj) {
     if (obj.__events != null) {
+        obj.__events.forEach((ev) => {
+           ev.length = 0;
+        });
         obj.__events.clear();
         delete obj.__events;
     }
@@ -79,7 +82,7 @@ export function removeOn(obj, property, callback) {
 }
 
 export function notifyPropertyChanged(obj, property) {
-    if (obj.__events.has(property) == false) return;
+    if (obj.__events == null || obj.__events.has(property) == false) return;
 
     const functions = obj.__events.get(property);
     for(let fn of functions) {

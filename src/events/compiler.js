@@ -32,7 +32,8 @@ export function releaseExp(exp) {
         x.count -= 1;
 
         if (x.count == 0) {
-            x.fn = null;
+            x.function = null;
+            x.parameters = null;
             crsbinding._expFn.delete(exp);
         }
     }
