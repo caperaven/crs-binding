@@ -27,14 +27,15 @@ export function compileExp(exp, parameters = [], sanitize = true) {
 }
 
 export function releaseExp(exp) {
-    if (crsbinding._expFn.has(exp)) {
-        const x = crsbinding._expFn.get(exp);
+    const key = exp.parameters.expression.split("context.").join("");
+    if (crsbinding._expFn.has(key)) {
+        const x = crsbinding._expFn.get(key);
         x.count -= 1;
 
         if (x.count == 0) {
             x.function = null;
             x.parameters = null;
-            crsbinding._expFn.delete(exp);
+            crsbinding._expFn.delete(key);
         }
     }
 }

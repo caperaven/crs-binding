@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/view2/view2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/view2/view2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -158,14 +148,7 @@
       <workItem from="1570792882325" duration="15133000" />
       <workItem from="1570809011143" duration="987000" />
       <workItem from="1570810880897" duration="2475000" />
-      <workItem from="1571082363820" duration="2573000" />
-    </task>
-    <task id="LOCAL-00012" summary="adding cache of expressions on compiler">
-      <created>1570198385483</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1570198385483</updated>
+      <workItem from="1571082363820" duration="2780000" />
     </task>
     <task id="LOCAL-00013" summary="adding cache of expressions on compiler">
       <created>1570207061914</created>
@@ -503,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570807838102</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="clean up inner provider memory">
+      <created>1571084958118</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1571084958118</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +515,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="expressions working" />
     <MESSAGE value="adding tests" />
     <MESSAGE value="fixed binding issue with single property expression" />
     <MESSAGE value="adding cache of expressions on compiler" />
@@ -550,7 +539,8 @@
     <MESSAGE value="clean up objects" />
     <MESSAGE value="clean up objects and tests" />
     <MESSAGE value="release1" />
-    <option name="LAST_COMMIT_MESSAGE" value="release1" />
+    <MESSAGE value="clean up inner provider memory" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up inner provider memory" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
