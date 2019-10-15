@@ -8,4 +8,9 @@ export default class View extends ViewBase {
     disconnectedCallback() {
         super.disconnectedCallback();
     }
+
+    _loaded() {
+        super._loaded();
+        this.field1 = "Field1";
+    }
 }
