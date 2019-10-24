@@ -14,7 +14,7 @@ export async function parseElement(element, context) {
 
     await parseAttributes(boundAttributes, context);
 
-    if (element.children && element.children.length == 0 && element.innerText.indexOf("${") != -1) {
+    if (element.children && element.children.length == 0 && (element.innerText || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context);
     }
 }

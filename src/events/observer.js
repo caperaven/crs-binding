@@ -21,6 +21,8 @@ export function observe(obj, prior) {
 }
 
 export function releaseObserved(obj) {
+    if (Array.isArray(obj)) return releaseObservedArray(obj);
+
     crsbinding.events.disableEvents(obj);
 
     if (obj.dispose != null) {
@@ -30,6 +32,10 @@ export function releaseObserved(obj) {
 
     delete obj[PROXY];
     delete obj[BACKUP];
+}
+
+function releaseObservedArray(ar) {
+    ar.forEach(item => releaseObserved(item));
 }
 
 function get(obj, prop) {

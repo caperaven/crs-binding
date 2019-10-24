@@ -14,13 +14,33 @@ export default class View extends ViewBase {
         super._loaded();
         this.items = observeArray([
             {
-                value: "item 1"
+                value: "1",
+                unit: "fr"
             },
             {
-                value: "item 2"
+                value: "2",
+                unit: "fr"
             },
             {
-                value: "item 3"
+                value: "3",
+                unit: "fr"
+            }
+        ]);
+    }
+
+    debug() {
+        this.items = observeArray([
+            {
+                value: "5",
+                unit: "em"
+            },
+            {
+                value: "6",
+                unit: "em"
+            },
+            {
+                value: "7",
+                unit: "em"
             }
         ]);
     }

@@ -3,6 +3,11 @@ const PROXY = "_isProxy";
 export function observeArray(obj) {
     obj[PROXY] = true;
 
+    for (let i = 0; i < obj.length; i++) {
+        obj[i] = crsbinding.observe(obj[i]);
+        obj[i].__index = i;
+    }
+
     const proxy = new Proxy(obj, {
         get: get
     });
