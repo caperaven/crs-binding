@@ -13,6 +13,11 @@
       "title": "View 2",
       "hash": "#view2",
       "view": "view2"
+    },
+    {
+      "title": "Repeat",
+      "hash": "#repeat",
+      "view": "repeat"
     }
   ]
 }

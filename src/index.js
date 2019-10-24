@@ -7,6 +7,7 @@ import {ProviderManager} from "./binding/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {updateUI} from "./events/update.js";
 import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
+import {listenOn, listenOnPath} from "./binding/listen-on.js";
 
 window.crsbinding = {
     _expFn: new Map(),
@@ -28,6 +29,8 @@ window.crsbinding = {
         on: on,
         notifyPropertyChanged: notifyPropertyChanged,
         removeOn: removeOn,
-        removeWhen: removeWhen
+        removeWhen: removeWhen,
+        listenOn: listenOn,
+        listenOnPath: listenOnPath
     }
 };

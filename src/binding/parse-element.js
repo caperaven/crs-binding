@@ -10,7 +10,7 @@ export async function parseElement(element, context) {
     await parseElements(element.children, context);
 
     const attributes = Array.from(element.attributes || []);
-    const boundAttributes = attributes.filter(attr => attr.name.indexOf(".") != -1);
+    const boundAttributes = attributes.filter(attr => attr.name == "repeat" || attr.name.indexOf(".") != -1);
 
     await parseAttributes(boundAttributes, context);
 
@@ -28,7 +28,7 @@ export async function parseAttributes(collection, context) {
 export async function parseAttribute(attr, context) {
     const parts = attr.name.split(".");
     const prop = parts[0];
-    const prov = parts[1];
+    const prov = prop == "repeat" ? prop : parts[1];
 
     return ProviderFactory[prov](attr.ownerElement, context, prop, attr.value);
 }

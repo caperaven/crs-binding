@@ -9,6 +9,8 @@ export class BindProvider extends OneWayProvider {
         delete this._setObj;
 
         super.dispose();
+
+        console.log(this);
     }
 
     initialize() {

@@ -4,6 +4,7 @@ import {OnceProvider} from "./providers/once-provider.js";
 import {WhenProvider} from "./providers/when-provider.js";
 import {CallProvider} from "./providers/call-provider.js";
 import {InnerProvider} from "./providers/inner-provider.js";
+import {RepeatProvider} from "./providers/repeat-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value) {
@@ -36,5 +37,9 @@ export class ProviderFactory {
 
     static "inner"(element, context) {
         return new InnerProvider(element, context);
+    }
+
+    static "repeat"(element, context) {
+        return new RepeatProvider(element, context);
     }
 }

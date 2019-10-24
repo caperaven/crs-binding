@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/binding/listen-on.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view2/view2.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/view2/view2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view2/view2.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/view2/view2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -153,14 +163,13 @@
       <workItem from="1571085265937" duration="75000" />
       <workItem from="1571085353840" duration="14000" />
       <workItem from="1571167650887" duration="855000" />
-      <workItem from="1571168620756" duration="116000" />
-    </task>
-    <task id="LOCAL-00015" summary="adding events">
-      <created>1570209076964</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1570209076964</updated>
+      <workItem from="1571168620756" duration="1149000" />
+      <workItem from="1571204180632" duration="22000" />
+      <workItem from="1571382992639" duration="68000" />
+      <workItem from="1571684075079" duration="3146000" />
+      <workItem from="1571767588251" duration="1140000" />
+      <workItem from="1571862211303" duration="1612000" />
+      <workItem from="1571945402860" duration="1064000" />
     </task>
     <task id="LOCAL-00016" summary="adding events">
       <created>1570209817870</created>
@@ -498,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571085363522</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="updated binding cleanup">
+      <created>1571168937149</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1571168937149</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -520,7 +536,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed binding issue with single property expression" />
     <MESSAGE value="adding cache of expressions on compiler" />
     <MESSAGE value="adding events" />
     <MESSAGE value="event clean up with tests" />
@@ -545,7 +560,8 @@
     <MESSAGE value="release1" />
     <MESSAGE value="clean up inner provider memory" />
     <MESSAGE value="package" />
-    <option name="LAST_COMMIT_MESSAGE" value="package" />
+    <MESSAGE value="updated binding cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated binding cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -554,11 +570,6 @@
           <url>file://$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js</url>
           <line>67</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/binding/providers/one-way-provider.js</url>
-          <line>71</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

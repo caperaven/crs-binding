@@ -35,35 +35,11 @@ export class OneWayProvider extends ProviderBase {
         }
 
         if (this._value.indexOf(".") == -1) {
-            this._listenOn(this._context, this._value);
+            crsbinding.events.listenOn(this._context, this._value, this._eventHandler);
         }
         else {
-            this._listenOnPath();
+            crsbinding.events.listenOnPath(this._context, this._value, this._eventHandler);
         }
-    }
-
-    _listenOnPath() {
-        let obj = this._context;
-        const parts = this._value.split(".");
-
-        for (let i = 0; i < parts.length; i++) {
-            const part = parts[i];
-            if (i == parts.length -1) {
-                this._listenOn(obj, part);
-            }
-            else {
-                if (obj[part] == null) {
-                    obj[part] = crsbinding.observe({})
-                }
-
-                this._listenOn(obj, part);
-                obj = obj[part];
-            }
-        }
-    }
-
-    _listenOn(context, property) {
-        crsbinding.events.on(context, property, this._eventHandler);
     }
 
     propertyChanged(prop, value) {
