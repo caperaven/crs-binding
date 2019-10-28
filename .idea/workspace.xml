@@ -5,11 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,14 +161,9 @@
       <workItem from="1571684075079" duration="3146000" />
       <workItem from="1571767588251" duration="1140000" />
       <workItem from="1571862211303" duration="1612000" />
-      <workItem from="1571945402860" duration="5435000" />
-    </task>
-    <task id="LOCAL-00017" summary="adding events">
-      <created>1570212854266</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1570212854266</updated>
+      <workItem from="1571945402860" duration="5513000" />
+      <workItem from="1571990592541" duration="5000" />
+      <workItem from="1572270276428" duration="1099000" />
     </task>
     <task id="LOCAL-00018" summary="adding events">
       <created>1570223325444</created>
@@ -508,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571946526037</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="update repeat behaviour">
+      <created>1571950884612</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1571950884612</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +530,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="adding events" />
     <MESSAGE value="event clean up with tests" />
     <MESSAGE value="update documentation" />
     <MESSAGE value="moved files around a bit" />
@@ -555,7 +554,8 @@
     <MESSAGE value="package" />
     <MESSAGE value="updated binding cleanup" />
     <MESSAGE value="updated collection binding and moved listen on to api level" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated collection binding and moved listen on to api level" />
+    <MESSAGE value="update repeat behaviour" />
+    <option name="LAST_COMMIT_MESSAGE" value="update repeat behaviour" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

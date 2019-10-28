@@ -1,7 +1,11 @@
+import {observeArray, releaseObservedArray} from "./observe-array.js";
+
 const PROXY = "_isProxy";
 const BACKUP = "__backup";
 
 export function observe(obj, prior) {
+    if (Array.isArray(obj)) return observeArray(obj);
+
     obj[PROXY] = true;
     obj[BACKUP] = {};
 
@@ -21,7 +25,7 @@ export function observe(obj, prior) {
 }
 
 export function releaseObserved(obj) {
-    if (Array.isArray(obj)) return releaseObservedArray(obj);
+    if (obj._isArray == true) return releaseObservedArray(obj);
 
     crsbinding.events.disableEvents(obj);
 
@@ -32,10 +36,6 @@ export function releaseObserved(obj) {
 
     delete obj[PROXY];
     delete obj[BACKUP];
-}
-
-function releaseObservedArray(ar) {
-    ar.forEach(item => releaseObserved(item));
 }
 
 function get(obj, prop) {

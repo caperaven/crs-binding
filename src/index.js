@@ -12,14 +12,20 @@ import {listenOn, listenOnPath} from "./binding/listen-on.js";
 window.crsbinding = {
     _expFn: new Map(),
     idleTaskManager: new IdleTaskManager(),
+    providerManager: new ProviderManager(),
+
+    // expression
     sanitizeExp: sanitizeExp,
     compileExp: compileExp,
     releaseExp: releaseExp,
-    providerManager: new ProviderManager(),
     updateUI: updateUI,
+
+    // observation
     observe: observe,
     releaseObserved: releaseObserved,
     releaseBinding: releaseBinding,
+
+    // parsers
     parseElement: parseElement,
 
     events: {

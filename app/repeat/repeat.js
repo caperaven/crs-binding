@@ -1,5 +1,4 @@
 import {ViewBase} from "./../../src/view/view-base.js";
-import {observeArray} from "../../src/events/observe-array.js";
 
 export default class View extends ViewBase {
     connectedCallback() {
@@ -12,7 +11,7 @@ export default class View extends ViewBase {
 
     _loaded() {
         super._loaded();
-        this.items = observeArray([
+        this.items = crsbinding.observe([
             {
                 value: "1",
                 unit: "fr"
@@ -29,7 +28,7 @@ export default class View extends ViewBase {
     }
 
     debug() {
-        this.items = observeArray([
+        this.items = crsbinding.observe([
             {
                 value: "5",
                 unit: "em"
@@ -43,5 +42,12 @@ export default class View extends ViewBase {
                 unit: "em"
             }
         ]);
+    }
+
+    add() {
+        this.items.push({
+            value: "8",
+            unit: "em"
+        })
     }
 }
