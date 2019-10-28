@@ -6,7 +6,7 @@
 
     <script>
         function loaded() {
-            const obj = crsbinding.observe({
+            const obj = crsbinding.observation.observe({
                 firstName: "name",
                 lastName: "lastName"
             });
@@ -17,7 +17,7 @@
             obj.firstName = "John";
             obj.lastName = "Doe";
 
-            crsbinding.releaseObserved(obj);
+            crsbinding.observation.releaseObserved(obj);
         }
     </script>
 

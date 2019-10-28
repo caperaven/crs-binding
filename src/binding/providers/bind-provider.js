@@ -5,12 +5,10 @@ export class BindProvider extends OneWayProvider {
         this._element.removeEventListener("change", this._changeHandler);
         this._changeHandler = null;
 
-        crsbinding.releaseExp(this._setObj);
+        crsbinding.expression.release(this._setObj);
         delete this._setObj;
 
         super.dispose();
-
-        console.log(this);
     }
 
     initialize() {
@@ -18,7 +16,7 @@ export class BindProvider extends OneWayProvider {
         this._changeHandler = this._change.bind(this);
         this._element.addEventListener("change", this._changeHandler);
 
-        this._setObj = crsbinding.compileExp(`context.${this._value} = value`, ["value"], false);
+        this._setObj = crsbinding.expression.compile(`context.${this._value} = value`, ["value"], false);
     }
 
     _change(event) {

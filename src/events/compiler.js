@@ -9,7 +9,7 @@ export function compileExp(exp, parameters = [], sanitize = true) {
     let san;
 
     if (sanitize == true) {
-        san = crsbinding.sanitizeExp(exp);
+        san = crsbinding.expression.sanitize(exp);
         src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
     }
     else {
@@ -32,6 +32,8 @@ export function compileExp(exp, parameters = [], sanitize = true) {
 }
 
 export function releaseExp(exp) {
+    if (typeof exp != "object") return;
+    
     const key = exp.parameters.expression;
     if (crsbinding._expFn.has(key)) {
         const x = crsbinding._expFn.get(key);

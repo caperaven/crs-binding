@@ -20,7 +20,7 @@
         import "/src/index.js";
 
         document.querySelector("crs-router").viewCreatedCallback = (view) => {
-            return crsbinding.observe(view);
+            return crsbinding.observation.observe(view);
         }
     </script>
 </body>

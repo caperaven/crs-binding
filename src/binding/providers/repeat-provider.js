@@ -12,7 +12,7 @@ export class RepeatProvider {
         delete this._element;
         delete this._context;
 
-        crsbinding.releaseExp(this._expObj);
+        crsbinding.expression.release(this._expObj);
         delete this._expObj;
     }
 
@@ -21,7 +21,7 @@ export class RepeatProvider {
         this._container.removeChild(this._element);
         const exp = this._element.getAttribute("repeat");
 
-        this._expObj = crsbinding.compileExp(exp);
+        this._expObj = crsbinding.expression.compile(exp);
 
         if (exp.indexOf(".") == -1) {
             crsbinding.events.listenOn(this._context, exp, this._eventHandler);
@@ -41,14 +41,14 @@ export class RepeatProvider {
 
         for (let item of ar) {
             const element = this._element.content.cloneNode(true);
-            await crsbinding.parseElement(element, item);
+            await crsbinding.parsers.parseElement(element, item);
             fragment.appendChild(element);
         }
 
         this._container.innerHTML = "";
         this._container.appendChild(fragment);
 
-        crsbinding.updateUI(ar);
+        crsbinding.expression.updateUI(ar);
     }
 
     _collectionChanged() {

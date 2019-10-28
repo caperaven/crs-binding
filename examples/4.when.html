@@ -3,7 +3,7 @@
 <body>
     <script>
         function loaded() {
-            const obj = crsbinding.observe({
+            const obj = crsbinding.observation.observe({
                 firstName: "name",
                 lastName: "lastName"
             });
@@ -15,7 +15,7 @@
             obj.lastName = "Doe";
 
             crsbinding.events.removeWhen(obj, "firstName == 'John' && lastName == 'Doe'", fn);
-            crsbinding.releaseObserved(obj);
+            crsbinding.observation.releaseObserved(obj);
         }
     </script>
 

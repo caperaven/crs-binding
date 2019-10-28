@@ -2,12 +2,10 @@ const PROXY = "_isProxy";
 const ISARRAY = "_isArray";
 
 export function observeArray(obj) {
-    obj[PROXY] = true;
     obj[ISARRAY] = true;
-    crsbinding.events.enableEvents(obj);
 
     for (let i = 0; i < obj.length; i++) {
-        obj[i] = crsbinding.observe(obj[i]);
+        obj[i] = crsbinding.observation.observe(obj[i]);
         obj[i].__index = i;
     }
 
@@ -20,7 +18,7 @@ export function observeArray(obj) {
 
 export function releaseObservedArray(obj) {
     crsbinding.events.disableEvents(obj);
-    obj.forEach(item => crsbinding.releaseObserved(item));
+    obj.forEach(item => crsbinding.observation.releaseObserved(item));
 }
 
 const deleteFunctions = ["pop", "slice"];

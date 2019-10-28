@@ -11,7 +11,7 @@ export default class View extends ViewBase {
 
     _loaded() {
         super._loaded();
-        this.items = crsbinding.observe([
+        this.items = crsbinding.observation.observe([
             {
                 value: "1",
                 unit: "fr"
@@ -28,7 +28,7 @@ export default class View extends ViewBase {
     }
 
     debug() {
-        this.items = crsbinding.observe([
+        this.items = crsbinding.observation.observe([
             {
                 value: "5",
                 unit: "em"

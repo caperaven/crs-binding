@@ -7,7 +7,7 @@ beforeEach(async () =>{
     global.window = {};
     global.crsbinding = (await import("../crsbinding.mock.js")).crsbindingMock;
 
-    context = crsbinding.observe({
+    context = crsbinding.observation.observe({
         firstName: "John"
     });
 

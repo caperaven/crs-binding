@@ -14,18 +14,18 @@ export class ViewBase {
     async connectedCallback() {
         this.isProxy = true;
         crsbinding.events.enableEvents(this);
-        crsbinding.parseElement(this.element, this)
+        crsbinding.parsers.parseElement(this.element, this)
             .then(() => this._loaded())
             .catch(error => console.error(error));
     }
 
     async disconnectedCallback() {
-        await crsbinding.releaseBinding(this.element);
+        await crsbinding.observation.releaseBinding(this.element);
         crsbinding.events.disableEvents(this);
     }
 
     _loaded() {
-        crsbinding.updateUI(this);
+        crsbinding.expression.updateUI(this);
         this.element.style.display = "block";
     }
 }

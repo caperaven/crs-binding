@@ -41,7 +41,7 @@
     <script type="module">
         import "./../src/index.js";
 
-        const viewModel = crsbinding.observe({
+        const viewModel = crsbinding.observation.observe({
             firstName: "John",
             lastName:  "Doe",
             age: 30,
@@ -55,8 +55,8 @@
         });
 
         async function parse() {
-            await crsbinding.parseElement(document.documentElement, viewModel);
-            crsbinding.updateUI(viewModel);
+            await crsbinding.parsers.parseElement(document.documentElement, viewModel);
+            crsbinding.expression.updateUI(viewModel);
             document.getElementById("container").style.display = "block";
         }
 

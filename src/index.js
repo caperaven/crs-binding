@@ -14,19 +14,22 @@ window.crsbinding = {
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
 
-    // expression
-    sanitizeExp: sanitizeExp,
-    compileExp: compileExp,
-    releaseExp: releaseExp,
-    updateUI: updateUI,
+    expression: {
+        sanitize: sanitizeExp,
+        compile: compileExp,
+        release: releaseExp,
+        updateUI: updateUI,
+    },
 
-    // observation
-    observe: observe,
-    releaseObserved: releaseObserved,
-    releaseBinding: releaseBinding,
+    observation: {
+        observe: observe,
+        releaseObserved: releaseObserved,
+        releaseBinding: releaseBinding,
+    },
 
-    // parsers
-    parseElement: parseElement,
+    parsers: {
+        parseElement: parseElement
+    },
 
     events: {
         enableEvents: enableEvents,

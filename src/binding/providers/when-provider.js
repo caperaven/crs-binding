@@ -10,8 +10,8 @@ export class WhenProvider extends ProviderBase {
         this._exp = null;
         this._condition = null;
 
-        crsbinding.releaseExp(this._expObj);
-        crsbinding.releaseExp(this._getValueFn);
+        crsbinding.expression.release(this._expObj);
+        crsbinding.expression.release(this._getValueFn);
 
         delete this._expObj;
         delete this._getValueFn;
@@ -29,7 +29,7 @@ export class WhenProvider extends ProviderBase {
             this._exp = `element.setAttribute("${this._property}", value)`;
         }
 
-        this._expObj = crsbinding.compileExp(this._exp, ["element", "value"], false);
+        this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], false);
 
         this._getExpressionParts();
     }
@@ -43,7 +43,7 @@ export class WhenProvider extends ProviderBase {
         const parts = this._value.split("?");
         this._condition = parts[0].trim();
 
-        this._getValueFn = crsbinding.compileExp(this._value);
+        this._getValueFn = crsbinding.expression.compile(this._value);
 
         for (let prop of this._getValueFn.parameters.properties) {
             crsbinding.events.on(this._context, prop, this._eventHandler);

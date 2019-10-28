@@ -4,11 +4,11 @@ export class OneWayProvider extends ProviderBase {
     dispose() {
         crsbinding.events.removeOn(this._context, this._value, this._exp.function);
 
-        crsbinding.releaseExp(this._expObj);
+        crsbinding.expression.release(this._expObj);
         delete this._expObj;
 
         if (this._getObj != null) {
-            crsbinding.releaseExp(this._getObj);
+            crsbinding.expression.release(this._getObj);
             delete this._getObj;
         }
 
@@ -28,10 +28,10 @@ export class OneWayProvider extends ProviderBase {
             this._exp = `element.setAttribute("${this._property}", value || "")`;
         }
 
-        this._expObj = crsbinding.compileExp(this._exp, ["element", "value"], false);
+        this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], false);
 
         if (this._value.indexOf(".") != -1) {
-            this._getObj = crsbinding.compileExp(this._value);
+            this._getObj = crsbinding.expression.compile(this._value);
         }
 
         if (this._value.indexOf(".") == -1) {

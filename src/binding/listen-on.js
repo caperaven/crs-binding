@@ -9,7 +9,7 @@ export function listenOnPath(context, value, callback) {
         }
         else {
             if (obj[part] == null) {
-                obj[part] = crsbinding.observe({})
+                obj[part] = crsbinding.observation.observe({})
             }
 
             listenOn(obj, part, callback);

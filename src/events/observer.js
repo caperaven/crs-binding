@@ -4,12 +4,12 @@ const PROXY = "_isProxy";
 const BACKUP = "__backup";
 
 export function observe(obj, prior) {
-    if (Array.isArray(obj)) return observeArray(obj);
-
     obj[PROXY] = true;
+    crsbinding.events.enableEvents(obj);
+
+    if (Array.isArray(obj)) return observeArray(obj);
     obj[BACKUP] = {};
 
-    crsbinding.events.enableEvents(obj);
 
     if (prior != null) {
         obj.__events = prior.__events;
@@ -82,7 +82,7 @@ function setOnPath(obj, prop, value) {
 function createProxyValue(origional, value) {
     if (origional && origional._isProxy == true) {
         if (value && value._isProxy != true) {
-            return crsbinding.observe(value, origional);
+            return crsbinding.observation.observe(value, origional);
         }
     }
     return value;

@@ -2,12 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/documents/todo.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/3.observe.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3.observe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/4.when.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/4.when.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/6.paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/listen-on.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/listen-on.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/when-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/when-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/view-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/update.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -109,9 +124,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
+        <item itemvalue="npm.build-publish" />
         <item itemvalue="Jest.bindable element - disconnectedCallback" />
         <item itemvalue="Jest.bindable element - get and set property" />
       </list>
@@ -163,14 +178,7 @@
       <workItem from="1571862211303" duration="1612000" />
       <workItem from="1571945402860" duration="5513000" />
       <workItem from="1571990592541" duration="5000" />
-      <workItem from="1572270276428" duration="1099000" />
-    </task>
-    <task id="LOCAL-00018" summary="adding events">
-      <created>1570223325444</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1570223325444</updated>
+      <workItem from="1572270276428" duration="2726000" />
     </task>
     <task id="LOCAL-00019" summary="adding events">
       <created>1570223520563</created>
@@ -508,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571950884612</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="updated array bindings">
+      <created>1572271391391</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1572271391391</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +545,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="event clean up with tests" />
     <MESSAGE value="update documentation" />
     <MESSAGE value="moved files around a bit" />
     <MESSAGE value="add binding providers" />
@@ -555,7 +569,8 @@
     <MESSAGE value="updated binding cleanup" />
     <MESSAGE value="updated collection binding and moved listen on to api level" />
     <MESSAGE value="update repeat behaviour" />
-    <option name="LAST_COMMIT_MESSAGE" value="update repeat behaviour" />
+    <MESSAGE value="updated array bindings" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated array bindings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
