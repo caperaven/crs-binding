@@ -2,26 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/documents/todo.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/3.observe.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3.observe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/4.when.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/4.when.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/6.paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/listen-on.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/listen-on.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/when-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/when-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/view-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/crsbinding.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/crsbinding.mock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/events/update.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,7 +51,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.bindable element - disconnectedCallback">
+  <component name="RunManager" selected="Jest.updateUI">
     <configuration name="bindable element - disconnectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -79,16 +65,16 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="bindable element - get and set property" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="updateUI" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/bindable-element.test.js" />
+      <test-file value="$PROJECT_DIR$/test/events/update.test.js" />
       <test-names>
-        <test-name value="bindable element - get and set property" />
+        <test-name value="updateUI" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -124,11 +110,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.updateUI" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.build-publish" />
         <item itemvalue="Jest.bindable element - disconnectedCallback" />
-        <item itemvalue="Jest.bindable element - get and set property" />
       </list>
     </recent_temporary>
   </component>
@@ -178,14 +164,12 @@
       <workItem from="1571862211303" duration="1612000" />
       <workItem from="1571945402860" duration="5513000" />
       <workItem from="1571990592541" duration="5000" />
-      <workItem from="1572270276428" duration="2726000" />
-    </task>
-    <task id="LOCAL-00019" summary="adding events">
-      <created>1570223520563</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1570223520563</updated>
+      <workItem from="1572270276428" duration="3453000" />
+      <workItem from="1572273893372" duration="640000" />
+      <workItem from="1572371645306" duration="2869000" />
+      <workItem from="1572444007015" duration="4607000" />
+      <workItem from="1572453894737" duration="272000" />
+      <workItem from="1572454629903" duration="133000" />
     </task>
     <task id="LOCAL-00020" summary="adding events">
       <created>1570261994558</created>
@@ -523,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572271391391</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="updated paths">
+      <created>1572273045236</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1572273045236</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +536,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="update documentation" />
     <MESSAGE value="moved files around a bit" />
     <MESSAGE value="add binding providers" />
     <MESSAGE value="adding expression test" />
@@ -570,7 +560,8 @@
     <MESSAGE value="updated collection binding and moved listen on to api level" />
     <MESSAGE value="update repeat behaviour" />
     <MESSAGE value="updated array bindings" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated array bindings" />
+    <MESSAGE value="updated paths" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated paths" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -579,6 +570,11 @@
           <url>file://$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js</url>
           <line>67</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/crsbinding.mock.js</url>
+          <line>2</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

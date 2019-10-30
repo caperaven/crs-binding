@@ -9,7 +9,7 @@ import {updateUI} from "./events/update.js";
 import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 
-window.crsbinding = {
+const crsbinding = {
     _expFn: new Map(),
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
@@ -42,4 +42,10 @@ window.crsbinding = {
         listenOn: listenOn,
         listenOnPath: listenOnPath
     }
+};
+
+window.crsbinding = crsbinding;
+
+export {
+    crsbinding
 };

@@ -4,6 +4,9 @@ export class RepeatProvider {
         this._context = context;
         this._eventHandler = this._collectionChanged.bind(this);
 
+        this._itemsAddedHandler = this._itemsAdded.bind(this);
+        this._itemsDeletedHandler = this._itemsDeleted.bind(this);
+
         crsbinding.providerManager.register(this);
         this.initialize().catch(error => console.error(error));
     }
@@ -14,6 +17,9 @@ export class RepeatProvider {
 
         crsbinding.expression.release(this._expObj);
         delete this._expObj;
+
+        this._itemsAddedHandler = null;
+        this._itemsDeletedHandler = null;
     }
 
     async initialize() {
@@ -30,16 +36,14 @@ export class RepeatProvider {
             crsbinding.events.listenOnPath(this._context, exp, this._eventHandler);
         }
 
-        await this._renderCollection();
+        await this._renderArray();
     }
 
-    async _renderCollection() {
-        const ar = this._expObj.function(this._context);
-        if (ar == null) return;
-
+    async _renderArray() {
+        if (this.ar == null) return;
         const fragment = document.createDocumentFragment();
 
-        for (let item of ar) {
+        for (let item of this.ar) {
             const element = this._element.content.cloneNode(true);
             await crsbinding.parsers.parseElement(element, item);
             fragment.appendChild(element);
@@ -48,10 +52,30 @@ export class RepeatProvider {
         this._container.innerHTML = "";
         this._container.appendChild(fragment);
 
-        crsbinding.expression.updateUI(ar);
+        crsbinding.expression.updateUI(this.ar);
     }
 
-    _collectionChanged() {
-        this._renderCollection();
+    async _collectionChanged() {
+        if (this.ar != null) {
+            crsbinding.events.removeOn(this.ar, "items-added", this._itemsAddedHandler);
+            crsbinding.events.removeOn(this.ar, "items-deleted", this._itemsDeletedHandler);
+        }
+
+        this.ar = this._expObj.function(this._context);
+
+        if (this.ar == null) return;
+
+        crsbinding.events.on(this.ar, "items-added", this._itemsAddedHandler);
+        crsbinding.events.on(this.ar, "items-deleted", this._itemsDeletedHandler);
+
+        this._renderArray();
+    }
+
+    async _itemsAdded() {
+        await this._renderArray();
+    }
+
+    async _itemsDeleted() {
+        await this._renderArray();
     }
 }

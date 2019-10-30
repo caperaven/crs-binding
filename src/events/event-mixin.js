@@ -81,11 +81,11 @@ export function removeOn(obj, property, callback) {
     }
 }
 
-export function notifyPropertyChanged(obj, property) {
+export function notifyPropertyChanged(obj, property, args) {
     if (obj.__events == null || obj.__events.has(property) == false) return;
 
     const functions = obj.__events.get(property);
     for(let fn of functions) {
-        fn(property, obj[property]);
+        fn(property, obj[property], args);
     }
 }

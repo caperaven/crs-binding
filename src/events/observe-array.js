@@ -46,11 +46,17 @@ function get(obj, prop) {
 }
 
 function itemsRemoved(obj, items) {
-    console.log(obj);
-    console.log(items);
+    crsbinding.events.notifyPropertyChanged(obj, "items-deleted", items);
+    for (let item of items) {
+        crsbinding.observation.releaseObserved(item);
+    }
 }
 
 function itemsAdded(obj, items) {
-    console.log(obj);
-    console.log(items);
+    for (let item of items) {
+        const index = obj.indexOf(item);
+        obj[index] = crsbinding.observation.observe(item);
+    }
+
+    crsbinding.events.notifyPropertyChanged(obj, "items-added", items);
 }
