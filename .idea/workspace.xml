@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/crsbinding.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/crsbinding.mock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/update.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -169,14 +164,7 @@
       <workItem from="1572371645306" duration="2869000" />
       <workItem from="1572444007015" duration="4607000" />
       <workItem from="1572453894737" duration="272000" />
-      <workItem from="1572454629903" duration="133000" />
-    </task>
-    <task id="LOCAL-00020" summary="adding events">
-      <created>1570261994558</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1570261994558</updated>
+      <workItem from="1572454629903" duration="739000" />
     </task>
     <task id="LOCAL-00021" summary="adding events">
       <created>1570262972267</created>
@@ -514,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572273045236</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="updated paths">
+      <created>1572454770700</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1572454770701</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
