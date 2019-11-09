@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="if provider added to use on attributes">
-      <change afterPath="$PROJECT_DIR$/examples/7.if.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
+    <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/documents/if-binding.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/todo.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -176,14 +168,7 @@
       <workItem from="1572780255076" duration="133000" />
       <workItem from="1572806220435" duration="3000" />
       <workItem from="1573027352788" duration="78000" />
-      <workItem from="1573285385443" duration="5564000" />
-    </task>
-    <task id="LOCAL-00022" summary="event clean up with tests">
-      <created>1570308589998</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1570308589998</updated>
+      <workItem from="1573285385443" duration="5998000" />
     </task>
     <task id="LOCAL-00023" summary="update documentation">
       <created>1570310025618</created>
@@ -521,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572455474471</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="if provider added to use on attributes">
+      <created>1573290998270</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1573290998270</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +535,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="moved files around a bit" />
     <MESSAGE value="add binding providers" />
     <MESSAGE value="adding expression test" />
     <MESSAGE value="bind provider manager added" />
@@ -568,7 +559,8 @@
     <MESSAGE value="update repeat behaviour" />
     <MESSAGE value="updated array bindings" />
     <MESSAGE value="updated paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated paths" />
+    <MESSAGE value="if provider added to use on attributes" />
+    <option name="LAST_COMMIT_MESSAGE" value="if provider added to use on attributes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
