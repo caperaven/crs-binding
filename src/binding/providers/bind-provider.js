@@ -25,7 +25,7 @@ export class BindProvider extends OneWayProvider {
         const typeFn = `_${type}`;
 
         if (this[typeFn] != null) {
-            value = this[typeFn](value);
+            value = this[typeFn](value, event.target);
         }
 
         this._setObj.function(this._context, value);
@@ -37,5 +37,9 @@ export class BindProvider extends OneWayProvider {
 
     _date(value) {
         return new Date(value);
+    }
+
+    _checkbox(value, element) {
+        return element.checked;
     }
 }
