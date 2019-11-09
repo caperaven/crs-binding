@@ -12,7 +12,15 @@
 
     <input checked.bind="isVisible" type="checkbox">
     <div>${isVisible}</div>
-    <div data-title.if="isVisible == true ? true : false">Conditional Data Attribute With Values</div>
+    <div>${selected}</div>
+
+    <select value.bind="selected">
+        <option value="0">Option 0</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+    </select>
+
+    <div data-title.if="isVisible == true ? true : false" hidden.if="selected == 2">Conditional Data Attribute With Values</div>
     <div data-title.if="isVisible == true ? true">Conditional Data Attribute</div>
     <div hidden.if="isVisible != true">Hello World</div>
 
@@ -22,7 +30,8 @@
         const button = document.querySelector("button");
 
         const viewModel = crsbinding.observation.observe({
-            isVisible: false
+            isVisible: false,
+            selected: 1
         });
 
         button.addEventListener("click", () => viewModel.isVisible = !viewModel.isVisible   );

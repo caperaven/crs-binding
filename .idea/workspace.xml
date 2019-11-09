@@ -168,14 +168,7 @@
       <workItem from="1572780255076" duration="133000" />
       <workItem from="1572806220435" duration="3000" />
       <workItem from="1573027352788" duration="78000" />
-      <workItem from="1573285385443" duration="7004000" />
-    </task>
-    <task id="LOCAL-00025" summary="moved files around a bit">
-      <created>1570310695113</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1570310695113</updated>
+      <workItem from="1573285385443" duration="7232000" />
     </task>
     <task id="LOCAL-00026" summary="add binding providers">
       <created>1570317332907</created>
@@ -513,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573292275747</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="fix input checkbox binding">
+      <created>1573292399741</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1573292399741</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
