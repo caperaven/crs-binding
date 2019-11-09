@@ -10,7 +10,7 @@
 <body>
     <button>Toggle</button>
 
-    <input value.bind="isVisible" type="checkbox">
+    <input checked.bind="isVisible" type="checkbox">
     <div>${isVisible}</div>
     <div data-title.if="isVisible == true ? true : false">Conditional Data Attribute With Values</div>
     <div data-title.if="isVisible == true ? true">Conditional Data Attribute</div>
