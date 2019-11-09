@@ -2,8 +2,6 @@ import {ProviderBase} from "./provider-base.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
-        crsbinding.events.removeOn(this._context, this._value, this._exp.function);
-
         crsbinding.expression.release(this._expObj);
         delete this._expObj;
 
@@ -34,12 +32,7 @@ export class OneWayProvider extends ProviderBase {
             this._getObj = crsbinding.expression.compile(this._value);
         }
 
-        if (this._value.indexOf(".") == -1) {
-            crsbinding.events.listenOn(this._context, this._value, this._eventHandler);
-        }
-        else {
-            crsbinding.events.listenOnPath(this._context, this._value, this._eventHandler);
-        }
+        this.listenOnPath(this._value, this._eventHandler);
     }
 
     propertyChanged(prop, value) {

@@ -50,4 +50,8 @@ export default class View extends ViewBase {
             unit: "em"
         })
     }
+
+    delete() {
+        this.items.splice(1, 1);
+    }
 }

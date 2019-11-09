@@ -4,12 +4,20 @@ export class ProviderBase {
         this._context = context;
         this._property = property;
         this._value = value;
+        this._eventsToRemove = [];
 
         crsbinding.providerManager.register(this);
         this.initialize();
     }
 
     dispose() {
+        this._eventsToRemove.forEach(event => {
+            crsbinding.events.removeOn(this._context, event.value, event.callback);
+        });
+
+        this._eventsToRemove.length = 0;
+        this._eventsToRemove = null;
+
         delete this._element;
         delete this._context;
         delete this._property;
@@ -20,5 +28,26 @@ export class ProviderBase {
      * Override to perform starting process
      */
     initialize() {
+    }
+
+    listenOnPath(value, callback) {
+        if (Array.isArray(value) == true) {
+            for (let v of value) {
+                this.listenOnPath(v, callback);
+            }
+            return;
+        }
+
+        if (value.indexOf(".") == -1) {
+            crsbinding.events.listenOn(this._context, value, callback);
+        }
+        else {
+            crsbinding.events.listenOnPath(this._context, value, callback);
+        }
+
+        this._eventsToRemove.push({
+            value: value,
+            callback: callback
+        })
     }
 }

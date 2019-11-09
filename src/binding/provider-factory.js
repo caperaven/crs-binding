@@ -5,6 +5,7 @@ import {WhenProvider} from "./providers/when-provider.js";
 import {CallProvider} from "./providers/call-provider.js";
 import {InnerProvider} from "./providers/inner-provider.js";
 import {RepeatProvider} from "./providers/repeat-provider.js";
+import {IfProvider} from "./providers/if-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value) {
@@ -41,5 +42,9 @@ export class ProviderFactory {
 
     static "repeat"(element, context) {
         return new RepeatProvider(element, context);
+    }
+
+    static "if"(element, context, property, value) {
+        return new IfProvider(element, context, property, value);
     }
 }

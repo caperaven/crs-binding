@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>Toggle</button>
+
+    <div data-title.if="isVisible == true ? true : false">Conditional Data Attribute With Values</div>
+    <div data-title.if="isVisible == true ? true">Conditional Data Attribute</div>
+    <div hidden.if="isVisible != true">Hello World</div>
+
+    <script type="module">
+        import "./../src/index.js";
+
+        const button = document.querySelector("button");
+
+        const viewModel = crsbinding.observation.observe({
+            isVisible: false
+        });
+
+        button.addEventListener("click", () => viewModel.isVisible = !viewModel.isVisible   );
+
+        async function parse() {
+            await crsbinding.parsers.parseElement(document.documentElement, viewModel);
+            crsbinding.expression.updateUI(viewModel);
+        }
+
+        parse().catch(error => console.error(error));
+
+    </script>
+</body>
+</html>
