@@ -82,6 +82,7 @@ function extractProperty(property) {
 const reserved = ["true", "false", "-", "+", "=", "<", ">", "(", ")","{", "}", "/",  "&", "|", "=", "!", "'", "`", '"', " ", "$", ".", ",", "?", ":"];
 const ignore = [".", "(", ")", ","];
 const quotes = ["'", '"', "`"];
+const stdQuotes = ["'", '"'];
 
 /**
  * Break the expression into expression tokens
@@ -92,18 +93,23 @@ function tokenize(exp) {
     let tokens = [];
     let word = [];
 
+    let isString = false;
     for (let char of exp) {
-        if (reserved.indexOf(char) != -1) {
-            if (word.length > 0) {
-                tokens.push(word.join(""));
-                word.length = 0;
+        if (isString == true) {
+            if (stdQuotes.indexOf(char) == -1) {
+                word.push(char);
             }
-
-            tokens.push(char);
+            else {
+                isString = pushToken(tokens, word, char);
+            }
+        }
+        else if (reserved.indexOf(char) != -1) {
+            isString = pushToken(tokens, word, char);
         }
         else {
             word.push(char);
         }
+        isString = isString || stdQuotes.indexOf(char) != -1;
     }
 
     if (word.length > 0) {
@@ -111,4 +117,14 @@ function tokenize(exp) {
     }
 
     return tokens;
+}
+
+function pushToken(tokens, word, char) {
+    if (word.length > 0) {
+        tokens.push(word.join(""));
+        word.length = 0;
+    }
+
+    tokens.push(char);
+    return false;
 }

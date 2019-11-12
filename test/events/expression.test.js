@@ -54,3 +54,8 @@ test ("sanitizeExp - path", () => {
    const result = sanitizeExp("address.street");
    expect(result.expression).toBe("context.address.street");
 });
+
+test ("sanitizeExp - special string", () => {
+   const result = sanitizeExp("value == 'v-height'");
+   expect(result.expression).toBe("context.value == 'v-height'");
+});
