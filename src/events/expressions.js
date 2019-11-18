@@ -100,16 +100,19 @@ function tokenize(exp) {
                 word.push(char);
             }
             else {
-                isString = pushToken(tokens, word, char);
+                pushToken(tokens, word, char);
+                isString = false;
             }
         }
         else if (reserved.indexOf(char) != -1) {
-            isString = pushToken(tokens, word, char);
+            pushToken(tokens, word, char);
+            if (stdQuotes.indexOf(char) != -1) {
+                isString = true;
+            }
         }
         else {
             word.push(char);
         }
-        isString = isString || stdQuotes.indexOf(char) != -1;
     }
 
     if (word.length > 0) {

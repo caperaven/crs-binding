@@ -59,3 +59,8 @@ test ("sanitizeExp - special string", () => {
    const result = sanitizeExp("value == 'v-height'");
    expect(result.expression).toBe("context.value == 'v-height'");
 });
+
+test ("sanitizeExp - when", () => {
+   const result = sanitizeExp("firstName == 'John' && lastName == 'Doe'");
+   expect(result.expression).toBe("context.firstName == 'John' && context.lastName == 'Doe'")
+});
