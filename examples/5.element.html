@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <body>
-    <test-component title="Hello World"></test-component>
+    <test-component title="Hello World" model.bind="$context"></test-component>
 
     <script type="module">
-        //import "./../src/index.js";
-        import "./../dist/crs-binding.js";
+        import "./../src/index.js";
+        //import "./../dist/crs-binding.js";
         import "./component/test-component.js";
 
         const element = document.querySelector("test-component");

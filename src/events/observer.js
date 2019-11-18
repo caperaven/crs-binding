@@ -10,7 +10,6 @@ export function observe(obj, prior) {
     if (Array.isArray(obj)) return observeArray(obj);
     obj[BACKUP] = {};
 
-
     if (prior != null) {
         obj.__events = prior.__events;
         delete prior.__events;

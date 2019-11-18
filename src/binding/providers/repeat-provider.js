@@ -2,8 +2,8 @@ export class RepeatProvider {
     constructor(element, context) {
         this._element = element;
         this._context = context;
-        this._eventHandler = this._collectionChanged.bind(this);
 
+        this._eventHandler = this._collectionChanged.bind(this);
         this._itemsAddedHandler = this._itemsAdded.bind(this);
         this._itemsDeletedHandler = this._itemsDeleted.bind(this);
 
@@ -72,10 +72,18 @@ export class RepeatProvider {
     }
 
     async _itemsAdded() {
-        await this._renderArray();
+            await this._renderArray();
     }
 
     async _itemsDeleted() {
         await this._renderArray();
     }
+
+    /**
+     * 1. drawItems - once, one-way, two-way
+     * 2. listenToArray - one-way, two-way
+     * 3. observe-model - two-way
+     *
+     */
+
 }

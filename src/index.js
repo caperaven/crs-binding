@@ -2,7 +2,7 @@ import {compileExp, releaseExp} from "./events/compiler.js";
 import {enableEvents, disableEvents} from "./events/event-mixin.js";
 import {observe, releaseObserved} from "./events/observer.js";
 import {sanitizeExp} from "./events/expressions.js";
-import {parseElement, releaseBinding} from "./binding/parse-element.js";
+import {parseElement, parseElements, releaseBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./binding/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {updateUI} from "./events/update.js";
@@ -28,7 +28,8 @@ const crsbinding = {
     },
 
     parsers: {
-        parseElement: parseElement
+        parseElement: parseElement,
+        parseElements: parseElements,
     },
 
     events: {

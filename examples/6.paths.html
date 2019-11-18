@@ -36,9 +36,12 @@
         <input value.bind="address.street1">
 
         <button click.call="addAddress">Add Address</button>
+
+        <test-component model.bind="$context"></test-component>
     </div>
 
     <script type="module">
+        import "./component/test-component.js";
         import "./../src/index.js";
 
         const viewModel = crsbinding.observation.observe({

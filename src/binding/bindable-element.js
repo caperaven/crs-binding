@@ -6,7 +6,7 @@ export class BindableElement extends HTMLElement {
     async connectedCallback() {
         this.innerHTML = await fetch(this.html).then(result => result.text());
         crsbinding.events.enableEvents(this);
-        await crsbinding.parsers.parseElement(this, this);
+        await crsbinding.parsers.parseElements(this.children, this);
         this.dispatchEvent(new CustomEvent("ready"));
     }
 
