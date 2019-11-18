@@ -71,6 +71,19 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="sanitizeExp - string token" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/events/expression.test.js" />
+      <test-names>
+        <test-name value="sanitizeExp - string token" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="sanitizeExp - when" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -82,16 +95,6 @@
       <test-names>
         <test-name value="sanitizeExp - when" />
       </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build-publish" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
       <method v="2" />
     </configuration>
     <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -107,10 +110,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Jest.expression.test.js" />
+        <item itemvalue="Jest.sanitizeExp - string token" />
         <item itemvalue="Jest.sanitizeExp - special string" />
         <item itemvalue="Jest.sanitizeExp - when" />
         <item itemvalue="npm.bundle" />
-        <item itemvalue="npm.build-publish" />
       </list>
     </recent_temporary>
   </component>
@@ -176,14 +179,7 @@
       <workItem from="1573819352908" duration="2152000" />
       <workItem from="1574057657722" duration="14000" />
       <workItem from="1574070038846" duration="7000" />
-      <workItem from="1574090577263" duration="3286000" />
-    </task>
-    <task id="LOCAL-00028" summary="add binding providers">
-      <created>1570317706002</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1570317706002</updated>
+      <workItem from="1574090577263" duration="3748000" />
     </task>
     <task id="LOCAL-00029" summary="adding expression test">
       <created>1570433491099</created>
@@ -521,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574092360460</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="added fix for sanitization of odd lettered words in string">
+      <created>1574093948560</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1574093948560</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +546,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add delegate provider" />
     <MESSAGE value="added one way binding" />
     <MESSAGE value="added one way binding and updated tests" />
     <MESSAGE value="added two way binding" />
@@ -568,7 +570,8 @@
     <MESSAGE value="fix input checkbox binding" />
     <MESSAGE value="fixed binding issue I had with an expression containing - in a string" />
     <MESSAGE value="add sending of $context during binding expressions" />
-    <option name="LAST_COMMIT_MESSAGE" value="add sending of $context during binding expressions" />
+    <MESSAGE value="added fix for sanitization of odd lettered words in string" />
+    <option name="LAST_COMMIT_MESSAGE" value="added fix for sanitization of odd lettered words in string" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -582,12 +585,6 @@
           <url>file://$PROJECT_DIR$/test/crsbinding.mock.js</url>
           <line>2</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/events/expression.test.js</url>
-          <line>59</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -64,3 +64,8 @@ test ("sanitizeExp - when", () => {
    const result = sanitizeExp("firstName == 'John' && lastName == 'Doe'");
    expect(result.expression).toBe("context.firstName == 'John' && context.lastName == 'Doe'")
 });
+
+test ("sanitizeExp - string token", () => {
+   const result = sanitizeExp("${firstName} ${lastName} is ${age} old and lives at \"${address.street}\"");
+   expect(result.expression).toBe("${context.firstName} ${context.lastName} is ${context.age} old and lives at \"${context.address.street}\"")
+});

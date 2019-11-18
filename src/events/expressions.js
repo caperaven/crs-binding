@@ -94,7 +94,13 @@ function tokenize(exp) {
     let word = [];
 
     let isString = false;
-    for (let char of exp) {
+    for (let i = 0; i < exp.length; i++) {
+        const char = exp[i];
+
+        if (isString == true && char == "$" && exp[i + 1] == "{") {
+            isString = false;
+        }
+
         if (isString == true) {
             if (stdQuotes.indexOf(char) == -1) {
                 word.push(char);
