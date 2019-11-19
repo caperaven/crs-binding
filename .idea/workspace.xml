@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/events/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/compiler.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/event-mixin.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observer.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/update.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,17 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.bindable element - disconnectedCallback">
-    <configuration name="bind-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Jest.releaseExp - count down">
     <configuration name="bindable element - connectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -93,14 +74,27 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="bindable-element.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="compiler.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/bindable-element.test.js" />
+      <test-file value="$PROJECT_DIR$/test/events/compiler.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="releaseExp - count down" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/events/compiler.test.js" />
+      <test-names>
+        <test-name value="releaseExp - count down" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -115,11 +109,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.releaseExp - count down" />
+        <item itemvalue="Jest.compiler.test.js" />
+        <item itemvalue="npm.test" />
         <item itemvalue="Jest.bindable element - disconnectedCallback" />
         <item itemvalue="Jest.bindable element - connectedCallback" />
-        <item itemvalue="Jest.bindable-element.test.js" />
-        <item itemvalue="npm.test" />
-        <item itemvalue="Jest.bind-provider.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -187,14 +181,7 @@
       <workItem from="1574070038846" duration="7000" />
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
-      <workItem from="1574190694196" duration="1529000" />
-    </task>
-    <task id="LOCAL-00031" summary="adding expression test">
-      <created>1570458517066</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1570458517066</updated>
+      <workItem from="1574190694196" duration="2113000" />
     </task>
     <task id="LOCAL-00032" summary="bind provider manager added">
       <created>1570461788488</created>
@@ -532,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574191266095</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="fix tests">
+      <created>1574192235176</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1574192235177</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +548,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added one way binding and updated tests" />
     <MESSAGE value="added two way binding" />
     <MESSAGE value="add two way binding" />
     <MESSAGE value="added bind tests" />
@@ -579,7 +572,8 @@
     <MESSAGE value="add sending of $context during binding expressions" />
     <MESSAGE value="added fix for sanitization of odd lettered words in string" />
     <MESSAGE value="fixed when tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed when tests" />
+    <MESSAGE value="fix tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

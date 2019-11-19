@@ -9,15 +9,16 @@ beforeAll(async () => {
 
 test("releaseExp - count down", () => {
     const exp = "property1 == 'a'";
-    compileExp(exp);
-    compileExp(exp);
+    const expResult1 = compileExp(exp);
+    const expResult2 = compileExp(exp);
+    const checkExp = expResult1.parameters.expression;
 
-    expect(global.crsbinding._expFn.get(exp).count).toEqual(2);
+    expect(crsbinding._expFn.get(checkExp).count).toEqual(2);
 
-    releaseExp(exp);
-    expect(global.crsbinding._expFn.get("property1 == 'a'").count).toEqual(1);
-    releaseExp(exp);
-    expect(global.crsbinding._expFn.get("property1 == 'a'")).toBeUndefined();
+    releaseExp(expResult1);
+    expect(crsbinding._expFn.get(checkExp).count).toEqual(1);
+    releaseExp(expResult2);
+    expect(crsbinding._expFn.get(checkExp)).toBeUndefined();
 });
 
 test("compileExp - get value", () => {

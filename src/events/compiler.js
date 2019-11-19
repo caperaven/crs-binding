@@ -10,6 +10,13 @@ export function compileExp(exp, parameters = [], sanitize = true) {
 
     if (sanitize == true) {
         san = crsbinding.expression.sanitize(exp);
+
+        if (crsbinding._expFn.has(san.expression)) {
+            const x = crsbinding._expFn.get(san.expression);
+            x.count += 1;
+            return x;
+        }
+
         src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
     }
     else {
