@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/compiler.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -109,9 +108,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.test" />
         <item itemvalue="Jest.releaseExp - count down" />
         <item itemvalue="Jest.compiler.test.js" />
-        <item itemvalue="npm.test" />
         <item itemvalue="Jest.bindable element - disconnectedCallback" />
         <item itemvalue="Jest.bindable element - connectedCallback" />
       </list>
@@ -181,14 +180,7 @@
       <workItem from="1574070038846" duration="7000" />
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
-      <workItem from="1574190694196" duration="2113000" />
-    </task>
-    <task id="LOCAL-00032" summary="bind provider manager added">
-      <created>1570461788488</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1570461788488</updated>
+      <workItem from="1574190694196" duration="2818000" />
     </task>
     <task id="LOCAL-00033" summary="bind provider manager added">
       <created>1570464179097</created>
@@ -526,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574192235177</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="fix tests">
+      <created>1574192816101</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1574192816101</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
