@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/expressions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/expression.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/when-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/when-provider.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.expression.test.js">
+  <component name="RunManager" selected="Jest.when-provider.test.js">
     <configuration name="expression.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -84,24 +84,21 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="sanitizeExp - when" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="when-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/events/expression.test.js" />
-      <test-names>
-        <test-name value="sanitizeExp - when" />
-      </test-names>
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/when-provider.test.js" />
       <method v="2" />
     </configuration>
-    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="bundle" />
+        <script value="test" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -109,11 +106,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.when-provider.test.js" />
+        <item itemvalue="npm.test" />
         <item itemvalue="Jest.expression.test.js" />
         <item itemvalue="Jest.sanitizeExp - string token" />
         <item itemvalue="Jest.sanitizeExp - special string" />
-        <item itemvalue="Jest.sanitizeExp - when" />
-        <item itemvalue="npm.bundle" />
       </list>
     </recent_temporary>
   </component>
@@ -179,14 +176,9 @@
       <workItem from="1573819352908" duration="2152000" />
       <workItem from="1574057657722" duration="14000" />
       <workItem from="1574070038846" duration="7000" />
-      <workItem from="1574090577263" duration="3748000" />
-    </task>
-    <task id="LOCAL-00029" summary="adding expression test">
-      <created>1570433491099</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1570433491099</updated>
+      <workItem from="1574090577263" duration="4360000" />
+      <workItem from="1574180181845" duration="145000" />
+      <workItem from="1574190694196" duration="544000" />
     </task>
     <task id="LOCAL-00030" summary="adding expression test">
       <created>1570457971974</created>
@@ -524,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574093948560</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="added fix for sanitization of odd lettered words in string">
+      <created>1574094335472</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1574094335472</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,11 +579,6 @@
           <url>file://$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js</url>
           <line>67</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/crsbinding.mock.js</url>
-          <line>2</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

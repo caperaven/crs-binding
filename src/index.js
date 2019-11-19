@@ -45,7 +45,12 @@ const crsbinding = {
     }
 };
 
-window.crsbinding = crsbinding;
+if (process != null) {
+    process.crsbinding = crsbinding;
+}
+else {
+    window.crsbinding = crsbinding;
+}
 
 export {
     crsbinding
