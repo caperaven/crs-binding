@@ -4,7 +4,9 @@ let context;
 let notifyPropertyChangedSpy;
 
 beforeEach(async () =>{
-    global.crsbinding = (await import("../crsbinding.mock.js"));
+    global.window = {};
+    const bindingModule = await import("./../crsbinding.mock.js");
+    global.crsbinding = bindingModule.crsbinding;
 
     context = crsbinding.observation.observe({
         firstName: "John"

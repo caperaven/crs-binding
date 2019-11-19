@@ -8,8 +8,9 @@ let context;
 let onspy;
 
 beforeEach(async () => {
+    const bindingModule = await import("./../../crsbinding.mock.js");
     global.window = {};
-    global.crsbinding = (await import("../../crsbinding.mock.js")).crsbindingMock;
+    global.crsbinding = bindingModule.crsbinding;
 
     element = new ElementMock();
     element.innerText = "${firstName}";

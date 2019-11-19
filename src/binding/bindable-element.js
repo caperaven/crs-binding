@@ -12,7 +12,7 @@ export class BindableElement extends HTMLElement {
 
     async disconnectedCallback() {
         crsbinding.events.disableEvents(this);
-        await crsbinding.expression.release(this);
+        crsbinding.observation.releaseBinding(this);
     }
 
     getProperty(prop) {

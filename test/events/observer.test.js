@@ -1,8 +1,10 @@
 import {observe, releaseObserved} from "../../src/events/observer.js"
 import {crsbindingMock} from "./../crsbinding.mock.js";
 
-beforeAll(() => {
-    global.crsbinding = crsbindingMock
+beforeAll(async () => {
+    global.window = {};
+    const bindingModule = await import("./../crsbinding.mock.js");
+    global.crsbinding = bindingModule.crsbinding;
 });
 
 test("observer", () => {

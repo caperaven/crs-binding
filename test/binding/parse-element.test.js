@@ -1,13 +1,14 @@
 import {parseElement, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
 import {observe} from "../../src/events/observer.js";
-import {ElementMock} from "../element.mock";
-import {crsbindingMock} from "./../crsbinding.mock.js";
+import {ElementMock} from "./../element.mock.js";
 
 let element;
 let context;
 
-beforeEach(() => {
-    global.crsbinding = crsbindingMock;
+beforeEach(async () => {
+    const bindingModule = await import("./../crsbinding.mock.js");
+    global.window = {};
+    global.crsbinding = bindingModule.crsbinding;
 
     context = observe({
         "firstName": null

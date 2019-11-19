@@ -1,7 +1,6 @@
 import {OneWayProvider} from "../../../src/binding/providers/one-way-provider.js";
 import {observe, releaseObserved} from "../../../src/events/observer.js";
 import {ElementMock} from "../../element.mock.js";
-import {crsbindingMock} from "../../crsbinding.mock.js";
 
 let instance;
 let element;
@@ -19,7 +18,8 @@ beforeEach(async () => {
     global.window = {};
     global.requestAnimationFrame = (callback) => callback();
 
-    global.crsbinding = crsbindingMock;
+    const bindingModule = await import("./../../crsbinding.mock.js");
+    global.crsbinding = bindingModule.crsbinding;
 
     element = new ElementMock();
 
@@ -49,7 +49,7 @@ test("One Way Provider - construction", () => {
 });
 
 test("One Way Provider - dispose", () => {
-    const releaseExpSpy = jest.spyOn(crsbinding, "releaseExp");
+    const releaseExpSpy = jest.spyOn(crsbinding.expression, "release");
 
     instance.dispose();
     expect(removedSpy).toHaveBeenCalled();
