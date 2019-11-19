@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,14 +180,7 @@
       <workItem from="1574070038846" duration="7000" />
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
-      <workItem from="1574190694196" duration="2818000" />
-    </task>
-    <task id="LOCAL-00033" summary="bind provider manager added">
-      <created>1570464179097</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1570464179097</updated>
+      <workItem from="1574190694196" duration="3589000" />
     </task>
     <task id="LOCAL-00034" summary="bind provider manager added">
       <created>1570464891818</created>
@@ -525,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574192816101</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="added global this for window and tests handles">
+      <created>1574193529688</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1574193529688</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +547,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added two way binding" />
     <MESSAGE value="add two way binding" />
     <MESSAGE value="added bind tests" />
     <MESSAGE value="added once provider" />
@@ -572,7 +571,8 @@
     <MESSAGE value="added fix for sanitization of odd lettered words in string" />
     <MESSAGE value="fixed when tests" />
     <MESSAGE value="fix tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix tests" />
+    <MESSAGE value="added global this for window and tests handles" />
+    <option name="LAST_COMMIT_MESSAGE" value="added global this for window and tests handles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

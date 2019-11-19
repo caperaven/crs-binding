@@ -21,8 +21,11 @@ export function releaseObservedArray(obj) {
     obj.forEach(item => crsbinding.observation.releaseObserved(item));
 }
 
-const deleteFunctions = ["pop", "slice"];
+const deleteFunctions = ["pop", "slice", "splice"];
 const addFunctions = ["push"];
+
+// ------- TODO ---------
+// JHR: todo: splice also adds, but how do you know what was added??
 
 function get(obj, prop) {
     const value = obj[prop];
