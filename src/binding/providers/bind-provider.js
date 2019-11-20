@@ -16,7 +16,7 @@ export class BindProvider extends OneWayProvider {
         this._changeHandler = this._change.bind(this);
         this._element.addEventListener("change", this._changeHandler);
 
-        this._setObj = crsbinding.expression.compile(`context.${this._value} = value`, ["value"], {sanitize: false});
+        this._setObj = crsbinding.expression.compile(`context.${this._value} = value`, ["value"], {sanitize: false, ctxName: this._ctxName});
     }
 
     _change(event) {

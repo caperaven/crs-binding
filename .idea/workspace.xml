@@ -3,11 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -185,14 +187,7 @@
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
-      <workItem from="1574226085470" duration="7039000" />
-    </task>
-    <task id="LOCAL-00037" summary="add delegate provider">
-      <created>1570471413451</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1570471413451</updated>
+      <workItem from="1574226085470" duration="7521000" />
     </task>
     <task id="LOCAL-00038" summary="add delegate provider">
       <created>1570472644105</created>
@@ -530,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574231501710</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="add foundation to change the context name so that for expressions will work">
+      <created>1574233773056</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1574233773056</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +554,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added once provider" />
     <MESSAGE value="when provider tests" />
     <MESSAGE value="added inner provider" />
     <MESSAGE value="updated tests" />
@@ -577,7 +578,8 @@
     <MESSAGE value="added global this for window and tests handles" />
     <MESSAGE value="fixed delete function on array observer for splice" />
     <MESSAGE value="removed when provider and started on the for provider" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed when provider and started on the for provider" />
+    <MESSAGE value="add foundation to change the context name so that for expressions will work" />
+    <option name="LAST_COMMIT_MESSAGE" value="add foundation to change the context name so that for expressions will work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -586,12 +588,6 @@
           <url>file://$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js</url>
           <line>67</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/binding/providers/one-way-provider.js</url>
-          <line>33</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

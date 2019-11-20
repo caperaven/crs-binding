@@ -1,10 +1,11 @@
 export class InnerProvider {
-    constructor(element, context) {
+    constructor(element, context, property, value, ctxName) {
         this._element = element;
         this._context = context;
+        this._ctxName = ctxName;
 
         this._eventHandler = this._change.bind(this);
-        this._expObj = crsbinding.expression.compile(element.innerText);
+        this._expObj = crsbinding.expression.compile(element.innerText, null, {ctxName: this._ctxName});
 
         for (let prop of this._expObj.parameters.properties) {
             crsbinding.events.on(this._context, prop, this._eventHandler);

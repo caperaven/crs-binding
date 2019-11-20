@@ -1,8 +1,8 @@
 import {ProviderBase} from "./provider-base.js";
 
 export class ForProvider extends ProviderBase {
-    constructor(element, context, property, value) {
-        super(element, context, property, value);
+    constructor(element, context, property, value, ctxName) {
+        super(element, context, property, value, ctxName);
     }
 
     dispose() {
@@ -30,7 +30,7 @@ export class ForProvider extends ProviderBase {
             .split("__property__").join(this._singular)
             .split("__collection__").join(this._plural);
 
-        this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true});
+        this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
 
         // 3. listen to the collection property on the context changing
         this._collectionChangedHandler = this._collectionChanged.bind(this);

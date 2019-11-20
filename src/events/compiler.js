@@ -3,12 +3,12 @@ const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 export function compileExp(exp, parameters = [], options) {
     let sanitize = true;
     let async = false;
-    let contextName = "context";
+    let ctxName = "context";
 
     if (options != null) {
         if (options.sanitize != null) sanitize = options.sanitize;
         if (options.async != null) async = options.async;
-        if (options.contextName != null) contextName = options.contextName;
+        if (options.ctxName != null) ctxName = options.ctxName;
     }
 
     if (crsbinding._expFn.has(exp)) {
@@ -37,7 +37,7 @@ export function compileExp(exp, parameters = [], options) {
         }
     }
 
-    const fn = async == true ? new AsyncFunction(contextName, ...parameters, src) : new Function(contextName, ...parameters, src);
+    const fn = async == true ? new AsyncFunction(ctxName, ...parameters, src) : new Function(ctxName, ...parameters, src);
 
     const result = {
         function: fn,
