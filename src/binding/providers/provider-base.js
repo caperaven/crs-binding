@@ -4,7 +4,7 @@ export class ProviderBase {
         this._context = context;
         this._property = property;
         this._value = value;
-        this._ctxName = ctxName;
+        this._ctxName = ctxName || "context";
         this._eventsToRemove = [];
         this._isNamedContext = this._ctxName != "context";
 

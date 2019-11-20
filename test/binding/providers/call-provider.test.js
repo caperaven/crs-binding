@@ -34,10 +34,10 @@ test("call provider - dispose", () => {
     expect(element.removeEventListener).toBeCalled();
     expect(instance._eventHandler).toBeNull();
     expect(instance._fn).toBeNull();
-    expect(instance._element).toBeUndefined();
-    expect(instance._context).toBeUndefined();
-    expect(instance._property).toBeUndefined();
-    expect(instance._value).toBeUndefined();
+    expect(instance._element).toBeNull();
+    expect(instance._context).toBeNull();
+    expect(instance._property).toBeNull();
+    expect(instance._value).toBeNull();
 });
 
 //JHR: todo: fix this test

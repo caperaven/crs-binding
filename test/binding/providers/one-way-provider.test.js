@@ -55,10 +55,10 @@ test("One Way Provider - dispose", () => {
     expect(removedSpy).toHaveBeenCalled();
     expect(releaseExpSpy).toHaveBeenCalled();
 
-    expect(instance._element).toBeUndefined();
-    expect(instance._context).toBeUndefined();
-    expect(instance._property).toBeUndefined();
-    expect(instance._value).toBeUndefined();
+    expect(instance._element).toBeNull();
+    expect(instance._context).toBeNull();
+    expect(instance._property).toBeNull();
+    expect(instance._value).toBeNull();
     expect(instance._eventHandler).toBeNull();
     expect(instance._exp).toBeNull();
     expect(instance._expObj).toBeUndefined();
