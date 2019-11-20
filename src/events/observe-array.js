@@ -49,20 +49,41 @@ function get(obj, prop) {
 }
 
 function itemsRemoved(obj, items) {
+    if (items == null) return;
     crsbinding.events.notifyPropertyChanged(obj, "items-deleted", items);
-    for (let item of items) {
-        crsbinding.observation.releaseObserved(item);
+
+    if (Array.isArray(items)) {
+        for (let item of items) {
+            itemRemoved(item);
+        }
+    }
+    else {
+        itemRemoved(items);
     }
 }
 
+function itemRemoved(item) {
+    crsbinding.observation.releaseObserved(item);
+}
+
 function itemsAdded(obj, items) {
+    if (items == null) return;
     const indexes = [];
 
-    for (let item of items) {
-        const index = obj.indexOf(item);
-        indexes.push(index);
-        obj[index] = crsbinding.observation.observe(item);
+    if (Array.isArray(items)) {
+        for (let item of items) {
+            itemAdded(obj, item, indexes);
+        }
+    }
+    else {
+        itemAdded(obj, items);
     }
 
     crsbinding.events.notifyPropertyChanged(obj, "items-added", {items: items, indexes: indexes});
+}
+
+function itemAdded(obj, item, indexes) {
+    const index = obj.indexOf(item);
+    indexes.push(index);
+    obj[index] = crsbinding.observation.observe(item);
 }

@@ -33,12 +33,44 @@ export default class View extends ViewBase {
     }
 
     debug() {
+        this.persons = crsbinding.observation.observe([
+            {
+                firstName: "First Name 3",
+                lastName: "Last Name 3",
+                contacts: crsbinding.observation.observe([
+                    {
+                        cell: "Cell 1"
+                    },
+                    {
+                        cell: "Cell 2"
+                    }
+                ])
+            },
+            {
+                firstName: "First Name 4",
+                lastName: "Last Name 4"
+            }
+        ]);
     }
 
     add() {
+        this.persons.push(
+            {
+                firstName: "First Name 3",
+                lastName: "Last Name 3",
+                contacts: crsbinding.observation.observe([
+                    {
+                        cell: "Cell 3"
+                    },
+                    {
+                        cell: "Cell 4"
+                    }
+                ])
+            }
+        )
     }
 
     delete() {
-        this.items.splice(1, 1);
+        this.persons.pop();
     }
 }
