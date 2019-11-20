@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -187,14 +181,7 @@
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
-      <workItem from="1574226085470" duration="7521000" />
-    </task>
-    <task id="LOCAL-00038" summary="add delegate provider">
-      <created>1570472644105</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1570472644105</updated>
+      <workItem from="1574226085470" duration="7708000" />
     </task>
     <task id="LOCAL-00039" summary="added one way binding">
       <created>1570631097550</created>
@@ -532,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574233773056</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="update context name to be passed on">
+      <created>1574234200331</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1574234200331</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +548,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="when provider tests" />
     <MESSAGE value="added inner provider" />
     <MESSAGE value="updated tests" />
     <MESSAGE value="add paths test file and updateUI function" />
@@ -579,7 +572,8 @@
     <MESSAGE value="fixed delete function on array observer for splice" />
     <MESSAGE value="removed when provider and started on the for provider" />
     <MESSAGE value="add foundation to change the context name so that for expressions will work" />
-    <option name="LAST_COMMIT_MESSAGE" value="add foundation to change the context name so that for expressions will work" />
+    <MESSAGE value="update context name to be passed on" />
+    <option name="LAST_COMMIT_MESSAGE" value="update context name to be passed on" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

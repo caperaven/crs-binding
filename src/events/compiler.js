@@ -1,6 +1,7 @@
 const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 
-export function compileExp(exp, parameters = [], options) {
+export function compileExp(exp, parameters, options) {
+    parameters = parameters || [];
     let sanitize = true;
     let async = false;
     let ctxName = "context";
