@@ -4,8 +4,14 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-manager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-manager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,14 +179,7 @@
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
-      <workItem from="1574226085470" duration="19108000" />
-    </task>
-    <task id="LOCAL-00045" summary="when provider tests">
-      <created>1570652307123</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1570652307123</updated>
+      <workItem from="1574226085470" duration="24069000" />
     </task>
     <task id="LOCAL-00046" summary="added inner provider">
       <created>1570655528401</created>
@@ -518,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574244174843</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="added items added and removed events">
+      <created>1574248490499</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1574248490499</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +546,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add paths test file and updateUI function" />
     <MESSAGE value="clean up objects" />
     <MESSAGE value="clean up objects and tests" />
     <MESSAGE value="release1" />
@@ -565,7 +570,8 @@
     <MESSAGE value="update context name to be passed on" />
     <MESSAGE value="repeat inner provider fixed" />
     <MESSAGE value="fixed inner binding for titles" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed inner binding for titles" />
+    <MESSAGE value="added items added and removed events" />
+    <option name="LAST_COMMIT_MESSAGE" value="added items added and removed events" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

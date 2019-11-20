@@ -52,7 +52,7 @@ export function compileExp(exp, parameters, options) {
 }
 
 export function releaseExp(exp) {
-    if (typeof exp != "object") return;
+    if (exp == null || typeof exp != "object") return;
     
     const key = exp.parameters.expression;
     if (crsbinding._expFn.has(key)) {

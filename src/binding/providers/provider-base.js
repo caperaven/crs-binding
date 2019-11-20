@@ -20,11 +20,11 @@ export class ProviderBase {
         this._eventsToRemove.length = 0;
         this._eventsToRemove = null;
 
-        delete this._element;
-        delete this._context;
-        delete this._property;
-        delete this._value;
-        delete this._ctxName;
+        this._element = null;
+        this._context = null;
+        this._property = null;
+        this._value = null;
+        this._ctxName = null;
     }
 
     /**

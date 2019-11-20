@@ -25,8 +25,9 @@ export class ProviderManager {
 
         for (let id of element.__providers) {
             const provider = this.items.get(id);
-            provider.dispose();
             this.items.delete(id);
+            provider.dispose();
         }
+        element.__providers = null;
     }
 }

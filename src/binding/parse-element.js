@@ -36,3 +36,9 @@ export async function parseAttribute(attr, context, ctxName) {
 export async function releaseBinding(element) {
     await crsbinding.providerManager.releaseElement(element);
 }
+
+export async function releaseChildBinding(element) {
+    for (let child of element.children) {
+        await releaseBinding(child);
+    }
+}

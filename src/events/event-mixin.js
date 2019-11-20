@@ -63,17 +63,22 @@ export function removeWhen(obj, exp, callback) {
 }
 
 export function on(obj, property, callback) {
+    if (obj == null || obj.__events == null) return;
+
     let functions = obj.__events.get(property) || [];
     functions = [...functions, callback];
     obj.__events.set(property, functions);
 }
 
 export function removeOn(obj, property, callback) {
+    if (obj == null || obj.__events == null) return;
+
     const functions = obj.__events.get(property) || [];
     const index = functions.indexOf(callback);
 
     if (index != -1) {
         functions.splice(index, 1);
+        obj.__events.set(property, functions);
     }
 
     if (functions.length == 0) {

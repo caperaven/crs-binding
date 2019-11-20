@@ -11,17 +11,16 @@ export class InnerProvider extends ProviderBase {
             this.listenOnPath(prop, this._eventHandler);
         }
 
-        crsbinding.providerManager.register(this);
         this._change();
     }
 
     dispose() {
         crsbinding.expression.release(this._expObj);
-        this._eventHandler = null;
         this._expObj = null;
 
-        delete this._element;
-        delete this._context;
+        super.dispose();
+
+        this._eventHandler = null;
     }
 
     _change() {

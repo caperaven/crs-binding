@@ -24,10 +24,6 @@ export default class View extends ViewBase {
                         cell: "Cell 2"
                     }
                 ])
-            },
-            {
-                firstName: "First Name 2",
-                lastName: "Last Name 2"
             }
         ]);
     }
