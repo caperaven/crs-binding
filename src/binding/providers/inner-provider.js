@@ -1,14 +1,14 @@
-export class InnerProvider {
+import {ProviderBase} from "./provider-base.js";
+
+export class InnerProvider extends ProviderBase {
     constructor(element, context, property, value, ctxName) {
-        this._element = element;
-        this._context = context;
-        this._ctxName = ctxName;
+        super(element, context, property, value, ctxName);
 
         this._eventHandler = this._change.bind(this);
         this._expObj = crsbinding.expression.compile(element.innerText, null, {ctxName: this._ctxName});
 
         for (let prop of this._expObj.parameters.properties) {
-            crsbinding.events.on(this._context, prop, this._eventHandler);
+            this.listenOnPath(prop, this._eventHandler);
         }
 
         crsbinding.providerManager.register(this);

@@ -15,7 +15,7 @@ export async function parseElement(element, context, ctxName = "context") {
     await parseAttributes(boundAttributes, context, ctxName);
 
     if (element.children && element.children.length == 0 && (element.innerText || "").indexOf("${") != -1) {
-        ProviderFactory["inner"](element, context);
+        ProviderFactory["inner"](element, context, null, null, ctxName);
     }
 }
 

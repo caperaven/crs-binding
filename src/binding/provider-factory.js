@@ -31,8 +31,8 @@ export class ProviderFactory {
         return new CallProvider(element, context, property, value, ctxName);
     }
 
-    static "inner"(element, context, ctxName) {
-        return new InnerProvider(element, context, ctxName);
+    static "inner"(element, context, property, value, ctxName) {
+        return new InnerProvider(element, context, property, value, ctxName);
     }
 
     static "for"(element, context, property, value, ctxName) {

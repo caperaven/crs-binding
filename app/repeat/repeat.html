@@ -1,17 +1,31 @@
-<h2>Repeat</h2>
+<h1>${title}</h1>
+
 <button click.call="debug">Debug</button>
 <button click.call="add">Add</button>
 <button click.call="delete">Delete</button>
 
+<style>
+    input {
+        display: block;
+    }
+</style>
+
 <ul>
     <template for="person of persons">
         <div>
+            <h2>Personal</h2>
+
             <input value.bind="person.firstName" />
             <input value.bind="person.lastName" />
 
-            <template for="contact of person.contacts">
-                <input value.bind="contact.cell">
-            </template>
+            <h2>Contacts</h2>
+            <div>
+                <template for="contact of person.contacts">
+                    <input value.bind="contact.cell">
+                    <div>${contact.cell}</div>
+                </template>
+            </div>
+            <hr />
         </div>
     </template>
 </ul>

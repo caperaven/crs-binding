@@ -2,8 +2,8 @@ import {ViewBase} from "./../../src/view/view-base.js";
 
 export default class View extends ViewBase {
     connectedCallback() {
-        this.title = "Repeat Test Title";
         super.connectedCallback();
+        this.title = "Repeat Test Title";
     }
 
     disconnectedCallback() {
@@ -16,14 +16,14 @@ export default class View extends ViewBase {
             {
                 firstName: "First Name 1",
                 lastName: "Last Name 1",
-                contacts: [
+                contacts: crsbinding.observation.observe([
                     {
                         cell: "Cell 1"
                     },
                     {
-                        cell: "$context.title"
+                        cell: "Cell 2"
                     }
-                ]
+                ])
             },
             {
                 firstName: "First Name 2",
