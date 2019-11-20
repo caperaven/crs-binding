@@ -1,4 +1,12 @@
 export class ViewBase {
+    get title() {
+        return this._title;
+    }
+
+    set title(newValue) {
+        this._title = newValue;
+    }
+
     get element() {
         return this._element;
     }

@@ -31,7 +31,7 @@ export class OneWayProvider extends ProviderBase {
             this._exp = `element.setAttribute("${this._property}", value || "")`;
         }
 
-        this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], false);
+        this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], {sanitize: false});
 
         if (this._value.indexOf(".") != -1) {
             this._getObj = crsbinding.expression.compile(this._value);

@@ -29,6 +29,7 @@ export class RepeatProvider {
 
         this._expObj = crsbinding.expression.compile(exp);
 
+        // use listenOnPath on provider base.
         if (exp.indexOf(".") == -1) {
             crsbinding.events.listenOn(this._context, exp, this._eventHandler);
         }

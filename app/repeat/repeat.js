@@ -2,6 +2,7 @@ import {ViewBase} from "./../../src/view/view-base.js";
 
 export default class View extends ViewBase {
     connectedCallback() {
+        this.title = "Repeat Test Title";
         super.connectedCallback();
     }
 
@@ -11,44 +12,30 @@ export default class View extends ViewBase {
 
     _loaded() {
         super._loaded();
-        this.items = crsbinding.observation.observe([
+        this.persons = crsbinding.observation.observe([
             {
-                value: "1",
-                unit: "fr"
+                firstName: "First Name 1",
+                lastName: "Last Name 1",
+                contacts: [
+                    {
+                        cell: "Cell 1"
+                    },
+                    {
+                        cell: "$context.title"
+                    }
+                ]
             },
             {
-                value: "2",
-                unit: "fr"
-            },
-            {
-                value: "3",
-                unit: "fr"
+                firstName: "First Name 2",
+                lastName: "Last Name 2"
             }
         ]);
     }
 
     debug() {
-        this.items = crsbinding.observation.observe([
-            {
-                value: "5",
-                unit: "em"
-            },
-            {
-                value: "6",
-                unit: "em"
-            },
-            {
-                value: "7",
-                unit: "em"
-            }
-        ]);
     }
 
     add() {
-        this.items.push({
-            value: "8",
-            unit: "em"
-        })
     }
 
     delete() {

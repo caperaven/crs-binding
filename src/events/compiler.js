@@ -1,4 +1,16 @@
-export function compileExp(exp, parameters = [], sanitize = true) {
+const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
+
+export function compileExp(exp, parameters = [], options) {
+    let sanitize = true;
+    let async = false;
+    let contextName = "context";
+
+    if (options != null) {
+        if (options.sanitize != null) sanitize = options.sanitize;
+        if (options.async != null) async = options.async;
+        if (options.contextName != null) contextName = options.contextName;
+    }
+
     if (crsbinding._expFn.has(exp)) {
         const x = crsbinding._expFn.get(exp);
         x.count += 1;
@@ -25,7 +37,7 @@ export function compileExp(exp, parameters = [], sanitize = true) {
         }
     }
 
-    const fn = new Function("context", ...parameters, src);
+    const fn = async == true ? new AsyncFunction(contextName, ...parameters, src) : new Function(contextName, ...parameters, src);
 
     const result = {
         function: fn,

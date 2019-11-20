@@ -19,5 +19,5 @@ export function listenOnPath(context, value, callback) {
 }
 
 export function listenOn(context, property, callback) {
-    crsbinding.events.on(context, property, callback);
+    crsbinding.events.on(context, property.trim(), callback);
 }

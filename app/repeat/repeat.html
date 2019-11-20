@@ -4,10 +4,14 @@
 <button click.call="delete">Delete</button>
 
 <ul>
-    <template repeat="items">
+    <template for="person of persons">
         <div>
-            <input value.bind="value" />
-            <input value.bind="unit" />
+            <input value.bind="person.firstName" />
+            <input value.bind="person.lastName" />
+
+            <template for="contact of person.contacts">
+                <input value.bind="contact.cell" />
+            </template>
         </div>
     </template>
 </ul>

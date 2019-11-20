@@ -40,7 +40,7 @@ export class IfProvider extends ProviderBase {
             .split("__attr__").join(this._property)
             .split("__attr-value__").join(this._property);
 
-        this._expObj = crsbinding.expression.compile(fnCode, ["element"], false);
+        this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false});
         this.listenOnPath(value.properties, this._eventHandler);
     }
 
@@ -59,7 +59,7 @@ export class IfProvider extends ProviderBase {
             .split("__true__").join(valueParts[0].trim())
             .split("__false__").join(valueParts[1].trim());
 
-        this._expObj = crsbinding.expression.compile(fnCode, ["element"], false);
+        this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false});
         this.listenOnPath(value.properties, this._eventHandler);
     }
 
@@ -76,7 +76,7 @@ export class IfProvider extends ProviderBase {
             .split("__attr__").join(this._property)
             .split("__attr-value__").join(parts[1].trim());
 
-        this._expObj = crsbinding.expression.compile(fnCode, ["element"], false);
+        this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false});
         this.listenOnPath(value.properties, this._eventHandler);
     }
 

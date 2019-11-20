@@ -1,10 +1,9 @@
 import {BindProvider} from "./providers/bind-provider.js";
 import {OneWayProvider} from "./providers/one-way-provider.js";
 import {OnceProvider} from "./providers/once-provider.js";
-import {WhenProvider} from "./providers/when-provider.js";
 import {CallProvider} from "./providers/call-provider.js";
 import {InnerProvider} from "./providers/inner-provider.js";
-import {RepeatProvider} from "./providers/repeat-provider.js";
+import {ForProvider} from "./providers/for-provider.js";
 import {IfProvider} from "./providers/if-provider.js";
 
 export class ProviderFactory {
@@ -24,10 +23,6 @@ export class ProviderFactory {
         return OnceProvider(element, context, property, value);
     }
 
-    static "when"(element, context, property, value) {
-        return new WhenProvider(element, context, property, value);
-    }
-
     static "call"(element, context, property, value) {
         return new CallProvider(element, context, property, value);
     }
@@ -40,8 +35,8 @@ export class ProviderFactory {
         return new InnerProvider(element, context);
     }
 
-    static "repeat"(element, context) {
-        return new RepeatProvider(element, context);
+    static "for"(element, context, property, value) {
+        return new ForProvider(element, context, property, value);
     }
 
     static "if"(element, context, property, value) {
