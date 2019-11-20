@@ -22,7 +22,7 @@ export function compileExp(exp, parameters, options) {
     let san;
 
     if (sanitize == true) {
-        san = crsbinding.expression.sanitize(exp);
+        san = crsbinding.expression.sanitize(exp, ctxName);
 
         if (crsbinding._expFn.has(san.expression)) {
             const x = crsbinding._expFn.get(san.expression);

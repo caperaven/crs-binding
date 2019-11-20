@@ -69,3 +69,13 @@ test ("sanitizeExp - string token", () => {
    const result = sanitizeExp("${firstName} ${lastName} is ${age} old and lives at \"${address.street}\"");
    expect(result.expression).toBe("${context.firstName} ${context.lastName} is ${context.age} old and lives at \"${context.address.street}\"")
 });
+
+test("sanitizeExp - ignore named expression", () => {
+   const result = sanitizeExp("person.firstName", "person");
+   expect(result.expression).toBe("person.firstName");
+});
+
+test("sanitizeExp - ignore named expression - multiple", () => {
+   const result = sanitizeExp("person.firstName && person.lastName", "person");
+   expect(result.expression).toBe("person.firstName && person.lastName");
+});

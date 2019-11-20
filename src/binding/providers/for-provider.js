@@ -27,8 +27,8 @@ export class ForProvider extends ProviderBase {
         this._plural = parts[1].trim();
 
         const forExp = repeatCode
-            .split("__property__").join(this._singular)
-            .split("__collection__").join(this._plural);
+            .split("_p").join(this._singular)
+            .split("_c").join(this._plural);
 
         this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
 
@@ -47,7 +47,7 @@ export class ForProvider extends ProviderBase {
 
         await this._forExp.function(this._context, async (item) => {
             const element = this._element.content.cloneNode(true);
-            await crsbinding.parsers.parseElement(element, item);
+            await crsbinding.parsers.parseElement(element, item, this._singular);
             fragment.appendChild(element);
         });
 
@@ -58,4 +58,4 @@ export class ForProvider extends ProviderBase {
     }
 }
 
-const repeatCode = `for (__property__ of context.__collection__ || []) {await callback(__property__);}`;
+const repeatCode = `for (_p of context._c || []) {await callback(_p);}`;

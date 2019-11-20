@@ -3,14 +3,15 @@
  * @param exp
  * @returns {{expression: *, properties: *}}
  */
-export function sanitizeExp(exp) {
-    const prefix = "context.";
-    const tokens = tokenize(exp);
+export function sanitizeExp(exp, ctxName = "context") {
+    const namedExp = ctxName != "context";
+    const prefix = `${ctxName}.`;
+    const tokens = tokenize(exp, namedExp ? ctxName : null);
 
     if (tokens.length == 1) {
         return {
             isLiteral: false,
-            expression: `${prefix}${exp}`,
+            expression: `${prefix}${tokens[0]}`,
             properties: [exp]
         }
     }
@@ -43,6 +44,13 @@ export function sanitizeExp(exp) {
 
         path.push(token);
         oldToken = token;
+    }
+
+    if (namedExp && path.length > 0) {
+        if (isLiteral == false || oldToken == "}") {
+            indexes.push(tokens.length - 1);
+            properties.push(extractProperty(`${path.join("")}`));
+        }
     }
 
     if (indexes.length == 0 && exp.indexOf(".") != -1) {
@@ -89,7 +97,7 @@ const stdQuotes = ["'", '"'];
  * @param exp
  * @returns {[]}
  */
-function tokenize(exp) {
+function tokenize(exp, ctxName) {
     let tokens = [];
     let word = [];
 
@@ -125,7 +133,25 @@ function tokenize(exp) {
         tokens.push(word.join(""));
     }
 
+    if (ctxName != null) {
+        tokens = removeNamedCtx(tokens, ctxName);
+    }
+
     return tokens;
+}
+
+function removeNamedCtx(collection, ctxName) {
+    const index = collection.indexOf(ctxName);
+    if (index == -1) return collection;
+
+    if (collection[index + 1] == ".") {
+        collection.splice(index, 2);
+        if (collection.indexOf(ctxName) != -1) {
+            removeNamedCtx(collection, ctxName)
+        };
+    }
+
+    return collection;
 }
 
 function pushToken(tokens, word, char) {
