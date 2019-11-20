@@ -7,39 +7,39 @@ import {ForProvider} from "./providers/for-provider.js";
 import {IfProvider} from "./providers/if-provider.js";
 
 export class ProviderFactory {
-    static "bind"(element, context, property, value) {
-        return new BindProvider(element, context, property, value)
+    static "bind"(element, context, property, value, ctxName) {
+        return new BindProvider(element, context, property, value, ctxName)
     }
 
-    static "two-way"(element, context, property, value) {
-        return this.bind(element, context, property, value);
+    static "two-way"(element, context, property, value, ctxName) {
+        return this.bind(element, context, property, value, ctxName);
     }
 
-    static "one-way"(element, context, property, value) {
-        return new OneWayProvider(element, context, property, value);
+    static "one-way"(element, context, property, value, ctxName) {
+        return new OneWayProvider(element, context, property, value, ctxName);
     }
 
-    static "once"(element, context, property, value) {
-        return OnceProvider(element, context, property, value);
+    static "once"(element, context, property, value, ctxName) {
+        return OnceProvider(element, context, property, value, ctxName);
     }
 
-    static "call"(element, context, property, value) {
-        return new CallProvider(element, context, property, value);
+    static "call"(element, context, property, value, ctxName) {
+        return new CallProvider(element, context, property, value, ctxName);
     }
 
-    static "delegate"(element, context, property, value) {
-        return new CallProvider(element, context, property, value);
+    static "delegate"(element, context, property, value, ctxName) {
+        return new CallProvider(element, context, property, value, ctxName);
     }
 
-    static "inner"(element, context) {
-        return new InnerProvider(element, context);
+    static "inner"(element, context, ctxName) {
+        return new InnerProvider(element, context, ctxName);
     }
 
-    static "for"(element, context, property, value) {
-        return new ForProvider(element, context, property, value);
+    static "for"(element, context, property, value, ctxName) {
+        return new ForProvider(element, context, property, value, ctxName);
     }
 
-    static "if"(element, context, property, value) {
-        return new IfProvider(element, context, property, value);
+    static "if"(element, context, property, value, ctxName) {
+        return new IfProvider(element, context, property, value, ctxName);
     }
 }

@@ -1,9 +1,10 @@
 export class ProviderBase {
-    constructor(element, context, property, value) {
+    constructor(element, context, property, value, ctxName) {
         this._element = element;
         this._context = context;
         this._property = property;
         this._value = value;
+        this._ctxName = ctxName;
         this._eventsToRemove = [];
 
         crsbinding.providerManager.register(this);
@@ -22,6 +23,7 @@ export class ProviderBase {
         delete this._context;
         delete this._property;
         delete this._value;
+        delete this._ctxName;
     }
 
     /**

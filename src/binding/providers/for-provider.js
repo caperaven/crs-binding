@@ -8,6 +8,9 @@ export class ForProvider extends ProviderBase {
     dispose() {
         crsbinding.expression.release(this._forExp);
         this._forExp = null;
+        delete this.ar;
+        delete this._singular;
+        delete this._plural;
 
         super.dispose();
         this._renderItemsHandler = null;
@@ -20,16 +23,23 @@ export class ForProvider extends ProviderBase {
 
         // 2. get the properties to work with and build the for loop
         const parts = this._value.split("of");
+        this._singular = parts[0].trim();
+        this._plural = parts[1].trim();
 
         const forExp = repeatCode
-            .split("__property__").join(parts[0].trim())
-            .split("__collection__").join(parts[1].trim());
+            .split("__property__").join(this._singular)
+            .split("__collection__").join(this._plural);
 
         this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true});
 
         // 3. listen to the collection property on the context changing
-        this._renderItemsHandler = this._renderItems.bind(this);
-        this.listenOnPath(parts[1], this._renderItemsHandler);
+        this._collectionChangedHandler = this._collectionChanged.bind(this);
+        this.listenOnPath(parts[1], this._collectionChangedHandler);
+    }
+
+    async _collectionChanged(property, newValue, oldValue) {
+        this.ar = newValue;
+        await this._renderItems();
     }
 
     async _renderItems() {
@@ -43,7 +53,9 @@ export class ForProvider extends ProviderBase {
 
         this._container.innerHTML = "";
         this._container.appendChild(fragment);
+
+        crsbinding.expression.updateUI(this.ar);
     }
 }
 
-const repeatCode = `for (__property__ of context.__collection__) {await callback(__property__);}`;
+const repeatCode = `for (__property__ of context.__collection__ || []) {await callback(__property__);}`;
