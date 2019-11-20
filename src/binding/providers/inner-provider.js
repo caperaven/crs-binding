@@ -12,6 +12,7 @@ export class InnerProvider extends ProviderBase {
         }
 
         crsbinding.providerManager.register(this);
+        this._change();
     }
 
     dispose() {

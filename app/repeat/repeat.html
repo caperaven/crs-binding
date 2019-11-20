@@ -8,6 +8,10 @@
     input {
         display: block;
     }
+    span {
+        padding-bottom: 1rem;
+        display: block;
+    }
 </style>
 
 <ul>
@@ -22,7 +26,7 @@
             <div>
                 <template for="contact of person.contacts">
                     <input value.bind="contact.cell">
-                    <div>${contact.cell}</div>
+                    <span>${contact.cell}</span>
                 </template>
             </div>
             <hr />
