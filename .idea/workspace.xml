@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/4.when.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/listen-on.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/listen-on.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/repeat-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/when-provider.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/view-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/when-provider.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/binding-expressions.md" beforeDir="false" afterPath="$PROJECT_DIR$/documents/binding-expressions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observer.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -196,14 +184,7 @@
       <workItem from="1574090577263" duration="4360000" />
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
-      <workItem from="1574226085470" duration="4963000" />
-    </task>
-    <task id="LOCAL-00035" summary="bind provider manager added">
-      <created>1570467406553</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1570467406553</updated>
+      <workItem from="1574226085470" duration="5200000" />
     </task>
     <task id="LOCAL-00036" summary="add delegate provider">
       <created>1570471079242</created>
@@ -541,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574194309317</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="removed when provider and started on the for provider">
+      <created>1574231248761</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1574231248761</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +551,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added bind tests" />
     <MESSAGE value="added once provider" />
     <MESSAGE value="when provider tests" />
     <MESSAGE value="added inner provider" />
@@ -588,7 +575,8 @@
     <MESSAGE value="fix tests" />
     <MESSAGE value="added global this for window and tests handles" />
     <MESSAGE value="fixed delete function on array observer for splice" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed delete function on array observer for splice" />
+    <MESSAGE value="removed when provider and started on the for provider" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed when provider and started on the for provider" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

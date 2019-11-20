@@ -16,12 +16,6 @@ const obj = observe(model);
 obj.on("property1", (newValue, oldValue) => console.log(`${newValue} - ${oldValue}`));
 ```
 
-### Defining a event
-```js
-const obj = observer(model);
-obj.when("property1 == 'a'", (newValue, oldValue) => console.log(`${newValue} - ${oldValue}`));
-```
-
 ### enableEvents vs observe
 
 There are two ways to enable a object to use the on and when functions.
@@ -63,5 +57,4 @@ attribute.bind      // same as two-way just a shorthand version
 attribute.two-way   // two way binding  
 attribute.one-way   // one way binding  
 attribute.once      // once off binding - inflate  
-attribute.when      // conditional binding  
 event.call          // delegate  
