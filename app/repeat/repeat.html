@@ -8,6 +8,10 @@
         <div>
             <input value.bind="person.firstName" />
             <input value.bind="person.lastName" />
+
+            <template for="contact of person.contacts">
+                <input value.bind="contact.cell">
+            </template>
         </div>
     </template>
 </ul>

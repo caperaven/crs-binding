@@ -28,13 +28,14 @@ export class ForProvider extends ProviderBase {
 
         const forExp = repeatCode
             .split("_p").join(this._singular)
-            .split("_c").join(this._plural);
+            .split("_c").join(this._ctxName == "context" ? `context.${this._plural}` : this._plural);
 
         this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
 
         // 3. listen to the collection property on the context changing
         this._collectionChangedHandler = this._collectionChanged.bind(this);
-        this.listenOnPath(parts[1], this._collectionChangedHandler);
+
+        this.listenOnPath(this._plural, this._collectionChangedHandler);
     }
 
     async _collectionChanged(property, newValue, oldValue) {
@@ -58,4 +59,4 @@ export class ForProvider extends ProviderBase {
     }
 }
 
-const repeatCode = `for (_p of context._c || []) {await callback(_p);}`;
+const repeatCode = `for (_p of _c || []) {await callback(_p);}`;

@@ -6,6 +6,7 @@ export class ProviderBase {
         this._value = value;
         this._ctxName = ctxName;
         this._eventsToRemove = [];
+        this._isNamedContext = this._ctxName != "context";
 
         crsbinding.providerManager.register(this);
         this.initialize();
@@ -38,6 +39,10 @@ export class ProviderBase {
                 this.listenOnPath(v, callback);
             }
             return;
+        }
+
+        if (this._isNamedContext) {
+            value = value.replace(`${this._ctxName}.`, "");
         }
 
         if (value.indexOf(".") == -1) {
