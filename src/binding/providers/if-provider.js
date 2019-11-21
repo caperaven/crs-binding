@@ -13,7 +13,7 @@ export class IfProvider extends ProviderBase {
         super.dispose();
     }
 
-    initialize() {
+    async initialize() {
         this._eventHandler = this.propertyChanged.bind(this);
 
         if (this._value.indexOf("?") == -1) {

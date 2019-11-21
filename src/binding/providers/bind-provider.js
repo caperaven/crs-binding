@@ -11,8 +11,8 @@ export class BindProvider extends OneWayProvider {
         super.dispose();
     }
 
-    initialize() {
-        super.initialize();
+    async initialize() {
+        await super.initialize();
         this._changeHandler = this._change.bind(this);
         this._element.addEventListener("change", this._changeHandler);
 

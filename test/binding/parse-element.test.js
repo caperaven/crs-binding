@@ -16,14 +16,13 @@ beforeEach(async () => {
 
     element = new ElementMock();
     element.children.push(new ElementMock());
-    element.children[0].attributes.push({
-        "name": "value.bind",
-        "value": "firstName",
-        "ownerElement": {
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-        }
-    });
+
+    element.children[0].attributes.set("name", "value.bind");
+    element.children[0].attributes.set("value", "firstName");
+    element.children[0].ownerElement = {
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn()
+    };
 });
 
 test("parseAttribute", async () => {

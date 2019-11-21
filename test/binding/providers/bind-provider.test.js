@@ -5,6 +5,7 @@ import {ElementMock} from "../../element.mock.js";
 let instance;
 let element;
 let context;
+let addEventListenerSpy;
 
 beforeEach(async () => {
     global.window = {};
@@ -14,6 +15,7 @@ beforeEach(async () => {
     global.crsbinding = bindingModule.crsbinding;
 
     element = new ElementMock();
+    addEventListenerSpy = jest.spyOn(element, "addEventListener");
 
     context = observe({
         "firstName": null
@@ -23,13 +25,14 @@ beforeEach(async () => {
 });
 
 test("Bind provider - constructor", () => {
-    expect(element.addEventListenerSpy).toHaveBeenCalled();
+    expect(addEventListenerSpy).toHaveBeenCalled();
     expect(instance._changeHandler).not.toBeNull();
 });
 
 test("Bind provider - dispose", () => {
+    const removeEventListenerSpy = jest.spyOn(element, "removeEventListener");
     instance.dispose();
-    expect(element.removeEventListenerSpy).toHaveBeenCalled();
+    expect(removeEventListenerSpy).toHaveBeenCalled();
     expect(instance._changeHandler).toBeNull();
 });
 

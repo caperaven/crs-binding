@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/dom-mock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/element.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/element.mock.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +28,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../crs-side-menu" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -46,21 +56,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.call provider - event">
-    <configuration name="One Way Provider - $context" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" />
-      <test-names>
-        <test-name value="One Way Provider - $context" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="call provider - event" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.for provider - items added">
+    <configuration name="call provider - constructor" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
@@ -69,24 +66,47 @@
       <scope-kind value="TEST" />
       <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
       <test-names>
-        <test-name value="call provider - event" />
+        <test-name value="call provider - constructor" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="provider base - listenOnPath" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="call provider - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
       <test-names>
-        <test-name value="provider base - listenOnPath" />
+        <test-name value="call provider - dispose" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
+    <configuration name="for provider - _collectionChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" />
+      <test-names>
+        <test-name value="for provider - _collectionChanged" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="for provider - items added" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" />
+      <test-names>
+        <test-name value="for provider - items added" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -102,10 +122,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.call provider - event" />
-        <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="Jest.provider base - listenOnPath" />
-        <item itemvalue="Jest.One Way Provider - $context" />
+        <item itemvalue="Jest.for provider - items added" />
+        <item itemvalue="Jest.call provider - dispose" />
+        <item itemvalue="Jest.call provider - constructor" />
+        <item itemvalue="Jest.for provider - _collectionChanged" />
       </list>
     </recent_temporary>
   </component>
@@ -175,14 +195,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="7542000" />
-    </task>
-    <task id="LOCAL-00053" summary="add paths test file and updateUI function">
-      <created>1570794878896</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1570794878896</updated>
+      <workItem from="1574258443591" duration="12108000" />
     </task>
     <task id="LOCAL-00054" summary="add paths test file and updateUI function">
       <created>1570795424719</created>
@@ -520,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574318641747</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="adding tests">
+      <created>1574318792639</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1574318792639</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,10 +593,10 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/binding/providers/provider-base.js</url>
-          <line>38</line>
+          <url>file://$PROJECT_DIR$/src/binding/providers/for-provider.js</url>
+          <line>87</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

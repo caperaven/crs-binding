@@ -9,7 +9,7 @@ export class ProviderBase {
         this._isNamedContext = this._ctxName != "context";
 
         crsbinding.providerManager.register(this);
-        this.initialize();
+        this.initialize().catch(error => throw new Error(error));
     }
 
     dispose() {
@@ -30,7 +30,7 @@ export class ProviderBase {
     /**
      * Override to perform starting process
      */
-    initialize() {
+    async initialize() {
     }
 
     listenOnPath(value, callback) {

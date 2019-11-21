@@ -17,7 +17,7 @@ export class OneWayProvider extends ProviderBase {
         super.dispose();
     }
 
-    initialize() {
+    async initialize() {
         if (this._value == "$context") {
             return this.setContext();
         }

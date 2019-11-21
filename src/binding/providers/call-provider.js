@@ -15,7 +15,7 @@ export class CallProvider extends ProviderBase {
         super.dispose();
     }
 
-    initialize() {
+    async initialize() {
         let src = `context.${this._value}`.split("$event").join("event");
         if (src.indexOf(")") == -1) {
             src = `${src}()`;
