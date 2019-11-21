@@ -1,5 +1,4 @@
 beforeAll(async () => {
-    global.window = {};
     const bindingModule = await import("./../crsbinding.mock.js");
     global.crsbinding = bindingModule.crsbinding;
 });

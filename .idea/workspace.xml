@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/binding/provider-factory.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/idle/idleCallback.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/idle/idleCallback.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/idle/idleTaskManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/idle/idleTaskManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/crsbinding.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/crsbinding.mock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/element.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/element.mock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/compiler.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/compiler.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/event-mixin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/event-mixin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observer.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/update.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/update.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +60,33 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.provider factory - once">
+  <component name="RunManager" selected="Jest.parseElements">
+    <configuration name="parseElement - check provider manager and also release element" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
+      <test-names>
+        <test-name value="parseElement - check provider manager and also release element" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="parseElements" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
+      <test-names>
+        <test-name value="parseElements" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="provider factory - once" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -58,26 +98,6 @@
       <test-names>
         <test-name value="provider factory - once" />
       </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="provider-factory.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/provider-factory.js" />
-      <method v="2" />
-    </configuration>
-    <configuration name="provider-factory.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/provider-factory.test.js" />
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
@@ -96,10 +116,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.provider factory - once" />
-        <item itemvalue="Jest.provider-factory.test.js" />
-        <item itemvalue="Jest.provider-factory.js" />
+        <item itemvalue="Jest.parseElements" />
+        <item itemvalue="Jest.parseElement - check provider manager and also release element" />
         <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Jest.provider factory - once" />
       </list>
     </recent_temporary>
   </component>
@@ -169,14 +189,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="16063000" />
-    </task>
-    <task id="LOCAL-00058" summary="clean up objects">
-      <created>1570804185559</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1570804185559</updated>
+      <workItem from="1574258443591" duration="17524000" />
     </task>
     <task id="LOCAL-00059" summary="clean up objects and tests">
       <created>1570806703308</created>
@@ -514,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574329346872</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="adding tests">
+      <created>1574329868418</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1574329868418</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -562,5 +582,29 @@
     <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
     <MESSAGE value="adding tests" />
     <option name="LAST_COMMIT_MESSAGE" value="adding tests" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/binding/provider-manager.js</url>
+          <line>9</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/binding/provider-factory.js</url>
+          <line>10</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/binding/parse-element.js</url>
+          <line>32</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

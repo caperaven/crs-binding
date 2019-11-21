@@ -8,7 +8,6 @@ let addEventListenerSpy;
 
 beforeEach(async () => {
     const bindingModule = await import("./../../crsbinding.mock.js");
-    global.window = {};
     global.crsbinding = bindingModule.crsbinding;
 
     element = new ElementMock();

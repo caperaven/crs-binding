@@ -8,7 +8,6 @@ let context;
 
 beforeEach(async () => {
     const bindingModule = await import("./../../crsbinding.mock.js");
-    global.window = {};
     global.crsbinding = bindingModule.crsbinding;
     global.document = new DocumentMock();
 

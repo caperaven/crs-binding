@@ -15,7 +15,6 @@ beforeEach(async () => {
         function: jest.fn()
     };
 
-    global.window = {};
     global.requestAnimationFrame = (callback) => callback();
 
     const bindingModule = await import("./../../crsbinding.mock.js");

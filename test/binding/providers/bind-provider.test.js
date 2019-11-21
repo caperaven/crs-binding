@@ -8,7 +8,6 @@ let context;
 let addEventListenerSpy;
 
 beforeEach(async () => {
-    global.window = {};
     global.requestAnimationFrame = (callback) => callback();
 
     const bindingModule = await import("./../../crsbinding.mock.js");

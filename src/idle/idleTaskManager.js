@@ -1,3 +1,5 @@
+import "./idleCallback.js";
+
 export class IdleTaskManager {
     constructor() {
         this.processing = false;
@@ -22,10 +24,10 @@ export class IdleTaskManager {
      * @private
      */
     _processQueue() {
-        if (window.requestIdleCallback == null) return this._runNextFunction();
+        if (requestIdleCallback == null) return this._runNextFunction();
 
         this.processing = true;
-        window.requestIdleCallback(deadline => {
+        requestIdleCallback(deadline => {
             while((deadline.timeRemaining() > 0 || deadline.didTimeout) && this._list.length) {
                 this._runNextFunction();
             }

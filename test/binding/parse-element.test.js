@@ -1,4 +1,4 @@
-import {parseElement, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
+import {parseElements, parseAttribute, releaseBinding} from "../../src/binding/parse-element.js";
 import {observe} from "../../src/events/observer.js";
 import {ElementMock} from "./../element.mock.js";
 
@@ -7,7 +7,6 @@ let context;
 
 beforeEach(async () => {
     const bindingModule = await import("./../crsbinding.mock.js");
-    global.window = {};
     global.crsbinding = bindingModule.crsbinding;
 
     context = observe({
@@ -17,12 +16,26 @@ beforeEach(async () => {
     element = new ElementMock();
     element.children.push(new ElementMock());
 
-    element.children[0].attributes.set("name", "value.bind");
-    element.children[0].attributes.set("value", "firstName");
+    element.children[0].setAttribute("name", "value.bind");
+    element.children[0].setAttribute("value", "firstName");
     element.children[0].ownerElement = {
         addEventListener: jest.fn(),
         removeEventListener: jest.fn()
     };
+});
+
+test("parseElements", async () => {
+    const element = new ElementMock("input");
+    element.setAttribute("value.bind", "name");
+
+    const context = {
+        name: "John"
+    };
+
+    const elements = [element];
+    await parseElements(elements, context);
+
+    expect(crsbinding.providerManager.items.size).toBeGreaterThan(0);
 });
 
 test("parseAttribute", async () => {
@@ -77,17 +90,6 @@ test("parseAttribute - call", async () => {
     expect(provider._context).not.toBeNull();
     expect(provider._property).not.toBeNull();
     expect(provider._value).not.toBeNull();
-});
-
-test.skip("parseElement - check provider manager and also release element", async () => {
-    await parseElement(element, context);
-    expect(crsbinding.providerManager.items.size).toEqual(5);
-
-    await crsbinding.providerManager.releaseElement(crsbinding.providerManager.items.get(0)._element);
-    expect(crsbinding.providerManager.items.size).toEqual(5);
-
-    // just for code completion, there is a bug in the tests where it does not reflect dynamic properties set.
-    await crsbinding.providerManager.releaseElement(element);
 });
 
 test("releaseBinding", async () => {

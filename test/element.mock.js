@@ -1,6 +1,6 @@
 export class ElementMock {
     constructor(tagName, name) {
-        this.attributes = new Map();
+        this.attributes = [];
         this.queryResults = new Map();
         this.events = new Map();
         this.innerText = "";
@@ -14,17 +14,23 @@ export class ElementMock {
     }
 
     getAttribute(attr) {
-        return this.attributes.get(attr);
+        return this.attributes.find(item => item.name == attr);
     }
 
     setAttribute(attr, value) {
-        this.attributes.set(attr, value);
+        const attrObj = {
+            name: attr,
+            value: value,
+            ownerElement: this
+        };
+
+        this.attributes.push(attrObj);
     }
 
     removeAttribute(attr, value) {
-        if (this.attributes.has(attr)) {
-            this.attributes.delete(attr);
-        }
+        const attrObj = this.getAttribute(attr);
+        const index = this.attributes.indexOf(attrObj);
+        this.attributes.splice(index, 1);
     }
 
     querySelector(selector) {
