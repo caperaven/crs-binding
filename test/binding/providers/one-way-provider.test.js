@@ -70,3 +70,15 @@ test("One Way Privider - property changed", () => {
     expect(element.value).toEqual("John");
     expect(idleTaskManagerSpy).toHaveBeenCalled();
 });
+
+test("One Way Provider - $context", () => {
+    const setContextSpy = jest.spyOn(instance, "setContext");
+    instance._value = "$context";
+    instance._context = {};
+    instance._property = "greeting";
+
+    instance.initialize();
+
+    expect(setContextSpy).toHaveBeenCalled();
+    expect(instance._element["greeting"]).toBe(instance._context);
+});
