@@ -227,6 +227,8 @@ Before we look at specifics we need to understand some terms used.
 
 bind is just a shorthand for two way binding but they do the same thing.
 
+It is important to note that the binding expressions above sets the properties on the elements and not the attributes directly.
+
 ### Updating the innerText
 
 ```html
@@ -259,3 +261,85 @@ Here are some examples showing off parameters as part of the call.
 <button click.call="doSomething(10, $event)">Do Something</button>
 ```
 All the above examples work with delegate also.
+
+### Conditional attribute binding
+
+We can use the `if` binding expression on attributes to affect the behaviour of those attributes based on a condition.  
+Here are some examples:
+
+```html
+<div hidden.if="isVisible != true">Hello World</div>
+```
+In this example the presence of the attribute is determined by the condition
+If isVisible is true, the hidden attribute is removed. 
+if isVisible is false, the hidden attribute is added.
+
+```html
+<div data-title.if="isVisible == true ? true">Hello World</div>
+```
+Here we are setting the data-title attribute's value too true if the condition passes.
+If the condition fails the attribute is removed.
+
+```html
+<div data-title.if="isVisible == true ? true : false">Hello World</div>
+```
+Now we are not removing the attribute, instead we are setting the attribute value depending on the condition
+
+### Repeat behaviours - binding to arrays
+
+We can bind to arrays and create elements on the UI based on those arrays using `for`.
+
+```html
+<div>
+    <template for="person of persons">
+        <div>
+            <h2>Personal</h2>
+    
+            <input value.bind="person.firstName" />
+            <input value.bind="person.lastName" />
+    
+            <h2>Contacts</h2>
+            <div>
+                <template for="contact of person.contacts">
+                    <input value.bind="contact.cell">
+                    <span>${contact.cell}</span>
+                </template>
+            </div>
+            <hr />
+        </div>
+    </template>
+</div>
+```
+
+The context object has a observed array called people.  
+The above example repeats this template for each person in that array.  
+Note that the binding expression has changed a little where we now use the person as the path to start our expressions.
+
+Each person has 0 to N contacts so here we want to print the contacts list for each person also.
+This means that we have a `for` operating in another `for`.
+
+The div elements the templates are in is important.
+If the collection is cleared this container is emptied and the new array drawn.  
+Don't put content you want to keep in this container along with the template.
+
+The array must also be an observed item.  
+You can use `crsbinding.observation.observe` to observe the array.
+
+When you add new items or remove items, the UI will be updated.  
+
+```js
+this.persons = crsbinding.observation.observe([
+    {
+        firstName: "First Name 1",
+        lastName: "Last Name 1",
+        contacts: crsbinding.observation.observe([
+            {
+                cell: "Cell 1"
+            },
+            {
+                cell: "Cell 2"
+            }
+        ])
+    }
+]);
+``` 
