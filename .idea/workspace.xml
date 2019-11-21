@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/binding/providers/if-provider.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,33 +46,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.if provider - propertyChanged">
-    <configuration name="if provider - initialize if function" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/if-provider.test.js" />
-      <test-names>
-        <test-name value="if provider - initialize if function" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="if provider - initialize normal function" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/if-provider.test.js" />
-      <test-names>
-        <test-name value="if provider - initialize normal function" />
-      </test-names>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="if provider - propertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -96,6 +70,22 @@
       <test-file value="$PROJECT_DIR$/test/binding/providers/if-provider.test.js" />
       <method v="2" />
     </configuration>
+    <configuration name="provider base - initit with errors" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" />
+      <test-names>
+        <test-name value="provider base - initit with errors" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -108,11 +98,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.provider base - initit with errors" />
         <item itemvalue="Jest.if provider - propertyChanged" />
         <item itemvalue="Jest.if-provider.test.js" />
-        <item itemvalue="Jest.if provider - initialize if function" />
-        <item itemvalue="Jest.if provider - initialize normal function" />
       </list>
     </recent_temporary>
   </component>
@@ -182,14 +172,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="13829000" />
-    </task>
-    <task id="LOCAL-00055" summary="add paths test file and updateUI function">
-      <created>1570795787395</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1570795787395</updated>
+      <workItem from="1574258443591" duration="14095000" />
     </task>
     <task id="LOCAL-00056" summary="add paths test file and updateUI function">
       <created>1570802082240</created>
@@ -527,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574324999593</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="adding tests">
+      <created>1574327648903</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1574327648903</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,23 +565,5 @@
     <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
     <MESSAGE value="adding tests" />
     <option name="LAST_COMMIT_MESSAGE" value="adding tests" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/binding/providers/if-provider.js</url>
-          <line>83</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/binding/providers/if-provider.test.js</url>
-          <line>75</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

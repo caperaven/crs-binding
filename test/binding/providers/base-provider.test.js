@@ -31,3 +31,16 @@ test("provider base - listenOnPath", () => {
 
    expect(listenOnPathSpy).toHaveBeenCalled();
 });
+
+test("provider base - initit with errors", () => {
+    class T extends ProviderBase {
+        async initialize() {
+            super.initialize();
+            throw new Error ("oops")
+        }
+    }
+
+    const ins = new T();
+
+    // JHR: Todo How do I check that the error was thrown?
+});
