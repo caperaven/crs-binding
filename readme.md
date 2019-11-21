@@ -252,10 +252,10 @@ Here are some examples showing off parameters as part of the call.
 <!-- standard parameters -->
 <button click.call="doSomething(10, 'hello world')">Do Something</button>
 
-<!-- send the click event on --> 
+<!-- send the MouseEvent on --> 
 <button click.call="doSomething($event)">Do Something</button>
 
-<!-- send the click event on and a standard parameter--> 
+<!-- send the MouseEvent on and a standard parameter--> 
 <button click.call="doSomething(10, $event)">Do Something</button>
 ```
 All the above examples work with delegate also.
