@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/binding/provider-manager.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/binding/provider-factory.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,54 +46,41 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.provider manager - releaseElement">
-    <configuration name="provider manager - register" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.provider factory - once">
+    <configuration name="provider factory - once" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/provider-manager.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/provider-factory.test.js" />
       <test-names>
-        <test-name value="provider manager - register" />
+        <test-name value="provider factory - once" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="provider manager - releaseElement" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/provider-manager.test.js" />
-      <test-names>
-        <test-name value="provider manager - releaseElement" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="provider manger - constructor" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/provider-manager.test.js" />
-      <test-names>
-        <test-name value="provider manger - constructor" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="provider-manager.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="provider-factory.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/provider-manager.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/provider-factory.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="provider-factory.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/binding/provider-factory.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -109,10 +96,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.provider manager - releaseElement" />
-        <item itemvalue="Jest.provider-manager.test.js" />
-        <item itemvalue="Jest.provider manager - register" />
-        <item itemvalue="Jest.provider manger - constructor" />
+        <item itemvalue="Jest.provider factory - once" />
+        <item itemvalue="Jest.provider-factory.test.js" />
+        <item itemvalue="Jest.provider-factory.js" />
+        <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
   </component>
@@ -182,14 +169,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="15521000" />
-    </task>
-    <task id="LOCAL-00057" summary="clean up objects">
-      <created>1570803686815</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1570803686815</updated>
+      <workItem from="1574258443591" duration="16063000" />
     </task>
     <task id="LOCAL-00058" summary="clean up objects">
       <created>1570804185559</created>
@@ -527,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574327945898</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="adding tests">
+      <created>1574329346872</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1574329346872</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
