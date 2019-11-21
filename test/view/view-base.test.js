@@ -18,6 +18,7 @@ beforeEach(async () => {
     updateUISpy = jest.spyOn(crsbinding.expression, "updateUI");
 
     instance = new ViewBase(element);
+    instance.title = "Hello World";
     expect(instance.element.style.display).toBe("none");
     await instance.connectedCallback();
 });
@@ -28,6 +29,7 @@ test("view base - connectedCallback", () => {
     expect(parseElementSpy).toHaveBeenCalled();
     expect(instance.element.style.display).toBe("block");
     expect(updateUISpy).toHaveBeenCalled();
+    expect(instance.title).toBe("Hello World");
 });
 
 test("view base - disconnectedCallback", () => {

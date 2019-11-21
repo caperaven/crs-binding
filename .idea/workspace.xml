@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/events/observe-array.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/view/view-base.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/view-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/view/view-base.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/view/view-base.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +46,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.view-base.test.js">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="observe-array.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -97,10 +95,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.test" />
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.view-base.test.js" />
         <item itemvalue="Jest.view base - connectedCallback" />
-        <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="npm.test" />
         <item itemvalue="Jest.observe-array.test.js" />
       </list>
     </recent_temporary>
@@ -171,14 +169,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="19994000" />
-    </task>
-    <task id="LOCAL-00061" summary="clean up inner provider memory">
-      <created>1571084958118</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1571084958118</updated>
+      <workItem from="1574258443591" duration="20096000" />
     </task>
     <task id="LOCAL-00062" summary="clean up inner provider memory">
       <created>1571085163821</created>
@@ -516,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574331605306</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="adding tests">
+      <created>1574333795504</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1574333795504</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
