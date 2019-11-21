@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/provider-manager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-manager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +46,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.bind-provider.test.js">
+  <component name="RunManager" selected="Jest.Bind provider - checked">
+    <configuration name="Bind provider - checked" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" />
+      <test-names>
+        <test-name value="Bind provider - checked" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="Bind provider - number" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -62,14 +73,7 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="bind-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" />
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -77,16 +81,6 @@
       <command value="run" />
       <scripts>
         <script value="build-publish" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="bundle" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -104,11 +98,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build-publish" />
-        <item itemvalue="npm.bundle" />
-        <item itemvalue="npm.test" />
-        <item itemvalue="Jest.bind-provider.test.js" />
+        <item itemvalue="Jest.Bind provider - checked" />
         <item itemvalue="Jest.Bind provider - number" />
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.build-publish" />
       </list>
     </recent_temporary>
   </component>
@@ -178,14 +172,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="2454000" />
-    </task>
-    <task id="LOCAL-00049" summary="add paths test file and updateUI function">
-      <created>1570723378413</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1570723378413</updated>
+      <workItem from="1574258443591" duration="5606000" />
     </task>
     <task id="LOCAL-00050" summary="add paths test file and updateUI function">
       <created>1570725783962</created>
@@ -523,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574259898259</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="fixed prior disposed provider bug on provider manager dispose">
+      <created>1574260919431</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1574260919431</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +539,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="clean up inner provider memory" />
     <MESSAGE value="package" />
     <MESSAGE value="updated binding cleanup" />
     <MESSAGE value="updated collection binding and moved listen on to api level" />
@@ -570,7 +563,8 @@
     <MESSAGE value="clean up memory leak on providers" />
     <MESSAGE value="fixed some broken tests" />
     <MESSAGE value="delete the repeat behaviour now that we have the for behaviour" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete the repeat behaviour now that we have the for behaviour" />
+    <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed prior disposed provider bug on provider manager dispose" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -579,12 +573,6 @@
           <url>file://$PROJECT_DIR$/test/binding/providers/one-way-provider.test.js</url>
           <line>67</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/binding/providers/bind-provider.test.js</url>
-          <line>46</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

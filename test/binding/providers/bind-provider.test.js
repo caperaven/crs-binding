@@ -70,4 +70,17 @@ test("Bind provider - date", () => {
     expect(_dateSpy).toHaveBeenCalled();
 });
 
+test ("Bind provider - checked", () => {
+   const _checkedSpy = jest.spyOn(instance, "_checkbox");
+
+   const event = {
+       target: new ElementMock()
+   };
+   event.target.checked = true;
+    event.target.type = "checkbox";
+   instance._change(event);
+
+   expect(_checkedSpy).toHaveBeenCalled();
+});
+
 
