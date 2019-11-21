@@ -40,8 +40,8 @@ test("call provider - dispose", () => {
     expect(instance._value).toBeNull();
 });
 
-//JHR: todo: fix this test
-test.skip("call provider - event", () => {
+test("call provider - event", () => {
+    const idelTaskSpy = jest.spyOn(crsbinding.idleTaskManager, "add");
     instance.event();
-    expect(crsbinding.idleTaskManager.add).toBeCalled();
+    expect(idelTaskSpy).toHaveBeenCalled();
 });
