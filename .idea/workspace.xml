@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/4.when.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,14 +169,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="23952000" />
-    </task>
-    <task id="LOCAL-00063" summary="package">
-      <created>1571085363522</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1571085363522</updated>
+      <workItem from="1574258443591" duration="24920000" />
     </task>
     <task id="LOCAL-00064" summary="updated binding cleanup">
       <created>1571168937149</created>
@@ -517,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574333897935</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="documentation and examples added">
+      <created>1574341290991</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1574341290991</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,7 +536,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updated binding cleanup" />
     <MESSAGE value="updated collection binding and moved listen on to api level" />
     <MESSAGE value="update repeat behaviour" />
     <MESSAGE value="updated array bindings" />
@@ -564,7 +560,8 @@
     <MESSAGE value="delete the repeat behaviour now that we have the for behaviour" />
     <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
     <MESSAGE value="adding tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding tests" />
+    <MESSAGE value="documentation and examples added" />
+    <option name="LAST_COMMIT_MESSAGE" value="documentation and examples added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

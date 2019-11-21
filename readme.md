@@ -199,3 +199,63 @@ You can define multiple conditions on a object and multiple callbacks for the sa
 ## UI Updates
 UI updates uses the object observation but brings defined changes to the UI.  
 From this point forward we will be show examples of what that would look like.  
+
+Before we look at specifics we need to understand some terms used.
+
+1. Binding. Moving data to and from objects as specified by intent.
+1. One way binding. Data only moves from the object to the UI but updates every time a property changes that affects the binding.
+1. Two way binding. Data flows between the data object and input control. Data is updated during the change event of the input.
+1. Once only binding. UI is updated once from the context object and never again. If the object changes no UI is updated.
+
+### Once binding
+
+```html
+<input value.once="firstName" />
+```
+
+### One way binding
+
+```html
+<input value.one-way="firstName" />
+```
+
+### Two way binding
+```html
+<input value.two-way="firstName" />
+<input value.bind="firstName" />
+```
+
+bind is just a shorthand for two way binding but they do the same thing.
+
+### Updating the innerText
+
+```html
+<div>${firstName} ${lastName}</div>
+```
+
+This copies the template literal syntax you are use to in javascript.
+
+### Binding to events
+
+In some cases you want to bind to a event of a element and call a function when that event occurs.
+
+```html
+<button click.call="doSomething">Do Something</button>
+<button click.delegate="doSomething">Do Something</button>
+```
+
+Again there are two syntax options. Some prefer call, others prefer delegate, we don't judge :) use what you are comfortable with.
+In the above example no parameter is passed to the calling function, but there are times when you do want to provide parameters.
+
+Here are some examples showing off parameters as part of the call.
+```html
+<!-- standard parameters -->
+<button click.call="doSomething(10, 'hello world')">Do Something</button>
+
+<!-- send the click event on --> 
+<button click.call="doSomething($event)">Do Something</button>
+
+<!-- send the click event on and a standard parameter--> 
+<button click.call="doSomething(10, $event)">Do Something</button>
+```
+All the above examples work with delegate also.
