@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/bind-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +46,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.Bind provider - checked">
+  <component name="RunManager" selected="Jest.inner provider - dispose">
     <configuration name="Bind provider - checked" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -73,17 +73,20 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
+    <configuration name="inner provider - dispose" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" />
+      <test-names>
+        <test-name value="inner provider - dispose" />
+      </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build-publish" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -98,11 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.test" />
+        <item itemvalue="Jest.inner provider - dispose" />
         <item itemvalue="Jest.Bind provider - checked" />
         <item itemvalue="Jest.Bind provider - number" />
         <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="npm.test" />
-        <item itemvalue="npm.build-publish" />
       </list>
     </recent_temporary>
   </component>
@@ -172,14 +175,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="5606000" />
-    </task>
-    <task id="LOCAL-00050" summary="add paths test file and updateUI function">
-      <created>1570725783962</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1570725783962</updated>
+      <workItem from="1574258443591" duration="5861000" />
     </task>
     <task id="LOCAL-00051" summary="add paths test file and updateUI function">
       <created>1570738061666</created>
@@ -517,7 +513,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574260919431</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="adding tests">
+      <created>1574316831942</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1574316831942</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,7 +542,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="package" />
     <MESSAGE value="updated binding cleanup" />
     <MESSAGE value="updated collection binding and moved listen on to api level" />
     <MESSAGE value="update repeat behaviour" />
@@ -564,7 +566,8 @@
     <MESSAGE value="fixed some broken tests" />
     <MESSAGE value="delete the repeat behaviour now that we have the for behaviour" />
     <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed prior disposed provider bug on provider manager dispose" />
+    <MESSAGE value="adding tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

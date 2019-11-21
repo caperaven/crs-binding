@@ -33,6 +33,20 @@ test("inner provider - constructor", () => {
     expect(onspy).toHaveBeenCalled();
 });
 
+test("inner provider - dispose", () => {
+    const releaseSpy = jest.spyOn(crsbinding.expression, "release");
+    instance.dispose();
+
+    expect(releaseSpy).toHaveBeenCalled();
+    expect(instance._expObj).toBeNull();
+    expect(instance._eventHandler).toBeNull();
+    expect(instance._eventsToRemove).toBeNull();
+    expect(instance._element).toBeNull();
+    expect(instance._context).toBeNull();
+    expect(instance._property).toBeNull();
+    expect(instance._value).toBeNull();
+});
+
 test("inner provider - _change", () => {
     instance._change();
     expect(element.innerText).toBe(context.firstName);
