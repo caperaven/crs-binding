@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/events/observe-array.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/view/view-base.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/view-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,44 +48,38 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.parseElement - inner provider">
-    <configuration name="parseElement - check provider manager and also release element" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.view-base.test.js">
+    <configuration name="observe-array.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/events/observe-array.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="view base - connectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
+      <test-file value="$PROJECT_DIR$/test/view/view-base.test.js" />
       <test-names>
-        <test-name value="parseElement - check provider manager and also release element" />
+        <test-name value="view base - connectedCallback" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="parseElement - inner provider" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="view-base.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
-      <test-names>
-        <test-name value="parseElement - inner provider" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="parseElements" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/parse-element.test.js" />
-      <test-names>
-        <test-name value="parseElements" />
-      </test-names>
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/view/view-base.test.js" />
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
@@ -101,11 +97,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.test" />
-        <item itemvalue="Jest.parseElement - inner provider" />
-        <item itemvalue="Jest.parseElements" />
+        <item itemvalue="Jest.view-base.test.js" />
+        <item itemvalue="Jest.view base - connectedCallback" />
         <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="Jest.parseElement - check provider manager and also release element" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="Jest.observe-array.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -175,14 +171,7 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="17797000" />
-    </task>
-    <task id="LOCAL-00060" summary="release1">
-      <created>1570807838102</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1570807838102</updated>
+      <workItem from="1574258443591" duration="19994000" />
     </task>
     <task id="LOCAL-00061" summary="clean up inner provider memory">
       <created>1571084958118</created>
@@ -520,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574331325086</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="adding tests">
+      <created>1574331605306</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1574331605306</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

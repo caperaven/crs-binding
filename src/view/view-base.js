@@ -19,6 +19,10 @@ export class ViewBase {
         this._element = newValue;
     }
 
+    constructor(element) {
+        this.element = element;
+    }
+
     async connectedCallback() {
         this.isProxy = true;
         crsbinding.events.enableEvents(this);
