@@ -9,7 +9,7 @@ export class ProviderBase {
         this._isNamedContext = this._ctxName != "context";
 
         crsbinding.providerManager.register(this);
-        this.initialize().catch(error => throw new Error(error));
+        this.initialize().catch(error => new Error(error));
     }
 
     dispose() {
