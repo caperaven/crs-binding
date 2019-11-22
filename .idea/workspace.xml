@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/7.if.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/7.if.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +23,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../crs-side-menu" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../crs-binding-example" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -47,29 +52,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration name="observe-array.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/events/observe-array.test.js" />
-      <method v="2" />
-    </configuration>
-    <configuration name="view base - connectedCallback" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/view/view-base.test.js" />
-      <test-names>
-        <test-name value="view base - connectedCallback" />
-      </test-names>
-      <method v="2" />
-    </configuration>
     <configuration name="view-base.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -81,6 +63,26 @@
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build-publish" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="bundle" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -95,11 +97,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.test" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.view-base.test.js" />
-        <item itemvalue="Jest.view base - connectedCallback" />
-        <item itemvalue="Jest.observe-array.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -169,14 +171,9 @@
       <workItem from="1574180181845" duration="145000" />
       <workItem from="1574190694196" duration="4034000" />
       <workItem from="1574226085470" duration="24752000" />
-      <workItem from="1574258443591" duration="26233000" />
-    </task>
-    <task id="LOCAL-00066" summary="update repeat behaviour">
-      <created>1571950884612</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1571950884612</updated>
+      <workItem from="1574258443591" duration="27650000" />
+      <workItem from="1574400376018" duration="28000" />
+      <workItem from="1574403683817" duration="6149000" />
     </task>
     <task id="LOCAL-00067" summary="updated array bindings">
       <created>1572271391391</created>
@@ -514,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574342304371</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="documentation and examples added">
+      <created>1574343629579</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1574343629579</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,13 +573,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/binding/provider-manager.js</url>
           <line>9</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/binding/provider-factory.js</url>
           <line>10</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>

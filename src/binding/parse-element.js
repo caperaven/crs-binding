@@ -10,7 +10,7 @@ export async function parseElement(element, context, ctxName = "context") {
     await parseElements(element.children, context, ctxName);
 
     const attributes = Array.from(element.attributes || []);
-    const boundAttributes = attributes.filter(attr => attr.name == "for" || attr.name.indexOf(".") != -1);
+    const boundAttributes = attributes.filter(attr => (attr.ownerElement.tagName == "TEMPLATE" && attr.name == "for") || attr.name.indexOf(".") != -1);
 
     await parseAttributes(boundAttributes, context, ctxName);
 

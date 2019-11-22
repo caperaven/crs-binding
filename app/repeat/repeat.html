@@ -14,6 +14,7 @@
     }
 </style>
 
+
 <ul>
     <template for="person of persons">
         <div>
@@ -25,6 +26,9 @@
             <h2>Contacts</h2>
             <div>
                 <template for="contact of person.contacts">
+                    <contact-card model.one-way="$context"></contact-card>
+                    <div>${person.firstName}</div>
+
                     <input value.bind="contact.cell">
                     <span>${contact.cell}</span>
                 </template>

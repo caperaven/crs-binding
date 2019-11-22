@@ -24,6 +24,7 @@ export class InnerProvider extends ProviderBase {
     }
 
     _change() {
+        if (this._expObj == null) return;
         this._element.innerText = this._expObj.function(this._context);
     }
 }
