@@ -23,7 +23,7 @@ export class IfStylesProvider extends ProviderBase {
 
         const values = parts[1].split(":");
         const trueValue = values[0].trim();
-        const falseValue = values[1].trim();
+        const falseValue = values.length > 1 ? values[1].trim() : '""';
 
         const fnCode = setElementConditional
             .split("__property__").join(this._property)
