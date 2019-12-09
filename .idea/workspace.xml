@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/style/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/style/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,14 +177,7 @@
       <workItem from="1574830589937" duration="5000" />
       <workItem from="1575873091519" duration="2313000" />
       <workItem from="1575876127552" duration="1374000" />
-      <workItem from="1575892398297" duration="7978000" />
-    </task>
-    <task id="LOCAL-00073" summary="fix input checkbox binding">
-      <created>1573292275747</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1573292275747</updated>
+      <workItem from="1575892398297" duration="9648000" />
     </task>
     <task id="LOCAL-00074" summary="fix input checkbox binding">
       <created>1573292399741</created>
@@ -519,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575900137899</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="updated documentation">
+      <created>1575900395565</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1575900395565</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +544,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="if provider added to use on attributes" />
     <MESSAGE value="fix input checkbox binding" />
     <MESSAGE value="fixed binding issue I had with an expression containing - in a string" />
     <MESSAGE value="add sending of $context during binding expressions" />
@@ -566,7 +568,8 @@
     <MESSAGE value="updated properties handeling for update" />
     <MESSAGE value="initial changes for style binding" />
     <MESSAGE value="class list binding" />
-    <option name="LAST_COMMIT_MESSAGE" value="class list binding" />
+    <MESSAGE value="updated documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

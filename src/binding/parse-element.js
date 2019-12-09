@@ -27,8 +27,8 @@ export async function parseAttributes(collection, context, ctxName) {
 
 export async function parseAttribute(attr, context, ctxName) {
     const parts = attr.name.split(".");
-    const prop = parts[0];
-    const prov = prop == "for" ? prop : parts[1];
+    const prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
+    const prov = prop == "for" ? prop : parts[parts.length - 1];
 
     return ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
 }
