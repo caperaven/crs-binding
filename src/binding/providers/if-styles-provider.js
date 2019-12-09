@@ -17,7 +17,7 @@ export class IfStylesProvider extends ProviderBase {
     async initialize() {
         this._eventHandler = this.propertyChanged.bind(this);
 
-        const value = crsbinding.expression.sanitize(this._value);
+        const value = crsbinding.expression.sanitize(this._value, this._ctxName);
         const parts = value.expression.split("?");
         const condition = parts[0].trim();
 

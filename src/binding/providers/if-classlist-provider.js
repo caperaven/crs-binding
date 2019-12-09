@@ -18,7 +18,7 @@ export class IfClassProvider extends ProviderBase {
         this._eventHandler = this.propertyChanged.bind(this);
 
         const parts = this._value.split("?");
-        const value = crsbinding.expression.sanitize(parts[0]);
+        const value = crsbinding.expression.sanitize(parts[0], this._ctxName);
         const condition = value.expression;
 
         const values = parts[1].split(":");

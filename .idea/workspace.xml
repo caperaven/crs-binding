@@ -4,8 +4,9 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-styles-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-styles-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,14 +26,14 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding\test\binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\test\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -94,8 +95,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.view-base.test.js" />
@@ -178,14 +179,7 @@
       <workItem from="1575876127552" duration="1374000" />
       <workItem from="1575892398297" duration="9852000" />
       <workItem from="1575914142635" duration="6589000" />
-      <workItem from="1575927279760" duration="1257000" />
-    </task>
-    <task id="LOCAL-00080" summary="fix tests">
-      <created>1574192235176</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1574192235177</updated>
+      <workItem from="1575927279760" duration="2401000" />
     </task>
     <task id="LOCAL-00081" summary="fix tests">
       <created>1574192816101</created>
@@ -523,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575926028269</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="fixed issue with updates on bindable element">
+      <created>1575928826268</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1575928826268</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +546,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add sending of $context during binding expressions" />
     <MESSAGE value="added fix for sanitization of odd lettered words in string" />
     <MESSAGE value="fixed when tests" />
     <MESSAGE value="fix tests" />
@@ -570,7 +570,8 @@
     <MESSAGE value="get conditional style binding to work" />
     <MESSAGE value="add conditional class binding provider" />
     <MESSAGE value="updated documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated documentation" />
+    <MESSAGE value="fixed issue with updates on bindable element" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed issue with updates on bindable element" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -68,7 +68,7 @@ export class IfProvider extends ProviderBase {
      * @private
      */
     _initCndAttrValue() {
-        const value = crsbinding.expression.sanitize(this._value);
+        const value = crsbinding.expression.sanitize(this._value, this._ctxName);
         const parts = value.expression.split("?");
 
         const fnCode = initCndAttrExp
