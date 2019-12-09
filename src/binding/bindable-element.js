@@ -3,15 +3,24 @@ export class BindableElement extends HTMLElement {
         return "";
     }
 
+    constructor() {
+        super();
+        crsbinding.events.enableEvents(this);
+    }
+
+    dispose() {
+        crsbinding.events.disableEvents(this);
+    }
+
     async connectedCallback() {
         this.innerHTML = await fetch(this.html).then(result => result.text());
-        crsbinding.events.enableEvents(this);
         await crsbinding.parsers.parseElements(this.children, this);
+        crsbinding.expression.updateUI(this);
         this.dispatchEvent(new CustomEvent("ready"));
     }
 
     async disconnectedCallback() {
-        crsbinding.events.disableEvents(this);
+        this.dispose();
         crsbinding.observation.releaseBinding(this);
     }
 
