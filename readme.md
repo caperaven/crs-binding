@@ -432,3 +432,22 @@ The convention is `${propertyName}Changed`;
 If i had a property called name and in my binding context i wanted a function to be called each time that property changes, 
 create a function with the name "nameChanged". If that function exists it will be called each time the "name" property changes and is notified
 using notifyPropertyChanged
+
+## Binding to class of element
+There are two ways to deal with style classes on a element.
+
+1. Set the class attribute
+2. Add and remove classes from the classList property.
+
+This example shows how we can bind to the classList and use the class attribute at the same time.
+
+```html
+<div class="italic" classlist.one-way="myClasses">Is Active Status</div>
+```
+
+myClass on the binding context can be a string value or a array of strings.  
+italic will be there regardless of what you set myClasses too.
+
+```js
+this.myClasses = this.isActive == true ? "blue": ["red", "bold"];
+```
