@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/class/class.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/class/class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/code-constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/code-constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,14 +175,7 @@
       <workItem from="1575873091519" duration="2313000" />
       <workItem from="1575876127552" duration="1374000" />
       <workItem from="1575892398297" duration="9852000" />
-      <workItem from="1575914142635" duration="5446000" />
-    </task>
-    <task id="LOCAL-00078" summary="added fix for sanitization of odd lettered words in string">
-      <created>1574094335472</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1574094335472</updated>
+      <workItem from="1575914142635" duration="6134000" />
     </task>
     <task id="LOCAL-00079" summary="fixed when tests">
       <created>1574191266095</created>
@@ -523,7 +513,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575923639776</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="add conditional class binding provider">
+      <created>1575925321087</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1575925321087</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +542,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed binding issue I had with an expression containing - in a string" />
     <MESSAGE value="add sending of $context during binding expressions" />
     <MESSAGE value="added fix for sanitization of odd lettered words in string" />
     <MESSAGE value="fixed when tests" />
@@ -570,7 +566,8 @@
     <MESSAGE value="class list binding" />
     <MESSAGE value="updated documentation" />
     <MESSAGE value="get conditional style binding to work" />
-    <option name="LAST_COMMIT_MESSAGE" value="get conditional style binding to work" />
+    <MESSAGE value="add conditional class binding provider" />
+    <option name="LAST_COMMIT_MESSAGE" value="add conditional class binding provider" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

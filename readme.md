@@ -452,6 +452,19 @@ italic will be there regardless of what you set myClasses too.
 this.myClasses = this.isActive == true ? "blue": ["red", "bold"];
 ```
 
+You can also perform conditional binding on the class list.  
+This is done using the "if" syntax.
+
+```html
+<div classlist.if="isActive == true ? ['green', 'italic'] : 'red'">Is Active Status</div>
+<div classlist.if="isActive == true ? 'green'">Is Active Status</div>
+```
+
+These two examples show the conditional binding with
+
+1. if / else scenario
+1. truthy only. if condition fails it will not contain those classes.
+
 ## Binding to style property
 If you don't want to use classes, you can also set a single style property.
 
@@ -467,3 +480,9 @@ element.style.background = value
 
 When you set the background property on the binding context the value will style property will be set accordingly.
 
+You can also use conditional binding here to set the style property.
+
+```html
+<div style.background.if="isActive == true ? 'blue' : 'red'">Is Active Status</div>
+<div style.background.if="isActive == true ? 'blue'">Is Active Status</div>
+```
