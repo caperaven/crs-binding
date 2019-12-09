@@ -1,0 +1,9 @@
+<h2>${title}</h2>
+<label>
+    <span>Is Active</span>
+    <input type="checkbox" checked.bind="isActive" />
+    <div>${isActive}</div>
+</label>
+
+<div classlist.one-way="background">Is Active Status</div>
+<div classlist.if="isActive == true ? ['green'] : 'red'"></div>

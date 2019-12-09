@@ -18,6 +18,16 @@
       "title": "Repeat",
       "hash": "#repeat",
       "view": "repeat"
+    },
+    {
+      "title": "Class",
+      "hash": "#class",
+      "view": "class"
+    },
+    {
+      "title": "Style",
+      "hash": "#style",
+      "view": "style"
     }
   ]
 }

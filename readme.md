@@ -393,3 +393,12 @@ It comes with two properties too take note of:
 1. element
 
 It is also event enabled and provides the getProperty and setProperty functions to use in your property getters and setters.
+
+The "ViewBase" can be found in the crs-view-base.js file.
+
+Though the view base is not technically a component it does also have:
+
+1. connectedCallback
+1. disconnectedCallback
+
+You can use them in the same way as you would a custom element.
