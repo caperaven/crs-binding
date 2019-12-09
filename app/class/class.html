@@ -1,3 +1,25 @@
+<style>
+    .blue {
+        color: blue;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+</style>
+
 <h2>${title}</h2>
 <label>
     <span>Is Active</span>
@@ -5,5 +27,5 @@
     <div>${isActive}</div>
 </label>
 
-<div classlist.one-way="background">Is Active Status</div>
-<div classlist.if="isActive == true ? ['green'] : 'red'"></div>
+<div class="italic" classlist.one-way="myClasses">Is Active Status</div>
+<div classlist.if="isActive == true ? ['green', 'italic'] : 'red'">Is Active Status</div>

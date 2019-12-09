@@ -39,6 +39,10 @@ class TestComponent extends BindableElement {
     btnClicked(...args) {
         console.log(args);
     }
+
+    titleChanged(args) {
+        console.log(args);
+    }
 }
 
 customElements.define("test-component", TestComponent);

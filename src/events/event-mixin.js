@@ -93,4 +93,9 @@ export function notifyPropertyChanged(obj, property, args) {
     for(let fn of functions) {
         fn(property, obj[property], args);
     }
+
+    const changedFnName = `${property}Changed`;
+    if (obj[changedFnName] != null) {
+        obj[changedFnName].call(obj, args);
+    }
 }

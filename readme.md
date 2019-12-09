@@ -402,3 +402,33 @@ Though the view base is not technically a component it does also have:
 1. disconnectedCallback
 
 You can use them in the same way as you would a custom element.
+
+##Old value vs New value
+Sometimes you want to know what the old value was.  
+Crs binding does not track what the previous values was.  
+If you want that kind of feature use the setter of your property to mange that for you.
+For example:
+
+```js
+class Test {
+    get name() {
+        return this._name;
+    }
+    
+    set name(newValue) {
+        this._oldName = this._name;
+        this._name = newValue;
+    }   
+}
+```
+
+This way you can track the old value of only the items you care about.
+
+## Property changed on context
+Notify property changed will check on the context if a function maching a convention exists and if it exists that function will be called.
+This is used to be notified simply when a property changes value;  
+The convention is `${propertyName}Changed`;  
+
+If i had a property called name and in my binding context i wanted a function to be called each time that property changes, 
+create a function with the name "nameChanged". If that function exists it will be called each time the "name" property changes and is notified
+using notifyPropertyChanged

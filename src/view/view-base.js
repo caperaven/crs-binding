@@ -40,6 +40,15 @@ export class ViewBase {
         crsbinding.events.disableEvents(this);
     }
 
+    getProperty(prop) {
+        return this[`_${prop}`] || this.getAttribute(prop);
+    }
+
+    setProperty(prop, value) {
+        this[`_${prop}`] = value;
+        crsbinding.events.notifyPropertyChanged(this, prop);
+    }
+
     _loaded() {
         crsbinding.expression.updateUI(this);
         this.element.style.display = "block";
