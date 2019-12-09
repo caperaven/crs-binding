@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/style/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-styles-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-styles-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/class/class.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/class/class.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/code-constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/code-constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,8 +95,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.bundle" />
+        <item itemvalue="npm.build-publish" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.view-base.test.js" />
@@ -176,14 +178,7 @@
       <workItem from="1575873091519" duration="2313000" />
       <workItem from="1575876127552" duration="1374000" />
       <workItem from="1575892398297" duration="9852000" />
-      <workItem from="1575914142635" duration="3782000" />
-    </task>
-    <task id="LOCAL-00077" summary="added fix for sanitization of odd lettered words in string">
-      <created>1574093948560</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1574093948560</updated>
+      <workItem from="1575914142635" duration="5446000" />
     </task>
     <task id="LOCAL-00078" summary="added fix for sanitization of odd lettered words in string">
       <created>1574094335472</created>
@@ -521,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575923273299</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="get conditional style binding to work">
+      <created>1575923639776</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1575923639776</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
