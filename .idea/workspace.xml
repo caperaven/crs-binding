@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/style/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/style/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -177,14 +174,7 @@
       <workItem from="1574830589937" duration="5000" />
       <workItem from="1575873091519" duration="2313000" />
       <workItem from="1575876127552" duration="1374000" />
-      <workItem from="1575892398297" duration="9648000" />
-    </task>
-    <task id="LOCAL-00074" summary="fix input checkbox binding">
-      <created>1573292399741</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1573292399741</updated>
+      <workItem from="1575892398297" duration="9801000" />
     </task>
     <task id="LOCAL-00075" summary="fixed binding issue I had with an expression containing - in a string">
       <created>1573587252692</created>
@@ -522,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575900395565</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="updated documentation">
+      <created>1575902068272</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1575902068272</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

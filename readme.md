@@ -451,3 +451,19 @@ italic will be there regardless of what you set myClasses too.
 ```js
 this.myClasses = this.isActive == true ? "blue": ["red", "bold"];
 ```
+
+## Binding to style property
+If you don't want to use classes, you can also set a single style property.
+
+```html
+<div style.background.one-way="background">Test</div>
+```
+
+This behaves the same way as if you wrote the following javascript:
+
+```js
+element.style.background = value
+```
+
+When you set the background property on the binding context the value will style property will be set accordingly.
+
