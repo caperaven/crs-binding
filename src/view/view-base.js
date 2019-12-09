@@ -1,4 +1,8 @@
 export class ViewBase {
+    static get properties() {
+        return ["title"]
+    }
+
     get title() {
         return this._title;
     }
