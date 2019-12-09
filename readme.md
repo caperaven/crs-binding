@@ -345,3 +345,51 @@ this.persons = crsbinding.observation.observe([
     }
 ]);
 ``` 
+##Bindable Element
+Bindable element is a web component base class that is event enabled.  
+That means you can listen to events on the element as you would with a normal class and use it as a binding context.  
+
+Important aspect to remember with bindable element is that it provides two functions.  
+One for getting property values in a property and another to set a property value.  
+These functions will take care of notifying property change for those properties when set.  
+See the following examples.
+
+```js
+get items() {
+    return this.getProperty("items");
+}
+
+set items(newValue) {
+    this.setProperty("items", newValue);
+}
+```
+
+If you don't use setProperty to get the property value, the events will not fire and you will need to call notifyPropertyChanged yourself.
+
+The bindable element class can be found in the file "crs-bindable-element.js";  
+It uses standard ES6 modules.
+
+```js
+import {BindableElement} from"./../../node_modules/crs-binding/crs-bindable-element.js";
+```
+
+In bindable element you must also populate the properties static getter with the property names available for updateUI.
+
+```js
+static get properties() {
+    return ["items"];
+}
+```
+
+When unsure when to use it, just add any property name that you are binding too.
+
+##View base
+View base is much like bindable element in that it provides you with base features.  
+This class is used when you want to create a view that can be a bindable context.
+
+It comes with two properties too take note of:
+
+1. title
+1. element
+
+It is also event enabled and provides the getProperty and setProperty functions to use in your property getters and setters.
