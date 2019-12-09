@@ -1,4 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
+import {setElementProperty, setAttribute, setClassList} from "./code-constants.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
@@ -59,14 +60,3 @@ function getExpForProvider(provider) {
     result = provider._property.indexOf("-") == -1 ? setElementProperty : setAttribute;
     return result.split("__property__").join(provider._property);
 }
-
-const setElementProperty = `requestAnimationFrame(() => element.__property__ = value || "")`;
-const setAttribute = `element.setAttribute("__property__", value || "")`;
-const setClassList = `
-if (element.__classList!=null) {
-    const remove = Array.isArray(element.__classList) ? element.__classList : [element.__classList];
-    remove.forEach(cls => element.classList.remove(cls));
-}
-element.__classList = value;
-const add = Array.isArray(value) ? value : [value];
-add.forEach(cls => element.classList.add(cls));`;

@@ -5,6 +5,8 @@ import {CallProvider} from "./providers/call-provider.js";
 import {InnerProvider} from "./providers/inner-provider.js";
 import {ForProvider} from "./providers/for-provider.js";
 import {IfProvider} from "./providers/if-provider.js";
+import {IfClassProvider} from "./providers/if-classlist-provider.js";
+import {IfStylesProvider} from "./providers/if-styles-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName) {
@@ -40,6 +42,14 @@ export class ProviderFactory {
     }
 
     static "if"(element, context, property, value, ctxName) {
+        if (property.toLowerCase() == "classlist") {
+            return new IfClassProvider(element, context, property, value, ctxName);
+        }
+
+        if (property.toLowerCase().indexOf("style.") != -1) {
+            return new IfStylesProvider(element, context, property, value, ctxName);
+        }
+
         return new IfProvider(element, context, property, value, ctxName);
     }
 }

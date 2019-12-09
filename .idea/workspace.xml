@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/binding/providers/code-constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/binding/providers/if-classlist-provider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/binding/providers/if-styles-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/style/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,14 +179,8 @@
       <workItem from="1574830589937" duration="5000" />
       <workItem from="1575873091519" duration="2313000" />
       <workItem from="1575876127552" duration="1374000" />
-      <workItem from="1575892398297" duration="9801000" />
-    </task>
-    <task id="LOCAL-00075" summary="fixed binding issue I had with an expression containing - in a string">
-      <created>1573587252692</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1573587252693</updated>
+      <workItem from="1575892398297" duration="9852000" />
+      <workItem from="1575914142635" duration="3411000" />
     </task>
     <task id="LOCAL-00076" summary="add sending of $context during binding expressions">
       <created>1574092360460</created>
@@ -519,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575902068272</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="updated documentation">
+      <created>1575902251103</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1575902251103</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
