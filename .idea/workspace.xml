@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/bind-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,8 +92,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.view-base.test.js" />
@@ -179,14 +178,7 @@
       <workItem from="1575914142635" duration="6589000" />
       <workItem from="1575927279760" duration="2644000" />
       <workItem from="1575999829665" duration="42000" />
-      <workItem from="1576000804475" duration="1444000" />
-    </task>
-    <task id="LOCAL-00083" summary="fixed delete function on array observer for splice">
-      <created>1574194309317</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1574194309317</updated>
+      <workItem from="1576000804475" duration="1555000" />
     </task>
     <task id="LOCAL-00084" summary="removed when provider and started on the for provider">
       <created>1574231248761</created>
@@ -524,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575930144916</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="fix event bubeling event on two way binding">
+      <created>1576007814630</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1576007814630</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,7 +545,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added fix for sanitization of odd lettered words in string" />
     <MESSAGE value="fixed when tests" />
     <MESSAGE value="fix tests" />
     <MESSAGE value="added global this for window and tests handles" />
@@ -571,7 +569,8 @@
     <MESSAGE value="add conditional class binding provider" />
     <MESSAGE value="updated documentation" />
     <MESSAGE value="fixed issue with updates on bindable element" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed issue with updates on bindable element" />
+    <MESSAGE value="fix event bubeling event on two way binding" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix event bubeling event on two way binding" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

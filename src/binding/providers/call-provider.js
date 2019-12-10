@@ -23,7 +23,8 @@ export class CallProvider extends ProviderBase {
         this._fn = new Function("context", src);
     }
 
-    event() {
+    event(event) {
         crsbinding.idleTaskManager.add(this._fn(this._context));
+        event.stopPropagation();
     }
 }
