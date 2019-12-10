@@ -21,7 +21,7 @@ export class BindProvider extends OneWayProvider {
     }
 
     _change(event) {
-        let value = event.target.value;
+        let value = event.target[this._property];
         const type = event.target.type || "text";
         const typeFn = `_${type}`;
 
@@ -30,6 +30,7 @@ export class BindProvider extends OneWayProvider {
         }
 
         this._setObj.function(this._context, value);
+        event.stopPropagation();
     }
 
     _number(value) {
