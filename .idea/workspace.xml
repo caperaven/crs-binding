@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,14 +179,7 @@
       <workItem from="1575914142635" duration="6589000" />
       <workItem from="1575927279760" duration="2644000" />
       <workItem from="1575999829665" duration="42000" />
-      <workItem from="1576000804475" duration="1555000" />
-    </task>
-    <task id="LOCAL-00084" summary="removed when provider and started on the for provider">
-      <created>1574231248761</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1574231248761</updated>
+      <workItem from="1576000804475" duration="1966000" />
     </task>
     <task id="LOCAL-00085" summary="removed when provider and started on the for provider">
       <created>1574231501710</created>
@@ -523,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576007814630</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="fix event bubeling event on two way binding">
+      <created>1576008010245</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1576008010245</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
