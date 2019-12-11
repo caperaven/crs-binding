@@ -27,6 +27,7 @@ class TestComponent extends BindableElement {
     }
 
     async connectedCallback() {
+        this.observeAttributes(["hidden"]);
         super.connectedCallback();
     }
 
@@ -40,8 +41,13 @@ class TestComponent extends BindableElement {
         console.log(args);
     }
 
-    titleChanged(args) {
-        console.log(args);
+    titleChanged() {
+        console.log(this.title);
+    }
+
+    hiddenAttributeChanged(value, oldValue) {
+        console.log(value);
+        console.log(oldValue);
     }
 }
 

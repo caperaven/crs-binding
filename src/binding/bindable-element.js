@@ -21,6 +21,12 @@ export class BindableElement extends HTMLElement {
 
     async disconnectedCallback() {
         this.dispose();
+
+        if (this.observer == null) {
+            this.observer.disconnect();
+            this.attributesChangedHandler = null;
+        }
+
         crsbinding.observation.releaseBinding(this);
     }
 
@@ -31,5 +37,20 @@ export class BindableElement extends HTMLElement {
     setProperty(prop, value) {
         this[`_${prop}`] = value;
         crsbinding.events.notifyPropertyChanged(this, prop);
+    }
+
+    observeAttributes(attributes) {
+        this.attributesChangedHandler = this.attributesChanged.bind(this);
+        this.observer = new MutationObserver(this.attributesChangedHandler);
+        this.observer.observe(this, {attributes: true, attributeFilter: attributes, attributeOldValue: true});
+    }
+
+    attributesChanged(mutationsList) {
+        for(let mutation of mutationsList) {
+            const attr = `${mutation.attributeName}AttributeChanged`;
+            if (this[attr] != null) {
+                this[attr](mutation.target[mutation.attributeName], mutation.oldValue);
+            }
+        }
     }
 }

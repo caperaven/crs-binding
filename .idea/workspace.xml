@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,6 +181,7 @@
       <workItem from="1575927279760" duration="2644000" />
       <workItem from="1575999829665" duration="42000" />
       <workItem from="1576000804475" duration="1966000" />
+      <workItem from="1576093347583" duration="2640000" />
     </task>
     <task id="LOCAL-00085" summary="removed when provider and started on the for provider">
       <created>1574231501710</created>
