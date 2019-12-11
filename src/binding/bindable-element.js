@@ -25,6 +25,7 @@ export class BindableElement extends HTMLElement {
         if (this.observer == null) {
             this.observer.disconnect();
             this.attributesChangedHandler = null;
+            this.observer = null;
         }
 
         crsbinding.observation.releaseBinding(this);

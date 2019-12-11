@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/component/test-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -181,14 +179,7 @@
       <workItem from="1575927279760" duration="2644000" />
       <workItem from="1575999829665" duration="42000" />
       <workItem from="1576000804475" duration="1966000" />
-      <workItem from="1576093347583" duration="2640000" />
-    </task>
-    <task id="LOCAL-00085" summary="removed when provider and started on the for provider">
-      <created>1574231501710</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1574231501710</updated>
+      <workItem from="1576093347583" duration="3305000" />
     </task>
     <task id="LOCAL-00086" summary="add foundation to change the context name so that for expressions will work">
       <created>1574233773056</created>
@@ -526,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576008010245</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="adding feature to bindable element">
+      <created>1576097263434</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1576097263435</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +546,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed when tests" />
     <MESSAGE value="fix tests" />
     <MESSAGE value="added global this for window and tests handles" />
     <MESSAGE value="fixed delete function on array observer for splice" />
@@ -573,7 +570,8 @@
     <MESSAGE value="updated documentation" />
     <MESSAGE value="fixed issue with updates on bindable element" />
     <MESSAGE value="fix event bubeling event on two way binding" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix event bubeling event on two way binding" />
+    <MESSAGE value="adding feature to bindable element" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding feature to bindable element" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
