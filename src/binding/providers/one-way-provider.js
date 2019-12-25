@@ -1,5 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
-import {setElementProperty, setAttribute, setClassList} from "./code-constants.js";
+import {setElementProperty, setAttribute, setClassList, setDataset} from "./code-constants.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
@@ -55,6 +55,11 @@ function getExpForProvider(provider) {
 
     if (provider._property.toLocaleLowerCase() == "classlist") {
         return setClassList;
+    }
+
+    if (provider._property.indexOf("data-") != -1) {
+        const prop = provider._property.replace("data-", "");
+        return setDataset.split("__property__").join(prop);
     }
 
     result = provider._property.indexOf("-") == -1 ? setElementProperty : setAttribute;
