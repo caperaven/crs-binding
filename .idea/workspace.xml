@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/code-constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/code-constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,8 +92,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.bundle" />
         <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
         <item itemvalue="Jest.view-base.test.js" />
@@ -183,21 +184,7 @@
       <workItem from="1576130193735" duration="63000" />
       <workItem from="1576225878624" duration="1131000" />
       <workItem from="1577294675501" duration="88000" />
-      <workItem from="1577294941724" duration="2765000" />
-    </task>
-    <task id="LOCAL-00088" summary="update context name to be passed on">
-      <created>1574234396798</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1574234396798</updated>
-    </task>
-    <task id="LOCAL-00089" summary="update context name to be passed on">
-      <created>1574239442096</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1574239442096</updated>
+      <workItem from="1577294941724" duration="3322000" />
     </task>
     <task id="LOCAL-00090" summary="update context name to be passed on">
       <created>1574242071097</created>
@@ -528,7 +515,21 @@
       <option name="project" value="LOCAL" />
       <updated>1577297701749</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="fixed problem binding once or oneway to data- properties">
+      <created>1577297712864</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1577297712864</updated>
+    </task>
+    <task id="LOCAL-00138" summary="publish">
+      <created>1577297919641</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1577297919642</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,7 +551,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added global this for window and tests handles" />
     <MESSAGE value="fixed delete function on array observer for splice" />
     <MESSAGE value="removed when provider and started on the for provider" />
     <MESSAGE value="add foundation to change the context name so that for expressions will work" />
@@ -575,7 +575,8 @@
     <MESSAGE value="fix event bubeling event on two way binding" />
     <MESSAGE value="adding feature to bindable element" />
     <MESSAGE value="fixed problem binding once or oneway to data- properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed problem binding once or oneway to data- properties" />
+    <MESSAGE value="publish" />
+    <option name="LAST_COMMIT_MESSAGE" value="publish" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
