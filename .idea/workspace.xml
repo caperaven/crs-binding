@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/code-constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/code-constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/once-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/once-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -188,14 +183,7 @@
       <workItem from="1576130193735" duration="63000" />
       <workItem from="1576225878624" duration="1131000" />
       <workItem from="1577294675501" duration="88000" />
-      <workItem from="1577294941724" duration="2732000" />
-    </task>
-    <task id="LOCAL-00087" summary="update context name to be passed on">
-      <created>1574234200331</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1574234200331</updated>
+      <workItem from="1577294941724" duration="2765000" />
     </task>
     <task id="LOCAL-00088" summary="update context name to be passed on">
       <created>1574234396798</created>
@@ -533,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576097843921</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="fixed problem binding once or oneway to data- properties">
+      <created>1577297701748</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1577297701749</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -555,7 +550,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix tests" />
     <MESSAGE value="added global this for window and tests handles" />
     <MESSAGE value="fixed delete function on array observer for splice" />
     <MESSAGE value="removed when provider and started on the for provider" />
@@ -580,7 +574,8 @@
     <MESSAGE value="fixed issue with updates on bindable element" />
     <MESSAGE value="fix event bubeling event on two way binding" />
     <MESSAGE value="adding feature to bindable element" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding feature to bindable element" />
+    <MESSAGE value="fixed problem binding once or oneway to data- properties" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed problem binding once or oneway to data- properties" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

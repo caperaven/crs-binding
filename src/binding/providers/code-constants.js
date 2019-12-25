@@ -25,4 +25,4 @@ export const setClassListCondition = `
     else {
         ${setClassListValue.split("value").join("__false__")}
     }
-`
+`;
