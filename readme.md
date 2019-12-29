@@ -403,6 +403,28 @@ Though the view base is not technically a component it does also have:
 
 You can use them in the same way as you would a custom element.
 
+When using view base and creating a new instance you must provide the element it will represent.
+ViewBase is used by systems like crs-router.
+You will need to mange the connected and disconnected callbacks manually if you are not using crs-router.
+These lifecycle events are important for getting the parsing of the element underway.
+
+When you create a view using viewbase the element style will be set to hidden.
+When you call the connectedCallback function it will set that back to visible again.
+
+Remember to set the properties static property
+
+If viewbase is not a custom element you will need to add a dummy function getAttribute that returns null or what value you require.
+
+```js
+static get properties() {
+    return ["items"];
+}
+```
+
+```js
+const view = new ClassUsingViewBase(document.body);
+```
+
 ##Old value vs New value
 Sometimes you want to know what the old value was.  
 Crs binding does not track what the previous values was.  
