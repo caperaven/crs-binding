@@ -23,6 +23,12 @@
 <div>Once</div>
 <input value.once="title" data-type="text">
 
+<label>
+    <span>IsActive</span>
+    <input type="checkbox" checked.bind="isActive" />
+    <span>${isActive}</span>
+</label>
+
 <button click.call="btnClicked">Normal</button>
 <button click.call="btnClicked($event)">With Event</button>
 <button click.call="btnClicked('hello world', $event)">With Parameters</button>

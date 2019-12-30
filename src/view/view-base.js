@@ -41,7 +41,11 @@ export class ViewBase {
     }
 
     getProperty(prop) {
-        return this[`_${prop}`] || this.getAttribute(prop);
+        let result = this[`_${prop}`];
+        if (result == null && this.getAttribute != null) {
+            result = this.getAttribute(prop);
+        }
+        return  result;
     }
 
     setProperty(prop, value) {

@@ -42,6 +42,6 @@ export class BindProvider extends OneWayProvider {
     }
 
     _checkbox(value, element) {
-        return element.checked;
+        return element.checked == true;
     }
 }

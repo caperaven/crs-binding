@@ -26,6 +26,14 @@ class TestComponent extends BindableElement {
         console.log(this._model);
     }
 
+    get isActive() {
+        return this.getProperty("isActive");
+    }
+
+    set isActive(newValue) {
+        this.setProperty("isActive", newValue)
+    }
+
     async connectedCallback() {
         this.observeAttributes(["hidden"]);
         super.connectedCallback();
@@ -48,6 +56,10 @@ class TestComponent extends BindableElement {
     hiddenAttributeChanged(value, oldValue) {
         console.log(value);
         console.log(oldValue);
+    }
+
+    isActiveChanged() {
+        console.log(this.isActive);
     }
 }
 
