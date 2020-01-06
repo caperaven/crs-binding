@@ -6,10 +6,12 @@ export class BindableElement extends HTMLElement {
     constructor() {
         super();
         crsbinding.events.enableEvents(this);
+        crsbinding.dom.enableEvents(this);
     }
 
     dispose() {
         crsbinding.events.disableEvents(this);
+        crsbinding.dom.disableEvents(this);
     }
 
     async connectedCallback() {

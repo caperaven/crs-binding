@@ -8,6 +8,7 @@ import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {updateUI} from "./events/update.js";
 import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
+import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 
 const crsbinding = {
     _expFn: new Map(),
@@ -43,6 +44,11 @@ const crsbinding = {
         removeWhen: removeWhen,
         listenOn: listenOn,
         listenOnPath: listenOnPath
+    },
+
+    dom: {
+        enableEvents: domEnableEvents,
+        disableEvents: domDisableEvents
     }
 };
 

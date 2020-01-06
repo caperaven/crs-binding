@@ -35,8 +35,9 @@ class TestComponent extends BindableElement {
     }
 
     async connectedCallback() {
-        this.observeAttributes(["hidden"]);
         super.connectedCallback();
+        this.observeAttributes(["hidden"]);
+        this.registerEvent("click", () => console.log("Hello World"));
     }
 
     async disconnectedCallback() {

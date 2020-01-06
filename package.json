@@ -1,6 +1,6 @@
 {
     "name": "crs-binding",
-    "version": "0.0.29",
+    "version": "0.0.31",
     "description": "",
     "main": "index.js",
     "directories": {

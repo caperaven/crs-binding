@@ -1,4 +1,4 @@
-NB: Please note that this is still under development
+Currently as BETA
 ----------------------------------------------------
 # CRS Binding Engine
 
@@ -400,8 +400,18 @@ this.dispatchEvent(new CustomEvent("ready"));
 ```
 
 As you can see from the above await the connected  callback needs to be async.
-
 If you want to prevent this, you need to override the connectedCallback function.
+
+You can register dom events in a bindable element so that you don't need to manage the addEventListener.
+
+You use the registerEvent and unregisterEvent and unregisterEvent to add and remove dom events.
+
+```js
+this.registerEvent("click", this.click.bind(this))
+```
+
+On the disconnected callback of the bindable element it will release all these events for you.
+This means that if you have events that live for the lifespan of the element you can register them when you want and the system will clean them up for you when the component is done.
 
 ##View base
 View base is much like bindable element in that it provides you with base features.  
