@@ -34,7 +34,7 @@ export class IfProvider extends ProviderBase {
      * @private
      */
     _initCndAttr() {
-        const value = crsbinding.expression.sanitize(this._value);
+        const value = crsbinding.expression.sanitize(this._value, this._ctxName);
         const fnCode = initCndAttrExp
             .split("__exp__").join(value.expression)
             .split("__attr__").join(this._property)
@@ -49,7 +49,7 @@ export class IfProvider extends ProviderBase {
      * @private
      */
     _initCndValue() {
-        const value = crsbinding.expression.sanitize(this._value);
+        const value = crsbinding.expression.sanitize(this._value, this._ctxName);
         const parts = value.expression.split("?");
         const valueParts = parts[1].split(":");
 

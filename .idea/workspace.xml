@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/1.compile.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/1.compile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -198,14 +194,7 @@
       <workItem from="1577741158148" duration="25000" />
       <workItem from="1578294503885" duration="469000" />
       <workItem from="1578295086962" duration="3475000" />
-      <workItem from="1578300101188" duration="16402000" />
-    </task>
-    <task id="LOCAL-00095" summary="clean up memory leak on providers">
-      <created>1574253449289</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1574253449289</updated>
+      <workItem from="1578300101188" duration="18095000" />
     </task>
     <task id="LOCAL-00096" summary="fixed some broken tests">
       <created>1574259591068</created>
@@ -543,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578302391087</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="fixed repeat observation">
+      <created>1578318837287</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1578318837287</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +561,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="update context name to be passed on" />
     <MESSAGE value="repeat inner provider fixed" />
     <MESSAGE value="fixed inner binding for titles" />
     <MESSAGE value="added items added and removed events" />
@@ -590,7 +585,8 @@
     <MESSAGE value="update get propery so that it returns the right value on false values" />
     <MESSAGE value="updated  documentation" />
     <MESSAGE value="added dom events and updated documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added dom events and updated documentation" />
+    <MESSAGE value="fixed repeat observation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed repeat observation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
