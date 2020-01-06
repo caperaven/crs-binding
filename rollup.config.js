@@ -7,7 +7,7 @@ export default [
             {file: 'dist/crs-binding.js', format: 'es', sourcemap: false}
         ],
         plugins: [
-            terser()
+            //terser()
         ]
     },
     {
@@ -25,7 +25,7 @@ export default [
             {file: 'dist/crs-bindable-element.js', format: 'es', sourcemap: false}
         ],
         plugins: [
-            terser()
+            //terser()
         ]
     },
     {

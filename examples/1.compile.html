@@ -8,7 +8,7 @@
     <script>
         function loaded() {
             const exp = "${firstName} ${lastName} is ${age} old and lives at \"${address.street}\"";
-            document.querySelector("#result").innerText = crsbinding.expression.compile(exp).function({
+            const result = crsbinding.expression.compile(exp).function({
                 firstName: "John",
                 lastName: "Doe",
                 age: 20,
@@ -16,6 +16,9 @@
                     street: "No Where"
                 }
             });
+
+            document.querySelector("#result").innerText = result;
+
             crsbinding.expression.release(exp);
         }
     </script>

@@ -15,6 +15,13 @@ export function observe(obj, prior) {
         delete prior.__events;
     }
 
+    const keys = Object.keys(obj);
+    for (let key of keys) {
+        if (Array.isArray(obj[key])) {
+            obj[key] = observeArray(obj[key]);
+        }
+    }
+
     const proxy = new Proxy(obj, {
         get: get,
         set: set
@@ -27,6 +34,13 @@ export function releaseObserved(obj) {
     if (obj._isArray == true) return releaseObservedArray(obj);
 
     crsbinding.events.disableEvents(obj);
+
+    const keys = Object.keys(obj);
+    for (let key of keys) {
+        if (Array.isArray(obj[key])) {
+            releaseObservedArray(obj[key]);
+        }
+    }
 
     if (obj.dispose != null) {
         obj._disposing = true;

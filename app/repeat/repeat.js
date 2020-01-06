@@ -16,14 +16,14 @@ export default class View extends ViewBase {
             {
                 firstName: "First Name 1",
                 lastName: "Last Name 1",
-                contacts: crsbinding.observation.observe([
+                contacts: [
                     {
                         cell: "Cell 1"
                     },
                     {
                         cell: "Cell 2"
                     }
-                ])
+                ]
             }
         ]);
     }
@@ -33,14 +33,14 @@ export default class View extends ViewBase {
             {
                 firstName: "First Name 3",
                 lastName: "Last Name 3",
-                contacts: crsbinding.observation.observe([
+                contacts: [
                     {
                         cell: "Cell 1"
                     },
                     {
                         cell: "Cell 2"
                     }
-                ])
+                ]
             },
             {
                 firstName: "First Name 4",
@@ -54,14 +54,14 @@ export default class View extends ViewBase {
             {
                 firstName: "First Name 3",
                 lastName: "Last Name 3",
-                contacts: crsbinding.observation.observe([
+                contacts: [
                     {
                         cell: "Cell 3"
                     },
                     {
                         cell: "Cell 4"
                     }
-                ])
+                ]
             }
         )
     }

@@ -26,8 +26,6 @@
             <h2>Contacts</h2>
             <div>
                 <template for="contact of person.contacts">
-                    <div>${person.firstName}</div>
-
                     <input value.bind="contact.cell">
                     <span>${contact.cell}</span>
                 </template>
