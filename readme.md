@@ -383,6 +383,26 @@ static get properties() {
 
 When unsure when to use it, just add any property name that you are binding too.
 
+Bindable element will try and load the HTML from a external file. You need to tell it where to find that file using the html property.
+
+```js
+get html() {
+    return import.meta.url.replace(".js", ".html");
+}
+```
+
+If you do override the connectedCallback, do not add the super but remember to add the following code after you are done.
+
+```js
+await crsbinding.parsers.parseElements(this.children, this);
+crsbinding.expression.updateUI(this);
+this.dispatchEvent(new CustomEvent("ready"));
+```
+
+As you can see from the above await the connected  callback needs to be async.
+
+If you want to prevent this, you need to override the connectedCallback function.
+
 ##View base
 View base is much like bindable element in that it provides you with base features.  
 This class is used when you want to create a view that can be a bindable context.
