@@ -72,6 +72,8 @@ export class ForProvider extends ProviderBase {
         await crsbinding.observation.releaseChildBinding(this._container);
         this._container.innerHTML = "";
 
+        if (this.ar == null) return;
+
         // create document fragment
         const fragment = document.createDocumentFragment();
 

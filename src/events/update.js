@@ -5,6 +5,9 @@ export function updateUI(context) {
     const keys = context.constructor.properties || Object.keys(context).filter(item => item.indexOf("__") == -1 && item != "_isProxy");
     for (let key of keys) {
         crsbinding.events.notifyPropertyChanged(context, key);
+        if (Array.isArray(context[key])) {
+            updateUIArray(context[key]);
+        }
     }
 }
 
