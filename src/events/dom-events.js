@@ -27,6 +27,9 @@ function registerEvent(event, callback) {
 function unregisterEvent(event, callback) {
     const item = this._domEvents.find(item => item.event == event && item.callback == callback);
     if (item == null) return;
+
+    this.removeEventListener(item.event, item.callback);
+
     this._domEvents.splice(this._domEvents.indexOf(item), 1);
     item.callback = null;
     item.event = null;
