@@ -30,7 +30,8 @@ export async function parseAttribute(attr, context, ctxName) {
     const prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
     const prov = prop == "for" ? prop : parts[parts.length - 1];
 
-    return ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
+    ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
+    attr.ownerElement.removeAttribute(attr.nodeName);
 }
 
 export async function releaseBinding(element) {
