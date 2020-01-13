@@ -63,7 +63,13 @@ export class ForProvider extends ProviderBase {
     }
 
     async _collectionChanged(property, newValue) {
-        this.ar = newValue;
+        if (Array.isArray(newValue)) {
+            this.ar = newValue;
+        }
+        else {
+            const fn = new Function("context", `return context.${this._plural}`);
+            this.ar = fn(this._context);
+        }
         await this._renderItems();
     }
 

@@ -4,6 +4,10 @@ const ISARRAY = "_isArray";
 export function observeArray(obj) {
     obj[ISARRAY] = true;
 
+    if (obj._events == null) {
+        crsbinding.events.enableEvents(obj);
+    }
+
     for (let i = 0; i < obj.length; i++) {
         obj[i] = crsbinding.observation.observe(obj[i]);
         obj[i].__index = i;
