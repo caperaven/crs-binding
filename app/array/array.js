@@ -14,7 +14,7 @@ export default class ArrayBinding extends ViewBase {
             // JHR: Add  it so that when you call a function it uses call with the context as this.
 
             add() {
-                this.data.items.push({caption: `Item ${this.items.length + 1}`})
+                this.data.items.push({caption: `Item ${this.data.items.length + 1}`})
             },
 
             remove() {

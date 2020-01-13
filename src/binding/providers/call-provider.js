@@ -18,7 +18,7 @@ export class CallProvider extends ProviderBase {
     async initialize() {
         let src = `context.${this._value}`.split("$event").join("event");
         if (src.indexOf(")") == -1) {
-            src = `${src}()`;
+            src = `${src}.call(context)`;
         }
         this._fn = new Function("context", src);
     }
