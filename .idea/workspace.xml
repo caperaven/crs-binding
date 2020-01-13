@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/call-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/call-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -201,14 +200,7 @@
       <workItem from="1578391401915" duration="104000" />
       <workItem from="1578474690547" duration="2308000" />
       <workItem from="1578924552401" duration="850000" />
-      <workItem from="1578925870577" duration="2084000" />
-    </task>
-    <task id="LOCAL-00102" summary="adding tests">
-      <created>1574318792639</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1574318792639</updated>
+      <workItem from="1578925870577" duration="3390000" />
     </task>
     <task id="LOCAL-00103" summary="adding tests">
       <created>1574324999593</created>
@@ -546,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578927691964</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="added context call for th click event">
+      <created>1578928098454</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1578928098455</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,7 +567,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed some broken tests" />
     <MESSAGE value="delete the repeat behaviour now that we have the for behaviour" />
     <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
     <MESSAGE value="adding tests" />
@@ -593,7 +591,8 @@
     <MESSAGE value="remove attributes after providers have been created" />
     <MESSAGE value="added array test screen" />
     <MESSAGE value="fixed array issue with for behaviour" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed array issue with for behaviour" />
+    <MESSAGE value="added context call for th click event" />
+    <option name="LAST_COMMIT_MESSAGE" value="added context call for th click event" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

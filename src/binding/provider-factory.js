@@ -10,7 +10,13 @@ import {IfStylesProvider} from "./providers/if-styles-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName) {
-        return new BindProvider(element, context, property, value, ctxName)
+        if (["value", "checked"].indexOf(property) != -1) {
+            return new BindProvider(element, context, property, value, ctxName)
+        }
+        else {
+            console.log("forced a one way on non event properties of element");
+            return this["one-way"](element, context, property, value, ctxName);
+        }
     }
 
     static "two-way"(element, context, property, value, ctxName) {
