@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,19 +21,20 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/array" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding\test\binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\test\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -196,14 +200,8 @@
       <workItem from="1578300101188" duration="21834000" />
       <workItem from="1578341058396" duration="902000" />
       <workItem from="1578391401915" duration="104000" />
-      <workItem from="1578474690547" duration="570000" />
-    </task>
-    <task id="LOCAL-00099" summary="adding tests">
-      <created>1574316831942</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1574316831942</updated>
+      <workItem from="1578474690547" duration="2308000" />
+      <workItem from="1578924552401" duration="353000" />
     </task>
     <task id="LOCAL-00100" summary="adding tests">
       <created>1574317123803</created>
@@ -541,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578341358916</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="remove attributes after providers have been created">
+      <created>1578475400875</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1578475400875</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +568,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed inner binding for titles" />
     <MESSAGE value="added items added and removed events" />
     <MESSAGE value="clean up memory leak on providers" />
     <MESSAGE value="fixed some broken tests" />
@@ -588,7 +592,8 @@
     <MESSAGE value="added dom events and updated documentation" />
     <MESSAGE value="fixed repeat observation" />
     <MESSAGE value="fixed context name issue on if provider." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed context name issue on if provider." />
+    <MESSAGE value="remove attributes after providers have been created" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove attributes after providers have been created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

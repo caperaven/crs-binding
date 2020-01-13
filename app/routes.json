@@ -28,6 +28,11 @@
       "title": "Style",
       "hash": "#style",
       "view": "style"
+    },
+    {
+      "title": "Array",
+      "hash": "#array",
+      "view": "array"
     }
   ]
 }

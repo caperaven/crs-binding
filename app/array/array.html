@@ -1,0 +1,11 @@
+<h2>${title}</h2>
+<div class="toolbar">
+    <button click.call="add">Add</button>
+    <button click.call="remove">Remove</button>
+</div>
+
+<ul>
+    <template for="item of items">
+        <li>${item.caption}</li>
+    </template>
+</ul>
