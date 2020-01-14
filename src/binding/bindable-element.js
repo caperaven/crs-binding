@@ -24,7 +24,7 @@ export class BindableElement extends HTMLElement {
     async disconnectedCallback() {
         this.dispose();
 
-        if (this.observer == null) {
+        if (this.observer != null) {
             this.observer.disconnect();
             this.attributesChangedHandler = null;
             this.observer = null;
