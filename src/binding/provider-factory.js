@@ -7,6 +7,7 @@ import {ForProvider} from "./providers/for-provider.js";
 import {IfProvider} from "./providers/if-provider.js";
 import {IfClassProvider} from "./providers/if-classlist-provider.js";
 import {IfStylesProvider} from "./providers/if-styles-provider.js";
+import {AttrProvider} from "./providers/attr-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName) {
@@ -57,5 +58,9 @@ export class ProviderFactory {
         }
 
         return new IfProvider(element, context, property, value, ctxName);
+    }
+
+    static "attr"(element, context, property, value, ctxName) {
+        return new AttrProvider(element, context, property, value, ctxName);
     }
 }

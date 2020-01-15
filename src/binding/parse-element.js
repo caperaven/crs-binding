@@ -10,7 +10,11 @@ export async function parseElement(element, context, ctxName = "context") {
     await parseElements(element.children, context, ctxName);
 
     const attributes = Array.from(element.attributes || []);
-    const boundAttributes = attributes.filter(attr => (attr.ownerElement.tagName == "TEMPLATE" && attr.name == "for") || attr.name.indexOf(".") != -1);
+    const boundAttributes = attributes.filter(attr =>
+        (attr.ownerElement.tagName == "TEMPLATE" && attr.name == "for") ||
+        (attr.name.indexOf(".") != -1) ||
+        ((attr.value || "").indexOf("${") == 0)
+    );
 
     await parseAttributes(boundAttributes, context, ctxName);
 
@@ -27,8 +31,13 @@ export async function parseAttributes(collection, context, ctxName) {
 
 export async function parseAttribute(attr, context, ctxName) {
     const parts = attr.name.split(".");
-    const prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
-    const prov = prop == "for" ? prop : parts[parts.length - 1];
+    let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
+    let prov = prop == "for" ? prop : parts[parts.length - 1];
+
+    if (prop.length == 0 && attr.value[0] == "$") {
+        prop = prov;
+        prov = "attr";
+    }
 
     ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
     attr.ownerElement.removeAttribute(attr.nodeName);

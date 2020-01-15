@@ -538,3 +538,9 @@ You can also use conditional binding here to set the style property.
 <div style.background.if="isActive == true ? 'blue' : 'red'">Is Active Status</div>
 <div style.background.if="isActive == true ? 'blue'">Is Active Status</div>
 ```
+
+## Attr one way binding
+In some cases you want to do a one way binding on an attribute.
+Lets say you want to bind to an attribute "data-name".
+One way of doing that would be `data-name.one-way="name"` but you can also use a shortcut syntax of
+`data-name="${name}"`. This is the same expression you would use as the innerText of a element.

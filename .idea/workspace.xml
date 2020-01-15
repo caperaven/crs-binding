@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/binding/providers/attr-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/parse-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/parse-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/provider-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/provider-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,15 +29,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding\test\binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\test\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -202,14 +207,8 @@
       <workItem from="1578924552401" duration="850000" />
       <workItem from="1578925870577" duration="4122000" />
       <workItem from="1578939443835" duration="171000" />
-      <workItem from="1579028637165" duration="795000" />
-    </task>
-    <task id="LOCAL-00104" summary="adding tests">
-      <created>1574327648903</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1574327648903</updated>
+      <workItem from="1579028637165" duration="1074000" />
+      <workItem from="1579088816694" duration="4768000" />
     </task>
     <task id="LOCAL-00105" summary="adding tests">
       <created>1574327945898</created>
@@ -547,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578929310374</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="random fixes">
+      <created>1579029443036</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1579029443036</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +575,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed prior disposed provider bug on provider manager dispose" />
     <MESSAGE value="adding tests" />
     <MESSAGE value="documentation and examples added" />
     <MESSAGE value="fied some issues with repeat operators" />
@@ -594,7 +599,8 @@
     <MESSAGE value="fixed array issue with for behaviour" />
     <MESSAGE value="added context call for th click event" />
     <MESSAGE value="fixed provider problem on non event bindings to return a one way binding instead." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed provider problem on non event bindings to return a one way binding instead." />
+    <MESSAGE value="random fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="random fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

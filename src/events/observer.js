@@ -66,6 +66,8 @@ function set(obj, prop, value) {
     }
 }
 
+const excludeBackup = ["isProxy", "_isProxy", "element"];
+
 function setSingle(obj, prop, value) {
     const backup = obj[BACKUP];
     const oldValue = obj[prop];
@@ -82,7 +84,9 @@ function setSingle(obj, prop, value) {
         releaseObserved(oldValue);
     }
     else {
-        backup[prop] = oldValue;
+        if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1) {
+            backup[prop] = oldValue;
+        }
     }
 
     return true;
