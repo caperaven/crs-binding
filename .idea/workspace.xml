@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view2/view2.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/view2/view2.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -210,14 +210,7 @@
       <workItem from="1579104132179" duration="1559000" />
       <workItem from="1579105713235" duration="610000" />
       <workItem from="1579161219124" duration="11000" />
-      <workItem from="1579162245709" duration="16533000" />
-    </task>
-    <task id="LOCAL-00115" summary="documentation and examples added">
-      <created>1574343629579</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1574343629579</updated>
+      <workItem from="1579162245709" duration="16816000" />
     </task>
     <task id="LOCAL-00116" summary="fied some issues with repeat operators">
       <created>1574416948257</created>
@@ -555,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579186155795</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="add splice example">
+      <created>1579186376266</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1579186376266</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
