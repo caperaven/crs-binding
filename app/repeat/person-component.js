@@ -11,11 +11,6 @@ class PersonComponent extends BindableElement {
 
     set person(newValue) {
         this.setProperty("person", newValue);
-        console.log(newValue);
-    }
-
-    async connectedCallback() {
-        super.connectedCallback();
     }
 }
 

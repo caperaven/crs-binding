@@ -27,13 +27,6 @@
 
             <person-comp person.two-way="person"></person-comp>
 
-            <h2>Contacts</h2>
-            <div>
-                <template for="contact of person.contacts">
-                    <input value.bind="contact.cell">
-                    <span>${contact.cell}</span>
-                </template>
-            </div>
             <hr />
         </div>
     </template>

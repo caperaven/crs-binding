@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="" />
+    <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repeat/person-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/person-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repeat/person-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/person-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,14 +212,7 @@
       <workItem from="1579104132179" duration="1559000" />
       <workItem from="1579105713235" duration="610000" />
       <workItem from="1579161219124" duration="11000" />
-      <workItem from="1579162245709" duration="14262000" />
-    </task>
-    <task id="LOCAL-00112" summary="documentation and examples added">
-      <created>1574341290991</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1574341290991</updated>
+      <workItem from="1579162245709" duration="14625000" />
     </task>
     <task id="LOCAL-00113" summary="documentation and examples added">
       <created>1574342256433</created>
@@ -552,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579183263626</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="fixed cleanup of one-way binding">
+      <created>1579183368970</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1579183368970</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
