@@ -12,6 +12,10 @@ export class ProviderBase {
         this.initialize().catch(error => {
             throw error;
         });
+
+        if (this._element.nodeName.indexOf("-") != -1 && this._property == this._ctxName) {
+            this._element[this._property] = this._context;
+        }
     }
 
     dispose() {

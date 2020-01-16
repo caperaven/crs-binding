@@ -9,6 +9,7 @@ export function listenOnPath(context, value, callback) {
         }
         else {
             if (obj[part] == null) {
+                // actual vs empty object
                 obj[part] = crsbinding.observation.observe({})
             }
 
