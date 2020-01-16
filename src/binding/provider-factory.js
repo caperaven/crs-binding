@@ -15,7 +15,6 @@ export class ProviderFactory {
             return new BindProvider(element, context, property, value, ctxName)
         }
         else {
-            console.log("forced a one way on non event properties of element");
             return this["one-way"](element, context, property, value, ctxName);
         }
     }

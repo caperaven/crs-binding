@@ -93,14 +93,14 @@ export class ForProvider extends ProviderBase {
 
         this._container.appendChild(fragment);
 
+        // render the updates. custom components are not ready at this time yet. so do it on the next frame.
+        crsbinding.expression.updateUI(this.ar);
+
         // update the container's provider to this so that this can be freed when content changes
         if (this._container.__providers == null) {
             this._container.__providers = [];
         }
         this._container.__providers.push(this.id);
-
-        // render the updates. custom components are not ready at this time yet. so do it on the next frame.
-        requestAnimationFrame(() => crsbinding.expression.updateUI(this.ar));
     }
 
     async _itemsAdded() {

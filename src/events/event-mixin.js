@@ -71,6 +71,11 @@ export function on(obj, property, callback) {
 }
 
 export function removeOn(obj, property, callback) {
+    if (property.indexOf(".") != -1) {
+        return removeOnPath(obj, property, callback);
+    }
+
+
     if (obj == null || obj.__events == null) return;
 
     const functions = obj.__events.get(property) || [];
@@ -83,6 +88,15 @@ export function removeOn(obj, property, callback) {
 
     if (functions.length == 0) {
         obj.__events.delete(property);
+    }
+}
+
+function removeOnPath(obj, property, callback) {
+    const parts = property.split(".");
+
+    for (let part of parts) {
+        removeOn(obj, part, callback);
+        obj = obj[part];
     }
 }
 

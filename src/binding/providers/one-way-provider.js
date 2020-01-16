@@ -3,6 +3,12 @@ import {setElementProperty, setAttribute, setClassList, setDataset} from "./code
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
+        const contextPrefix = `${this._ctxName}.`;
+        if (this._value.indexOf(contextPrefix) == 0) {
+            this._value = this._value.replace(contextPrefix, "");
+        }
+        this.removeOn(this._value, this._eventHandler);
+
         if (this._expObj != null) {
             crsbinding.expression.release(this._expObj);
             delete this._expObj;

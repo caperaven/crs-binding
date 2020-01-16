@@ -52,7 +52,7 @@ export default class View extends ViewBase {
 
     add() {
         this.persons.push(
-            {
+            crsbinding.observation.observe({
                 firstName: "First Name 3",
                 lastName: "Last Name 3",
                 contacts: [
@@ -63,7 +63,7 @@ export default class View extends ViewBase {
                         cell: "Cell 4"
                     }
                 ]
-            }
+            })
         )
     }
 

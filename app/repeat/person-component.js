@@ -16,7 +16,6 @@ class PersonComponent extends BindableElement {
 
     async connectedCallback() {
         super.connectedCallback();
-        console.log("person component loaded");
     }
 }
 

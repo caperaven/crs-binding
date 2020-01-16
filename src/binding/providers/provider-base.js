@@ -63,4 +63,8 @@ export class ProviderBase {
             callback: callback
         })
     }
+
+    removeOn(value, callback) {
+        crsbinding.events.removeOn(this._context, value, callback);
+    }
 }
