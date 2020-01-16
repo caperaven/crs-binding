@@ -1,6 +1,6 @@
 import {observeArray, releaseObservedArray} from "./observe-array.js";
 
-const PROXY = "_isProxy";
+const PROXY = "__isProxy";
 const BACKUP = "__backup";
 
 export function observe(obj, prior) {
@@ -31,7 +31,7 @@ export function observe(obj, prior) {
 }
 
 export function releaseObserved(obj) {
-    if (obj._isArray == true) return releaseObservedArray(obj);
+    if (obj.__isArray == true) return releaseObservedArray(obj);
 
     crsbinding.events.disableEvents(obj);
 
@@ -66,7 +66,7 @@ function set(obj, prop, value) {
     }
 }
 
-const excludeBackup = ["isProxy", "_isProxy", "element"];
+const excludeBackup = ["__isProxy", "element"];
 
 function setSingle(obj, prop, value) {
     const backup = obj[BACKUP];
@@ -97,8 +97,8 @@ function setOnPath(obj, prop, value) {
 }
 
 function createProxyValue(origional, value) {
-    if (origional && origional._isProxy == true) {
-        if (value && value._isProxy != true) {
+    if (origional && origional.__isProxy == true) {
+        if (value && value.__isProxy != true) {
             return crsbinding.observation.observe(value, origional);
         }
     }

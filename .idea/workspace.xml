@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/bindable-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/bindable-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/view-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/view-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/observe-array.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observe-array.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/observer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/observer.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/view/view-base.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/view/view-base.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +28,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/array" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Users\Johan\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\192.6262.59\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -210,14 +217,7 @@
       <workItem from="1579104132179" duration="1559000" />
       <workItem from="1579105713235" duration="610000" />
       <workItem from="1579161219124" duration="11000" />
-      <workItem from="1579162245709" duration="2994000" />
-    </task>
-    <task id="LOCAL-00108" summary="adding tests">
-      <created>1574331325086</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1574331325086</updated>
+      <workItem from="1579162245709" duration="7133000" />
     </task>
     <task id="LOCAL-00109" summary="adding tests">
       <created>1574331605306</created>
@@ -555,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579164132346</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="random fixes">
+      <created>1579166426739</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1579166426739</updated>
+    </task>
+    <option name="localTasksCounter" value="158" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,9 +607,9 @@
     <MESSAGE value="fixed array issue with for behaviour" />
     <MESSAGE value="added context call for th click event" />
     <MESSAGE value="fixed provider problem on non event bindings to return a one way binding instead." />
-    <MESSAGE value="random fixes" />
     <MESSAGE value="fix expression problem with null" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix expression problem with null" />
+    <MESSAGE value="random fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="random fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

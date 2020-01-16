@@ -1,5 +1,5 @@
-const PROXY = "_isProxy";
-const ISARRAY = "_isArray";
+const PROXY = "__isProxy";
+const ISARRAY = "__isArray";
 
 export function observeArray(obj) {
     obj[ISARRAY] = true;

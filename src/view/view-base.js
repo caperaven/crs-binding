@@ -28,7 +28,7 @@ export class ViewBase {
     }
 
     async connectedCallback() {
-        this.isProxy = true;
+        this.__isProxy = true;
         crsbinding.events.enableEvents(this);
         crsbinding.parsers.parseElement(this.element, this)
             .then(() => this._loaded())

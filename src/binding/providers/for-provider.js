@@ -86,6 +86,7 @@ export class ForProvider extends ProviderBase {
         // loop through items and add them to fragment after being parsed
         await this._forExp.function(this._context, async (item) => {
             const element = this._element.content.cloneNode(true);
+
             await crsbinding.parsers.parseElement(element, item, this._singular);
             fragment.appendChild(element);
         });

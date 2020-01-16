@@ -9,9 +9,9 @@ beforeAll(async () => {
 
 test("observe array - proxy", () => {
     expect(instance).not.toBeNull();
-    expect(instance._isArray).toBeTruthy();
-    expect(instance[0]._isProxy).toBeTruthy();
-    expect(instance._events).not.toBeNull();
+    expect(instance.__isArray).toBeTruthy();
+    expect(instance[0].__isProxy).toBeTruthy();
+    expect(instance.__events).not.toBeNull();
 });
 
 test ("observe array - release", () => {

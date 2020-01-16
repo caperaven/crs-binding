@@ -15,7 +15,7 @@ test("observer", () => {
 
     expect(px.on).not.toBeNull();
     expect(px.notifyPropertyChanged).not.toBeNull();
-    expect(px._isProxy).toBe(true);
+    expect(px.__isProxy).toBe(true);
     expect(px.__backup).not.toBeNull();
 });
 
@@ -85,13 +85,13 @@ test("observer - releaseObserved", () => {
     const px = observe(obj);
     expect(px.on).not.toBeNull();
     expect(px.notifyPropertyChanged).not.toBeNull();
-    expect(px._isProxy).toBe(true);
+    expect(px.__isProxy).toBe(true);
     expect(px.__backup).not.toBeNull();
 
     releaseObserved(px);
     expect(px.on).toBeUndefined();
     expect(px.notifyPropertyChanged).toBeUndefined();
-    expect(px._isProxy).toBeUndefined();
+    expect(px.__isProxy).toBeUndefined();
     expect(px.__backup).toBeUndefined();
 
     expect(obj.dispose).toHaveBeenCalled()

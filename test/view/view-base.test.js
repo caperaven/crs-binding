@@ -24,7 +24,7 @@ beforeEach(async () => {
 });
 
 test("view base - connectedCallback", () => {
-    expect(instance.isProxy).toBeTruthy();
+    expect(instance.__isProxy).toBeTruthy();
     expect(instance.__events).not.toBeNull();
     expect(parseElementSpy).toHaveBeenCalled();
     expect(instance.element.style.display).toBe("block");
