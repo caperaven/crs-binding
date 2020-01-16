@@ -79,3 +79,8 @@ test("sanitizeExp - ignore named expression - multiple", () => {
    const result = sanitizeExp("person.firstName && person.lastName", "person");
    expect(result.expression).toBe("person.firstName && person.lastName");
 });
+
+test("sanitizeExp - ignore null", () => {
+   const result = sanitizeExp("validation.editing == null", "context");
+   expect(result.expression).toBe("context.validation.editing == null");
+});

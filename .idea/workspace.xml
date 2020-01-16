@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/repeat/person-component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/repeat/person-component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/component/test-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/attr-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/attr-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/inner-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/expressions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/events/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/expression.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,15 +52,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration name="view-base.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.sanitizeExp - ignore null">
+    <configuration name="sanitizeExp - ignore null" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/view/view-base.test.js" />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/events/expression.test.js" />
+      <test-names>
+        <test-name value="sanitizeExp - ignore null" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
@@ -98,11 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.sanitizeExp - ignore null" />
         <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.bundle" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.view-base.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -209,13 +212,9 @@
       <workItem from="1579028637165" duration="1074000" />
       <workItem from="1579088816694" duration="6630000" />
       <workItem from="1579104132179" duration="1559000" />
-    </task>
-    <task id="LOCAL-00106" summary="adding tests">
-      <created>1574329346872</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1574329346872</updated>
+      <workItem from="1579105713235" duration="610000" />
+      <workItem from="1579161219124" duration="11000" />
+      <workItem from="1579162245709" duration="1861000" />
     </task>
     <task id="LOCAL-00107" summary="adding tests">
       <created>1574329868418</created>
@@ -553,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579094128353</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="random fixes">
+      <created>1579105720017</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1579105720017</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

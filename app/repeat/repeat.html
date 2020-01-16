@@ -20,8 +20,12 @@
         <div>
             <h2>Personal</h2>
 
-            <input data-value.one-way="person.firstName" value.bind="person.firstName" />
-            <input value.bind="person.lastName" />
+            <hr />
+            <div>${person.firstName}</div>
+            <div>${person.lastName}</div>
+            <hr />
+
+            <person-comp person.one-way="person"></person-comp>
 
             <h2>Contacts</h2>
             <div>

@@ -1,4 +1,5 @@
 import {ViewBase} from "./../../src/view/view-base.js";
+import "./person-component.js";
 
 export default class View extends ViewBase {
     connectedCallback() {
