@@ -4,7 +4,6 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/array/array.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -211,14 +210,7 @@
       <workItem from="1579104132179" duration="1559000" />
       <workItem from="1579105713235" duration="610000" />
       <workItem from="1579161219124" duration="11000" />
-      <workItem from="1579162245709" duration="16336000" />
-    </task>
-    <task id="LOCAL-00114" summary="documentation and examples added">
-      <created>1574342304371</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1574342304371</updated>
+      <workItem from="1579162245709" duration="16533000" />
     </task>
     <task id="LOCAL-00115" summary="documentation and examples added">
       <created>1574343629579</created>
@@ -556,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579183754114</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="add splice example">
+      <created>1579186155795</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1579186155795</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -578,7 +577,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="initial changes for style binding" />
     <MESSAGE value="class list binding" />
     <MESSAGE value="get conditional style binding to work" />
     <MESSAGE value="add conditional class binding provider" />
@@ -603,7 +601,8 @@
     <MESSAGE value="renamed all system variables to have the double underscore prefix &quot;__&quot;" />
     <MESSAGE value="added fix for binding context to a property used in for operations" />
     <MESSAGE value="fixed cleanup of one-way binding" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed cleanup of one-way binding" />
+    <MESSAGE value="add splice example" />
+    <option name="LAST_COMMIT_MESSAGE" value="add splice example" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
