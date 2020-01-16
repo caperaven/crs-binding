@@ -1,8 +1,4 @@
 export class BindableElement extends HTMLElement {
-    get html() {
-        return "";
-    }
-
     constructor() {
         super();
         crsbinding.events.enableEvents(this);
@@ -15,9 +11,12 @@ export class BindableElement extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.innerHTML = await fetch(this.html).then(result => result.text());
-        await crsbinding.parsers.parseElements(this.children, this);
-        crsbinding.expression.updateUI(this);
+        if (this.html != null) {
+            this.innerHTML = await fetch(this.html).then(result => result.text());
+            await crsbinding.parsers.parseElements(this.children, this);
+            crsbinding.expression.updateUI(this);
+        }
+
         this.dispatchEvent(new CustomEvent("ready"));
     }
 

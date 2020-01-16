@@ -10,6 +10,8 @@ export class InnerProvider extends ProviderBase {
         for (let prop of this._expObj.parameters.properties) {
             this.listenOnPath(prop, this._eventHandler);
         }
+
+        this._change();
     }
 
     dispose() {
