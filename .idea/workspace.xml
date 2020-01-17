@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -212,13 +213,7 @@
       <workItem from="1579162245709" duration="17574000" />
       <workItem from="1579187597631" duration="22000" />
       <workItem from="1579251332642" duration="169000" />
-    </task>
-    <task id="LOCAL-00119" summary="updated properties handeling for update">
-      <created>1575893195009</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1575893195009</updated>
+      <workItem from="1579251801430" duration="63000" />
     </task>
     <task id="LOCAL-00120" summary="initial changes for style binding">
       <created>1575895648596</created>
@@ -556,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579251356707</updated>
     </task>
-    <option name="localTasksCounter" value="168" />
+    <task id="LOCAL-00168" summary="package">
+      <created>1579251807138</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1579251807138</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
