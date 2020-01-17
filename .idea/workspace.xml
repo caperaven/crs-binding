@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/repeat/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/repeat/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -217,14 +214,7 @@
       <workItem from="1579187597631" duration="22000" />
       <workItem from="1579251332642" duration="169000" />
       <workItem from="1579251801430" duration="83000" />
-      <workItem from="1579259400739" duration="8984000" />
-    </task>
-    <task id="LOCAL-00121" summary="class list binding">
-      <created>1575900137899</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1575900137899</updated>
+      <workItem from="1579259400739" duration="9713000" />
     </task>
     <task id="LOCAL-00122" summary="updated documentation">
       <created>1575900395565</created>
@@ -562,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579251877479</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="update repeat behaviour to render on demand instead of full rerender">
+      <created>1579268895431</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1579268895431</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +581,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add conditional class binding provider" />
     <MESSAGE value="updated documentation" />
     <MESSAGE value="fixed issue with updates on bindable element" />
     <MESSAGE value="fix event bubeling event on two way binding" />
@@ -609,7 +605,8 @@
     <MESSAGE value="add splice example" />
     <MESSAGE value="added on the run property setting" />
     <MESSAGE value="package" />
-    <option name="LAST_COMMIT_MESSAGE" value="package" />
+    <MESSAGE value="update repeat behaviour to render on demand instead of full rerender" />
+    <option name="LAST_COMMIT_MESSAGE" value="update repeat behaviour to render on demand instead of full rerender" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

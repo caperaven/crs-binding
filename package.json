@@ -1,6 +1,6 @@
 {
     "name": "crs-binding",
-    "version": "0.0.52",
+    "version": "0.0.53",
     "description": "zero dependency binding engine",
     "main": "index.js",
     "directories": {
@@ -11,7 +11,9 @@
         "bundle": "rollup -c",
         "build-publish": "rollup -c & node build/publish.js"
     },
-    "keywords": ["binding"],
+    "keywords": [
+        "binding"
+    ],
     "author": "Johan Rabie",
     "homepage": "https://caperaven.co.za/",
     "license": "ISC",
