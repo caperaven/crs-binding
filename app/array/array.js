@@ -19,6 +19,8 @@ export default class ArrayBinding extends ViewBase {
 
             remove() {
                 this.data.items.pop();
+                this.data.items.pop();
+                this.data.items.pop();
             },
 
             splice() {
