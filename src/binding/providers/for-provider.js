@@ -105,12 +105,9 @@ export class ForProvider extends ProviderBase {
     }
 
     async _itemsAdded(event, value, added) {
-        let offset = 0;
-
         for (let i = 0; i < added.items.length; i++) {
             const item = added.items[i];
-            const index = added.indexes[i]  + offset;
-            offset++;
+            const index = added.indexes[i];
 
             const element = await this.createElement(item);
             const child = this._container.children[index];

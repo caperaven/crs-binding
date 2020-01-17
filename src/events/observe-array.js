@@ -26,7 +26,7 @@ export function releaseObservedArray(collection) {
     collection.forEach(item => crsbinding.observation.releaseObserved(item));
 }
 
-const deleteFunctions = ["pop", "slice", "splice"];
+const deleteFunctions = ["pop", "splice"];
 const addFunctions = ["push"];
 
 function get(collection, prop) {
@@ -38,6 +38,11 @@ function get(collection, prop) {
 
             if (deleteFunctions.indexOf(prop) != -1) {
                 itemsRemoved(collection, result);
+
+                if (prop == "splice" && args.length > 2) {
+                    args = args.splice(2, args.length);
+                    itemsAdded(collection, args);
+                }
             }
             else if (addFunctions.indexOf(prop) != -1) {
                 itemsAdded(collection, args);
