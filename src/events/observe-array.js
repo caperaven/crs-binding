@@ -1,48 +1,46 @@
 const PROXY = "__isProxy";
 const ISARRAY = "__isArray";
 
-export function observeArray(obj) {
-    obj[ISARRAY] = true;
+export function observeArray(collection) {
+    collection[ISARRAY] = true;
 
-    if (obj._events == null) {
-        crsbinding.events.enableEvents(obj);
+    if (collection._events == null) {
+        crsbinding.events.enableEvents(collection);
     }
 
-    for (let i = 0; i < obj.length; i++) {
-        obj[i] = crsbinding.observation.observe(obj[i]);
-        obj[i].__index = i;
+    collection.__nextId = 1;
+
+    for (let i = 0; i < collection.length; i++) {
+        observeIndex(collection, i);
     }
 
-    const proxy = new Proxy(obj, {
+    const proxy = new Proxy(collection, {
         get: get
     });
 
     return proxy;
 }
 
-export function releaseObservedArray(obj) {
-    crsbinding.events.disableEvents(obj);
-    obj.forEach(item => crsbinding.observation.releaseObserved(item));
+export function releaseObservedArray(collection) {
+    crsbinding.events.disableEvents(collection);
+    collection.forEach(item => crsbinding.observation.releaseObserved(item));
 }
 
 const deleteFunctions = ["pop", "slice", "splice"];
 const addFunctions = ["push"];
 
-// ------- TODO ---------
-// JHR: todo: splice also adds, but how do you know what was added??
-
-function get(obj, prop) {
-    const value = obj[prop];
+function get(collection, prop) {
+    const value = collection[prop];
 
     if (typeof value == "function") {
         return (...args) => {
-            const result = obj[prop](...args);
+            const result = collection[prop](...args);
 
             if (deleteFunctions.indexOf(prop) != -1) {
-                itemsRemoved(obj, result);
+                itemsRemoved(collection, result);
             }
             else if (addFunctions.indexOf(prop) != -1) {
-                itemsAdded(obj, args);
+                itemsAdded(collection, args);
             }
 
             return result;
@@ -52,42 +50,45 @@ function get(obj, prop) {
     return value;
 }
 
-function itemsRemoved(obj, items) {
+function itemsRemoved(collection, items) {
     if (items == null) return;
-    crsbinding.events.notifyPropertyChanged(obj, "items-deleted", items);
+    crsbinding.events.notifyPropertyChanged(collection, "items-deleted", items);
 
     if (Array.isArray(items)) {
         for (let item of items) {
-            itemRemoved(item);
+            crsbinding.observation.releaseObserved(item);
         }
     }
     else {
-        itemRemoved(items);
+        crsbinding.observation.releaseObserved(items);
     }
-}
-
-function itemRemoved(item) {
-    crsbinding.observation.releaseObserved(item);
 }
 
 function itemsAdded(obj, items) {
     if (items == null) return;
-    const indexes = [];
 
-    if (Array.isArray(items)) {
-        for (let item of items) {
-            itemAdded(obj, item, indexes);
-        }
-    }
-    else {
-        itemAdded(obj, items);
+    const payload = {
+        items: [],
+        indexes: []
+    };
+
+    for (let item of items) {
+        const index = obj.indexOf(item);
+
+        observeIndex(obj, index);
+
+        payload.items.push(item);
+        payload.indexes.push(index);
     }
 
-    crsbinding.events.notifyPropertyChanged(obj, "items-added", {items: items, indexes: indexes});
+    crsbinding.events.notifyPropertyChanged(obj, "items-added", payload);
 }
 
-function itemAdded(obj, item, indexes) {
-    const index = obj.indexOf(item);
-    indexes.push(index);
-    obj[index] = crsbinding.observation.observe(item);
+function observeIndex(collection, index) {
+    const item = collection[index];
+    if (item.__isProxy != true) {
+        item.__uid = collection.__nextId;
+        collection.__nextId++;
+        collection[index] = crsbinding.observation.observe(item);
+    }
 }

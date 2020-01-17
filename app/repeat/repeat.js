@@ -51,10 +51,11 @@ export default class View extends ViewBase {
     }
 
     add() {
+        const length = this.persons.length + 1;
         this.persons.push(
             crsbinding.observation.observe({
-                firstName: "First Name 3",
-                lastName: "Last Name 3",
+                firstName: `First Name ${length}`,
+                lastName: `Last Name ${length}`,
                 contacts: [
                     {
                         cell: "Cell 3"

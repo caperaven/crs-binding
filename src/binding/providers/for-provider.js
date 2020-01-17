@@ -70,7 +70,10 @@ export class ForProvider extends ProviderBase {
             const fn = new Function("context", `return context.${this._plural}`);
             this.ar = fn(this._context);
         }
-        await this._renderItems();
+
+        if (this.ar != null) {
+            await this._renderItems();
+        }
     }
 
     async _renderItems() {
@@ -85,9 +88,7 @@ export class ForProvider extends ProviderBase {
 
         // loop through items and add them to fragment after being parsed
         await this._forExp.function(this._context, async (item) => {
-            const element = this._element.content.cloneNode(true);
-
-            await crsbinding.parsers.parseElement(element, item, this._singular);
+            const element = await this.createElement(item);
             fragment.appendChild(element);
         });
 
@@ -103,13 +104,57 @@ export class ForProvider extends ProviderBase {
         this._container.__providers.push(this.id);
     }
 
-    async _itemsAdded() {
-        await this._renderItems();
+    async _itemsAdded(event, value, added) {
+        let offset = 0;
+
+        for (let i = 0; i < added.items.length; i++) {
+            const item = added.items[i];
+            const index = added.indexes[i]  + offset;
+            offset++;
+
+            const element = await this.createElement(item);
+            const child = this._container.children[index];
+            this._container.insertBefore(element, child);
+        }
     }
 
-    async _itemsDeleted() {
-        await this._renderItems();
+    async _itemsDeleted(event, value, removed) {
+        const elements = [];
+
+        const push = (item) => {
+            const uid = item.__uid;
+            const result = this._container.querySelectorAll([`[data-uid="${uid}"]`]);
+            result.forEach(element => elements.push(element));
+        };
+
+        if (Array.isArray(removed)) {
+            for (let item of removed) {
+                push(item)
+            }
+        }
+        else {
+            push(removed);
+        }
+
+        for (let element of elements) {
+            if (element != null) {
+                element.parentElement.removeChild(element);
+                crsbinding.observation.releaseBinding(element).catch(error => console.error(error));
+            }
+        }
+    }
+
+    async createElement(item) {
+        const element = this._element.content.cloneNode(true);
+        await crsbinding.parsers.parseElement(element, item, this._singular);
+
+        for (let child of element.children) {
+            child.dataset.uid = item.__uid;
+        }
+
+        return element;
     }
 }
+
 
 const repeatCode = `for (_p of _c || []) {await callback(_p);}`;
