@@ -12,7 +12,8 @@
         "build-publish": "rollup -c & node build/publish.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Johan Rabie",
+    "homepage": "https://caperaven.co.za/",
     "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.6.0",

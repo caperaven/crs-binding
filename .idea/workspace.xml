@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -209,14 +210,9 @@
       <workItem from="1579104132179" duration="1559000" />
       <workItem from="1579105713235" duration="610000" />
       <workItem from="1579161219124" duration="11000" />
-      <workItem from="1579162245709" duration="17522000" />
-    </task>
-    <task id="LOCAL-00117" summary="updated properties handeling for update">
-      <created>1575875752943</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1575875752943</updated>
+      <workItem from="1579162245709" duration="17574000" />
+      <workItem from="1579187597631" duration="22000" />
+      <workItem from="1579251332642" duration="16000" />
     </task>
     <task id="LOCAL-00118" summary="updated properties handeling for update">
       <created>1575877826030</created>
@@ -554,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579186643444</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="package">
+      <created>1579187536615</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1579187536615</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +579,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="get conditional style binding to work" />
     <MESSAGE value="add conditional class binding provider" />
     <MESSAGE value="updated documentation" />
     <MESSAGE value="fixed issue with updates on bindable element" />
@@ -601,7 +603,8 @@
     <MESSAGE value="fixed cleanup of one-way binding" />
     <MESSAGE value="add splice example" />
     <MESSAGE value="added on the run property setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="added on the run property setting" />
+    <MESSAGE value="package" />
+    <option name="LAST_COMMIT_MESSAGE" value="package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
