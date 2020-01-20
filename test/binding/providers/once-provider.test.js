@@ -8,6 +8,6 @@ test("Once provider - execute", () => {
        firstName: "John"
     };
 
-    OnceProvider(element, context, "value", "firstName");
+    OnceProvider(element, context, "value", "firstName", "context");
     expect(element.value).toBe("John");
 });

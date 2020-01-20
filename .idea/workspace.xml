@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/array/array.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/array/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/if-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/if-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/provider-factory.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/provider-factory.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,15 +29,15 @@
     <property name="ts.external.directory.path" value="C:\Users\Johan\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\192.6262.59\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding\test\binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\test\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -50,21 +53,31 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.sanitizeExp - ignore null">
-    <configuration name="sanitizeExp - ignore null" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.Once provider - execute">
+    <configuration name="Once provider - execute" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/events/expression.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" />
       <test-names>
-        <test-name value="sanitizeExp - ignore null" />
+        <test-name value="Once provider - execute" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
+    <configuration name="provider factory - once" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/provider-factory.test.js" />
+      <test-names>
+        <test-name value="provider factory - once" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -99,11 +112,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.test" />
+        <item itemvalue="Jest.Once provider - execute" />
+        <item itemvalue="Jest.provider factory - once" />
         <item itemvalue="npm.build-publish" />
         <item itemvalue="npm.bundle" />
-        <item itemvalue="Jest.sanitizeExp - ignore null" />
-        <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -217,21 +230,9 @@
       <workItem from="1579251332642" duration="169000" />
       <workItem from="1579251801430" duration="83000" />
       <workItem from="1579259400739" duration="13216000" />
-      <workItem from="1579292871968" duration="1106000" />
-    </task>
-    <task id="LOCAL-00123" summary="updated documentation">
-      <created>1575902068272</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1575902068272</updated>
-    </task>
-    <task id="LOCAL-00124" summary="updated documentation">
-      <created>1575902251103</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1575902251103</updated>
+      <workItem from="1579292871968" duration="1530000" />
+      <workItem from="1579498859741" duration="2362000" />
+      <workItem from="1579503193644" duration="219000" />
     </task>
     <task id="LOCAL-00125" summary="get conditional style binding to work">
       <created>1575923273299</created>
@@ -562,7 +563,21 @@
       <option name="project" value="LOCAL" />
       <updated>1579272610166</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="update the splice behaviour of for">
+      <created>1579297019309</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1579297019309</updated>
+    </task>
+    <task id="LOCAL-00173" summary="update the splice behaviour of for">
+      <created>1579297385460</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1579297385460</updated>
+    </task>
+    <option name="localTasksCounter" value="174" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +599,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updated documentation" />
     <MESSAGE value="fixed issue with updates on bindable element" />
     <MESSAGE value="fix event bubeling event on two way binding" />
     <MESSAGE value="adding feature to bindable element" />
@@ -609,7 +623,8 @@
     <MESSAGE value="added on the run property setting" />
     <MESSAGE value="package" />
     <MESSAGE value="update repeat behaviour to render on demand instead of full rerender" />
-    <option name="LAST_COMMIT_MESSAGE" value="update repeat behaviour to render on demand instead of full rerender" />
+    <MESSAGE value="update the splice behaviour of for" />
+    <option name="LAST_COMMIT_MESSAGE" value="update the splice behaviour of for" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -618,6 +633,11 @@
           <url>file://$PROJECT_DIR$/src/binding/provider-manager.js</url>
           <line>9</line>
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/binding/providers/once-provider.js</url>
+          <line>17</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

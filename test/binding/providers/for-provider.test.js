@@ -72,13 +72,16 @@ test ("for provider - _collectionChanged", () => {
 });
 
 test ("for provider - items added", async () => {
-    const renderItemsSpy = jest.spyOn(instance, "_renderItems");
+    const added = {
+        items: [{}],
+        indexes: []
+    }
+
     await instance._itemsAdded();
-    expect(renderItemsSpy).toHaveBeenCalled();
 });
 
 test ("for provider - items deleted", async () => {
-    const renderItemsSpy = jest.spyOn(instance, "_renderItems");
+    // JHR: complete this
+
     await instance._itemsDeleted();
-    expect(renderItemsSpy).toHaveBeenCalled();
 });

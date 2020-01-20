@@ -25,6 +25,8 @@ export class IfProvider extends ProviderBase {
         else {
             this._initCndAttrValue();
         }
+
+        this.propertyChanged();
     }
 
     /**
