@@ -1,0 +1,24 @@
+<h2>${title}</h2>
+
+<ul>
+    <template for="item of data.items">
+        <li>
+            <ul>
+                <template for="test of item.items">
+                    <li>${test.caption}</li>
+                </template>
+            </ul>
+        </li>
+    </template>
+</ul>
+<ul>
+    <template for="item of data.items2">
+        <li>
+            <ul>
+                <template for="test of item.items">
+                    <li>${test.caption}</li>
+                </template>
+            </ul>
+        </li>
+    </template>
+</ul>

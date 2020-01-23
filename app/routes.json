@@ -33,6 +33,11 @@
       "title": "Array",
       "hash": "#array",
       "view": "array"
+    },
+    {
+      "title": "Array2",
+      "hash": "#array2",
+      "view": "array2"
     }
   ]
 }
