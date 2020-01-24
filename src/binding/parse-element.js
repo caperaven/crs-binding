@@ -39,8 +39,11 @@ export async function parseAttribute(attr, context, ctxName) {
         prov = "attr";
     }
 
-    ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
+    const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
     attr.ownerElement.removeAttribute(attr.nodeName);
+
+    // used for testing
+    return provider;
 }
 
 export async function releaseBinding(element) {

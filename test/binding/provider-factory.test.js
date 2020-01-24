@@ -59,6 +59,6 @@ test("provider factory - for", () => {
 });
 
 test("provider factory - if", () => {
-    const instance = ProviderFactory["if"]();
+    const instance = ProviderFactory["if"](element, context, property, value, ctxName);
     expect(instance).not.toBeNull();
 });

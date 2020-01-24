@@ -45,6 +45,6 @@ test("call provider - dispose", () => {
 
 test("call provider - event", () => {
     const idelTaskSpy = jest.spyOn(crsbinding.idleTaskManager, "add");
-    instance.event();
+    instance.event({stopPropagation() {}});
     expect(idelTaskSpy).toHaveBeenCalled();
 });

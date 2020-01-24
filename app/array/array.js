@@ -1,5 +1,9 @@
 import {ViewBase} from "./../../src/view/view-base.js";
 
+/**
+ * TODO: JHR - test the class and style binding to ensure it works with the repeat behaviours.
+ */
+
 export default class ArrayBinding extends ViewBase {
     static get properties() {
         return ["data"];

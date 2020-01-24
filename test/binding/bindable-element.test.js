@@ -22,6 +22,10 @@ beforeEach(async () => {
 
     const module = await import("../../src/binding/bindable-element.js");
     class MyBind extends module.BindableElement {
+        get html() {
+            return "proxy takes care of this fetch";
+        }
+
         get name() {
             return this.getProperty("name");
         }

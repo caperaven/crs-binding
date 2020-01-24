@@ -73,15 +73,14 @@ test ("for provider - _collectionChanged", () => {
 
 test ("for provider - items added", async () => {
     const added = {
-        items: [{}],
-        indexes: []
-    }
+        items: [{code: "B"}],
+        indexes: [1]
+    };
 
-    await instance._itemsAdded();
+    await instance._itemsAdded(null, null, added);
 });
 
 test ("for provider - items deleted", async () => {
-    // JHR: complete this
-
-    await instance._itemsDeleted();
+    const removed = {code: "B"};
+    await instance._itemsDeleted(null, null, removed);
 });

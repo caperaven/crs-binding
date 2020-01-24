@@ -37,7 +37,8 @@ test("Bind provider - dispose", () => {
 
 test("Bind provider - change", () => {
     const event = {
-        target: new ElementMock()
+        target: new ElementMock(),
+        stopPropagation: () => {}
     };
     event.target.value = "John";
     instance._change(event);
@@ -49,7 +50,8 @@ test("Bind provider - number", () => {
     const numberSpy = jest.spyOn(instance, "_number");
 
     const event = {
-        target: new ElementMock()
+        target: new ElementMock(),
+        stopPropagation: () => {}
     };
     event.target.value = 10;
     event.target.type = "number";
@@ -63,7 +65,8 @@ test("Bind provider - date", () => {
     const _dateSpy = jest.spyOn(instance, "_date");
 
     const event = {
-        target: new ElementMock()
+        target: new ElementMock(),
+        stopPropagation: () => {}
     };
     event.target.value = new Date(2019, 1, 1);
     event.target.type = "date";
@@ -76,7 +79,8 @@ test ("Bind provider - checked", () => {
    const _checkedSpy = jest.spyOn(instance, "_checkbox");
 
    const event = {
-       target: new ElementMock()
+       target: new ElementMock(),
+       stopPropagation: () => {}
    };
    event.target.checked = true;
     event.target.type = "checkbox";

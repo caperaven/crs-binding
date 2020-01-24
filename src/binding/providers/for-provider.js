@@ -79,7 +79,6 @@ export class ForProvider extends ProviderBase {
     async _renderItems() {
         // release the old content
         await crsbinding.observation.releaseChildBinding(this._container);
-        this._container.innerHTML = "";
 
         if (this.ar == null) return;
 
@@ -88,10 +87,15 @@ export class ForProvider extends ProviderBase {
 
         // loop through items and add them to fragment after being parsed
         await this._forExp.function(this._context, async (item) => {
-            const element = await this.createElement(item);
-            fragment.appendChild(element);
+            return new Promise((resolve) => {
+                this.createElement(item).then(element => {
+                    fragment.appendChild(element);
+                    resolve();
+                });
+            });
         });
 
+        this._container.innerHTML = "";
         this._container.appendChild(fragment);
 
         // render the updates. custom components are not ready at this time yet. so do it on the next frame.
@@ -101,7 +105,10 @@ export class ForProvider extends ProviderBase {
         if (this._container.__providers == null) {
             this._container.__providers = [];
         }
-        this._container.__providers.push(this.id);
+
+        if (this._container.__providers.indexOf(this.id) == -1) {
+            this._container.__providers.push(this.id);
+        }
     }
 
     async _itemsAdded(event, value, added) {

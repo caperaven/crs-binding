@@ -37,6 +37,10 @@ export class ElementMock {
         return this.queryResults.get(selector);
     }
 
+    querySelectorAll(selector) {
+        return [this.querySelector(selector)];
+    }
+
     cloneNode() {
         return this;
     }
@@ -58,5 +62,9 @@ export class ElementMock {
 
     removeEventListener(event, callback) {
         this.events.delete(event);
+    }
+
+    insertBefore(element, oldElement) {
+
     }
 }
