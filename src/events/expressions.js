@@ -32,8 +32,10 @@ export function sanitizeExp(exp, ctxName = "context") {
 
             if (path.length > 0) {
                 if (isLiteral == false || oldToken == "}") {
-                    indexes.push(i - path.length);
-                    properties.push(extractProperty(`${path.join("")}`));
+                    if (isNaN(path)) {
+                        indexes.push(i - path.length);
+                        properties.push(extractProperty(`${path.join("")}`));
+                    }
                 }
 
                 path.length = 0;
@@ -48,8 +50,10 @@ export function sanitizeExp(exp, ctxName = "context") {
 
     if (namedExp && path.length > 0) {
         if (isLiteral == false || oldToken == "}") {
-            indexes.push(tokens.length - 1);
-            properties.push(extractProperty(`${path.join("")}`));
+            if (isNaN(path)) {
+                indexes.push(tokens.length - 1);
+                properties.push(extractProperty(`${path.join("")}`));
+            }
         }
     }
 

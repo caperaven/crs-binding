@@ -84,3 +84,13 @@ test("sanitizeExp - ignore null", () => {
    const result = sanitizeExp("validation.editing == null", "context");
    expect(result.expression).toBe("context.validation.editing == null");
 });
+
+test("sanitizeExp - array in expression", () => {
+   const result = sanitizeExp("arrayfield != null || arrayfield.length == 0", "person");
+   expect(result.expression).toBe("person.arrayfield != null || person.arrayfield.length == 0");
+});
+
+test("sanitizeExp - array in expression", () => {
+   const result = sanitizeExp("arrayfield.length == 0 || arrayfield.length == 5", "person");
+   expect(result.expression).toBe("person.arrayfield.length == 0 || person.arrayfield.length == 5");
+});
