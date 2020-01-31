@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/expressions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/expressions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/events/expression.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/events/expression.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,19 +62,6 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="call provider - event" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/call-provider.test.js" />
-      <test-names>
-        <test-name value="call provider - event" />
-      </test-names>
-      <method v="2" />
-    </configuration>
     <configuration name="expression.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -99,6 +85,16 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build-publish" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -111,11 +107,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build-publish" />
         <item itemvalue="Jest.expression.test.js" />
         <item itemvalue="Jest.sanitizeExp - array in expression" />
         <item itemvalue="Jest.bindable element - connectedCallback" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.call provider - event" />
       </list>
     </recent_temporary>
   </component>
@@ -234,14 +230,9 @@
       <workItem from="1579503193644" duration="5431000" />
       <workItem from="1579674080754" duration="9000" />
       <workItem from="1579844068904" duration="7714000" />
-      <workItem from="1579862827362" duration="5026000" />
-    </task>
-    <task id="LOCAL-00127" summary="add conditional class binding provider">
-      <created>1575925321087</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1575925321087</updated>
+      <workItem from="1579862827362" duration="6383000" />
+      <workItem from="1579903064830" duration="13000" />
+      <workItem from="1580464507005" duration="563000" />
     </task>
     <task id="LOCAL-00128" summary="updated documentation">
       <created>1575926028269</created>
@@ -579,7 +570,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579855975582</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="fixed issue with double items being rendered due to async behaviour">
+      <created>1579874326532</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1579874326532</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
