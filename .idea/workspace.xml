@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observe-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observe-array.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -237,14 +237,7 @@
       <workItem from="1580464507005" duration="563000" />
       <workItem from="1580467789951" duration="129000" />
       <workItem from="1580897690637" duration="29000" />
-      <workItem from="1580897781222" duration="1919000" />
-    </task>
-    <task id="LOCAL-00128" summary="updated documentation">
-      <created>1575926028269</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1575926028269</updated>
+      <workItem from="1580897781222" duration="2427000" />
     </task>
     <task id="LOCAL-00129" summary="fixed issue with updates on bindable element">
       <created>1575928826268</created>
@@ -582,7 +575,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579874326532</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="fixed issue on repeat where attributes were not updating on new items">
+      <created>1580899849150</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1580899849150</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +604,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="adding feature to bindable element" />
     <MESSAGE value="fixed problem binding once or oneway to data- properties" />
     <MESSAGE value="publish" />
     <MESSAGE value="update get propery so that it returns the right value on false values" />
@@ -629,7 +628,8 @@
     <MESSAGE value="update the splice behaviour of for" />
     <MESSAGE value="started updating tests and fixed if expression in repeat" />
     <MESSAGE value="fixed issue with double items being rendered due to async behaviour" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed issue with double items being rendered due to async behaviour" />
+    <MESSAGE value="fixed issue on repeat where attributes were not updating on new items" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed issue on repeat where attributes were not updating on new items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

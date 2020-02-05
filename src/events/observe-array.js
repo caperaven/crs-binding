@@ -91,9 +91,9 @@ function itemsAdded(obj, items) {
 
 function observeIndex(collection, index) {
     const item = collection[index];
+    item.__uid = collection.__nextId;
+    collection.__nextId++;
     if (item.__isProxy != true) {
-        item.__uid = collection.__nextId;
-        collection.__nextId++;
         collection[index] = crsbinding.observation.observe(item);
     }
 }
