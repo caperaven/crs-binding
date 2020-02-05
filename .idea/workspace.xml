@@ -4,6 +4,8 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,11 +97,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="bundle" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="test" />
+        <script value="bundle" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -108,10 +110,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.expression.test.js" />
         <item itemvalue="Jest.sanitizeExp - array in expression" />
         <item itemvalue="Jest.bindable element - connectedCallback" />
-        <item itemvalue="npm.test" />
       </list>
     </recent_temporary>
   </component>
@@ -233,6 +235,9 @@
       <workItem from="1579862827362" duration="6383000" />
       <workItem from="1579903064830" duration="13000" />
       <workItem from="1580464507005" duration="563000" />
+      <workItem from="1580467789951" duration="129000" />
+      <workItem from="1580897690637" duration="29000" />
+      <workItem from="1580897781222" duration="1919000" />
     </task>
     <task id="LOCAL-00128" summary="updated documentation">
       <created>1575926028269</created>
@@ -636,7 +641,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/binding/providers/for-provider.js</url>
-          <line>151</line>
+          <line>160</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

@@ -1,4 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
+import {AttrProvider} from "./attr-provider.js";
 
 export class ForProvider extends ProviderBase {
     get ar() {
@@ -117,8 +118,16 @@ export class ForProvider extends ProviderBase {
             const index = added.indexes[i];
 
             const element = await this.createElement(item);
+            const update = element.children[0];
             const child = this._container.children[index];
             this._container.insertBefore(element, child);
+
+            for (let p of update.__providers) {
+                const provider = crsbinding.providerManager.items.get(p);
+                if (provider instanceof AttrProvider) {
+                    provider._change();
+                }
+            }
         }
     }
 
