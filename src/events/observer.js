@@ -34,17 +34,24 @@ export function releaseObserved(obj) {
     if (obj.__isArray == true) return releaseObservedArray(obj);
 
     crsbinding.events.disableEvents(obj);
-
+    
     const keys = Object.keys(obj);
     for (let key of keys) {
         if (Array.isArray(obj[key])) {
             releaseObservedArray(obj[key]);
         }
     }
-
+    
     if (obj.dispose != null) {
         obj._disposing = true;
         obj.dispose();
+    }
+    
+    const properties = Object.getOwnPropertyNames(obj);
+    for (let prop of properties) {
+        if (prop.indexOf("Changed") != -1 && typeof obj[prop] == "function") {
+            delete obj[prop];
+        }
     }
 
     delete obj[PROXY];

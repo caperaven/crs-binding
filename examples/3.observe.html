@@ -8,7 +8,8 @@
         function loaded() {
             const obj = crsbinding.observation.observe({
                 firstName: "name",
-                lastName: "lastName"
+                lastName: "lastName",
+                firstNameChanged: () => {console.log(this.firstName)}
             });
 
             crsbinding.events.on(obj, "firstName", () => document.querySelector("#name").innerText = obj.firstName);
