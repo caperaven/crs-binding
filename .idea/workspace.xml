@@ -4,13 +4,8 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/array2/array2.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array2/array2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/6.paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/once-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/once-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/array2/array2.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array2/array2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -243,14 +238,7 @@
       <workItem from="1580467789951" duration="129000" />
       <workItem from="1580897690637" duration="29000" />
       <workItem from="1580897781222" duration="2427000" />
-      <workItem from="1581057408711" duration="5880000" />
-    </task>
-    <task id="LOCAL-00130" summary="fixed issue with updates on bindable element">
-      <created>1575930037700</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1575930037700</updated>
+      <workItem from="1581057408711" duration="7654000" />
     </task>
     <task id="LOCAL-00131" summary="fixed issue with updates on bindable element">
       <created>1575930144916</created>
@@ -588,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581063436758</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="fix capitalization issues">
+      <created>1581064660823</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1581064660823</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

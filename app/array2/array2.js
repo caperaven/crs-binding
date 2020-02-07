@@ -36,4 +36,9 @@ export default class ArrayBinding extends ViewBase {
         this.data.items = null;
         this.data.items2 = null;
     }
+
+    update() {
+        const item = this.data.items[0].items[0];
+        item.level = "10px";
+    }
 }
