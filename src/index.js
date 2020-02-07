@@ -10,6 +10,10 @@ import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/ev
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1)
+}
+
 const crsbinding = {
     _expFn: new Map(),
     idleTaskManager: new IdleTaskManager(),

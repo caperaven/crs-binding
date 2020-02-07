@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/3.observe.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3.observe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/array2/array2.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array2/array2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/array2/array2.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array2/array2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -237,6 +240,7 @@
       <workItem from="1580467789951" duration="129000" />
       <workItem from="1580897690637" duration="29000" />
       <workItem from="1580897781222" duration="2427000" />
+      <workItem from="1581057408711" duration="4511000" />
     </task>
     <task id="LOCAL-00129" summary="fixed issue with updates on bindable element">
       <created>1575928826268</created>

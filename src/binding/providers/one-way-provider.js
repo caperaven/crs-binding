@@ -39,6 +39,11 @@ export class OneWayProvider extends ProviderBase {
         }
 
         this.listenOnPath(this._value, this._eventHandler);
+
+        const v = this._context[this._value];
+        if (v != null) {
+            this.propertyChanged(null, v);
+        }
     }
 
     setContext() {
@@ -68,6 +73,13 @@ function getExpForProvider(provider) {
         return setDataset.split("__property__").join(prop);
     }
 
-    result = provider._property.indexOf("-") == -1 ? setElementProperty : setAttribute;
+    if (provider._property.indexOf("-") == -1 || (provider._property.indexOf("-") != -1 && provider._property.indexOf(".") != -1)) {
+        result = setElementProperty;
+        provider._property = provider.capitalizePropertyPath(provider._property);
+    }
+    else {
+        result = setAttribute;
+    }
+
     return result.split("__property__").join(provider._property);
 }

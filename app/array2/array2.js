@@ -7,11 +7,15 @@ export default class ArrayBinding extends ViewBase {
 
     connectedCallback() {
         super.connectedCallback();
+        this.level = "100px";
+        this.background = "hotpink";
+        this.color = "white";
 
         let item = {
             caption: "Item 1", items: [
                 {
-                    caption: "Test"
+                    caption: "Test",
+                    level: "100px"
                 }
             ]
         };
