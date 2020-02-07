@@ -75,7 +75,7 @@ function getExpForProvider(provider) {
 
     if (provider._property.indexOf("-") == -1 || (provider._property.indexOf("-") != -1 && provider._property.indexOf(".") != -1)) {
         result = setElementProperty;
-        provider._property = provider.capitalizePropertyPath(provider._property);
+        provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
     }
     else {
         result = setAttribute;

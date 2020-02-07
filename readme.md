@@ -539,6 +539,14 @@ You can also use conditional binding here to set the style property.
 <div style.background.if="isActive == true ? 'blue'">Is Active Status</div>
 ```
 
+There are cases where the style property is capitalized.
+A example of that would be something like paddingLeft.
+Sine the dom makes all that lowercase you need to dash seperate new words in these cases.
+
+```html
+<div style.padding-left.one-way="paddingProperty">Is Active Status</div>
+```
+
 ## Attr one way binding
 In some cases you want to do a one way binding on an attribute.
 Lets say you want to bind to an attribute "data-name".

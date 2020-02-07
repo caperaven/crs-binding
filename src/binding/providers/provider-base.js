@@ -67,12 +67,4 @@ export class ProviderBase {
     removeOn(value, callback) {
         crsbinding.events.removeOn(this._context, value, callback);
     }
-
-    capitalizePropertyPath(str) {
-        const parts = str.split("-");
-        for (let i = 1; i < parts.length; i++) {
-            parts[i] = parts[i].capitalize();
-        }
-        return parts.join("");
-    }
 }

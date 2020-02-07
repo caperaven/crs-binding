@@ -4,7 +4,10 @@
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/array2/array2.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array2/array2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array2/array2.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array2/array2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/6.paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/6.paths.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/providers/once-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/once-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/provider-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/provider-base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
@@ -240,14 +243,7 @@
       <workItem from="1580467789951" duration="129000" />
       <workItem from="1580897690637" duration="29000" />
       <workItem from="1580897781222" duration="2427000" />
-      <workItem from="1581057408711" duration="4511000" />
-    </task>
-    <task id="LOCAL-00129" summary="fixed issue with updates on bindable element">
-      <created>1575928826268</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1575928826268</updated>
+      <workItem from="1581057408711" duration="5880000" />
     </task>
     <task id="LOCAL-00130" summary="fixed issue with updates on bindable element">
       <created>1575930037700</created>
@@ -585,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580899849150</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="fix capitalization issues">
+      <created>1581063436758</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1581063436758</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +610,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed problem binding once or oneway to data- properties" />
     <MESSAGE value="publish" />
     <MESSAGE value="update get propery so that it returns the right value on false values" />
     <MESSAGE value="updated  documentation" />
@@ -632,7 +634,8 @@
     <MESSAGE value="started updating tests and fixed if expression in repeat" />
     <MESSAGE value="fixed issue with double items being rendered due to async behaviour" />
     <MESSAGE value="fixed issue on repeat where attributes were not updating on new items" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed issue on repeat where attributes were not updating on new items" />
+    <MESSAGE value="fix capitalization issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix capitalization issues" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

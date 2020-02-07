@@ -12,6 +12,14 @@ import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
+};
+
+function capitalizePropertyPath(str) {
+    const parts = str.split("-");
+    for (let i = 1; i < parts.length; i++) {
+        parts[i] = parts[i].capitalize();
+    }
+    return parts.join("");
 }
 
 const crsbinding = {
@@ -53,6 +61,10 @@ const crsbinding = {
     dom: {
         enableEvents: domEnableEvents,
         disableEvents: domDisableEvents
+    },
+
+    utils: {
+        capitalizePropertyPath: capitalizePropertyPath
     }
 };
 
