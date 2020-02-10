@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/providers/once-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/once-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/bindable-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/bindable-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/parse-element.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/parse-element.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/for-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/element.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/element.mock.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +49,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.for provider - items added">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="for provider - items added" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -80,30 +76,17 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="provider base - constructor" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" />
-      <test-names>
-        <test-name value="provider base - constructor" />
-      </test-names>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="provider base - initit with errors" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="build-publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build-publish" />
+      </scripts>
       <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/base-provider.test.js" />
-      <test-names>
-        <test-name value="provider base - initit with errors" />
-      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -118,11 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.for provider - items added" />
         <item itemvalue="npm.test" />
+        <item itemvalue="npm.build-publish" />
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Jest.for provider - items added" />
         <item itemvalue="Jest.parseAttribute - once" />
-        <item itemvalue="Jest.provider base - initit with errors" />
-        <item itemvalue="Jest.provider base - constructor" />
       </list>
     </recent_temporary>
   </component>
@@ -249,14 +232,7 @@
       <workItem from="1580897781222" duration="2427000" />
       <workItem from="1581057408711" duration="7660000" />
       <workItem from="1581066729562" duration="47000" />
-      <workItem from="1581323145719" duration="5194000" />
-    </task>
-    <task id="LOCAL-00135" summary="adding feature to bindable element">
-      <created>1576097843921</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1576097843921</updated>
+      <workItem from="1581323145719" duration="7607000" />
     </task>
     <task id="LOCAL-00136" summary="fixed problem binding once or oneway to data- properties">
       <created>1577297701748</created>
@@ -594,7 +570,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581327983903</updated>
     </task>
-    <option name="localTasksCounter" value="184" />
+    <task id="LOCAL-00184" summary="update tests">
+      <created>1581329100714</created>
+      <option name="number" value="00184" />
+      <option name="presentableId" value="LOCAL-00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1581329100714</updated>
+    </task>
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -15,7 +15,9 @@ function setContext(element, context, property, value) {
 }
 
 function setItem(element, context, property, value, ctxName) {
-    const fn = new Function(ctxName, `return ${ctxName}.${value}`);
+    const code = value.indexOf(ctxName) == 0 ? `return ${value}` : `return ${ctxName}.${value}`;
+
+    const fn = new Function(ctxName, code);
     setProperty(element, property, fn(context));
 }
 
