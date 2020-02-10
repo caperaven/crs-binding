@@ -39,7 +39,7 @@ test("for provider - constructor", () => {
     expect(instance._singular).toBe("item");
     expect(instance._plural).toBe("items");
     expect(instance._forExp).not.toBeNull();
-    expect(instance._forExp.parameters.expression).toBe("for (item of context.items || []) {await callback(item);}");
+    expect(instance._forExp.parameters.expression).toBe("for (item of context.items || []) {callback(item);}");
     expect(instance._collectionChangedHandler).not.toBeNull();
 });
 
@@ -71,16 +71,17 @@ test ("for provider - _collectionChanged", () => {
     expect(ar.__events.get("items-deleted")).toBeUndefined();
 });
 
-test ("for provider - items added", async () => {
+test ("for provider - items added", () => {
     const added = {
         items: [{code: "B"}],
         indexes: [1]
     };
 
-    await instance._itemsAdded(null, null, added);
+    instance.createElement = () => (new ElementMock()).appendChild(new ElementMock());
+    instance._itemsAdded(null, null, added);
 });
 
-test ("for provider - items deleted", async () => {
+test ("for provider - items deleted", () => {
     const removed = {code: "B"};
-    await instance._itemsDeleted(null, null, removed);
+    instance._itemsDeleted(null, null, removed);
 });

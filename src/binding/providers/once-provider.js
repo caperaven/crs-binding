@@ -1,4 +1,4 @@
-export function OnceProvider(element, context, property, value, ctxName) {
+export function OnceProvider(element, context, property, value, ctxName = "context") {
     if (ctxName == "context") {
         setContext(element, context, property, value);
     }
@@ -15,7 +15,7 @@ function setContext(element, context, property, value) {
 }
 
 function setItem(element, context, property, value, ctxName) {
-    const fn = new Function(ctxName, `return ${value}`);
+    const fn = new Function(ctxName, `return ${ctxName}.${value}`);
     setProperty(element, property, fn(context));
 }
 

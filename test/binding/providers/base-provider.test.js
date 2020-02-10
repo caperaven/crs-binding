@@ -14,7 +14,7 @@ beforeEach(async () => {
 
 test("provider base - constructor", () => {
     const registerSpy = jest.spyOn(crsbinding.providerManager, "register");
-    const provider = new TestProvider();
+    const provider = new TestProvider(new ElementMock());
     expect(registerSpy).toHaveBeenCalled();
 });
 
@@ -40,7 +40,7 @@ test("provider base - initit with errors", () => {
         }
     }
 
-    const ins = new T();
+    const ins = new T(new ElementMock());
 
     // JHR: Todo How do I check that the error was thrown?
 });

@@ -1,4 +1,6 @@
 let instance;
+let enableEventsSpy;
+let parseElementSpy;
 
 beforeEach(async () => {
     global.CustomEvent = class {
@@ -35,6 +37,9 @@ beforeEach(async () => {
         }
     }
 
+    enableEventsSpy = jest.spyOn(crsbinding.events, "enableEvents");
+    parseElementSpy = jest.spyOn(crsbinding.parsers, "parseElements");
+
     instance = new MyBind();
     instance.connectedCallback();
     instance.dispatchEvent = jest.fn();
@@ -43,8 +48,6 @@ beforeEach(async () => {
 });
 
 test("bindable element - connectedCallback", async () => {
-    const enableEventsSpy = jest.spyOn(crsbinding.events, "enableEvents");
-    const parseElementSpy = jest.spyOn(crsbinding.parsers, "parseElements");
 
     await instance.connectedCallback();
     expect(instance.innerHTML).toBe("Hello World");

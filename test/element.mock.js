@@ -47,6 +47,7 @@ export class ElementMock {
 
     appendChild(element) {
         this.children.push(element);
+        return this;
     };
 
     removeChild(child) {
@@ -54,6 +55,7 @@ export class ElementMock {
         if (index != -1) {
             this.children.splice(index, 1);
         }
+        return this;
     }
 
     addEventListener(event, callback) {

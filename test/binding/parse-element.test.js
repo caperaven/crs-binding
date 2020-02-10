@@ -93,7 +93,7 @@ test("parseAttribute", async () => {
 
 test("parseAttribute - once", async () => {
     const attr = {name: "value.once", value: "firstName", ownerElement: element};
-    const provider = await parseAttribute(attr, context);
+    const provider = parseAttribute(attr, context);
     expect(provider).toBeNull();
 });
 
