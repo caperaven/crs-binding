@@ -87,13 +87,9 @@ export class ForProvider extends ProviderBase {
         const fragment = document.createDocumentFragment();
 
         // loop through items and add them to fragment after being parsed
-        await this._forExp.function(this._context, async (item) => {
-            return new Promise((resolve) => {
-                this.createElement(item).then(element => {
-                    fragment.appendChild(element);
-                    resolve();
-                });
-            });
+        await this._forExp.function(this._context, (item) => {
+            const element = this.createElement(item);
+            fragment.appendChild(element);
         });
 
         this._container.innerHTML = "";
@@ -112,12 +108,12 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    async _itemsAdded(event, value, added) {
+    _itemsAdded(event, value, added) {
         for (let i = 0; i < added.items.length; i++) {
             const item = added.items[i];
             const index = added.indexes[i];
 
-            const element = await this.createElement(item);
+            const element = this.createElement(item);
             const update = element.children[0];
             const child = this._container.children[index];
             this._container.insertBefore(element, child);
@@ -131,7 +127,7 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    async _itemsDeleted(event, value, removed) {
+    _itemsDeleted(event, value, removed) {
         const elements = [];
 
         const push = (item) => {
@@ -157,7 +153,7 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    async createElement(item) {
+    createElement(item) {
         const element = this._element.content.cloneNode(true);
         crsbinding.parsers.parseElement(element, item, this._singular);
 
@@ -170,4 +166,4 @@ export class ForProvider extends ProviderBase {
 }
 
 
-const repeatCode = `for (_p of _c || []) {await callback(_p);}`;
+const repeatCode = `for (_p of _c || []) {callback(_p);}`;
