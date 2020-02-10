@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/once-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/once-provider.js" afterDir="false" />
-    </list>
+    <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,14 +228,7 @@
       <workItem from="1580897781222" duration="2427000" />
       <workItem from="1581057408711" duration="7660000" />
       <workItem from="1581066729562" duration="47000" />
-      <workItem from="1581323145719" duration="7607000" />
-    </task>
-    <task id="LOCAL-00136" summary="fixed problem binding once or oneway to data- properties">
-      <created>1577297701748</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1577297701749</updated>
+      <workItem from="1581323145719" duration="7703000" />
     </task>
     <task id="LOCAL-00137" summary="fixed problem binding once or oneway to data- properties">
       <created>1577297712864</created>
@@ -577,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581329100714</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <task id="LOCAL-00185" summary="update tests">
+      <created>1581333357770</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1581333357770</updated>
+    </task>
+    <option name="localTasksCounter" value="186" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
