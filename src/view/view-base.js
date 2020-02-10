@@ -30,13 +30,12 @@ export class ViewBase {
     async connectedCallback() {
         this.__isProxy = true;
         crsbinding.events.enableEvents(this);
-        crsbinding.parsers.parseElement(this.element, this)
-            .then(() => this._loaded())
-            .catch(error => console.error(error));
+        crsbinding.parsers.parseElement(this.element, this);
+        this._loaded();
     }
 
     async disconnectedCallback() {
-        await crsbinding.observation.releaseBinding(this.element);
+        crsbinding.observation.releaseBinding(this.element);
         crsbinding.events.disableEvents(this);
     }
 

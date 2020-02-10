@@ -13,7 +13,7 @@ export class BindableElement extends HTMLElement {
     async connectedCallback() {
         if (this.html != null) {
             this.innerHTML = await fetch(this.html).then(result => result.text());
-            await crsbinding.parsers.parseElements(this.children, this);
+            crsbinding.parsers.parseElements(this.children, this);
             crsbinding.expression.updateUI(this);
         }
 

@@ -40,7 +40,7 @@
         button.addEventListener("click", () => viewModel.isVisible = !viewModel.isVisible   );
 
         async function parse() {
-            await crsbinding.parsers.parseElement(document.documentElement, viewModel);
+            crsbinding.parsers.parseElement(document.documentElement, viewModel);
             crsbinding.expression.updateUI(viewModel);
         }
 

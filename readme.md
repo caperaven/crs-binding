@@ -394,7 +394,7 @@ get html() {
 If you do override the connectedCallback, do not add the super but remember to add the following code after you are done.
 
 ```js
-await crsbinding.parsers.parseElements(this.children, this);
+crsbinding.parsers.parseElements(this.children, this);
 crsbinding.expression.updateUI(this);
 this.dispatchEvent(new CustomEvent("ready"));
 ```

@@ -1,13 +1,13 @@
 import {ProviderFactory} from "./provider-factory.js";
 
-export async function parseElements(collection, context, ctxName = "context") {
+export function parseElements(collection, context, ctxName = "context") {
     for (let element of collection || []) {
-        await parseElement(element, context, ctxName);
+        parseElement(element, context, ctxName);
     }
 }
 
-export async function parseElement(element, context, ctxName = "context") {
-    await parseElements(element.children, context, ctxName);
+export function parseElement(element, context, ctxName = "context") {
+    parseElements(element.children, context, ctxName);
 
     const attributes = Array.from(element.attributes || []);
     const boundAttributes = attributes.filter(attr =>
@@ -16,20 +16,20 @@ export async function parseElement(element, context, ctxName = "context") {
         ((attr.value || "").indexOf("${") == 0)
     );
 
-    await parseAttributes(boundAttributes, context, ctxName);
+    parseAttributes(boundAttributes, context, ctxName);
 
     if (element.children && element.children.length == 0 && (element.innerText || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context, null, null, ctxName);
     }
 }
 
-export async function parseAttributes(collection, context, ctxName) {
+export function parseAttributes(collection, context, ctxName) {
     for (let attr of collection) {
-        await parseAttribute(attr, context, ctxName);
+        parseAttribute(attr, context, ctxName);
     }
 }
 
-export async function parseAttribute(attr, context, ctxName) {
+export function parseAttribute(attr, context, ctxName) {
     const parts = attr.name.split(".");
     let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
     let prov = prop == "for" ? prop : parts[parts.length - 1];
@@ -46,12 +46,12 @@ export async function parseAttribute(attr, context, ctxName) {
     return provider;
 }
 
-export async function releaseBinding(element) {
-    await crsbinding.providerManager.releaseElement(element);
+export function releaseBinding(element) {
+    crsbinding.providerManager.releaseElement(element);
 }
 
-export async function releaseChildBinding(element) {
+export function releaseChildBinding(element) {
     for (let child of element.children) {
-        await releaseBinding(child);
+        releaseBinding(child);
     }
 }

@@ -58,7 +58,7 @@
         });
 
         async function parse() {
-            await crsbinding.parsers.parseElement(document.documentElement, viewModel);
+            crsbinding.parsers.parseElement(document.documentElement, viewModel);
             crsbinding.expression.updateUI(viewModel);
             document.getElementById("container").style.display = "block";
         }

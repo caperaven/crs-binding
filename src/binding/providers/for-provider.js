@@ -152,14 +152,14 @@ export class ForProvider extends ProviderBase {
         for (let element of elements) {
             if (element != null) {
                 element.parentElement.removeChild(element);
-                crsbinding.observation.releaseBinding(element).catch(error => console.error(error));
+                crsbinding.observation.releaseBinding(element);
             }
         }
     }
 
     async createElement(item) {
         const element = this._element.content.cloneNode(true);
-        await crsbinding.parsers.parseElement(element, item, this._singular);
+        crsbinding.parsers.parseElement(element, item, this._singular);
 
         for (let child of element.children) {
             child.dataset.uid = item.__uid;
