@@ -7,6 +7,7 @@ export class ElementMock {
         this.innerHTML = "";
         this.content = this;
         this.children = [];
+        this.classList = new ClassList();
 
         this.nodeName = (tagName || "div").toUpperCase();
         this.name = name;
@@ -68,5 +69,20 @@ export class ElementMock {
 
     insertBefore(element, oldElement) {
 
+    }
+}
+
+class ClassList {
+    constructor() {
+        this.items = [];
+    }
+
+    add(item) {
+        this.items.push(item);
+    }
+
+    contains(item) {
+        const result = this.items.find(cls => cls == item);
+        return result != null;
     }
 }
