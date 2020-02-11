@@ -38,6 +38,11 @@
       "title": "Array2",
       "hash": "#array2",
       "view": "array2"
+    },
+    {
+      "title": "Form",
+      "hash": "#form",
+      "view": "form"
     }
   ]
 }

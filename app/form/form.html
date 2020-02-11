@@ -1,0 +1,27 @@
+<header>
+    <h2>${title}</h2>
+</header>
+
+<form>
+    <h3>Personal Information</h3>
+
+    <label>
+        <div>First Name</div>
+        <input value.bind="data.personal.firstName" />
+    </label>
+
+    <label>
+        <div>Last Name</div>
+        <input value.bind="data.personal.lastName" />
+    </label>
+
+    <label>
+        <div>Age</div>
+        <input type="number" value.bind="data.personal.age" />
+    </label>
+
+    <h4>Summary</h4>
+    <div>${data.personal.firstName} ${data.personal.lastName} is ${data.personal.age} old</div>
+
+    <button click.call="disposeData">Dispose Data</button>
+</form>
