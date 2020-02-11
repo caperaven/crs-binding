@@ -30,3 +30,7 @@
 <div class="italic" classlist.one-way="myClasses">Is Active Status</div>
 <div classlist.if="isActive == true ? ['green', 'italic'] : 'red'">Is Active Status</div>
 <div classlist.if="isActive == true ? 'green'">Is Active Status</div>
+
+
+<input type="checkbox" checked.bind="model.isActive" />
+<div classlist.if="model.isActive == true ? 'green'">Model Is Active Status</div>
