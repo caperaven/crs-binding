@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/style/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/style/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -237,14 +233,7 @@
       <workItem from="1581066729562" duration="47000" />
       <workItem from="1581323145719" duration="8588000" />
       <workItem from="1581338794438" duration="48000" />
-      <workItem from="1581420519227" duration="1028000" />
-    </task>
-    <task id="LOCAL-00139" summary="publish">
-      <created>1577298342103</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1577298342103</updated>
+      <workItem from="1581420519227" duration="1314000" />
     </task>
     <task id="LOCAL-00140" summary="publish">
       <created>1577634915521</created>
@@ -582,7 +571,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581338739979</updated>
     </task>
-    <option name="localTasksCounter" value="188" />
+    <task id="LOCAL-00188" summary="ensure events get swapped between observed items">
+      <created>1581421641682</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1581421641682</updated>
+    </task>
+    <option name="localTasksCounter" value="189" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +600,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updated  documentation" />
     <MESSAGE value="added dom events and updated documentation" />
     <MESSAGE value="fixed repeat observation" />
     <MESSAGE value="fixed context name issue on if provider." />
@@ -629,7 +624,8 @@
     <MESSAGE value="fix capitalization issues" />
     <MESSAGE value="remove async from parseElement" />
     <MESSAGE value="update tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="update tests" />
+    <MESSAGE value="ensure events get swapped between observed items" />
+    <option name="LAST_COMMIT_MESSAGE" value="ensure events get swapped between observed items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

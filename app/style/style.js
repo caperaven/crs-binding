@@ -11,9 +11,9 @@ export default class StyleBinding extends ViewBase {
         this.isActive = true;
         this.background = "blue";
         this.color = "yellow";
-        this.model = crsbinding.observation.observe({
+        this.model = {
             color: "#ff0000"
-        });
+        };
     }
 
     disconnectedCallback() {
