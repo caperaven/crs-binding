@@ -1,5 +1,5 @@
 import {IfClassProvider} from "./../../../src/binding/providers/if-classlist-provider.js";
-import {ElementMock} from "../../element.mock";
+import {ElementMock} from "../../element.mock.js";
 
 let instance;
 let element;
