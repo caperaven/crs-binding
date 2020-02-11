@@ -552,3 +552,11 @@ In some cases you want to do a one way binding on an attribute.
 Lets say you want to bind to an attribute "data-name".
 One way of doing that would be `data-name.one-way="name"` but you can also use a shortcut syntax of
 `data-name="${name}"`. This is the same expression you would use as the innerText of a element.
+
+## Setting inner text once
+```html
+<h2 inner-text.once="title"></h2>
+```
+
+This is a bit different to having the expression between the tags in that there is no listener for this.
+Once the value is copied over that is it, it does not change again.

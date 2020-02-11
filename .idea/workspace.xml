@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/style/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/5.element.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/5.element.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/component/test-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/component/test-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,9 +102,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.build-publish" />
-        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Jest.for provider - items added" />
         <item itemvalue="Jest.parseAttribute - once" />
       </list>
@@ -235,14 +235,7 @@
       <workItem from="1581066729562" duration="47000" />
       <workItem from="1581323145719" duration="8588000" />
       <workItem from="1581338794438" duration="48000" />
-      <workItem from="1581420519227" duration="3201000" />
-    </task>
-    <task id="LOCAL-00141" summary="update get propery so that it returns the right value on false values">
-      <created>1577727715339</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1577727715340</updated>
+      <workItem from="1581420519227" duration="4451000" />
     </task>
     <task id="LOCAL-00142" summary="updated  documentation">
       <created>1578294795447</created>
@@ -580,7 +573,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581421856438</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="ensure events get swapped between observed items">
+      <created>1581424796534</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1581424796534</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
