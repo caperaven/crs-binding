@@ -33,6 +33,14 @@ export default class ArrayBinding extends ViewBase {
 
             splice2() {
                 this.data.items.splice(1, 2, {caption: `Item - splice ${this.data.items.length + 1}`}, {caption: `Item - splice ${this.data.items.length + 2}`});
+            },
+
+            move() {
+                const fromIndex = 3;
+                const toIndex = 1;
+
+                // insert(atIndex, 0, itemsToAdd)
+                this.data.items.splice(toIndex, 0, ...this.data.items.splice(fromIndex, 1));
             }
         });
     }
@@ -49,5 +57,4 @@ export default class ArrayBinding extends ViewBase {
     remove() {
         this.data.items.pop();
     }
-
 }
