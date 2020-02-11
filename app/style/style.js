@@ -26,4 +26,8 @@ export default class StyleBinding extends ViewBase {
         crsbinding.events.notifyPropertyChanged(this, "background");
         crsbinding.events.notifyPropertyChanged(this, "color");
     }
+
+    updateColor() {
+        this.model.color = "#FFBB00";
+    }
 }

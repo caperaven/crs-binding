@@ -108,6 +108,10 @@ function createProxyValue(origional, value) {
         if (value && value.__isProxy != true) {
             return crsbinding.observation.observe(value, origional);
         }
+        else {
+            value.__events = origional.__events;
+            delete origional.__events;
+        }
     }
     return value;
 }

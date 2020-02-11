@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/style/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/style/style.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/style/style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -230,14 +235,9 @@
       <workItem from="1580897781222" duration="2427000" />
       <workItem from="1581057408711" duration="7660000" />
       <workItem from="1581066729562" duration="47000" />
-      <workItem from="1581323145719" duration="8497000" />
-    </task>
-    <task id="LOCAL-00138" summary="publish">
-      <created>1577297919641</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1577297919642</updated>
+      <workItem from="1581323145719" duration="8588000" />
+      <workItem from="1581338794438" duration="48000" />
+      <workItem from="1581420519227" duration="1028000" />
     </task>
     <task id="LOCAL-00139" summary="publish">
       <created>1577298342103</created>
@@ -575,7 +575,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581333462093</updated>
     </task>
-    <option name="localTasksCounter" value="187" />
+    <task id="LOCAL-00187" summary="update tests">
+      <created>1581338739979</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1581338739979</updated>
+    </task>
+    <option name="localTasksCounter" value="188" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
