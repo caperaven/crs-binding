@@ -8,6 +8,7 @@ export class ElementMock {
         this.content = this;
         this.children = [];
         this.classList = new ClassList();
+        this.dataset = {};
 
         this.nodeName = (tagName || "div").toUpperCase();
         this.name = name;

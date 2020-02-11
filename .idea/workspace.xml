@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/if-classlist-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/if-classlist-provider.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/binding/providers/if-styles-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/if-styles-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/element.mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/element.mock.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,41 +50,44 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.if-styles-provider - propertyChanged - isActive = false">
-    <configuration name="if-styles-provider - propertyChanged - isActive = false" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.inner provider - _change no expObj">
+    <configuration name="Once provider - different context" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/if-styles-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" />
       <test-names>
-        <test-name value="if-styles-provider - propertyChanged - isActive = false" />
+        <test-name value="Once provider - different context" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="if-styles-provider - propertyChanged" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="Once provider - set data-attribute" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/if-styles-provider.test.js" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/once-provider.test.js" />
       <test-names>
-        <test-name value="if-styles-provider - propertyChanged" />
+        <test-name value="Once provider - set data-attribute" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="if-styles-provider.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="inner provider - _change no expObj" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST_FILE" />
-      <test-file value="$PROJECT_DIR$/test/binding/providers/if-styles-provider.test.js" />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/binding/providers/inner-provider.test.js" />
+      <test-names>
+        <test-name value="inner provider - _change no expObj" />
+      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/crs-binding/coverage/lcov-report/index.html" useBuiltInWebServerPort="true">
@@ -102,9 +106,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.if-styles-provider - propertyChanged - isActive = false" />
-        <item itemvalue="Jest.if-styles-provider.test.js" />
-        <item itemvalue="Jest.if-styles-provider - propertyChanged" />
+        <item itemvalue="Jest.inner provider - _change no expObj" />
+        <item itemvalue="Jest.Once provider - set data-attribute" />
+        <item itemvalue="Jest.Once provider - different context" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
@@ -234,14 +238,7 @@
       <workItem from="1581066729562" duration="47000" />
       <workItem from="1581323145719" duration="8588000" />
       <workItem from="1581338794438" duration="48000" />
-      <workItem from="1581420519227" duration="7940000" />
-    </task>
-    <task id="LOCAL-00146" summary="fixed context name issue on if provider.">
-      <created>1578326832122</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1578326832122</updated>
+      <workItem from="1581420519227" duration="8409000" />
     </task>
     <task id="LOCAL-00147" summary="fixed context name issue on if provider.">
       <created>1578341358916</created>
@@ -579,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581429029504</updated>
     </task>
-    <option name="localTasksCounter" value="195" />
+    <task id="LOCAL-00195" summary="added tests">
+      <created>1581429445584</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1581429445584</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

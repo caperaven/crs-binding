@@ -51,3 +51,10 @@ test("inner provider - _change", () => {
     expect(element.innerText).toBe(context.firstName);
 });
 
+test("inner provider - _change no expObj", () => {
+    instance._expObj = null;
+    instance._element.innerText = null;
+    instance._change();
+    expect(element.innerText).toBeNull();
+});
+
