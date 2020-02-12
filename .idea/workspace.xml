@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/list/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/list/list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/array/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/array/array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/one-way-provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,22 +23,23 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/form" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Users\Johan\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\192.6262.59\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\caperaven-projects\crs-binding\app" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\app\form" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
+      <recent name="D:\projects\caperaven-projects\crs-binding" />
+      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\caperaven-projects\crs-binding\test\binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\test\events" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src\events" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\caperaven-projects\crs-binding\app\form" />
-      <recent name="D:\projects\caperaven-projects\crs-binding\app\array" />
-      <recent name="D:\projects\caperaven-projects\crs-binding" />
       <recent name="D:\projects\caperaven-projects\crs-binding\src" />
     </key>
   </component>
@@ -235,14 +239,7 @@
       <workItem from="1581338794438" duration="48000" />
       <workItem from="1581420519227" duration="11661000" />
       <workItem from="1581434621935" duration="24462000" />
-      <workItem from="1581507176337" duration="524000" />
-    </task>
-    <task id="LOCAL-00152" summary="fixed provider problem on non event bindings to return a one way binding instead.">
-      <created>1578929310374</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
-      <option name="project" value="LOCAL" />
-      <updated>1578929310374</updated>
+      <workItem from="1581507176337" duration="1796000" />
     </task>
     <task id="LOCAL-00153" summary="random fixes">
       <created>1579029443036</created>
@@ -580,7 +577,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581504971808</updated>
     </task>
-    <option name="localTasksCounter" value="201" />
+    <task id="LOCAL-00201" summary="package update">
+      <created>1581507709453</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1581507709453</updated>
+    </task>
+    <option name="localTasksCounter" value="202" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

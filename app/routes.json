@@ -10,6 +10,11 @@
       "html-only": true
     },
     {
+      "title": "List",
+      "hash": "#list",
+      "view": "list"
+    },
+    {
       "title": "View 2",
       "hash": "#view2",
       "view": "view2"
