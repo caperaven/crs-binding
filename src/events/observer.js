@@ -45,7 +45,7 @@ export function releaseObserved(obj) {
         if (prop.indexOf("__") == 0 || (prop.indexOf("Changed") != -1 && typeof obj[prop] == "function")) {
             delete obj[prop];
         }
-        else if (obj[prop][PROXY] == true) {
+        else if (obj[prop] && obj[prop][PROXY] == true) {
             releaseObserved(obj[prop]);
             delete obj[prop];
         }

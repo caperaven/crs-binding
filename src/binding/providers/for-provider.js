@@ -124,6 +124,8 @@ export class ForProvider extends ProviderBase {
                     provider._change();
                 }
             }
+
+            crsbinding.expression.updateUI(item);
         }
     }
 
