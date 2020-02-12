@@ -6,7 +6,6 @@ export default class Form extends ViewBase {
         this.title = "Personal Input Form";
 
         this.data = getData();
-        console.log(this.data.personal.__events);
     }
 
     disposeData() {
