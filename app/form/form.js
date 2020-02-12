@@ -4,12 +4,18 @@ export default class Form extends ViewBase {
     async connectedCallback() {
         super.connectedCallback();
         this.title = "Personal Input Form";
+
         this.data = getData();
+        console.log(this.data.personal.__events);
     }
 
     disposeData() {
-        //JHR: TODO: NB: DEBUG THIS AND MAKE SURE EVERYTHING GETS DESTROYED
+        // JHR: todo: first time this thing is called the valus appear as normal
         this.data = null;
+    }
+
+    print() {
+        console.log(this.data.personal);
     }
 }
 

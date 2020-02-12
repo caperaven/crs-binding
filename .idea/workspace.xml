@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/form/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/form/form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/form/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/form/form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/compiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/compiler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -234,14 +234,7 @@
       <workItem from="1581323145719" duration="8588000" />
       <workItem from="1581338794438" duration="48000" />
       <workItem from="1581420519227" duration="11661000" />
-      <workItem from="1581434621935" duration="14244000" />
-    </task>
-    <task id="LOCAL-00149" summary="added array test screen">
-      <created>1578924997009</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1578924997010</updated>
+      <workItem from="1581434621935" duration="22404000" />
     </task>
     <task id="LOCAL-00150" summary="fixed array issue with for behaviour">
       <created>1578927691964</created>
@@ -579,7 +572,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581450093355</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="added try catch to long path expressions in case path no longer exists">
+      <created>1581495078029</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1581495078029</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +601,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed context name issue on if provider." />
     <MESSAGE value="remove attributes after providers have been created" />
     <MESSAGE value="added array test screen" />
     <MESSAGE value="fixed array issue with for behaviour" />
@@ -626,7 +625,8 @@
     <MESSAGE value="ensure events get swapped between observed items" />
     <MESSAGE value="added tests" />
     <MESSAGE value="path test" />
-    <option name="LAST_COMMIT_MESSAGE" value="path test" />
+    <MESSAGE value="added try catch to long path expressions in case path no longer exists" />
+    <option name="LAST_COMMIT_MESSAGE" value="added try catch to long path expressions in case path no longer exists" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

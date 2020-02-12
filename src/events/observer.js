@@ -63,9 +63,14 @@ function get(obj, prop) {
 }
 
 function set(obj, prop, value) {
-    if (prop == "_disposing" || obj._disposing == true || obj.__processing == true) return true;
+    if (prop == "_disposing" || obj._disposing == true) return true;
 
-    setSingle(obj, prop, value);
+    if (prop.indexOf("__") != -1) {
+        obj[prop] = value;
+    }
+    else {
+        setSingle(obj, prop, value);
+    }
 
     return true;
 }
@@ -95,20 +100,36 @@ function setSingle(obj, prop, value) {
         }
     }
 
-    obj.__processing = false;
+    delete obj.__processing;
 }
 
 function createProxyValue(origional, value) {
+    if (value == null) return null;
+
+    let result = value;
+
     if (origional && origional.__isProxy == true) {
-        if (value && value.__isProxy != true) {
-            return crsbinding.observation.observe(value, origional);
+        if (result && result.__isProxy != true) {
+            result = crsbinding.observation.observe(result, origional);
         }
-        else if (value && origional) {
-            value.__events = origional.__events;
+        else if (result && origional) {
+            result.__events = origional.__events;
             delete origional.__events;
         }
+
+        const properties = Object.getOwnPropertyNames(origional).filter(item => item.indexOf("__") == -1);
+        for (let property of properties) {
+            if (origional[property][PROXY] == true && result[property][PROXY] != true) {
+                const nc = crsbinding.observation.observe(result[property], origional[property]);
+                result.__processing = true;
+                delete result[property];
+                result[property] = nc;
+                delete result.__processing;
+            }
+        }
     }
-    return value;
+
+    return result;
 }
 
 function isProxy(obj) {
