@@ -15,7 +15,7 @@ export default class Form extends ViewBase {
 
 function getData() {
     return {
-        personal: {
+         personal: {
             firstName: "John",
             lastName: "Doe",
             age: 21

@@ -63,19 +63,18 @@ function get(obj, prop) {
 }
 
 function set(obj, prop, value) {
-    if (prop == "_disposing" || obj._disposing == true) return true;
+    if (prop == "_disposing" || obj._disposing == true || obj.__processing == true) return true;
 
-    if (value != null && value.indexOf && value.indexOf(".") > 0) {
-        return setOnPath(obj, prop, value);
-    }
-    else {
-        return setSingle(obj, prop, value);
-    }
+    setSingle(obj, prop, value);
+
+    return true;
 }
 
 const excludeBackup = ["__isProxy", "element"];
 
 function setSingle(obj, prop, value) {
+    obj.__processing = true;
+
     const backup = obj[BACKUP];
     const oldValue = obj[prop];
 
@@ -96,11 +95,7 @@ function setSingle(obj, prop, value) {
         }
     }
 
-    return true;
-}
-
-function setOnPath(obj, prop, value) {
-    return true;
+    obj.__processing = false;
 }
 
 function createProxyValue(origional, value) {
@@ -108,7 +103,7 @@ function createProxyValue(origional, value) {
         if (value && value.__isProxy != true) {
             return crsbinding.observation.observe(value, origional);
         }
-        else {
+        else if (value && origional) {
             value.__events = origional.__events;
             delete origional.__events;
         }

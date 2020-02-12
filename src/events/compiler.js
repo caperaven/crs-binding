@@ -31,6 +31,11 @@ export function compileExp(exp, parameters, options) {
         }
 
         src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
+
+        const parts = san.expression.split(".");
+        if (parts.length > 2) {
+            src = `try { ${src} } catch(error) { return null }`;
+        }
     }
     else {
         san = {
