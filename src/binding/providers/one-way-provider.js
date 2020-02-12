@@ -41,9 +41,7 @@ export class OneWayProvider extends ProviderBase {
         this.listenOnPath(this._value, this._eventHandler);
 
         const v = this._context[this._value];
-        if (v != null) {
-            this.propertyChanged(null, v);
-        }
+        this.propertyChanged(null, v);
     }
 
     setContext() {

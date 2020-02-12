@@ -13,7 +13,7 @@ export default class ArrayBinding extends ViewBase {
         super.connectedCallback();
 
         this.data = crsbinding.observation.observe({
-            items: [{caption: "Item 1"}],  // should not need to put observe on this property
+            items: [{caption: "Item 1", editing: true}],  // should not need to put observe on this property
 
             // JHR: Add  it so that when you call a function it uses call with the context as this.
 
@@ -51,7 +51,7 @@ export default class ArrayBinding extends ViewBase {
     }
 
     add() {
-        this.data.items.push({caption: `Item ${this.data.items.length + 1}`});
+        this.data.items.push({caption: `Item ${this.data.items.length + 1}`, editing: true});
     }
 
     remove() {

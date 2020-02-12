@@ -9,6 +9,9 @@
 
 <ul>
     <template for="item of data.items">
-        <li data-editing.if="item.editing == true ? 'true' : 'false'">${item.caption}</li>
+        <li data-editing.if="item.editing == true ? 'true' : 'false'" data-editing2="${item.editing}">
+            <span>${item.caption}</span>
+            <input type="checkbox" checked.bind="item.editing" />
+        </li>
     </template>
 </ul>
