@@ -14,7 +14,9 @@ export class InflationManager {
      * @param template
      */
     register(id, template) {
-        const result = generateCodeFor(template);
+        const generator = new InflationCodeGenerator();
+        const result = generator.generateCodeFor(template);
+        generator.dispose();
 
         this._items.set(id, {
             template: template,
@@ -50,7 +52,7 @@ export class InflationManager {
 
         for (let d of data) {
             const element = item.template.content.cloneNode(true);
-            this.inflate(id, element, d, item.inflate);
+            this.inflate(id, element.children[0], d, item.inflate);
             fragment.appendChild(element);
         }
 
@@ -87,12 +89,92 @@ export class InflationManager {
     }
 }
 
-function generateCodeFor(template) {
-    let inflateSrc = "";
-    let deflateSrc = "";
+class InflationCodeGenerator {
+    constructor() {
+        this.inflateSrc = [];
+        this.deflateSrc = [];
+    }
 
-    return {
-        inflate: inflateSrc,
-        deflate: deflateSrc
+    dispose() {
+        this.inflateSrc = null;
+        this.deflateSrc = null;
+    };
+
+    generateCodeFor(template) {
+        const element = template.content.children[0];
+        this.path = "element";
+
+        this._processElement(element);
+
+        const inflateCode = this.inflateSrc.join("\n");
+        const deflateCode = this.deflateSrc.join("\n");
+
+        return {
+            inflate: new Function("element", "context", inflateCode),
+            deflate: new Function("element", "context", deflateCode)
+        }
+    }
+
+    _processElement(element) {
+        this._processInnerText(element);
+        this._processAttributes(element);
+
+        const path = this.path;
+        for (let i = 0; i < element.children.length; i++) {
+            this.path = `${path}.children[${i}]`;
+            this._processElement(element.children[i]);
+        }
+    }
+
+    _processInnerText(element) {
+        const text = (element.innerHTML || "").trim();
+        if (text.indexOf("${") == 0) {
+            let exp = text.substr(2, text.length - 3);
+            exp = crsbinding.expression.sanitize(exp).expression;
+            this.inflateSrc.push(`${this.path}.innerText = ${exp};`);
+            this.deflateSrc.push(`${this.path}.innerText = "";`);
+        }
+    }
+
+    _processAttributes(element) {
+        const attributes = Array.from(element.attributes).filter(attr => attr.value.indexOf("${") != -1 || attr.name.indexOf(".if") != -1);
+        for (let attr of attributes) {
+            if (attr.value.indexOf("${") != -1) {
+                this._processAttrValue(attr);
+            }
+            else {
+                this._processAttrCondition(attr);
+            }
+        }
+    }
+
+    _processAttrValue(attr) {
+        const text = attr.value.trim();
+        let exp = text.substr(2, text.length - 3);
+        exp = crsbinding.expression.sanitize(exp).expression;
+        this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", ${exp});`);
+        this.deflateSrc.push(`${this.path}.removeAttribute("${attr.name}");`);
+    }
+
+    _processAttrCondition(attr) {
+        if (attr.name.trim().indexOf("style") == 0) {
+            this._processStyle(attr);
+        }
+        else if (attr.name.trim().indexOf("classlist") == 0) {
+            this._processClassList(attr);
+        }
+    }
+
+    _processStyle(attr) {
+        const parts = attr.name.split(".");
+        const prop = parts[1];
+        const value = crsbinding.expression.sanitize(attr.value.trim()).expression;
+
+        this.inflateSrc.push(`${this.path}.style.${prop} = ${value}`);
+        this.deflateSrc.push(`${this.path}.style.${prop} = ""`);
+        attr.parentElement.removeAttribute(attr.name);
+    }
+
+    _processClassList(attr) {
     }
 }

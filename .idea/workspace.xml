@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/template/template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/template/template.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/binding/inflation-manager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/template/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/template/template.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binding/inflation-manager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/inflation-manager.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,9 +106,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.build-publish" />
+        <item itemvalue="npm.bundle" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="npm.test" />
-        <item itemvalue="npm.bundle" />
         <item itemvalue="Jest.inner provider - _change no expObj" />
       </list>
     </recent_temporary>
@@ -246,14 +242,8 @@
       <workItem from="1581434621935" duration="24462000" />
       <workItem from="1581507176337" duration="2359000" />
       <workItem from="1581509664799" duration="6367000" />
-      <workItem from="1581604351069" duration="3765000" />
-    </task>
-    <task id="LOCAL-00157" summary="random fixes">
-      <created>1579166426739</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1579166426739</updated>
+      <workItem from="1581604351069" duration="5055000" />
+      <workItem from="1581612602608" duration="7034000" />
     </task>
     <task id="LOCAL-00158" summary="renamed all system variables to have the double underscore prefix &quot;__&quot;">
       <created>1579172387998</created>
@@ -591,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581517271164</updated>
     </task>
-    <option name="localTasksCounter" value="206" />
+    <task id="LOCAL-00206" summary="started adding inflation">
+      <created>1581610494130</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1581610494131</updated>
+    </task>
+    <option name="localTasksCounter" value="207" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +610,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed provider problem on non event bindings to return a one way binding instead." />
     <MESSAGE value="fix expression problem with null" />
     <MESSAGE value="random fixes" />
     <MESSAGE value="renamed all system variables to have the double underscore prefix &quot;__&quot;" />
@@ -638,7 +634,8 @@
     <MESSAGE value="package update" />
     <MESSAGE value="dispose sub proxy objects" />
     <MESSAGE value="fixed small bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed small bugs" />
+    <MESSAGE value="started adding inflation" />
+    <option name="LAST_COMMIT_MESSAGE" value="started adding inflation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
