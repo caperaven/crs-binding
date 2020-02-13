@@ -9,6 +9,7 @@ import {updateUI} from "./events/update.js";
 import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
+import {InflationManager} from "./binding/inflation-manager.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -26,6 +27,7 @@ const crsbinding = {
     _expFn: new Map(),
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
+    inflationManager: new InflationManager(),
 
     expression: {
         sanitize: sanitizeExp,

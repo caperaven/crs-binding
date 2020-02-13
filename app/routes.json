@@ -15,6 +15,11 @@
       "view": "list"
     },
     {
+      "title": "Template",
+      "hash": "#template",
+      "view": "template"
+    },
+    {
       "title": "View 2",
       "hash": "#view2",
       "view": "view2"

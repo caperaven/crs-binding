@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/template/template.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/template/template.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/binding/inflation-manager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/welcome/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/welcome/welcome.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/binding/providers/for-provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/providers/for-provider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/event-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/event-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/observer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/observer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -242,14 +245,8 @@
       <workItem from="1581420519227" duration="11661000" />
       <workItem from="1581434621935" duration="24462000" />
       <workItem from="1581507176337" duration="2359000" />
-      <workItem from="1581509664799" duration="4430000" />
-    </task>
-    <task id="LOCAL-00156" summary="fix expression problem with null">
-      <created>1579164132346</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
-      <option name="project" value="LOCAL" />
-      <updated>1579164132346</updated>
+      <workItem from="1581509664799" duration="6367000" />
+      <workItem from="1581604351069" duration="3765000" />
     </task>
     <task id="LOCAL-00157" summary="random fixes">
       <created>1579166426739</created>
@@ -587,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581509438128</updated>
     </task>
-    <option name="localTasksCounter" value="205" />
+    <task id="LOCAL-00205" summary="fixed small bugs">
+      <created>1581517271164</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1581517271164</updated>
+    </task>
+    <option name="localTasksCounter" value="206" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,7 +613,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added context call for th click event" />
     <MESSAGE value="fixed provider problem on non event bindings to return a one way binding instead." />
     <MESSAGE value="fix expression problem with null" />
     <MESSAGE value="random fixes" />
@@ -634,7 +637,8 @@
     <MESSAGE value="fixed path binding" />
     <MESSAGE value="package update" />
     <MESSAGE value="dispose sub proxy objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="dispose sub proxy objects" />
+    <MESSAGE value="fixed small bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed small bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
