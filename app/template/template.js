@@ -7,14 +7,24 @@ export default class TemplatesView extends ViewBase {
         crsbinding.inflationManager.register("list-item", template);
         this.list = this._element.querySelector(".my-list");
 
-        const data = getData(10);
-        const fragment = crsbinding.inflationManager.get("list-item", data);
+        this.data = getData(10);
+        const fragment = crsbinding.inflationManager.get("list-item", this.data);
         this.list.appendChild(fragment);
     }
 
     async disconnectedCallback() {
         crsbinding.inflationManager.unregister("list-item");
         super.disconnectedCallback();
+    }
+
+    deflate() {
+        const element = this.list.children[0];
+        crsbinding.inflationManager.deflate("list-item", element);
+    }
+
+    inflate() {
+        const element = this.list.children[0];
+        crsbinding.inflationManager.inflate("list-item", element, this.data[0]);
     }
 }
 

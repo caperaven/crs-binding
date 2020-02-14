@@ -11,9 +11,20 @@
         height: 24px;
         margin-right: 1rem;
     }
+
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 </style>
 
 <h2>Templates</h2>
+
+<div class="toolbar">
+    <button click.call="deflate">Deflate</button>
+    <button click.call="inflate">Inflate</button>
+</div>
 
 <template id="my-template">
     <li data-id="${id}">
