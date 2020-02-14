@@ -172,7 +172,7 @@ class InflationCodeGenerator {
 
         this.inflateSrc.push(`${this.path}.style.${prop} = ${value}`);
         this.deflateSrc.push(`${this.path}.style.${prop} = ""`);
-        attr.parentElement.removeAttribute(attr.name);
+        attr.ownerElement.removeAttribute(attr.name);
     }
 
     _processClassList(attr) {

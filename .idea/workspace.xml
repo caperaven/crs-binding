@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0032edc8-e598-4e76-9d95-ca41b566ec1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/template/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/template/template.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/template/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/template/template.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/binding/inflation-manager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binding/inflation-manager.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -244,13 +242,8 @@
       <workItem from="1581509664799" duration="6367000" />
       <workItem from="1581604351069" duration="5055000" />
       <workItem from="1581612602608" duration="7034000" />
-    </task>
-    <task id="LOCAL-00158" summary="renamed all system variables to have the double underscore prefix &quot;__&quot;">
-      <created>1579172387998</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1579172387998</updated>
+      <workItem from="1581629829417" duration="82000" />
+      <workItem from="1581638465839" duration="331000" />
     </task>
     <task id="LOCAL-00159" summary="added fix for binding context to a property used in for operations">
       <created>1579175183706</created>
@@ -588,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581610494131</updated>
     </task>
-    <option name="localTasksCounter" value="207" />
+    <task id="LOCAL-00207" summary="started adding inflation">
+      <created>1581629839948</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1581629839949</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
