@@ -1,3 +1,5 @@
+import {setClassListCondition} from "./providers/code-constants.js";
+
 export class InflationManager {
     constructor() {
         this._items = new Map();
@@ -176,5 +178,25 @@ class InflationCodeGenerator {
     }
 
     _processClassList(attr) {
+        const parts = attr.value.split("?");
+        const condition = crsbinding.expression.sanitize(parts[0]).expression;
+
+        const values = parts[1].split(":");
+        const trueValue = values[0].trim();
+        const falseValue = values.length > 1 ? values[1].trim() : "";
+        
+        const trueCode = trueValue.indexOf("[") == -1 ? trueValue : `...${trueValue}`;
+        let code = `if (${condition}) {${this.path}.classList.add(${trueCode})}`;
+
+        if (falseValue.length > 0) {
+            let falseCode = falseValue.indexOf("[") == -1 ? falseValue : `...${falseValue}`;
+            code += `else {${this.path}.classList.add(${falseCode})}`;
+        }
+        
+        const deflateCode = `while (${this.path}.classList.length > 0) { ${this.path}.classList.remove(${this.path}.classList.item(0)); }`
+        
+        this.inflateSrc.push(code);
+        this.deflateSrc.push(deflateCode);
+        attr.ownerElement.removeAttribute(attr.name);
     }
 }

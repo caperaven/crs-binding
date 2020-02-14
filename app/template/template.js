@@ -1,5 +1,15 @@
 import {ViewBase} from "./../../src/view/view-base.js";
 
+/**
+ * JHR: Add for.once example after you added it.
+ * 
+ * 1. Add class expression
+ * 2. Add attribute.if expressions x 3
+ * 3. Add for.once
+ * 4. Write tests
+ * 5. Go sleep.
+ */
+
 export default class TemplatesView extends ViewBase {
     connectedCallback() {
         super.connectedCallback();
@@ -42,6 +52,10 @@ function getData(count) {
 
         isActive = !isActive;
     }
+    
+    result[0].isReady = true;
+    result[1].isReady = true;
+    result[2].isReady = true;
 
     return result;
 }

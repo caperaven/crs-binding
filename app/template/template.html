@@ -17,6 +17,18 @@
         flex-direction: row;
         align-items: center;
     }
+    
+    .ready {
+        background: yellow;
+    }
+    
+    .italic {
+        font-style: italic;
+    }
+    
+    .notReady {
+        background: gray;
+    }
 </style>
 
 <h2>Templates</h2>
@@ -27,9 +39,10 @@
 </div>
 
 <template id="my-template">
-    <li data-id="${id}">
+    <li data-id="${id}" classlist.if="isReady == true ? ['ready', 'italic'] : 'notReady'">
         <div class="icon" style.background.if="isActive == true ? 'green' : 'red'"></div>
         <div>${caption}</div>
+        <div hidden.if="isActive == false" data-hidden.if="isActive == false ? 'yes' : 'no'" data-descrioption="isActive == false ? 'this is active'">I am active</div>
     </li>
 </template>
 
