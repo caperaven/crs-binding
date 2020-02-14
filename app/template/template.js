@@ -28,13 +28,17 @@ export default class TemplatesView extends ViewBase {
     }
 
     deflate() {
-        const element = this.list.children[0];
-        crsbinding.inflationManager.deflate("list-item", element);
+        crsbinding.inflationManager.deflate("list-item", this.list.children[0]);
+        crsbinding.inflationManager.deflate("list-item", this.list.children[1]);
+        crsbinding.inflationManager.deflate("list-item", this.list.children[2]);
+        crsbinding.inflationManager.deflate("list-item", this.list.children[3]);
     }
 
     inflate() {
-        const element = this.list.children[0];
-        crsbinding.inflationManager.inflate("list-item", element, this.data[0]);
+        crsbinding.inflationManager.inflate("list-item", this.list.children[0], this.data[0]);
+        crsbinding.inflationManager.inflate("list-item", this.list.children[1], this.data[1]);
+        crsbinding.inflationManager.inflate("list-item", this.list.children[2], this.data[2]);
+        crsbinding.inflationManager.inflate("list-item", this.list.children[3], this.data[3]);
     }
 }
 

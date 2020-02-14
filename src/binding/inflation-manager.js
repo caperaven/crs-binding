@@ -160,10 +160,15 @@ class InflationCodeGenerator {
 
     _processAttrCondition(attr) {
         if (attr.name.trim().indexOf("style") == 0) {
-            this._processStyle(attr);
+            return this._processStyle(attr);
         }
-        else if (attr.name.trim().indexOf("classlist") == 0) {
-            this._processClassList(attr);
+        
+        if (attr.name.trim().indexOf("classlist") == 0) {
+            return this._processClassList(attr);
+        }
+        
+        if (attr.name.trim().indexOf(".if") != -1) {
+            return this._processConditional(attr);
         }
     }
 
@@ -172,8 +177,8 @@ class InflationCodeGenerator {
         const prop = parts[1];
         const value = crsbinding.expression.sanitize(attr.value.trim()).expression;
 
-        this.inflateSrc.push(`${this.path}.style.${prop} = ${value}`);
-        this.deflateSrc.push(`${this.path}.style.${prop} = ""`);
+        this.inflateSrc.push(`${this.path}.style.${prop} = ${value};`);
+        this.deflateSrc.push(`${this.path}.style.${prop} = "";`);
         attr.ownerElement.removeAttribute(attr.name);
     }
 
@@ -186,17 +191,45 @@ class InflationCodeGenerator {
         const falseValue = values.length > 1 ? values[1].trim() : "";
         
         const trueCode = trueValue.indexOf("[") == -1 ? trueValue : `...${trueValue}`;
-        let code = `if (${condition}) {${this.path}.classList.add(${trueCode})}`;
+        let code = `if (${condition}) {${this.path}.classList.add(${trueCode});}`;
 
         if (falseValue.length > 0) {
             let falseCode = falseValue.indexOf("[") == -1 ? falseValue : `...${falseValue}`;
-            code += `else {${this.path}.classList.add(${falseCode})}`;
+            code += `else {${this.path}.classList.add(${falseCode});}`;
         }
         
-        const deflateCode = `while (${this.path}.classList.length > 0) { ${this.path}.classList.remove(${this.path}.classList.item(0)); }`
+        const deflateCode = `while (${this.path}.classList.length > 0) {${this.path}.classList.remove(${this.path}.classList.item(0));}`
         
         this.inflateSrc.push(code);
         this.deflateSrc.push(deflateCode);
+        attr.ownerElement.removeAttribute(attr.name);
+    }
+
+    _processConditional(attr) {
+        const attrName = attr.name.split(".if")[0].trim();
+        const expParts = attr.value.split("?");
+        const condition = crsbinding.expression.sanitize(expParts[0].trim()).expression;
+        let code = [`if(${condition})`];
+        
+        const expValue = expParts.length > 1 ? expParts[1].trim() : `"${attrName}"`;
+        
+        if (expValue.indexOf(":") == -1) {
+            code.push("{");
+            code.push(`${this.path}.setAttribute("${attrName}", ${expValue});`);
+            code.push("}");
+            code.push(`else {${this.path}.removeAttribute("${attrName}")}`);
+        }
+        else {
+            const condParts = expParts[1].split(":");
+            code.push("{");
+            code.push(`${this.path}.setAttribute("${attrName}", ${condParts[0].trim()});`);
+            code.push("}");
+            code.push(`else {${this.path}.setAttribute("${attrName}", ${condParts[1].trim()})}`);
+        }
+        
+        this.inflateSrc.push(code.join(""));
+        this.deflateSrc.push(`${this.path}.removeAttribute("${attrName}")`);
+
         attr.ownerElement.removeAttribute(attr.name);
     }
 }
