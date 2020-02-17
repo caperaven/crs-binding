@@ -1,5 +1,6 @@
 import {InflationManager} from "./../../src/binding/inflation-manager.js";
 import {ElementMock} from "../element.mock.js";
+import {DocumentMock} from "../dom-mock.js";
 
 let instance;
 let template;
@@ -8,12 +9,15 @@ let model;
 async function createTemplate() {
     const bindingModule = await import("./../crsbinding.mock.js");
     global.crsbinding = bindingModule.crsbinding;
+    global.document = new DocumentMock();
 
     template = new ElementMock("template");
     const li = new ElementMock("li", "listitem");
 
     const child1 = new ElementMock("div");
     child1.setAttribute("data-id", "${id}");
+    child1.setAttribute("data-hidden.if","isActive == false ? 'yes' : 'no'");
+    child1.innerHTML = "${id}";
     li.appendChild(child1);
 
     const child2 = new ElementMock("div");
@@ -43,6 +47,9 @@ beforeEach(async () => {
 
 test("inflation manger - constructor", () => {
     expect(instance._items).not.toBeUndefined();
+
+    instance.unregister("list-item");
+    expect(instance._items.get("list-item")).toBeUndefined();
 });
 
 test("inflation manger - dispose", () => {
@@ -63,9 +70,13 @@ test("inflation manager - check attribute value", () => {
     const el = template.children[0];
     instance.inflate("list-item", el, model);
     expect(el.children[0].getAttribute("data-id").value).toEqual(model.id);
+    expect(el.children[0].getAttribute("data-hidden").value).toEqual("no");
+    expect(el.children[0].innerText).toEqual(model.id);
 
     instance.deflate("list-item", el);
     expect(el.children[0].getAttribute("data-id")).toBeUndefined();
+    expect(el.children[0].getAttribute("data-hidden")).toBeUndefined();
+    expect(el.children[0].innerText).toEqual("");
 });
 
 test("inflation manager - check classlist", () => {
@@ -102,6 +113,25 @@ test("inflation manager - check style", () => {
     instance.inflate("list-item", el, model);
     expect(el.children[2].style.background).toBe("red");
 
-    instance.deflate("list-item", el);
+    instance.deflate("list-item", [el]);
     expect(el.children[2].style.background).toBe("");
+});
+
+test("inflation manager - get", () => {
+    const data = [
+        {
+            id: 1,
+            isActive: true,
+            isReady: true
+        }
+    ];
+
+    const result = instance.get("list-item", data);
+    expect(result).not.toBeUndefined();
+    expect(result.children.length).toBe(1);
+});
+
+test("inflation manager - get", () => {
+    const result = instance.get("wrong", null);
+    expect(result).toBe(null);
 });
