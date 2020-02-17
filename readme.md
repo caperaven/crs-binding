@@ -560,3 +560,77 @@ One way of doing that would be `data-name.one-way="name"` but you can also use a
 
 This is a bit different to having the expression between the tags in that there is no listener for this.
 Once the value is copied over that is it, it does not change again.
+
+# Inflating UI
+Let me start by describing what this is and where you would use it before we get into the details.
+Binding engines operate on ui and data and creating a relationship between the two.
+Sometimes you need to keep the connection alive so that updates on one reflects on the other.
+
+Inflation is the opposite of this.
+Using a template as a reference we want to populate the template with data from the model and forget about it.
+This sounds very much like populating data with the once operation except this applies to the entire template and all the binding expressions are evaluated once only.
+To this end you can also use an array of data and ask for all the items back, populated with it's data and decorated according to it's attribute, style and classlist expressions.
+
+The result is static so any changes you make to the data has no effect.
+This is a great way to generate UI for virtualized lists or static information.
+
+So here is a list of usable expression types.
+
+1. Attributes ```data-id="${id}"```
+1. Conditional Attributes ```hidden.if="isActive == false"```
+1. Conditional ClassList ```classlist.if="isReady == true ? ['ready', 'italic'] : 'notReady'"```
+1. Conditional Styles ```style.background.if="isActive == true ? 'green' : 'red'"```
+
+How to use this?
+
+<strong>Step 1</strong>: create an template and register it with the inflation manager giving a unique id for later use
+
+```html
+<template id="my-template">
+    <li data-id="${id}" classlist.if="isReady == true ? ['ready', 'italic'] : 'notReady'">
+        <div class="icon" style.background.if="isActive == true ? 'green' : 'red'"></div>
+        <div>${caption}</div>
+        <div hidden.if="isActive == false" data-hidden.if="isActive == false ? 'yes' : 'no'" data-description.if="isActive == false ? 'this not is active'">I am active</div>
+    </li>
+</template>
+```
+
+```js
+const template = this._element.querySelector("#my-template");
+crsbinding.inflationManager.register("list-item", template);
+```
+
+<strong>Step 2:</strong> when you have your data you can use the get function.
+
+```js
+const fragment = crsbinding.inflationManager.get("list-item", template);
+```
+
+<strong>Finally</strong> When you are done clean up after yourself by un-registering the template
+
+```js
+crsbinding.inflationManager.unregister("list-item");
+```
+
+In some cases you may want to reuse a element and add it to a element store.
+Doing this prevents it from being picked up by the garbage collection.
+You don't want to store it with all the inflated information though so there are two functions that allow you too use it this way.
+
+1. deflate: clean up the element for storgate
+1. inflate: populate a given element with the information on the model.
+
+```js
+store.add(crsbinding.inflationManager.deflate("list-item", element));
+```
+
+```js
+const element = store.getElement();
+crsbinding.inflationManager.deflate("list-item", element, model);
+```
+
+For performance reasons the function generated to perform this task does not do checks on the model or element.
+Thus, please keep this min mind:
+
+1. Only use elements you got origionally from the inflation manager.
+1. The models you use as part of the inflation process must have the paths structures as defined in your expression.
+1. The expressions you define in the template is relative with the model being the root. So if you have a property called isActive on the item you can start the expression with isActive.
