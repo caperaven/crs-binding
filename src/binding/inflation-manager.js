@@ -1,5 +1,3 @@
-import {setClassListCondition} from "./providers/code-constants.js";
-
 export class InflationManager {
     constructor() {
         this._items = new Map();
@@ -156,6 +154,7 @@ class InflationCodeGenerator {
         exp = crsbinding.expression.sanitize(exp).expression;
         this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", ${exp});`);
         this.deflateSrc.push(`${this.path}.removeAttribute("${attr.name}");`);
+        attr.ownerElement.removeAttribute(attr.name);
     }
 
     _processAttrCondition(attr) {
