@@ -17,6 +17,7 @@ async function createTemplate() {
     const child1 = new ElementMock("div");
     child1.setAttribute("data-id", "${id}");
     child1.setAttribute("data-hidden.if","isActive == false ? 'yes' : 'no'");
+    child1.setAttribute("data-desc.if", "isActive == true ? 'ready'");
     child1.innerHTML = "${id}";
     li.appendChild(child1);
 
@@ -71,12 +72,21 @@ test("inflation manager - check attribute value", () => {
     instance.inflate("list-item", el, model);
     expect(el.children[0].getAttribute("data-id").value).toEqual(model.id);
     expect(el.children[0].getAttribute("data-hidden").value).toEqual("no");
+    expect(el.children[0].getAttribute("data-desc").value).toBe("ready");
     expect(el.children[0].innerText).toEqual(model.id);
 
     instance.deflate("list-item", el);
     expect(el.children[0].getAttribute("data-id")).toBeUndefined();
     expect(el.children[0].getAttribute("data-hidden")).toBeUndefined();
+    expect(el.children[0].getAttribute("data-desc")).toBeUndefined();
     expect(el.children[0].innerText).toEqual("");
+});
+
+test("inflation manager - check conditional value", () => {
+    model.isActive = false;
+    const el = template.children[0];
+    instance.inflate("list-item", el, model);
+    expect(el.children[0].getAttribute("data-desc")).toBeUndefined();
 });
 
 test("inflation manager - check classlist", () => {
