@@ -20,12 +20,18 @@ async function createTemplate() {
     child2.setAttribute("classlist.if", "isReady == true ? 'ready' : 'notReady'");
     li.appendChild(child2);
 
+    const child3 = new ElementMock("div");
+    child3.setAttribute("style.background.if", "isActive == true ? 'green' : 'red'");
+    li.appendChild(child3);
+
+
     template.appendChild(li);
 
     instance.register("list-item", template);
 
     model = {
         id: 10,
+        isActive: true,
         isReady: true
     }
 }
@@ -69,4 +75,33 @@ test("inflation manager - check classlist", () => {
 
     instance.deflate("list-item", el);
     expect(el.children[1].classList.length).toBe(0);
+});
+
+test("inflation manager - check classlist false", () => {
+    model.isReady = false;
+    const el = template.children[0];
+    instance.inflate("list-item", el, model);
+    expect(el.children[1].classList.contains("notReady")).toBeTruthy();
+
+    instance.deflate("list-item", el);
+    expect(el.children[1].classList.length).toBe(0);
+});
+
+test("inflation manager - check style", () => {
+    const el = template.children[0];
+    instance.inflate("list-item", el, model);
+    expect(el.children[2].style.background).toBe("green");
+
+    instance.deflate("list-item", el);
+    expect(el.children[2].style.background).toBe("");
+});
+
+test("inflation manager - check style", () => {
+    model.isActive = false;
+    const el = template.children[0];
+    instance.inflate("list-item", el, model);
+    expect(el.children[2].style.background).toBe("red");
+
+    instance.deflate("list-item", el);
+    expect(el.children[2].style.background).toBe("");
 });
