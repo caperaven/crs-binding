@@ -5,9 +5,10 @@
     <button click.call="data.splice">Splice remove</button>
     <button click.call="data.splice2">Splice remove and add</button>
     <button click.call="data.move">Move item in array</button>
+    <button click.call="itemClick($event)">Click</button>
 </div>
 
-<ul>
+<ul click.call="itemClick($event)">
     <template for="item of data.items">
         <li data-editing.if="item.editing == true ? 'true' : 'false'" data-editing2="${item.editing}">
             <span>${item.caption}</span>
@@ -15,3 +16,15 @@
         </li>
     </template>
 </ul>
+
+<h2>Details</h2>
+
+<label>
+    <span>caption:</span>
+    <span>${model.caption}</span>
+</label>
+<br/>
+<label>
+    <span>is editing:</span>
+    <span>${model.editing}</span>
+</label>

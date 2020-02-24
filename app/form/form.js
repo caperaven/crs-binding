@@ -1,4 +1,5 @@
 import {ViewBase} from "./../../src/view/view-base.js";
+import "./../../examples/component/simple-component.js";
 
 export default class Form extends ViewBase {
     async connectedCallback() {
@@ -23,7 +24,8 @@ function getData() {
          personal: {
             firstName: "John",
             lastName: "Doe",
-            age: 21
+            age: 21, 
+            isActive: true
         }
     }
 }

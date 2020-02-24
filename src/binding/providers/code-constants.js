@@ -1,7 +1,7 @@
-export const setElementProperty = `requestAnimationFrame(() => element.__property__ = value || "")`;
-export const setAttribute = `element.setAttribute("__property__", value || "")`;
+export const setElementProperty = `requestAnimationFrame(() => element.__property__ = value == null ? "" : value);`;
+export const setAttribute = `element.setAttribute("__property__", value == null ? "" : value)`;
 export const setElementConditional = "requestAnimationFrame(() => element.__property__ = (__exp__) ? __true__ : __false__)";
-export const setDataset = `element.dataset["__property__"] = value || ""`;
+export const setDataset = `element.dataset["__property__"] = value == null ? "" : value`;
 
 const setClassListRemove = `
 if (element.__classList!=null) {

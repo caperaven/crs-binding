@@ -20,8 +20,15 @@
         <input type="number" value.bind="data.personal.age" />
     </label>
 
+    <label>
+        <div>Is Active</div>
+        <input type="checkbox" checked.bind="data.personal.isActive"/>
+    </label>
+
     <h4>Summary</h4>
     <div>${data.personal.firstName} ${data.personal.lastName} is ${data.personal.age} old</div>
+    
+    <simple-component is-active.bind="data.personal.isActive"></simple-component>
 
     <button click.call="disposeData">Dispose Data</button>
     <button click.call="print">Print</button>

@@ -70,8 +70,9 @@ function getExpForProvider(provider) {
         const prop = provider._property.replace("data-", "");
         return setDataset.split("__property__").join(prop);
     }
-
-    if (provider._property.indexOf("-") == -1 || (provider._property.indexOf("-") != -1 && provider._property.indexOf(".") != -1)) {
+    
+    // if the attr == something like is-active or style.background then use the property setter else use the attribute setter.
+    if (provider._property.indexOf("-") != -1 || provider._property.indexOf(".") != -1) {
         result = setElementProperty;
         provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
     }

@@ -57,4 +57,16 @@ export default class ArrayBinding extends ViewBase {
     remove() {
         this.data.items.pop();
     }
+
+    itemClick(event) {
+        let target = event.target;
+        if (target.nodeName != "LI") {
+            target = target.parentElement;
+        }
+        
+        const index = Array.from(target.parentElement.children).indexOf(target);
+        const data = this.data.items[index];
+        
+        this.model = data;
+    }
 }
