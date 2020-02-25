@@ -107,8 +107,7 @@ function createProxyValue(origional, value) {
             result = crsbinding.observation.observe(result, origional);
         }
         else if (result && origional) {
-            result.__events = origional.__events;
-            delete origional.__events;
+            copyOverEvents(result, origional);
         }
 
         const properties = Object.getOwnPropertyNames(origional).filter(item => item.indexOf("__") == -1);
@@ -128,4 +127,9 @@ function createProxyValue(origional, value) {
 
 function isProxy(obj) {
     return obj && typeof obj == "object" && obj[PROXY] == true;
+}
+
+function copyOverEvents(target, source) {
+    target.__events = source.__events;
+    delete source.__events;
 }

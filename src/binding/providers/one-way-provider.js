@@ -1,5 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
-import {setElementProperty, setAttribute, setClassList, setDataset} from "./code-constants.js";
+import {setElementProperty, setElementValueProperty, setAttribute, setClassList, setDataset} from "./code-constants.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
@@ -71,7 +71,7 @@ function getExpForProvider(provider) {
         return setDataset.split("__property__").join(prop);
     }
     
-    result = setElementProperty;
+    result = provider._property == "value" ? setElementValueProperty : setElementProperty;
     provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
     
     return result.split("__property__").join(provider._property);
