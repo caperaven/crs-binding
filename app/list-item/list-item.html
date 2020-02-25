@@ -1,0 +1,43 @@
+<style>
+    .list {
+        display: inline-block;
+        border: var(--cl-border) solid 1px;
+        padding: 1rem;
+        margin-left: 1rem;
+    }
+
+    .list li {
+        display: flex;
+    }
+
+    .list li span {
+        flex: 1;
+    }
+
+    .tools {
+        padding: 1rem;
+    }
+
+    input[type="number"] {
+        width: 50px;
+    }
+
+    .layout {
+        display: grid;
+        height: 400px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+</style>
+
+<ul role="list" class="list" click.call="_click($event)">
+    <template for="item of items">
+        <li data-id="${item.id}" style.background.bind="item.backgroundColour" data-id="${item.id}">
+            <span data-id="${item.id}" style.color.bind="item.fontColour">${item.caption}</span>
+            <input type="checkbox" checked.bind="item.isActive" />
+            <button data-id="${item.id}" data-call="itemClicked">Set model</button>
+        </li>
+    </template>
+</ul>
+
+<text-properties hidden.if="model == null" model.bind="model"></text-properties>

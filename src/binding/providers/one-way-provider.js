@@ -40,7 +40,7 @@ export class OneWayProvider extends ProviderBase {
 
         this.listenOnPath(this._value, this._eventHandler);
 
-        const v = this._context[this._value];
+        const v = this._ctxName == "context" ? this._context[this._value] : this._context;
         this.propertyChanged(null, v);
     }
 
@@ -71,14 +71,8 @@ function getExpForProvider(provider) {
         return setDataset.split("__property__").join(prop);
     }
     
-    // if the attr == something like is-active or style.background then use the property setter else use the attribute setter.
-    if (provider._property.indexOf("-") != -1 || provider._property.indexOf(".") != -1) {
-        result = setElementProperty;
-        provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
-    }
-    else {
-        result = setAttribute;
-    }
-
+    result = setElementProperty;
+    provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
+    
     return result.split("__property__").join(provider._property);
 }
