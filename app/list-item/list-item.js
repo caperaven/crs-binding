@@ -17,8 +17,9 @@ export default class ListItem extends ViewBase {
     }
 
     async disconnectedCallback() {
-        crsbinding.observation.releaseObserved(this.items, true);
         super.disconnectedCallback();
+        this.model = null;
+        crsbinding.observation.releaseObserved(this.items, true);
     }
     
     _click(e) {

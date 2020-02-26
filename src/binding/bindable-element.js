@@ -6,6 +6,7 @@ export class BindableElement extends HTMLElement {
     }
 
     dispose() {
+        this._disposing = true;
         crsbinding.events.disableEvents(this);
         crsbinding.dom.disableEvents(this);
     }
@@ -41,7 +42,19 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(prop, value) {
+        const property = this[`${prop}`];
+
+        if (property != null) {
+            const elEvents = property.__elEvents || property.__events;
+            delete property.__elEvents;
+
+            if (value != null) {
+                value.__elEvents = elEvents;
+            }
+        }
+
         this[`_${prop}`] = value;
+
         crsbinding.events.notifyPropertyChanged(this, prop);
     }
 
