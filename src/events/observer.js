@@ -31,6 +31,7 @@ export function observe(obj, prior) {
 }
 
 export function releaseObserved(obj) {
+    if (obj.__elEvents != null) return;
     if (obj.__isArray == true) return releaseObservedArray(obj);
 
     crsbinding.events.disableEvents(obj);

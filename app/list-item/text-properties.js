@@ -10,6 +10,10 @@ export class TextProperties extends BindableElement {
     }
 
     set model(newValue) {
+        /**
+         * On set of the property using the set property, the events on the isting item needs to be compied over.
+         * setting the property to null will release the item from this and then also delete the _model thing.
+         */
         this.setProperty("model", newValue);
     }
 
@@ -23,8 +27,8 @@ export class TextProperties extends BindableElement {
     }
 
     async disconnectedCallback() {
-        crsbinding.observation.releaseObserved(this.model);
-        delete this.model;
+        this.model = null;
+        super.disconnectedCallback();
     }
 }
 

@@ -89,13 +89,20 @@ export function removeOn(obj, property, callback) {
 export function notifyPropertyChanged(obj, property, args) {
     if (obj.__events == null || obj.__events.has(property) == false) return;
 
-    const functions = obj.__events.get(property);
-    for(let fn of functions) {
-        fn(property, obj[property], args);
+    callFunctions(obj.__events.get(property), obj, property, args);
+
+    if (obj.__elEvents) {
+        callFunctions(obj.__elEvents.get(property), obj, property, args);
     }
 
     const changedFnName = `${property}Changed`;
     if (obj[changedFnName] != null) {
         obj[changedFnName].call(obj, args);
+    }
+}
+
+function callFunctions(functions, obj, property, args) {
+    for(let fn of functions) {
+        fn(property, obj[property], args);
     }
 }
