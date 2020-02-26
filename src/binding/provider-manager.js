@@ -29,5 +29,9 @@ export class ProviderManager {
             provider && provider.dispose();
         }
         element.__providers = null;
+
+        if (this.items.size == 0) {
+            this._nextId = 0;
+        }
     }
 }
