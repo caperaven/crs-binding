@@ -48,6 +48,10 @@ export class BindableElement extends HTMLElement {
             const elEvents = property.__elEvents || property.__events;
             delete property.__elEvents;
 
+            if (value == undefined) {
+                value = {};
+            }
+
             if (value != null) {
                 value.__elEvents = elEvents;
             }
