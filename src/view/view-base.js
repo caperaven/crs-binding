@@ -49,7 +49,7 @@ export class ViewBase {
 
     setProperty(prop, value) {
         this[`_${prop}`] = value;
-        crsbinding.events.notifyPropertyChanged(this, prop);
+        // this is a proxy and the notification of property change happens in the observer
     }
 
     _loaded() {

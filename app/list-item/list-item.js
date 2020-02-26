@@ -15,6 +15,11 @@ export default class ListItem extends ViewBase {
         this.title = "List Item Bind Example";
         this.items = getData(10);
     }
+
+    async disconnectedCallback() {
+        crsbinding.observation.releaseObserved(this.items, true);
+        super.disconnectedCallback();
+    }
     
     _click(e) {
         if (this[e.target.dataset.call]) {
@@ -23,7 +28,8 @@ export default class ListItem extends ViewBase {
     }   
     
     itemClicked(e) {
-       this.model = this.items.find(_=> _.id === Number(e.target.dataset.id));
+        const item = this.items.find(_=> _.id === Number(e.target.dataset.id));
+        this.model = item;
     }
 }
 
@@ -60,5 +66,5 @@ function getData() {
         }
     ];
     
-    return crsbinding.observation.observe(result);
+    return crsbinding.observation.observe(result, null, true);
 }

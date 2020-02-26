@@ -41,28 +41,7 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(prop, value) {
-        const field = `_${prop}`;
-        
-        if (value == this[field]) return;
-        
-        if (this[field] && this[field].__isProxy == true) {
-            if (value == null) {
-                delete this[field].__elEvents;
-                delete this[`${prop}`];
-            }
-            else {
-                if (this[field].__elEvents != null) {
-                    value.__elEvents = this[field].__elEvents;                  
-                }
-                else {
-                    value.__elEvents = this[field].__events;
-                }
-                
-                console.log(value.__elEvents);
-            }
-        }
-        
-        this[field] = value;
+        this[`_${prop}`] = value;
         crsbinding.events.notifyPropertyChanged(this, prop);
     }
 

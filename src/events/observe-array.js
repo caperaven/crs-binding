@@ -1,7 +1,7 @@
 const PROXY = "__isProxy";
 const ISARRAY = "__isArray";
 
-export function observeArray(collection) {
+export function observeArray(collection, persistent = false) {
     collection[ISARRAY] = true;
 
     if (collection._events == null) {
@@ -9,6 +9,7 @@ export function observeArray(collection) {
     }
 
     collection.__nextId = 1;
+    collection.__persistent = persistent;
 
     for (let i = 0; i < collection.length; i++) {
         observeIndex(collection, i);
@@ -21,9 +22,9 @@ export function observeArray(collection) {
     return proxy;
 }
 
-export function releaseObservedArray(collection) {
+export function releaseObservedArray(collection, force = false) {
     crsbinding.events.disableEvents(collection);
-    collection.forEach(item => crsbinding.observation.releaseObserved(item));
+    collection.forEach(item => crsbinding.observation.releaseObserved(item, force));
 }
 
 const deleteFunctions = ["pop", "splice"];
@@ -94,6 +95,6 @@ function observeIndex(collection, index) {
     item.__uid = collection.__nextId;
     collection.__nextId++;
     if (item.__isProxy != true) {
-        collection[index] = crsbinding.observation.observe(item);
+        collection[index] = crsbinding.observation.observe(item, null, collection.__persistent);
     }
 }
