@@ -44,7 +44,7 @@ export class BindableElement extends HTMLElement {
     setProperty(prop, value) {
         const property = this[`${prop}`];
 
-        if (property != null) {
+        if (property != null && typeof property == "object") {
             const elEvents = property.__elEvents || property.__events;
             delete property.__elEvents;
 
