@@ -13,7 +13,7 @@ export default class StyleBinding extends ViewBase {
         this.color = "yellow";
         this.model = crsbinding.observation.observe({
             color: "#ff0000"
-        });
+        }, this.model);
     }
 
     disconnectedCallback() {

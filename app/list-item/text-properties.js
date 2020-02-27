@@ -22,7 +22,7 @@ export class TextProperties extends BindableElement {
     }
 
     async disconnectedCallback() {
-        delete this.model;
+        this.model = null;
         super.disconnectedCallback();
     }
 }

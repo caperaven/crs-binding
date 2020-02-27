@@ -12,7 +12,7 @@ export default class ClassesBinding extends ViewBase {
         this.myClasses = "blue";
         this.model = crsbinding.observation.observe({
             isActive: false
-        });
+        }, this.model);
     }
 
     disconnectedCallback() {
