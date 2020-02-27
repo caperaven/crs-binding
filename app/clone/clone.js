@@ -5,6 +5,7 @@ export default class Clone extends ViewBase {
         super.connectedCallback();
         this.model.caption = "Hello World";
         this.model.isClone = false;
+        this.model.site = { code: "A11" }
     }
 
     async disconnectedCallback() {
@@ -16,5 +17,6 @@ export default class Clone extends ViewBase {
     clone() {
         this.model2 = crsbinding.utils.clone(this.model, this.model2);
         this.model2.isClone = true;
+        this.model2.site.code = "B11";
     }
 }
