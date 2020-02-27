@@ -1,4 +1,4 @@
-import {InflationManager} from "./../../src/binding/inflation-manager.js";
+import {InflationManager} from "../../src/managers/inflation-manager.js";
 import {ElementMock} from "../element.mock.js";
 import {DocumentMock} from "../dom-mock.js";
 

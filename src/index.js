@@ -3,13 +3,14 @@ import {enableEvents, disableEvents} from "./events/event-mixin.js";
 import {observe, releaseObserved} from "./events/observer.js";
 import {sanitizeExp} from "./events/expressions.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
-import {ProviderManager} from "./binding/provider-manager.js";
+import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {updateUI} from "./events/update.js";
 import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
-import {InflationManager} from "./binding/inflation-manager.js";
+import {InflationManager} from "./managers/inflation-manager.js";
+import {clone} from "./lib/clone.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -66,7 +67,8 @@ const crsbinding = {
     },
 
     utils: {
-        capitalizePropertyPath: capitalizePropertyPath
+        capitalizePropertyPath: capitalizePropertyPath,
+        clone: clone
     }
 };
 

@@ -10,6 +10,11 @@
       "html-only": true
     },
     {
+      "title": "Clone",
+      "hash": "#clone",
+      "view": "clone"
+    },
+    {
       "title": "List Item",
       "hash": "#list-item",
       "view": "list-item"
