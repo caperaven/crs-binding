@@ -413,6 +413,8 @@ this.registerEvent("click", this.click.bind(this))
 On the disconnected callback of the bindable element it will release all these events for you.
 This means that if you have events that live for the lifespan of the element you can register them when you want and the system will clean them up for you when the component is done.
 
+//////
+
 ##View base
 View base is much like bindable element in that it provides you with base features.  
 This class is used when you want to create a view that can be a bindable context.

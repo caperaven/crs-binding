@@ -144,14 +144,18 @@ function createProxyValue(origional, value) {
             copyOverEvents(result, origional);
         }
 
-        const properties = Object.getOwnPropertyNames(origional).filter(item => item.indexOf("__") == -1);
-        for (let property of properties) {
-            if (origional[property][PROXY] == true && result[property][PROXY] != true) {
-                const nc = crsbinding.observation.observe(result[property], origional[property]);
-                result.__processing = true;
-                delete result[property];
-                result[property] = nc;
-                delete result.__processing;
+        // Process properties and make them observed if they are required.
+        // Used to ensure object path bindings.
+        if (Array.isArray(value) != true) {
+            const properties = Object.getOwnPropertyNames(origional).filter(item => item.indexOf("__") == -1);
+            for (let property of properties) {
+                if (origional[property][PROXY] == true && result[property][PROXY] != true) {
+                    const nc = crsbinding.observation.observe(result[property], origional[property]);
+                    result.__processing = true;
+                    delete result[property];
+                    result[property] = nc;
+                    delete result.__processing;
+                }
             }
         }
     }

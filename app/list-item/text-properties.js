@@ -22,8 +22,8 @@ export class TextProperties extends BindableElement {
     }
 
     async disconnectedCallback() {
-        this.model = null;
         super.disconnectedCallback();
+        this.model = null;
     }
 }
 
