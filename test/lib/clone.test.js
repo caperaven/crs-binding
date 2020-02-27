@@ -5,6 +5,11 @@ beforeAll(async () => {
     global.crsbinding = bindingModule.crsbinding;
 });
 
+test("clone - none", () => {
+    const result = crsbinding.utils.clone(null);
+    expect(result).toBeNull();
+});
+
 test("clone", () => {
     const source = {test: "testing"};
     const result = crsbinding.utils.clone(source);
