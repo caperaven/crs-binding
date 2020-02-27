@@ -413,8 +413,6 @@ this.registerEvent("click", this.click.bind(this))
 On the disconnected callback of the bindable element it will release all these events for you.
 This means that if you have events that live for the lifespan of the element you can register them when you want and the system will clean them up for you when the component is done.
 
-//////
-
 ##View base
 View base is much like bindable element in that it provides you with base features.  
 This class is used when you want to create a view that can be a bindable context.
@@ -636,3 +634,18 @@ Thus, please keep this min mind:
 1. Only use elements you got origionally from the inflation manager.
 1. The models you use as part of the inflation process must have the paths structures as defined in your expression.
 1. The expressions you define in the template is relative with the model being the root. So if you have a property called isActive on the item you can start the expression with isActive.
+
+## Clone
+When you need to clone an object, it may have binding events registered for it.
+The binding engine provides a object clone feature that will retain the binding events of the object.
+
+```js
+this.model2 = crsbinding.utils.clone(this.model, this.model2);
+```
+
+You will note that there are two parameters.
+The first is the object to make a copy of and the second is the object to inherit it's binding from.
+This is often used in observation were you do the same thing.
+
+If you don't provide the second parameter it will still clone the object but the binding events will not be maintained.
+
