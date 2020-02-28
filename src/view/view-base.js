@@ -37,6 +37,7 @@ export class ViewBase {
     async disconnectedCallback() {
         crsbinding.observation.releaseBinding(this.element);
         crsbinding.events.disableEvents(this);
+        this.element = null;
     }
 
     getProperty(prop) {

@@ -18,6 +18,10 @@ export class BindableElement extends HTMLElement {
             crsbinding.expression.updateUI(this);
         }
 
+        if (this.load != null) {
+            this.load();
+        }
+
         this.dispatchEvent(new CustomEvent("ready"));
     }
 
