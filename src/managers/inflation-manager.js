@@ -14,9 +14,8 @@ export class InflationManager {
      * @param template
      */
     register(id, template, ctxName = "context") {
-        this._ctxName = ctxName;
-        const generator = new InflationCodeGenerator();
-        const result = generator.generateCodeFor(template, ctxName);
+        const generator = new InflationCodeGenerator(ctxName);
+        const result = generator.generateCodeFor(template);
         generator.dispose();
 
         this._items.set(id, {
@@ -91,9 +90,10 @@ export class InflationManager {
 }
 
 class InflationCodeGenerator {
-    constructor() {
+    constructor(ctxName) {
         this.inflateSrc = [];
         this.deflateSrc = [];
+        this._ctxName = ctxName;
     }
 
     dispose() {
@@ -101,7 +101,7 @@ class InflationCodeGenerator {
         this.deflateSrc = null;
     };
 
-    generateCodeFor(template, ctxName) {
+    generateCodeFor(template) {
         const element = template.content.children[0];
         this.path = "element";
 
@@ -111,8 +111,8 @@ class InflationCodeGenerator {
         const deflateCode = this.deflateSrc.join("\n");
 
         return {
-            inflate: new Function("element", ctxName, inflateCode),
-            deflate: new Function("element", ctxName, deflateCode)
+            inflate: new Function("element", this._ctxName, inflateCode),
+            deflate: new Function("element", this._ctxName, deflateCode)
         }
     }
 
@@ -152,7 +152,7 @@ class InflationCodeGenerator {
     _processAttrValue(attr) {
         const text = attr.value.trim();
         let exp = text.substr(2, text.length - 3);
-        exp = crsbinding.expression.sanitize(exp).expression;
+        exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
         this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", ${exp});`);
         this.deflateSrc.push(`${this.path}.removeAttribute("${attr.name}");`);
         attr.ownerElement.removeAttribute(attr.name);
@@ -175,7 +175,7 @@ class InflationCodeGenerator {
     _processStyle(attr) {
         const parts = attr.name.split(".");
         const prop = parts[1];
-        const value = crsbinding.expression.sanitize(attr.value.trim()).expression;
+        const value = crsbinding.expression.sanitize(attr.value.trim(), this._ctxName).expression;
 
         this.inflateSrc.push(`${this.path}.style.${prop} = ${value};`);
         this.deflateSrc.push(`${this.path}.style.${prop} = "";`);
@@ -184,7 +184,7 @@ class InflationCodeGenerator {
 
     _processClassList(attr) {
         const parts = attr.value.split("?");
-        const condition = crsbinding.expression.sanitize(parts[0]).expression;
+        const condition = crsbinding.expression.sanitize(parts[0], this._ctxName).expression;
 
         const values = parts[1].split(":");
         const trueValue = values[0].trim();
@@ -208,7 +208,7 @@ class InflationCodeGenerator {
     _processConditional(attr) {
         const attrName = attr.name.split(".if")[0].trim();
         const expParts = attr.value.split("?");
-        const condition = crsbinding.expression.sanitize(expParts[0].trim()).expression;
+        const condition = crsbinding.expression.sanitize(expParts[0].trim(), this._ctxName).expression;
         let code = [`if(${condition})`];
         
         const expValue = expParts.length > 1 ? expParts[1].trim() : `"${attrName}"`;

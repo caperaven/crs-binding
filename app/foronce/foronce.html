@@ -12,3 +12,10 @@
     <span>Selected Item: </span>
     <span>${selectedId}</span>
 </label>
+
+<select value.bind="selectedId2">
+    <template for.once="item of items2">
+        <option value="${item.id}">${item.caption}</option>
+    </template>
+</select>
+
