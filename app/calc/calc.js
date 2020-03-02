@@ -11,7 +11,7 @@ export default class Calc extends ViewBase {
         
         this.start = "01:00";
         this.end = "01:20";
-        crsbinding.events.notifyPropertyChanged(this, "duration");
-        //crsbinding.events.notifyPropertyOn(["start", "end"]);
+        //crsbinding.events.notifyPropertyChanged(this, "duration");
+        crsbinding.events.notifyPropertyOn(this, "duration", ["start", "end"]);
     }
 }   

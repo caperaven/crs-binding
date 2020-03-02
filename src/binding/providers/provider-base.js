@@ -51,12 +51,7 @@ export class ProviderBase {
             value = value.replace(`${this._ctxName}.`, "");
         }
 
-        if (value.indexOf(".") == -1) {
-            crsbinding.events.listenOn(this._context, value, callback);
-        }
-        else {
-            crsbinding.events.listenOnPath(this._context, value, callback);
-        }
+        crsbinding.events.listenOn(this._context, value, callback);
 
         this._eventsToRemove.push({
             value: value,

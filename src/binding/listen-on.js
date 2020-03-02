@@ -20,5 +20,10 @@ export function listenOnPath(context, value, callback) {
 }
 
 export function listenOn(context, property, callback) {
-    crsbinding.events.on(context, property.trim(), callback);
+    if (property.indexOf(".") == -1) {
+        crsbinding.events.on(context, property.trim(), callback);
+    }
+    else {
+        crsbinding.events.listenOnPath(context, property, callback);
+    }
 }
