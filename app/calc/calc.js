@@ -3,7 +3,7 @@ import {ViewBase} from "./../../src/view/view-base.js";
 export default class Calc extends ViewBase {
     get duration() {
         const startS = this._durToSec(this.start);
-        const endS = this._durToSec(this.end);;
+        const endS = this._durToSec(this.end);
 
         const result = endS - startS;
         return this._secToDur(result);
