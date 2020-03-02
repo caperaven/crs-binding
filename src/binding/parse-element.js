@@ -39,7 +39,7 @@ export function parseAttribute(attr, context, ctxName) {
         prov = "attr";
     }
 
-    const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName);
+    const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName, attr);
     attr.ownerElement.removeAttribute(attr.nodeName);
 
     // used for testing

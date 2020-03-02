@@ -1,0 +1,14 @@
+<header>
+    <h2>${title}</h2>
+</header>
+
+<select value.bind="selectedId">
+    <template for.once="item of items">
+        <option value="${item.id}">${item.caption}</option>
+    </template>
+</select>
+
+<label>
+    <span>Selected Item: </span>
+    <span>${selectedId}</span>
+</label>

@@ -13,9 +13,10 @@ export class InflationManager {
      * @param id
      * @param template
      */
-    register(id, template) {
+    register(id, template, ctxName = "context") {
+        this._ctxName = ctxName;
         const generator = new InflationCodeGenerator();
-        const result = generator.generateCodeFor(template);
+        const result = generator.generateCodeFor(template, ctxName);
         generator.dispose();
 
         this._items.set(id, {
@@ -100,7 +101,7 @@ class InflationCodeGenerator {
         this.deflateSrc = null;
     };
 
-    generateCodeFor(template) {
+    generateCodeFor(template, ctxName) {
         const element = template.content.children[0];
         this.path = "element";
 
@@ -110,8 +111,8 @@ class InflationCodeGenerator {
         const deflateCode = this.deflateSrc.join("\n");
 
         return {
-            inflate: new Function("element", "context", inflateCode),
-            deflate: new Function("element", "context", deflateCode)
+            inflate: new Function("element", ctxName, inflateCode),
+            deflate: new Function("element", ctxName, deflateCode)
         }
     }
 
@@ -130,7 +131,7 @@ class InflationCodeGenerator {
         const text = (element.innerHTML || "").trim();
         if (text.indexOf("${") == 0) {
             let exp = text.substr(2, text.length - 3);
-            exp = crsbinding.expression.sanitize(exp).expression;
+            exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
             this.inflateSrc.push(`${this.path}.innerText = ${exp};`);
             this.deflateSrc.push(`${this.path}.innerText = "";`);
         }
