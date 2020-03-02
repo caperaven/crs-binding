@@ -1,10 +1,6 @@
 import {BindableElement} from "../../src/binding/bindable-element.js";
 
 export class SimpleComponent extends BindableElement {
-    static get properties() {
-        return ["isActive"]
-    }
-    
     get html() {
         return import.meta.url.replace(".js", ".html");
     }

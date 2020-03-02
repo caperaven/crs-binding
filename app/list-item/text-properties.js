@@ -1,10 +1,6 @@
 import {BindableElement} from "../../src/binding/bindable-element.js";
 
 export class TextProperties extends BindableElement {
-    static get properties() {
-        return ["model"]
-    }
-
     get model() {
         return this.getProperty("model");
     }

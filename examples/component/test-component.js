@@ -1,10 +1,6 @@
 import {BindableElement} from "./../../src/binding/bindable-element.js";
 
 class TestComponent extends BindableElement {
-    static get properties() {
-        return ["title", "model", "age"]
-    }
-
     get html() {
         return import.meta.url.replace(".js", ".html");
     }

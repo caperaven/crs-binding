@@ -5,10 +5,6 @@ import {ViewBase} from "./../../src/view/view-base.js";
  */
 
 export default class ArrayBinding extends ViewBase {
-    static get properties() {
-        return ["data"];
-    }
-
     connectedCallback() {
         super.connectedCallback();
 

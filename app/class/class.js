@@ -1,10 +1,6 @@
 import {ViewBase} from "./../../src/view/view-base.js";
 
 export default class ClassesBinding extends ViewBase {
-    static get properties() {
-        return ["title", "isActive", "myClasses"];
-    }
-
     connectedCallback() {
         super.connectedCallback();
         this.title = "Classes Binding";

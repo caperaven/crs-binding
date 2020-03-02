@@ -10,6 +10,11 @@
       "html-only": true
     },
     {
+      "title": "Calculated",
+      "hash": "#calc",
+      "view": "calc"
+    },
+    {
       "title": "For Once",
       "hash": "#foronce",
       "view": "foronce"
