@@ -6,7 +6,7 @@ import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {updateUI} from "./events/update.js";
-import {when, on, notifyPropertyChanged, removeOn, removeWhen} from "./events/event-mixin.js";
+import {when, on, notifyPropertyChanged, removeOn, removeWhen, notifyPropertyOn} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
@@ -55,6 +55,7 @@ const crsbinding = {
         when: when,
         on: on,
         notifyPropertyChanged: notifyPropertyChanged,
+        notifyPropertyOn: notifyPropertyOn,
         removeOn: removeOn,
         removeWhen: removeWhen,
         listenOn: listenOn,

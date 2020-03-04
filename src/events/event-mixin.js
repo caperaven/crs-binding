@@ -3,6 +3,7 @@ import {compileExp} from "./compiler.js"
 export function enableEvents(obj) {
     obj.__events = new Map();
     obj.__conditions = new Map();
+    obj.__computed = new Map();
 }
 
 export function disableEvents(obj) {
@@ -21,6 +22,12 @@ export function disableEvents(obj) {
         });
         obj.__conditions.clear();
         delete obj.__conditions;
+    }
+    
+    if (obj.__computed) {
+        obj.__computed.forEach((cmp) => {
+            delete cnd.fn;
+        })
     }
 }
 
@@ -97,6 +104,18 @@ export function notifyPropertyChanged(obj, property, args) {
     const changedFnName = `${property}Changed`;
     if (obj[changedFnName] != null) {
         obj[changedFnName].call(obj, args);
+    }
+}
+
+export function notifyPropertyOn(obj, property, triggerProperties) {
+    let fn = obj.__computed.get(property);
+    if (fn == null) {
+        fn = () => crsbinding.events.notifyPropertyChanged(obj, property);
+        obj.__computed.set(property, fn);
+    }
+    
+    for (let prop of triggerProperties) {
+        crsbinding.events.listenOn(obj, prop, fn);
     }
 }
 
