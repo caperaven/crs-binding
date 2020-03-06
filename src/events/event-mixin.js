@@ -25,7 +25,7 @@ export function disableEvents(obj) {
     }
     
     if (obj.__computed) {
-        obj.__computed.forEach((cmp) => {
+        obj.__computed.forEach((cnd) => {
             delete cnd.fn;
         })
     }
