@@ -177,4 +177,14 @@ function copyOverEvents(target, source) {
         target.__events = source.__events;
         delete source.__events;
     }
+    
+    if (target.__conditions == null) {
+        target.__conditions = source.__conditions;
+        delete source.__conditions;
+    }
+    
+    if (target.__computed == null) {
+        target.__computed = source.__computed;
+        delete source.__computed;
+    }
 }
