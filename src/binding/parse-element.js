@@ -1,8 +1,12 @@
 import {ProviderFactory} from "./provider-factory.js";
 
+const ignore = ["STYLE"];
+
 export function parseElements(collection, context, ctxName = "context") {
     for (let element of collection || []) {
-        parseElement(element, context, ctxName);
+        if (ignore.indexOf(element.nodeName) == -1) {            
+            parseElement(element, context, ctxName);
+        }
     }
 }
 
@@ -18,7 +22,7 @@ export function parseElement(element, context, ctxName = "context") {
 
     parseAttributes(boundAttributes, context, ctxName);
 
-    if (element.children && element.children.length == 0 && (element.innerText || "").indexOf("${") != -1) {
+    if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context, null, null, ctxName);
     }
 }

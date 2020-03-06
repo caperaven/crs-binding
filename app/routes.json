@@ -15,6 +15,11 @@
       "view": "calc"
     },
     {
+      "title": "SVG",
+      "hash": "#svg",
+      "view": "svg"
+    },
+    {
       "title": "For Once",
       "hash": "#foronce",
       "view": "foronce"
