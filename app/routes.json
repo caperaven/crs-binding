@@ -10,6 +10,11 @@
       "html-only": true
     },
     {
+      "title": "Converters",
+      "hash": "#converters",
+      "view": "converters"
+    },
+    {
       "title": "Calculated",
       "hash": "#calc",
       "view": "calc"
