@@ -8,6 +8,8 @@ export class ProviderBase {
         this._eventsToRemove = [];
         this._isNamedContext = this._ctxName != "context";
 
+        this.init && this.init();
+
         crsbinding.providerManager.register(this);
         this.initialize().catch(error => {
             throw error;

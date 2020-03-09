@@ -13,10 +13,11 @@ const BACKUP = "__backup";
  * @returns {*}
  */
 export function observe(obj, prior, persistent = false) {
+    if (Array.isArray(obj)) return observeArray(obj, persistent);
+
     obj[PROXY] = true;
     crsbinding.events.enableEvents(obj);
 
-    if (Array.isArray(obj)) return observeArray(obj, persistent);
     obj[BACKUP] = {};
 
     if (prior != null) {
@@ -26,10 +27,10 @@ export function observe(obj, prior, persistent = false) {
 
     obj.__persistent = persistent;
 
-    const keys = Object.keys(obj);
-    for (let key of keys) {
-        if (Array.isArray(obj[key])) {
-            obj[key] = observeArray(obj[key]);
+    const properties = Object.getOwnPropertyNames(obj).filter(item => item.indexOf("__") == -1);
+    for (let property of properties) {
+        if (Array.isArray(obj[property])) {
+            obj[property] = observeArray(obj[property]);
         }
     }
 

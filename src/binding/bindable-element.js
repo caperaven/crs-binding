@@ -45,7 +45,7 @@ export class BindableElement extends HTMLElement {
         return  result;
     }
 
-    setProperty(prop, value) {
+    setProperty(prop, value, forceProxy = false) {
         const property = this[`${prop}`];
 
         if (property != null && typeof property == "object") {
@@ -59,6 +59,10 @@ export class BindableElement extends HTMLElement {
             if (value != null) {
                 value.__elEvents = elEvents;
             }
+        }
+
+        if (forceProxy === true && value != null && value.__isProxy !== true) {
+            value = crsbinding.observation.observe(value, this[`_${prop}`]);
         }
 
         this[`_${prop}`] = value;

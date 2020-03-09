@@ -21,6 +21,10 @@ export class ForProvider extends ProviderBase {
 
     constructor(element, context, property, value, ctxName) {
         super(element, context, property, value, ctxName);
+
+    }
+
+    init() {
         this._itemsAddedHandler = this._itemsAdded.bind(this);
         this._itemsDeletedHandler = this._itemsDeleted.bind(this);
     }
@@ -61,6 +65,12 @@ export class ForProvider extends ProviderBase {
         this._collectionChangedHandler = this._collectionChanged.bind(this);
 
         this.listenOnPath(this._plural, this._collectionChangedHandler);
+
+        const fn = new Function("context", `try { return context.${this._plural}; } catch { return null;}`);
+        const result = fn(this._context);
+        if(result != null) {
+            this._collectionChanged(null, result);
+        }
     }
 
     async _collectionChanged(property, newValue) {

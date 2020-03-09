@@ -2,24 +2,30 @@ const PROXY = "__isProxy";
 const ISARRAY = "__isArray";
 
 export function observeArray(collection, persistent = false) {
+    if(collection[PROXY] === true) {
+        return observeItems(collection);
+    }
+
     collection[ISARRAY] = true;
 
-    if (collection._events == null) {
-        crsbinding.events.enableEvents(collection);
-    }
+    collection[PROXY] = true;
+    crsbinding.events.enableEvents(collection);
 
     collection.__nextId = 1;
     collection.__persistent = persistent;
 
+    observeItems(collection);
+
+    return new Proxy(collection, {
+        get: get
+    });
+}
+
+function observeItems(collection) {
     for (let i = 0; i < collection.length; i++) {
         observeIndex(collection, i);
     }
-
-    const proxy = new Proxy(collection, {
-        get: get
-    });
-
-    return proxy;
+    return collection;
 }
 
 export function releaseObservedArray(collection, force = false) {
@@ -81,9 +87,9 @@ function itemsAdded(obj, items) {
     for (let item of items) {
         const index = obj.indexOf(item);
 
-        observeIndex(obj, index);
+        let observed = observeIndex(obj, index);
 
-        payload.items.push(item);
+        payload.items.push(observed);
         payload.indexes.push(index);
     }
 
@@ -97,4 +103,5 @@ function observeIndex(collection, index) {
     if (item.__isProxy != true) {
         collection[index] = crsbinding.observation.observe(item, null, collection.__persistent);
     }
+    return collection[index];
 }
