@@ -14,6 +14,8 @@ export class IfProvider extends ProviderBase {
     }
 
     async initialize() {
+        this._sanitizeProperties = ["fill", "stroke"];
+
         this._eventHandler = this.propertyChanged.bind(this);
 
         if (this._value.indexOf("?") == -1) {
@@ -54,12 +56,14 @@ export class IfProvider extends ProviderBase {
         const value = crsbinding.expression.sanitize(this._value, this._ctxName);
         const parts = value.expression.split("?");
         const valueParts = parts[1].split(":");
+        const tval = this._sanitizeValue(valueParts[0].trim());
+        const fval = this._sanitizeValue(valueParts[1].trim());
 
         const fnCode = initCndValueExp
             .split("__exp__").join(parts[0].trim())
             .split("__attr__").join(this._property)
-            .split("__true__").join(valueParts[0].trim())
-            .split("__false__").join(valueParts[1].trim());
+            .split("__true__").join(tval)
+            .split("__false__").join(fval);
 
         this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false, ctxName: this._ctxName});
         this.listenOnPath(value.properties, this._eventHandler);
@@ -80,6 +84,11 @@ export class IfProvider extends ProviderBase {
 
         this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false, ctxName: this._ctxName});
         this.listenOnPath(value.properties, this._eventHandler);
+    }
+
+    _sanitizeValue(value) {
+        if (this._sanitizeProperties.indexOf(this._property) == -1) return value;
+        return value.split("'").join("");
     }
 
     propertyChanged() {

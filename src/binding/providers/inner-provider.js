@@ -5,7 +5,7 @@ export class InnerProvider extends ProviderBase {
         super(element, context, property, value, ctxName);
 
         this._eventHandler = this._change.bind(this);
-        this._expObj = crsbinding.expression.compile(element.innerText, null, {ctxName: this._ctxName});
+        this._expObj = crsbinding.expression.compile(element.innerText || element.textContent, null, {ctxName: this._ctxName});
 
         for (let prop of this._expObj.parameters.properties) {
             this.listenOnPath(prop, this._eventHandler);
@@ -25,6 +25,7 @@ export class InnerProvider extends ProviderBase {
 
     _change() {
         if (this._expObj == null) return;
-        this._element.innerText = this._expObj.function(this._context);
+        const target = this._element.textContent ? "textContent" : "innerText";
+        this._element[target] = this._expObj.function(this._context);
     }
 }

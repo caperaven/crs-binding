@@ -10,6 +10,7 @@ import {when, on, notifyPropertyChanged, removeOn, removeWhen, notifyPropertyOn}
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
+import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
 
 String.prototype.capitalize = function() {
@@ -26,9 +27,11 @@ function capitalizePropertyPath(str) {
 
 const crsbinding = {
     _expFn: new Map(),
+
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
+    valueConverters: new ValueConverters(),
 
     expression: {
         sanitize: sanitizeExp,

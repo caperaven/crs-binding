@@ -10,9 +10,19 @@
       "html-only": true
     },
     {
+      "title": "Converters",
+      "hash": "#converters",
+      "view": "converters"
+    },
+    {
       "title": "Calculated",
       "hash": "#calc",
       "view": "calc"
+    },
+    {
+      "title": "SVG",
+      "hash": "#svg",
+      "view": "svg"
     },
     {
       "title": "For Once",
