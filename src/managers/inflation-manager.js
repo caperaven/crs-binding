@@ -129,11 +129,13 @@ class InflationCodeGenerator {
 
     _processInnerText(element) {
         const text = (element.innerHTML || "").trim();
+        const target = element.textContent ? "textContent" : "innerText";
+        
         if (text.indexOf("${") == 0) {
             let exp = text.substr(2, text.length - 3);
             exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
-            this.inflateSrc.push(`${this.path}.innerText = ${exp};`);
-            this.deflateSrc.push(`${this.path}.innerText = "";`);
+            this.inflateSrc.push(`${this.path}.${target} = ${exp};`);
+            this.deflateSrc.push(`${this.path}.${target} = "";`);
         }
     }
 
