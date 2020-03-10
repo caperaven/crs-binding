@@ -68,6 +68,7 @@ export class BindableElement extends HTMLElement {
         this[`_${prop}`] = value;
 
         crsbinding.events.notifyPropertyChanged(this, prop);
+        this.dispatchEvent(new CustomEvent(`${prop}Change`));
     }
 
     observeAttributes(attributes) {
