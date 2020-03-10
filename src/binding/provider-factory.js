@@ -21,7 +21,7 @@ export class ProviderFactory {
     }
 
     static "two-way"(element, context, property, value, ctxName) {
-        return this.bind(element, context, property, value, ctxName);
+        return new BindProvider(element, context, property, value, ctxName);
     }
 
     static "one-way"(element, context, property, value, ctxName) {
