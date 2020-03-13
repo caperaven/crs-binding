@@ -137,6 +137,8 @@ function setSingle(obj, prop, value) {
 function createProxyValue(obj, property, oldValue, newValue) {
     if (newValue == null) return null;
 
+    if (typeof newValue != "object") return newValue;
+
     // 1. initialize
     let result = newValue;
 
