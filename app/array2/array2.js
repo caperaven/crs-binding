@@ -8,6 +8,8 @@ export default class ArrayBinding extends ViewBase {
         this.color = "white";
 
         let item = {
+            get properties() {return ["items"]},
+
             caption: "Item 1", items: [
                 {
                     caption: "Test",
@@ -18,6 +20,8 @@ export default class ArrayBinding extends ViewBase {
 
         this.data = crsbinding.observation.observe(
             {
+                get properties() {return ["items", "items2"]},
+
                 items: [],
                 items2: [],
             });
