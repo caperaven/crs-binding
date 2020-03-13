@@ -27,7 +27,7 @@ export function observe(obj, prior, persistent = false) {
     for (let property of obj.properties || []) {
         const value = obj[property];
         if (value && value[PROXY] != true) {
-            obj[property] = observe(obj);
+            obj[property] = observe(obj[property]);
         }
     }
 

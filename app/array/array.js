@@ -9,6 +9,8 @@ export default class ArrayBinding extends ViewBase {
         super.connectedCallback();
 
         this.data = crsbinding.observation.observe({
+            get properties() {return ["items"]},
+
             items: [{caption: "Item 1", editing: true}],  // should not need to put observe on this property
 
             // JHR: Add  it so that when you call a function it uses call with the context as this.
