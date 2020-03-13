@@ -12,6 +12,7 @@ import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
+import {ObjectStore} from "./store/object-store.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -27,6 +28,7 @@ function capitalizePropertyPath(str) {
 
 const crsbinding = {
     _expFn: new Map(),
+    _objStore: new ObjectStore(),
 
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
