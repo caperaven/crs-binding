@@ -49,6 +49,7 @@ test("provider factory - delegate", () => {
 });
 
 test("provider factory - inner", () => {
+    element.innerText = "${name}";
     const instance = ProviderFactory["inner"](element, context, property, value, ctxName);
     expect(instance).not.toBeNull();
 });

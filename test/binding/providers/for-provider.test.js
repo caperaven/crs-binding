@@ -58,7 +58,7 @@ test("for provider - dispose", () => {
     expect(instance._collectionChangedHandler).toBeNull();
 });
 
-test ("for provider - _collectionChanged", () => {
+test.skip ("for provider - _collectionChanged", () => {
     const ar = crsbinding.observation.observe([]);
     instance._collectionChanged(null, ar);
     expect(instance.ar).toEqual(ar);

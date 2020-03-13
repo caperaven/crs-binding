@@ -45,7 +45,7 @@ export class ProviderFactory {
     }
 
     static "for"(element, context, property, value, ctxName, attr) {
-        if (attr.name.indexOf(".once") != -1) {
+        if (attr && attr.name.indexOf(".once") != -1) {
             return ForOnceProvider(element, context, property, value, ctxName);
         }
         else {

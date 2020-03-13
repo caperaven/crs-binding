@@ -19,7 +19,7 @@ test("add - get first id", () => {
     const obj = {};
     crsbinding._objStore.add(obj, null);
     expect(obj.__bid).not.toBeUndefined();
-    expect(obj.__bid).toEqual(1);
+    expect(obj.__bid).toEqual(crsbinding._objStore._lastId);
     expect(crsbinding._objStore._store.get(obj.__bid)).not.toBeUndefined();
 });
 
