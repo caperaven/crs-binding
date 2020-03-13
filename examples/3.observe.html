@@ -3,22 +3,27 @@
 <body>
     <div id="name"></div>
     <div id="lastName"></div>
+    <button id="btnChange">Change</button>
 
     <script>
+        const btn = document.querySelector("#btnChange");
+        btn.addEventListener("click", () => {
+            window.obj.firstName = "Hello";
+            crsbinding.observation.releaseObserved(window.obj);
+        });
+
         function loaded() {
-            const obj = crsbinding.observation.observe({
+            window.obj = crsbinding.observation.observe({
                 firstName: "name",
                 lastName: "lastName",
-                firstNameChanged: () => {console.log(this.firstName)}
+                firstNameChanged: () => {console.log(window.obj.firstName)}
             });
 
-            crsbinding.events.on(obj, "firstName", () => document.querySelector("#name").innerText = obj.firstName);
-            crsbinding.events.on(obj, "lastName", () => document.querySelector("#lastName").innerText = obj.lastName);
+            crsbinding.events.on(window.obj, "firstName", () => document.querySelector("#name").innerText = window.obj.firstName);
+            crsbinding.events.on(window.obj, "lastName", () => document.querySelector("#lastName").innerText = window.obj.lastName);
 
-            obj.firstName = "John";
-            obj.lastName = "Doe";
-
-            crsbinding.observation.releaseObserved(obj);
+            window.obj.firstName = "John";
+            window.obj.lastName = "Doe";
         }
     </script>
 

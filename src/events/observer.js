@@ -88,7 +88,7 @@ function get(obj, prop) {
  * @returns {boolean}
  */
 function set(obj, prop, value) {
-    if (prop == "_disposing" || obj._disposing == true) return true;
+    if (prop == "_disposing" || obj._disposing == true || obj[PROXY] != true) return true;
 
     // 1. Setting system fields
     if (prop.indexOf("__") != -1) {

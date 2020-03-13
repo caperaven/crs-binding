@@ -29,6 +29,11 @@ export class ObjectStore {
 
         this._store.delete(id);
         obj && obj.dispose();
+
+        if (this._store.size == 0) {
+            this._nextId = 0;
+            this._lastId = 0;
+        }
     }
 
     get(proxy, autoAdd = true) {
