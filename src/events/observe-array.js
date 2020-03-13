@@ -7,9 +7,9 @@ export function observeArray(collection, persistent = false) {
     }
 
     collection[ISARRAY] = true;
-
     collection[PROXY] = true;
-    crsbinding.events.enableEvents(collection);
+
+    crsbinding._objStore.add(collection);
 
     collection.__nextId = 1;
     collection.__persistent = persistent;

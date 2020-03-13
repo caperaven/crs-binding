@@ -1,8 +1,5 @@
 const BID = "__bid";
 
-/**
- * This class manages object dependencies for models.
- */
 export class ObjectStore {
     get nextId() {
         const result = (this._lastId || 0) + 1;
@@ -17,7 +14,7 @@ export class ObjectStore {
 
     add(proxy, prior) {
         const id = prior && prior[BID] || this.nextId;
-        proxy.__bid = id;
+        proxy[BID] = id;
 
         if (prior == null) {
             this._store.set(id, new StoreItem())
@@ -32,6 +29,16 @@ export class ObjectStore {
 
         this._store.delete(id);
         obj && obj.dispose();
+    }
+
+    get(proxy, autoAdd = true) {
+        if (proxy[BID] == null && autoAdd == true) {
+            this.add(proxy);
+        }
+
+        if (proxy[BID] == null) return null;
+
+        return this._store.get(proxy[BID]);
     }
 }
 

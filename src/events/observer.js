@@ -2,6 +2,8 @@ import {observeArray, releaseObservedArray} from "./observe-array.js";
 
 const PROXY = "__isProxy";
 const BACKUP = "__backup";
+const PERSISTENT = "__persistent";
+const ISARRAY = "__isArray";
 
 /**
  * Start observing an object for property changes.
@@ -15,25 +17,21 @@ const BACKUP = "__backup";
 export function observe(obj, prior, persistent = false) {
     if (Array.isArray(obj)) return observeArray(obj, persistent);
 
+    // 1. Initialize the object
+    crsbinding._objStore.add(obj, prior);
     obj[PROXY] = true;
-    crsbinding.events.enableEvents(obj);
-
     obj[BACKUP] = {};
+    obj[PERSISTENT] = persistent;
 
-    if (prior != null) {
-        obj.__events = prior.__events;
-        delete prior.__events;
-    }
-
-    obj.__persistent = persistent;
-
-    const properties = Object.getOwnPropertyNames(obj).filter(item => item.indexOf("__") == -1);
-    for (let property of properties) {
-        if (Array.isArray(obj[property])) {
-            obj[property] = observeArray(obj[property]);
+    // 2. Make bindable properties observed
+    for (let property of obj.properties || []) {
+        const value = obj[property];
+        if (value && value[PROXY] != true) {
+            obj[property] = observe(obj);
         }
     }
 
+    // 3. Create the proxy result
     const proxy = new Proxy(obj, {
         get: get,
         set: set
@@ -50,11 +48,10 @@ export function observe(obj, prior, persistent = false) {
  * @param force: <boolean> force cleanup.
  */
 export function releaseObserved(obj, force = false) {
-    if (obj.__persistent == true && force != true) return;
+    if (obj[PERSISTENT] == true && force != true) return;
+    if (obj[ISARRAY] == true) return releaseObservedArray(obj, force);
 
-    if (obj.__isArray == true) return releaseObservedArray(obj, force);
-
-    crsbinding.events.disableEvents(obj);
+    crsbinding._objStore.remove(obj);
 
     if (obj.dispose != null) {
         obj._disposing = true;
@@ -93,9 +90,11 @@ function get(obj, prop) {
 function set(obj, prop, value) {
     if (prop == "_disposing" || obj._disposing == true) return true;
 
+    // 1. Setting system fields
     if (prop.indexOf("__") != -1) {
         obj[prop] = value;
     }
+    // 2. Set actual values
     else {
         setSingle(obj, prop, value);
     }
@@ -108,19 +107,22 @@ const excludeBackup = ["__isProxy", "element"];
 function setSingle(obj, prop, value) {
     obj.__processing = true;
 
+    // 1. Get state values
     const backup = obj[BACKUP];
     const oldValue = obj[prop];
 
-    obj[prop] = createProxyValue(obj[prop], value);
+    // 2. Set the new value
+    obj[prop] = createProxyValue(obj, prop, obj[prop], value);
 
+    // 3. Notify changes to listeners
     crsbinding.events.notifyPropertyChanged(obj, prop);
 
     if (obj.propertyChanged != null) {
-        obj.propertyChanged(value, oldValue);
+        obj.propertyChanged(prop, value, oldValue);
     }
 
+    // 4. Release the old value
     if (isProxy(oldValue)) {
-        // Need to put a marker to say DON"T RELEASE THIS YET
         releaseObserved(oldValue);
     }
     else {
@@ -132,32 +134,34 @@ function setSingle(obj, prop, value) {
     delete obj.__processing;
 }
 
-function createProxyValue(origional, value) {
-    if (value == null) return null;
+function createProxyValue(obj, property, oldValue, newValue) {
+    if (newValue == null) return null;
 
-    let result = value;
+    // 1. initialize
+    let result = newValue;
 
-    if (origional && origional.__isProxy == true) {
-        if (result && result.__isProxy != true) {
-            result = crsbinding.observation.observe(result, origional);
-        }
-        else if (result && origional) {
-            copyOverEvents(result, origional);
-        }
+    // 2. this is not a bindable property so just return it
+    if ((obj.properties || []).indexOf(property) == 1) {
+        return result;
+    }
 
-        // Process properties and make them observed if they are required.
-        // Used to ensure object path bindings.
-        if (Array.isArray(value) != true) {
-            const properties = Object.getOwnPropertyNames(origional).filter(item => item.indexOf("__") == -1);
-            for (let property of properties) {
-                if (origional[property][PROXY] == true && result[property][PROXY] != true) {
-                    const nc = crsbinding.observation.observe(result[property], origional[property]);
-                    result.__processing = true;
-                    delete result[property];
-                    result[property] = nc;
-                    delete result.__processing;
-                }
-            }
+    // 3. if the value is not a proxy, make it one.
+    if (newValue[PROXY] != true) {
+        result = crsbinding.observation.observe(newValue, oldValue);
+    }
+
+    // 4. if the old value is a proxy, copy over all the set all the proxy properties on the new object
+    if (oldValue != null && oldValue[PROXY] == true) {
+        // get all the field names that needs to be made in sync.
+        // if the old value is null there is nothing to copy over.
+        // if the new value is null there is no need to copy anything over
+        const properties = (oldValue.properties || []).filter(fName => oldValue[fName] != null && result[fName] != null);
+        for (let property of properties) {
+            const nc = crsbinding.observation.observe(result[property], oldValue[property]);
+            result.__processing = true;
+            delete result[property];
+            result[property] = nc;
+            delete result.__processing;
         }
     }
 
@@ -166,26 +170,4 @@ function createProxyValue(origional, value) {
 
 function isProxy(obj) {
     return obj && typeof obj == "object" && obj[PROXY] == true;
-}
-
-function copyOverEvents(target, source) {
-    /**
-     * In some cases like using a item between a list and a bindable element, you need to maintain the origional events.
-     * Only copy events over in cases when it is null because those are the cases where you have a single use case.
-     * The __events object is removed on releasing of the old object.
-     */
-    if (target.__events == null) {
-        target.__events = source.__events;
-        delete source.__events;
-    }
-    
-    if (target.__conditions == null) {
-        target.__conditions = source.__conditions;
-        delete source.__conditions;
-    }
-    
-    if (target.__computed == null) {
-        target.__computed = source.__computed;
-        delete source.__computed;
-    }
 }
