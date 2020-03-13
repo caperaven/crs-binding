@@ -57,7 +57,7 @@ export function releaseObserved(obj, force = false) {
         obj._disposing = true;
         obj.dispose();
     }
-    
+
     const properties = Object.getOwnPropertyNames(obj);
     for (let prop of properties) {
         if (prop.indexOf("__") == 0 || (prop.indexOf("Changed") != -1 && typeof obj[prop] == "function")) {
@@ -66,6 +66,22 @@ export function releaseObserved(obj, force = false) {
         else if (obj[prop] && obj[prop][PROXY] == true) {
             releaseObserved(obj[prop]);
             delete obj[prop];
+        }
+    }
+}
+
+/**
+ * remove all the system properties as part of a clean up process.
+ * @param obj
+ */
+function cleanSystemProperties(obj) {
+    const properties = Object.getOwnPropertyNames(obj);
+    for (let property of properties) {
+        if (property.indexOf("__") == 0) {
+            delete obj[property];
+        }
+        else if (obj[property][PROXY] == true) {
+            cleanSystemProperties(obj[property]);
         }
     }
 }
@@ -122,13 +138,13 @@ function setSingle(obj, prop, value) {
     }
 
     // 4. Release the old value
-    if (isProxy(oldValue)) {
-        releaseObserved(oldValue);
-    }
-    else {
-        if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1 && oldValue != null) {
-            backup[prop] = oldValue;
-        }
+    if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1 && oldValue != null) {
+        // 4.1 release the previous backup item properly
+        releaseObserved(backup[prop]);
+        // 4.2 clean the system properties off the oldValue
+        cleanSystemProperties(oldValue);
+        // 4.3 add the clean oldvalue to backup
+        backup[prop] = oldValue;
     }
 
     delete obj.__processing;
