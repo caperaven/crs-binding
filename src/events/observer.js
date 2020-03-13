@@ -142,7 +142,9 @@ function setSingle(obj, prop, value) {
         // 4.1 release the previous backup item properly
         releaseObserved(backup[prop]);
         // 4.2 clean the system properties off the oldValue
-        cleanSystemProperties(oldValue);
+        if (oldValue[PROXY] == true) {
+            cleanSystemProperties(oldValue);
+        }
         // 4.3 add the clean oldvalue to backup
         backup[prop] = oldValue;
     }
