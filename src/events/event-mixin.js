@@ -42,7 +42,7 @@ export function when(obj, exp, callback) {
     let cond = storeItem.__conditions.get(exp);
     if (cond == null) {
         const fn = () => {
-            if (cmp.function(storeItem) == true) {
+            if (cmp.function(obj) == true) {
                 for (let call of functions) {
                     call();
                 }
@@ -55,7 +55,7 @@ export function when(obj, exp, callback) {
 
     const properties = cmp.parameters.properties;
     for (let property of properties) {
-        crsbinding.events.on(storeItem, property, cond.fn);
+        crsbinding.events.on(obj, property, cond.fn);
     }
 }
 

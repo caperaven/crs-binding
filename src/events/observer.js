@@ -48,7 +48,7 @@ export function observe(obj, prior, persistent = false) {
  * @param force: <boolean> force cleanup.
  */
 export function releaseObserved(obj, force = false) {
-    if (obj[PERSISTENT] == true && force != true) return;
+    if ((obj == null) || (obj[PERSISTENT] == true && force != true)) return;
     if (obj[ISARRAY] == true) return releaseObservedArray(obj, force);
 
     crsbinding._objStore.remove(obj);
