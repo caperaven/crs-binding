@@ -123,7 +123,7 @@ export function notifyPropertyOn(obj, property, triggerProperties) {
     if (storeItem != null) {
         let fn = storeItem.__computed.get(property);
         if (fn == null) {
-            fn = () => crsbinding.events.notifyPropertyChanged(storeItem, property);
+            fn = () => crsbinding.events.notifyPropertyChanged(obj, property);
             storeItem.__computed.set(property, fn);
         }
 
