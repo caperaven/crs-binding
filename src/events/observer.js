@@ -154,23 +154,15 @@ function createProxyValue(obj, property, oldValue, newValue) {
     // 1. initialize
     let result = newValue;
 
-    // 2. this is not a bindable property so just return it
-    if ((obj.properties || []).indexOf(property) == 1) {
-        return result;
-    }
-
-    // 3. if the value is not a proxy, make it one.
+    // 2. if the value is not a proxy, make it one.
     if (newValue[PROXY] != true) {
         result = crsbinding.observation.observe(newValue, oldValue);
     }
 
-    // 4. if the old value is a proxy, copy over all the set all the proxy properties on the new object
-    if (oldValue != null && oldValue[PROXY] == true) {
-        // get all the field names that needs to be made in sync.
-        // if the old value is null there is nothing to copy over.
-        // if the new value is null there is no need to copy anything over
-        const properties = (oldValue.properties || []).filter(fName => oldValue[fName] != null && result[fName] != null);
-        for (let property of properties) {
+    const properties = Object.getOwnPropertyNames(result).filter(item => item.indexOf("__") == -1);
+    for(let property of properties) {
+        // note: this will cover objects and arrays as typeof [] = "object"
+        if (typeof result[property] == "object") {
             const nc = crsbinding.observation.observe(result[property], oldValue[property]);
             result.__processing = true;
             delete result[property];

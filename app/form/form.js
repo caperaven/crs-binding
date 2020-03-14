@@ -2,6 +2,8 @@ import {ViewBase} from "./../../src/view/view-base.js";
 import "./../../examples/component/simple-component.js";
 
 export default class Form extends ViewBase {
+    get properties() {return ["data"]}
+
     async connectedCallback() {
         super.connectedCallback();
         this.title = "Personal Input Form";
