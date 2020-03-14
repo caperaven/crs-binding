@@ -1,11 +1,19 @@
 import {compileExp} from "./compiler.js"
 
+/**
+ * enable events
+ * @param obj
+ */
 export function enableEvents(obj) {
     obj.__events = new Map();
     obj.__conditions = new Map();
     obj.__computed = new Map();
 }
 
+/**
+ * disable events
+ * @param obj
+ */
 export function disableEvents(obj) {
     if (obj.__events != null) {
         obj.__events.forEach((ev) => {
@@ -31,6 +39,12 @@ export function disableEvents(obj) {
     }
 }
 
+/**
+ * Register the condition on the object
+ * @param obj
+ * @param exp
+ * @param callback
+ */
 export function when(obj, exp, callback) {
     const storeItem = crsbinding._objStore.get(obj);
 
@@ -59,6 +73,12 @@ export function when(obj, exp, callback) {
     }
 }
 
+/**
+ * Remove the condition added during when
+ * @param obj
+ * @param exp
+ * @param callback
+ */
 export function removeWhen(obj, exp, callback) {
     const storeItem = crsbinding._objStore.get(obj, false);
 
@@ -75,6 +95,12 @@ export function removeWhen(obj, exp, callback) {
     }
 }
 
+/**
+ * Set events for when a property changes
+ * @param obj
+ * @param property
+ * @param callback
+ */
 export function on(obj, property, callback) {
     const storeItem = crsbinding._objStore.get(obj);
 
@@ -83,6 +109,12 @@ export function on(obj, property, callback) {
     storeItem.__events.set(property, functions);
 }
 
+/**
+ * Remove the events defined in On
+ * @param obj
+ * @param property
+ * @param callback
+ */
 export function removeOn(obj, property, callback) {
     const storeItem = crsbinding._objStore.get(obj, false);
 
@@ -101,6 +133,12 @@ export function removeOn(obj, property, callback) {
     }
 }
 
+/**
+ * Notify that property has changed
+ * @param obj: object that change happened on
+ * @param property: name of property that changed
+ * @param args: this is used in array notifications for added and removed items
+ */
 export function notifyPropertyChanged(obj, property, args) {
     const storeItem = crsbinding._objStore.get(obj, false);
 
@@ -117,6 +155,12 @@ export function notifyPropertyChanged(obj, property, args) {
     }
 }
 
+/**
+ * Used for calculated properties
+ * @param obj: object that notify happens on
+ * @param property: the calculated property
+ * @param triggerProperties: array of field names that causes the refresh of the above property binding.
+ */
 export function notifyPropertyOn(obj, property, triggerProperties) {
     const storeItem = crsbinding._objStore.get(obj, false);
 
@@ -133,6 +177,13 @@ export function notifyPropertyOn(obj, property, triggerProperties) {
     }
 }
 
+/**
+ * Execute the given functions
+ * @param functions: functions to execute
+ * @param obj: context object
+ * @param property: property that changed
+ * @param args: used during array notification for items added or removed
+ */
 function callFunctions(functions, obj, property, args) {
     for(let fn of functions) {
         fn(property, obj[property], args);
