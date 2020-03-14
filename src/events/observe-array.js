@@ -21,9 +21,12 @@ export function observeArray(collection) {
 }
 
 function observeItems(collection) {
-    for (let i = 0; i < collection.length; i++) {
-        observeIndex(collection, i);
+    if (collection && collection.length > 0 && typeof collection[0] == "object") {
+        for (let i = 0; i < collection.length; i++) {
+            observeIndex(collection, i);
+        }
     }
+
     return collection;
 }
 

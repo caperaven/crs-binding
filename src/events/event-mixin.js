@@ -101,18 +101,18 @@ export function removeOn(obj, property, callback) {
     }
 }
 
-export function notifyPropertyChanged(obj, property) {
+export function notifyPropertyChanged(obj, property, args) {
     const storeItem = crsbinding._objStore.get(obj, false);
 
     if (storeItem != null) {
         if (storeItem.__events.has(property) === true)
         {
-            callFunctions(storeItem.__events.get(property), obj, property);
+            callFunctions(storeItem.__events.get(property), obj, property, args);
         }
 
         const changedFnName = `${property}Changed`;
         if (obj[changedFnName] != null) {
-            obj[changedFnName].call(obj);
+            obj[changedFnName].call(obj, args);
         }
     }
 }
@@ -133,8 +133,8 @@ export function notifyPropertyOn(obj, property, triggerProperties) {
     }
 }
 
-function callFunctions(functions, obj, property) {
+function callFunctions(functions, obj, property, args) {
     for(let fn of functions) {
-        fn(property, obj[property]);
+        fn(property, obj[property], args);
     }
 }

@@ -159,15 +159,17 @@ function createProxyValue(obj, property, oldValue, newValue) {
         result = crsbinding.observation.observe(newValue, oldValue);
     }
 
-    const properties = Object.getOwnPropertyNames(result).filter(item => item.indexOf("__") == -1);
-    for(let property of properties) {
-        // note: this will cover objects and arrays as typeof [] = "object"
-        if (typeof result[property] == "object") {
-            const nc = crsbinding.observation.observe(result[property], oldValue[property]);
-            result.__processing = true;
-            delete result[property];
-            result[property] = nc;
-            delete result.__processing;
+    if (Array.isArray(result) == false) {
+        const properties = Object.getOwnPropertyNames(result).filter(item => item.indexOf("__") == -1);
+        for(let property of properties) {
+            // note: this will cover objects and arrays as typeof [] = "object"
+            if (typeof result[property] == "object") {
+                const nc = crsbinding.observation.observe(result[property], oldValue[property]);
+                result.__processing = true;
+                delete result[property];
+                result[property] = nc;
+                delete result.__processing;
+            }
         }
     }
 
