@@ -19,7 +19,7 @@ export default class ListItem extends ViewBase {
     async disconnectedCallback() {
         super.disconnectedCallback();
         this.model = null;
-        crsbinding.observation.releaseObserved(this.items, true);
+        crsbinding.observation.releaseObserved(this.items);
     }
     
     _click(e) {
@@ -67,5 +67,5 @@ function getData() {
         }
     ];
     
-    return crsbinding.observation.observe(result, null, true);
+    return crsbinding.observation.observe(result, null);
 }

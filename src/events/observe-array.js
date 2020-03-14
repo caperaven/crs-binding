@@ -1,7 +1,7 @@
 const PROXY = "__isProxy";
 const ISARRAY = "__isArray";
 
-export function observeArray(collection, persistent = false) {
+export function observeArray(collection) {
     if(collection[PROXY] === true) {
         return observeItems(collection);
     }
@@ -12,7 +12,6 @@ export function observeArray(collection, persistent = false) {
     crsbinding._objStore.add(collection);
 
     collection.__nextId = 1;
-    collection.__persistent = persistent;
 
     observeItems(collection);
 
@@ -101,7 +100,7 @@ function observeIndex(collection, index) {
     item.__uid = collection.__nextId;
     collection.__nextId++;
     if (item.__isProxy != true) {
-        collection[index] = crsbinding.observation.observe(item, null, collection.__persistent);
+        collection[index] = crsbinding.observation.observe(item, null);
     }
     return collection[index];
 }

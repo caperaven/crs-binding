@@ -25,14 +25,17 @@ export class ViewBase {
 
     async connectedCallback() {
         this.__isProxy = true;
-        crsbinding.events.enableEvents(this);
+
+        crsbinding._objStore.add(this);
         crsbinding.parsers.parseElement(this.element, this);
+
         this._loaded();
     }
 
     async disconnectedCallback() {
         crsbinding.observation.releaseBinding(this.element);
-        crsbinding.events.disableEvents(this);
+        crsbinding._objStore.remove(this);
+
         this.element = null;
     }
 

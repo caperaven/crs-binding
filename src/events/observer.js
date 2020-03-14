@@ -2,26 +2,22 @@ import {observeArray, releaseObservedArray} from "./observe-array.js";
 
 const PROXY = "__isProxy";
 const BACKUP = "__backup";
-const PERSISTENT = "__persistent";
 const ISARRAY = "__isArray";
 
 /**
  * Start observing an object for property changes.
  * This will turn the object into a proxy and enable events and conditions.
- * Mark the object as persistent using the persistent parameter if you don't want it to be cleaned when replaced with another objects.
  * @param obj
  * @param prior
- * @param persistent
  * @returns {*}
  */
-export function observe(obj, prior, persistent = false) {
-    if (Array.isArray(obj)) return observeArray(obj, persistent);
+export function observe(obj, prior) {
+    if (Array.isArray(obj)) return observeArray(obj);
 
     // 1. Initialize the object
     crsbinding._objStore.add(obj, prior);
     obj[PROXY] = true;
     obj[BACKUP] = {};
-    obj[PERSISTENT] = persistent;
 
     // 2. Make bindable properties observed
     for (let property of obj.properties || []) {
@@ -42,14 +38,12 @@ export function observe(obj, prior, persistent = false) {
 
 /**
  * Release a object's binding properties to clean up memory
- * if the object's __persistent field is true, it will not be released unless force is true.
- * This helps the system bypass persistent objects being used between multiple UI parts
  * @param obj: <any> object to release, must be a proxy
  * @param force: <boolean> force cleanup.
  */
-export function releaseObserved(obj, force = false) {
-    if ((obj == null) || (obj[PERSISTENT] == true && force != true)) return;
-    if (obj[ISARRAY] == true) return releaseObservedArray(obj, force);
+export function releaseObserved(obj) {
+    if (obj == null) return;
+    if (obj[ISARRAY] == true) return releaseObservedArray(obj);
 
     crsbinding._objStore.remove(obj);
 
@@ -107,7 +101,7 @@ function set(obj, prop, value) {
     if (prop == "_disposing" || obj._disposing == true || obj[PROXY] != true) return true;
 
     // 1. Setting system fields
-    if (prop.indexOf("__") != -1) {
+    if (prop.indexOf("__") != -1 || value instanceof HTMLElement) {
         obj[prop] = value;
     }
     // 2. Set actual values

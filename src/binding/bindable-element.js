@@ -1,13 +1,14 @@
 export class BindableElement extends HTMLElement {
     constructor() {
         super();
-        crsbinding.events.enableEvents(this);
+        crsbinding._objStore.add(this);
         crsbinding.dom.enableEvents(this);
     }
 
     dispose() {
         this._disposing = true;
-        crsbinding.events.disableEvents(this);
+
+        crsbinding._objStore.remove(this);
         crsbinding.dom.disableEvents(this);
     }
 
