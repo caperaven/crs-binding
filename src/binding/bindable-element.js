@@ -23,6 +23,7 @@ export class BindableElement extends HTMLElement {
             this.load();
         }
 
+        this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
     }
 
@@ -47,27 +48,29 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(prop, value, forceProxy = false) {
-        const property = this[`${prop}`];
+        // 1 Get the old value
+        const oldValue = this[`${prop}`];
 
-        if (property != null && typeof property == "object") {
-            const elEvents = property.__elEvents || property.__events;
-            delete property.__elEvents;
+        // 2. During initialization the old value is a object created during element processing.
+        // Due to events in the providers it may try to override this with a undefined as the data model is not there yet.
+        // Ignore that.
+        // If you do want to make this "empty" set it to null not undefined
+        if (oldValue != null && oldValue.__isProxy == true && value === undefined) return;
 
-            if (value == undefined) {
-                value = {};
-            }
-
-            if (value != null) {
-                value.__elEvents = elEvents;
-            }
-        }
-
+        // 3. Do you want to object to always be a proxy event when you don't set it up to be like that.
         if (forceProxy === true && value != null && value.__isProxy !== true) {
             value = crsbinding.observation.observe(value, this[`_${prop}`]);
         }
 
+        // 4. If the old and new value exist share the references between them so that object sharing can happen
+        if (value && oldValue) {
+            crsbinding._objStore.setReference(value.__bid, oldValue.__bid);
+        }
+
+        // 5. Set the actual value
         this[`_${prop}`] = value;
 
+        // 6. Notify that the change has taken place.
         crsbinding.events.notifyPropertyChanged(this, prop);
         this.dispatchEvent(new CustomEvent(`${prop}Change`));
     }

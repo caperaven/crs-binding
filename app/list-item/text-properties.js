@@ -6,7 +6,7 @@ export class TextProperties extends BindableElement {
     }
 
     set model(newValue) {
-        this.setProperty("model", newValue);
+        this.setProperty("model", newValue, true);
     }
 
     get html() {

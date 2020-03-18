@@ -45,6 +45,16 @@ export class ObjectStore {
 
         return this._store.get(proxy[BID]);
     }
+
+    setReference(id, referenceId) {
+        const si1 = this._store.get(id);
+        const si2 = this._store.get(referenceId);
+
+        const references = si2.__references || [referenceId];
+
+        si1.__references = si1.__references || [];
+        si1.__references = [...si1.__references, ...references];
+    }
 }
 
 class StoreItem {

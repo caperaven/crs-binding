@@ -140,18 +140,24 @@ export function removeOn(obj, property, callback) {
  * @param args: this is used in array notifications for added and removed items
  */
 export function notifyPropertyChanged(obj, property, args) {
-    const storeItem = crsbinding._objStore.get(obj, false);
+    propertyChangedById(obj.__bid, obj, property, args);
+}
 
-    if (storeItem != null) {
-        if (storeItem.__events.has(property) === true)
-        {
-            callFunctions(storeItem.__events.get(property), obj, property, args);
-        }
+function propertyChangedById(id, obj, property, args) {
+    const storeItem = crsbinding._objStore._store.get(id);
+    if (storeItem == null) return;
 
-        const changedFnName = `${property}Changed`;
-        if (obj[changedFnName] != null) {
-            obj[changedFnName].call(obj, args);
-        }
+    if (storeItem.__events.has(property) === true) {
+        callFunctions(storeItem.__events.get(property), obj, property, args);
+    }
+
+    const changedFnName = `${property}Changed`;
+    if (obj[changedFnName] != null) {
+        obj[changedFnName].call(obj, args);
+    }
+
+    for (let refId of storeItem.__references || []) {
+        propertyChangedById(refId, obj, property, args)
     }
 }
 

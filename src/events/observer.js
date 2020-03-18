@@ -3,6 +3,7 @@ import {observeArray, releaseObservedArray} from "./observe-array.js";
 const PROXY = "__isProxy";
 const BACKUP = "__backup";
 const ISARRAY = "__isArray";
+const PERSISTENT = "__persistent";
 
 /**
  * Start observing an object for property changes.
@@ -11,13 +12,17 @@ const ISARRAY = "__isArray";
  * @param prior
  * @returns {*}
  */
-export function observe(obj, prior) {
+export function observe(obj, prior, persistent = false) {
     if (Array.isArray(obj)) return observeArray(obj);
 
     // 1. Initialize the object
     crsbinding._objStore.add(obj, prior);
     obj[PROXY] = true;
     obj[BACKUP] = {};
+
+    if (persistent === true) {
+        obj[PERSISTENT] = true;
+    }
 
     // 2. Make bindable properties observed
     for (let property of obj.properties || []) {
@@ -41,17 +46,26 @@ export function observe(obj, prior) {
  * @param obj: <any> object to release, must be a proxy
  * @param force: <boolean> force cleanup.
  */
-export function releaseObserved(obj) {
+export function releaseObserved(obj, force = false) {
+    // 1. Redirect if an array or null
     if (obj == null) return;
     if (obj[ISARRAY] == true) return releaseObservedArray(obj);
 
+    // 2 Is the object persistent if so don't clean up unless you force a cleanup
+    if (obj[PERSISTENT] == true && force != true) {
+        return;
+    }
+
+    // 3. Remove functions from store as it is no longer used
     crsbinding._objStore.remove(obj);
 
+    // 4. If the object is disposable then dispose of it
     if (obj.dispose != null) {
         obj._disposing = true;
         obj.dispose();
     }
 
+    // 5. Clean properties recursively
     const properties = Object.getOwnPropertyNames(obj);
     for (let prop of properties) {
         if (prop.indexOf("__") == 0 || (prop.indexOf("Changed") != -1 && typeof obj[prop] == "function")) {
@@ -69,7 +83,9 @@ export function releaseObserved(obj) {
  * @param obj
  */
 function cleanSystemProperties(obj) {
-    const properties = Object.getOwnPropertyNames(obj);
+    if (obj[PERSISTENT] === true) return;
+
+    const properties = Object.getOwnPropertyNames(obj).filter(item => excludeProperties.indexOf(item) == -1);
     for (let property of properties) {
         if (property.indexOf("__") == 0) {
             delete obj[property];
@@ -164,7 +180,7 @@ function createProxyValue(obj, property, oldValue, newValue) {
         for(let property of properties) {
             // note: this will cover objects and arrays as typeof [] = "object"
             if (typeof result[property] == "object") {
-                const nc = crsbinding.observation.observe(result[property], oldValue[property]);
+                const nc = crsbinding.observation.observe(result[property], oldValue[property], oldValue[PERSISTENT]);
                 result.__processing = true;
                 delete result[property];
                 result[property] = nc;

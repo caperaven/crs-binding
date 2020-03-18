@@ -2,6 +2,8 @@ import {ViewBase} from "./../../src/view/view-base.js";
 import "./text-properties.js";
 
 export default class ListItem extends ViewBase {
+    get ignore() {return ["model"]};
+    
     get model() {
         return this.getProperty("model");
     }

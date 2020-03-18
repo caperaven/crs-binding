@@ -30,9 +30,9 @@ function observeItems(collection) {
     return collection;
 }
 
-export function releaseObservedArray(collection, force = false) {
+export function releaseObservedArray(collection) {
     crsbinding.events.disableEvents(collection);
-    collection.forEach(item => crsbinding.observation.releaseObserved(item, force));
+    collection.forEach(item => crsbinding.observation.releaseObserved(item, true));
 }
 
 const deleteFunctions = ["pop", "splice"];
@@ -103,7 +103,7 @@ function observeIndex(collection, index) {
     item.__uid = collection.__nextId;
     collection.__nextId++;
     if (item.__isProxy != true) {
-        collection[index] = crsbinding.observation.observe(item, null);
+        collection[index] = crsbinding.observation.observe(item, null, true);
     }
     return collection[index];
 }
