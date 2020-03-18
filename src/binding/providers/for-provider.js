@@ -91,12 +91,12 @@ export class ForProvider extends ProviderBase {
     }
 
     _clear() {
-        for (let child of this._element.children) {
+        const elements = Array.from(this._container.children);
+
+        for (let child of elements) {
             child.parentElement.removeChild(child);
             crsbinding.observation.releaseBinding(child);
         }
-
-        this._element.innerHTML = "";
     }
 
     async _renderItems() {

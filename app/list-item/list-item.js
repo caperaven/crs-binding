@@ -25,11 +25,11 @@ export default class ListItem extends ViewBase {
     }
 
     swapData() {
-        this.items = getData2();
+        this.items = getData2(this.items);
     }
 
     empty() {
-        this.items = null;
+        this.items = crsbinding.observation.observe([], this.items);
     }
     
     _click(e) {
@@ -79,7 +79,7 @@ function getData() {
     return crsbinding.observation.observe(result, null);
 }
 
-function getData2() {
+function getData2(prior) {
     const result = [
         {
             id: 1,
@@ -104,5 +104,5 @@ function getData2() {
         }
     ];
 
-    return crsbinding.observation.observe(result, null);
+    return crsbinding.observation.observe(result, prior);
 }

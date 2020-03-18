@@ -13,7 +13,7 @@ const PERSISTENT = "__persistent";
  * @returns {*}
  */
 export function observe(obj, prior, persistent = false) {
-    if (Array.isArray(obj)) return observeArray(obj);
+    if (Array.isArray(obj)) return observeArray(obj, prior);
 
     // 1. Initialize the object
     crsbinding._objStore.add(obj, prior);
@@ -66,7 +66,7 @@ export function releaseObserved(obj, force = false) {
     }
 
     // 5. Clean properties recursively
-    const properties = Object.getOwnPropertyNames(obj);
+    const properties = Object.getOwnPropertyNames(obj).filter(item => excludeProperties.indexOf(item) == -1);
     for (let prop of properties) {
         if (prop.indexOf("__") == 0 || (prop.indexOf("Changed") != -1 && typeof obj[prop] == "function")) {
             delete obj[prop];
@@ -77,15 +77,14 @@ export function releaseObserved(obj, force = false) {
         }
     }
 }
-
+const excludeProperties = ["__bid", "__isProxy"];
 /**
  * remove all the system properties as part of a clean up process.
  * @param obj
  */
 function cleanSystemProperties(obj) {
     if (obj[PERSISTENT] === true) return;
-
-    const properties = Object.getOwnPropertyNames(obj);
+    const properties = Object.getOwnPropertyNames(obj).filter(item => excludeProperties.indexOf(item) == -1);
     for (let property of properties) {
         if (property.indexOf("__") == 0) {
             delete obj[property];

@@ -1,7 +1,7 @@
 const PROXY = "__isProxy";
 const ISARRAY = "__isArray";
 
-export function observeArray(collection) {
+export function observeArray(collection, prior) {
     if(collection[PROXY] === true) {
         return observeItems(collection);
     }
@@ -9,7 +9,7 @@ export function observeArray(collection) {
     collection[ISARRAY] = true;
     collection[PROXY] = true;
 
-    crsbinding._objStore.add(collection);
+    crsbinding._objStore.add(collection, prior);
 
     collection.__nextId = 1;
 
