@@ -103,7 +103,9 @@ function observeIndex(collection, index) {
     item.__uid = collection.__nextId;
     collection.__nextId++;
     if (item.__isProxy != true) {
-        collection[index] = crsbinding.observation.observe(item, null, true);
+        const child = crsbinding.observation.observe(item, null, true);
+        child.__pbid = collection.__bid;
+        collection[index] = child;
     }
     return collection[index];
 }

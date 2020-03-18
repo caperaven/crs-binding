@@ -21,7 +21,7 @@ export default class ListItem extends ViewBase {
     async disconnectedCallback() {
         super.disconnectedCallback();
         this.model = null;
-        crsbinding.observation.releaseObserved(this.items);
+        this.items = null;
     }
 
     swapData() {

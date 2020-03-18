@@ -143,21 +143,34 @@ export function notifyPropertyChanged(obj, property, args) {
     propertyChangedById(obj.__bid, obj, property, args);
 }
 
-function propertyChangedById(id, obj, property, args) {
+function propertyChangedById(id, obj, property, args, processParentBinding = true) {
+    // 1. Get store item
     const storeItem = crsbinding._objStore._store.get(id);
     if (storeItem == null) return;
 
+    // 2. Call core update functions
     if (storeItem.__events.has(property) === true) {
         callFunctions(storeItem.__events.get(property), obj, property, args);
     }
 
+    // 3. Call property changed function if it exists
     const changedFnName = `${property}Changed`;
     if (obj[changedFnName] != null) {
         obj[changedFnName].call(obj, args);
     }
 
-    for (let refId of storeItem.__references || []) {
-        propertyChangedById(refId, obj, property, args)
+    // 4. Get the references and call their functions
+    if (processParentBinding == true) {
+        let references = storeItem.__references || [];
+
+        if (obj.__pbid) {
+            let parentItem = crsbinding._objStore._store.get(obj.__pbid);
+            references = [...references, ...parentItem.__references || []];
+        }
+
+        for (let refId of references) {
+            propertyChangedById(refId, obj, property, args, false)
+        }
     }
 }
 
