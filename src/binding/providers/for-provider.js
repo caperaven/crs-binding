@@ -85,6 +85,18 @@ export class ForProvider extends ProviderBase {
         if (this.ar != null) {
             await this._renderItems();
         }
+        else {
+            this._clear();
+        }
+    }
+
+    _clear() {
+        for (let child of this._element.children) {
+            child.parentElement.removeChild(child);
+            crsbinding.observation.releaseBinding(child);
+        }
+
+        this._element.innerHTML = "";
     }
 
     async _renderItems() {

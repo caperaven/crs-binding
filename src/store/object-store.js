@@ -53,7 +53,12 @@ export class ObjectStore {
         const references = si2.__references || [referenceId];
 
         si1.__references = si1.__references || [];
-        si1.__references = [...si1.__references, ...references];
+
+        for (let ref of references) {
+            if (si1.__references.indexOf(ref) == -1) {
+                si1.__references.push(ref);
+            }
+        }
     }
 }
 

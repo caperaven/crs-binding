@@ -27,6 +27,10 @@ export default class ListItem extends ViewBase {
     swapData() {
         this.items = getData2();
     }
+
+    empty() {
+        this.items = null;
+    }
     
     _click(e) {
         if (this[e.target.dataset.call]) {
