@@ -28,7 +28,17 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
     }
+
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem;
+    }
 </style>
+
+<div class="toolbar">
+    <button click.call="swapData">Swap Data</button>
+</div>
 
 <ul role="list" class="list" click.call="_click($event)">
     <template for="item of items">

@@ -85,7 +85,7 @@ export function releaseObserved(obj, force = false) {
 function cleanSystemProperties(obj) {
     if (obj[PERSISTENT] === true) return;
 
-    const properties = Object.getOwnPropertyNames(obj).filter(item => excludeProperties.indexOf(item) == -1);
+    const properties = Object.getOwnPropertyNames(obj);
     for (let property of properties) {
         if (property.indexOf("__") == 0) {
             delete obj[property];
@@ -149,14 +149,20 @@ function setSingle(obj, prop, value) {
 
     // 4. Release the old value
     if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1 && oldValue != null) {
-        // 4.1 release the previous backup item properly
-        releaseObserved(backup[prop]);
-        // 4.2 clean the system properties off the oldValue
-        if (oldValue[PROXY] == true) {
-            cleanSystemProperties(oldValue);
+
+        if (Array.isArray(oldValue)) {
+            crsbinding.observation.releaseObserved(oldValue);
         }
-        // 4.3 add the clean oldvalue to backup
-        backup[prop] = oldValue;
+        else {
+            // 4.1 release the previous backup item properly
+            releaseObserved(backup[prop]);
+            // 4.2 clean the system properties off the oldValue
+            if (oldValue[PROXY] == true) {
+                cleanSystemProperties(oldValue);
+            }
+            // 4.3 add the clean oldvalue to backup
+            backup[prop] = oldValue;
+        }
     }
 
     delete obj.__processing;

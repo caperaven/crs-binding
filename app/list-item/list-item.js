@@ -15,13 +15,17 @@ export default class ListItem extends ViewBase {
     async connectedCallback() {
         super.connectedCallback();
         this.title = "List Item Bind Example";
-        this.items = getData(10);
+        this.items = getData();
     }
 
     async disconnectedCallback() {
         super.disconnectedCallback();
         this.model = null;
         crsbinding.observation.releaseObserved(this.items);
+    }
+
+    swapData() {
+        this.items = getData2();
     }
     
     _click(e) {
@@ -37,14 +41,13 @@ export default class ListItem extends ViewBase {
 }
 
 function getData() {
-    
-    let result = [
+    const result = [
         {
-        id: 1,
-        caption: `Item 1`,
-        isActive: false,
-        fontColour: "#ff0000",
-        backgroundColour: "#0000ff"
+            id: 1,
+            caption: `Item 1`,
+            isActive: false,
+            fontColour: "#ff0000",
+            backgroundColour: "#0000ff"
         },
         {
             id: 2,
@@ -69,5 +72,33 @@ function getData() {
         }
     ];
     
+    return crsbinding.observation.observe(result, null);
+}
+
+function getData2() {
+    const result = [
+        {
+            id: 1,
+            caption: `Item 10`,
+            isActive: false,
+            fontColour: "#ffffff",
+            backgroundColour: "#000000"
+        },
+        {
+            id: 2,
+            caption: `Item 11`,
+            isActive: false,
+            fontColour: "yellow",
+            backgroundColour: "red"
+        },
+        {
+            id: 3,
+            caption: `Item 12`,
+            isActive: false,
+            fontColour: "#000000",
+            backgroundColour: "#FFBB00"
+        }
+    ];
+
     return crsbinding.observation.observe(result, null);
 }
