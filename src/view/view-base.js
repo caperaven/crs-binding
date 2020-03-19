@@ -13,7 +13,7 @@ export class ViewBase {
 
     set element(newValue) {
         if (newValue != null) {
-            newValue.style.display = "none";
+            newValue.style.visibility = "hidden";
         }
 
         this._element = newValue;
