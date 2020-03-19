@@ -51,6 +51,6 @@ export class ViewBase {
 
     _loaded() {
         crsbinding.expression.updateUI(this);
-        this.element.style.display = "block";
+        this.element.style.visibility = "";
     }
 }
