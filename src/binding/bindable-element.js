@@ -67,7 +67,7 @@ export class BindableElement extends HTMLElement {
             // When working with arrays, you don't want to use the bid as the reference is set on the array itself.
             // In those cases we use the pbid. this stands for parent binding id.
             if (value && oldValue) {
-                crsbinding._objStore.setReference(value.__pbid || value.__bid, oldValue.__bid);
+                crsbinding._objStore.setReference(value, oldValue);
             }
         }
 

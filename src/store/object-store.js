@@ -46,17 +46,25 @@ export class ObjectStore {
         return this._store.get(proxy[BID]);
     }
 
-    setReference(id, referenceId) {
-        const si1 = this._store.get(id);
-        const si2 = this._store.get(referenceId);
+    setReference(value, oldValue) {
+        // 1 If old value does not exist there are no references to carry over
+        // If the parent references are the same then also exist as the references are on the parent
+        if (oldValue == null || (value.__pbid != null && value.__pbid == oldValue.__pbid)) return;
 
-        const references = si2.__references || [referenceId];
+        // 2. If the value has a parent binding reference add the reference there as it is a collection
+        const valueStoreItem = this._store.get(value.__pbid || value.__bid);
+        const oldValueStoreItem = this._store.get(oldValue.__bid);
 
-        si1.__references = si1.__references || [];
+        // 3. If the old value has references use that else create a reference to the old value
+        const references = oldValueStoreItem.__references || [oldValue.__bid];
 
+        // 4. Create a reference array for the new value if it does not already exist.
+        valueStoreItem.__references = valueStoreItem.__references || [];
+
+        // 5. Add  the references to the new value references if they are not already in the collection
         for (let ref of references) {
-            if (si1.__references.indexOf(ref) == -1) {
-                si1.__references.push(ref);
+            if (valueStoreItem.__references.indexOf(ref) == -1) {
+                valueStoreItem.__references.push(ref);
             }
         }
     }

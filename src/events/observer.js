@@ -77,7 +77,7 @@ export function releaseObserved(obj, force = false) {
         }
     }
 }
-const excludeProperties = ["__bid", "__isProxy"];
+const excludeProperties = ["__bid", "__pbid", "__isProxy"];
 /**
  * remove all the system properties as part of a clean up process.
  * @param obj
