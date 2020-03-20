@@ -25,7 +25,8 @@ export function observe(obj, prior, persistent = false) {
     }
 
     // 2. Make bindable properties observed
-    for (let property of obj.properties || []) {
+    const properties = obj.properties || Object.getOwnPropertyNames(obj).filter(item => item.indexOf("__") == -1 && item != "element" && item != "_element" && typeof obj[item] == "object");
+    for (let property of properties) {
         const value = obj[property];
         if (value && value[PROXY] != true) {
             obj[property] = observe(obj[property]);

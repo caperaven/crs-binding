@@ -11,6 +11,11 @@
       "html-only": true
     },
     {
+      "title": "Complex Binding",
+      "hash": "#complex-binding",
+      "view": "complex-binding"
+    },
+    {
       "title": "Converters",
       "hash": "#converters",
       "view": "converters"
