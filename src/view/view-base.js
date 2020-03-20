@@ -12,10 +12,6 @@ export class ViewBase {
     }
 
     set element(newValue) {
-        if (newValue != null) {
-            newValue.style.display = "none";
-        }
-
         this._element = newValue;
     }
 
@@ -54,6 +50,7 @@ export class ViewBase {
 
     _loaded() {
         crsbinding.expression.updateUI(this);
-        this.element.style.display = "block";
+        this._element.style.visibility = "";
+        this._loaded = true;
     }
 }
