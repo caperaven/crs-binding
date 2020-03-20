@@ -2,6 +2,7 @@
   "default": "welcome",
   "root": "app",
   "auto-nav": true,
+  "auto-hide": true,
   "routes": [
     {
       "title": "Welcome",

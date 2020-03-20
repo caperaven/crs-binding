@@ -12,10 +12,6 @@ export class ViewBase {
     }
 
     set element(newValue) {
-        if (newValue != null) {
-            newValue.style.visibility = "hidden";
-        }
-
         this._element = newValue;
     }
 
@@ -52,5 +48,6 @@ export class ViewBase {
     _loaded() {
         crsbinding.expression.updateUI(this);
         this._element.style.visibility = "";
+        this._loaded = true;
     }
 }
