@@ -1,1 +1,18 @@
-<h2>Person</h2>
+<h3>${person.firstName} - ${person.lastName} - ${person.age}</h3>
+
+<label>
+    <div>First Name</div>
+    <input type="text" value.bind="person.firstName" />
+</label>
+
+<label>
+    <div>Last Name</div>
+    <input type="text" value.bind="person.lastName" />
+</label>
+
+<label>
+    <div>Age</div>
+    <input type="text" value.bind="person.age" />
+</label>
+
+<contacts-details contacts.bind="person.contacts"></contacts-details>

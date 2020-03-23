@@ -1,4 +1,6 @@
 import {ViewBase} from "./../../src/view/view-base.js";
+import "./details.js";
+import "./person.js";
 
 export default class ComplexBinding extends ViewBase {
     get items() {
@@ -9,10 +11,23 @@ export default class ComplexBinding extends ViewBase {
         this.setProperty("items", newValue);
     }
 
+    get selectedItem() {
+        return this.getProperty("selectedItem");
+    }
+
+    set selectedItem(newValue) {
+        this.setProperty("selectedItem", newValue);
+    }
+
     async connectedCallback() {
         super.connectedCallback();
         this.items = getData(this.items);
-        console.log(this.items);
+    }
+
+    select(event) {
+        const id = event.target.dataset.id;
+        const selected = this.items.find(item => item.id == id);
+        this.selectedItem = selected;
     }
 }
 

@@ -185,7 +185,7 @@ function createProxyValue(obj, property, oldValue, newValue) {
         const properties = Object.getOwnPropertyNames(result).filter(item => item.indexOf("__") == -1);
         for(let property of properties) {
             // note: this will cover objects and arrays as typeof [] = "object"
-            if (typeof result[property] == "object") {
+            if (typeof result[property] == "object" && result[property][PROXY] != true) {
                 const nc = crsbinding.observation.observe(result[property], oldValue[property], oldValue[PERSISTENT]);
                 result.__processing = true;
                 delete result[property];

@@ -1,1 +1,45 @@
+<style>
+    .container {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 200px auto;
+    }
+
+    .collection {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+
+    .collection li {
+        padding: 0.25rem 1rem;
+        cursor: pointer;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
 <h2>${title}</h2>
+
+<div class="container">
+    <div>
+        <ul class="collection" click.delegate="select($event)">
+            <template for="item of items">
+                <li data-id="${item.id}">${item.code}</li>
+            </template>
+        </ul>
+    </div>
+    <div class="details">
+        <details-component data.bind="selectedItem"></details-component>
+    </div>
+</div>

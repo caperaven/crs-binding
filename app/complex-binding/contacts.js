@@ -4,6 +4,14 @@ export class ContactsComponent extends BindableElement {
     get html() {
         return import.meta.url.replace(".js", ".html");
     }
+
+    get contacts() {
+        return this.getProperty("contacts");
+    }
+
+    set contacts(newValue) {
+        return this.setProperty("contacts", newValue);
+    }
 }
 
-customElements.define("simple-component", ContactsComponent);
+customElements.define("contacts-details", ContactsComponent);
