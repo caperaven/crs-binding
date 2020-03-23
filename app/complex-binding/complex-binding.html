@@ -3,7 +3,7 @@
         display: grid;
         width: 100%;
         height: 100%;
-        grid-template-columns: 200px auto;
+        grid-template-columns: 300px auto;
     }
 
     .collection {
@@ -27,15 +27,22 @@
         display: block;
         margin-bottom: 0.5rem;
     }
+
+    h3 {
+        padding: 0;
+        margin: 1rem 0;
+    }
 </style>
 
 <h2>${title}</h2>
 
 <div class="container">
     <div>
+        <h3>Items</h3>
         <ul class="collection" click.delegate="select($event)">
             <template for="item of items">
                 <li data-id="${item.id}">${item.code}</li>
+                <person-summery person.bind="item.details"></person-summery>
             </template>
         </ul>
     </div>

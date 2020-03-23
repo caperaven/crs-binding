@@ -1,6 +1,7 @@
 import {ViewBase} from "./../../src/view/view-base.js";
 import "./details.js";
 import "./person.js";
+import "./person-summery.js";
 
 export default class ComplexBinding extends ViewBase {
     get items() {

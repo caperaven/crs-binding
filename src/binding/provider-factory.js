@@ -13,7 +13,7 @@ import {ForOnceProvider} from "./providers/for-once-provider.js";
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName) {
         if (["value", "checked"].indexOf(property) != -1) {
-            return new BindProvider(element, context, property, value, ctxName)
+            return new BindProvider(element, context, property, value, ctxName);
         }
         else {
             return this["one-way"](element, context, property, value, ctxName);
