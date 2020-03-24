@@ -48,7 +48,7 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(prop, value, forceProxy = false) {
-        if (this.isReady != true && value === undefined) return;
+        if (value === undefined) return;
 
         // 1 Get the old value
         const oldValue = this[`${prop}`];

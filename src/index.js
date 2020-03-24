@@ -89,6 +89,11 @@ const crsbinding = {
         },
         itemsWithReferences() {
             console.log(Array.from(crsbinding._objStore._store).filter(item => item[1].__references != null).map(item => item[1]));
+        },
+        modelForBid(bid) {
+            const result = Array.from(crsbinding.providerManager.items).find(item => item[1]._context.__bid == 3);
+            if (result == null) return console.error("no results found");
+            console.log(result[1]._context);
         }
     }
 };
