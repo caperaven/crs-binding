@@ -75,6 +75,21 @@ const crsbinding = {
     utils: {
         capitalizePropertyPath: capitalizePropertyPath,
         clone: clone
+    },
+
+    debug: {
+        providersForBid(bid) {
+            console.log(Array.from(crsbinding.providerManager.items).filter(item => item[1]._context.__bid == bid).map(item => item[1]))
+        },
+        elementsForBid(bid) {
+            console.log(Array.from(crsbinding.providerManager.items).filter(item => item[1]._context.__bid == bid).map(item => item[1]._element))
+        },
+        eventsForBid(bid) {
+            console.log(crsbinding._objStore._store.get(bid));
+        },
+        itemsWithReferences() {
+            console.log(Array.from(crsbinding._objStore._store).filter(item => item[1].__references != null).map(item => item[1]));
+        }
     }
 };
 

@@ -18,6 +18,12 @@ export class ProviderBase {
         if (this._element.nodeName.indexOf("-") != -1 && this._property == this._ctxName) {
             this._element[this._property] = this._context;
         }
+
+        this._element.dataset.bid = this._context.__bid;
+
+        if (this._context.__pbid != null) {
+            this._element.dataset.pbid = this._context.__pbid;
+        }
     }
 
     dispose() {

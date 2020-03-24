@@ -26,6 +26,8 @@ export default class ComplexBinding extends ViewBase {
     }
 
     select(event) {
+        if (event.target.nodeName != "LI") return;
+
         const id = event.target.dataset.id;
         const selected = this.items.find(item => item.id == id);
         this.selectedItem = selected;
@@ -34,7 +36,7 @@ export default class ComplexBinding extends ViewBase {
 
 function getData(prior) {
     const result = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
         result.push({
             id: i,
             code: `Code ${i}`,

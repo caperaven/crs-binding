@@ -47,6 +47,8 @@ export class ObjectStore {
     }
 
     setReference(value, oldValue) {
+        if (value === oldValue) return;
+
         // 1 If old value does not exist there are no references to carry over
         // If the parent references are the same then also exist as the references are on the parent
         if (oldValue == null || (value.__pbid != null && value.__pbid == oldValue.__pbid)) return;
