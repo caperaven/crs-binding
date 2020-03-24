@@ -2,17 +2,17 @@
 
 <label>
     <div>First Name</div>
-    <input type="text" value.two-way="person.firstName" />
+    <input type="text" value.two-way="person.firstName" data-path="person.firstName"/>
 </label>
 
 <label>
     <div>Last Name</div>
-    <input type="text" value.two-way="person.lastName" />
+    <input type="text" value.two-way="person.lastName" data-path="person.lastName"/>
 </label>
 
 <label>
     <div>Age</div>
-    <input type="text" value.two-way="person.age" />
+    <input type="text" value.two-way="person.age" data-path="person.age"/>
 </label>
 
 <contacts-details contacts.bind="person.contacts"></contacts-details>

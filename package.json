@@ -8,6 +8,7 @@
     },
     "scripts": {
         "test": "jest",
+        "testui": "jest test/ui/ui.test.js",
         "bundle": "rollup -c",
         "build-publish": "rollup -c & node build/publish.js"
     },
@@ -28,6 +29,7 @@
         "glob": "^7.1.4",
         "jest": "^24.9.0",
         "mkdirp": "^0.5.1",
+        "puppeteer": "^2.1.1",
         "rollup": "^1.23.0",
         "rollup-plugin-terser": "^5.1.2"
     }
