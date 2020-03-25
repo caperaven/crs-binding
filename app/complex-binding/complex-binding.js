@@ -32,6 +32,20 @@ export default class ComplexBinding extends ViewBase {
         const selected = this.items.find(item => item.id == id);
         this.selectedItem = selected;
     }
+
+    add() {
+        this.selectedItem.details.debug = {};
+        this.selectedItem.details.debug.items = [
+            {
+                code: "Debug World 1"
+            },
+            {
+                code: "Debug World 2"
+            }
+        ];
+
+        crsbinding.events.notifyPropertyChanged(this.selectedItem, "details");
+    }
 }
 
 function getData(prior) {

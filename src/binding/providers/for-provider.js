@@ -66,7 +66,7 @@ export class ForProvider extends ProviderBase {
 
         this.listenOnPath(this._plural, this._collectionChangedHandler);
 
-        const fn = new Function("context", `try { return context.${this._plural}; } catch { return null;}`);
+        const fn = pluralFactory(this._plural);
         const result = fn(this._context);
         if(result != null) {
             this._collectionChanged(null, result);
@@ -78,7 +78,7 @@ export class ForProvider extends ProviderBase {
             this.ar = newValue;
         }
         else {
-            const fn = new Function("context", `return context.${this._plural}`);
+            const fn = pluralFactory(this._plural);
             this.ar = fn(this._context);
         }
 
@@ -189,5 +189,8 @@ export class ForProvider extends ProviderBase {
     }
 }
 
+function pluralFactory(plural) {
+    return new Function("context", `try { return context.${plural}; } catch { return null;}`);
+}
 
 const repeatCode = `for (_p of _c || []) {callback(_p);}`;

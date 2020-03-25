@@ -10,8 +10,36 @@ async function navigateTo(hash) {
     ]).catch(e => console.log(e));
 }
 
+async function getTextContent(query) {
+    const handle = await page.$(query);
+    const value = await page.evaluate(element => element.textContent, handle);
+    handle.dispose();
+    return value;
+}
+
+async function getValues(query) {
+    const handles = await page.$$(query);
+    const values = [];
+
+    for (let handle of handles) {
+        values.push(await page.evaluate(element => element.value, handle));
+    }
+
+    return values;
+}
+
+async function setInputText(query, value) {
+    const handle = await page.$(query);
+    await page.evaluate(element => element.value = "", handle);
+
+    await handle.click();
+    await page.keyboard.type(value);
+    await page.keyboard.press("Tab");
+}
+
 beforeAll(async () => {
-    browser = await puppeteer.launch({headless: false, slowMo: 100});
+    jest.setTimeout(100000);
+    browser = await puppeteer.launch({headless: false, slowMo: 100, args: ['--disable-dev-shm-usage']});
     page = await browser.newPage();
     await page.goto('http://127.0.0.1:8000/#welcome', {waitUntil: 'networkidle2'});
 });
@@ -39,19 +67,31 @@ test("complex-binding", async() => {
     await navigateTo("complex-binding");
 
     await page.click(".collection li");
+    //await page.waitForSelector("person-details");
     await page.waitForFunction(() => document.querySelector("person-details h3").getAttribute("data-bid") != null);
 
     // 1. check for the heading
-    const headingHandle = await page.$("person-details h3");
-    const headingValue = await page.evaluate(element => element.textContent, headingHandle);
+    const headingValue = await getTextContent("person-details h3");
 
     expect(headingValue).toEqual("First Name 0 - Last Name 0 - 20");
 
     // 2. change the first name
-    const firstNamesHandle = await page.$$('[data-path="person.firstName"]');
+    let firstNames = await getValues('[data-path="person.firstName"]');
 
-    // 3.clean up
-    headingHandle.dispose();
+    expect(firstNames.length).toEqual(2);
+    expect(firstNames[0]).toEqual("First Name 0");
+    expect(firstNames[1]).toEqual("First Name 0");
+
+    await setInputText("#edtFirstName", "Hello World").catch(e => console.error(e));
+
+    // 3. check that all the relevant inputs have the same value as typed
+    firstNames = await getValues('[data-path="person.firstName"]');
+    expect(firstNames[0]).toEqual("Hello World");
+    expect(firstNames[1]).toEqual("Hello World");
+
+    // 4. check that the labels are also updated
+    const
 
     await page.goBack();
 });
+

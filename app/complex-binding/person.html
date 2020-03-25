@@ -2,7 +2,7 @@
 
 <label>
     <div>First Name</div>
-    <input type="text" value.two-way="person.firstName" data-path="person.firstName"/>
+    <input type="text" value.two-way="person.firstName" data-path="person.firstName" id="edtFirstName"/>
 </label>
 
 <label>
@@ -16,3 +16,9 @@
 </label>
 
 <contacts-details contacts.bind="person.contacts"></contacts-details>
+
+<ul>
+    <template for="item of person.debug.items">
+        <li>${item.code}</li>
+    </template>
+</ul>
