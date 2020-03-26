@@ -90,7 +90,11 @@ test("complex-binding", async() => {
     expect(firstNames[1]).toEqual("Hello World");
 
     // 4. check that the labels are also updated
-    const
+    const label1 = await getTextContent('person-details > h3');
+    const label2 = await getTextContent('person-summery > div');
+
+    expect(label1).toEqual("Hello World - Last Name 0 - 20");
+    expect(label2).toEqual("Hello World - Last Name 0 - 20");
 
     await page.goBack();
 });
