@@ -14,6 +14,7 @@ export default class StyleBinding extends ViewBase {
 
     disconnectedCallback() {
         super.disconnectedCallback();
+        this.model = null;
     }
 
     isActiveChanged() {

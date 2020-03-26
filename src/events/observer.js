@@ -147,8 +147,13 @@ function setSingle(obj, prop, value) {
         obj.propertyChanged(prop, value, oldValue);
     }
 
+    if (value === null && oldValue && oldValue[PROXY] == true) {
+        crsbinding.observation.releaseObserved(oldValue);
+        backup && backup[prop] && releaseObserved(backup[prop]);
+    }
+
     // 4. Release the old value
-    if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1 && oldValue != null) {
+    else if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1 && oldValue != null) {
 
         if (Array.isArray(oldValue)) {
             crsbinding.observation.releaseObserved(oldValue);

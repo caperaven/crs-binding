@@ -22,7 +22,6 @@ export class ViewBase {
     async connectedCallback() {
         this.__isProxy = true;
 
-        crsbinding._objStore.add(this);
         crsbinding.parsers.parseElement(this.element, this);
 
         this._loaded();

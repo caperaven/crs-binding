@@ -20,6 +20,7 @@ export default class Converters extends ViewBase {
 
     async disconnectedCallback() {
         crsbinding.valueConverters.unregister("status");
+        super.disconnectedCallback();
     }
 }
 

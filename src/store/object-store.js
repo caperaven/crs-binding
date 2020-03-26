@@ -17,7 +17,7 @@ export class ObjectStore {
         proxy[BID] = id;
 
         if (prior == null) {
-            this._store.set(id, new StoreItem(id))
+            this._store.set(id, new StoreItem(id, proxy.constructor.name))
         }
     }
 
@@ -73,8 +73,9 @@ export class ObjectStore {
 }
 
 class StoreItem {
-    constructor(id) {
+    constructor(id, type) {
         this.bid = id;
+        this.type = type;
         crsbinding.events.enableEvents(this);
     }
 
