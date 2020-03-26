@@ -134,7 +134,7 @@ function setSingle(obj, prop, value) {
     obj.__processing = true;
 
     // 1. Get state values
-    const backup = obj[BACKUP];
+    const backup = obj[BACKUP] || {};
     const oldValue = obj[prop];
 
     // 2. Set the new value

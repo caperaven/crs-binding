@@ -63,7 +63,6 @@ export class ForProvider extends ProviderBase {
 
         // 3. listen to the collection property on the context changing
         this._collectionChangedHandler = this._collectionChanged.bind(this);
-
         this.listenOnPath(this._plural, this._collectionChangedHandler);
 
         const fn = pluralFactory(this._plural);
@@ -103,7 +102,7 @@ export class ForProvider extends ProviderBase {
         // release the old content
         await crsbinding.observation.releaseChildBinding(this._container);
 
-        if (this.ar == null) return;
+        if (this.ar == null || this.ar.length == 0) return;
 
         // create document fragment
         const fragment = document.createDocumentFragment();
@@ -187,10 +186,15 @@ export class ForProvider extends ProviderBase {
 
         return element;
     }
+
+    _ensurePath() {
+        const parts = this._plural.split(".");
+
+    }
 }
 
 function pluralFactory(plural) {
-    return new Function("context", `try { return context.${plural}; } catch { return null;}`);
+    return new Function("context", `try { return context.${plural}; } catch {return null;}`);
 }
 
 const repeatCode = `for (_p of _c || []) {callback(_p);}`;

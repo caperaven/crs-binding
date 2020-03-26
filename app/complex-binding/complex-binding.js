@@ -44,7 +44,7 @@ export default class ComplexBinding extends ViewBase {
             }
         ];
 
-        crsbinding.events.notifyPropertyChanged(this.selectedItem, "details");
+        //crsbinding.events.notifyPropertyChanged(this.selectedItem, "details");
     }
 }
 

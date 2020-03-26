@@ -103,6 +103,7 @@ export function removeWhen(obj, exp, callback) {
  */
 export function on(obj, property, callback) {
     const storeItem = crsbinding._objStore.get(obj);
+    if (storeItem == null) return;
 
     let functions = storeItem.__events.get(property) || [];
     functions = [...functions, callback];

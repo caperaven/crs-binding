@@ -58,7 +58,8 @@ export class BindableElement extends HTMLElement {
             // Due to events in the providers it may try to override this with a undefined as the data model is not there yet.
             // Ignore that.
             // If you do want to make this "empty" set it to null not undefined
-            if (oldValue != null && oldValue.__isProxy == true && value === undefined) return;
+            // --- this may have been handled in the first line to ignore undefined items
+            // if (oldValue != null && oldValue.__isProxy == true && value === undefined) return;
 
             // 3. Do you want to object to always be a proxy event when you don't set it up to be like that.
             if (forceProxy === true && value != null && value.__isProxy !== true) {
@@ -71,6 +72,11 @@ export class BindableElement extends HTMLElement {
             if (value && oldValue) {
                 crsbinding._objStore.setReference(value, oldValue);
             }
+
+            // 5. If you have a property on the old that is a proxy but not on the new, just ensure those references come along.
+            if (oldValue != null) {
+                this._updateChildReferences(value, oldValue);
+            }
         }
 
         // 5. Set the actual value
@@ -79,6 +85,19 @@ export class BindableElement extends HTMLElement {
         // 6. Notify that the change has taken place.
         crsbinding.events.notifyPropertyChanged(this, prop);
         this.dispatchEvent(new CustomEvent(`${prop}Change`));
+    }
+
+    /**
+     * For all the properties on the old value that are proxy objects and not on the new value, just copy the references over onto empty objects
+     * @param value
+     * @param oldValue
+     * @private
+     */
+    _updateChildReferences(value, oldValue) {
+        const properties = Object.getOwnPropertyNames(oldValue).filter(prop => typeof oldValue[prop] == "object" && oldValue[prop].__isProxy == true && value[prop] == null);
+        for (let property of properties) {
+            value[property] = crsbinding.observation.observe({}, oldValue[property]);
+        }
     }
 
     observeAttributes(attributes) {
