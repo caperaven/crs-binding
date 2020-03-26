@@ -45,7 +45,6 @@ export default class ArrayBinding extends ViewBase {
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        this.data.items = null;
     }
 
     add() {
