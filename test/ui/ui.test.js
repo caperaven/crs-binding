@@ -128,3 +128,15 @@ test("form", async() => {
 
     await page.goBack();
 });
+
+test("clone", async() => {
+    await navigateTo("clone");
+
+    await page.waitForSelector('body > crs-router > .toolbar > button');
+    await page.click('body > crs-router > .toolbar > button');
+
+    const child1 = await getTextContent('body > crs-router > label:nth-child(9) > div:nth-child(1)');
+    expect(child1).toEqual("Model2 Caption");
+
+    await page.goBack();
+});
