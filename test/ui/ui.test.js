@@ -39,7 +39,7 @@ async function setInputText(query, value) {
 
 beforeAll(async () => {
     jest.setTimeout(100000);
-    browser = await puppeteer.launch({headless: false, slowMo: 100, args: ['--disable-dev-shm-usage']});
+    browser = await puppeteer.launch({headless: false, slowMo: 50, args: ['--disable-dev-shm-usage']});
     page = await browser.newPage();
     await page.goto('http://127.0.0.1:8000/#welcome', {waitUntil: 'networkidle2'});
 });
