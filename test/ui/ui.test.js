@@ -96,6 +96,16 @@ test("complex-binding", async() => {
     expect(label1).toEqual("Hello World - Last Name 0 - 20");
     expect(label2).toEqual("Hello World - Last Name 0 - 20");
 
+
+    await page.click('body > crs-router > .container > div > button');
+
+    await page.waitForSelector('.details > details-component > person-details > ul > li:nth-child(1)');
+    const child1 = await getTextContent('.details > details-component > person-details > ul > li:nth-child(1)');
+    expect(child1).toEqual("Debug World 1");
+
+    await page.waitForSelector('.details > details-component > person-details > ul > li:nth-child(2)');
+    const child2 = await getTextContent('.details > details-component > person-details > ul > li:nth-child(2)');
+    expect(child2).toEqual("Debug World 2");
+
     await page.goBack();
 });
-
