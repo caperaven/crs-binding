@@ -109,3 +109,22 @@ test("complex-binding", async() => {
 
     await page.goBack();
 });
+
+test("form", async() => {
+    await navigateTo("form");
+
+    await page.waitForSelector('body > crs-router > form > label:nth-child(2) > input');
+    await page.click('form > label:nth-child(2) > input');
+
+    await setInputText("form > label:nth-child(2) > input", "name").catch(e => console.error(e));
+    await setInputText("form > label:nth-child(3) > input", "lastname").catch(e => console.error(e));
+    await setInputText("form > label:nth-child(4) > input", "30").catch(e => console.error(e));
+
+    await page.waitForSelector('form > label:nth-child(5) > input');
+    await page.click('form > label:nth-child(5) > input');
+
+    const child1 = await getTextContent('body > crs-router > form > div');
+    expect(child1).toEqual("name lastname is 30 old");
+
+    await page.goBack();
+});
