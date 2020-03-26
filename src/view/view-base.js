@@ -30,7 +30,7 @@ export class ViewBase {
     async disconnectedCallback() {
         crsbinding.observation.releaseBinding(this.element);
         crsbinding._objStore.remove(this);
-
+        crsbinding.utils.disposeProperties(this);
         this.element = null;
     }
 

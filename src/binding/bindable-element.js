@@ -36,6 +36,8 @@ export class BindableElement extends HTMLElement {
             this.observer = null;
         }
 
+        crsbinding.utils.disposeProperties(this);
+
         crsbinding.observation.releaseBinding(this);
     }
 

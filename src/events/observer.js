@@ -29,7 +29,7 @@ export function observe(obj, prior, persistent = false) {
     for (let property of properties) {
         const value = obj[property];
         if (value && value[PROXY] != true) {
-            obj[property] = observe(obj[property]);
+            obj[property] = observe(obj[property], (prior || {})[property]);
         }
     }
 
@@ -138,7 +138,7 @@ function setSingle(obj, prop, value) {
     const oldValue = obj[prop];
 
     // 2. Set the new value
-    obj[prop] = createProxyValue(obj, prop, obj[prop], value);
+    obj[prop] = createProxyValue(obj, prop, oldValue, value);
 
     // 3. Notify changes to listeners
     crsbinding.events.notifyPropertyChanged(obj, prop);

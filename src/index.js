@@ -26,6 +26,20 @@ function capitalizePropertyPath(str) {
     return parts.join("");
 }
 
+function disposeProperties(obj) {
+    const properties = Object.getOwnPropertyNames(obj).filter(prop => obj[prop] && obj[prop].__isProxy == true);
+    for (let property of properties) {
+        console.log(property);
+
+        const pObj = obj[property];
+        if (Array.isArray(pObj) != true) {
+            disposeProperties(pObj);
+        }
+        crsbinding.observation.releaseObserved(pObj);
+        delete obj[property];
+    }
+}
+
 const crsbinding = {
     _expFn: new Map(),
     _objStore: new ObjectStore(),
@@ -74,7 +88,8 @@ const crsbinding = {
 
     utils: {
         capitalizePropertyPath: capitalizePropertyPath,
-        clone: clone
+        clone: clone,
+        disposeProperties: disposeProperties
     },
 
     debug: {
