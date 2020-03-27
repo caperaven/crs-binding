@@ -25,7 +25,7 @@ export class ObjectStore {
         const id = proxy[BID];
         const obj = this._store.get(id);
 
-        if (obj == null)  return;
+        if (obj == null) return;
 
         this._store.delete(id);
         obj && obj.dispose();

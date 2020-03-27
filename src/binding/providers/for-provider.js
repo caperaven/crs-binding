@@ -81,7 +81,7 @@ export class ForProvider extends ProviderBase {
             this.ar = fn(this._context);
         }
 
-        if (this.ar != null) {
+        if (this.ar != null && this.ar.length > 0) {
             await this._renderItems();
         }
         else {

@@ -50,7 +50,7 @@ export function observe(obj, prior, persistent = false) {
 export function releaseObserved(obj, force = false) {
     // 1. Redirect if an array or null
     if (obj == null) return;
-    if (obj[ISARRAY] == true) return releaseObservedArray(obj);
+    if (obj[ISARRAY] == true) return releaseObservedArray(obj, force);
 
     // 2 Is the object persistent if so don't clean up unless you force a cleanup
     if (obj[PERSISTENT] == true && force != true) {
@@ -156,7 +156,7 @@ function setSingle(obj, prop, value) {
     else if (excludeBackup.indexOf(prop) == -1 && prop.indexOf("__") == -1 && oldValue != null) {
 
         if (Array.isArray(oldValue)) {
-            crsbinding.observation.releaseObserved(oldValue);
+            crsbinding.observation.releaseObserved(oldValue, value == null);
         }
         else {
             // 4.1 release the previous backup item properly

@@ -30,10 +30,13 @@ function observeItems(collection) {
     return collection;
 }
 
-export function releaseObservedArray(collection) {
+export function releaseObservedArray(collection, force = false) {
     crsbinding.events.disableEvents(collection);
     collection.forEach(item => crsbinding.observation.releaseObserved(item, true));
-    crsbinding._objStore.remove(collection);
+
+    if (force == true) {
+        crsbinding._objStore.remove(collection);
+    }
 }
 
 const deleteFunctions = ["pop", "splice"];
