@@ -23,6 +23,10 @@ export class ObjectStore {
 
     remove(proxy) {
         const id = proxy[BID];
+        this.removeId(id);
+    }
+
+    removeId(id) {
         const obj = this._store.get(id);
 
         if (obj == null) return;

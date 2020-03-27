@@ -33,7 +33,7 @@ function disposeProperties(obj) {
         if (Array.isArray(pObj) != true) {
             disposeProperties(pObj);
         }
-        crsbinding.observation.releaseObserved(pObj);
+        crsbinding.observation.releaseObserved(pObj, true);
         delete obj[property];
     }
 }

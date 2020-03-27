@@ -51,6 +51,8 @@ export class OneWayProvider extends ProviderBase {
     }
 
     propertyChanged(prop, value) {
+        if (this._expObj == null) return;
+
         let v = value;
         if (this._getObj != null) {
             v = this._getObj.function(this._context);

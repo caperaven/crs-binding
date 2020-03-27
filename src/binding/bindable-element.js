@@ -38,6 +38,10 @@ export class BindableElement extends HTMLElement {
 
         crsbinding.utils.disposeProperties(this);
 
+        for (let ref of this.__references || []) {
+            crsbinding._objStore.removeId(ref);
+        }
+
         crsbinding.observation.releaseBinding(this);
     }
 
@@ -51,9 +55,15 @@ export class BindableElement extends HTMLElement {
 
     setProperty(prop, value, forceProxy = false) {
         if (value === undefined) return;
+        this.__references = this.__references || [];
 
         // 1 Get the old value
         const oldValue = this[`${prop}`];
+
+        // Keep track of property references so that we can remove it on disposing of this element
+        if (oldValue && oldValue.__bid != null && this.__references.indexOf(oldValue.__bid) == -1) {
+            this.__references.push(oldValue.__bid);
+        }
 
         if (typeof value == "object") {
             // 2. During initialization the old value is a object created during element processing.
@@ -76,7 +86,7 @@ export class BindableElement extends HTMLElement {
             }
 
             // 5. If you have a property on the old that is a proxy but not on the new, just ensure those references come along.
-            if (oldValue != null) {
+            if (value != null && oldValue != null) {
                 this._updateChildReferences(value, oldValue);
             }
         }
