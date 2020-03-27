@@ -28,6 +28,12 @@ async function getValues(query) {
     return values;
 }
 
+async function getValue(query) {
+    const handle = await page.$(query);
+    const value = await page.evaluate(element => element.value, handle);
+    return value;
+}
+
 async function setInputText(query, value) {
     const handle = await page.$(query);
     await page.evaluate(element => element.value = "", handle);
@@ -137,6 +143,18 @@ test("clone", async() => {
 
     const child1 = await getTextContent('body > crs-router > label:nth-child(9) > div:nth-child(1)');
     expect(child1).toEqual("Model2 Caption");
+
+    await page.goBack();
+});
+
+test("calc", async() => {
+    await navigateTo("calc");
+
+    await page.waitForSelector('#edtStart');
+    await setInputText("#edtStart", "00:10").catch(e => console.error(e));
+
+    const child1 = await getValue('#edtDuration');
+    expect(child1).toEqual("01.1666666666666667:68.83333333333333");
 
     await page.goBack();
 });
