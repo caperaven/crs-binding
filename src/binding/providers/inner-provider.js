@@ -26,6 +26,7 @@ export class InnerProvider extends ProviderBase {
     _change() {
         if (this._expObj == null) return;
         const target = this._element.textContent ? "textContent" : "innerText";
-        this._element[target] = this._expObj.function(this._context);
+        const context = crsbinding.data.getValue(this._context);
+        this._element[target] = this._expObj.function(context);
     }
 }

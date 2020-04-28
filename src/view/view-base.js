@@ -1,10 +1,10 @@
 export class ViewBase {
     get title() {
-        return this._title;
+        return this.getProperty("title");
     }
 
     set title(newValue) {
-        this._title = newValue;
+        this.setProperty("title", newValue);
     }
 
     get element() {
@@ -16,39 +16,33 @@ export class ViewBase {
     }
 
     constructor(element) {
+        this.__dataId = crsbinding.data.addObject(this.constructor.name);
         this.element = element;
     }
 
     async connectedCallback() {
         this.__isProxy = true;
 
-        crsbinding.parsers.parseElement(this.element, this);
+        crsbinding.parsers.parseElement(this.element, this.__dataId);
 
         this._loaded();
     }
 
     async disconnectedCallback() {
         crsbinding.observation.releaseBinding(this.element);
-        crsbinding._objStore.remove(this);
         crsbinding.utils.disposeProperties(this);
         this.element = null;
     }
 
-    getProperty(prop) {
-        let result = this[`_${prop}`];
-        if (result == null && this.getAttribute != null) {
-            result = this.getAttribute(prop);
-        }
-        return  result;
+    getProperty(property) {
+        return crsbinding.data.getValue(this.__dataId, property);
     }
 
-    setProperty(prop, value) {
-        this[`_${prop}`] = value;
-        // this is a proxy and the notification of property change happens in the observer
+    setProperty(property, value) {
+        crsbinding.data.setProperty(this.__dataId, property, value);
     }
 
     _loaded() {
-        crsbinding.expression.updateUI(this);
         this._element.style.visibility = "";
         this._loaded = true;
     }

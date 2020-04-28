@@ -1,4 +1,6 @@
 const data = new Map();
+const callbacks = new Map();
+
 let _nextId = 0;
 
 function getNextId() {
@@ -7,11 +9,21 @@ function getNextId() {
     return id;
 }
 
-function setProperty(obj, property, value) {
-    obj[property] = value;
+function addCallback(obj, property, callback) {
+    obj[property] = obj[property] || {
+        functions: []
+        // JHR: todo: conditions need to badded in this place when they are set.
+    };
+    obj[property].functions.push(callback);
 }
 
-function setPropertyPath(obj, path, value) {
+function addCallbackPath(obj, path, callback) {
+    ensurePath(obj, path, (obj, prop) => {
+        addCallback(obj, prop, callback);
+    });
+}
+
+function ensurePath(obj, path, callback) {
     let cobj = obj;
     const parts = path.split(".");
 
@@ -23,7 +35,15 @@ function setPropertyPath(obj, path, value) {
         cobj = cobj[part];
     }
 
-    cobj[parts[parts.length -1]] = value;
+    callback(cobj, parts[parts.length -1]);
+}
+
+function setProperty(obj, property, value) {
+    obj[property] = value;
+}
+
+function setPropertyPath(obj, path, value) {
+    ensurePath(obj, path, (obj,  prop) => obj[prop] = value);
 }
 
 function getProperty(obj, property) {
@@ -48,6 +68,8 @@ function createReference(refId, name, path) {
 }
 
 export const bindingData = {
+    details: {data: data, callbacks: callbacks},
+
     addObject(name, type = {}) {
         const id = getNextId();
         data.set(id, {
@@ -56,7 +78,15 @@ export const bindingData = {
             type: "data",
             data: type
         });
+
+        callbacks.set(id, {});
+
         return id;
+    },
+
+    addCallback(id, property, callback) {
+        const obj = callbacks.get(id);
+        return property.indexOf(".") == -1 ? addCallback(obj, property, callback) : addCallbackPath(obj, property, callback);
     },
 
     setProperty(id, property, value) {

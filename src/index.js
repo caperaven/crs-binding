@@ -1,18 +1,14 @@
 import {compileExp, releaseExp} from "./events/compiler.js";
-import {enableEvents, disableEvents} from "./events/event-mixin.js";
-import {observe, releaseObserved} from "./events/observer.js";
 import {sanitizeExp} from "./events/expressions.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
-import {updateUI} from "./events/update.js";
 import {when, on, notifyPropertyChanged, removeOn, removeWhen, notifyPropertyOn} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
-import {ObjectStore} from "./store/object-store.js";
 import {bindingData} from "./store/binding-data.js";
 
 String.prototype.capitalize = function() {
@@ -34,14 +30,12 @@ function disposeProperties(obj) {
         if (Array.isArray(pObj) != true) {
             disposeProperties(pObj);
         }
-        crsbinding.observation.releaseObserved(pObj, true);
         delete obj[property];
     }
 }
 
 const crsbinding = {
     _expFn: new Map(),
-    _objStore: new ObjectStore(),
 
     data: bindingData,
     idleTaskManager: new IdleTaskManager(),
@@ -52,13 +46,11 @@ const crsbinding = {
     expression: {
         sanitize: sanitizeExp,
         compile: compileExp,
-        release: releaseExp,
-        updateUI: updateUI,
+        release: releaseExp
     },
 
     observation: {
-        observe: observe,
-        releaseObserved: releaseObserved,
+        observe: (view) => view, // remove this, ued in router
         releaseBinding: releaseBinding,
         releaseChildBinding: releaseChildBinding
     },
@@ -69,8 +61,6 @@ const crsbinding = {
     },
 
     events: {
-        enableEvents: enableEvents,
-        disableEvents: disableEvents,
         when: when,
         on: on,
         notifyPropertyChanged: notifyPropertyChanged,
@@ -90,26 +80,6 @@ const crsbinding = {
         capitalizePropertyPath: capitalizePropertyPath,
         clone: clone,
         disposeProperties: disposeProperties
-    },
-
-    debug: {
-        providersForBid(bid) {
-            console.log(Array.from(crsbinding.providerManager.items).filter(item => item[1]._context.__bid == bid).map(item => item[1]))
-        },
-        elementsForBid(bid) {
-            console.log(Array.from(crsbinding.providerManager.items).filter(item => item[1]._context.__bid == bid).map(item => item[1]._element))
-        },
-        eventsForBid(bid) {
-            console.log(crsbinding._objStore._store.get(bid));
-        },
-        itemsWithReferences() {
-            console.log(Array.from(crsbinding._objStore._store).filter(item => item[1].__references != null).map(item => item[1]));
-        },
-        modelForBid(bid) {
-            const result = Array.from(crsbinding.providerManager.items).find(item => item[1]._context.__bid == 3);
-            if (result == null) return console.error("no results found");
-            console.log(result[1]._context);
-        }
     }
 };
 

@@ -1,4 +1,8 @@
 export class ProviderBase {
+    get data() {
+        return crsbinding.data.getValue(this._context);
+    }
+
     constructor(element, context, property, value, ctxName) {
         this._element = element;
         this._context = context;
@@ -17,12 +21,6 @@ export class ProviderBase {
 
         if (this._element.nodeName.indexOf("-") != -1 && this._property == this._ctxName) {
             this._element[this._property] = this._context;
-        }
-
-        this._element.dataset.bid = this._context.__bid;
-
-        if (this._context.__pbid != null) {
-            this._element.dataset.pbid = this._context.__pbid;
         }
     }
 
@@ -47,24 +45,8 @@ export class ProviderBase {
     async initialize() {
     }
 
-    listenOnPath(value, callback) {
-        if (Array.isArray(value) == true) {
-            for (let v of value) {
-                this.listenOnPath(v, callback);
-            }
-            return;
-        }
-
-        if (this._isNamedContext) {
-            value = value.replace(`${this._ctxName}.`, "");
-        }
-
-        crsbinding.events.listenOn(this._context, value, callback);
-
-        this._eventsToRemove.push({
-            value: value,
-            callback: callback
-        })
+    listenOnPath(property, callback) {
+        crsbinding.data.addCallback(this._context, property, callback);
     }
 
     removeOn(value, callback) {
