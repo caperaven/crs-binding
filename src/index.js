@@ -13,6 +13,7 @@ import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
 import {ObjectStore} from "./store/object-store.js";
+import {bindingData} from "./store/binding-data.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -42,6 +43,7 @@ const crsbinding = {
     _expFn: new Map(),
     _objStore: new ObjectStore(),
 
+    data: bindingData,
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
