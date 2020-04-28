@@ -11,84 +11,9 @@
       "html-only": true
     },
     {
-      "title": "Complex Binding",
-      "hash": "#complex-binding",
-      "view": "complex-binding"
-    },
-    {
-      "title": "Converters",
-      "hash": "#converters",
-      "view": "converters"
-    },
-    {
-      "title": "Calculated",
-      "hash": "#calc",
-      "view": "calc"
-    },
-    {
-      "title": "SVG",
-      "hash": "#svg",
-      "view": "svg"
-    },
-    {
-      "title": "For Once",
-      "hash": "#foronce",
-      "view": "foronce"
-    },
-    {
-      "title": "Clone",
-      "hash": "#clone",
-      "view": "clone"
-    },
-    {
-      "title": "List Item",
-      "hash": "#list-item",
-      "view": "list-item"
-    },
-    {
-      "title": "List",
-      "hash": "#list",
-      "view": "list"
-    },
-    {
-      "title": "Template",
-      "hash": "#template",
-      "view": "template"
-    },
-    {
-      "title": "View 2",
-      "hash": "#view2",
-      "view": "view2"
-    },
-    {
-      "title": "Repeat",
-      "hash": "#repeat",
-      "view": "repeat"
-    },
-    {
-      "title": "Class",
-      "hash": "#class",
-      "view": "class"
-    },
-    {
-      "title": "Style",
-      "hash": "#style",
-      "view": "style"
-    },
-    {
-      "title": "Array",
-      "hash": "#array",
-      "view": "array"
-    },
-    {
-      "title": "Array2",
-      "hash": "#array2",
-      "view": "array2"
-    },
-    {
-      "title": "Form",
-      "hash": "#form",
-      "view": "form"
+      "title": "Component Test",
+      "hash": "#component",
+      "view": "component"
     }
   ]
 }
