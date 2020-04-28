@@ -1,11 +1,22 @@
 import {ViewBase} from "../../src/view/view-base.js";
+import "./input-form.js";
 
 export default class Component extends ViewBase {
-    async connectedCallback() {
-        super.connectedCallback();
+    get data() {
+        return this.getProperty("data");
     }
 
-    async disconnectedCallback() {
-        super.disconnectedCallback();
+    set data(newValue) {
+        this.setProperty("data", newValue);
+    }
+
+    _loaded() {
+        this.data = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 20
+        };
+
+        super._loaded();
     }
 }

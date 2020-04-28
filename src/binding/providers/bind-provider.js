@@ -34,7 +34,7 @@ export class BindProvider extends OneWayProvider {
             value = this[typeFn](value, event.target);
         }
 
-        this._setObj.function(this._context, value);
+        this._setObj.function(this.data, value);
         event.stopPropagation();
     }
 

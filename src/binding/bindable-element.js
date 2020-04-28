@@ -1,6 +1,7 @@
 export class BindableElement extends HTMLElement {
     constructor() {
         super();
+        this._dataId = crsbinding.data.addObject(this.constructor.name);
         crsbinding.dom.enableEvents(this);
     }
 
@@ -12,7 +13,7 @@ export class BindableElement extends HTMLElement {
     async connectedCallback() {
         if (this.html != null) {
             this.innerHTML = await fetch(this.html).then(result => result.text());
-            crsbinding.parsers.parseElements(this.children, this);
+            crsbinding.parsers.parseElements(this.children, this._dataId);
         }
 
         if (this.load != null) {
@@ -21,6 +22,13 @@ export class BindableElement extends HTMLElement {
 
         this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
+
+        requestAnimationFrame(() => {
+            const name = this.getAttribute("name");
+            if (name != null) {
+                crsbinding.data.setName(this._dataId, name);
+            }
+        })
     }
 
     async disconnectedCallback() {
@@ -30,9 +38,11 @@ export class BindableElement extends HTMLElement {
         crsbinding.observation.releaseBinding(this);
     }
 
-    getProperty(prop) {
+    getProperty(property) {
+        return crsbinding.data.getValue(this._dataId, property);
     }
 
-    setProperty(prop, value, forceProxy = false) {
+    setProperty(property, value) {
+        crsbinding.data.setProperty(this._dataId, property, value);
     }
 }

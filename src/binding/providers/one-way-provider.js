@@ -41,7 +41,6 @@ export class OneWayProvider extends ProviderBase {
         this.listenOnPath(this._value, this._eventHandler);
 
         const v = this._ctxName == "context" ? this._context[this._value] : this._context;
-        this.propertyChanged(null, v);
     }
 
     setContext() {
@@ -52,12 +51,7 @@ export class OneWayProvider extends ProviderBase {
 
     propertyChanged(prop, value) {
         if (this._expObj == null) return;
-
-        let v = value;
-        if (this._getObj != null) {
-            v = this._getObj.function(this._context);
-        }
-        crsbinding.idleTaskManager.add(this._expObj.function(this._context, this._element, v));
+        crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
     }
 }
 

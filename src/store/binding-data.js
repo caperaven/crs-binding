@@ -9,6 +9,16 @@ function getNextId() {
     return id;
 }
 
+function callFunctions(id, property) {
+    const obj = callbacks.get(id);
+    if (obj[property] == null) return;
+
+    for(let fn of obj[property].functions) {
+        const value = bindingData.getValue(id, property);
+        fn(property, value);
+    }
+}
+
 function addCallback(obj, property, callback) {
     obj[property] = obj[property] || {
         functions: []
@@ -70,6 +80,10 @@ function createReference(refId, name, path) {
 export const bindingData = {
     details: {data: data, callbacks: callbacks},
 
+    setName(id, name) {
+        data.get(id).name = name;
+    },
+
     addObject(name, type = {}) {
         const id = getNextId();
         data.set(id, {
@@ -91,7 +105,9 @@ export const bindingData = {
 
     setProperty(id, property, value) {
         const obj = data.get(id).data;
-        return property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
+        property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
+
+        callFunctions(id, property);
     },
 
     getValue(id, property) {

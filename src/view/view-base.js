@@ -16,14 +16,12 @@ export class ViewBase {
     }
 
     constructor(element) {
-        this.__dataId = crsbinding.data.addObject(this.constructor.name);
+        this._dataId = crsbinding.data.addObject(this.constructor.name);
         this.element = element;
     }
 
     async connectedCallback() {
-        this.__isProxy = true;
-
-        crsbinding.parsers.parseElement(this.element, this.__dataId);
+        crsbinding.parsers.parseElement(this.element, this._dataId);
 
         this._loaded();
     }
@@ -35,11 +33,11 @@ export class ViewBase {
     }
 
     getProperty(property) {
-        return crsbinding.data.getValue(this.__dataId, property);
+        return crsbinding.data.getValue(this._dataId, property);
     }
 
     setProperty(property, value) {
-        crsbinding.data.setProperty(this.__dataId, property, value);
+        crsbinding.data.setProperty(this._dataId, property, value);
     }
 
     _loaded() {

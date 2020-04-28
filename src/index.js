@@ -3,7 +3,7 @@ import {sanitizeExp} from "./events/expressions.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
-import {when, on, notifyPropertyChanged, removeOn, removeWhen, notifyPropertyOn} from "./events/event-mixin.js";
+import {when, on, removeOn, removeWhen} from "./events/event-mixin.js";
 import {listenOn, listenOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
@@ -63,8 +63,6 @@ const crsbinding = {
     events: {
         when: when,
         on: on,
-        notifyPropertyChanged: notifyPropertyChanged,
-        notifyPropertyOn: notifyPropertyOn,
         removeOn: removeOn,
         removeWhen: removeWhen,
         listenOn: listenOn,
