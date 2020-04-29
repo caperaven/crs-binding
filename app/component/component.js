@@ -1,5 +1,6 @@
 import {ViewBase} from "../../src/view/view-base.js";
 import "./input-form.js";
+import "./firstName.js";
 
 export default class Component extends ViewBase {
     get data() {

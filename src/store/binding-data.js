@@ -12,18 +12,27 @@ function getNextId() {
 function callFunctions(id, property) {
     const obj = callbacks.get(id);
     if (obj[property] == null) return;
+    callFunctionsOnObject(obj[property], id, property);
+}
 
-    for(let fn of obj[property].functions) {
-        const value = bindingData.getValue(id, property);
-        fn(property, value);
+function callFunctionsOnObject(obj, id, property) {
+    const functions = obj.functions;
+    if (functions != null) {
+        for(let fn of obj.functions) {
+            const value = bindingData.getValue(id, property);
+            fn(property, value);
+        }
+    }
+
+    const properties = Object.getOwnPropertyNames(obj).filter(p => p != "functions");
+    for (let prop of properties) {
+        callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
     }
 }
 
 function addCallback(obj, property, callback) {
-    obj[property] = obj[property] || {
-        functions: []
-        // JHR: todo: conditions need to badded in this place when they are set.
-    };
+    obj[property] = obj[property] || {};
+    obj[property].functions = obj[property].functions || [];
     obj[property].functions.push(callback);
 }
 
@@ -77,8 +86,19 @@ function createReference(refId, name, path) {
     return id;
 }
 
+function link(sourceId, sourceProp, targetId, targetProp) {
+    console.log(sourceId);
+    console.log(sourceProp);
+    console.log(targetId);
+    console.log(targetProp);
+}
+
 export const bindingData = {
     details: {data: data, callbacks: callbacks},
+
+    link(sourceId, sourceProp, targetId, targetProp) {
+        link(sourceId, sourceProp, targetId, targetProp);
+    },
 
     setName(id, name) {
         data.get(id).name = name;

@@ -3,6 +3,8 @@ export class BindableElement extends HTMLElement {
         super();
         this._dataId = crsbinding.data.addObject(this.constructor.name);
         crsbinding.dom.enableEvents(this);
+
+        this.__properties = new Map();
     }
 
     dispose() {
@@ -28,7 +30,11 @@ export class BindableElement extends HTMLElement {
             if (name != null) {
                 crsbinding.data.setName(this._dataId, name);
             }
-        })
+        });
+
+        this.__properties.forEach((value, key) => crsbinding.data.setProperty(this._dataId, key, value));
+        this.__properties.clear();
+        delete this.__properties;
     }
 
     async disconnectedCallback() {
@@ -43,6 +49,10 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(property, value) {
+        if (this.isReady != true) {
+            return this.__properties.set(property, value);
+        }
+
         crsbinding.data.setProperty(this._dataId, property, value);
     }
 }
