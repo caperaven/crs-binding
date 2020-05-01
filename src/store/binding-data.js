@@ -1,5 +1,7 @@
 const data = new Map();
 const callbacks = new Map();
+const updates = new Map();
+const triggers = new Map();
 
 let _nextId = 0;
 
@@ -15,6 +17,14 @@ function callFunctions(id, property) {
     callFunctionsOnObject(obj[property], id, property);
 }
 
+function callTriggers(id, property) {
+    const obj = triggers.get(id);
+    if (obj == null || obj[property] == null) return;
+    for (let trigger of obj[property]) {
+        callFunctions(trigger.id, trigger.property);
+    }
+}
+
 function callFunctionsOnObject(obj, id, property) {
     const functions = obj.functions;
     if (functions != null) {
@@ -28,6 +38,12 @@ function callFunctionsOnObject(obj, id, property) {
     for (let prop of properties) {
         callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
     }
+}
+
+function performUpdates(id, property, value) {
+    const obj = updates.get(id);
+    if (obj == null || obj[property] == null) return;
+    bindingData.setProperty(obj[property].originId, obj[property].originProperty, value);
 }
 
 function addCallback(obj, property, callback) {
@@ -58,11 +74,17 @@ function ensurePath(obj, path, callback) {
 }
 
 function setProperty(obj, property, value) {
-    obj[property] = value;
+    if (obj[property] != value) {
+        obj[property] = value;
+        return true;
+    }
+    return false;
 }
 
 function setPropertyPath(obj, path, value) {
-    ensurePath(obj, path, (obj,  prop) => obj[prop] = value);
+    let result = true;
+    ensurePath(obj, path, (obj,  prop) => result = setProperty(obj, prop, value));
+    return result;
 }
 
 function getProperty(obj, property) {
@@ -86,18 +108,48 @@ function createReference(refId, name, path) {
     return id;
 }
 
-function link(sourceId, sourceProp, targetId, targetProp) {
-    console.log(sourceId);
-    console.log(sourceProp);
-    console.log(targetId);
-    console.log(targetProp);
+function addUpdateOrigin(sourceId, sourceProp, targetId, targetProp) {
+    const update = updates.get(targetId) || {};
+    const source = update[targetProp] || {};
+
+    if (source.originId == sourceId && source.originProperty == sourceProp) return;
+
+    source.originId = sourceId;
+    source.originProperty = sourceProp;
+    update[targetProp] = source;
+    updates.set(targetId, update);
+}
+
+function addTriggers(sourceId, sourceProp, targetId, targetProp) {
+    const trigger = triggers.get(sourceId) || {};
+    const items = trigger[sourceProp] || [];
+
+    const item = items.find(i => i.targetId == targetId && i.property == targetProp);
+    if (item != null) return;
+
+    items.push({
+        id: targetId,
+        property: targetProp
+    });
+
+    trigger[sourceProp] = items;
+    triggers.set(sourceId, trigger);
+}
+
+function link(sourceId, sourceProp, targetId, targetProp, value) {
+    if (typeof value != "object" || value === null) {
+        addUpdateOrigin(sourceId, sourceProp, targetId, targetProp);
+        addUpdateOrigin(targetId, targetProp, sourceId, sourceProp);
+    }
+
+    addTriggers(sourceId, sourceProp, targetId, targetProp);
 }
 
 export const bindingData = {
-    details: {data: data, callbacks: callbacks},
+    details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers},
 
-    link(sourceId, sourceProp, targetId, targetProp) {
-        link(sourceId, sourceProp, targetId, targetProp);
+    link(sourceId, sourceProp, targetId, targetProp, value) {
+        link(sourceId, sourceProp, targetId, targetProp, value);
     },
 
     setName(id, name) {
@@ -125,9 +177,13 @@ export const bindingData = {
 
     setProperty(id, property, value) {
         const obj = data.get(id).data;
-        property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
+        const changed = property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
 
-        callFunctions(id, property);
+        if (changed == true) {
+            performUpdates(id, property, value);
+            callFunctions(id, property);
+            callTriggers(id, property);
+        }
     },
 
     getValue(id, property) {

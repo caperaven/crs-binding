@@ -8,9 +8,6 @@ export class BindProvider extends OneWayProvider {
         this._eventName = null;
         this._changeHandler = null;
 
-        crsbinding.expression.release(this._setObj);
-        delete this._setObj;
-        
         super.dispose();
     }
 
@@ -20,9 +17,6 @@ export class BindProvider extends OneWayProvider {
         
         this._eventName = (changeElements.indexOf(this._element.nodeName) !== -1) ? "change" :  `${this._property}Change`; 
         this._element.addEventListener(this._eventName, this._changeHandler);
-
-        const exp = this._isNamedContext == true ? `${this._value} = value` : `context.${this._value} = value`;
-        this._setObj = crsbinding.expression.compile(exp, ["value"], {sanitize: false, ctxName: this._ctxName});
     }
 
     _change(event) {
@@ -34,7 +28,8 @@ export class BindProvider extends OneWayProvider {
             value = this[typeFn](value, event.target);
         }
 
-        this._setObj.function(this.data, value);
+        crsbinding.data.setProperty(this._context, this._value, value);
+
         event.stopPropagation();
     }
 
