@@ -24,7 +24,8 @@ export class CallProvider extends ProviderBase {
     }
 
     event(event) {
-        crsbinding.idleTaskManager.add(this._fn(this._context));
+        const context = crsbinding.data.getContext(this._context);
+        crsbinding.idleTaskManager.add(this._fn(context));
         event.stopPropagation();
     }
 }

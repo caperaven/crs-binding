@@ -20,4 +20,10 @@ export default class Component extends ViewBase {
 
         super._loaded();
     }
+
+    update() {
+        crsbinding.data.updateUI(0, "data.firstName");
+        crsbinding.data.updateUI(1, "value");
+        crsbinding.data.updateUI(2, "data.firstName");
+    }
 }

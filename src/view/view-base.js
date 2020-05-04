@@ -17,6 +17,7 @@ export class ViewBase {
 
     constructor(element) {
         this._dataId = crsbinding.data.addObject(this.constructor.name);
+        crsbinding.data.addContext(this._dataId, this);
         this.element = element;
     }
 

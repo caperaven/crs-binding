@@ -1,7 +1,32 @@
+/**
+ * Binding data used for binding operations
+ * @type {Map<any, any>}
+ */
 const data = new Map();
+
+/**
+ * Functions that trigger when properties change
+ * @type {Map<any, any>}
+ */
 const callbacks = new Map();
+
+/**
+ * When a object's value changes, copy that value to a update as defined in this map
+ * @type {Map<any, any>}
+ */
 const updates = new Map();
+
+/**
+ * When this property changes, also update other UI by firing their triggers
+ * @type {Map<any, any>}
+ */
 const triggers = new Map();
+
+/**
+ * Components and views need access to the actual class to execute delegates.
+ * @type {Map<any, any>}
+ */
+const context = new Map();
 
 let _nextId = 0;
 
@@ -11,7 +36,18 @@ function getNextId() {
     return id;
 }
 
+function callFunctionsOnPath(id, path) {
+    const obj = callbacks.get(id);
+
+    const fn = new Function("context", `try {return context.${path}} catch {return null}`);
+    const result =  fn(obj);
+    
+    callFunctionsOnObject(result, id, path);
+}
+
 function callFunctions(id, property) {
+    if (property.indexOf(".") != -1) return callFunctionsOnPath(id, property);
+
     const obj = callbacks.get(id);
     if (obj[property] == null) return;
     callFunctionsOnObject(obj[property], id, property);
@@ -141,12 +177,10 @@ function link(sourceId, sourceProp, targetId, targetProp, value) {
         addUpdateOrigin(sourceId, sourceProp, targetId, targetProp);
         addUpdateOrigin(targetId, targetProp, sourceId, sourceProp);
     }
-
-    addTriggers(sourceId, sourceProp, targetId, targetProp);
 }
 
 export const bindingData = {
-    details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers},
+    details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers, context:  context},
 
     link(sourceId, sourceProp, targetId, targetProp, value) {
         link(sourceId, sourceProp, targetId, targetProp, value);
@@ -168,6 +202,10 @@ export const bindingData = {
         callbacks.set(id, {});
 
         return id;
+    },
+
+    addContext(id, obj) {
+        context.set(id, obj);
     },
 
     addCallback(id, property, callback) {
@@ -200,6 +238,10 @@ export const bindingData = {
         }
     },
 
+    getContext(id) {
+        return context.get(id);
+    },
+
     getReferenceValue(id, property, path) {
         const obj = data.get(id);
 
@@ -213,9 +255,7 @@ export const bindingData = {
         }
     },
 
-    createReferenceTo(refId, name, path) {
-        return createReference(refId, name, path);
-    },
+    createReferenceTo: createReference,
 
     clear() {
         data.forEach((value, key) => {
@@ -223,5 +263,7 @@ export const bindingData = {
         });
         data.clear();
         _nextId = 0;
-    }
+    },
+
+    updateUI: callFunctions
 };
