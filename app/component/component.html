@@ -8,6 +8,10 @@
     <input value.bind="data.firstName">
 </label>
 
+<h2>Contacts</h2>
+<div>${data.contacts.phone.land}</div>
+<div>${data.contacts.phone.cell}</div>
+<div>${data.contacts.phone.fax}</div>
+
 <input-form name="Import Form 1" data.bind="data"></input-form>
 <first-name name="First Name Component" value.bind="data.firstName"></first-name>
-<person-contacts contacts.bind="data.contacts.details"></person-contacts>

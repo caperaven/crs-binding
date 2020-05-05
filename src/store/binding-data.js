@@ -82,7 +82,8 @@ function callFunctionsOnObject(obj, id, property) {
         }
     }
 
-    const properties = Object.getOwnPropertyNames(obj).filter(p => p != "functions");
+    // JHR: todo, rename functions and triggers to have __ before them just to make sure they are unique
+    const properties = Object.getOwnPropertyNames(obj).filter(p => p != "functions" && p != "trigger");
     for (let prop of properties) {
         callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
     }
@@ -193,24 +194,49 @@ function syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
     }
 }
 
-// JHR: todo this needs to be updated so that the source prop and target prop can be paths
 function syncTriggers(sourceId, sourceProp, targetId, targetProp) {
     let sourceObj = callbacks.get(sourceId);
     let targetObj = callbacks.get(targetId);
 
-    const properties = Object.getOwnPropertyNames(sourceObj[sourceProp]).filter(fn => fn != "functions");
-    for (let property of properties) {
-        const source = sourceObj[sourceProp][property];
+    /**
+     *  Source: data.contacts.phone...
+     *  Target: X
+     *
+     *  Path: data.contracts
+     *
+     *  Path on target does not exist.
+     */
 
-        if (source.trigger != null) {
-            targetObj[targetProp] = targetObj[targetProp] || {};
-            targetObj[targetProp][property] = targetObj[sourceProp][property] || {};
-            targetObj[targetProp][property].trigger = source.trigger;
+    const properties = (new Function("sourceObj", `return Object.getOwnPropertyNames(sourceObj.${sourceProp}).filter(fn => fn != \"functions\")`))(sourceObj);
 
-            const tr = triggers.get(source.trigger);
-            tr.values.push({id: targetId, path: `${targetProp}.${property}`});
+    ensurePath(targetObj, sourceProp, (obj, prop) => {
+        for (let property of properties) {
+            const source = (new Function("sourceObj", `return sourceObj.${sourceProp}.${property}`))(sourceObj);
+
+            if (source.trigger != null) {
+                obj[prop] = obj[prop] || {};
+                obj[prop][property] = obj[prop][property] || {};
+                obj[prop][property].trigger = source.trigger;
+
+                const tr = triggers.get(source.trigger);
+                tr.values.push({id: targetId, path: `${targetProp}.${property}`});
+            }
         }
-    }
+    });
+
+    // const properties = Object.getOwnPropertyNames(sourceObj[sourceProp]).filter(fn => fn != "functions");
+    // for (let property of properties) {
+    //     const source = sourceObj[sourceProp][property];
+    //
+    //     if (source.trigger != null) {
+    //         targetObj[targetProp] = targetObj[targetProp] || {};
+    //         targetObj[targetProp][property] = targetObj[sourceProp][property] || {};
+    //         targetObj[targetProp][property].trigger = source.trigger;
+    //
+    //         const tr = triggers.get(source.trigger);
+    //         tr.values.push({id: targetId, path: `${targetProp}.${property}`});
+    //     }
+    // }
 }
 
 function makeShared(id, property, sharedItems) {

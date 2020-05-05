@@ -12,12 +12,19 @@ export default class Component extends ViewBase {
     }
 
     _loaded() {
-        crsbinding.data.makeShared(this._dataId, "data", ["firstName"]);
+        crsbinding.data.makeShared(this._dataId, "data", ["firstName", "contacts.phone.land", "contacts.phone.cell", "contacts.phone.fax"]);
 
         this.data = {
             firstName: "John",
             lastName: "Doe",
-            age: 20
+            age: 20,
+            contacts: {
+                phone: {
+                    land: "Land number",
+                    cell: "cell number",
+                    fax: "fax number"
+                }
+            }
         };
 
         super._loaded();

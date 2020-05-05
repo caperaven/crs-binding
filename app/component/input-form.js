@@ -1,4 +1,5 @@
 import {BindableElement} from "../../src/binding/bindable-element.js";
+import "./input-contacts.js";
 
 export class InputForm extends BindableElement {
     get html() {
