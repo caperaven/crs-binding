@@ -43,4 +43,19 @@ export default class Component extends ViewBase {
             age: 30
         };
     }
+
+    newObject2() {
+        this.data = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 20,
+            contacts: {
+                phone: {
+                    land: "Land number",
+                    cell: "cell number",
+                    fax: "fax number"
+                }
+            }
+        };
+    }
 }
