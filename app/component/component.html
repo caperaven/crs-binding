@@ -1,6 +1,7 @@
 <h2>${title} - View Model</h2>
 
 <button click.call="update">Update UI</button>
+<button click.call="newObject">New Object</button>
 
 <label>
     <div>First Name</div>
@@ -9,3 +10,4 @@
 
 <input-form name="Import Form 1" data.bind="data"></input-form>
 <first-name name="First Name Component" value.bind="data.firstName"></first-name>
+<person-contacts contacts.bind="data.contacts.details"></person-contacts>

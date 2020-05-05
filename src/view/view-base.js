@@ -37,7 +37,7 @@ export class ViewBase {
         return crsbinding.data.getValue(this._dataId, property);
     }
 
-    setProperty(property, value) {
+    setProperty(property, value, sharedFields = []) {
         crsbinding.data.setProperty(this._dataId, property, value);
     }
 

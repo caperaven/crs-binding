@@ -51,11 +51,13 @@ export class OneWayProvider extends ProviderBase {
 
     propertyChanged(prop, value) {
         if (this._expObj == null) return;
-        crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
 
-        if (this._element._dataId != null) {
+        if (this._isLinked != true && this._element._dataId != null) {
             crsbinding.data.link(this._context, prop, this._element._dataId, this._property, value);
+            this._isLinked = true;
         }
+
+        crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
     }
 }
 

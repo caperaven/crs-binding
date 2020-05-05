@@ -12,6 +12,8 @@ export default class Component extends ViewBase {
     }
 
     _loaded() {
+        crsbinding.data.makeShared(this._dataId, "data", ["firstName"]);
+
         this.data = {
             firstName: "John",
             lastName: "Doe",
@@ -25,5 +27,13 @@ export default class Component extends ViewBase {
         crsbinding.data.updateUI(0, "data.firstName");
         crsbinding.data.updateUI(1, "value");
         crsbinding.data.updateUI(2, "data.firstName");
+    }
+
+    newObject() {
+        this.data = {
+            firstName: "Test",
+            lastName: "Data",
+            age: 30
+        };
     }
 }

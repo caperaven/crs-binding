@@ -5,7 +5,8 @@
 const data = new Map();
 
 /**
- * Functions that trigger when properties change
+ * Functions that trigger when properties change.
+ * This updates the UI and performs binding operations as defined in the DOM
  * @type {Map<any, any>}
  */
 const callbacks = new Map();
@@ -17,7 +18,8 @@ const callbacks = new Map();
 const updates = new Map();
 
 /**
- * When this property changes, also update other UI by firing their triggers
+ * When this property changes, also update other UI by firing their triggers.
+ * Items in the trigger array are related, if one changes, update the UI of all the triggers in the same group
  * @type {Map<any, any>}
  */
 const triggers = new Map();
@@ -29,10 +31,17 @@ const triggers = new Map();
 const context = new Map();
 
 let _nextId = 0;
+let _nextTriggerId = 0;
 
 function getNextId() {
     const id = _nextId;
     _nextId += 1;
+    return id;
+}
+
+function getNextTriggerId() {
+    const id = _nextTriggerId;
+    _nextTriggerId += 1;
     return id;
 }
 
@@ -41,7 +50,7 @@ function callFunctionsOnPath(id, path) {
 
     const fn = new Function("context", `try {return context.${path}} catch {return null}`);
     const result =  fn(obj);
-    
+
     callFunctionsOnObject(result, id, path);
 }
 
@@ -53,20 +62,23 @@ function callFunctions(id, property) {
     callFunctionsOnObject(obj[property], id, property);
 }
 
-function callTriggers(id, property) {
-    const obj = triggers.get(id);
-    if (obj == null || obj[property] == null) return;
-    for (let trigger of obj[property]) {
-        callFunctions(trigger.id, trigger.property);
-    }
-}
-
 function callFunctionsOnObject(obj, id, property) {
     const functions = obj.functions;
     if (functions != null) {
         for(let fn of obj.functions) {
             const value = bindingData.getValue(id, property);
             fn(property, value);
+        }
+    }
+
+    if (obj.trigger != null) {
+        const triggerObj = triggers.get(obj.trigger);
+        if (triggerObj.frozen != true) {
+            triggerObj.frozen = true;
+            for (let trigger of triggerObj.values) {
+                crsbinding.data.updateUI(trigger.id, trigger.path);
+            }
+            delete triggerObj.frozen;
         }
     }
 
@@ -106,7 +118,7 @@ function ensurePath(obj, path, callback) {
         cobj = cobj[part];
     }
 
-    callback(cobj, parts[parts.length -1]);
+    callback && callback(cobj, parts[parts.length -1]);
 }
 
 function setProperty(obj, property, value) {
@@ -156,35 +168,71 @@ function addUpdateOrigin(sourceId, sourceProp, targetId, targetProp) {
     updates.set(targetId, update);
 }
 
-function addTriggers(sourceId, sourceProp, targetId, targetProp) {
-    const trigger = triggers.get(sourceId) || {};
-    const items = trigger[sourceProp] || [];
-
-    const item = items.find(i => i.targetId == targetId && i.property == targetProp);
-    if (item != null) return;
-
-    items.push({
-        id: targetId,
-        property: targetProp
-    });
-
-    trigger[sourceProp] = items;
-    triggers.set(sourceId, trigger);
-}
-
 function link(sourceId, sourceProp, targetId, targetProp, value) {
     if (typeof value != "object" || value === null) {
         addUpdateOrigin(sourceId, sourceProp, targetId, targetProp);
         addUpdateOrigin(targetId, targetProp, sourceId, sourceProp);
+        syncValueTrigger(sourceId, sourceProp, targetId, targetProp);
+    }
+    else {
+        syncTriggers(sourceId, sourceProp, targetId, targetProp);
+    }
+}
+
+function syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
+    let sourceObj = callbacks.get(sourceId);
+    let targetObj = callbacks.get(targetId);
+
+    const trigger = (new Function("context", `try {return context.${sourceProp}.trigger} catch {return null}`))(sourceObj);
+    if (trigger != null) {
+        targetObj[targetProp] = targetObj[targetProp] || {};
+        targetObj[targetProp].trigger = trigger;
+
+        const tr = triggers.get(trigger);
+        tr.values.push({id: targetId, path: targetProp});
+    }
+}
+
+// JHR: todo this needs to be updated so that the source prop and target prop can be paths
+function syncTriggers(sourceId, sourceProp, targetId, targetProp) {
+    let sourceObj = callbacks.get(sourceId);
+    let targetObj = callbacks.get(targetId);
+
+    const properties = Object.getOwnPropertyNames(sourceObj[sourceProp]).filter(fn => fn != "functions");
+    for (let property of properties) {
+        const source = sourceObj[sourceProp][property];
+
+        if (source.trigger != null) {
+            targetObj[targetProp] = targetObj[targetProp] || {};
+            targetObj[targetProp][property] = targetObj[sourceProp][property] || {};
+            targetObj[targetProp][property].trigger = source.trigger;
+
+            const tr = triggers.get(source.trigger);
+            tr.values.push({id: targetId, path: `${targetProp}.${property}`});
+        }
+    }
+}
+
+function makeShared(id, property, sharedItems) {
+    const obj = callbacks.get(id);
+    for (let prop of sharedItems) {
+        const path = `${property}.${prop}`;
+        ensurePath(obj, path, (tobj, tprop) => {
+            if (tobj[tprop] == null) {
+                tobj[tprop] = {};
+            }
+
+            const nextId = getNextTriggerId();
+            triggers.set(nextId, { values: [{id: id, path: path}]});
+            tobj[tprop].trigger = nextId;
+        })
     }
 }
 
 export const bindingData = {
     details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers, context:  context},
 
-    link(sourceId, sourceProp, targetId, targetProp, value) {
-        link(sourceId, sourceProp, targetId, targetProp, value);
-    },
+    link: link,
 
     setName(id, name) {
         data.get(id).name = name;
@@ -220,7 +268,6 @@ export const bindingData = {
         if (changed == true) {
             performUpdates(id, property, value);
             callFunctions(id, property);
-            callTriggers(id, property);
         }
     },
 
@@ -264,6 +311,8 @@ export const bindingData = {
         data.clear();
         _nextId = 0;
     },
+
+    makeShared: makeShared,
 
     updateUI: callFunctions
 };
