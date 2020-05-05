@@ -1,3 +1,5 @@
+import {getPropertyNamesOnPath, getValueOnPath} from "./../lib/path-utils.js";
+
 /**
  * Binding data used for binding operations
  * @type {Map<any, any>}
@@ -207,36 +209,37 @@ function syncTriggers(sourceId, sourceProp, targetId, targetProp) {
      *  Path on target does not exist.
      */
 
-    const properties = (new Function("sourceObj", `return Object.getOwnPropertyNames(sourceObj.${sourceProp}).filter(fn => fn != \"functions\")`))(sourceObj);
+    if (sourceProp.indexOf(".") == -1) {
+        copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetProp);
+    }
+    else {
+        ensurePath(targetObj, targetProp, (obj, prop) => {
+            obj[prop] = obj[prop] || {};
+            const parts = sourceProp.split(".");
+            const sp = parts[parts.length -1];  // source property
+            const np = parts.splice(0, parts.length -1).join(); // new Path
+            const so = getValueOnPath(sourceObj, np); // source object
+            copyTriggers(so, sp, obj, prop, targetId, targetProp);
+        });
+    }
 
-    ensurePath(targetObj, sourceProp, (obj, prop) => {
-        for (let property of properties) {
-            const source = (new Function("sourceObj", `return sourceObj.${sourceProp}.${property}`))(sourceObj);
+}
 
-            if (source.trigger != null) {
-                obj[prop] = obj[prop] || {};
-                obj[prop][property] = obj[prop][property] || {};
-                obj[prop][property].trigger = source.trigger;
+function copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetPath) {
+    const source = sourceObj[sourceProp];
+    const target = targetObj[targetProp] = targetObj[targetProp] || {};
 
-                const tr = triggers.get(source.trigger);
-                tr.values.push({id: targetId, path: `${targetProp}.${property}`});
-            }
-        }
-    });
+    if (source.trigger != null) {
+        target.trigger = source.trigger;
 
-    // const properties = Object.getOwnPropertyNames(sourceObj[sourceProp]).filter(fn => fn != "functions");
-    // for (let property of properties) {
-    //     const source = sourceObj[sourceProp][property];
-    //
-    //     if (source.trigger != null) {
-    //         targetObj[targetProp] = targetObj[targetProp] || {};
-    //         targetObj[targetProp][property] = targetObj[sourceProp][property] || {};
-    //         targetObj[targetProp][property].trigger = source.trigger;
-    //
-    //         const tr = triggers.get(source.trigger);
-    //         tr.values.push({id: targetId, path: `${targetProp}.${property}`});
-    //     }
-    // }
+        const tr = triggers.get(source.trigger);
+        tr.values.push({id: targetId, path: targetPath});
+    }
+
+    const properties = Object.getOwnPropertyNames(source).filter(item => item != "functions" && item != "trigger");
+    for (let property of properties) {
+        copyTriggers(source, property, target, property, targetId, `${targetPath}.${property}`);
+    }
 }
 
 function makeShared(id, property, sharedItems) {
