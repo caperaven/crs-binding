@@ -10,6 +10,8 @@ export class AttrProvider extends ProviderBase {
         for (let prop of this._expObj.parameters.properties) {
             this.listenOnPath(prop, this._eventHandler);
         }
+
+        this._change();
     }
 
     dispose() {
@@ -22,8 +24,7 @@ export class AttrProvider extends ProviderBase {
     }
 
     _change() {
-        if (this._expObj == null) return;
-        const value = this._expObj.function(this._context);
+        const value = this._expObj.function(this.data);
         this._element.setAttribute(this._property, value);
     }
 }

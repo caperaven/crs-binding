@@ -44,9 +44,11 @@ export function parseAttribute(attr, context, ctxName) {
     }
 
     const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName, attr);
-    attr.ownerElement.removeAttribute(attr.nodeName);
 
-    // used for testing
+    if (provider == null || provider.constructor.name != "AttrProvider") {
+        attr.ownerElement.removeAttribute(attr.nodeName);
+    }
+
     return provider;
 }
 
