@@ -148,15 +148,23 @@ function getPropertyPath(obj, path) {
     return fn(obj);
 }
 
-function createReference(refId, name, path) {
+function createReference(refId, name, path, index) {
     const id = getNextId();
-    data.set(id, {
+
+    const ref = {
         id: id,
         name: name,
         type: "ref",
         refId: refId,
         path: path
-    });
+    };
+
+    if (index !== undefined) {
+        ref.index = index;
+    }
+
+    data.set(id, ref);
+    callbacks.set(id, {});
     return id;
 }
 
@@ -301,7 +309,7 @@ export const bindingData = {
         }
         else {
             const refId = obj.refId;
-            return this.getReferenceValue(refId, property, obj.path);
+            return this.getReferenceValue(refId, property, obj.path, obj.index);
         }
     },
 
@@ -309,12 +317,18 @@ export const bindingData = {
         return context.get(id);
     },
 
-    getReferenceValue(id, property, path) {
+    getReferenceValue(id, property, path, index) {
         const obj = data.get(id);
 
         if (obj.type == "data") {
-            const p = property == null ? path : `${path}.${property}`;
-            return this.getValue(id, p);
+            if (index === undefined) {
+                const p = property == null ? path : `${path}.${property}`;
+                return this.getValue(id, p);
+            }
+            else {
+                const ar = this.getValue(id, path);
+                return ar[index];
+            }
         }
         else {
             let pString = `${obj.path}.${path}`; // subObj.field1

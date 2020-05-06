@@ -2,26 +2,8 @@ import {ProviderBase} from "./provider-base.js";
 import {AttrProvider} from "./attr-provider.js";
 
 export class ForProvider extends ProviderBase {
-    get ar() {
-        return this._ar;
-    }
-
-    set ar(newValue) {
-        if (this._ar != null) {
-            crsbinding.events.removeOn(this._ar, "items-added", this._itemsAddedHandler);
-            crsbinding.events.removeOn(this._ar, "items-deleted", this._itemsDeletedHandler);
-        }
-
-        this._ar = newValue;
-        if (this._ar != null) {
-            crsbinding.events.on(this._ar, "items-added", this._itemsAddedHandler);
-            crsbinding.events.on(this._ar, "items-deleted", this._itemsDeletedHandler);
-        }
-    }
-
     constructor(element, context, property, value, ctxName) {
         super(element, context, property, value, ctxName);
-
     }
 
     init() {
@@ -30,8 +12,6 @@ export class ForProvider extends ProviderBase {
     }
 
     dispose() {
-        this.ar = null;
-
         crsbinding.expression.release(this._forExp);
         this._forExp = null;
         this._itemsAddedHandler = null;
@@ -55,38 +35,19 @@ export class ForProvider extends ProviderBase {
         this._singular = parts[0].trim();
         this._plural = parts[1].trim();
 
-        const forExp = repeatCode
-            .split("_p").join(this._singular)
-            .split("_c").join(this._ctxName == "context" ? `context.${this._plural}` : this._plural);
+        const forExp = "for (let i = 0; i < context.length; i++) { callback(context[i], i) }";
 
         this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
 
         // 3. listen to the collection property on the context changing
         this._collectionChangedHandler = this._collectionChanged.bind(this);
         this.listenOnPath(this._plural, this._collectionChangedHandler);
-
-        const fn = pluralFactory(this._plural);
-        const result = fn(this._context);
-        if(result != null) {
-            this._collectionChanged(null, result);
-        }
     }
 
     async _collectionChanged(property, newValue) {
-        if (Array.isArray(newValue)) {
-            this.ar = newValue;
-        }
-        else {
-            const fn = pluralFactory(this._plural);
-            this.ar = fn(this._context);
-        }
+        if (newValue == null) return this._clear();
 
-        if (this.ar != null && this.ar.length > 0) {
-            await this._renderItems();
-        }
-        else {
-            this._clear();
-        }
+        this._renderItems(newValue);
     }
 
     _clear() {
@@ -98,26 +59,21 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    async _renderItems() {
+    async _renderItems(array) {
         // release the old content
         await crsbinding.observation.releaseChildBinding(this._container);
-
-        if (this.ar == null || this.ar.length == 0) return;
 
         // create document fragment
         const fragment = document.createDocumentFragment();
 
         // loop through items and add them to fragment after being parsed
-        await this._forExp.function(this._context, (item) => {
-            const element = this.createElement(item);
+        await this._forExp.function(array, (item, index) => {
+            const element = this.createElement(item, index);
             fragment.appendChild(element);
         });
 
         this._container.innerHTML = "";
         this._container.appendChild(fragment);
-
-        // render the updates. custom components are not ready at this time yet. so do it on the next frame.
-        crsbinding.expression.updateUI(this.ar);
 
         // update the container's provider to this so that this can be freed when content changes
         if (this._container.__providers == null) {
@@ -145,8 +101,6 @@ export class ForProvider extends ProviderBase {
                     provider._change();
                 }
             }
-
-            crsbinding.expression.updateUI(item);
         }
     }
 
@@ -176,25 +130,10 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    createElement(item) {
+    createElement(item, index) {
+        const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-array-item-${index}`, this._plural, index);
         const element = this._element.content.cloneNode(true);
-        crsbinding.parsers.parseElement(element, item, this._singular);
-
-        for (let child of element.children) {
-            child.dataset.uid = item.__uid;
-        }
-
+        crsbinding.parsers.parseElement(element, id, this._singular);
         return element;
     }
-
-    _ensurePath() {
-        const parts = this._plural.split(".");
-
-    }
 }
-
-function pluralFactory(plural) {
-    return new Function("context", `try { return context.${plural}; } catch {return null;}`);
-}
-
-const repeatCode = `for (_p of _c || []) {callback(_p);}`;

@@ -38,4 +38,10 @@ export default class Component extends ViewBase {
     popItem() {
         crsbinding.data.array(this._dataId, "items").pop();
     }
+
+    selectItem(event) {
+        if (event.target.nodeName == "LI") {
+            console.log(event.target);
+        }
+    }
 }

@@ -1,9 +1,11 @@
 <div class="collections-container">
     <h2>${title}</h2>
-    <ul>
+    <ul click.call="selectItem($event)">
         <template repeat.for="item of items">
-            <div>${item.title}</div>
-            <div>${item.isDone}</div>
+            <li class="list-item" data-id.once="item.id">
+                <div>${item.title}</div>
+                <div>${item.isDone}</div>
+            </li>
         </template>
     </ul>
     <div class="form">
