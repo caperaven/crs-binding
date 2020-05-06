@@ -12,14 +12,3 @@ export function getValueOnPath(object, path) {
     }
     return obj[parts[parts.length -1]];
 }
-
-export function getPropertyNamesOnPath(obj, path, filter) {
-    const value = getValueOnPath(obj, path);
-    let properties = Object.getOwnPropertyNames(value);
-
-    if (filter != null) {
-        properties = properties.filter(filter);
-    }
-
-    return properties;
-}

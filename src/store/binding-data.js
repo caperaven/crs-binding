@@ -1,4 +1,5 @@
-import {getPropertyNamesOnPath, getValueOnPath} from "./../lib/path-utils.js";
+import {getValueOnPath} from "./../lib/path-utils.js";
+import {createArrayProxy} from "./binding-data-arrays.js";
 
 /**
  * Binding data used for binding operations
@@ -200,15 +201,6 @@ function syncTriggers(sourceId, sourceProp, targetId, targetProp) {
     let sourceObj = callbacks.get(sourceId);
     let targetObj = callbacks.get(targetId);
 
-    /**
-     *  Source: data.contacts.phone...
-     *  Target: X
-     *
-     *  Path: data.contracts
-     *
-     *  Path on target does not exist.
-     */
-
     if (sourceProp.indexOf(".") == -1) {
         copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetProp);
     }
@@ -222,7 +214,6 @@ function syncTriggers(sourceId, sourceProp, targetId, targetProp) {
             copyTriggers(so, sp, obj, prop, targetId, targetProp);
         });
     }
-
 }
 
 function copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetPath) {
@@ -343,5 +334,10 @@ export const bindingData = {
 
     makeShared: makeShared,
 
-    updateUI: callFunctions
+    updateUI: callFunctions,
+
+    array(id, property) {
+        const value = this.getValue(id, property);
+        return createArrayProxy(value);
+    }
 };

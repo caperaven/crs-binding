@@ -1,0 +1,20 @@
+<div class="collections-container">
+    <h2>${title}</h2>
+    <ul>
+        <template repeat.for="item of items">
+            <div>${item.title}</div>
+            <div>${item.isDone}</div>
+        </template>
+    </ul>
+    <div class="form">
+        <div class="toolbar">
+            <button click.call="addItem">Add Item</button>
+            <button click.call="removeItem">Remove Item</button>
+            <button click.call="popItem">Remove Last Item</button>
+        </div>
+
+        <div>
+            content
+        </div>
+    </div>
+</div>

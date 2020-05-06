@@ -1,0 +1,45 @@
+export function createArrayProxy(array) {
+    if (array == null) return null;
+    return new Proxy(array, {get: get});
+}
+
+const deleteFunctions = ["pop", "splice"];
+const addFunctions = ["push"];
+
+function get(collection, property) {
+    const value = collection[property];
+
+    if (typeof value == "function") {
+        return (...args) => {
+            const result = collection[property](...args);
+
+            if (deleteFunctions.indexOf(property) != -1) {
+                itemsRemoved(collection, result);
+
+                if (property == "splice" && args.length > 2) {
+                    args = args.splice(2, args.length);
+                    itemsAdded(collection, args);
+                }
+            }
+            else if (addFunctions.indexOf(property) != -1) {
+                itemsAdded(collection, args);
+            }
+
+            return result;
+        }
+    }
+
+    return value;
+}
+
+function itemsRemoved(collection, items) {
+    console.log("item was removed to array");
+}
+
+function itemsAdded(collection, items) {
+    console.log("item was added to array");
+    for (let item of items) {
+        const index = collection.indexOf(item);
+        console.log(index);
+    }
+}
