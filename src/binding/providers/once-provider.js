@@ -12,8 +12,7 @@ export function OnceProvider(element, context, property, value, ctxName = "conte
 }
 
 function setContext(element, context, property, value) {
-    const data = crsbinding.data.getValue(context, value);
-    setProperty(element, property, data);
+    setProperty(element, property, crsbinding.data.getValue(context, value));
 }
 
 function setItem(element, context, property, value, ctxName) {
