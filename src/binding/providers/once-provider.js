@@ -1,3 +1,5 @@
+import {getValueOnPath} from "./../../lib/path-utils.js";
+
 export function OnceProvider(element, context, property, value, ctxName = "context") {
     if (ctxName == "context") {
         setContext(element, context, property, value);
@@ -10,15 +12,16 @@ export function OnceProvider(element, context, property, value, ctxName = "conte
 }
 
 function setContext(element, context, property, value) {
-    const fn = new Function("context", `return context.${value}`);
-    setProperty(element, property, fn(context));
+    const data = crsbinding.data.getValue(context, value);
+    setProperty(element, property, data);
 }
 
 function setItem(element, context, property, value, ctxName) {
-    const code = value.indexOf(ctxName) == 0 ? `return ${value}` : `return ${ctxName}.${value}`;
+    const data = crsbinding.data.getValue(context, value);
+    const path = value.replace(`${ctxName}.`, "");
+    const v = getValueOnPath(data, path);
 
-    const fn = new Function(ctxName, code);
-    setProperty(element, property, fn(context));
+    setProperty(element, property, v);
 }
 
 function setProperty(element, property, value) {
