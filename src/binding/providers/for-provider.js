@@ -86,49 +86,51 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    _itemsAdded(event, value, added) {
-        for (let i = 0; i < added.items.length; i++) {
-            const item = added.items[i];
-            const index = added.indexes[i];
-
-            const element = this.createElement(item);
-            const update = element.children[0];
-            const child = this._container.children[index];
-            this._container.insertBefore(element, child);
-
-            for (let p of update.__providers || []) {
-                const provider = crsbinding.providerManager.items.get(p);
-                if (provider instanceof AttrProvider) {
-                    provider._change();
-                }
-            }
-        }
+    _itemsAdded(added) {
+        console.log(added);
+        // for (let i = 0; i < added.items.length; i++) {
+        //     const item = added.items[i];
+        //     const index = added.indexes[i];
+        //
+        //     const element = this.createElement(item);
+        //     const update = element.children[0];
+        //     const child = this._container.children[index];
+        //     this._container.insertBefore(element, child);
+        //
+        //     for (let p of update.__providers || []) {
+        //         const provider = crsbinding.providerManager.items.get(p);
+        //         if (provider instanceof AttrProvider) {
+        //             provider._change();
+        //         }
+        //     }
+        // }
     }
 
-    _itemsDeleted(event, value, removed) {
-        const elements = [];
-
-        const push = (item) => {
-            const uid = item.__uid;
-            const result = this._container.querySelectorAll([`[data-uid="${uid}"]`]);
-            result.forEach(element => elements.push(element));
-        };
-
-        if (Array.isArray(removed)) {
-            for (let item of removed) {
-                push(item)
-            }
-        }
-        else {
-            push(removed);
-        }
-
-        for (let element of elements) {
-            if (element != null) {
-                element.parentElement.removeChild(element);
-                crsbinding.observation.releaseBinding(element);
-            }
-        }
+    _itemsDeleted(removed) {
+        console.log(removed);
+        // const elements = [];
+        //
+        // const push = (item) => {
+        //     const uid = item.__uid;
+        //     const result = this._container.querySelectorAll([`[data-uid="${uid}"]`]);
+        //     result.forEach(element => elements.push(element));
+        // };
+        //
+        // if (Array.isArray(removed)) {
+        //     for (let item of removed) {
+        //         push(item)
+        //     }
+        // }
+        // else {
+        //     push(removed);
+        // }
+        //
+        // for (let element of elements) {
+        //     if (element != null) {
+        //         element.parentElement.removeChild(element);
+        //         crsbinding.observation.releaseBinding(element);
+        //     }
+        // }
     }
 
     createElement(item, index) {

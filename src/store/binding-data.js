@@ -270,6 +270,23 @@ function makeShared(id, property, sharedItems) {
     }
 }
 
+function arrayItemsAdded(id, prop, items) {
+    const obj = callbacks.get(id);
+    const clbObj = getValueOnPath(obj, prop);
+
+    for (let callback of clbObj.__itemsAdded || []) {
+        callback(items);
+    }
+}
+
+function arrayItemsRemoved(id, prop, items) {
+    const obj = callbacks.get(id);
+    const clbObj = getValueOnPath(obj, prop);
+    for (let callback of clbObj.__itemsDeleted || []) {
+        callback(items);
+    }
+}
+
 export const bindingData = {
     details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers, context:  context},
 
@@ -368,5 +385,7 @@ export const bindingData = {
         return createArrayProxy(value, id, property);
     },
 
-    setArrayEvents: setArrayEvents
+    setArrayEvents: setArrayEvents,
+    arrayItemsAdded: arrayItemsAdded,
+    arrayItemsRemoved: arrayItemsRemoved
 };

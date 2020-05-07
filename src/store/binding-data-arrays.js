@@ -40,14 +40,12 @@ function itemsRemoved(collection, items) {
     const id = collection.__id;
     const property = collection.__property;
 
-    console.log("item was removed to array");
+    crsbinding.data.arrayItemsRemoved(id, property, items);
 }
 
 function itemsAdded(collection, items) {
     const id = collection.__id;
     const property = collection.__property;
 
-    for (let item of items) {
-        const index = collection.indexOf(item);
-    }
+    crsbinding.data.arrayItemsAdded(id, property, items);
 }
