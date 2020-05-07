@@ -1,5 +1,9 @@
-export function createArrayProxy(array) {
+export function createArrayProxy(array, id, property) {
     if (array == null) return null;
+
+    array.__id = id;
+    array.__property = property;
+
     return new Proxy(array, {get: get});
 }
 
@@ -33,13 +37,17 @@ function get(collection, property) {
 }
 
 function itemsRemoved(collection, items) {
+    const id = collection.__id;
+    const property = collection.__property;
+
     console.log("item was removed to array");
 }
 
 function itemsAdded(collection, items) {
-    console.log("item was added to array");
+    const id = collection.__id;
+    const property = collection.__property;
+
     for (let item of items) {
         const index = collection.indexOf(item);
-        console.log(index);
     }
 }

@@ -42,11 +42,12 @@ export class ForProvider extends ProviderBase {
         // 3. listen to the collection property on the context changing
         this._collectionChangedHandler = this._collectionChanged.bind(this);
         this.listenOnPath(this._plural, this._collectionChangedHandler);
+
+        crsbinding.data.setArrayEvents(this._context, this._plural, this._itemsAddedHandler, this._itemsDeletedHandler);
     }
 
     async _collectionChanged(property, newValue) {
         if (newValue == null) return this._clear();
-
         this._renderItems(newValue);
     }
 

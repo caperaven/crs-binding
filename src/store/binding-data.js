@@ -66,16 +66,16 @@ function callFunctions(id, property) {
 }
 
 function callFunctionsOnObject(obj, id, property) {
-    const functions = obj.functions;
+    const functions = obj.__functions;
     if (functions != null) {
-        for(let fn of obj.functions) {
+        for(let fn of obj.__functions) {
             const value = bindingData.getValue(id, property);
             fn(property, value);
         }
     }
 
-    if (obj.trigger != null) {
-        const triggerObj = triggers.get(obj.trigger);
+    if (obj.__trigger != null) {
+        const triggerObj = triggers.get(obj.__trigger);
         if (triggerObj.frozen != true) {
             triggerObj.frozen = true;
             for (let trigger of triggerObj.values) {
@@ -85,8 +85,7 @@ function callFunctionsOnObject(obj, id, property) {
         }
     }
 
-    // JHR: todo, rename functions and triggers to have __ before them just to make sure they are unique
-    const properties = Object.getOwnPropertyNames(obj).filter(p => p != "functions" && p != "trigger");
+    const properties = Object.getOwnPropertyNames(obj).filter(p => p.indexOf("__") == -1);
     for (let prop of properties) {
         callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
     }
@@ -100,8 +99,8 @@ function performUpdates(id, property, value) {
 
 function addCallback(obj, property, callback) {
     obj[property] = obj[property] || {};
-    obj[property].functions = obj[property].functions || [];
-    obj[property].functions.push(callback);
+    obj[property].__functions = obj[property].__functions || [];
+    obj[property].__functions.push(callback);
 }
 
 function addCallbackPath(obj, path, callback) {
@@ -195,10 +194,10 @@ function syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
     let sourceObj = callbacks.get(sourceId);
     let targetObj = callbacks.get(targetId);
 
-    const trigger = (new Function("context", `try {return context.${sourceProp}.trigger} catch {return null}`))(sourceObj);
+    const trigger = (new Function("context", `try {return context.${sourceProp}.__trigger} catch {return null}`))(sourceObj);
     if (trigger != null) {
         targetObj[targetProp] = targetObj[targetProp] || {};
-        targetObj[targetProp].trigger = trigger;
+        targetObj[targetProp].__trigger = trigger;
 
         const tr = triggers.get(trigger);
         tr.values.push({id: targetId, path: targetProp});
@@ -224,18 +223,32 @@ function syncTriggers(sourceId, sourceProp, targetId, targetProp) {
     }
 }
 
+function setArrayEvents(id, path, itemsAddedCallback, itemsDeletedCallback) {
+    const cbObj = callbacks.get(id);
+
+    ensurePath(cbObj, path, (obj, property) => {
+        obj[property] = obj[property] || {};
+
+        obj[property].__itemsAdded = obj[property].itemsAdded || [];
+        obj[property].__itemsAdded.push(itemsAddedCallback);
+
+        obj[property].__itemsDeleted = obj[property].itemsDeleted || [];
+        obj[property].__itemsDeleted.push(itemsDeletedCallback);
+    });
+}
+
 function copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetPath) {
     const source = sourceObj[sourceProp];
     const target = targetObj[targetProp] = targetObj[targetProp] || {};
 
-    if (source.trigger != null) {
-        target.trigger = source.trigger;
+    if (source.__trigger != null) {
+        target.__trigger = source.__trigger;
 
-        const tr = triggers.get(source.trigger);
+        const tr = triggers.get(source.__trigger);
         tr.values.push({id: targetId, path: targetPath});
     }
 
-    const properties = Object.getOwnPropertyNames(source).filter(item => item != "functions" && item != "trigger");
+    const properties = Object.getOwnPropertyNames(source).filter(item => item.indexOf("__") == -1);
     for (let property of properties) {
         copyTriggers(source, property, target, property, targetId, `${targetPath}.${property}`);
     }
@@ -252,7 +265,7 @@ function makeShared(id, property, sharedItems) {
 
             const nextId = getNextTriggerId();
             triggers.set(nextId, { values: [{id: id, path: path}]});
-            tobj[tprop].trigger = nextId;
+            tobj[tprop].__trigger = nextId;
         })
     }
 }
@@ -352,6 +365,8 @@ export const bindingData = {
 
     array(id, property) {
         const value = this.getValue(id, property);
-        return createArrayProxy(value);
-    }
+        return createArrayProxy(value, id, property);
+    },
+
+    setArrayEvents: setArrayEvents
 };
