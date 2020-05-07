@@ -24,7 +24,7 @@ export default class Component extends ViewBase {
     }
 
     addItem() {
-        const array = crsbinding.data.array(this._dataId, "items");
+        const array = this.items;
         const id = array[array.length -1].id + 1;
         const newItem = createItem(id);
 
@@ -36,12 +36,14 @@ export default class Component extends ViewBase {
     }
 
     popItem() {
-        crsbinding.data.array(this._dataId, "items").pop();
+        this.items.pop();
     }
 
     selectItem(event) {
         if (event.target.nodeName == "LI") {
-            console.log(event.target);
+            const selectedId = event.target.dataset.id;
+
+            console.log(selectedId);
         }
     }
 }

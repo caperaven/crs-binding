@@ -1,3 +1,5 @@
+import {getProperty, setProperty} from "./binding-helper.js";
+
 export class BindableElement extends HTMLElement {
     constructor() {
         super();
@@ -46,14 +48,10 @@ export class BindableElement extends HTMLElement {
     }
 
     getProperty(property) {
-        return crsbinding.data.getValue(this._dataId, property);
+        return getProperty(this, property);
     }
 
     setProperty(property, value) {
-        if (this.isReady != true) {
-            return this.__properties.set(property, value);
-        }
-
-        crsbinding.data.setProperty(this._dataId, property, value);
+        setProperty(this, property, value);
     }
 }
