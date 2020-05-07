@@ -309,7 +309,6 @@ function removeReferences(parentId) {
 }
 
 function removeCallbacks(id) {
-    const obj = callbacks.get(id);
     callbacks.delete(id);
 }
 

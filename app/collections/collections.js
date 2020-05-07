@@ -19,6 +19,8 @@ export default class Component extends ViewBase {
     }
 
     _loaded() {
+        crsbinding.data.makeShared(this._dataId, "selectedItem", ["title"]);
+
         this.items = createItems(5);
         super._loaded();
     }
@@ -42,8 +44,7 @@ export default class Component extends ViewBase {
     selectItem(event) {
         if (event.target.nodeName == "LI") {
             const selectedId = event.target.dataset.id;
-
-            console.log(selectedId);
+            this.selectedItem = this.items.find(item => item.id == selectedId);
         }
     }
 }
