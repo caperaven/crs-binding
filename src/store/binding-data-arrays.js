@@ -40,12 +40,12 @@ function itemsRemoved(collection, items) {
     const id = collection.__id;
     const property = collection.__property;
 
-    crsbinding.data.arrayItemsRemoved(id, property, items);
+    crsbinding.data.arrayItemsRemoved(id, property, items, collection);
 }
 
 function itemsAdded(collection, items) {
     const id = collection.__id;
     const property = collection.__property;
 
-    crsbinding.data.arrayItemsAdded(id, property, items);
+    crsbinding.data.arrayItemsAdded(id, property, items, collection);
 }

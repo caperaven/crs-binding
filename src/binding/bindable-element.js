@@ -45,6 +45,7 @@ export class BindableElement extends HTMLElement {
 
         crsbinding.utils.disposeProperties(this);
         crsbinding.observation.releaseBinding(this);
+        crsbinding.data.removeObject(this._dataId);
     }
 
     getProperty(property) {

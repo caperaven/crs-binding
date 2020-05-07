@@ -270,21 +270,55 @@ function makeShared(id, property, sharedItems) {
     }
 }
 
-function arrayItemsAdded(id, prop, items) {
+function arrayItemsAdded(id, prop, items, collection) {
     const obj = callbacks.get(id);
     const clbObj = getValueOnPath(obj, prop);
 
     for (let callback of clbObj.__itemsAdded || []) {
-        callback(items);
+        callback(items, collection);
     }
 }
 
-function arrayItemsRemoved(id, prop, items) {
+function arrayItemsRemoved(id, prop, items, collection) {
     const obj = callbacks.get(id);
     const clbObj = getValueOnPath(obj, prop);
     for (let callback of clbObj.__itemsDeleted || []) {
-        callback(items);
+        callback(items, collection);
     }
+}
+
+function removeObject(id) {
+    context.delete(id);
+
+    removeData(id);
+    removeCallbacks(id);
+    removeUpdates(id);
+    removeTriggers(id);
+}
+
+function removeData(id) {
+    removeReferences(id);
+    data.delete(id);
+}
+
+function removeReferences(parentId) {
+    const references = Array.from(data).filter(item => item[1].refId == parentId);
+    for (let ref of references) {
+        data.delete(ref.id);
+    }
+}
+
+function removeCallbacks(id) {
+    const obj = callbacks.get(id);
+    callbacks.delete(id);
+}
+
+function removeUpdates(id) {
+
+}
+
+function removeTriggers(id) {
+
 }
 
 export const bindingData = {
@@ -309,6 +343,8 @@ export const bindingData = {
 
         return id;
     },
+
+    removeObject: removeObject,
 
     addContext(id, obj) {
         context.set(id, obj);

@@ -33,6 +33,7 @@ export class ViewBase {
         crsbinding.observation.releaseBinding(this.element);
         crsbinding.utils.disposeProperties(this);
         this.element = null;
+        crsbinding.data.removeObject(this._dataId);
     }
 
     getProperty(property) {

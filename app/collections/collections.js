@@ -25,7 +25,7 @@ export default class Component extends ViewBase {
 
     addItem() {
         const array = this.items;
-        const id = array[array.length -1].id + 1;
+        const id = array.length == 0 ? 0 : array[array.length -1].id + 1;
         const newItem = createItem(id);
 
         array.push(newItem);

@@ -2,7 +2,7 @@
     <h2 data-title.once="title" data-test="${title}">${title}</h2>
     <ul click.call="selectItem($event)">
         <template for="item of items">
-            <li class="list-item" data-id.once="item.id" aria-label="....find translations on the context for a given value...">
+            <li class="list-item" data-id.once="item.id">
                 <div>${item.title}</div>
                 <div>${item.isDone}</div>
             </li>
