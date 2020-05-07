@@ -85,7 +85,7 @@ function callFunctionsOnObject(obj, id, property) {
         }
     }
 
-    const properties = Object.getOwnPropertyNames(obj).filter(p => p.indexOf("__") == -1);
+    const properties = getOwnProperties(obj);
     for (let prop of properties) {
         callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
     }
@@ -191,7 +191,42 @@ function link(sourceId, sourceProp, targetId, targetProp, value) {
 }
 
 function linkToArrayItem(id, path, itemId) {
-    const obj = triggers.get(id);
+    let sourceObj = getValueOnPath(callbacks.get(id), path);
+    let targetObj = callbacks.get(itemId);
+
+    const properties = getOwnProperties(sourceObj);
+    for (let property of properties) {
+        copyTriggers(sourceObj, property, targetObj, property, itemId, property);
+    }
+}
+
+function unlinkArrayItem(object) {
+    const clbObj = callbacks.get(object.__uid);
+    removeTriggersOnCallbacks(clbObj, object.__uid);
+}
+
+function removeTriggersOnCallbacks(obj, id) {
+    const properties = getOwnProperties(obj);
+    for (let property of properties) {
+        const trigger = obj[property].__trigger;
+        if (trigger != null) {
+            delete obj[property].__trigger;
+            removeTriggersOnTriggers(id, trigger);
+        }
+
+        if (typeof obj[property] == "object") {
+            removeTriggersOnCallbacks(obj[property]);
+        }
+    }
+}
+
+function removeTriggersOnTriggers(id, triggerId) {
+    const obj = triggers.get(triggerId);
+    const items = obj.values.filter(item => item.id == id)
+    for (let item of items) {
+        const index = obj.values.indexOf(item);
+        obj.values.splice(index, 1);
+    }
 }
 
 function syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
@@ -252,10 +287,14 @@ function copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, ta
         tr.values.push({id: targetId, path: targetPath});
     }
 
-    const properties = Object.getOwnPropertyNames(source).filter(item => item.indexOf("__") == -1);
+    const properties = getOwnProperties(source);
     for (let property of properties) {
         copyTriggers(source, property, target, property, targetId, `${targetPath}.${property}`);
     }
+}
+
+function getOwnProperties(obj) {
+    return Object.getOwnPropertyNames(obj).filter(item => item.indexOf("__") == -1)
 }
 
 function makeShared(id, property, sharedItems) {
@@ -427,5 +466,6 @@ export const bindingData = {
     setArrayEvents: setArrayEvents,
     arrayItemsAdded: arrayItemsAdded,
     arrayItemsRemoved: arrayItemsRemoved,
-    linkToArrayItem: linkToArrayItem
+    linkToArrayItem: linkToArrayItem,
+    unlinkArrayItem: unlinkArrayItem
 };

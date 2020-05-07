@@ -8,6 +8,11 @@ export function getProperty(obj, property) {
 }
 
 export function setProperty(obj, property, value) {
+    let oldValue;
+    if (value && value.__uid != null) {
+        oldValue = getProperty(obj, property);
+    }
+
     crsbinding.data.setProperty(obj._dataId, property, value);
 
     if (Array.isArray(value)) {
@@ -15,6 +20,10 @@ export function setProperty(obj, property, value) {
     }
 
     if (value && value.__uid) {
+        if (oldValue != null) {
+            crsbinding.data.unlinkArrayItem(oldValue);
+        }
 
+        crsbinding.data.linkToArrayItem(obj._dataId, property, value.__uid);
     }
 }
