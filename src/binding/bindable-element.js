@@ -52,6 +52,10 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(property, value) {
+        if (this.isReady != true) {
+            return this.__properties.set(property, value);
+        }
+
         setProperty(this, property, value);
     }
 }
