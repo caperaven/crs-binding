@@ -190,11 +190,15 @@ function link(sourceId, sourceProp, targetId, targetProp, value) {
     }
 }
 
+function linkToArrayItem(id, path, itemId) {
+    const obj = triggers.get(id);
+}
+
 function syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
     let sourceObj = callbacks.get(sourceId);
     let targetObj = callbacks.get(targetId);
 
-    const trigger = (new Function("context", `try {return context.${sourceProp}.__trigger} catch {return null}`))(sourceObj);
+    const trigger = getValueOnPath(sourceObj, `${sourceProp}.__trigger`);
     if (trigger != null) {
         targetObj[targetProp] = targetObj[targetProp] || {};
         targetObj[targetProp].__trigger = trigger;
@@ -266,7 +270,7 @@ function makeShared(id, property, sharedItems) {
             const nextId = getNextTriggerId();
             triggers.set(nextId, { values: [{id: id, path: path}]});
             tobj[tprop].__trigger = nextId;
-        })
+        });
     }
 }
 
@@ -422,5 +426,6 @@ export const bindingData = {
 
     setArrayEvents: setArrayEvents,
     arrayItemsAdded: arrayItemsAdded,
-    arrayItemsRemoved: arrayItemsRemoved
+    arrayItemsRemoved: arrayItemsRemoved,
+    linkToArrayItem: linkToArrayItem
 };

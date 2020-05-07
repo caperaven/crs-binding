@@ -13,4 +13,8 @@ export function setProperty(obj, property, value) {
     if (Array.isArray(value)) {
         obj[`_${property}`] = crsbinding.data.array(obj._dataId, property);
     }
+
+    if (value && value.__uid) {
+
+    }
 }
