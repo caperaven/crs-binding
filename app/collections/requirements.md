@@ -12,6 +12,7 @@
 ## Low priority
 1. Translation context on the repeat. (add button that uses translation on parent)
 1. Sharing objects between array without using clones if we can manage that.
+1. In the if providers do not try catch it, do something better dumbass.
 
 ## JHR:  todo
 1. Add cleanup
