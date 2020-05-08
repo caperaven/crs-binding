@@ -73,9 +73,14 @@ export default class Component extends ViewBase {
     }
 
     selectItem(event) {
+        if (this.selectedItem != null) {
+            this.selectedItem.__isSelected = false;
+        }
+
         if (event.target.nodeName == "LI") {
             const selectedId = event.target.dataset.id;
             this.selectedItem = this.items.find(item => item.id == selectedId);
+            this.selectedItem.__isSelected = true;
         }
     }
 }
