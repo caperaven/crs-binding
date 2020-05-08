@@ -38,3 +38,13 @@
     flex-direction: row;
     align-items: center;
 }
+
+.collections-container .alarm {
+    background: #e91e63;
+    color: white;
+}
+
+.collections-container .fine {
+    background: #03a9f4;
+    color: white;
+}

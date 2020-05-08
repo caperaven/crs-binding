@@ -25,7 +25,7 @@
         <div>
             <label>
                 <div>Title</div>
-                <input value.bind="selectedItem.title" style.color.if="selectedItem.priority == 2 ? 'red'"/>
+                <input value.bind="selectedItem.title" classlist.if="selectedItem.priority == 2 ? 'alarm' : 'fine'"/>
             </label>
 
             <select value.bind="selectedItem.priority">
