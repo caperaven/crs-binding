@@ -22,14 +22,23 @@ function createTasks(index, count) {
     return result;
 }
 
+let nextPriority = 0;
+
 export function createItem(id) {
-    return {
+    const result = {
         id: id,
         title: `Code ${id}`,
-        priority: 0,
+        priority: nextPriority,
         tasks: createTasks(id, 3),
         isDone: false
+    };
+
+    nextPriority += 1;
+    if (nextPriority > 2) {
+        nextPriority = 0;
     }
+
+    return result;
 }
 
 export function createPriorities() {

@@ -25,7 +25,6 @@ export class ViewBase {
 
     async connectedCallback() {
         crsbinding.parsers.parseElement(this.element, this._dataId);
-
         this._loaded();
     }
 

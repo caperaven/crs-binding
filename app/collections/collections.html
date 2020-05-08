@@ -23,11 +23,11 @@
                 <input value.bind="selectedItem.title" />
             </label>
 
-<!--            <select value.bind="selectedItem.priority">-->
-<!--                <template for.once="item of priorities">-->
-<!--                    <option value="${item.id}">item.title</option>-->
-<!--                </template>-->
-<!--            </select>-->
+            <select value.bind="selectedItem.priority">
+                <template for.once="item of priorities">
+                    <option value="${item.id}">${item.title}</option>
+                </template>
+            </select>
 
             <div>
                 NB: remember to add the items translations feature

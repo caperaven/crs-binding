@@ -5,8 +5,8 @@ export function ForOnceProvider(element, context, property, value, ctxName = "co
 
     crsbinding.inflationManager.register("for-once", element, singular);
 
-    const dataFn = new Function("context", `return context.${plural}`);
-    const data = dataFn(context);
+    const data = crsbinding.data.getValue(context, plural);
+
     const elements = crsbinding.inflationManager.get("for-once", data);
     element.parentElement.appendChild(elements);
     element.parentElement.removeChild(element);

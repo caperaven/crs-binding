@@ -1,5 +1,5 @@
 import {ViewBase} from "../../src/view/view-base.js";
-import {createItems, createItem} from "./data.js";
+import {createItems, createItem, createPriorities} from "./data.js";
 
 export default class Component extends ViewBase {
     get items() {
@@ -23,16 +23,19 @@ export default class Component extends ViewBase {
     }
 
     set priorities(newValue) {
-        /**
-         * When changing list items
-         */
         this.setProperty("priorities", newValue);
+    }
+
+    async connectedCallback() {
+        this.items = createItems(5);
+        this.priorities = createPriorities();
+
+        super.connectedCallback();
     }
 
     _loaded() {
         crsbinding.data.makeShared(this._dataId, "selectedItem", ["title"]);
-
-        this.items = createItems(5);
+        crsbinding.data.updateUI(this._dataId, "items");
         super._loaded();
     }
 
