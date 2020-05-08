@@ -8,8 +8,9 @@ export function getProperty(obj, property) {
 }
 
 export function setProperty(obj, property, value) {
+    let oldValue;
     if (value && value.__uid != null) {
-        const oldValue = getProperty(obj, property);
+        oldValue = getProperty(obj, property);
         oldValue && crsbinding.data.unlinkArrayItem(oldValue);
     }
 
@@ -21,5 +22,11 @@ export function setProperty(obj, property, value) {
 
     if (value && value.__uid) {
         crsbinding.data.linkToArrayItem(obj._dataId, property, value.__uid);
+    }
+
+    const fnName = `${property}Changed`;
+    const context = crsbinding.data.getContext(obj._dataId);
+    if (context[fnName] != null) {
+        context[fnName](value, oldValue);
     }
 }

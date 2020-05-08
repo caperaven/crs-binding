@@ -1,7 +1,7 @@
 import {ViewBase} from "../../src/view/view-base.js";
 import {createItems, createItem, createPriorities} from "./data.js";
 
-export default class Component extends ViewBase {
+export default class Collections extends ViewBase {
     get items() {
         return this.getProperty("items");
     }
@@ -84,5 +84,10 @@ export default class Component extends ViewBase {
             this.selectedItem = this.items.find(item => item.id == selectedId);
             this.selectedItem.__isSelected = true;
         }
+    }
+
+    selectedItemChanged(newValue, oldValue) {
+        console.log(newValue);
+        console.log(oldValue);
     }
 }
