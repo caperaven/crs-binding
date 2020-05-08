@@ -3,7 +3,7 @@
 
     <ul click.call="selectItem($event)">
         <template for="item of items">
-            <li class="list-item" data-id.once="item.id" style.color.if="selectedItem.priority == 3 ? 'red'">
+            <li class="list-item" data-id.once="item.id" style.color.if="item.priority == '2' ? 'red'">
                 <div>${item.title}</div>
                 <div>${item.isDone}</div>
 <!--                <select value.bind="item.priority">-->
@@ -25,7 +25,7 @@
         <div>
             <label>
                 <div>Title</div>
-                <input value.bind="selectedItem.title" style.color.if="selectedItem.priority == 3 ? 'red'"/>
+                <input value.bind="selectedItem.title" style.color.if="selectedItem.priority == '2' ? 'red'"/>
             </label>
 
             <select value.bind="selectedItem.priority">

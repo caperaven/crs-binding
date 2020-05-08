@@ -46,7 +46,10 @@ export class ProviderBase {
     }
 
     listenOnPath(property, callback) {
-        crsbinding.data.addCallback(this._context, property, callback);
+        const collection = Array.isArray(property) == true ? property : [property];
+        for (let p of collection) {
+            crsbinding.data.addCallback(this._context, p, callback);
+        }
     }
 
     removeOn(value, callback) {
