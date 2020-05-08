@@ -37,6 +37,11 @@ export class IfStylesProvider extends ProviderBase {
     }
 
     propertyChanged() {
-        crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element));
+        try {
+            crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element));
+        }
+        catch {
+            return;
+        }
     }
 }

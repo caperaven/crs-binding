@@ -5,7 +5,7 @@
 1. Proper list to selected item updates - done
 1. Array, remove item in middle of list - done
 1. Select binding on value must update when changing the selected item - done
-1. Conditional binding on attributes, styles and classes
+1. Conditional binding on attributes, styles and classes - done
 1. Add $parent syntax in collections to access the repeat behaviour's context
 1. Set up a scenario where you have a select in the repeat, perhaps the items collection
 

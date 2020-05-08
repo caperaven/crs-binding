@@ -69,6 +69,8 @@ export default class Component extends ViewBase {
     }
 
     popItem() {
+        const array = this.items;
+        this.selectedItem = array.length == 1 ? null : array[array.length -2];
         this.items.pop();
     }
 
