@@ -13,6 +13,18 @@ export class InputForm extends BindableElement {
     set data(newValue) {
         this.setProperty("data", newValue);
     }
+
+    get showContacts() {
+        return this.getProperty("showContacts");
+    }
+
+    set showContacts(newValue) {
+        this.setProperty("showContacts", newValue);
+    }
+
+    load() {
+        this.showContacts = true;
+    }
 }
 
 customElements.define("input-form", InputForm);

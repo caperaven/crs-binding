@@ -15,4 +15,10 @@
     <input value.bind="data.age">
 </label>
 
-<input-contacts contacts.bind="data.contacts"></input-contacts>
+<hr />
+<label>
+    <div>Show Contacts</div>
+    <input type="checkbox" checked.bind="showContacts" />
+</label>
+
+<input-contacts contacts.bind="data.contacts" hidden.if="showContacts == false"></input-contacts>

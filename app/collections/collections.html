@@ -6,6 +6,11 @@
             <li class="list-item" data-id.once="item.id" style.color.if="selectedItem.priority == 3 ? 'red'">
                 <div>${item.title}</div>
                 <div>${item.isDone}</div>
+<!--                <select value.bind="item.priority">-->
+<!--                    <template for.once="item of $parent.priorities">-->
+<!--                        <option value="${item.id}">${item.title}</option>-->
+<!--                    </template>-->
+<!--                </select>-->
             </li>
         </template>
     </ul>
