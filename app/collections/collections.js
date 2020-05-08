@@ -34,7 +34,7 @@ export default class Component extends ViewBase {
     }
 
     _loaded() {
-        crsbinding.data.makeShared(this._dataId, "selectedItem", ["title"]);
+        crsbinding.data.makeShared(this._dataId, "selectedItem", ["title", "priority"]);
         crsbinding.data.updateUI(this._dataId, "items");
         super._loaded();
     }
