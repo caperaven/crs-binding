@@ -31,3 +31,20 @@ export function createItem(id) {
         isDone: false
     }
 }
+
+export function createPriorities() {
+    return [
+        {
+            id: 0,
+            title: "Low"
+        },
+        {
+            id: 1,
+            title: "Medium"
+        },
+        {
+            id: 2,
+            title: "High"
+        }
+    ]
+}

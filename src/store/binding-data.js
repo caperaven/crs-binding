@@ -61,6 +61,7 @@ function callFunctions(id, property) {
     if (property.indexOf(".") != -1) return callFunctionsOnPath(id, property);
 
     const obj = callbacks.get(id);
+    if (obj == null) return;
     if (obj[property] == null) return;
     callFunctionsOnObject(obj[property], id, property);
 }
@@ -360,7 +361,13 @@ function removeUpdates(id) {
 }
 
 function removeTriggers(id) {
-
+    const tr = Array.from(triggers);
+    for (let trigger of tr) {
+        const index = trigger[1].values.findIndex(item => item.id == id);
+        if (index != -1) {
+            trigger[1].values.splice(index, 1);
+        }
+    }
 }
 
 export const bindingData = {

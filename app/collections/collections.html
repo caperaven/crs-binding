@@ -1,5 +1,6 @@
 <div class="collections-container">
     <h2 data-title.once="title" data-test="${title}">${title}</h2>
+
     <ul click.call="selectItem($event)">
         <template for="item of items">
             <li class="list-item" data-id.once="item.id">
@@ -12,8 +13,8 @@
     <div class="form">
         <div class="toolbar">
             <button click.call="addItem">Add Item</button>
-            <button click.call="removeItem">Remove Item</button>
             <button click.call="popItem">Remove Last Item</button>
+            <button click.call="removeItem">Remove Item</button>
         </div>
 
         <div>
@@ -21,6 +22,12 @@
                 <div>Title</div>
                 <input value.bind="selectedItem.title" />
             </label>
+
+<!--            <select value.bind="selectedItem.priority">-->
+<!--                <template for.once="item of priorities">-->
+<!--                    <option value="${item.id}">item.title</option>-->
+<!--                </template>-->
+<!--            </select>-->
 
             <div>
                 NB: remember to add the items translations feature

@@ -18,6 +18,17 @@ export default class Component extends ViewBase {
         this.setProperty("selectedItem", newValue);
     }
 
+    get priorities() {
+        return this.getProperty("priorities");
+    }
+
+    set priorities(newValue) {
+        /**
+         * When changing list items
+         */
+        this.setProperty("priorities", newValue);
+    }
+
     _loaded() {
         crsbinding.data.makeShared(this._dataId, "selectedItem", ["title"]);
 
@@ -34,7 +45,24 @@ export default class Component extends ViewBase {
     }
 
     removeItem() {
+        if (this.selectedItem != null) {
+            const array = this.items;
 
+            const id = this.selectedItem.id;
+            const index = array.findIndex(item => item.id == id);
+            const length = array.length;
+            let newIndex = length == 0 ? -1 : index + 1;
+
+            if (newIndex != -1) {
+                if (newIndex > length - 1) {
+                    newIndex = length - 2;
+                }
+            }
+
+            this.selectedItem = newIndex == -1 ? null : array[newIndex];
+
+            array.splice(index, 1);
+        }
     }
 
     popItem() {
