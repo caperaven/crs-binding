@@ -33,6 +33,7 @@ export class IfClassProvider extends ProviderBase {
 
         this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false, ctxName: this._ctxName});
         this.listenOnPath(value.properties, this._eventHandler);
+        this.propertyChanged();
     }
 
     propertyChanged() {
