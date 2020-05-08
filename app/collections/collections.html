@@ -1,5 +1,5 @@
 <div class="collections-container">
-    <h2 data-title.once="title" data-test="${title}">${title}</h2>
+    <h2 data-title.once="title" data-test="${title}" inner-text.once="title"></h2>
 
     <ul click.call="selectItem($event)">
         <template for="item of items">
@@ -25,7 +25,7 @@
         <div>
             <label>
                 <div>Title</div>
-                <input value.bind="selectedItem.title" classlist.if="selectedItem.priority == 2 ? 'alarm' : 'fine'"/>
+                <input data-priority.if="selectedItem.priority == 1 ? 'dont care' : 'hmmm oops'" value.bind="selectedItem.title" classlist.if="selectedItem.priority == 2 ? 'alarm' : 'fine'"/>
             </label>
 
             <select value.bind="selectedItem.priority">
