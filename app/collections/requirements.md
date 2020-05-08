@@ -13,3 +13,4 @@
 
 ## JHR:  todo
 1. Add cleanup
+1. style.color.if="case selectedItem.priority ? 0:'green' 1:'blue' 2:'red'" // same for classes
