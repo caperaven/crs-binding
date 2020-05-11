@@ -50,7 +50,6 @@ const crsbinding = {
     },
 
     observation: {
-        observe: (view) => view, // remove this, ued in router
         releaseBinding: releaseBinding,
         releaseChildBinding: releaseChildBinding
     },
