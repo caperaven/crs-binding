@@ -50,10 +50,7 @@ function getNextTriggerId() {
 
 function callFunctionsOnPath(id, path) {
     const obj = callbacks.get(id);
-
-    const fn = new Function("context", `try {return context.${path}} catch {return null}`);
-    const result =  fn(obj);
-
+    const result =  getValueOnPath(obj, path);
     callFunctionsOnObject(result, id, path);
 }
 
@@ -451,7 +448,8 @@ export const bindingData = {
             }
             else {
                 const ar = this.getValue(id, path);
-                return ar[index];
+                const result = ar[index];
+                return property == null ? result : getValueOnPath(result, property);
             }
         }
         else {
@@ -470,7 +468,12 @@ export const bindingData = {
                 v = v[refId];
             }
 
+            if (ctxName != "context") {
+                property = property.split(`${ctxName}.`).join("");
+            }
+
             setPropertyPath(v, property, value);
+            callFunctionsOnPath(id, property);
         }
         else {
             let pString = `${obj.path}.${path}`; // subObj.field1

@@ -16,11 +16,12 @@ function setContext(element, context, property, value) {
 }
 
 function setItem(element, context, property, value, ctxName) {
-    const data = crsbinding.data.getValue(context, value);
-    const path = value.replace(`${ctxName}.`, "");
-    const v = getValueOnPath(data, path);
+    if (ctxName != "context") {
+        value = value.split(`${ctxName}.`).join("");
+    }
 
-    setProperty(element, property, v);
+    const data = crsbinding.data.getValue(context, value);
+    setProperty(element, property, data);
 }
 
 function setProperty(element, property, value) {
