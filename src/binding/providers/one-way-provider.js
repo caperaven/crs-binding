@@ -25,7 +25,7 @@ export class OneWayProvider extends ProviderBase {
     }
 
     async initialize() {
-        if (this._value == "$context") {
+        if (this._value == "$context" || this._value == this._ctxName) {
             return this.setContext();
         }
 
@@ -45,7 +45,17 @@ export class OneWayProvider extends ProviderBase {
 
     setContext() {
         if (this._element != null && this._property != null) {
-            this._element[this._property] = this._context;
+            const fn = () => {
+                this._element.removeEventListener("ready", fn);
+                this._element[this._property] = crsbinding.data.getValue(this._context);
+            };
+
+            if (this._element.isReady == true) {
+                fn();
+            }
+            else {
+                this._element.addEventListener("ready", fn);
+            }
         }
     }
 

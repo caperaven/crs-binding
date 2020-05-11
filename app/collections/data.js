@@ -8,15 +8,21 @@ export function createItems(count) {
     return result;
 }
 
-function createTasks(index, count) {
+let nextTaskCount = 1;
+function createTasks(index) {
     const result = [];
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < nextTaskCount; i++) {
         result.push({
             id: i,
             title: `task ${i} for ${index}`,
             isDone: false
         })
+    }
+
+    nextTaskCount += 1;
+    if (nextTaskCount > 3) {
+        nextTaskCount = 1;
     }
 
     return result;
@@ -29,7 +35,7 @@ export function createItem(id) {
         id: id,
         title: `Code ${id}`,
         priority: nextPriority,
-        tasks: createTasks(id, 3),
+        tasks: createTasks(id),
         isDone: false
     };
 

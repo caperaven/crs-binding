@@ -193,6 +193,8 @@ function link(sourceId, sourceProp, targetId, targetProp, value) {
 
 function linkToArrayItem(id, path, itemId) {
     let sourceObj = getValueOnPath(callbacks.get(id), path);
+    if (sourceObj == null) return;
+
     let targetObj = callbacks.get(itemId);
 
     const properties = getOwnProperties(sourceObj);

@@ -1,5 +1,6 @@
 import {ViewBase} from "../../src/view/view-base.js";
 import {createItems, createItem, createPriorities} from "./data.js";
+import "./tasks-summary.js";
 
 export default class Collections extends ViewBase {
     get items() {
