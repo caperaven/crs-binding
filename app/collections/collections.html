@@ -7,13 +7,7 @@
                 <div>${item.title}</div>
                 <div>${item.isDone}</div>
                 <tasks-summary parent.bind="item"></tasks-summary>
-                <button aria-label="$parent.translations.remove">${$parent.translations.remove}</button>
-                
-<!--                <select value.bind="item.priority">-->
-<!--                    <template for.once="item of $parent.priorities">-->
-<!--                        <option value="${item.id}">${item.title}</option>-->
-<!--                    </template>-->
-<!--                </select>-->
+                <button aria-label="${$parent.translations.remove}">${$parent.translations.remove}</button>
             </li>
         </template>
     </ul>

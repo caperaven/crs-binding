@@ -1,11 +1,11 @@
 import {ProviderBase} from "./provider-base.js";
 
 export class AttrProvider extends ProviderBase {
-    constructor(element, context, property, value, ctxName) {
-        super(element, context, property, value, ctxName);
+    constructor(element, context, property, value, ctxName, parentId) {
+        super(element, context, property, value, ctxName, parentId);
 
         this._eventHandler = this._change.bind(this);
-        this._expObj = crsbinding.expression.compile(value, null, {ctxName: this._ctxName});
+        this._expObj = crsbinding.expression.compile(this._value, null, {ctxName: this._ctxName});
 
         for (let prop of this._expObj.parameters.properties) {
             this.listenOnPath(prop, this._eventHandler);

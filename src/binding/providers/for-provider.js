@@ -2,8 +2,8 @@ import {ProviderBase} from "./provider-base.js";
 import {AttrProvider} from "./attr-provider.js";
 
 export class ForProvider extends ProviderBase {
-    constructor(element, context, property, value, ctxName) {
-        super(element, context, property, value, ctxName);
+    constructor(element, context, property, value, ctxName, parentId) {
+        super(element, context, property, value, ctxName, parentId);
     }
 
     init() {
@@ -129,7 +129,7 @@ export class ForProvider extends ProviderBase {
     createElement(item, index) {
         const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-array-item-${index}`, this._plural, index);
         const element = this._element.content.cloneNode(true);
-        crsbinding.parsers.parseElement(element, id, this._singular);
+        crsbinding.parsers.parseElement(element, id, this._singular, this._context);
 
         item.__uid = id;
 

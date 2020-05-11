@@ -11,61 +11,61 @@ import {AttrProvider} from "./providers/attr-provider.js";
 import {ForOnceProvider} from "./providers/for-once-provider.js";
 
 export class ProviderFactory {
-    static "bind"(element, context, property, value, ctxName) {
+    static "bind"(element, context, property, value, ctxName, parentId) {
         if (["value", "checked"].indexOf(property) != -1) {
-            return new BindProvider(element, context, property, value, ctxName);
+            return new BindProvider(element, context, property, value, ctxName, parentId);
         }
         else {
-            return this["one-way"](element, context, property, value, ctxName);
+            return this["one-way"](element, context, property, value, ctxName, parentId);
         }
     }
 
-    static "two-way"(element, context, property, value, ctxName) {
-        return new BindProvider(element, context, property, value, ctxName);
+    static "two-way"(element, context, property, value, ctxName, parentId) {
+        return new BindProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "one-way"(element, context, property, value, ctxName) {
-        return new OneWayProvider(element, context, property, value, ctxName);
+    static "one-way"(element, context, property, value, ctxName, parentId) {
+        return new OneWayProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "once"(element, context, property, value, ctxName) {
-        return OnceProvider(element, context, property, value, ctxName);
+    static "once"(element, context, property, value, ctxName, parentId) {
+        return OnceProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "call"(element, context, property, value, ctxName) {
-        return new CallProvider(element, context, property, value, ctxName);
+    static "call"(element, context, property, value, ctxName, parentId) {
+        return new CallProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "delegate"(element, context, property, value, ctxName) {
-        return new CallProvider(element, context, property, value, ctxName);
+    static "delegate"(element, context, property, value, ctxName, parentId) {
+        return new CallProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "inner"(element, context, property, value, ctxName) {
-        return new InnerProvider(element, context, property, value, ctxName);
+    static "inner"(element, context, property, value, ctxName, parentId) {
+        return new InnerProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "for"(element, context, property, value, ctxName, attr) {
+    static "for"(element, context, property, value, ctxName, attr, parentId) {
         if (attr && attr.name.indexOf(".once") != -1) {
-            return ForOnceProvider(element, context, property, value, ctxName);
+            return ForOnceProvider(element, context, property, value, ctxName, parentId);
         }
         else {
-            return new ForProvider(element, context, property, value, ctxName);
+            return new ForProvider(element, context, property, value, ctxName, parentId);
         }
     }
 
-    static "if"(element, context, property, value, ctxName) {
+    static "if"(element, context, property, value, ctxName, parentId) {
         if (property.toLowerCase() == "classlist") {
-            return new IfClassProvider(element, context, property, value, ctxName);
+            return new IfClassProvider(element, context, property, value, ctxName, parentId);
         }
 
         if (property.toLowerCase().indexOf("style.") != -1) {
-            return new IfStylesProvider(element, context, property, value, ctxName);
+            return new IfStylesProvider(element, context, property, value, ctxName, parentId);
         }
 
-        return new IfProvider(element, context, property, value, ctxName);
+        return new IfProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "attr"(element, context, property, value, ctxName) {
-        return new AttrProvider(element, context, property, value, ctxName);
+    static "attr"(element, context, property, value, ctxName, attr, parentId) {
+        return new AttrProvider(element, context, property, value, ctxName, parentId);
     }
 }

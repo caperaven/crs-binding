@@ -27,9 +27,20 @@ export default class Collections extends ViewBase {
         this.setProperty("priorities", newValue);
     }
 
+    get translations() {
+        this.getProperty("translations");
+    }
+
+    set translations(newValue) {
+        this.setProperty("translations", newValue);
+    }
+
     async connectedCallback() {
         this.items = createItems(5);
         this.priorities = createPriorities();
+        this.translations = {
+            remove: "Remove"
+        };
 
         super.connectedCallback();
     }

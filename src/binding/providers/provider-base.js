@@ -3,7 +3,7 @@ export class ProviderBase {
         return crsbinding.data.getValue(this._context);
     }
 
-    constructor(element, context, property, value, ctxName) {
+    constructor(element, context, property, value, ctxName, parentId) {
         this._element = element;
         this._context = context;
         this._property = property;
@@ -11,6 +11,11 @@ export class ProviderBase {
         this._ctxName = ctxName || "context";
         this._eventsToRemove = [];
         this._isNamedContext = this._ctxName != "context";
+
+        if (this._value && this._value.indexOf("$parent") != -1) {
+            this._value = this._value.split("$parent.").join("");
+            this._context = parentId;
+        }
 
         this.init && this.init();
 

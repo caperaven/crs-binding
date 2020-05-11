@@ -1,11 +1,11 @@
 import {getValueOnPath} from "./../../lib/path-utils.js";
 
-export function OnceProvider(element, context, property, value, ctxName = "context") {
+export function OnceProvider(element, context, property, value, ctxName = "context", parentId) {
     if (ctxName == "context") {
-        setContext(element, context, property, value);
+        setContext(element, context, property, value, parentId);
     }
     else {
-        setItem(element, context, property, value, ctxName);
+        setItem(element, context, property, value, ctxName, parentId);
     }
 
     return null;

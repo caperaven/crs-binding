@@ -1,8 +1,8 @@
 import {ProviderBase} from "./provider-base.js";
 
 export class IfProvider extends ProviderBase {
-    constructor(element, context, property, value, ctxName) {
-        super(element, context, property, value, ctxName);
+    constructor(element, context, property, value, ctxName, parentId) {
+        super(element, context, property, value, ctxName, parentId);
     }
 
     dispose() {

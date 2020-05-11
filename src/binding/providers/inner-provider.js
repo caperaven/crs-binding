@@ -1,8 +1,19 @@
 import {ProviderBase} from "./provider-base.js";
 
 export class InnerProvider extends ProviderBase {
-    constructor(element, context, property, value, ctxName) {
-        super(element, context, property, value, ctxName);
+    constructor(element, context, property, value, ctxName, parentId) {
+        super(element, context, property, value, ctxName, parentId);
+
+        if (element.innerText.indexOf("$parent.") != -1) {
+            element.innerText = element.innerText.split("$parent.").join("");
+            this._context = parentId;
+        }
+
+        if (element.textContent.indexOf("$parent.") != -1) {
+            element.textContent = element.textContent.split("$parent.").join("");
+            this._context = parentId;
+        }
+
 
         this._eventHandler = this._change.bind(this);
         this._expObj = crsbinding.expression.compile(element.innerText || element.textContent, null, {ctxName: this._ctxName});
