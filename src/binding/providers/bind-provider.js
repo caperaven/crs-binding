@@ -28,7 +28,7 @@ export class BindProvider extends OneWayProvider {
             value = this[typeFn](value, event.target);
         }
 
-        crsbinding.data.setProperty(this._context, this._value, value);
+        crsbinding.data.setProperty(this._context, this._value, value, this._ctxName);
 
         event.stopPropagation();
     }

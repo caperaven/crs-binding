@@ -406,13 +406,20 @@ export const bindingData = {
         return property.indexOf(".") == -1 ? addCallback(obj, property, callback) : addCallbackPath(obj, property, callback);
     },
 
-    setProperty(id, property, value) {
-        const obj = data.get(id).data;
-        const changed = property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
+    setProperty(id, property, value, ctxName) {
+        let obj = data.get(id);
 
-        if (changed == true) {
-            performUpdates(id, property, value);
-            callFunctions(id, property);
+        if (obj.type == "data") {
+            obj = data.get(id).data;
+            const changed = property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
+
+            if (changed == true) {
+                performUpdates(id, property, value);
+                callFunctions(id, property);
+            }
+        }
+        else {
+            this.setReferenceValue(id, property, value, obj.refId, obj.path, obj.index, ctxName);
         }
     },
 
@@ -446,6 +453,24 @@ export const bindingData = {
                 const ar = this.getValue(id, path);
                 return ar[index];
             }
+        }
+        else {
+            let pString = `${obj.path}.${path}`; // subObj.field1
+            return this.getReferenceValue(obj.refId, property, pString)
+        }
+    },
+
+    setReferenceValue(id, property, value, refId, refPath, refIndex, ctxName) {
+        const obj = data.get(refId);
+
+        if (obj.type == "data") {
+            let v = getValueOnPath(obj.data, refPath);
+
+            if (refIndex != null) {
+                v = v[refId];
+            }
+
+            setPropertyPath(v, property, value);
         }
         else {
             let pString = `${obj.path}.${path}`; // subObj.field1

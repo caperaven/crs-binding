@@ -1,4 +1,8 @@
 export function ForOnceProvider(element, context, property, value, ctxName = "context", parentId) {
+    if (value.indexOf("$parent.") != -1) {
+        value = value.split("$parent.").join("");
+        context = parentId;
+    }
     const parts = value.split("of");
     const singular = parts[0].trim();
     const plural = parts[1].trim();

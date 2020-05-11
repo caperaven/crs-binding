@@ -38,7 +38,11 @@ export class OneWayProvider extends ProviderBase {
             this._getObj = crsbinding.expression.compile(this._value, null, {ctxName: this._ctxName});
         }
 
-        this.listenOnPath(this._value, this._eventHandler);
+        let path = this._value;
+        if (this._isNamedContext == true) {
+            path = this._value.split(`${this._ctxName}.`).join("");
+        }
+        this.listenOnPath(path, this._eventHandler);
 
         const v = this._ctxName == "context" ? this._context[this._value] : this._context;
     }

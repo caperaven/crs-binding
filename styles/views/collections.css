@@ -27,7 +27,7 @@
     pointer-events: none;
 }
 
-.collections-container .list-item button {
+.collections-container .list-item button, .collections-container .list-item select {
     pointer-events: all;
 }
 
