@@ -31,11 +31,6 @@
     <script type="module">
         import "/node_modules/crs-router/crs-router.js";
         import "./publish/crs-binding.js";
-        //import "/src/index.js";
-
-        document.querySelector("crs-router").viewCreatedCallback = (view) => {
-            return crsbinding.observation.observe(view);
-        }
     </script>
 </body>
 </html>
