@@ -20,7 +20,6 @@ class TasksSummary extends BindableElement{
 
     set taskCount(newValue) {
         this.setProperty("taskCount", newValue);
-        crsbinding.data.updateUI(this._dataId, "taskCount");
     }
 
     async connectedCallback() {
