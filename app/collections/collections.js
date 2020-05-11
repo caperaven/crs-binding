@@ -61,23 +61,27 @@ export default class Collections extends ViewBase {
 
     removeItem() {
         if (this.selectedItem != null) {
-            const array = this.items;
-
             const id = this.selectedItem.id;
-            const index = array.findIndex(item => item.id == id);
-            const length = array.length;
-            let newIndex = length == 0 ? -1 : index + 1;
-
-            if (newIndex != -1) {
-                if (newIndex > length - 1) {
-                    newIndex = length - 2;
-                }
-            }
-
-            this.selectedItem = newIndex == -1 ? null : array[newIndex];
-
-            array.splice(index, 1);
+            this.removeItemById(id);
         }
+    }
+
+    removeItemById(id) {
+        const array = this.items;
+
+        const index = array.findIndex(item => item.id == id);
+        const length = array.length;
+        let newIndex = length == 0 ? -1 : index + 1;
+
+        if (newIndex != -1) {
+            if (newIndex > length - 1) {
+                newIndex = length - 2;
+            }
+        }
+
+        this.selectedItem = newIndex == -1 ? null : array[newIndex];
+
+        array.splice(index, 1);
     }
 
     popItem() {
@@ -96,5 +100,10 @@ export default class Collections extends ViewBase {
             this.selectedItem = this.items.find(item => item.id == selectedId);
             this.selectedItem.__isSelected = true;
         }
+    }
+
+    removeThis(event) {
+        const id = event.target.parentElement.dataset.id;
+        this.removeItemById(id);
     }
 }

@@ -7,7 +7,7 @@
                 <div>${item.title}</div>
                 <div>${item.isDone}</div>
                 <tasks-summary parent.bind="item"></tasks-summary>
-                <button aria-label="${$parent.translations.remove}">${$parent.translations.remove}</button>
+                <button click.call="$parent.removeThis($event)" aria-label="${$parent.translations.remove}">${$parent.translations.remove}</button>
             </li>
         </template>
     </ul>

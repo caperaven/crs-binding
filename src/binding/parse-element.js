@@ -23,7 +23,7 @@ export function parseElement(element, context, ctxName = "context", parentId) {
     parseAttributes(boundAttributes, context, ctxName, parentId);
 
     if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
-        ProviderFactory["inner"](element, context, null, null, ctxName, parentId);
+        ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
     }
 }
 

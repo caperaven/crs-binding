@@ -11,7 +11,7 @@ import {AttrProvider} from "./providers/attr-provider.js";
 import {ForOnceProvider} from "./providers/for-once-provider.js";
 
 export class ProviderFactory {
-    static "bind"(element, context, property, value, ctxName, parentId) {
+    static "bind"(element, context, property, value, ctxName, attr, parentId) {
         if (["value", "checked"].indexOf(property) != -1) {
             return new BindProvider(element, context, property, value, ctxName, parentId);
         }
@@ -20,27 +20,27 @@ export class ProviderFactory {
         }
     }
 
-    static "two-way"(element, context, property, value, ctxName, parentId) {
+    static "two-way"(element, context, property, value, ctxName, attr, parentId) {
         return new BindProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "one-way"(element, context, property, value, ctxName, parentId) {
+    static "one-way"(element, context, property, value, ctxName, attr, parentId) {
         return new OneWayProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "once"(element, context, property, value, ctxName, parentId) {
+    static "once"(element, context, property, value, ctxName, attr, parentId) {
         return OnceProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "call"(element, context, property, value, ctxName, parentId) {
+    static "call"(element, context, property, value, ctxName, attr, parentId) {
         return new CallProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "delegate"(element, context, property, value, ctxName, parentId) {
+    static "delegate"(element, context, property, value, ctxName, attr, parentId) {
         return new CallProvider(element, context, property, value, ctxName, parentId);
     }
 
-    static "inner"(element, context, property, value, ctxName, parentId) {
+    static "inner"(element, context, property, value, ctxName, attr, parentId) {
         return new InnerProvider(element, context, property, value, ctxName, parentId);
     }
 
@@ -53,7 +53,7 @@ export class ProviderFactory {
         }
     }
 
-    static "if"(element, context, property, value, ctxName, parentId) {
+    static "if"(element, context, property, value, ctxName, attr,  parentId) {
         if (property.toLowerCase() == "classlist") {
             return new IfClassProvider(element, context, property, value, ctxName, parentId);
         }

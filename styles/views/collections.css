@@ -27,6 +27,10 @@
     pointer-events: none;
 }
 
+.collections-container .list-item button {
+    pointer-events: all;
+}
+
 .collections-container .form {
     display: grid;
     grid-template-rows: 2rem 1fr;
