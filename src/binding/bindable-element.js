@@ -21,10 +21,6 @@ export class BindableElement extends HTMLElement {
             crsbinding.parsers.parseElements(this.children, this._dataId);
         }
 
-        if (this.load != null) {
-            this.load();
-        }
-
         this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
 
@@ -38,6 +34,10 @@ export class BindableElement extends HTMLElement {
         this.__properties.forEach((value, key) => crsbinding.data.setProperty(this._dataId, key, value));
         this.__properties.clear();
         delete this.__properties;
+
+        if (this.load != null) {
+            this.load();
+        }
     }
 
     async disconnectedCallback() {

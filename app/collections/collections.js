@@ -86,9 +86,4 @@ export default class Collections extends ViewBase {
             this.selectedItem.__isSelected = true;
         }
     }
-
-    selectedItemChanged(newValue, oldValue) {
-        console.log(newValue);
-        console.log(oldValue);
-    }
 }
