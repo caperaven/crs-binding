@@ -356,7 +356,10 @@ function removeCallbacks(id) {
 }
 
 function removeUpdates(id) {
-
+    const remove = Array.from(updates).filter(item => item[0] == id || item[1].value.originId == id);
+    for (let rem of remove) {
+        updates.delete(rem[0]);
+    }
 }
 
 function removeTriggers(id) {
@@ -365,6 +368,9 @@ function removeTriggers(id) {
         const index = trigger[1].values.findIndex(item => item.id == id);
         if (index != -1) {
             trigger[1].values.splice(index, 1);
+        }
+        if (trigger.values.length == 0) {
+            triggers.delete(trigger[0]);
         }
     }
 }
