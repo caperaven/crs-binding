@@ -342,12 +342,15 @@ function removeObject(id) {
 function removeData(id) {
     removeReferences(id);
     data.delete(id);
+    if (data.size == 0) {
+        _nextId = 0;
+    }
 }
 
 function removeReferences(parentId) {
     const references = Array.from(data).filter(item => item[1].refId == parentId);
     for (let ref of references) {
-        data.delete(ref.id);
+        removeObject(ref[1].id);
     }
 }
 
@@ -372,6 +375,9 @@ function removeTriggers(id) {
         if (trigger.values.length == 0) {
             triggers.delete(trigger[0]);
         }
+    }
+    if (triggers.size == 0) {
+        _nextTriggerId = 0;
     }
 }
 
