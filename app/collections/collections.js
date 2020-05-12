@@ -91,14 +91,23 @@ export default class Collections extends ViewBase {
     }
 
     selectItem(event) {
+        const updates = [];
+
         if (this.selectedItem != null) {
+            updates.push(this.selectedItem.__uid);
             this.selectedItem.__isSelected = false;
         }
 
         if (event.target.nodeName == "LI") {
-            const selectedId = event.target.dataset.id;
+            const selectedId = Number(event.target.dataset.id);
+            updates.push(Number(event.target.dataset.uid));
+
             this.selectedItem = this.items.find(item => item.id == selectedId);
             this.selectedItem.__isSelected = true;
+        }
+
+        for (let update of updates) {
+            crsbinding.data.updateUI(update, "__isSelected");
         }
     }
 
