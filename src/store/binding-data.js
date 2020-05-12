@@ -406,6 +406,10 @@ export const bindingData = {
     setProperty(id, property, value, ctxName) {
         let obj = data.get(id);
 
+        if (isNaN(value) == false) {
+            value = Number(value);
+        }
+
         if (obj.type == "data") {
             obj = data.get(id).data;
             const changed = property.indexOf(".") == -1 ? setProperty(obj, property, value) : setPropertyPath(obj, property, value);
@@ -465,7 +469,7 @@ export const bindingData = {
             let v = getValueOnPath(obj.data, refPath);
 
             if (refIndex != null) {
-                v = v[refId];
+                v = v[refIndex];
             }
 
             if (ctxName != "context") {
