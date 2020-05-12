@@ -11,6 +11,16 @@ export default class Component extends ViewBase {
         this.setProperty("data", newValue);
     }
 
+    get parts() {
+        return this.getProperty("parts");
+    }
+
+    set parts(newValue) {
+        this.setProperty("parts", newValue);
+
+        console.log(crsbinding.data.getValue(this._dataId, "parts"));
+    }
+
     _loaded() {
         crsbinding.data.makeShared(this._dataId, "data", ["firstName", "contacts.phone.land", "contacts.phone.cell", "contacts.phone.fax"]);
 
@@ -26,6 +36,8 @@ export default class Component extends ViewBase {
                 }
             }
         };
+
+        this.parts = [];
 
         super._loaded();
     }

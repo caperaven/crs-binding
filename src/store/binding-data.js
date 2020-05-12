@@ -406,7 +406,7 @@ export const bindingData = {
     setProperty(id, property, value, ctxName) {
         let obj = data.get(id);
 
-        if (isNaN(value) == false) {
+        if (isNaN(value) == false && Array.isArray(value) == false) {
             value = Number(value);
         }
 
