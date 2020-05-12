@@ -424,6 +424,13 @@ export const bindingData = {
         }
     },
 
+    /**
+     * Get either the value as defined by the property and id pair
+     * or get the object by just defining the id.
+     * @param id {number} id of the data object to use, see _dataId on component
+     * @param property {string} optional - path to the property
+     * @returns {value}
+     */
     getValue(id, property) {
         const obj = data.get(id);
 

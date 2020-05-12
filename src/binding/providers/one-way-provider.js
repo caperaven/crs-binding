@@ -1,5 +1,6 @@
 import {ProviderBase} from "./provider-base.js";
-import {setElementProperty, setElementValueProperty, setAttribute, setClassList, setDataset} from "./code-constants.js";
+import {setElementProperty, setElementValueProperty, setClassList, setDataset} from "./code-constants.js";
+import {BindableElement} from "../bindable-element.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
@@ -12,11 +13,6 @@ export class OneWayProvider extends ProviderBase {
         if (this._expObj != null) {
             crsbinding.expression.release(this._expObj);
             delete this._expObj;
-        }
-
-        if (this._getObj != null) {
-            crsbinding.expression.release(this._getObj);
-            delete this._getObj;
         }
 
         this._exp = null;
@@ -34,17 +30,17 @@ export class OneWayProvider extends ProviderBase {
 
         this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], {sanitize: false, ctxName: this._ctxName});
 
-        if (this._value.indexOf(".") != -1) {
-            this._getObj = crsbinding.expression.compile(this._value, null, {ctxName: this._ctxName});
-        }
-
         let path = this._value;
         if (this._isNamedContext == true) {
             path = this._value.split(`${this._ctxName}.`).join("");
         }
+
         this.listenOnPath(path, this._eventHandler);
 
-        const v = this._ctxName == "context" ? this._context[this._value] : this._context;
+        const value = crsbinding.data.getValue(this._context, path);
+        if (value != null) {
+            this.propertyChanged(path, value);
+        }
     }
 
     setContext() {

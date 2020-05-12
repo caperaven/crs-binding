@@ -7,8 +7,9 @@
 1. Select binding on value must update when changing the selected item - done
 1. Conditional binding on attributes, styles and classes - done
 
-1. Add $parent syntax in collections to access the repeat behaviour's context
-1. Set up a scenario where you have a select in the repeat, perhaps the items collection
+1. Add $parent syntax in collections to access the repeat behaviour's context - done
+1. Set up a scenario where you have a select in the repeat, perhaps the items collection - in progress
+1. Freeze updates when disposing bindable element
 
 ## Low priority
 1. Translation context on the repeat. (add button that uses translation on parent)
