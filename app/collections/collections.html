@@ -51,6 +51,11 @@
                     <option value="${item.id}">${item.title}</option>
                 </template>
             </select>
+
+            <h2>Tasks</h2>
+            <template for="task of selectedItem.tasks">
+                <div>${task.title}</div>
+            </template>
         </div>
     </div>
 </div>
