@@ -125,9 +125,22 @@ export default class Collections extends ViewBase {
 
         const id = event.target.parentElement.dataset.id;
         const index = fromArray.findIndex(item => item.id == id);
-        const item = crsbinding.utils.clone(fromArray[index]);
+        const item = fromArray[index];
 
         this.removeItemById(id);
         toArray.push(item);
+    }
+
+    removeDone(event) {
+        const fromArray = this.doneItems;
+        const toArray = this.items;
+
+        if (event.target.nodeName == "LI") {
+            const id = event.target.dataset.id;
+            const index = fromArray.findIndex(item => item.id == id);
+            const obj = fromArray[index];
+            fromArray.splice(index, 1);
+            toArray.push(obj);
+        }
     }
 }

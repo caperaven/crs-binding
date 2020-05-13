@@ -25,9 +25,9 @@
 
         <section>
             <h2>Done Items</h2>
-            <ul>
+            <ul click.delegate="removeDone($event)">
                 <template for="item of doneItems">
-                    <li>${item.title}</li>
+                    <li data-id.once="item.id">${item.title}</li>
                 </template>
             </ul>
         </section>
