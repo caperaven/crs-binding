@@ -1,11 +1,7 @@
-import {ProviderBase} from "./provider-base.js";
 import {AttrProvider} from "./attr-provider.js";
+import {RepeatBaseProvider} from "./repeat-base-provider.js";
 
-export class ForProvider extends ProviderBase {
-    constructor(element, context, property, value, ctxName, parentId) {
-        super(element, context, property, value, ctxName, parentId);
-    }
-
+export class ForProvider extends RepeatBaseProvider {
     init() {
         this._itemsAddedHandler = this._itemsAdded.bind(this);
         this._itemsDeletedHandler = this._itemsDeleted.bind(this);
@@ -17,52 +13,19 @@ export class ForProvider extends ProviderBase {
         this._itemsAddedHandler = null;
         this._itemsDeletedHandler = null;
 
-        this._singular = null;
-        this._plural = null;
-        this._container = null;
-        this._collectionChangedHandler = null;
-
         super.dispose();
     }
 
     async initialize() {
-        // 1. get the container and remove the template
-        this._container = this._element.parentElement;
-        this._container.removeChild(this._element);
-
-        // 2. get the properties to work with and build the for loop
-        const parts = this._value.split("of");
-        this._singular = parts[0].trim();
-        this._plural = parts[1].trim();
+        super.initialize();
 
         const forExp = "for (let i = 0; i < context.length; i++) { callback(context[i], i) }";
-
         this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
-
-        // 3. listen to the collection property on the context changing
-        this._collectionChangedHandler = this._collectionChanged.bind(this);
-        this.listenOnPath(this._plural, this._collectionChangedHandler);
-
         crsbinding.data.setArrayEvents(this._context, this._plural, this._itemsAddedHandler, this._itemsDeletedHandler);
     }
 
-    async _collectionChanged(property, newValue) {
-        if (newValue == null) return this._clear();
-        this._renderItems(newValue);
-    }
-
-    _clear() {
-        const elements = Array.from(this._container.children);
-
-        for (let child of elements) {
-            child.parentElement.removeChild(child);
-            crsbinding.observation.releaseBinding(child);
-        }
-    }
-
     async _renderItems(array) {
-        // release the old content
-        await crsbinding.observation.releaseChildBinding(this._container);
+        super._renderItems();
 
         // create document fragment
         const fragment = document.createDocumentFragment();
@@ -74,8 +37,7 @@ export class ForProvider extends ProviderBase {
             fragment.appendChild(element);
         });
 
-        this._container.innerHTML = "";
-        this._container.appendChild(fragment);
+        this.positionStruct.addAction(fragment);
 
         // update the container's provider to this so that this can be freed when content changes
         if (this._container.__providers == null) {
@@ -126,19 +88,5 @@ export class ForProvider extends ProviderBase {
                 crsbinding.observation.releaseBinding(element);
             }
         }
-    }
-
-    createElement(item, arrayId) {
-        const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-array-item-${arrayId}`, this._plural, arrayId);
-        const element = this._element.content.cloneNode(true);
-        crsbinding.parsers.parseElement(element, id, this._singular, this._context);
-
-        item.__uid = id;
-
-        for (let child of element.children) {
-            child.dataset.uid = id;
-        }
-
-        return element;
     }
 }
