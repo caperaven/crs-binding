@@ -68,8 +68,9 @@ export class ForProvider extends ProviderBase {
         const fragment = document.createDocumentFragment();
 
         // loop through items and add them to fragment after being parsed
-        await this._forExp.function(array, (item, index) => {
-            const element = this.createElement(item, index);
+        await this._forExp.function(array, (item) => {
+            item.__aId = crsbinding.data.nextArrayId();
+            const element = this.createElement(item, item.__aId);
             fragment.appendChild(element);
         });
 
@@ -91,7 +92,8 @@ export class ForProvider extends ProviderBase {
             const item = added[i];
             const index = collection.indexOf(item);
 
-            const element = this.createElement(item, index);
+            item.__aId = crsbinding.data.nextArrayId();
+            const element = this.createElement(item, item.__aId);
             const update = element.children[0];
             const child = this._container.children[index];
             this._container.insertBefore(element, child);
@@ -126,8 +128,8 @@ export class ForProvider extends ProviderBase {
         }
     }
 
-    createElement(item, index) {
-        const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-array-item-${index}`, this._plural, index);
+    createElement(item, arrayId) {
+        const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-array-item-${arrayId}`, this._plural, arrayId);
         const element = this._element.content.cloneNode(true);
         crsbinding.parsers.parseElement(element, id, this._singular, this._context);
 

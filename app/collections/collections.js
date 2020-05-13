@@ -24,7 +24,21 @@ export default class Collections extends ViewBase {
     }
 
     set selectedItem(newValue) {
+        const updates = [];
+
+        const oldItem = this.selectedItem;
+        if (oldItem != null) {
+            updates.push(oldItem.__uid);
+            oldItem.__isSelected = false;
+        }
+
+        updates.push(newValue.__uid);
+        newValue.__isSelected = true;
         this.setProperty("selectedItem", newValue);
+
+        for (let update of updates) {
+            crsbinding.data.updateUI(update, "__isSelected");
+        }
     }
 
     get priorities() {
@@ -99,23 +113,9 @@ export default class Collections extends ViewBase {
     }
 
     selectItem(event) {
-        const updates = [];
-
-        if (this.selectedItem != null) {
-            updates.push(this.selectedItem.__uid);
-            this.selectedItem.__isSelected = false;
-        }
-
         if (event.target.nodeName == "LI") {
             const selectedId = Number(event.target.dataset.id);
-            updates.push(Number(event.target.dataset.uid));
-
             this.selectedItem = this.items.find(item => item.id == selectedId);
-            this.selectedItem.__isSelected = true;
-        }
-
-        for (let update of updates) {
-            crsbinding.data.updateUI(update, "__isSelected");
         }
     }
 
@@ -126,8 +126,6 @@ export default class Collections extends ViewBase {
         const id = event.target.parentElement.dataset.id;
         const index = fromArray.findIndex(item => item.id == id);
         const item = crsbinding.utils.clone(fromArray[index]);
-
-        console.log(item);
 
         this.removeItemById(id);
         toArray.push(item);

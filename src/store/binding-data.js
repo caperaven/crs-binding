@@ -33,18 +33,28 @@ const triggers = new Map();
  */
 const context = new Map();
 
-let _nextId = 0;
-let _nextTriggerId = 0;
+const idStore = {
+    nextId: 0,
+    nextTriggerId: 0,
+    nextArrayId: 0
+};
+
 
 function getNextId() {
-    const id = _nextId;
-    _nextId += 1;
-    return id;
+    return nextId("nextId");
 }
 
 function getNextTriggerId() {
-    const id = _nextTriggerId;
-    _nextTriggerId += 1;
+    return nextId("nextTriggerId");
+}
+
+function nextArrayId() {
+    return nextId("nextArrayId");
+}
+
+function nextId(idVariable) {
+    const id = idStore[idVariable];
+    idStore[idVariable] += 1;
     return id;
 }
 
@@ -157,7 +167,7 @@ function createReference(refId, name, path, index) {
     };
 
     if (index !== undefined) {
-        ref.index = index;
+        ref.aId = index;
     }
 
     data.set(id, ref);
@@ -343,7 +353,8 @@ function removeData(id) {
     removeReferences(id);
     data.delete(id);
     if (data.size == 0) {
-        _nextId = 0;
+        idStore.nextId = 0;
+        idStore.nextArrayId = 0;
     }
 }
 
@@ -371,13 +382,15 @@ function removeTriggers(id) {
         const index = trigger[1].values.findIndex(item => item.id == id);
         if (index != -1) {
             trigger[1].values.splice(index, 1);
-        }
-        if (trigger.values.length == 0) {
-            triggers.delete(trigger[0]);
+
+            if (trigger.values.length == 0) {
+                triggers.delete(trigger[0]);
+            }
         }
     }
+
     if (triggers.size == 0) {
-        _nextTriggerId = 0;
+        idStore.nextTriggerId = 0;
     }
 }
 
@@ -453,7 +466,7 @@ export const bindingData = {
         }
         else {
             const refId = obj.refId;
-            return this.getReferenceValue(refId, property, obj.path, obj.index);
+            return this.getReferenceValue(refId, property, obj.path, obj.aId);
         }
     },
 
@@ -461,17 +474,17 @@ export const bindingData = {
         return context.get(id);
     },
 
-    getReferenceValue(id, property, path, index) {
+    getReferenceValue(id, property, path, aId) {
         const obj = data.get(id);
 
         if (obj.type == "data") {
-            if (index === undefined) {
+            if (aId === undefined) {
                 const p = property == null ? path : `${path}.${property}`;
                 return this.getValue(id, p);
             }
             else {
                 const ar = this.getValue(id, path);
-                const result = ar[index];
+                const result = ar.find(i => i.__aId == aId);
                 return property == null ? result : getValueOnPath(result, property);
             }
         }
@@ -511,7 +524,8 @@ export const bindingData = {
             delete value.data;
         });
         data.clear();
-        _nextId = 0;
+        idStore.nextId = 0;
+        idStore.nextArrayId = 0;
     },
 
     makeShared: makeShared,
@@ -527,5 +541,6 @@ export const bindingData = {
     arrayItemsAdded: arrayItemsAdded,
     arrayItemsRemoved: arrayItemsRemoved,
     linkToArrayItem: linkToArrayItem,
-    unlinkArrayItem: unlinkArrayItem
+    unlinkArrayItem: unlinkArrayItem,
+    nextArrayId: nextArrayId
 };
