@@ -445,7 +445,7 @@ export const bindingData = {
             }
         }
         else {
-            this.setReferenceValue(id, property, value, obj.refId, obj.path, obj.index, ctxName);
+            this.setReferenceValue(id, property, value, obj.refId, obj.path, obj.aId, ctxName);
         }
     },
 
@@ -494,14 +494,14 @@ export const bindingData = {
         }
     },
 
-    setReferenceValue(id, property, value, refId, refPath, refIndex, ctxName) {
+    setReferenceValue(id, property, value, refId, refPath, refaId, ctxName) {
         const obj = data.get(refId);
 
         if (obj.type == "data") {
             let v = getValueOnPath(obj.data, refPath);
 
-            if (refIndex != null) {
-                v = v[refIndex];
+            if (refaId != null) {
+                v = v.find(i => i.__aId == refaId);
             }
 
             if (ctxName != "context") {
