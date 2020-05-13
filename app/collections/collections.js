@@ -11,6 +11,14 @@ export default class Collections extends ViewBase {
         this.setProperty("items", newValue);
     }
 
+    get doneItems() {
+        return this.getProperty("doneItems");
+    }
+
+    set doneItems(newValue) {
+        this.setProperty("doneItems", newValue);
+    }
+
     get selectedItem() {
         return this.getProperty("selectedItem")
     }
@@ -37,6 +45,7 @@ export default class Collections extends ViewBase {
 
     async connectedCallback() {
         this.items = createItems(5);
+        this.doneItems = [];
         this.priorities = createPriorities();
         this.translations = {
             remove: "Remove"
@@ -68,7 +77,6 @@ export default class Collections extends ViewBase {
 
     removeItemById(id) {
         const array = this.items;
-
         const index = array.findIndex(item => item.id == id);
         const length = array.length;
         let newIndex = length == 0 ? -1 : index + 1;
@@ -112,7 +120,16 @@ export default class Collections extends ViewBase {
     }
 
     removeThis(event) {
+        const fromArray = this.items;
+        const toArray = this.doneItems;
+
         const id = event.target.parentElement.dataset.id;
+        const index = fromArray.findIndex(item => item.id == id);
+        const item = crsbinding.utils.clone(fromArray[index]);
+
+        console.log(item);
+
         this.removeItemById(id);
+        toArray.push(item);
     }
 }
