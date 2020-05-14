@@ -4,6 +4,8 @@ export class BindableElement extends HTMLElement {
     constructor() {
         super();
         this._dataId = crsbinding.data.addObject(this.constructor.name);
+        this.dataset.uid = this._dataId;
+
         crsbinding.data.addContext(this._dataId, this);
         crsbinding.dom.enableEvents(this);
 

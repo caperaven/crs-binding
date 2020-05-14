@@ -153,4 +153,13 @@ export default class Collections extends ViewBase {
         const array = crsbinding.data.array(this._dataId, "selectedItem.tasks");
         array.pop();
     }
+
+    changeTask() {
+        const item = this.selectedItem.tasks[0];
+        crsbinding.data.setProperty(item.__uid, "title", "Hello World");
+    }
+
+    updateTaskUI() {
+        crsbinding.data.updateUI(this._dataId, "selectedItem.tasks");
+    }
 }

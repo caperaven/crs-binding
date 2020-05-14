@@ -87,6 +87,7 @@ function callFunctionsOnObject(obj, id, property) {
         if (triggerObj.frozen != true) {
             triggerObj.frozen = true;
             for (let trigger of triggerObj.values) {
+                if (trigger.id == id && trigger.path == property) continue;
                 crsbinding.data.updateUI(trigger.id, trigger.path);
             }
             delete triggerObj.frozen;
