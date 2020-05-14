@@ -69,12 +69,21 @@ function callFunctions(id, property) {
         id = id.__uid || id._dataId;
     }
 
-    if (property.indexOf(".") != -1) return callFunctionsOnPath(id, property);
-
     const obj = callbacks.get(id);
-    if (obj == null) return;
-    if (obj[property] == null) return;
-    callFunctionsOnObject(obj[property], id, property);
+
+    if (property == null) {
+        const properties = getOwnProperties(obj);
+        for (let prop of properties) {
+            callFunctionsOnObject(obj[prop], id, prop);
+        }
+    }
+    else {
+        if (property.indexOf(".") != -1) return callFunctionsOnPath(id, property);
+
+        if (obj == null) return;
+        if (obj[property] == null) return;
+        callFunctionsOnObject(obj[property], id, property);
+    }
 }
 
 function callFunctionsOnObject(obj, id, property) {
