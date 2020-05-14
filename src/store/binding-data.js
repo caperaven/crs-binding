@@ -65,6 +65,10 @@ function callFunctionsOnPath(id, path) {
 }
 
 function callFunctions(id, property) {
+    if (typeof id == "object") {
+        id = id.__uid || id._dataId;
+    }
+
     if (property.indexOf(".") != -1) return callFunctionsOnPath(id, property);
 
     const obj = callbacks.get(id);
@@ -430,6 +434,10 @@ export const bindingData = {
     },
 
     setProperty(id, property, value, ctxName) {
+        if (typeof id == "object") {
+            id = id.__uid || id._dataId;
+        }
+
         let obj = data.get(id);
 
         if (isNaN(value) == false && Array.isArray(value) == false) {
@@ -534,6 +542,10 @@ export const bindingData = {
     updateUI: callFunctions,
 
     array(id, property) {
+        if (typeof id == "object") {
+            id = id._dataId;
+        }
+
         const value = this.getValue(id, property);
         return createArrayProxy(value, id, property);
     },

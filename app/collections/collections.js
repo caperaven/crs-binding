@@ -145,21 +145,23 @@ export default class Collections extends ViewBase {
     }
 
     addTask() {
-        const array = crsbinding.data.array(this._dataId, "selectedItem.tasks");
+        const array = crsbinding.data.array(this, "selectedItem.tasks");
         array.push(createTask(this.selectedItem.tasks.length, this.selectedItem.id));
     }
 
     popTask() {
-        const array = crsbinding.data.array(this._dataId, "selectedItem.tasks");
+        const array = crsbinding.data.array(this, "selectedItem.tasks");
         array.pop();
     }
 
     changeTask() {
         const item = this.selectedItem.tasks[0];
-        crsbinding.data.setProperty(item.__uid, "title", "Hello World");
+        crsbinding.data.setProperty(item, "title", "Hello World");
     }
 
-    updateTaskUI() {
-        crsbinding.data.updateUI(this._dataId, "selectedItem.tasks");
+    updateTaskProperty() {
+        const item = this.selectedItem.tasks[0];
+        item.title = "Hello World";
+        crsbinding.data.updateUI(item);
     }
 }
