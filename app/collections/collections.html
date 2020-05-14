@@ -53,9 +53,15 @@
             </select>
 
             <h2>Tasks</h2>
+
             <template for="task of selectedItem.tasks">
                 <div>${task.title}</div>
             </template>
+
+            <div class="toolbar" hidden.if="selectedItem == null" style="margin-top: 1rem">
+                <button click.call="addTask">AddTask</button>
+                <button click.call="popTask">Remove Last Task</button>
+            </div>
         </div>
     </div>
 </div>

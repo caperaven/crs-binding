@@ -57,7 +57,7 @@ export class ForProvider extends RepeatBaseProvider {
             item.__aId = crsbinding.data.nextArrayId();
             const element = this.createElement(item, item.__aId);
             const update = element.children[0];
-            const child = this._container.children[index];
+            const child = this._container.children[index + this.positionStruct.startIndex + 1];
             this._container.insertBefore(element, child);
 
             for (let p of update.__providers || []) {

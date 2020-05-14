@@ -1,5 +1,5 @@
 import {ViewBase} from "../../src/view/view-base.js";
-import {createItems, createItem, createPriorities} from "./data.js";
+import {createItems, createItem, createPriorities, createTask} from "./data.js";
 import "./tasks-summary.js";
 
 export default class Collections extends ViewBase {
@@ -142,5 +142,15 @@ export default class Collections extends ViewBase {
             fromArray.splice(index, 1);
             toArray.push(obj);
         }
+    }
+
+    addTask() {
+        const array = crsbinding.data.array(this._dataId, "selectedItem.tasks");
+        array.push(createTask(this.selectedItem.tasks.length, this.selectedItem.id));
+    }
+
+    popTask() {
+        const array = crsbinding.data.array(this._dataId, "selectedItem.tasks");
+        array.pop();
     }
 }

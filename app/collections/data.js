@@ -13,11 +13,7 @@ function createTasks(index) {
     const result = [];
 
     for (let i = 0; i < nextTaskCount; i++) {
-        result.push({
-            id: i,
-            title: `task ${i} for ${index}`,
-            isDone: false
-        })
+        result.push(createTask(i, index));
     }
 
     nextTaskCount += 1;
@@ -26,6 +22,14 @@ function createTasks(index) {
     }
 
     return result;
+}
+
+export function createTask(id, index) {
+    return {
+        id: id,
+        title: `task ${id} for ${index}`,
+        isDone: false
+    }
 }
 
 let nextPriority = 0;
