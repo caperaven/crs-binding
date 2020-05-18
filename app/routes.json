@@ -20,6 +20,12 @@
       "hash": "#collections",
       "view": "collections",
       "hasStyle": true
+    },
+    {
+      "title": "Inflation Example",
+      "hash": "#inflation",
+      "view": "inflation",
+      "hasStyle": true
     }
   ]
 }
