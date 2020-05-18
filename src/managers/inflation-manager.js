@@ -160,7 +160,8 @@ class InflationCodeGenerator {
             this.inflateSrc.push(`${this.path}.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", ${exp});`);
         }
         else {
-            this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", ${exp});`);
+            const parts = exp.split("?");
+            this.inflateSrc.push(`if (${parts[0].trim()} != null) {${this.path}.setAttribute("${attr.name}", ${exp});}`);
         }
 
 
