@@ -18,6 +18,9 @@ div {
 [type="cell"] {
     border-bottom: #dedede solid 1px;
     border-right: #dedede solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon {
