@@ -155,7 +155,15 @@ class InflationCodeGenerator {
         const text = attr.value.trim();
         let exp = text.substr(2, text.length - 3);
         exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
-        this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", ${exp});`);
+
+        if (attr.name == "xlink:href") {
+            this.inflateSrc.push(`${this.path}.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", ${exp});`);
+        }
+        else {
+            this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", ${exp});`);
+        }
+
+
         this.deflateSrc.push(`${this.path}.removeAttribute("${attr.name}");`);
         attr.ownerElement.removeAttribute(attr.name);
     }
