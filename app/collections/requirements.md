@@ -8,14 +8,16 @@
 1. Conditional binding on attributes, styles and classes - done
 
 1. Add $parent syntax in collections to access the repeat behaviour's context - done
-1. Set up a scenario where you have a select in the repeat, perhaps the items collection - in progress
-1. Freeze updates when disposing bindable element
+1. Set up a scenario where you have a select in the repeat, perhaps the items collection - done
 
 ## Low priority
-1. Translation context on the repeat. (add button that uses translation on parent)
-1. Sharing objects between array without using clones if we can manage that.
-1. In the if providers do not try catch it, do something better dumbass.
+1. Translation context on the repeat. (add button that uses translation on parent) - done
+1. Sharing objects between array without using clones if we can manage that. - done
 
 ## JHR:  todo
-1. Add cleanup
+1. Add cleanup - done
+
+## Todo
+1. Freeze updates when disposing bindable element
+1. In the if providers do not try catch it, do something better dumbass.
 1. style.color.if="case selectedItem.priority ? 0:'green' 1:'blue' 2:'red'" // same for classes

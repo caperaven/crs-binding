@@ -6,9 +6,9 @@
             <h2>Active Items</h2>
             <ul click.call="selectItem($event)">
                 <template for="item of items">
-                    <li class="list-item" data-id.once="item.id" style.background.if="item.__isSelected == true ? '#ffd69a'" style.color.if="item.priority == 2 ? 'red'">
+                    <li class="list-item" data-id.once="item.id"  style.background.if="item.__isSelected == true ? '#ffd69a'" style.color.if="item.priority == 2 ? 'red'" style.color.if="item.">
                         <div>${item.title}</div>
-                        <div>${item.isDone}</div>
+                        <input type="checkbox" checked.bind="item.isDone" />
                         <tasks-summary parent.bind="item"></tasks-summary>
 
                         <select value.bind="item.priority">
@@ -55,7 +55,10 @@
             <h2>Tasks</h2>
 
             <template for="task of selectedItem.tasks">
-                <div>${task.title}</div>
+                <div style.color.if="task.isDone == true ? 'silver'">
+                    <span>${task.title}</span>
+                    <input type="checkbox" checked.bind="task.isDone" />
+                </div>
             </template>
 
             <div class="toolbar" hidden.if="selectedItem == null" style="margin-top: 1rem">

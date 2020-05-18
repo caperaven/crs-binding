@@ -40,7 +40,18 @@ export function createItem(id) {
         title: `Code ${id}`,
         priority: nextPriority,
         tasks: createTasks(id),
-        isDone: false
+
+        get isDone() {
+            return this._isDone == true;
+        },
+
+        set isDone(newValue) {
+            this._isDone = newValue;
+            for (let task of this.tasks) {
+                task.isDone = newValue;
+                task.__uid && crsbinding.data.updateUI(task);
+            }
+        }
     };
 
     nextPriority += 1;

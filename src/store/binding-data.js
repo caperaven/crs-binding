@@ -442,14 +442,14 @@ export const bindingData = {
         return property.indexOf(".") == -1 ? addCallback(obj, property, callback) : addCallbackPath(obj, property, callback);
     },
 
-    setProperty(id, property, value, ctxName) {
+    setProperty(id, property, value, ctxName, dataType) {
         if (typeof id == "object") {
             id = id.__uid || id._dataId;
         }
 
         let obj = data.get(id);
 
-        if (isNaN(value) == false && Array.isArray(value) == false) {
+        if (dataType == "number" || (dataType == null && isNaN(value) == false && Array.isArray(value) == false)) {
             value = Number(value);
         }
 
