@@ -6,8 +6,6 @@
     <button>Set Value</button>
 </div>
 
-<li>
-    <tempalte for.map="item of data">
-        <div data-key="${item.key}">${item.value.title}</div>
-    </tempalte>
-</li>
+<template for.map="item of data">
+    <div data-key="${item.key}">${item.value.title}</div>
+</template>

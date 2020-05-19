@@ -46,16 +46,15 @@ export class ProviderFactory {
     }
 
     static "for"(element, context, property, value, ctxName, attr, parentId) {
-        if (attr && attr.name.indexOf(".once") != -1) {
+        if (attr && attr.name.indexOf(".map") != -1) {
+            return new ForMapProvider(element, context, property, value, ctxName, parentId);
+        }
+        else if (attr && attr.name.indexOf(".once") != -1) {
             return ForOnceProvider(element, context, property, value, ctxName, parentId);
         }
         else {
             return new ForProvider(element, context, property, value, ctxName, parentId);
         }
-    }
-
-    static "for-map"(element, context, property, value, ctxName) {
-        return new ForMapProvider(element, context, property, value, ctxName)
     }
 
     static "if"(element, context, property, value, ctxName, attr,  parentId) {

@@ -502,7 +502,16 @@ export const bindingData = {
             }
             else {
                 const ar = this.getValue(id, path);
-                const result = ar.find(i => i.__aId == aId);
+                let result;
+
+                if (Array.isArray(ar)) {
+                    result = ar.find(i => i.__aId == aId);
+                }
+                else {
+                    const item = ar.get(aId);
+                    result = {key: aId, value: item};
+                }
+
                 return property == null ? result : getValueOnPath(result, property);
             }
         }
