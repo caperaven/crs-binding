@@ -26,7 +26,7 @@ export class IfStylesProvider extends ProviderBase {
         const falseValue = values.length > 1 ? values[1].trim() : '""';
 
         const fnCode = setElementConditional
-            .split("__property__").join(this._property)
+            .split("__property__").join(crsbinding.utils.capitalizePropertyPath(this._property))
             .split("__exp__").join(condition)
             .split("__true__").join(trueValue)
             .split("__false__").join(falseValue);

@@ -55,7 +55,7 @@
             <h2>Tasks</h2>
 
             <template for="task of selectedItem.tasks">
-                <div style.color.if="task.isDone == true ? 'silver'">
+                <div style.color.if="task.isDone == true ? 'silver'" style.padding-left.if="task.isDone == true ? '1rem'">
                     <span>${task.title}</span>
                     <input type="checkbox" checked.bind="task.isDone" />
                 </div>
