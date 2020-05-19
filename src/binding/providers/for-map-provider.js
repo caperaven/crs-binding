@@ -11,8 +11,9 @@ export class ForMapProvider extends RepeatBaseProvider {
         const fragment = document.createDocumentFragment();
 
         array.forEach((value, key) => {
-            const obj = {key: key, value: value, __aId: key};
-            const element = this.createElement(obj, obj.__aId);
+            const element = this.createElement(value, key);
+            value.__aId = key;
+
             fragment.appendChild(element);
         });
 

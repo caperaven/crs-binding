@@ -19,4 +19,13 @@ export default class Maps extends ViewBase {
             [3, {title: "Item 4"}],
         ])
     }
+
+    add() {
+    }
+
+    remove() {
+    }
+
+    update() {
+    }
 }
