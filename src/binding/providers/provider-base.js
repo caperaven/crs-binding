@@ -30,10 +30,6 @@ export class ProviderBase {
     }
 
     dispose() {
-        this._eventsToRemove.forEach(event => {
-            crsbinding.events.removeOn(this._context, event.value, event.callback);
-        });
-
         this._eventsToRemove.length = 0;
         this._eventsToRemove = null;
 
@@ -55,9 +51,5 @@ export class ProviderBase {
         for (let p of collection) {
             crsbinding.data.addCallback(this._context, p, callback);
         }
-    }
-
-    removeOn(value, callback) {
-        crsbinding.events.removeOn(this._context, value, callback);
     }
 }

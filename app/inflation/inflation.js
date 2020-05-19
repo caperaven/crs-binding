@@ -3,7 +3,7 @@ import {getRenderData} from "./data.js";
 
 export default class Component extends ViewBase {
     async connectedCallback() {
-        super.connectedCallback();
+        await super.connectedCallback();
 
         const template = this._element.querySelector("#items-template");
         crsbinding.inflationManager.register("items", template);

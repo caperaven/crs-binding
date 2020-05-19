@@ -1,0 +1,13 @@
+<h2>${title}</h2>
+
+<div class="toolbar">
+    <button>Add</button>
+    <button>Remove</button>
+    <button>Set Value</button>
+</div>
+
+<li>
+    <tempalte for.map="item of data">
+        <div data-key="${item.key}">${item.value.title}</div>
+    </tempalte>
+</li>

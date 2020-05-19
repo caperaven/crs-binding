@@ -1,0 +1,7 @@
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    align-items: center;
+    border: silver solid 1px;
+}
