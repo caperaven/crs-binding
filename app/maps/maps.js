@@ -21,11 +21,17 @@ export default class Maps extends ViewBase {
     }
 
     add() {
+        this.data.set(4, {title: "Item 5"});
+        crsbinding.data.updateUI(this._dataId, "data");
     }
 
     remove() {
+        this.data.delete(0);
+        crsbinding.data.updateUI(this._dataId, "data");
     }
 
     update() {
+        this.data.set(1, {title: "Hello World"});
+        crsbinding.data.updateUI(this._dataId, "data");
     }
 }
