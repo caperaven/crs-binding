@@ -511,7 +511,18 @@ export const bindingData = {
             }
             else {
                 const ar = this.getValue(id, path);
+
                 const result = ar.find(i => i.__aId == aId);
+
+                let result;
+
+                if (Array.isArray(ar)) {
+                    result = ar.find(i => i.__aId == aId);
+                }
+                else {
+                    const item = ar.get(aId);
+                    result = {key: aId, value: item};
+                }
                 // TODO GM: Investigate why result empty. Fix in phase 7.
                 return property == null || result == null ? result : getValueOnPath(result, property);
             }

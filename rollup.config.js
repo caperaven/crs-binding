@@ -12,15 +12,6 @@ export default [
         ]
     },
     {
-        input: "src/events/event-mixin.js",
-        output: [
-            {file: 'dist/crs-event-mixin.js', format: 'es', sourcemap: false}
-        ],
-        plugins: [
-            terser()
-        ]
-    },
-    {
         input: "src/binding/bindable-element.js",
         output: [
             {file: 'dist/crs-bindable-element.js', format: 'es', sourcemap: false}

@@ -26,6 +26,12 @@
       "hash": "#inflation",
       "view": "inflation",
       "hasStyle": true
+    },
+    {
+      "title": "Binding using maps Example",
+      "hash": "#maps",
+      "view": "maps",
+      "hasStyle": true
     }
   ]
 }
