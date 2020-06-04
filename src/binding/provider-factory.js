@@ -9,6 +9,7 @@ import {IfClassProvider} from "./providers/if-classlist-provider.js";
 import {IfStylesProvider} from "./providers/if-styles-provider.js";
 import {AttrProvider} from "./providers/attr-provider.js";
 import {ForOnceProvider} from "./providers/for-once-provider.js";
+import {ForMapProvider} from "./providers/for-map-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName, attr, parentId) {
@@ -45,7 +46,10 @@ export class ProviderFactory {
     }
 
     static "for"(element, context, property, value, ctxName, attr, parentId) {
-        if (attr && attr.name.indexOf(".once") != -1) {
+        if (attr && attr.name.indexOf(".map") != -1) {
+            return new ForMapProvider(element, context, property, value, ctxName, parentId);
+        }
+        else if (attr && attr.name.indexOf(".once") != -1) {
             return ForOnceProvider(element, context, property, value, ctxName, parentId);
         }
         else {

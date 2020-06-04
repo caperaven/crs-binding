@@ -8,7 +8,6 @@ export class OneWayProvider extends ProviderBase {
         if (this._value.indexOf(contextPrefix) == 0) {
             this._value = this._value.replace(contextPrefix, "");
         }
-        this.removeOn(this._value, this._eventHandler);
 
         if (this._expObj != null) {
             crsbinding.expression.release(this._expObj);
@@ -83,7 +82,7 @@ function getExpForProvider(provider) {
         return setDataset.split("__property__").join(prop);
     }
     
-    result = provider._property == "value" ? setElementValueProperty : setElementProperty;
+    result = provider._property == "value" || provider._property == "placeholder" ? setElementValueProperty : setElementProperty;
     provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
     
     return result.split("__property__").join(provider._property);

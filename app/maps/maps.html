@@ -1,0 +1,11 @@
+<h2>${title}</h2>
+
+<div class="toolbar">
+    <button click.call="add">Add</button>
+    <button click.call="remove">Remove</button>
+    <button click.call="update">Set Value</button>
+</div>
+
+<template for.map="item of data">
+    <div data-key="${item.key}">${item.value.title}</div>
+</template>
