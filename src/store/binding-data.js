@@ -458,7 +458,7 @@ export const bindingData = {
 
         let obj = data.get(id);
         // NOTE GM: isNaN([]) and isNaN(true) returns false so we need to check typeof
-        if (dataType == "number" || (dataType == null && typeof value !== "object" && isNaN(value) == true)) {
+        if (dataType == "number" || (dataType == null && typeof value !== "object" && isNaN(value) == false)) {
             value = Number(value);
         }
 
