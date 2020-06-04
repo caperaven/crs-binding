@@ -83,7 +83,7 @@ function getExpForProvider(provider) {
         return setDataset.split("__property__").join(prop);
     }
     
-    result = provider._property == "value" ? setElementValueProperty : setElementProperty;
+    result = provider._property == "value" || provider._property == "placeholder" ? setElementValueProperty : setElementProperty;
     provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
     
     return result.split("__property__").join(provider._property);

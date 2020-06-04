@@ -147,7 +147,7 @@ function ensurePath(obj, path, callback) {
 }
 
 function setProperty(obj, property, value) {
-    if (obj[property] != value) {
+    if (obj[property] !== value) {
         obj[property] = value;
         return true;
     }
@@ -337,6 +337,15 @@ function makeShared(id, property, sharedItems) {
     }
 }
 
+function notifyArrayItemsAdded(collection, items) {
+    crsbinding.data.arrayItemsAdded(collection.__id, collection.__property, Array.isArray(items) ? items: [items], collection);
+}
+
+function notifyArrayItemsRemoved(collection, items) {
+    crsbinding.data.arrayItemsRemoved(collection.__id, collection.__property, Array.isArray(items) ? items: [items], collection);
+}
+
+
 function arrayItemsAdded(id, prop, items, collection) {
     const obj = callbacks.get(id);
     const clbObj = getValueOnPath(obj, prop);
@@ -384,7 +393,7 @@ function removeCallbacks(id) {
 }
 
 function removeUpdates(id) {
-    const remove = Array.from(updates).filter(item => item[0] == id || item[1].value.originId == id);
+    const remove = Array.from(updates).filter(item => item[0] == id || (item[1].value && item[1].value.originId == id));
     for (let rem of remove) {
         updates.delete(rem[0]);
     }
@@ -448,8 +457,8 @@ export const bindingData = {
         }
 
         let obj = data.get(id);
-
-        if (dataType == "number" || (dataType == null && isNaN(value) == false && Array.isArray(value) == false)) {
+        // NOTE GM: isNaN([]) and isNaN(true) returns false so we need to check typeof
+        if (dataType == "number" || (dataType == null && typeof value !== "object" && isNaN(value) == true)) {
             value = Number(value);
         }
 
@@ -503,7 +512,8 @@ export const bindingData = {
             else {
                 const ar = this.getValue(id, path);
                 const result = ar.find(i => i.__aId == aId);
-                return property == null ? result : getValueOnPath(result, property);
+                // TODO GM: Investigate why result empty. Fix in phase 7.
+                return property == null || result == null ? result : getValueOnPath(result, property);
             }
         }
         else {
@@ -560,6 +570,8 @@ export const bindingData = {
     },
 
     setArrayEvents: setArrayEvents,
+    notifyArrayItemsAdded: notifyArrayItemsAdded,
+    notifyArrayItemsRemoved: notifyArrayItemsRemoved,
     arrayItemsAdded: arrayItemsAdded,
     arrayItemsRemoved: arrayItemsRemoved,
     linkToArrayItem: linkToArrayItem,
