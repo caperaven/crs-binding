@@ -17,6 +17,15 @@ export class BindableElement extends HTMLElement {
     }
 
     async connectedCallback() {
+
+        if(this.preLoad != null) {
+            const setPropertyCallback = (path, value)=> {
+                crsbinding.data.setProperty(this._dataId, path, value);
+            };
+
+            this.preLoad(setPropertyCallback)
+        }
+
         if (this.html != null) {
             this.innerHTML = await fetch(this.html).then(result => result.text());
             crsbinding.parsers.parseElements(this.children, this._dataId);
@@ -56,8 +65,8 @@ export class BindableElement extends HTMLElement {
         return getProperty(this, property);
     }
 
-    setProperty(property, value) {
-        if (this.isReady != true) {
+    setProperty(property, value, once = false) {
+        if (this.isReady != true && once === false) {
             return this.__properties.set(property, value);
         }
 
