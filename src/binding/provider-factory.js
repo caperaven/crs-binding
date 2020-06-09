@@ -10,6 +10,7 @@ import {IfStylesProvider} from "./providers/if-styles-provider.js";
 import {AttrProvider} from "./providers/attr-provider.js";
 import {ForOnceProvider} from "./providers/for-once-provider.js";
 import {ForMapProvider} from "./providers/for-map-provider.js";
+import {EventProvider} from "./providers/event-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName, attr, parentId) {
@@ -39,6 +40,10 @@ export class ProviderFactory {
 
     static "delegate"(element, context, property, value, ctxName, attr, parentId) {
         return new CallProvider(element, context, property, value, ctxName, parentId);
+    }
+
+    static "event"(element, context, property, value, ctxName, attr, parentId) {
+        return new EventProvider(element, context, property, value, ctxName, parentId);
     }
 
     static "inner"(element, context, property, value, ctxName, attr, parentId) {

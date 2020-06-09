@@ -11,6 +11,12 @@ export default class Component extends ViewBase {
         this.setProperty("data", newValue);
     }
 
+    async connectedCallback() {
+        super.connectedCallback();
+        this.customEventHandler = this.customEvent.bind(this);
+        crsbinding.events.emitter.on("customEvent", this.customEventHandler);
+    }
+
     _loaded() {
         crsbinding.data.makeShared(this._dataId, "data", ["firstName", "contacts.phone.land", "contacts.phone.cell", "contacts.phone.fax"]);
 
@@ -57,5 +63,9 @@ export default class Component extends ViewBase {
                 }
             }
         };
+    }
+
+    customEvent(args) {
+        console.log(args);
     }
 }

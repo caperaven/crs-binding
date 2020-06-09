@@ -9,6 +9,7 @@ import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
 import {bindingData} from "./store/binding-data.js";
+import {EventEmitter} from "./events/events.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -60,7 +61,8 @@ const crsbinding = {
 
     events: {
         listenOn: listenOn,
-        listenOnPath: listenOnPath
+        listenOnPath: listenOnPath,
+        emitter: new EventEmitter()
     },
 
     dom: {

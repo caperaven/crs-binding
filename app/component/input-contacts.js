@@ -12,6 +12,10 @@ class InputContacts extends BindableElement{
     set contacts(newValue) {
         this.setProperty("contacts", newValue);
     }
+
+    customEvent(...args) {
+        crsbinding.events.emitter.emit("custom-event", {args: args});
+    }
 }
 
 customElements.define("input-contacts", InputContacts);
