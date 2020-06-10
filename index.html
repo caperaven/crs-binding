@@ -19,18 +19,40 @@
     }
     body {
         display: grid;
+        grid-template-rows: 3rem 1fr 2rem;
     }
+
+    h1 {
+        text-align: center;
+        color: cornflowerblue;
+    }
+
     crs-router {
         padding: 1rem;
         display: block;
     }
 </style>
-<body>
-    <crs-router></crs-router>
+<body style="visibility: hidden">
+    <header>
+        <h1>${title}</h1>
+    </header>
+
+    <main>
+        <crs-router></crs-router>
+    </main>
+
+    <footer></footer>
 
     <script type="module">
         import "/node_modules/crs-router/crs-router.js";
         import "./src/index.js";
+
+        import Index from "./index.js";
+        document.viewModel = new Index(document.body);
+
+        window.addEventListener("load", (event) => {
+            document.viewModel.connectedCallback();
+        });
     </script>
 </body>
 </html>
