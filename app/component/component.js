@@ -17,6 +17,12 @@ export default class Component extends ViewBase {
         crsbinding.events.emitter.on("customEvent", this.customEventHandler);
     }
 
+    async disconnectedCallback() {
+        crsbinding.events.emitter.on("customEvent", this.customEventHandler);
+        this.customEventHandler = null;
+        super.disconnectedCallback();
+    }
+
     _loaded() {
         crsbinding.data.makeShared(this._dataId, "data", ["firstName", "contacts.phone.land", "contacts.phone.cell", "contacts.phone.fax"]);
 
