@@ -11,9 +11,14 @@ export class EmitProvider extends CallProvider {
         }
         argsStr.push("}");
 
-        const src = `crsbinding.events.emitter.emit("${name}", ${argsStr.join("")});`;
+        const src = this._getSource(name, argsStr.join(""));
         this._fn = new Function("context", src);
     }
+
+    _getSource(name, args) {
+        return `crsbinding.events.emitter.emit("${name}", ${args});`;
+    }
+
 
     _getParametersCode(parameters, args) {
         const argParts = parameters.split(")").join("").split(",");
