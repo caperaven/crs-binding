@@ -25,6 +25,10 @@ export class InputForm extends BindableElement {
     load() {
         this.showContacts = true;
     }
+
+    onMessage(args) {
+        console.log(args);
+    }
 }
 
 customElements.define("input-form", InputForm);

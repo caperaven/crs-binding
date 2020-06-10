@@ -13,8 +13,8 @@ class InputContacts extends BindableElement{
         this.setProperty("contacts", newValue);
     }
 
-    customEvent(...args) {
-        crsbinding.events.emitter.emit("custom-event", {args: args});
+    onMessage(args) {
+        console.log(args);
     }
 }
 

@@ -11,6 +11,7 @@ import {AttrProvider} from "./providers/attr-provider.js";
 import {ForOnceProvider} from "./providers/for-once-provider.js";
 import {ForMapProvider} from "./providers/for-map-provider.js";
 import {EmitProvider} from "./providers/emit-provider.js";
+import {PostProvider} from "./providers/post-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName, attr, parentId) {
@@ -44,6 +45,10 @@ export class ProviderFactory {
 
     static "emit"(element, context, property, value, ctxName, attr, parentId) {
         return new EmitProvider(element, context, property, value, ctxName, parentId);
+    }
+
+    static "post"(element, context, property, value, ctxName, attr, parentId) {
+        return new PostProvider(element, context, property, value, ctxName, parentId);
     }
 
     static "inner"(element, context, property, value, ctxName, attr, parentId) {

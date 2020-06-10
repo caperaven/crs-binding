@@ -42,8 +42,8 @@ export class EventEmitter {
     }
 
     postMessage(query, args, scope) {
-        // investigate passing multiple queries
-        const items = Array.from((scope || document).querySelectorAll(query));
+        const element = scope || document;
+        const items = Array.from(element.querySelectorAll(query));
 
         items.forEach(item => {
             if (item.onMessage != undefined) {
