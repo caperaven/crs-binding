@@ -21,6 +21,7 @@ export class EmitProvider extends CallProvider {
 
 
     _getParametersCode(parameters, args) {
+        if (parameters == null) return;
         const argParts = parameters.split(")").join("").split(",");
 
         for (let i = 0; i < argParts.length; i++) {

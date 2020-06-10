@@ -7,8 +7,7 @@
     {
       "title": "Welcome",
       "hash": "#welcome",
-      "view": "welcome",
-      "html-only": true
+      "view": "welcome"
     },
     {
       "title": "Component Test",

@@ -22,9 +22,18 @@
         grid-template-rows: 3rem 1fr 2rem;
     }
 
+    header {
+        display: flex;
+        padding: 1rem;
+        align-items: center;
+    }
+
     h1 {
         text-align: center;
         color: cornflowerblue;
+        flex: 1;
+        padding: 0;
+        margin: 0;
     }
 
     crs-router {
@@ -34,6 +43,7 @@
 </style>
 <body style="visibility: hidden">
     <header>
+        <button click.emit="toggle-menu">Menu</button>
         <h1>${title}</h1>
     </header>
 
