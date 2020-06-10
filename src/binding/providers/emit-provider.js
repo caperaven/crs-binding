@@ -5,33 +5,57 @@ export class EmitProvider extends CallProvider {
         const fnParts = this._value.split("(");
         const name = fnParts[0];
 
-        const aStr = ["{"];
+        const argsStr = ["{"];
         if (fnParts.length > 0) {
-            const argParts = fnParts[1].split(")").join("").split(",");
-            for (let i = 0; i < argParts.length; i++) {
-                const ap = argParts[i];
-                const v = ap.trim();
+            this._getParametersCode(fnParts[1], argsStr);
+        }
+        argsStr.push("}");
 
-                switch(v) {
-                    case "$event":
-                        aStr.push("event: event");
-                        break;
-                    case "$context":
-                        aStr.push("context: context");
-                        break;
-                    default:
-                        const vParts = v.split("=");
-                        aStr.push(`${vParts[0]}:${vParts[1]}`)
-                }
+        const src = `crsbinding.events.emitter.emit("${name}", ${argsStr.join("")});`;
+        this._fn = new Function("context", src);
+    }
 
-                if (i < argParts.length - 1) {
-                    aStr.push(",");
-                }
+    _getParametersCode(parameters, args) {
+        const argParts = parameters.split(")").join("").split(",");
+
+        for (let i = 0; i < argParts.length; i++) {
+            const ap = argParts[i];
+            const v = ap.trim();
+
+            if (this[v] != null) {
+                this[v](args);
+            }
+            else {
+                this._processArg(v, args);
+            }
+
+            if (i < argParts.length - 1) {
+                args.push(",");
             }
         }
-        aStr.push("}");
+    }
 
-        const src = `crsbinding.events.emitter.emit("${name}", ${aStr.join("")});`;
-        this._fn = new Function("context", src);
+    "$event"(args) {
+        args.push("event: event");
+    }
+
+    "$context"(args) {
+        args.push("context: context");
+    }
+
+    _processArg(value, args) {
+        const parts = value.split("=");
+        const property = parts[0].trim();
+        const code = this._processValue(parts[1]);
+        args.push(`${property}:${code}`)
+    }
+
+    _processValue(value) {
+        if (value.indexOf("${") != -1)
+        {
+            return value.split("${").join("context.").split("}").join("");
+        }
+
+        return value;
     }
 }
