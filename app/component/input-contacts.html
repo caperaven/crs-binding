@@ -14,4 +14,10 @@
     <input value.bind="contacts.phone.fax" />
 </label>
 
-<button click.event="customEvent(title='hello world', $event, $context)">Custom Event</button>
+<div>
+    <button click.emit="customEvent(title='hello world', $event, $context)">Custom Event</button>
+    <!--<button click.emit="customEvent(title='hello world', $event, contacts=${contacts})">Custom Event - contacts</button>-->
+</div>
+
+<!--<button click.emit="customEvent(title='hello world', $event, property1=$context.property1)">Custom Event</button>-->
+<!--<button click.post="customEvent['input-component', 'button'](title='hello world')"></button>-->

@@ -1,6 +1,6 @@
 import {CallProvider} from "./call-provider.js";
 
-export class EventProvider extends CallProvider {
+export class EmitProvider extends CallProvider {
     async initialize() {
         const fnParts = this._value.split("(");
         const name = fnParts[0];
