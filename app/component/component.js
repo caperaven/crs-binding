@@ -18,7 +18,7 @@ export default class Component extends ViewBase {
     }
 
     async disconnectedCallback() {
-        crsbinding.events.emitter.on("customEvent", this.customEventHandler);
+        crsbinding.events.emitter.remove("customEvent", this.customEventHandler);
         this.customEventHandler = null;
         super.disconnectedCallback();
     }

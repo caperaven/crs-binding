@@ -5,7 +5,7 @@ export class EmitProvider extends CallProvider {
         const fnParts = this._value.split("(");
         const name = fnParts[0];
 
-        const argsStr = ["{"];
+        const argsStr = [`{`];
         if (fnParts.length > 0) {
             this._getParametersCode(fnParts[1], argsStr);
         }

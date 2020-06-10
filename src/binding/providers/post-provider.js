@@ -8,7 +8,7 @@ export class PostProvider extends EmitProvider {
         const name = this._value.substring(0, queryStartIndex).trim();
 
 
-        const argsStr = ["{"];
+        const argsStr = [`{key: "${name}",`];
 
         const argsStartIndex = this._value.indexOf("(");
         const argsEndIndex = this._value.indexOf(")");
