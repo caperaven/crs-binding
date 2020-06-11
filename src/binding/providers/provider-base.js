@@ -49,7 +49,13 @@ export class ProviderBase {
     listenOnPath(property, callback) {
         const collection = Array.isArray(property) == true ? property : [property];
         for (let p of collection) {
-            crsbinding.data.addCallback(this._context, p, callback);
+            if (p.indexOf("$globals.") != -1) {
+                p = p.split("$globals.").join("");
+                crsbinding.data.addCallback(crsbinding.$globals, p, callback);
+            }
+            else {
+                crsbinding.data.addCallback(this._context, p, callback);
+            }
         }
     }
 }
