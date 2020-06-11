@@ -78,6 +78,8 @@ const crsbinding = {
 };
 
 globalThis.crsbinding = crsbinding;
+crsbinding.$globals = crsbinding.data.addObject("globals");
+crsbinding.data.globals = crsbinding.data.getValue(crsbinding.$globals);
 
 export {
     crsbinding

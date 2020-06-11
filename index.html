@@ -51,11 +51,15 @@
         <crs-router></crs-router>
     </main>
 
-    <footer></footer>
+    <footer>
+        <div>menu is visible: ${$globals.menuVisible}</div>
+    </footer>
 
     <script type="module">
         import "/node_modules/crs-router/crs-router.js";
         import "./src/index.js";
+
+        crsbinding.data.setProperty(crsbinding.$globals, "menuVisible", true, null, "boolean");
 
         import Index from "./index.js";
         document.viewModel = new Index(document.body);
