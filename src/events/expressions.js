@@ -33,7 +33,9 @@ export function sanitizeExp(exp, ctxName = "context") {
             if (path.length > 0) {
                 if (isLiteral == false || oldToken == "}") {
                     if (isNaN(path)) {
-                        indexes.push(i - path.length);
+                        if (path[0] != "$globals") {
+                            indexes.push(i - path.length);
+                        }
                         properties.push(extractProperty(`${path.join("")}`));
                     }
                 }
@@ -44,7 +46,13 @@ export function sanitizeExp(exp, ctxName = "context") {
             continue;
         }
 
-        path.push(token);
+        if (oldToken == "$" && token == "globals") {
+            path.push("$globals");
+        }
+        else {
+            path.push(token);
+        }
+
         oldToken = token;
     }
 
@@ -57,7 +65,7 @@ export function sanitizeExp(exp, ctxName = "context") {
         }
     }
 
-    if (indexes.length == 0 && exp.indexOf(".") != -1) {
+    if (indexes.length == 0 && exp.indexOf(".") != -1 && exp.indexOf("$globals") == -1) {
         indexes.push(0);
     }
 
@@ -67,7 +75,7 @@ export function sanitizeExp(exp, ctxName = "context") {
 
     return {
         isLiteral: isLiteral,
-        expression: tokens.join(""),
+        expression: tokens.join("").split("$globals").join("crsbinding.data.globals"),
         properties: properties
     }
 }
