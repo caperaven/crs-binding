@@ -4,6 +4,8 @@ export class ProviderBase {
     }
 
     constructor(element, context, property, value, ctxName, parentId) {
+        this._globals = {};
+
         this._element = element;
         this._context = context;
         this._property = property;
@@ -27,8 +29,6 @@ export class ProviderBase {
         if (this._element.nodeName.indexOf("-") != -1 && this._property == this._ctxName) {
             this._element[this._property] = this._context;
         }
-
-        this._globals = {};
     }
 
     dispose() {

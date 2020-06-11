@@ -31,6 +31,12 @@
       "hash": "#maps",
       "view": "maps",
       "hasStyle": true
+    },
+    {
+      "title": "Mouse event",
+      "hash": "#mouse-event",
+      "view": "mouse-event",
+      "hasStyle": true
     }
   ]
 }
