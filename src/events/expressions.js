@@ -99,7 +99,7 @@ function extractProperty(property) {
     return result.join(".");
 }
 
-const reserved = ["true", "false", "-", "+", "=", "<", ">", "(", ")","{", "}", "/",  "&", "|", "=", "!", "'", "`", '"', " ", "$", ".", ",", "?", ":", "null", "undefined", "new"];
+const reserved = ["true", "false", "-", "+", "=", "<", ">", "(", ")","{", "}", "/",  "&", "|", "=", "!", "'", "`", '"', " ", "$", ".", ",", "?", ":", "null", "undefined", "new", "Math"];
 const ignore = [".", "(", ")", ","];
 const quotes = ["'", '"', "`"];
 const stdQuotes = ["'", '"'];
