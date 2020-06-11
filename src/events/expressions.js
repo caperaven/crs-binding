@@ -33,7 +33,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
             if (path.length > 0) {
                 if (isLiteral == false || oldToken == "}") {
                     if (isNaN(path)) {
-                        if (path[0] != "$globals") {
+                        if (ignoreTokens.indexOf(path[0]) == -1 && token != ":") {
                             indexes.push(i - path.length);
                         }
                         properties.push(extractProperty(`${path.join("")}`));
@@ -46,8 +46,8 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
             continue;
         }
 
-        if (oldToken == "$" && token == "globals") {
-            path.push("$globals");
+        if (oldToken == "$" && reservedTokens.indexOf(token) != -1) {
+            path.push(`$${token}`);
         }
         else {
             path.push(token);
@@ -65,7 +65,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
-    if (indexes.length == 0 && exp.indexOf(".") != -1 && exp.indexOf("$globals") == -1) {
+    if (indexes.length == 0 && exp.indexOf(".") != -1 && exp.indexOf("$globals") == -1 && exp.trim()[0] != "{") {
         indexes.push(0);
     }
 
@@ -86,7 +86,9 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
 
     return {
         isLiteral: isLiteral,
-        expression: tokens.join("").split("$globals").join("crsbinding.data.globals"),
+        expression: tokens.join("")
+            .split("$globals").join("crsbinding.data.globals")
+            .split("$event").join("event"),
         properties: properties
     }
 }
@@ -121,6 +123,8 @@ function extractProperty(property) {
 
 const reserved = ["true", "false", "-", "+", "=", "<", ">", "(", ")","{", "}", "/",  "&", "|", "=", "!", "'", "`", '"', " ", "$", ".", ",", "?", ":", "null", "undefined", "new", "Math"];
 const ignore = [".", "(", ")", ","];
+const reservedTokens = ["globals", "event"];
+const ignoreTokens = ["$globals", "$event"];
 const quotes = ["'", '"', "`"];
 const stdQuotes = ["'", '"'];
 

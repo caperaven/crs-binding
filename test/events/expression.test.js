@@ -98,4 +98,9 @@ test("sanitizeExp - array in expression", () => {
 test("sanitizeExp - set object", () => {
    const result = sanitizeExp("$globals.date = {title: ${title}}");
    expect(result.expression).toBe("crsbinding.data.globals.date = {title: ${context.title}}")
-})
+});
+
+test("sanitizeExp - set object with event", () => {
+   const result = sanitizeExp("{ x: $event.x, y: $event.y }");
+   expect(result.expression).toBe("{ x: event.x, y: event.y }");
+});
