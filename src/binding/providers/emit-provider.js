@@ -19,7 +19,6 @@ export class EmitProvider extends CallProvider {
         return `crsbinding.events.emitter.emit("${name}", ${args});`;
     }
 
-
     _getParametersCode(parameters, args) {
         if (parameters == null) return;
         const argParts = parameters.split(")").join("").split(",");

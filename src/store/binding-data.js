@@ -474,7 +474,7 @@ export const bindingData = {
 
         let obj = data.get(id);
 
-        if (dataType == "boolean") {
+        if (dataType == "boolean" || typeof value === "boolean") {
             value = Boolean(value);
         }
         else if (dataType == "number" || (dataType == null && typeof value !== "object" && isNaN(value) == false)) {
