@@ -125,6 +125,22 @@ function addCallback(obj, property, callback) {
     obj[property].__functions.push(callback);
 }
 
+function removeGlobalsCallback(path, callback) {
+    const obj = callbacks.get(crsbinding.$globals);
+    const property = getValueOnPath(obj, path);
+
+    if (property.__functions) {
+        const index = property.__functions.indexOf(callback);
+        if (index != -1) {
+            property.__functions.splice(index, 1);
+
+            if (property.__functions.length == 0) {
+                delete property.__functions;
+            }
+        }
+    }
+}
+
 function addCallbackPath(obj, path, callback) {
     ensurePath(obj, path, (obj, prop) => {
         addCallback(obj, prop, callback);
@@ -588,5 +604,7 @@ export const bindingData = {
     arrayItemsRemoved: arrayItemsRemoved,
     linkToArrayItem: linkToArrayItem,
     unlinkArrayItem: unlinkArrayItem,
-    nextArrayId: nextArrayId
+    nextArrayId: nextArrayId,
+
+    removeGlobalsCallback: removeGlobalsCallback
 };

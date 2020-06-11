@@ -27,6 +27,8 @@ export class ProviderBase {
         if (this._element.nodeName.indexOf("-") != -1 && this._property == this._ctxName) {
             this._element[this._property] = this._context;
         }
+
+        this._globals = {};
     }
 
     dispose() {
@@ -38,6 +40,11 @@ export class ProviderBase {
         this._property = null;
         this._value = null;
         this._ctxName = null;
+
+        for (let key of Object.keys(this._globals)) {
+            crsbinding.data.removeGlobalsCallback(key, this._globals[key]);
+            delete this._globals[key];
+        }
     }
 
     /**
@@ -52,6 +59,8 @@ export class ProviderBase {
             if (p.indexOf("$globals.") != -1) {
                 p = p.split("$globals.").join("");
                 crsbinding.data.addCallback(crsbinding.$globals, p, callback);
+
+                this._globals[p] = callback;
             }
             else {
                 crsbinding.data.addCallback(this._context, p, callback);
