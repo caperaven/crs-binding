@@ -3,7 +3,7 @@
  * @param exp
  * @returns {{expression: *, properties: *}}
  */
-export function sanitizeExp(exp, ctxName = "context") {
+export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
     const namedExp = ctxName != "context";
     const prefix = `${ctxName}.`;
     const tokens = tokenize(exp, namedExp ? ctxName : null);
@@ -73,10 +73,30 @@ export function sanitizeExp(exp, ctxName = "context") {
         tokens.splice(i + indexes[i], 0, prefix);
     }
 
+    if (cleanLiterals == true) {
+        let i = 0;
+        while (i < tokens.length) {
+            if (tokens[i] == "$" && tokens[i+1] == "{") {
+                tokens.splice(i, 2);
+                removeNextToken(tokens, i, "}");
+            }
+            i++;
+        }
+    }
+
     return {
         isLiteral: isLiteral,
         expression: tokens.join("").split("$globals").join("crsbinding.data.globals"),
         properties: properties
+    }
+}
+
+function removeNextToken(collection, startIndex, token) {
+    for (let i = startIndex; i < collection.length; i++) {
+        if (collection[i] == token) {
+            collection.splice(i, 1);
+            break;
+        }
     }
 }
 

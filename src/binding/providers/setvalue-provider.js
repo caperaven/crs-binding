@@ -11,7 +11,7 @@ export class SetValueProvider extends CallProvider {
     }
 
     _processRightPart(part) {
-        return crsbinding.expression.sanitize(part).expression;
+        return crsbinding.expression.sanitize(part, this._ctxName, true).expression;
     }
 
     _processLeftPart(part, value) {

@@ -94,3 +94,8 @@ test("sanitizeExp - array in expression", () => {
    const result = sanitizeExp("arrayfield.length == 0 || arrayfield.length == 5", "person");
    expect(result.expression).toBe("person.arrayfield.length == 0 || person.arrayfield.length == 5");
 });
+
+test("sanitizeExp - set object", () => {
+   const result = sanitizeExp("$globals.date = {title: ${title}}");
+   expect(result.expression).toBe("crsbinding.data.globals.date = {title: ${context.title}}")
+})
