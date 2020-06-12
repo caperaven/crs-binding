@@ -181,8 +181,7 @@ function getProperty(obj, property) {
 }
 
 function getPropertyPath(obj, path) {
-    const fn = new Function("context", `try {return context.${path}} catch {return null}`);
-    return fn(obj);
+    return getValueOnPath(obj, path);
 }
 
 function createReference(refId, name, path, index) {
