@@ -1,10 +1,11 @@
 let instance;
-let enableEventsSpy;
 let parseElementSpy;
 
 beforeEach(async () => {
     global.CustomEvent = class {
     };
+
+    global.requestAnimationFrame = (callback) => callback();
 
     const bindingModule = await import("./../crsbinding.mock.js");
     global.crsbinding = bindingModule.crsbinding;
@@ -37,7 +38,6 @@ beforeEach(async () => {
         }
     }
 
-    enableEventsSpy = jest.spyOn(crsbinding.events, "enableEvents");
     parseElementSpy = jest.spyOn(crsbinding.parsers, "parseElements");
 
     instance = new MyBind();
@@ -48,30 +48,22 @@ beforeEach(async () => {
 });
 
 test("bindable element - connectedCallback", async () => {
-
-    await instance.connectedCallback();
     expect(instance.innerHTML).toBe("Hello World");
-    expect(enableEventsSpy).toHaveBeenCalled();
     expect(parseElementSpy).toHaveBeenCalled();
     expect(instance.dispatchEvent).toBeCalled();
 });
 
 test("bindable element - disconnectedCallback", async () => {
-    const disableEventsSpy = jest.spyOn(crsbinding.events, "disableEvents");
     const releaseBinding = jest.spyOn(crsbinding.observation, "releaseBinding");
 
     await instance.disconnectedCallback();
-    expect(disableEventsSpy).toHaveBeenCalled();
     expect(releaseBinding).toHaveBeenCalled();
 });
 
 test( "bindable element - get and set property", () => {
-    let notifyPropertyChangedSpy = jest.spyOn(crsbinding.events, "notifyPropertyChanged");
-
     const name = instance.name;
     expect(instance.getAttribute).toBeCalled();
 
     instance.name = "John";
     expect(instance.name).toEqual("John");
-    expect(notifyPropertyChangedSpy).toHaveBeenCalled();
 });

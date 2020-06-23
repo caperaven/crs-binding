@@ -1,6 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
 import {setElementProperty, setElementValueProperty, setClassList, setDataset} from "./code-constants.js";
-import {BindableElement} from "../bindable-element.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {

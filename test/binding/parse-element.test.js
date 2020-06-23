@@ -1,5 +1,4 @@
 import {parseElements, parseAttribute, releaseBinding, releaseChildBinding} from "../../src/binding/parse-element.js";
-import {observe} from "../../src/events/observer.js";
 import {ElementMock} from "./../element.mock.js";
 
 let element;
@@ -9,9 +8,8 @@ beforeEach(async () => {
     const bindingModule = await import("./../crsbinding.mock.js");
     global.crsbinding = bindingModule.crsbinding;
 
-    context = observe({
-        "firstName": null
-    });
+    context = crsbinding.data.addObject("test object");
+    crsbinding.data.setProperty(context, "firstName", "John");
 
     element = new ElementMock();
     element.children.push(new ElementMock());
@@ -44,10 +42,6 @@ test("parseElements", async () => {
 test("parseElement - inner provider", async () => {
     const element = new ElementMock("div");
     element.innerText = "${name}";
-
-    const context = {
-        name: "John"
-    };
 
     const elements = [element];
     await parseElements(elements, context);

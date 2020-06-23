@@ -3,6 +3,7 @@ export class ElementMock {
         this.attributes = [];
         this.queryResults = new Map();
         this.events = new Map();
+        this.textContent = "";
         this.innerText = "";
         this.innerHTML = "";
         this.content = this;
