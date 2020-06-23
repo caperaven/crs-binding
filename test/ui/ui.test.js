@@ -155,6 +155,33 @@ test("component", async() => {
 
 test("collections", async() => {
     await navigateTo("collections");
+
+    let count = await countElements(".list-item");
+    expect(count).toEqual(5);
+
+    await click(".list-item[data-id='0'] div");
+    const value = await getValue("#edtCode");
+    expect(value).toEqual("Code 0");
+
+    await click("#btnAdd");
+    count = await countElements(".list-item");
+    expect(count).toEqual(6);
+
+    await click("#btnRemoveLast");
+    count = await countElements(".list-item");
+    expect(count).toEqual(5);
+
+    await click("#btnRemoveLast");
+    count = await countElements(".list-item");
+    expect(count).toEqual(4);
+
+    count = await countElements("#lstDone li");
+    expect(count).toEqual(0);
+
+    await click(".list-item[data-id='0'] button");
+    count = await countElements("#lstDone li");
+    expect(count).toEqual(1);
+
     await page.goBack();
 });
 

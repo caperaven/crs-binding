@@ -25,7 +25,7 @@
 
         <section>
             <h2>Done Items</h2>
-            <ul click.delegate="removeDone($event)">
+            <ul click.delegate="removeDone($event)" id="lstDone">
                 <template for="item of doneItems">
                     <li data-id.once="item.id">${item.title}</li>
                 </template>
@@ -35,15 +35,15 @@
 
     <div class="form">
         <div class="toolbar">
-            <button click.call="addItem">Add Item</button>
-            <button click.call="popItem">Remove Last Item</button>
-            <button click.call="removeItem">Remove Item</button>
+            <button click.call="addItem" id="btnAdd">Add Item</button>
+            <button click.call="popItem" id="btnRemoveLast">Remove Last Item</button>
+            <button click.call="removeItem" id="btnRemove">Remove Item</button>
         </div>
 
         <div>
             <label>
                 <div>Title</div>
-                <input data-priority.if="selectedItem.priority == 1 ? 'dont care' : 'hmmm oops'" value.bind="selectedItem.title" classlist.if="selectedItem.priority == 2 ? 'alarm' : 'fine'"/>
+                <input id="edtCode" data-priority.if="selectedItem.priority == 1 ? 'dont care' : 'hmmm oops'" value.bind="selectedItem.title" classlist.if="selectedItem.priority == 2 ? 'alarm' : 'fine'"/>
             </label>
 
             <select value.bind="selectedItem.priority">
