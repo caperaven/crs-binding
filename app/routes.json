@@ -37,6 +37,11 @@
       "hash": "#mouse-event",
       "view": "mouse-event",
       "hasStyle": true
+    },
+    {
+      "title": "Drawer using set value",
+      "hash": "#drawer",
+      "view": "drawer"
     }
   ]
 }

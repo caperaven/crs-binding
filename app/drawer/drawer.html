@@ -1,0 +1,12 @@
+<h2>Open and close toggle button</h2>
+
+<div class="toolbar">
+    <button click.setValue="$context.isVisible = !$context.isVisible">Toggle</button>
+    <button click.setValue="isVisible = !isVisible">Toggle Plain</button>
+</div>
+
+<ul hidden.if="isVisible != true">
+    <li>item 1</li>
+    <li>item 1</li>
+    <li>item 1</li>
+</ul>

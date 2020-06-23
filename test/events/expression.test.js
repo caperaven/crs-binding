@@ -108,4 +108,14 @@ test("sanitizeExp - set object with event", () => {
 test("snnitizeExp - toggle boolean", () => {
    const result = sanitizeExp("$context.isOpen = !$context.isOpen");
    expect(result.expression).toBe("context.isOpen = !context.isOpen");
-})
+});
+
+test("snnitizeExp - !$context.expression", () => {
+   const result = sanitizeExp("!$context.isOpen");
+   expect(result.expression).toBe("!context.isOpen");
+});
+
+test("snnitizeExp - !expression", () => {
+   const result = sanitizeExp("${!isOpen}");
+   expect(result.expression).toBe("${!context.isOpen}");
+});
