@@ -29,6 +29,15 @@ export class SetValueProvider extends CallProvider {
     }
 
     _getContextSetter(part, value) {
+        part = part.replace("$context.", "");
+
+        if (value.indexOf("context.") != -1) {
+            const parts = value.split("context.");
+            const property = parts[parts.length -1];
+            let prefix = parts[0] == "!" ? "!" : "";
+            value = `${prefix}crsbinding.data.getValue(${this._context}, "${property}")`;
+        }
+
         return `crsbinding.data.setProperty(${this._context}, "${part}", ${value});`;
     }
 }
