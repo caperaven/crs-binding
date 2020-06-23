@@ -169,8 +169,19 @@ test("inflation", async() => {
 
 test("maps", async() => {
     await navigateTo("maps");
-    const count = await countElements("[data-key]");
+    let count = await countElements("[data-key]");
     expect(count).toEqual(4);
+
+    await click("#btnAdd");
+    count = await countElements("[data-key]");
+    expect(count).toEqual(5);
+
+    await click("#btnRemove");
+    count = await countElements("[data-key]");
+    expect(count).toEqual(4);
+
+    await click("#btnUpdate");
+    expect(await getInnerText("[data-key='1']")).toEqual("Hello World");
 
     await page.goBack();
 });
