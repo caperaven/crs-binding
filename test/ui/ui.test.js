@@ -50,6 +50,11 @@ async function setInputText(query, value) {
     await page.keyboard.press("Tab");
 }
 
+async function hasAttribute(query, attrName) {
+    const attr = await page.evaluate(`document.querySelector("${query}").getAttribute("${attrName}")`);
+    return attr != null;
+}
+
 async function click(query) {
     const handle = await page.$(query);
     await handle.click();
@@ -211,4 +216,13 @@ test("maps", async() => {
     expect(await getInnerText("[data-key='1']")).toEqual("Hello World");
 
     await page.goBack();
+});
+
+test("drawer", async() => {
+    await navigateTo("drawer");
+    await click("#btnToggle");
+    expect(await hasAttribute("#container", "hidden")).toBeFalsy();
+
+    await click("#btnToggle");
+    expect(await hasAttribute("#container", "hidden")).toBeTruthy();
 });
