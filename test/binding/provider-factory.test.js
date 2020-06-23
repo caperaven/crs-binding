@@ -11,9 +11,10 @@ beforeEach(async () => {
     const bindingModule = await import("./../crsbinding.mock.js");
     global.crsbinding = bindingModule.crsbinding;
     element = new ElementMock();
-    context = {
-        name: "John"
-    };
+
+    context = crsbinding.data.addObject("test object");
+    crsbinding.data.setProperty(context, "name", "John");
+
     property = "name";
     value = "John";
 });

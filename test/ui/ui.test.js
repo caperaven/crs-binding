@@ -82,7 +82,7 @@ afterAll(async () => {
     await page.close();
 });
 
-test("component", async() => {
+test.skip("component", async() => {
     await navigateTo("component");
 
     const values = {
@@ -138,12 +138,12 @@ test("component", async() => {
     await page.goBack();
 });
 
-test("collections", async() => {
+test.skip("collections", async() => {
     await navigateTo("collections");
     await page.goBack();
 });
 
-test("inflation", async() => {
+test.skip("inflation", async() => {
     await navigateTo("inflation");
 
     const count = await childCount('body > crs-router > #container');
@@ -152,7 +152,7 @@ test("inflation", async() => {
     await page.goBack();
 });
 
-test("maps", async() => {
+test.skip("maps", async() => {
     await navigateTo("maps");
 
     const count = await countElements("[data-key]");

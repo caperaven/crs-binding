@@ -61,7 +61,9 @@ function nextId(idVariable) {
 function callFunctionsOnPath(id, path) {
     const obj = callbacks.get(id);
     const result =  getValueOnPath(obj, path);
-    callFunctionsOnObject(result, id, path);
+    if (result != null) {
+        callFunctionsOnObject(result, id, path);
+    }
 }
 
 function callFunctions(id, property) {
