@@ -82,6 +82,19 @@ afterAll(async () => {
     await page.close();
 });
 
+test("welcome", async() => {
+    const handle = await page.evaluateHandle(() => window);
+    const crsbinding = await page.evaluate(e => e.crsbinding, handle);
+    await page.goto('http://127.0.0.1:8000/#welcome', {waitUntil: 'networkidle2'});
+
+    await click('#btnI1');
+    await click('#btnI1');
+    await click('#btnI2');
+    await click('#btnI3');
+    await click('#btnI4');
+    await click('#btnI5');
+});
+
 test("component", async() => {
     await navigateTo("component");
 

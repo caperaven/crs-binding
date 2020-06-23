@@ -43,31 +43,12 @@
 </style>
 <body style="visibility: hidden">
     <header>
-        <button click.setValue="$globals.menuVisible = !$globals.menuVisible">Menu</button>
-        <button click.setValue="title='Hello World'">Set Title</button>
-        <button click.setValue="$globals.myDate = new Date()">New Date</button>
-        <button click.setValue="$globals.object = {title: ${title}}">Set globals object</button>
-        <button click.setValue="$globals.mousePos = {x: $event.x, y: $event.y}">Set globals mouse pos</button>
+        <button id="btnI1" click.setValue="$globals.menuVisible = !$globals.menuVisible">Menu</button>
+        <button id="btnI2" click.setValue="title='Hello World'">Set Title</button>
+        <button id="btnI3" click.setValue="$globals.myDate = new Date()">New Date</button>
+        <button id="btnI4" click.setValue="$globals.object = {title: ${title}}">Set globals object</button>
+        <button id="btnI5" click.setValue="$globals.mousePos = {x: $event.x, y: $event.y}">Set globals mouse pos</button>
 
-        <!--        <div click.setValue=""></div>-->
-
-<!--        <button click.setValue="subObj.prop=5">Menu</button>-->
-
-<!--        <button click.setValue="myDate = new Date()">Menu</button>-->
-<!--        <button click.setValue="$globals.myDate = new Date()">Menu</button>-->
-
-<!--        <div click.setValue="mousePos = {x: $event.clientX, y: $event.clientY}"></div>-->
-
-<!--        <script>-->
-<!--            function doSomething(context, event) {-->
-<!--                return context.mousePos = {x: event.clientX, y: event.clientY}-->
-<!--            }-->
-<!--        </script>-->
-
-        <!--
-            try and set up a example where you bind to a global object's property
-            e.g. $globals.system.version
-        -->
         <h1>${title}</h1>
     </header>
 
