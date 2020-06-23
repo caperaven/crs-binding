@@ -7,8 +7,8 @@
         "example": "examples"
     },
     "scripts": {
-        "test": "jest",
-        "testui": "jest test/ui/ui.test.js",
+        "test": "jest --unhandled-rejections=strict",
+        "testui": "jest test/ui/ui.test.js --unhandled-rejections=strict",
         "bundle": "rollup -c",
         "build-publish": "rollup -c & node build/publish.js"
     },

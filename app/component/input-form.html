@@ -2,12 +2,12 @@
 
 <label>
     <div>${translations.firstName}</div>
-    <input value.bind="data.firstName">
+    <input value.bind="data.firstName" id="edtInputFirstName">
 </label>
 
 <label>
     <div>${translations.lastName}</div>
-    <input value.bind="data.lastName">
+    <input value.bind="data.lastName" id="edtInputLastName">
 </label>
 
 <label>
@@ -18,7 +18,7 @@
 <hr />
 <label>
     <div style.color.if="showContacts == true ? 'green' : 'red'">Show Contacts</div>
-    <input type="checkbox" checked.bind="showContacts" />
+    <input type="checkbox" checked.bind="showContacts" id="edtShowContacts"/>
 </label>
 
 <input-contacts contacts.bind="data.contacts" hidden.if="showContacts == false"></input-contacts>
