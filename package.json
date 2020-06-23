@@ -7,8 +7,8 @@
         "example": "examples"
     },
     "scripts": {
-        "test": "jest --unhandled-rejections=strict",
-        "testui": "jest test/ui/ui.test.js --unhandled-rejections=strict",
+        "test": "jest --detectOpenHandles",
+        "testui": "jest test/ui/ui.test.js --detectOpenHandles && nyc report --reporter=html",
         "bundle": "rollup -c",
         "build-publish": "rollup -c & node build/publish.js"
     },
@@ -30,7 +30,11 @@
         "jest": "^24.9.0",
         "mkdirp": "^0.5.1",
         "puppeteer": "^2.1.1",
+        "puppeteer-to-istanbul": "^1.4.0",
         "rollup": "^1.23.0",
         "rollup-plugin-terser": "^5.1.2"
+    },
+    "dependencies": {
+        "nyc": "^15.1.0"
     }
 }

@@ -30,7 +30,7 @@ export default class Maps extends ViewBase {
         crsbinding.data.updateUI(this._dataId, "data");
     }
 
-    update() {
+    updateItem() {
         this.data.set(1, {title: "Hello World"});
         crsbinding.data.updateUI(this._dataId, "data");
     }

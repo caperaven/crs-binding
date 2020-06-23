@@ -1,3 +1,4 @@
+const pti = require('puppeteer-to-istanbul');
 const puppeteer = require('puppeteer');
 
 let browser;
@@ -5,8 +6,7 @@ let page;
 
 async function navigateTo(hash) {
     return Promise.all([
-        page.click(`a[href="#${hash}"]`),
-        page.waitForNavigation()
+        await page.goto(`http://127.0.0.1:8000/#${hash}`, {waitUntil: 'networkidle2'})
     ]).catch(e => console.log(e));
 }
 
@@ -75,10 +75,21 @@ beforeAll(async () => {
     jest.setTimeout(100000);
     browser = await puppeteer.launch({headless: false, slowMo: 50, args: ['--disable-dev-shm-usage']});
     page = await browser.newPage();
+
+    await Promise.all([
+        page.coverage.startJSCoverage(),
+        page.coverage.startCSSCoverage()
+    ]);
+
     await page.goto('http://127.0.0.1:8000/#welcome', {waitUntil: 'networkidle2'});
 });
 
 afterAll(async () => {
+    const [jsCoverage, cssCoverage] = await Promise.all([
+        page.coverage.stopJSCoverage(),
+        page.coverage.stopCSSCoverage(),
+    ]);
+    pti.write([...jsCoverage, ...cssCoverage], { includeHostname: true , storagePath: './.nyc_output' })
     await page.close();
 });
 
@@ -158,7 +169,6 @@ test("inflation", async() => {
 
 test("maps", async() => {
     await navigateTo("maps");
-
     const count = await countElements("[data-key]");
     expect(count).toEqual(4);
 
