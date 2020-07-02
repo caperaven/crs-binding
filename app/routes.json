@@ -42,6 +42,11 @@
       "title": "Drawer using set value",
       "hash": "#drawer",
       "view": "drawer"
+    },
+    {
+      "title": "SVG",
+      "hash": "#svg",
+      "view": "svg"
     }
   ]
 }
