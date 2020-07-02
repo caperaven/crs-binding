@@ -24,6 +24,14 @@ export class ViewBase {
     }
 
     async connectedCallback() {
+        if(this.preLoad != null) {
+            const setPropertyCallback = (path, value)=> {
+                crsbinding.data.setProperty(this._dataId, path, value);
+            };
+
+            await this.preLoad(setPropertyCallback)
+        }
+
         crsbinding.parsers.parseElement(this.element, this._dataId);
         this._loaded();
     }

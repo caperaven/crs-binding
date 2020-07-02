@@ -4,12 +4,11 @@ export class InnerProvider extends ProviderBase {
     constructor(element, context, property, value, ctxName, parentId) {
         super(element, context, property, value, ctxName, parentId);
 
-        if (element.innerText.indexOf("$parent.") != -1) {
+        if (element.innerText && element.innerText.indexOf("$parent.") != -1) {
             element.innerText = element.innerText.split("$parent.").join("");
             this._context = parentId;
         }
-
-        if (element.textContent.indexOf("$parent.") != -1) {
+        else if (element.textContent && element.textContent.indexOf("$parent.") != -1) {
             element.textContent = element.textContent.split("$parent.").join("");
             this._context = parentId;
         }

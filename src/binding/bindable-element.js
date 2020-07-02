@@ -17,13 +17,12 @@ export class BindableElement extends HTMLElement {
     }
 
     async connectedCallback() {
-
         if(this.preLoad != null) {
             const setPropertyCallback = (path, value)=> {
                 crsbinding.data.setProperty(this._dataId, path, value);
             };
 
-            this.preLoad(setPropertyCallback)
+            await this.preLoad(setPropertyCallback)
         }
 
         if (this.html != null) {
