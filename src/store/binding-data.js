@@ -504,6 +504,10 @@ export const bindingData = {
      * @returns {value}
      */
     getValue(id, property) {
+        if (typeof id == "object") {
+            id = id.__uid || id._dataId;
+        }
+
         const obj = data.get(id);
 
         if (obj.type == "data") {
