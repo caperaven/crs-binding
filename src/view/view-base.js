@@ -29,7 +29,7 @@ export class ViewBase {
                 crsbinding.data.setProperty(this._dataId, path, value);
             };
 
-            await this.preLoad(setPropertyCallback)
+            await this.preLoad(setPropertyCallback);
         }
 
         crsbinding.parsers.parseElement(this.element, this._dataId);
