@@ -29,11 +29,11 @@ export class ViewBase {
                 crsbinding.data.setProperty(this._dataId, path, value);
             };
 
-            await this.preLoad(setPropertyCallback)
+            await this.preLoad(setPropertyCallback);
         }
 
         crsbinding.parsers.parseElement(this.element, this._dataId);
-        this._loaded();
+        this.load();
     }
 
     async disconnectedCallback() {
@@ -51,7 +51,7 @@ export class ViewBase {
         setProperty(this, property,  value);
     }
 
-    _loaded() {
+    load() {
         this._element.style.visibility = "";
         this._loaded = true;
     }

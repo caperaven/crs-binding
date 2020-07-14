@@ -56,6 +56,7 @@ export class InflationManager {
             fragment.appendChild(element);
         }
 
+        fragment.querySelectorAll('[remove="true"]').forEach(element => element.parentElement.removeChild(element));
         return fragment;
     }
 
