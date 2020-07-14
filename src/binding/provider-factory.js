@@ -61,13 +61,13 @@ export class ProviderFactory {
     }
 
     static "for"(element, context, property, value, ctxName, attr, parentId) {
-        if (attr && attr.name.indexOf(".map") != -1) {
-            return new ForMapProvider(element, context, property, value, ctxName, parentId);
-        }
-        else if (attr && attr.name.indexOf(".once") != -1) {
-            return ForOnceProvider(element, context, property, value, ctxName, parentId);
-        }
-        else {
+        const parts = attr.name.split(".");
+
+        const customProvider = parts.length > 1 ? crsbinding.providerManager.providers.for[parts[1]] : null;
+
+        if (customProvider != null) {
+            return new customProvider(element, context, property, value, ctxName, parentId);
+        } else {
             return new ForProvider(element, context, property, value, ctxName, parentId);
         }
     }
