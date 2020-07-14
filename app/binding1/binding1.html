@@ -1,0 +1,59 @@
+<style>
+    .container div {
+        padding: 0.5rem;
+        display: inline-block;
+    }
+
+    .container div:nth-child(2) {
+        width: 200px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 350px;
+    }
+
+    li input:first-child {
+        margin-left: 30px;
+    }
+
+    li span {
+        margin-left: 45px;
+        width: 195px;
+        display: inline-block;
+    }
+
+    .done {
+        opacity: 0.5;
+    }
+
+    [aria-selected="true"] {
+        border: #266fed solid 1px;
+        background: #266fed20;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<div role="toolbar">
+    <button click.call="addItem">Add Item</button>
+    <button click.call="removeSelected">Remove Selected</button>
+</div>
+
+<div class="container">
+    <div>Selected</div>
+    <div>Title</div>
+    <div>Is Done</div>
+</div>
+
+<ul role="listbox">
+    <template for="item of items">
+        <li classlist.if="item.isDone == true ? 'done'" aria-selected="${item.isSelected}" role="listitem">
+            <input type="checkbox" checked.bind="item.isSelected">
+            <span>${item.title}</span>
+            <input type="checkbox" checked.bind="item.isDone">
+        </li>
+    </template>
+</ul>

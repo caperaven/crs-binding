@@ -47,6 +47,11 @@
       "title": "SVG",
       "hash": "#svg",
       "view": "svg"
+    },
+    {
+      "title": "Binding 1",
+      "hash": "#binding1",
+      "view": "binding1"
     }
   ]
 }
