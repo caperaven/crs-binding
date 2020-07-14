@@ -117,8 +117,12 @@ function callFunctionsOnObject(obj, id, property) {
 
 function performUpdates(id, property, value) {
     const obj = updates.get(id);
-    if (obj == null || obj[property] == null) return;
-    bindingData.setProperty(obj[property].originId, obj[property].originProperty, value);
+    if (obj != null && obj[property] != null) {
+        bindingData.setProperty(obj[property].originId, obj[property].originProperty, value);
+    }
+
+    const ctx = context.get(id);
+    ctx && ctx.propertyChanged && ctx.propertyChanged(property, value);
 }
 
 function addCallback(obj, property, callback) {
