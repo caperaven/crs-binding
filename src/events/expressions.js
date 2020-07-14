@@ -65,7 +65,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
-    if (indexes.length == 0 && exp.indexOf(".") != -1 && exp.indexOf("$globals") == -1 && exp.indexOf("$context") == -1 && exp.trim()[0] != "{") {
+    if (indexes.length == 0 && exp.indexOf(".") != -1 && exp.indexOf("$globals") == -1 && exp.indexOf("$context") == -1 && exp.indexOf("$event") == -1 && exp.trim()[0] != "{") {
         indexes.push(0);
     }
 

@@ -119,3 +119,8 @@ test("sanitizeExp - !expression", () => {
    const result = sanitizeExp("${!isOpen}");
    expect(result.expression).toBe("${!context.isOpen}");
 });
+
+test("sanitizeExp - $event.target", () => {
+   const result = sanitizeExp("$event.target");
+   expect(result.expression).toBe("event.target");
+});
