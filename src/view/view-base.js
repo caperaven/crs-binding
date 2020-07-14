@@ -33,7 +33,7 @@ export class ViewBase {
         }
 
         crsbinding.parsers.parseElement(this.element, this._dataId);
-        this._loaded();
+        this.load();
     }
 
     async disconnectedCallback() {
@@ -51,7 +51,7 @@ export class ViewBase {
         setProperty(this, property,  value);
     }
 
-    _loaded() {
+    load() {
         this._element.style.visibility = "";
         this._loaded = true;
     }
