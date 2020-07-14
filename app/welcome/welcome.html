@@ -10,3 +10,11 @@
     <a href="#svg">Svg</a>
     <a href="#binding1">Binding 1</a>
 </nav>
+</nav>
+
+<h3>Events</h3>
+
+<button click.call="fn1">First</button>
+<button click.call="fn1($event)">Second</button>
+<button click.call="fn1('test', $event)">Third</button>
+<button click.call="fn1($event, 10, 30)">Fourth</button>

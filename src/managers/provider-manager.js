@@ -1,7 +1,16 @@
+import {ForOnceProvider} from "../binding/providers/for-once-provider.js";
+import {ForMapProvider} from "../binding/providers/for-map-provider.js";
+
 export class ProviderManager {
     constructor() {
         this._nextId = 0;
         this.items = new Map();
+        this.providers = {
+            for: {
+                map: ForMapProvider,
+                once: ForOnceProvider
+            }
+        }
     }
 
     async register(provider) {

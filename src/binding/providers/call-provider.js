@@ -18,14 +18,14 @@ export class CallProvider extends ProviderBase {
     async initialize() {
         let src = `context.${this._value}`.split("$event").join("event");
         if (src.indexOf(")") == -1) {
-            src = `${src}.call(context)`;
+            src = `${src}.call(context, event)`;
         }
-        this._fn = new Function("context", src);
+        this._fn = new Function("context", "event", src);
     }
 
     event(event) {
         const context = crsbinding.data.getContext(this._context);
-        crsbinding.idleTaskManager.add(this._fn(context));
+        crsbinding.idleTaskManager.add(this._fn(context, event));
         event.stopPropagation();
     }
 }
