@@ -11,8 +11,8 @@ import {clone} from "./lib/clone.js";
 import {bindingData} from "./store/binding-data.js";
 import {EventEmitter} from "./events/events.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
-import {BindableElement} from "../dist/crs-bindable-element.js";
-import {ViewBase} from "../dist/crs-view-base.js";
+import {BindableElement} from "../src/binding/bindable-element.js";
+import {ViewBase} from "../src/view/view-base.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
