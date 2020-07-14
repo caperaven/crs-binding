@@ -343,6 +343,10 @@ function getOwnProperties(obj) {
 }
 
 function makeShared(id, property, sharedItems) {
+    if (typeof id == "object") {
+        id = id.__uid || id._dataId;
+    }
+
     const obj = callbacks.get(id);
     for (let prop of sharedItems) {
         const path = `${property}.${prop}`;
