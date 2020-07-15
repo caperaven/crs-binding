@@ -131,8 +131,10 @@ function addCallback(obj, property, callback) {
     obj[property].__functions.push(callback);
 }
 
-function removeGlobalsCallback(path, callback) {
-    const obj = callbacks.get(crsbinding.$globals);
+function removeCallback(id, path, callback) {
+    const obj = callbacks.get(id);
+    if (obj == null) return;
+
     const property = getValueOnPath(obj, path);
 
     if (property.__functions) {
@@ -619,5 +621,5 @@ export const bindingData = {
     unlinkArrayItem: unlinkArrayItem,
     nextArrayId: nextArrayId,
 
-    removeGlobalsCallback: removeGlobalsCallback
+    removeCallback: removeCallback
 };
