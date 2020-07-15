@@ -71,6 +71,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         exp.indexOf("$context") == -1 &&
         exp.indexOf("$event") == -1 &&
         exp.indexOf("$parent") == -1 &&
+        exp.indexOf("$data") == -1 &&
         exp.trim()[0] != "{") {
         indexes.push(0);
     }
@@ -96,6 +97,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
             .split("$globals").join("crsbinding.data.globals")
             .split("$event").join("event")
             .split("$context").join("context")
+            .split("$data").join("crsbinding.data.getValue")
             .split("$parent").join("parent"),
         properties: properties
     }
@@ -131,8 +133,8 @@ function extractProperty(property) {
 
 const reserved = ["true", "false", "-", "+", "=", "<", ">", "(", ")","{", "}", "/",  "&", "|", "=", "!", "'", "`", '"', " ", "$", ".", ",", "?", ":", "null", "undefined", "new", "Math"];
 const ignore = [".", "(", ")", ","];
-const reservedTokens = ["globals", "event", "context", "parent"];
-const ignoreTokens = ["$globals", "$event", "$context", "$parent"];
+const reservedTokens = ["globals", "event", "context", "parent", "data"];
+const ignoreTokens = ["$globals", "$event", "$context", "$parent", "$data"];
 const quotes = ["'", '"', "`"];
 const stdQuotes = ["'", '"'];
 

@@ -57,11 +57,9 @@
 </style>
 
 <div class="container">
-    <!--    <ul click.setValue="selectedObj = $event.target.data)"></ul>-->
-
-    <ul click.setValue="selectedId = $event.target.dataset.id">
+    <ul click.setValue="data = $data($event.target.dataset.uid)">
         <template for="item of items">
-            <li data-id="${item.id}" aria-selected.if="$parent.selectedId == item.id">
+            <li data-id="${item.id}" aria-selected.if="$parent.data.id == item.id">
                 <div class="select"></div>
                 <div>${item.title}</div>
             </li>
