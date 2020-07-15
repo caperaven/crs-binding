@@ -60,12 +60,7 @@ export class ForProvider extends RepeatBaseProvider {
             const child = this._container.children[index + this.positionStruct.startIndex + 1];
             this._container.insertBefore(element, child);
 
-            for (let p of update.__providers || []) {
-                const provider = crsbinding.providerManager.items.get(p);
-                if (provider instanceof AttrProvider) {
-                    provider._change();
-                }
-            }
+            this.updateAttributeProviders(update);
         }
     }
 

@@ -1,4 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
+import {AttrProvider} from "./attr-provider.js";
 
 export class RepeatBaseProvider extends ProviderBase {
     dispose() {
@@ -137,5 +138,14 @@ export class RepeatBaseProvider extends ProviderBase {
         }
 
         return element;
+    }
+
+    updateAttributeProviders(element) {
+        for (let p of element.__providers || []) {
+            const provider = crsbinding.providerManager.items.get(p);
+            if (provider instanceof AttrProvider) {
+                provider._change();
+            }
+        }
     }
 }
