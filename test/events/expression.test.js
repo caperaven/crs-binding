@@ -124,3 +124,8 @@ test("sanitizeExp - $event.target", () => {
    const result = sanitizeExp("$event.target");
    expect(result.expression).toBe("event.target");
 });
+
+test("sanitizeExp - $parentId in expression", () => {
+   const result = sanitizeExp("$parent.property1 == item.property2", "item");
+   expect(result.expression).toBe("parent.property1 == item.property2");
+});

@@ -1,0 +1,74 @@
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        width: 100%;
+        height: 100%;
+
+        --supressed: #dedede;
+    }
+
+    .container ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        border-right: solid 1px var(--supressed);
+    }
+
+    .container li {
+        padding: 0.25rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .container li div {
+        pointer-events: none;
+    }
+
+    .select {
+        border-radius: 50%;
+        border-right: solid 1px var(--supressed);
+        background: var(--supressed);
+        width: 8px;
+        height: 8px;
+        margin-right: 1rem;
+    }
+
+    .selected {
+        background: #266fed;
+    }
+
+    .data {
+        padding: 0 1rem;
+    }
+
+    .data h2 {
+        margin: 0;
+    }
+
+    [hidden] {
+        display: none;
+    }
+
+    [aria-selected] .select {
+        background: #266fed;
+    }
+</style>
+
+<div class="container">
+    <ul click.setValue="selectedId = $event.target.dataset.id">
+        <template for="item of items">
+            <li data-id="${item.id}" aria-selected.if="$parent.selectedId == item.id">
+                <div class="select"></div>
+                <div>${item.title}</div>
+            </li>
+        </template>
+    </ul>
+    <div class="data" hidden.if="data == null">
+        <h2>${data.title}</h2>
+        <p>${data.paragraph}</p>
+        <hr />
+        <input value.bind="data.title">
+    </div>
+</div>
