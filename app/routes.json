@@ -49,14 +49,14 @@
       "view": "svg"
     },
     {
+      "title": "Parent Binding",
+      "hash": "#parent",
+      "view": "parent"
+    },
+    {
       "title": "Binding 1",
       "hash": "#binding1",
       "view": "binding1"
-    },
-    {
-      "title": "Project 5",
-      "hash": "#project5",
-      "view": "project5"
     },
     {
       "title": "First Last Inverse Paint",

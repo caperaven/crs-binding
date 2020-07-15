@@ -122,7 +122,8 @@ function performUpdates(id, property, value) {
     }
 
     const ctx = context.get(id);
-    ctx && ctx.propertyChanged && ctx.propertyChanged(property, value);
+    const fnName = `${property}Changed`;
+    ctx && ctx[fnName] && ctx[fnName](value);
 }
 
 function addCallback(obj, property, callback) {
