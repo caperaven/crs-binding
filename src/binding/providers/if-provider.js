@@ -58,8 +58,7 @@ export class IfProvider extends ProviderBase {
             .split("__attr-value__").join(this._property);
 
         this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], {sanitize: false, ctxName: this._ctxName});
-//JHR: TODO filter out the $parent from properties
-        this.listenOnPath(value.properties, this._eventHandler);
+        this.listenOnPath(value.properties.filter(item => item.indexOf("$parent") == -1), this._eventHandler);
         return value;
     }
 
