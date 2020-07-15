@@ -65,7 +65,13 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
-    if (indexes.length == 0 && exp.indexOf(".") != -1 && exp.indexOf("$globals") == -1 && exp.indexOf("$context") == -1 && exp.indexOf("$event") == -1 && exp.trim()[0] != "{") {
+    if (indexes.length == 0 &&
+        exp.indexOf(".") != -1 &&
+        exp.indexOf("$globals") == -1 &&
+        exp.indexOf("$context") == -1 &&
+        exp.indexOf("$event") == -1 &&
+        exp.indexOf("$parent") == -1 &&
+        exp.trim()[0] != "{") {
         indexes.push(0);
     }
 
@@ -89,7 +95,8 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         expression: tokens.join("")
             .split("$globals").join("crsbinding.data.globals")
             .split("$event").join("event")
-            .split("$context").join("context"),
+            .split("$context").join("context")
+            .split("$parent").join("parent"),
         properties: properties
     }
 }
@@ -124,8 +131,8 @@ function extractProperty(property) {
 
 const reserved = ["true", "false", "-", "+", "=", "<", ">", "(", ")","{", "}", "/",  "&", "|", "=", "!", "'", "`", '"', " ", "$", ".", ",", "?", ":", "null", "undefined", "new", "Math"];
 const ignore = [".", "(", ")", ","];
-const reservedTokens = ["globals", "event", "context"];
-const ignoreTokens = ["$globals", "$event", "$context"];
+const reservedTokens = ["globals", "event", "context", "parent"];
+const ignoreTokens = ["$globals", "$event", "$context", "$parent"];
 const quotes = ["'", '"', "`"];
 const stdQuotes = ["'", '"'];
 

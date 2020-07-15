@@ -122,7 +122,8 @@ function performUpdates(id, property, value) {
     }
 
     const ctx = context.get(id);
-    ctx && ctx.propertyChanged && ctx.propertyChanged(property, value);
+    const fnName = `${property}Changed`;
+    ctx && ctx[fnName] && ctx[fnName](value);
 }
 
 function addCallback(obj, property, callback) {
@@ -131,8 +132,10 @@ function addCallback(obj, property, callback) {
     obj[property].__functions.push(callback);
 }
 
-function removeGlobalsCallback(path, callback) {
-    const obj = callbacks.get(crsbinding.$globals);
+function removeCallback(id, path, callback) {
+    const obj = callbacks.get(id);
+    if (obj == null) return;
+
     const property = getValueOnPath(obj, path);
 
     if (property.__functions) {
@@ -343,6 +346,10 @@ function getOwnProperties(obj) {
 }
 
 function makeShared(id, property, sharedItems) {
+    if (typeof id == "object") {
+        id = id.__uid || id._dataId;
+    }
+
     const obj = callbacks.get(id);
     for (let prop of sharedItems) {
         const path = `${property}.${prop}`;
@@ -615,5 +622,5 @@ export const bindingData = {
     unlinkArrayItem: unlinkArrayItem,
     nextArrayId: nextArrayId,
 
-    removeGlobalsCallback: removeGlobalsCallback
+    removeCallback: removeCallback
 };

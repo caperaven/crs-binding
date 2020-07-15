@@ -3,8 +3,8 @@ export class ProviderBase {
         return crsbinding.data.getValue(this._context);
     }
 
-    constructor(element, context, property, value, ctxName, parentId) {
-        this._globals = {};
+    constructor(element, context, property, value, ctxName, parentId, changeParentToContext = true) {
+        this._cleanEvents = [];
 
         this._element = element;
         this._context = context;
@@ -13,8 +13,9 @@ export class ProviderBase {
         this._ctxName = ctxName || "context";
         this._eventsToRemove = [];
         this._isNamedContext = this._ctxName != "context";
+        this._parentId = parentId;
 
-        if (this._value && this._value.indexOf("$parent") != -1) {
+        if (this._value && this._value.indexOf("$parent") != -1 && changeParentToContext == true) {
             this._value = this._value.split("$parent.").join("");
             this._context = parentId;
         }
@@ -41,10 +42,13 @@ export class ProviderBase {
         this._value = null;
         this._ctxName = null;
 
-        for (let key of Object.keys(this._globals)) {
-            crsbinding.data.removeGlobalsCallback(key, this._globals[key]);
-            delete this._globals[key];
-        }
+        this._cleanEvents.forEach(item => {
+            crsbinding.data.removeCallback(item.context, item.path, item.callback);
+            delete item.context;
+            delete item.path;
+            delete item.callback;
+        });
+        this._cleanEvents = null;
     }
 
     /**
@@ -58,13 +62,18 @@ export class ProviderBase {
         for (let p of collection) {
             if (p.indexOf("$globals.") != -1) {
                 p = p.split("$globals.").join("");
-                crsbinding.data.addCallback(crsbinding.$globals, p, callback);
+            }
 
-                this._globals[p] = callback;
-            }
-            else {
-                crsbinding.data.addCallback(this._context, p, callback);
-            }
+            this._addCallback(this._context, p, callback);
         }
+    }
+
+    _addCallback(context, path, callback) {
+        crsbinding.data.addCallback(context, path, callback);
+        this._cleanEvents.push({
+            context: context,
+            path: path.split("$parent.").join("").split("$context.").join(""),
+            callback: callback
+        });
     }
 }

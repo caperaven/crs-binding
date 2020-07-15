@@ -2,11 +2,12 @@ import {ProviderBase} from "./provider-base.js";
 
 export class IfProvider extends ProviderBase {
     constructor(element, context, property, value, ctxName, parentId) {
-        super(element, context, property, value, ctxName, parentId);
+        super(element, context, property, value, ctxName, parentId, false);
     }
 
     dispose() {
         crsbinding.expression.release(this._expObj);
+        delete this._expObj.parentObj;
         delete this._expObj;
 
         this._eventHandler = null;
@@ -18,14 +19,26 @@ export class IfProvider extends ProviderBase {
 
         this._eventHandler = this.propertyChanged.bind(this);
 
+        let sanProp;
         if (this._value.indexOf("?") == -1) {
-            this._initCndAttr();
+            sanProp = this._initCndAttr();
         }
         else if(this._value.indexOf(":") != -1) {
-            this._initCndValue();
+            sanProp = this._initCndValue();
         }
         else {
-            this._initCndAttrValue();
+            sanProp = this._initCndAttrValue();
+        }
+
+        if (this._value.indexOf("$parent") != -1) {
+            this._expObj.parentObj = crsbinding.data.getValue(this._parentId);
+
+            sanProp.properties.forEach(path => {
+                if (path.indexOf("$parent.") != -1) {
+                    const p = path.replace("$parent.", "");
+                    this._addCallback(this._parentId, p, this._eventHandler);
+                }
+            });
         }
 
         this.propertyChanged();
@@ -44,8 +57,9 @@ export class IfProvider extends ProviderBase {
             .split("__attr__").join(this._property)
             .split("__attr-value__").join(this._property);
 
-        this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false, ctxName: this._ctxName});
-        this.listenOnPath(value.properties, this._eventHandler);
+        this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], {sanitize: false, ctxName: this._ctxName});
+        this.listenOnPath(value.properties.filter(item => item.indexOf("$parent") == -1), this._eventHandler);
+        return value;
     }
 
     /**
@@ -65,8 +79,10 @@ export class IfProvider extends ProviderBase {
             .split("__true__").join(tval)
             .split("__false__").join(fval);
 
-        this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false, ctxName: this._ctxName});
+        this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], {sanitize: false, ctxName: this._ctxName});
+
         this.listenOnPath(value.properties, this._eventHandler);
+        return value;
     }
 
     /**
@@ -82,9 +98,11 @@ export class IfProvider extends ProviderBase {
             .split("__attr__").join(this._property)
             .split("__attr-value__").join(parts[1].trim());
 
-        this._expObj = crsbinding.expression.compile(fnCode, ["element"], {sanitize: false, ctxName: this._ctxName});
+        this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], {sanitize: false, ctxName: this._ctxName});
+
         this.listenOnPath(value.properties, this._eventHandler);
         this.propertyChanged();
+        return value;
     }
 
     _sanitizeValue(value) {
@@ -94,7 +112,7 @@ export class IfProvider extends ProviderBase {
 
     propertyChanged() {
         try {
-            crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element));
+            crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, this._expObj.parentObj));
         }
         catch {
             return;
