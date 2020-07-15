@@ -23,7 +23,7 @@ export default class Component extends ViewBase {
         super.disconnectedCallback();
     }
 
-    _loaded() {
+    load() {
         crsbinding.data.makeShared(this._dataId, "data", ["firstName", "contacts.phone.land", "contacts.phone.cell", "contacts.phone.fax"]);
 
         this.data = {
@@ -39,7 +39,7 @@ export default class Component extends ViewBase {
             }
         };
 
-        super._loaded();
+        super.load();
     }
 
     newObject() {

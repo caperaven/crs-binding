@@ -1,4 +1,4 @@
-<h2>Welcome</h2>
+<h2>Flip</h2>
 
 <nav style.visibility.if="$globals.menuVisible == true ? '' : 'hidden'">
     <a href="#component">Complex Binding</a>
@@ -8,6 +8,8 @@
     <a href="#mouse-event">Mouse Event</a>
     <a href="#drawer">Drawer example using setValue</a>
     <a href="#svg">Svg</a>
+    <a href="#binding1">Binding 1</a>
+</nav>
 </nav>
 
 <h3>Events</h3>
@@ -16,3 +18,4 @@
 <button click.call="fn1($event)">Second</button>
 <button click.call="fn1('test', $event)">Third</button>
 <button click.call="fn1($event, 10, 30)">Fourth</button>
+<button click.setValue="selectedItem = $event.target">Set Selected</button>

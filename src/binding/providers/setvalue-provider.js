@@ -7,7 +7,7 @@ export class SetValueProvider extends CallProvider {
         const value = this._processRightPart(parts[1].trim());
         const src = this._processLeftPart(parts[0].trim(), value);
 
-        this._fn = new Function("context", src);
+        this._fn = new Function("context", "event", src);
     }
 
     _processRightPart(part) {

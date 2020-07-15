@@ -68,10 +68,10 @@ export default class Collections extends ViewBase {
         super.connectedCallback();
     }
 
-    _loaded() {
+    load() {
         crsbinding.data.makeShared(this._dataId, "selectedItem", ["title", "priority"]);
         crsbinding.data.updateUI(this._dataId, "items");
-        super._loaded();
+        super.load();
     }
 
     addItem() {

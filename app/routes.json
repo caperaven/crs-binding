@@ -47,6 +47,16 @@
       "title": "SVG",
       "hash": "#svg",
       "view": "svg"
+    },
+    {
+      "title": "Binding 1",
+      "hash": "#binding1",
+      "view": "binding1"
+    },
+    {
+      "title": "First Last Inverse Paint",
+      "hash": "#flip",
+      "view": "flip"
     }
   ]
 }
