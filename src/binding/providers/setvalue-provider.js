@@ -26,7 +26,7 @@ export class SetValueProvider extends CallProvider {
 
     _getGlobalSetter(part, value) {
         const path = part.replace("$globals.", "");
-        return `setProperty(crsbinding.$globals, "${path}", ${value});`;
+        return `setProperty({_dataId: crsbinding.$globals}, "${path}", ${value});`;
     }
 
     _getContextSetter(part, value) {
