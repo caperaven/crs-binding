@@ -129,3 +129,8 @@ test("sanitizeExp - $parentId in expression", () => {
    const result = sanitizeExp("$parent.property1 == item.property2", "item");
    expect(result.expression).toBe("parent.property1 == item.property2");
 });
+
+test("sanitizeExp - $data", () => {
+   const result = sanitizeExp("selectedObj = $data($event.target.dataset.id)");
+   expect(result.expression).toBe("context.selectedObj = crsbinding.data.getValue(event.target.dataset.id)");
+});

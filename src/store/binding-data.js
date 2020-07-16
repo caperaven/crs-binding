@@ -519,7 +519,7 @@ export const bindingData = {
             id = id.__uid || id._dataId;
         }
 
-        const obj = data.get(id);
+        const obj = data.get(Number(id));
 
         if (obj.type == "data") {
             const data = obj.data;
