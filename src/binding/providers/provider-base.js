@@ -5,6 +5,7 @@ export class ProviderBase {
 
     constructor(element, context, property, value, ctxName, parentId, changeParentToContext = true) {
         this._cleanEvents = [];
+        this._globals = {};
 
         this._element = element;
         this._context = context;
@@ -48,7 +49,13 @@ export class ProviderBase {
             delete item.path;
             delete item.callback;
         });
+
         this._cleanEvents = null;
+
+        for (let key of Object.keys(this._globals)) {
+            crsbinding.data.removeCallback(crsbinding.$globals, key, this._globals[key]);
+            delete this._globals[key];
+        }
     }
 
     /**
@@ -59,12 +66,18 @@ export class ProviderBase {
 
     listenOnPath(property, callback) {
         const collection = Array.isArray(property) == true ? property : [property];
+
+
         for (let p of collection) {
+            let context = this._context;
+
             if (p.indexOf("$globals.") != -1) {
+                context = crsbinding.$globals;
                 p = p.split("$globals.").join("");
+                this._globals[p] = callback;
             }
 
-            this._addCallback(this._context, p, callback);
+            this._addCallback(context, p, callback);
         }
     }
 
