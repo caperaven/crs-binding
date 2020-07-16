@@ -5,7 +5,13 @@ export default class Welcome extends ViewBase {
         console.log(args);
     }
 
-    propertyChanged(property, value) {
-        console.log("property changed: ", property, value);
+    preLoad() {
+        this.setProperty("item", {
+            name: "Johan"
+        })
+    }
+
+    debug() {
+        console.log(this.getProperty("item.name"));
     }
 }

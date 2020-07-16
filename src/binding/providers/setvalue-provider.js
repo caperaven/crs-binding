@@ -1,4 +1,5 @@
 import {CallProvider} from "./call-provider.js";
+import {setProperty} from "./../binding-helper.js";
 
 export class SetValueProvider extends CallProvider {
     async initialize() {
@@ -7,7 +8,7 @@ export class SetValueProvider extends CallProvider {
         const value = this._processRightPart(parts[1].trim());
         const src = this._processLeftPart(parts[0].trim(), value);
 
-        this._fn = new Function("context", "event", src);
+        this._fn = new Function("context", "event", "setProperty", src);
     }
 
     _processRightPart(part) {
@@ -25,7 +26,7 @@ export class SetValueProvider extends CallProvider {
 
     _getGlobalSetter(part, value) {
         const path = part.replace("$globals.", "");
-        return `crsbinding.data.setProperty(crsbinding.$globals, "${path}", ${value});`;
+        return `setProperty(crsbinding.$globals, "${path}", ${value});`;
     }
 
     _getContextSetter(part, value) {
@@ -35,9 +36,15 @@ export class SetValueProvider extends CallProvider {
             const parts = value.split("context.");
             const property = parts[parts.length -1];
             let prefix = parts[0] == "!" ? "!" : "";
-            value = `${prefix}crsbinding.data.getValue(${this._context}, "${property}")`;
+            value = `${prefix}crsbinding.data.getValue({_dataId: ${this._context}}, "${property}")`;
         }
 
-        return `crsbinding.data.setProperty(${this._context}, "${part}", ${value});`;
+        return `setProperty({_dataId: ${this._context}}, "${part}", ${value});`;
+    }
+
+    event(event) {
+        const context = crsbinding.data.getContext(this._context);
+        crsbinding.idleTaskManager.add(this._fn(context, event, setProperty));
+        event.stopPropagation();
     }
 }
