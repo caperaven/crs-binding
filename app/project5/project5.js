@@ -22,7 +22,7 @@ export default class Project5 extends ViewBase {
     }
 
     load() {
-        crsbinding.data.makeShared(this, "data", ["title"]);
+        //crsbinding.data.makeShared(this, "data", ["title"]);
         crsbinding.data.updateUI(this, "items");
         super.load();
     }
@@ -37,12 +37,5 @@ export default class Project5 extends ViewBase {
     selectedIdChanged(value) {
         const item = crsbinding.data.array(this, "items").find(item => item.id == value);
         crsbinding.data.setProperty(this, "data", item);
-
-        // //JHR: todo, how can I update the selected list item on binding
-        // const selected = this.element.querySelector("li[aria-selected]");
-        // selected && selected.removeAttribute("aria-selected");
-        //
-        // const element = this.element.querySelector(`li[data-id="${value}"`);
-        // element && element.setAttribute("aria-selected", true);
     }
 }

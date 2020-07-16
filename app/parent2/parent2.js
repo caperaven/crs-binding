@@ -23,6 +23,7 @@ export default class Parent2 extends ViewBase {
 
     load() {
         crsbinding.data.updateUI(this, "items");
+        crsbinding.data.makeShared(this, "data", ["title"]);
         super.load();
     }
 }
