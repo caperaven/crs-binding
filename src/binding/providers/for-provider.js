@@ -25,7 +25,7 @@ export class ForProvider extends RepeatBaseProvider {
     }
 
     async _renderItems(array) {
-        super._renderItems();
+        await super._renderItems();
 
         // create document fragment
         const fragment = document.createDocumentFragment();

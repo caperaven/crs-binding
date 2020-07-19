@@ -6,7 +6,7 @@ export class ForMapProvider extends RepeatBaseProvider {
     }
 
     async _renderItems(array) {
-        super._renderItems();
+        await super._renderItems();
 
         const fragment = document.createDocumentFragment();
 

@@ -44,7 +44,13 @@ export class SetValueProvider extends CallProvider {
 
     event(event) {
         const context = crsbinding.data.getContext(this._context);
-        crsbinding.idleTaskManager.add(this._fn(context, event, setProperty));
+        crsbinding.idleTaskManager.add(this._fn(context, event, this._setProperty));
         event.stopPropagation();
+    }
+
+    _setProperty(obj, property, value) {
+        if (value !== undefined) {
+            setProperty(obj, property, value);
+        }
     }
 }
