@@ -62,7 +62,7 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(property, value, once = false) {
-        if (this.isReady != true && once === false) {
+        if (this.isReady != true && once === false && this.__properties) {
             return this.__properties.set(property, value);
         }
 

@@ -3,6 +3,7 @@
 
     <div class="container">
         <ul click.setValue="data = $data($event.target.dataset.uid)">
+            <button click.call="removeSelected">Remove</button>
             <template for="item of items">
                 <li aria-selected.if="$parent.data.id == item.id">
                     <div class="select"></div>

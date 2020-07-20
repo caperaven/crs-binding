@@ -21,4 +21,26 @@ export default class MasterDetail extends ViewBase {
         ]);
     }
 
+    load() {
+        crsbinding.data.updateUI(this, "items");
+        crsbinding.data.makeShared(this, "data", ["title"]);
+        super.load();
+    }
+
+    removeSelected() {
+        const items = this.getProperty("items");
+        const selectedItems = items.filter(item => item.selected == true);
+        for (let selected of selectedItems) {
+            this.setSelected(items, selected);
+            items.splice(items.indexOf(selected), 1);
+        }
+    }
+
+    setSelected(items, selected) {
+        const data = this.getProperty("data");
+        if (selected === data) {
+            this.setProperty("data", null);
+        }
+    }
+
 }
