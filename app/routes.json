@@ -49,24 +49,10 @@
       "view": "svg"
     },
     {
-      "title": "Parent Binding",
-      "hash": "#parent",
-      "view": "parent"
-    },
-    {
-      "title": "Parent Binding 2",
-      "hash": "#parent2",
-      "view": "parent2"
-    },
-    {
-      "title": "Binding 1",
-      "hash": "#binding1",
-      "view": "binding1"
-    },
-    {
-      "title": "First Last Inverse Paint",
-      "hash": "#flip",
-      "view": "flip"
+      "title": "Master Detail",
+      "hash": "#master-detail",
+      "view": "master-detail",
+      "hasStyle": true
     }
   ]
 }

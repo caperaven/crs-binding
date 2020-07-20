@@ -1,4 +1,4 @@
-<h2>Flip</h2>
+<h2>${title}</h2>
 
 <nav style.visibility.if="$globals.menuVisible == true ? '' : 'hidden'">
     <a href="#component">Complex Binding</a>
@@ -8,9 +8,7 @@
     <a href="#mouse-event">Mouse Event</a>
     <a href="#drawer">Drawer example using setValue</a>
     <a href="#svg">Svg</a>
-    <a href="#binding1">Binding 1</a>
-    <a href="#parent">Parent binding with id</a>
-    <a href="#parent2">Parent binding with objects</a>
+    <a href="#master-detail">Master Detail</a>
 </nav>
 </nav>
 
@@ -22,4 +20,10 @@
 <button click.call="fn1($event, 10, 30)">Fourth</button>
 <button click.setValue="selectedItem = $event.target">Set Selected</button>
 
-<button click.call="debug">Debug</button>
+<button id="btnI1" click.setValue="$globals.menuVisible = !$globals.menuVisible">Menu</button>
+<button id="btnI2" click.setValue="title='Hello World'">Set Title</button>
+<button id="btnI3" click.setValue="$globals.myDate = new Date()">New Date</button>
+<button id="btnI4" click.setValue="$globals.object = {title: ${title}}">Set globals object</button>
+<button id="btnI5" click.setValue="$globals.mousePos = {x: $event.x, y: $event.y}">Set globals mouse pos</button>
+
+

@@ -10,8 +10,4 @@ export default class Welcome extends ViewBase {
             name: "Johan"
         })
     }
-
-    debug() {
-        console.log(this.getProperty("item.name"));
-    }
 }

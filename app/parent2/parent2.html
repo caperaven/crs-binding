@@ -61,7 +61,7 @@
         <template for="item of items">
             <li aria-selected.if="$parent.data.id == item.id">
                 <div class="select"></div>
-                <input type="checkbox" checked.bind="item.selected" data-uid.once="item.uid"/>
+                <input type="checkbox" checked.bind="item.selected" />
                 <div>${item.title}</div>
             </li>
         </template>
