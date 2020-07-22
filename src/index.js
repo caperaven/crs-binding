@@ -13,6 +13,7 @@ import {EventEmitter} from "./events/events.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
 import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
+import {ElementStoreManager} from "./managers/element-store-manager.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -44,6 +45,7 @@ const crsbinding = {
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
+    elementStoreManager: new ElementStoreManager(),
     valueConverters: new ValueConverters(),
     expression: {
         sanitize: sanitizeExp,

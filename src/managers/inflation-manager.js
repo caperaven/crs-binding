@@ -18,8 +18,9 @@ export class InflationManager {
         const result = generator.generateCodeFor(template);
         generator.dispose();
 
+        crsbinding.elementStoreManager.register(id, template);
+
         this._items.set(id, {
-            template: template,
             inflate: result.inflate,
             deflate: result.deflate
         })
@@ -32,11 +33,11 @@ export class InflationManager {
     unregister(id) {
         const item = this._items.get(id);
         if (item != null) {
-            item.template = null;
             item.inflate = null;
             item.defaulte = null;
             this._items.delete(id);
         }
+        crsbinding.elementStoreManager.unregister(id);
     }
 
     /**
@@ -51,7 +52,7 @@ export class InflationManager {
         const fragment = document.createDocumentFragment();
 
         for (let d of data) {
-            const element = item.template.content.cloneNode(true);
+            const element = crsbinding.elementStoreManager.getElement(id);
             this.inflate(id, element.children[0], d, item.inflate);
             fragment.appendChild(element);
         }

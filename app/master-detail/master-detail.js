@@ -29,11 +29,12 @@ export default class MasterDetail extends ViewBase {
 
     removeSelected() {
         const items = this.getProperty("items");
-        const selectedItems = items.filter(item => item.selected == true);
-        for (let selected of selectedItems) {
-            this.setSelected(items, selected);
-            items.splice(items.indexOf(selected), 1);
-        }
+        const remainder = items.filter(item => item.selected != true);
+        this.setProperty("items", items);
+        // for (let selected of selectedItems) {
+        //     this.setSelected(items, selected);
+        //     items.splice(items.indexOf(selected), 1);
+        // }
     }
 
     setSelected(items, selected) {
