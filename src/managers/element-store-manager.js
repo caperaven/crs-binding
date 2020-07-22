@@ -37,6 +37,13 @@ export class ElementStoreManager {
         return fragment;
     }
 
+    getBoundElement(id, context) {
+        const item = this._items.get(id);
+        const result = this._getItemElement(item);
+        crsbinding.parsers.parseElement(result, context);
+        return result;
+    }
+
     returnElements(id, elements, restore = true) {
         const item = this._items.get(id);
 
