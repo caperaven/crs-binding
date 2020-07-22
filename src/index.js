@@ -38,6 +38,14 @@ function disposeProperties(obj) {
     }
 }
 
+function fragmentToText(fragment) {
+    const text = [];
+    for (let child of fragment.children) {
+        text.push(child.outerHTML);
+    }
+    return text.join("");
+}
+
 const crsbinding = {
     _expFn: new Map(),
 
@@ -83,7 +91,8 @@ const crsbinding = {
     utils: {
         capitalizePropertyPath: capitalizePropertyPath,
         clone: clone,
-        disposeProperties: disposeProperties
+        disposeProperties: disposeProperties,
+        fragmentToText: fragmentToText
     }
 };
 

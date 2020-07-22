@@ -12,7 +12,7 @@ export class ElementStoreManager {
         const instance = template.content.cloneNode(true);
         this._items.set(id, {
             elements: [instance],
-            innerHTML: instance.innerHTML,
+            innerHTML: crsbinding.utils.fragmentToText(instance),
             template: template
         })
     }
