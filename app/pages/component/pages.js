@@ -19,12 +19,7 @@ export class Pages extends BindableElement {
     }
 
     async disconnectedCallback() {
-        const element = this.querySelector("[role='tablist']");
-        element.removeEventListener("click", clickHandler);
-        const clickHandler = null;
-
         delete this._panel;
-
         this._templates.forEach(id => crsbinding.elementStoreManager.unregister(id));
         super.disconnectedCallback();
     }
@@ -41,10 +36,7 @@ export class Pages extends BindableElement {
             crsbinding.elementStoreManager.register(id, element);
         }
 
-        // JHR: we should add this to a register event function instead
-        const element = this.querySelector("[role='tablist']");
-        const clickHandler = this._click.bind(this);
-        element.addEventListener("click", clickHandler);
+        this.registerEvent(this.querySelector("[role='tablist']"), "click", this._click.bind(this));
     }
 
     contextChanged(newValue) {
@@ -63,7 +55,7 @@ export class Pages extends BindableElement {
             crsbinding.idleTaskManager.add(() => {
                 crsbinding.observation.releaseBinding(oldChild);
             })
-        };
+        }
 
         const id = `${this.id}_${target}`;
         const element = crsbinding.elementStoreManager.getBoundElement(id, this.context);
@@ -71,8 +63,6 @@ export class Pages extends BindableElement {
         const child = document.createElement("div");
         child.id = target;
         child.appendChild(element);
-
-        crsbinding.parsers.parseElement(child, this.context);
 
         this._panel.appendChild(child);
     }

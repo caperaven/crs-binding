@@ -8,13 +8,23 @@ export class ElementStoreManager {
         this._items = null;
     }
 
-    register(id, template) {
+    register(id, template, cacheInnerHTML = false, measure = false) {
         const instance = template.content.cloneNode(true);
-        this._items.set(id, {
+
+        const result = {
             elements: [instance],
-            innerHTML: crsbinding.utils.fragmentToText(instance),
             template: template
-        })
+        };
+
+        if (cacheInnerHTML === true) {
+            result.innerHTML = crsbinding.utils.fragmentToText(instance);
+        }
+
+        if (measure === true) {
+            crsbinding.measure(instance).then(size => result.size = size);
+        }
+
+        this._items.set(id, result);
     }
 
     _getItemElement(item) {

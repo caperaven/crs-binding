@@ -14,6 +14,7 @@ import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
 import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
+import {measureElement, fragmentToText, disposeProperties} from "./lib/utils.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -25,25 +26,6 @@ function capitalizePropertyPath(str) {
         parts[i] = parts[i].capitalize();
     }
     return parts.join("");
-}
-
-function disposeProperties(obj) {
-    const properties = Object.getOwnPropertyNames(obj).filter(prop => obj[prop] && obj[prop].__isProxy == true);
-    for (let property of properties) {
-        const pObj = obj[property];
-        if (Array.isArray(pObj) != true) {
-            disposeProperties(pObj);
-        }
-        delete obj[property];
-    }
-}
-
-function fragmentToText(fragment) {
-    const text = [];
-    for (let child of fragment.children) {
-        text.push(child.outerHTML);
-    }
-    return text.join("");
 }
 
 const crsbinding = {
@@ -92,7 +74,8 @@ const crsbinding = {
         capitalizePropertyPath: capitalizePropertyPath,
         clone: clone,
         disposeProperties: disposeProperties,
-        fragmentToText: fragmentToText
+        fragmentToText: fragmentToText,
+        measureElement: measureElement
     }
 };
 
