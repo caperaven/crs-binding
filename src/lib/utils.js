@@ -7,7 +7,28 @@ export function fragmentToText(fragment) {
 }
 
 export function measureElement(element) {
-    console.log(element);
+    return new Promise(resolve => {
+        let el = element;
+        let result;
+
+        if (element.nodeName === "#document-fragment") {
+            el = document.createElement("div");
+            el.appendChild(element);
+            el.style.width = "max-content";
+            el.style.height = "max-content";
+            el.style.position = "fixed";
+            el.style.transform = "translate(-100px, -100px)";
+
+            document.body.appendChild(el);
+            result = el.getBoundingClientRect();
+            document.body.removeChild(el);
+        }
+        else {
+            result = el.getBoundingClientRect();
+        }
+
+        resolve(result);
+    })
 }
 
 export function disposeProperties(obj) {

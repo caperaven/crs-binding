@@ -8,7 +8,7 @@ export class ElementStoreManager {
         this._items = null;
     }
 
-    register(id, template, cacheInnerHTML = false, measure = false) {
+    register(id, template, measure = false) {
         const instance = template.content.cloneNode(true);
 
         const result = {
@@ -16,12 +16,8 @@ export class ElementStoreManager {
             template: template
         };
 
-        if (cacheInnerHTML === true) {
-            result.innerHTML = crsbinding.utils.fragmentToText(instance);
-        }
-
         if (measure === true) {
-            crsbinding.measure(instance).then(size => result.size = size);
+            crsbinding.utils.measureElement(instance).then(size => result.size = size);
         }
 
         this._items.set(id, result);
@@ -40,7 +36,7 @@ export class ElementStoreManager {
         const item = this._items.get(id);
         const fragment = document.createDocumentFragment();
 
-        for (let i = 0; i < quantity; i++) {
+        while(fragment.children.length < quantity) {
             fragment.appendChild(this._getItemElement(item));
         }
 
@@ -54,14 +50,10 @@ export class ElementStoreManager {
         return result;
     }
 
-    returnElements(id, elements, restore = true) {
+    returnElements(id, elements) {
         const item = this._items.get(id);
 
         for (let element of elements) {
-            if (restore == true) {
-                element.innerHTML = item.innerHTML;
-            }
-
             item.elements.push(element);
         }
     }
@@ -72,7 +64,6 @@ export class ElementStoreManager {
             this._items.delete(id);
             item.elements.length = 0;
             item.template = null;
-            item.innerHTML = null;
         }
     }
 }

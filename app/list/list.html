@@ -1,11 +1,43 @@
 <style>
+    .padded {
+        box-sizing: border-box;
+        padding: 0.25rem 0;
+    }
+
+    .container {
+        overflow-y: auto;
+    }
+
+    .container ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .toolbar {
+        display: flex;
+        align-items: center;
+    }
+
+    .toolbar button {
+        margin-left: 1rem;
+        height: 24px;
+    }
 </style>
-<h2>${title}</h2>
-<ul>
-    <template id="tplItem">
-        <li style.background.if="code == 'code1' ? '#ffbb00'">
-            <div>${code}</div>
-            <div>${description}</div>
-        </li>
-    </template>
-</ul>
+
+<div class="toolbar">
+    <h2>${title}</h2>
+    <button click.call="return" id="btnReturn">Return</button>
+    <button click.call="nextPage" id="btnNextPage">Next Page</button>
+</div>
+
+<div class="container">
+    <ul>
+        <template id="tplItem">
+            <li style.background.if="code == 'Code 1' ? '#ffbb00' : 'initial'" class="padded">
+                <div>${code}</div>
+                <div>${description}</div>
+            </li>
+        </template>
+    </ul>
+</div>
