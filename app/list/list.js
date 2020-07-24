@@ -35,7 +35,7 @@ export default class List extends ViewBase {
             element.parentElement.removeChild(element);
         }
 
-        crsbinding.inflationManager.returnElements("list", elements, true);
+        crsbinding.inflationManager.returnElements("list", elements);
     }
 
     nextPage() {

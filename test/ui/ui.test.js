@@ -94,8 +94,9 @@ afterAll(async () => {
         page.coverage.stopJSCoverage(),
         page.coverage.stopCSSCoverage(),
     ]);
-    pti.write([...jsCoverage, ...cssCoverage], { includeHostname: true , storagePath: './.nyc_output' })
+    pti.write([...jsCoverage, ...cssCoverage], { includeHostname: true , storagePath: './.nyc_output' });
     await page.close();
+    browser.close();
 });
 
 test("welcome", async() => {
@@ -108,6 +109,8 @@ test("welcome", async() => {
     await click('#btnI3');
     await click('#btnI4');
     await click('#btnI5');
+
+    await page.goBack();
 });
 
 test("component", async() => {
@@ -224,4 +227,39 @@ test("drawer", async() => {
 
     await click("#btnToggle");
     expect(await hasAttribute("#container", "hidden")).toBeTruthy();
+
+    await page.goBack();
+});
+
+test("pages", async() => {
+    let handle;
+
+    await navigateTo("pages");
+    await click("#btnOverview");
+    handle = await page.$("#tplOverview");
+    expect(handle).not.toBeNull();
+
+    await click("#btnDetails");
+    handle = await page.$("#tplDetails");
+    expect(handle).not.toBeNull();
+
+    await click("#btnContent");
+    handle = await page.$("#tplContent");
+    expect(handle).not.toBeNull();
+
+    await page.goBack();
+});
+
+test("list", async() => {
+    await navigateTo("list");
+
+    expect(await countElements(".container li")).toEqual(10);
+
+    await click("#btnReturn");
+    expect(await countElements(".container li")).toEqual(0);
+
+    await click("#btnNextPage");
+    expect(await countElements(".container li")).toEqual(10);
+
+    await page.goBack();
 });
