@@ -1,11 +1,10 @@
-const bg = chrome.extension.getBackgroundPage();
+const port = chrome.runtime.connect({name: "crs-binding-panel"});
 
-bg.get({
-    key: "context",
-    callback: (args) => {
-        console.log(args);
-        document.write(args);
-    }
+port.onMessage.addListener(msg => {
+    document.write(msg.source);
 });
 
-bg.debug();
+port.postMessage({
+    source: "crs-binding-panel",
+    key: "get-data"
+});

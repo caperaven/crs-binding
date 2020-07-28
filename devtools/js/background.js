@@ -3,16 +3,19 @@
     The content script pushes to this file when it detects crsbinding active on the page.
  */
 
-window.instances = {};
+const connections = {};
 
-window.get = function(args) {
-    const key = args.key;
-    const callback = args.callback;
+chrome.runtime.onConnect.addListener(port => {
+    connections[port.name] = port;
 
-    callback("hello world");
-};
-
-// message from the injected script
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    window.instances[request.url] = request.hasBinding;
+    port.onMessage.addListener(msg => {
+        const target = msg.source == "crs-binding-inject" ? "crs-binding-panel" : "crs-binding-inject";
+        connections[target] && connections[target].postMessage(msg);
+    })
 });
+
+// // message from the injected script
+// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+//     window.instances[request.url] = request.hasBinding;
+//     console.log("message received");
+// });

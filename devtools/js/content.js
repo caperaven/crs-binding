@@ -5,5 +5,6 @@
 
 window.postMessage({
     url: window.location.href,
-    hasBinding: crsbinding != null
+    hasBinding: window.crsbinding != null
 }, "*");
+
