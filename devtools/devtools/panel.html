@@ -113,6 +113,7 @@
             <span>__id__</span>
             <span class="dash">-</span>
             <span>__type__</span>
+            <span>(__count__)</span>
         </li>
     </template>
 
@@ -123,6 +124,16 @@
             <span class="highlight">__value__</span>
         </li>
     </template>
+
+    <template id="tplTemplate">
+        <li>
+            <span>__id__</span>
+            <span class="dash">-</span>
+            <span class="highlight">__name__</span>
+            <span>(__node__)</span>
+        </li>
+    </template>
+
 
     <div class="toolbar">
         <h2>crs binding tools</h2>
@@ -139,9 +150,9 @@
         <ul id="data"></ul>
     </section>
 
-    <section id="secTriggers" hidden>
-        <h2>triggers</h2>
-        <ul id="triggers"></ul>
+    <section id="secProviders" hidden>
+        <h2>providers</h2>
+        <ul id="providers"></ul>
     </section>
 
     <script src="panel.js"></script>

@@ -2,7 +2,8 @@ function getData() {
     if (window.crsbinding == null) return null;
     return {
         contexts: getContextValues(),
-        data: getDataValues()
+        data: getDataValues(),
+        providers: getProviders()
     };
 }
 
@@ -41,6 +42,23 @@ function getDataValues() {
     }
 
     crsbinding.data.details.data.forEach(process);
+
+    return result;
+}
+
+function getProviders() {
+    const result = [];
+
+    function process(value, key) {
+        result.push({
+            id: key,
+            context: value._context,
+            type: value.constructor.name,
+            nodeName: value._element.nodeName
+        })
+    }
+
+    crsbinding.providerManager.items.forEach(process);
 
     return result;
 }

@@ -2,7 +2,7 @@ const port = chrome.runtime.connect({name: "crs-binding-panel"});
 
 const btnRefresh = document.querySelector("#btnRefresh");
 const dataElement = document.querySelector("#secData");
-const triggersElement = document.querySelector("#secTriggers");
+const providersElement = document.querySelector("#secProviders");
 const contexts = document.querySelector("#contexts");
 
 let crsData;
@@ -19,7 +19,7 @@ port.onMessage.addListener(args => {
 
 function performRefreshEvent() {
     dataElement.setAttribute("hidden", "hidden");
-    triggersElement.setAttribute("hidden", "hidden");
+    providersElement.setAttribute("hidden", "hidden");
 
     port.postMessage({
         source: "crs-binding-panel",
@@ -31,6 +31,7 @@ function selectContextEvent(event) {
     const dataId = event.target.dataset.id;
     if (dataId == null) return;
     drawData(Number(dataId));
+    drawProviders(crsData.providers.filter(item => item.context == dataId));
 }
 
 function selectDataEvent(event) {
@@ -63,11 +64,14 @@ function drawContext(data) {
     data.forEach(item => {
         const instance = template.content.cloneNode(true);
         const li = instance.children[0];
+        const count = providerCount(item.id);
+
         li.dataset.id = item.id;
         li.innerHTML =
             li.innerHTML
                 .split("__id__").join(item.id)
-                .split("__type__").join(item.type);
+                .split("__type__").join(item.type)
+                .split("__count__").join(count);
         fragment.appendChild(instance);
     });
     contexts.appendChild(fragment);
@@ -119,6 +123,33 @@ function drawDataItem(property, dataItem, fragment, template) {
     }
 
     fragment.appendChild(instance);
+}
+
+function providerCount(id) {
+    return crsData.providers.filter(item => item.context == id).length;
+}
+
+function drawProviders(providers) {
+    providersElement.removeAttribute("hidden");
+    const container = providersElement.querySelector("ul");
+    container.innerHTML = "";
+    const template = document.querySelector("#tplTemplate");
+
+    const fragment = document.createDocumentFragment();
+
+    providers.forEach(provider => {
+        const instance = template.content.cloneNode(true);
+        const li = instance.children[0];
+        li.innerHTML =
+            li.innerHTML
+                .split("__id__").join(provider.id)
+                .split("__name__").join(provider.type)
+                .split("__node__").join(provider.nodeName)
+
+        fragment.appendChild(li);
+    });
+
+    container.appendChild(fragment);
 }
 
 function getValue(item) {
