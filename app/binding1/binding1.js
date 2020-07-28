@@ -21,6 +21,6 @@ export default class Binding1 extends ViewBase {
 
     removeSelected() {
         const items = crsbinding.data.getValue(this, "items").filter(item => item.isSelected != true);
-        crsbinding.data.setProperty(this, "items", items);
+        this.setProperty("items", items);
     }
 }

@@ -23,6 +23,14 @@ export default class Component extends ViewBase {
         super.disconnectedCallback();
     }
 
+    preLoad(setPropertyCallback) {
+        setPropertyCallback("model", {
+            translations: {
+                firstName: "First Name"
+            }
+        });
+    }
+
     load() {
         crsbinding.data.makeShared(this._dataId, "data", ["firstName", "contacts.phone.land", "contacts.phone.cell", "contacts.phone.fax"]);
 

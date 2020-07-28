@@ -63,6 +63,11 @@
       "hash": "#master-detail",
       "view": "master-detail",
       "hasStyle": true
+    },
+    {
+      "title": "Binding Memory Leak",
+      "hash": "#binding1",
+      "view": "binding1"
     }
   ]
 }
