@@ -1,10 +1,11 @@
-document.querySelector("#ctxCount").innerText = "5";
+const bg = chrome.extension.getBackgroundPage();
 
-const backgroundPageConnection = chrome.runtime.connect({
-    name: "panel"
+bg.get({
+    key: "context",
+    callback: (args) => {
+        console.log(args);
+        document.write(args);
+    }
 });
 
-backgroundPageConnection.postMessage({
-    name: 'init',
-    tabId: chrome.devtools.inspectedWindow.tabId
-});
+bg.debug();
