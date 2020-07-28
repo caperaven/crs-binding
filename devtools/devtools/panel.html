@@ -41,7 +41,7 @@
             cursor: pointer;
         }
 
-        li * {
+        li span {
             pointer-events: none;
         }
 
@@ -78,6 +78,32 @@
 
         .highlight {
             color: var(--cl-highlight);
+        }
+
+        ul.collapsed {
+            display: none;
+        }
+
+        .parent {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .parent:before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: url("./chevron.svg") no-repeat;
+            transform: rotate(90deg);
+            transition: all 0.3s ease;
+        }
+
+        .parent.collapsed:before {
+            transform: rotate(0deg);
         }
     </style>
 </head>

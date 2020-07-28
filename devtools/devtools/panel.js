@@ -9,6 +9,7 @@ let crsData;
 
 btnRefresh.addEventListener("click", performRefreshEvent);
 contexts.addEventListener("click", selectContextEvent);
+dataElement.addEventListener("click", selectDataEvent);
 
 port.onMessage.addListener(args => {
     if (args.msg.key == "refresh-result") {
@@ -30,6 +31,23 @@ function selectContextEvent(event) {
     const dataId = event.target.dataset.id;
     if (dataId == null) return;
     drawData(Number(dataId));
+}
+
+function selectDataEvent(event) {
+    if (event.target.nodeName == "LI") {
+        const child = event.target.querySelector("ul");
+
+        if (child != null) {
+            if (child.classList.contains("collapsed")) {
+                child.classList.remove("collapsed");
+                event.target.classList.remove("collapsed");
+            }
+            else {
+                child.classList.add("collapsed");
+                event.target.classList.add("collapsed");
+            }
+        }
+    }
 }
 
 function refresh(data) {
@@ -83,6 +101,7 @@ function drawDataItem(property, dataItem, fragment, template) {
 
     if (options.highlight == false) {
         li.children[2].classList.remove("highlight");
+        li.classList.add("parent");
     }
     else {
         li.classList.add("value");
