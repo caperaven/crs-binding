@@ -1,6 +1,14 @@
 const port = chrome.runtime.connect({name: "crs-binding-panel"});
 
-document.querySelector("#btnRefresh").addEventListener("click", performRefresh);
+const btnRefresh = document.querySelector("#btnRefresh");
+const dataElement = document.querySelector("#data");
+const triggersElement = document.querySelector("#triggers");
+const contexts = document.querySelector("#contexts");
+
+let crsData;
+
+btnRefresh.addEventListener("click", performRefreshEvent);
+contexts.addEventListener("click", selectContextEvent);
 
 port.onMessage.addListener(args => {
     if (args.msg.key == "refresh-result") {
@@ -8,20 +16,28 @@ port.onMessage.addListener(args => {
     }
 });
 
-function performRefresh() {
+function performRefreshEvent() {
+    dataElement.setAttribute("hidden", "hidden");
+    triggersElement.setAttribute("hidden", "hidden");
+
     port.postMessage({
         source: "crs-binding-panel",
         key: "refresh"
     });
 }
 
+function selectContextEvent(event) {
+    const dataId = event.target.dataset.id;
+    if (dataId == null) return;
+}
+
 function refresh(data) {
-    drawContext(data.contexts);
+    crsData = data;
+    drawContext(crsData.contexts);
 }
 
 function drawContext(data) {
     const template = document.querySelector("#tplContextItem");
-    const contexts = document.querySelector("#contexts");
     contexts.innerHTML = "";
 
     const fragment = document.createDocumentFragment();
@@ -37,4 +53,4 @@ function drawContext(data) {
     contexts.appendChild(fragment);
 }
 
-performRefresh();
+performRefreshEvent();

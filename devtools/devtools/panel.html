@@ -30,6 +30,11 @@
 
         li {
             line-height: 1.5rem;
+            cursor: pointer;
+        }
+
+        li * {
+            pointer-events: none;
         }
 
         .contexts span {
@@ -57,11 +62,15 @@
         .dash {
             text-align: left;
         }
+
+        [hidden] {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <template id="tplContextItem">
-        <li>
+        <li data-id="__id__">
             <span>__id__</span>
             <span class="dash">-</span>
             <span>__type__</span>
@@ -76,6 +85,16 @@
     <section>
         <h2>contexts</h2>
         <ul id="contexts"></ul>
+    </section>
+
+    <section hidden>
+        <h2>Data</h2>
+        <ul id="data"></ul>
+    </section>
+
+    <section hidden>
+        <h2>Triggers</h2>
+        <ul id="triggers"></ul>
     </section>
 
     <script src="panel.js"></script>
