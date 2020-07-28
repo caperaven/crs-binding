@@ -51,7 +51,7 @@
 
         section {
             border: solid 1px #dadada;
-            padding: 1rem;
+            padding: 0.5rem;
             margin-bottom: 0.5rem;
             user-select: none;
         }
@@ -109,10 +109,33 @@
 
         section h2 {
             cursor: pointer;
+            position: relative;
+            margin: 0;
+        }
+
+        section > ul {
+            margin-top: 1rem;
+        }
+
+        section h2:after {
+            content: "";
+            position: absolute;
+            right: 1rem;
+            top: 0.5rem;
+            display: block;
+            background: url("./chevron_w.svg") no-repeat;
+            transition: all 0.3s ease;
+            width: 24px;
+            height: 24px;
+            transform: rotate(90deg);
         }
 
         section h2.collapsed ~ ul {
             display: none;
+        }
+
+        section h2.collapsed:after {
+            transform: rotate(0deg);
         }
     </style>
 </head>
