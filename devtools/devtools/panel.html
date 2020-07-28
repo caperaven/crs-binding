@@ -4,7 +4,9 @@
     <style>
         :root {
             --cl-primary: #2196f3;
-            --cl-highlight: #E91E63;
+            --cl-highlight: #1ebae9;
+            --cl-gray: #607D8B;
+            --cl-border: #dadada;
             color: var(--cl-primary);
         }
 
@@ -81,6 +83,13 @@
             color: var(--cl-highlight);
         }
 
+        [aria-selected='true'] {
+            background: var(--cl-highlight);
+            color: white;
+            padding-left: 1rem;
+            transition: padding 0.5s ease-out;
+        }
+
         ul.collapsed {
             display: none;
         }
@@ -137,6 +146,17 @@
         section h2.collapsed:after {
             transform: rotate(0deg);
         }
+
+        .subtext {
+            color: var(--cl-gray);
+            margin-top: -0.5rem;
+            font-size: 0.7rem;
+        }
+
+        .bg-highlight {
+            background: var(--cl-highlight);
+        }
+
     </style>
 </head>
 <body>
@@ -157,12 +177,13 @@
         </li>
     </template>
 
-    <template id="tplTemplate">
+    <template id="tplProviders">
         <li>
             <span>__id__</span>
             <span class="dash">-</span>
             <span class="highlight">__name__</span>
             <span>(__node__)</span>
+            <div class="subtext">__exp__</div>
         </li>
     </template>
 
@@ -178,12 +199,12 @@
     </section>
 
     <section id="secData" hidden>
-        <h2>data</h2>
+        <h2 class="bg-highlight">data</h2>
         <ul id="data"></ul>
     </section>
 
     <section id="secProviders" hidden>
-        <h2>providers</h2>
+        <h2 class="bg-highlight">providers</h2>
         <ul id="providers"></ul>
     </section>
 

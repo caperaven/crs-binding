@@ -29,13 +29,20 @@ function performRefreshEvent() {
 }
 
 function selectContextEvent(event) {
+
     const dataId = event.target.dataset.id;
     if (dataId == null) return;
+
+    const selected = document.querySelector("[aria-selected='true']");
+    selected && selected.removeAttribute("aria-selected");
+    event.target.setAttribute("aria-selected", true);
+
     drawData(Number(dataId));
     drawProviders(crsData.providers.filter(item => item.context == dataId));
 }
 
 function selectDataEvent(event) {
+
     if (event.target.nodeName == "LI") {
         const child = event.target.querySelector("ul");
 
@@ -143,7 +150,7 @@ function drawProviders(providers) {
     providersElement.removeAttribute("hidden");
     const container = providersElement.querySelector("ul");
     container.innerHTML = "";
-    const template = document.querySelector("#tplTemplate");
+    const template = document.querySelector("#tplProviders");
 
     const fragment = document.createDocumentFragment();
 
@@ -155,6 +162,7 @@ function drawProviders(providers) {
                 .split("__id__").join(provider.id)
                 .split("__name__").join(provider.type)
                 .split("__node__").join(provider.nodeName)
+                .split("__exp__").join(provider.expression);
 
         fragment.appendChild(li);
     });

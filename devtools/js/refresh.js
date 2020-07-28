@@ -50,12 +50,19 @@ function getProviders() {
     const result = [];
 
     function process(value, key) {
+        let exp = value._value;
+
+        if (exp == null) {
+            exp = value._expObj ? value._expObj.parameters.expression : "";
+        }
+
         result.push({
             id: key,
             context: value._context,
             type: value.constructor.name,
-            nodeName: value._element.nodeName
-        })
+            nodeName: value._element.nodeName,
+            expression: exp
+        });
     }
 
     crsbinding.providerManager.items.forEach(process);
