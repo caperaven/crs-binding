@@ -53,6 +53,7 @@
             border: solid 1px #dadada;
             padding: 1rem;
             margin-bottom: 0.5rem;
+            user-select: none;
         }
 
         section h2 {
@@ -104,6 +105,14 @@
 
         .parent.collapsed:before {
             transform: rotate(0deg);
+        }
+
+        section h2 {
+            cursor: pointer;
+        }
+
+        section h2.collapsed ~ ul {
+            display: none;
         }
     </style>
 </head>

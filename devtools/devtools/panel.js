@@ -10,6 +10,7 @@ let crsData;
 btnRefresh.addEventListener("click", performRefreshEvent);
 contexts.addEventListener("click", selectContextEvent);
 dataElement.addEventListener("click", selectDataEvent);
+document.querySelectorAll("section h2").forEach(element => element.addEventListener("click", headingClickEvent));
 
 port.onMessage.addListener(args => {
     if (args.msg.key == "refresh-result") {
@@ -48,6 +49,15 @@ function selectDataEvent(event) {
                 event.target.classList.add("collapsed");
             }
         }
+    }
+}
+
+function headingClickEvent(event) {
+    if (event.target.classList.contains("collapsed")) {
+        event.target.classList.remove("collapsed")
+    }
+    else {
+        event.target.classList.add("collapsed");
     }
 }
 
