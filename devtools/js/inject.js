@@ -19,7 +19,6 @@ window.addEventListener("message", event => {
     }
 
     const message = event.data;
-    console.log(event);
 
     // send message to background.js
     chrome.runtime.sendMessage(message);
