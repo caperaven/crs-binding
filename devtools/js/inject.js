@@ -1,22 +1,20 @@
-/**
- * This file is initialized by the manifest and injects the content script.
- */
-
 function injectScript(file_path, tag) {
-    const node = document.getElementsByTagName(tag)[0];
+    const element = document.getElementsByTagName(tag)[0];
     const script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
     script.setAttribute('src', file_path);
-    node.appendChild(script);
-    return script;
+    element.appendChild(script);
+    script.onload = () => {
+        element.removeChild(script);
+    }
 }
-const script = injectScript(chrome.extension.getURL('js/content.js'), 'body');
 
 const port = chrome.runtime.connect({name: "crs-binding-inject"});
 
 port.onMessage.addListener(msg => {
-    console.log(msg);
-    debugger;
+    if (msg.key == "refresh") {
+        injectScript(chrome.extension.getURL('js/refresh.js'), 'body');
+    }
 });
 
 // Messages from content.js
@@ -25,12 +23,8 @@ window.addEventListener("message", event => {
         return;
     }
 
-    const message = event.data;
-
-    // send message to background
     port.postMessage({
         source: "crs-binding-inject",
-        key: "has-binding",
-        msg: message
+        msg: event.data
     });
 });

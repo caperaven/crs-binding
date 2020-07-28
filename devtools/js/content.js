@@ -7,4 +7,3 @@ window.postMessage({
     url: window.location.href,
     hasBinding: window.crsbinding != null
 }, "*");
-

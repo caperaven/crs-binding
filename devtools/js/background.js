@@ -9,13 +9,9 @@ chrome.runtime.onConnect.addListener(port => {
     connections[port.name] = port;
 
     port.onMessage.addListener(msg => {
+        console.log(msg);
+
         const target = msg.source == "crs-binding-inject" ? "crs-binding-panel" : "crs-binding-inject";
         connections[target] && connections[target].postMessage(msg);
     })
 });
-
-// // message from the injected script
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//     window.instances[request.url] = request.hasBinding;
-//     console.log("message received");
-// });
