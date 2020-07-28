@@ -66,43 +66,55 @@ function drawData(id) {
     const fragment = document.createDocumentFragment();
     const keys = Object.getOwnPropertyNames(data.value);
     keys.forEach(key => {
-        let value;
-        let highlight = true;
-
-        if (data.value[key] == null) {
-            value = "null";
-        }
-        else {
-            if (Array.isArray(data.value[key])) {
-                value = `[array (${data.value[key].length})]`;
-                highlight = false;
-            }
-            else {
-                value = data.value[key].toString();
-                if (value == "[object Object]") {
-                    value = "[object]";
-                    highlight = false;
-                }
-            }
-        }
-
-        const instance = template.content.cloneNode(true);
-        const li = instance.children[0];
-        li.innerHTML =
-            li.innerHTML
-                .split("__property__").join(key)
-                .split("__value__").join(value);
-
-        if (highlight == false) {
-            li.children[2].classList.remove("highlight");
-        }
-        else {
-            li.classList.add("value");
-        }
-
-        fragment.appendChild(instance);
+        drawDataItem(key, data.value, fragment, template);
     });
     container.appendChild(fragment);
+}
+
+function drawDataItem(property, dataItem, fragment, template) {
+    const options = getValue(dataItem[property]);
+
+    const instance = template.content.cloneNode(true);
+    const li = instance.children[0];
+    li.innerHTML =
+        li.innerHTML
+            .split("__property__").join(property)
+            .split("__value__").join(options.value);
+
+    if (options.highlight == false) {
+        li.children[2].classList.remove("highlight");
+    }
+    else {
+        li.classList.add("value");
+    }
+
+    fragment.appendChild(instance);
+}
+
+function getValue(item) {
+    const result = {
+        value: "null",
+        highlight: true
+    };
+
+    if (item == null) {
+        result.value = "null";
+    }
+    else {
+        if (Array.isArray(item)) {
+            result.value = `[array (${item.length})]`;
+            result.highlight = false;
+        }
+        else {
+            result.value = item.toString();
+            if (result.value == "[object Object]") {
+                result.value = "[object]";
+                result.highlight = false;
+            }
+        }
+    }
+
+    return result;
 }
 
 performRefreshEvent();
