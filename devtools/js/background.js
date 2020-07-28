@@ -9,8 +9,6 @@ chrome.runtime.onConnect.addListener(port => {
     connections[port.name] = port;
 
     port.onMessage.addListener(msg => {
-        console.log(msg);
-
         const target = msg.source == "crs-binding-inject" ? "crs-binding-panel" : "crs-binding-inject";
         connections[target] && connections[target].postMessage(msg);
     })

@@ -13,9 +13,15 @@ function getContextValues() {
     }];
 
     function process(value, key) {
+        let type = value.constructor.name;
+
+        if (value instanceof HTMLElement) {
+            type = `${type} (Element)`
+        }
+
         result.push({
             id: key,
-            type: value.constructor.name
+            type: type
         })
     }
 
