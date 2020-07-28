@@ -44,6 +44,7 @@ function drawContext(data) {
     data.forEach(item => {
         const instance = template.content.cloneNode(true);
         const li = instance.children[0];
+        li.dataset.id = item.id;
         li.innerHTML =
         li.innerHTML
             .split("__id__").join(item.id)

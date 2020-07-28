@@ -1,12 +1,16 @@
 function getData() {
     if (window.crsbinding == null) return null;
     return {
-        contexts: getContext()
+        contexts: getContextValues(),
+        data: getDataValues()
     };
 }
 
-function getContext() {
-    const result = [];
+function getContextValues() {
+    const result = [{
+        id: 0,
+        type: "Globals"
+    }];
 
     function process(value, key) {
         result.push({
@@ -16,6 +20,21 @@ function getContext() {
     }
 
     crsbinding.data.details.context.forEach(process);
+
+    return result;
+}
+
+function getDataValues() {
+    const result = [];
+
+    function process(value, key) {
+        result.push({
+            id: key,
+            value: value.data
+        })
+    }
+
+    crsbinding.data.details.data.forEach(process);
 
     return result;
 }
