@@ -88,13 +88,25 @@ function drawDataItem(property, dataItem, fragment, template) {
         li.classList.add("value");
     }
 
+    if (options.type != "value") {
+        const childFragment = document.createDocumentFragment();
+        const keys = Object.keys(dataItem[property]);
+        keys.forEach(key => {
+            drawDataItem(key, dataItem[property], childFragment, template);
+        });
+        const ul = document.createElement("ul");
+        ul.appendChild(childFragment);
+        li.appendChild(ul);
+    }
+
     fragment.appendChild(instance);
 }
 
 function getValue(item) {
     const result = {
         value: "null",
-        highlight: true
+        highlight: true,
+        type: "value"
     };
 
     if (item == null) {
@@ -104,12 +116,14 @@ function getValue(item) {
         if (Array.isArray(item)) {
             result.value = `[array (${item.length})]`;
             result.highlight = false;
+            result.type = "array";
         }
         else {
             result.value = item.toString();
             if (result.value == "[object Object]") {
                 result.value = "[object]";
                 result.highlight = false;
+                result.type = "object";
             }
         }
     }
