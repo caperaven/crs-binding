@@ -82,12 +82,3 @@ const crsbinding = {
 globalThis.crsbinding = crsbinding;
 crsbinding.$globals = crsbinding.data.addObject("globals");
 crsbinding.data.globals = crsbinding.data.getValue(crsbinding.$globals);
-
-window.postMessage({
-    greeting: 'hello there!',
-    source: 'my-devtools-extension'
-}, '*');
-
-export {
-    crsbinding
-};
