@@ -5,4 +5,3 @@ yarn-error.log
 /.nyc_output/
 /coverage/
 /dist/
-/publish/

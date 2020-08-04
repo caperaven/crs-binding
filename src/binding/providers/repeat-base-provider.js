@@ -33,7 +33,7 @@ export class RepeatBaseProvider extends ProviderBase {
 
     async _collectionChanged(context, newValue) {
         if (newValue == null) return this._clear();
-        this._renderItems(newValue);
+        await this._renderItems(newValue);
     }
 
     /**

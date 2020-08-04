@@ -1,5 +1,5 @@
-//import {terser} from "rollup-plugin-terser";
-function terser() {}
+import {terser} from "rollup-plugin-terser";
+//function terser() {}
 
 export default [
     {

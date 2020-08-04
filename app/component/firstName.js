@@ -12,6 +12,10 @@ class FirstName extends BindableElement{
     set value(newValue) {
         this.setProperty("value", newValue);
     }
+
+    load() {
+        this.setProperty("model", {translations: {firstName: "First Name"}})
+    }
 }
 
 customElements.define("first-name", FirstName);

@@ -28,6 +28,10 @@
         align-items: center;
     }
 
+    main {
+        flex: 1;
+    }
+
     h1 {
         text-align: center;
         color: cornflowerblue;
@@ -38,17 +42,11 @@
 
     crs-router {
         padding: 1rem;
-        display: block;
+        display: grid;
     }
 </style>
 <body style="visibility: hidden">
     <header>
-        <button id="btnI1" click.setValue="$globals.menuVisible = !$globals.menuVisible">Menu</button>
-        <button id="btnI2" click.setValue="title='Hello World'">Set Title</button>
-        <button id="btnI3" click.setValue="$globals.myDate = new Date()">New Date</button>
-        <button id="btnI4" click.setValue="$globals.object = {title: ${title}}">Set globals object</button>
-        <button id="btnI5" click.setValue="$globals.mousePos = {x: $event.x, y: $event.y}">Set globals mouse pos</button>
-
         <h1>${title}</h1>
     </header>
 

@@ -22,7 +22,18 @@ export default class Parent2 extends ViewBase {
     };
 
     load() {
-        crsbinding.data.updateUI(this, "items");
+        crsbinding.data.updateUI(this, "items").then(this._measureItems);
+        crsbinding.data.makeShared(this, "data", ["title"]);
         super.load();
+    }
+
+    _measureItems() {
+        const el = document.querySelector(`li`);
+        const dim = el.getBoundingClientRect();
+        console.log(dim);
+    }
+
+    _remove() {
+
     }
 }

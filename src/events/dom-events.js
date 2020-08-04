@@ -7,8 +7,10 @@ export function domEnableEvents(element) {
 export function domDisableEvents(element) {
     if (element._domEvents == null) return;
     for (let event of element._domEvents) {
-        event.callback = null;
-        event.event = null;
+        element.removeEventListener(event.event, event.callback);
+        delete event.element;
+        delete event.callback;
+        delete event.event;
     }
     element._domEvents.length = 0;
     delete element._domEvents;
@@ -16,21 +18,23 @@ export function domDisableEvents(element) {
     delete element.unregisterEvent;
 }
 
-function registerEvent(event, callback) {
-    this.addEventListener(event, callback);
+function registerEvent(element, event, callback) {
+    element.addEventListener(event, callback);
     this._domEvents.push({
+        element: element,
         event: event,
         callback: callback
     })
 }
 
-function unregisterEvent(event, callback) {
-    const item = this._domEvents.find(item => item.event == event && item.callback == callback);
+function unregisterEvent(element, event, callback) {
+    const item = this._domEvents.find(item => item.element == element && item.event == event && item.callback == callback);
     if (item == null) return;
 
-    this.removeEventListener(item.event, item.callback);
+    element.removeEventListener(item.event, item.callback);
 
     this._domEvents.splice(this._domEvents.indexOf(item), 1);
-    item.callback = null;
-    item.event = null;
+    delete item.element;
+    delete item.callback;
+    delete item.event;
 }

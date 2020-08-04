@@ -1,0 +1,22 @@
+<div class="main">
+    <h2>${title}</h2>
+
+    <div class="container">
+        <ul click.setValue="data = $data($event.target.dataset.uid)">
+            <button click.call="removeSelected">Remove</button>
+            <template for="item of items">
+                <li aria-selected.if="$parent.data.id == item.id">
+                    <div class="select"></div>
+                    <input type="checkbox" checked.bind="item.selected" />
+                    <div>${item.title}</div>
+                </li>
+            </template>
+        </ul>
+        <div class="data" hidden.if="data == null">
+            <h2>${data.title}</h2>
+            <p>${data.paragraph}</p>
+            <hr />
+            <input value.bind="data.title">
+        </div>
+    </div>
+</div>

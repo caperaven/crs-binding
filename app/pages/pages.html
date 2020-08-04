@@ -1,0 +1,41 @@
+<style>
+    crs-pages {
+        display: block;
+        height: max-content;
+    }
+
+    crs-pages [role="tabpanel"] {
+        border: solid 1px #dadada;
+        border-radius: 10px;
+        padding: 0.5rem;
+        min-height: 5rem;
+        margin-top: 1rem;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<crs-pages id="pgrMain" context.bind="dataId">
+    <div role="tablist">
+        <button data-template="tplOverview" aria-selected="true" aria-controls="panel" id="btnOverview">Overview</button>
+        <button data-template="tplDetails" aria-selected="true" aria-controls="panel" id="btnDetails">Details</button>
+        <button data-template="tplContent" aria-selected="true" aria-controls="panel" id="btnContent">Content</button>
+    </div>
+
+    <div id="panel" role="tabpanel" tabindex="0">
+        <template id="tplOverview">
+            <h2>Overview</h2>
+            <p>${data.p1}</p>
+        </template>
+
+        <template id="tplDetails">
+            <h2>Details</h2>
+            <p>${data.p2}</p>
+        </template>
+
+        <template id="tplContent">
+            <h2>Content</h2>
+            <p>${data.p3}</p>
+        </template>
+    </div>
+</crs-pages>

@@ -13,7 +13,7 @@ export class InnerProvider extends ProviderBase {
             this._context = parentId;
         }
 
-
+        this._value = element.innerText || element.textContent;
         this._eventHandler = this._change.bind(this);
         this._expObj = crsbinding.expression.compile(element.innerText || element.textContent, null, {ctxName: this._ctxName});
 

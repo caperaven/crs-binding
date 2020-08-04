@@ -59,8 +59,9 @@
 <div class="container">
     <ul click.setValue="data = $data($event.target.dataset.uid)">
         <template for="item of items">
-            <li data-id="${item.id}" aria-selected.if="$parent.data.id == item.id">
+            <li aria-selected.if="$parent.data.id == item.id">
                 <div class="select"></div>
+                <input type="checkbox" checked.bind="item.selected" />
                 <div>${item.title}</div>
             </li>
         </template>

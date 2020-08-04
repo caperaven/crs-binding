@@ -30,9 +30,6 @@ export class BindableElement extends HTMLElement {
             crsbinding.parsers.parseElements(this.children, this._dataId);
         }
 
-        this.isReady = true;
-        this.dispatchEvent(new CustomEvent("ready"));
-
         requestAnimationFrame(() => {
             const name = this.getAttribute("name");
             if (name != null) {
@@ -48,8 +45,8 @@ export class BindableElement extends HTMLElement {
             this.load();
         }
 
-        // JHR: this is for debugging.
-        // this.dataset.uid = this._dataId;
+        this.isReady = true;
+        this.dispatchEvent(new CustomEvent("ready"));
     }
 
     async disconnectedCallback() {
@@ -65,7 +62,7 @@ export class BindableElement extends HTMLElement {
     }
 
     setProperty(property, value, once = false) {
-        if (this.isReady != true && once === false) {
+        if (this.isReady != true && once === false && this.__properties) {
             return this.__properties.set(property, value);
         }
 

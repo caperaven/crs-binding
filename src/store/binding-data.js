@@ -66,7 +66,7 @@ function callFunctionsOnPath(id, path) {
     }
 }
 
-function callFunctions(id, property) {
+async function callFunctions(id, property) {
     if (typeof id == "object") {
         id = id.__uid || id._dataId;
     }
@@ -76,7 +76,7 @@ function callFunctions(id, property) {
     if (property == null) {
         const properties = getOwnProperties(obj);
         for (let prop of properties) {
-            callFunctionsOnObject(obj[prop], id, prop);
+            await callFunctionsOnObject(obj[prop], id, prop);
         }
     }
     else {
@@ -84,16 +84,16 @@ function callFunctions(id, property) {
 
         if (obj == null) return;
         if (obj[property] == null) return;
-        callFunctionsOnObject(obj[property], id, property);
+        await callFunctionsOnObject(obj[property], id, property);
     }
 }
 
-function callFunctionsOnObject(obj, id, property) {
+async function callFunctionsOnObject(obj, id, property) {
     const functions = obj.__functions;
     if (functions != null) {
         for(let fn of obj.__functions) {
             const value = bindingData.getValue(id, property);
-            fn(property, value);
+            await fn(property, value);
         }
     }
 
@@ -103,7 +103,7 @@ function callFunctionsOnObject(obj, id, property) {
             triggerObj.frozen = true;
             for (let trigger of triggerObj.values) {
                 if (trigger.id == id && trigger.path == property) continue;
-                crsbinding.data.updateUI(trigger.id, trigger.path);
+                await crsbinding.data.updateUI(trigger.id, trigger.path);
             }
             delete triggerObj.frozen;
         }
@@ -111,7 +111,7 @@ function callFunctionsOnObject(obj, id, property) {
 
     const properties = getOwnProperties(obj);
     for (let prop of properties) {
-        callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
+        await callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
     }
 }
 
@@ -515,6 +515,8 @@ export const bindingData = {
      * @returns {value}
      */
     getValue(id, property) {
+        if (id == "undefined" || id == null) return undefined;
+
         if (typeof id == "object") {
             id = id.__uid || id._dataId;
         }

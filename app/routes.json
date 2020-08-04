@@ -10,6 +10,16 @@
       "view": "welcome"
     },
     {
+      "title": "List",
+      "hash": "#list",
+      "view": "list"
+    },
+    {
+      "title": "Pages",
+      "hash": "#pages",
+      "view": "pages"
+    },
+    {
       "title": "Component Test",
       "hash": "#component",
       "view": "component"
@@ -49,24 +59,15 @@
       "view": "svg"
     },
     {
-      "title": "Parent Binding",
-      "hash": "#parent",
-      "view": "parent"
+      "title": "Master Detail",
+      "hash": "#master-detail",
+      "view": "master-detail",
+      "hasStyle": true
     },
     {
-      "title": "Parent Binding 2",
-      "hash": "#parent2",
-      "view": "parent2"
-    },
-    {
-      "title": "Binding 1",
+      "title": "Binding Memory Leak",
       "hash": "#binding1",
       "view": "binding1"
-    },
-    {
-      "title": "First Last Inverse Paint",
-      "hash": "#flip",
-      "view": "flip"
     }
   ]
 }

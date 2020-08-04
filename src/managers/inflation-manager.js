@@ -13,13 +13,14 @@ export class InflationManager {
      * @param id
      * @param template
      */
-    register(id, template, ctxName = "context") {
+    register(id, template, ctxName = "context", measure = false) {
         const generator = new InflationCodeGenerator(ctxName);
         const result = generator.generateCodeFor(template);
         generator.dispose();
 
+        crsbinding.elementStoreManager.register(id, template, measure);
+
         this._items.set(id, {
-            template: template,
             inflate: result.inflate,
             deflate: result.deflate
         })
@@ -32,11 +33,11 @@ export class InflationManager {
     unregister(id) {
         const item = this._items.get(id);
         if (item != null) {
-            item.template = null;
             item.inflate = null;
             item.defaulte = null;
             this._items.delete(id);
         }
+        crsbinding.elementStoreManager.unregister(id);
     }
 
     /**
@@ -48,15 +49,11 @@ export class InflationManager {
         const item = this._items.get(id);
         if (item == null) return null;
 
-        const fragment = document.createDocumentFragment();
-
-        for (let d of data) {
-            const element = item.template.content.cloneNode(true);
-            this.inflate(id, element.children[0], d, item.inflate);
-            fragment.appendChild(element);
+        const fragment = crsbinding.elementStoreManager.getElements(id, data.length);
+        for (let i = 0; i < data.length; i++) {
+            this.inflate(id, fragment.children[i], data[i], item.inflate);
         }
 
-        fragment.querySelectorAll('[remove="true"]').forEach(element => element.parentElement.removeChild(element));
         return fragment;
     }
 
@@ -87,6 +84,16 @@ export class InflationManager {
         else {
             fn(elements);
         }
+    }
+
+    /**
+     * Return elements back to the store for use again later
+     * @param id
+     * @param elements
+     * @param restore
+     */
+    returnElements(id, elements, restore = false) {
+        crsbinding.elementStoreManager.returnElements(id, elements, restore)
     }
 }
 
