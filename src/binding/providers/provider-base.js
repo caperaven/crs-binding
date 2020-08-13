@@ -67,7 +67,6 @@ export class ProviderBase {
     listenOnPath(property, callback) {
         const collection = Array.isArray(property) == true ? property : [property];
 
-
         for (let p of collection) {
             let context = this._context;
 
