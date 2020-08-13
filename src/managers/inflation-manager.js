@@ -66,7 +66,6 @@ export class InflationManager {
     inflate(id, element, data, inflate = null) {
         const fn = inflate || this._items.get(id).inflate;
         fn(element, data);
-
         const removedElements = element.querySelectorAll('[remove="true"]');
         for (let rel of removedElements) {
             rel.parentElement.removeChild(rel);

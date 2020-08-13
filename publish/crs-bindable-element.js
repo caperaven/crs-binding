@@ -1,1 +1,101 @@
-function t(t,i){const s=`_${i}`;return null!=t[s]?t[s]:crsbinding.data.getValue(t._dataId,i)}class i extends HTMLElement{constructor(){super(),this._dataId=crsbinding.data.addObject(this.constructor.name),crsbinding.data.addContext(this._dataId,this),crsbinding.dom.enableEvents(this),this.__properties=new Map}dispose(){this._disposing=!0,crsbinding.dom.disableEvents(this)}async connectedCallback(){if(null!=this.preLoad){const t=(t,i)=>{crsbinding.data.setProperty(this._dataId,t,i)};await this.preLoad(t)}null!=this.html&&(this.innerHTML=await fetch(this.html).then(t=>t.text()),crsbinding.parsers.parseElements(this.children,this._dataId)),requestAnimationFrame(()=>{const t=this.getAttribute("name");null!=t&&crsbinding.data.setName(this._dataId,t)}),this.__properties.forEach((t,i)=>crsbinding.data.setProperty(this._dataId,i,t)),this.__properties.clear(),delete this.__properties,null!=this.load&&this.load(),this.isReady=!0,this.dispatchEvent(new CustomEvent("ready"))}async disconnectedCallback(){this.dispose(),crsbinding.utils.disposeProperties(this),crsbinding.observation.releaseBinding(this),crsbinding.data.removeObject(this._dataId)}getProperty(i){return t(this,i)}setProperty(i,s,e=!1){if(1!=this.isReady&&!1===e&&this.__properties)return this.__properties.set(i,s);!function(i,s,e){let a=t(i,s);Array.isArray(a)&&crsbinding.data.array(i,s).splice(0,a.length),e&&null!=e.__uid&&a&&crsbinding.data.unlinkArrayItem(a),crsbinding.data.setProperty(i._dataId,s,e),Array.isArray(e)&&(i[`_${s}`]=crsbinding.data.array(i._dataId,s)),e&&e.__uid&&crsbinding.data.linkToArrayItem(i._dataId,s,e.__uid)}(this,i,s)}}export{i as BindableElement};
+function getProperty(obj, property) {
+    const field = `_${property}`;
+    if (obj[field] != null) {
+        return obj[field];
+    }
+
+    return crsbinding.data.getValue(obj._dataId, property);
+}
+
+function setProperty(obj, property, value) {
+    let oldValue = getProperty(obj, property);
+
+    if (Array.isArray(oldValue)) {
+        crsbinding.data.array(obj, property).splice(0, oldValue.length);
+    }
+    if (value && value.__uid != null) {
+        oldValue && crsbinding.data.unlinkArrayItem(oldValue);
+    }
+
+    crsbinding.data.setProperty(obj._dataId, property, value);
+
+    if (Array.isArray(value)) {
+        obj[`_${property}`] = crsbinding.data.array(obj._dataId, property);
+    }
+
+    if (value && value.__uid) {
+        crsbinding.data.linkToArrayItem(obj._dataId, property, value.__uid);
+    }
+}
+
+class BindableElement extends HTMLElement {
+    constructor() {
+        super();
+        this._dataId = crsbinding.data.addObject(this.constructor.name);
+
+        crsbinding.data.addContext(this._dataId, this);
+        crsbinding.dom.enableEvents(this);
+
+        this.__properties = new Map();
+    }
+
+    dispose() {
+        this._disposing = true;
+        crsbinding.dom.disableEvents(this);
+    }
+
+    async connectedCallback() {
+        if(this.preLoad != null) {
+            const setPropertyCallback = (path, value)=> {
+                crsbinding.data.setProperty(this._dataId, path, value);
+            };
+
+            await this.preLoad(setPropertyCallback);
+        }
+
+        if (this.html != null) {
+            this.innerHTML = await fetch(this.html).then(result => result.text());
+            crsbinding.parsers.parseElements(this.children, this._dataId);
+        }
+
+        requestAnimationFrame(() => {
+            const name = this.getAttribute("name");
+            if (name != null) {
+                crsbinding.data.setName(this._dataId, name);
+            }
+        });
+
+        this.__properties.forEach((value, key) => crsbinding.data.setProperty(this._dataId, key, value));
+        this.__properties.clear();
+        delete this.__properties;
+
+        if (this.load != null) {
+            this.load();
+        }
+
+        this.isReady = true;
+        this.dispatchEvent(new CustomEvent("ready"));
+    }
+
+    async disconnectedCallback() {
+        this.dispose();
+
+        crsbinding.utils.disposeProperties(this);
+        crsbinding.observation.releaseBinding(this);
+        crsbinding.data.removeObject(this._dataId);
+    }
+
+    getProperty(property) {
+        return getProperty(this, property);
+    }
+
+    setProperty(property, value, once = false) {
+        if (this.isReady != true && once === false && this.__properties) {
+            return this.__properties.set(property, value);
+        }
+
+        setProperty(this, property, value);
+    }
+}
+
+export { BindableElement };
