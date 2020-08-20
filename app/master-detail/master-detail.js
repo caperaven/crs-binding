@@ -44,4 +44,8 @@ export default class MasterDetail extends ViewBase {
         }
     }
 
+    selected(event) {
+        console.log(event.target);
+    }
+
 }

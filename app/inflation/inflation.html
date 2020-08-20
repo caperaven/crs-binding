@@ -19,6 +19,17 @@
     </div>
 </template>
 
-<div id="container">
+<div id="container" class="container">
 
+</div>
+
+<div class="container">
+    <template for.once="item of data">
+        <div data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">
+            <div remove.if="item.title == null ? true">${item.title}</div>
+            <svg class="icon" remove.if="item.value == null ? true">
+                <use xlink:href="${item.value == true ? '#checked' : '#unchecked'}" />
+            </svg>
+        </div>
+    </template>
 </div>

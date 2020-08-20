@@ -22,7 +22,6 @@ export default class Project5 extends ViewBase {
     }
 
     load() {
-        //crsbinding.data.makeShared(this, "data", ["title"]);
         crsbinding.data.updateUI(this, "items");
         super.load();
     }
