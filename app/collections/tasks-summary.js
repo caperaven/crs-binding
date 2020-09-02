@@ -21,10 +21,6 @@ class TasksSummary extends BindableElement{
     set taskCount(newValue) {
         this.setProperty("taskCount", newValue);
     }
-
-    async connectedCallback() {
-        super.connectedCallback();
-    }
 }
 
 customElements.define("tasks-summary", TasksSummary);

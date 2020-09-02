@@ -31,11 +31,13 @@ export function measureElement(element) {
     })
 }
 
+const ignoreDispose = ["_element"];
 export function disposeProperties(obj) {
-    const properties = Object.getOwnPropertyNames(obj).filter(prop => obj[prop] && obj[prop].__isProxy == true);
+    if (obj == null) return;
+    const properties = Object.getOwnPropertyNames(obj).filter(name => ignoreDispose.indexOf(name) == -1);
     for (let property of properties) {
         const pObj = obj[property];
-        if (Array.isArray(pObj) != true) {
+        if (typeof pObj == "object" && Array.isArray(pObj) != true) {
             disposeProperties(pObj);
         }
         delete obj[property];
