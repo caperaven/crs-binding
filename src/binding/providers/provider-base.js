@@ -56,6 +56,7 @@ export class ProviderBase {
             crsbinding.data.removeCallback(crsbinding.$globals, key, this._globals[key]);
             delete this._globals[key];
         }
+        this._globals = null;
     }
 
     /**

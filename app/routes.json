@@ -5,6 +5,11 @@
   "auto-hide": true,
   "routes": [
     {
+      "title": "Context Actions",
+      "hash": "#context-actions",
+      "view": "context-actions"
+    },
+    {
       "title": "Welcome",
       "hash": "#welcome",
       "view": "welcome"

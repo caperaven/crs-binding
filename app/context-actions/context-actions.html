@@ -1,0 +1,29 @@
+<style>
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    li {
+        display: flex;;
+        align-items: center;
+        margin: 0.25rem 0;
+    }
+
+    li button {
+        margin-left: 1rem;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<ul click.call="performAction($event)">
+    <template for="item of items">
+        <li>
+            <span>${item.code}</span>
+            <button data-action="remove" data-path="items" data-id.once="item.id">Remove</button>
+            <button data-action="edit" data-path="items" data-id.once="item.id">Edit</button>
+        </li>
+    </template>
+</ul>

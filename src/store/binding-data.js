@@ -394,26 +394,32 @@ function arrayItemsRemoved(id, prop, items, collection) {
 function removeObject(id) {
     context.delete(id);
 
-    removeData(id);
+    let result = removeData(id);
     removeCallbacks(id);
     removeUpdates(id);
     removeTriggers(id);
+    return result;
 }
 
 function removeData(id) {
-    removeReferences(id);
+    const result = removeReferences(id);
     data.delete(id);
     if (data.size == 0) {
         idStore.nextId = 0;
         idStore.nextArrayId = 0;
     }
+    result.push(id);
+    return result;
 }
 
 function removeReferences(parentId) {
+    const result = [];
     const references = Array.from(data).filter(item => item[1].refId == parentId);
     for (let ref of references) {
+        result.push(ref[1].id);
         removeObject(ref[1].id);
     }
+    return result;
 }
 
 function removeCallbacks(id) {

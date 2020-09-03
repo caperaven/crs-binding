@@ -33,11 +33,12 @@ export class ProviderManager {
         if (element.__providers == null) return;
 
         for (let id of element.__providers) {
-            const provider = this.items.get(id);
+            let provider = this.items.get(id);
             this.items.delete(id);
             provider && provider.dispose();
+            provider = null;
         }
-        element.__providers = null;
+        delete element.__providers;
 
         if (this.items.size == 0) {
             this._nextId = 0;

@@ -12,7 +12,7 @@ export default class Component extends ViewBase {
     }
 
     async connectedCallback() {
-        super.connectedCallback();
+        await super.connectedCallback();
         this.customEventHandler = this.customEvent.bind(this);
         crsbinding.events.emitter.on("customEvent", this.customEventHandler);
     }
@@ -20,7 +20,7 @@ export default class Component extends ViewBase {
     async disconnectedCallback() {
         crsbinding.events.emitter.remove("customEvent", this.customEventHandler);
         this.customEventHandler = null;
-        super.disconnectedCallback();
+        await super.disconnectedCallback();
     }
 
     preLoad(setPropertyCallback) {

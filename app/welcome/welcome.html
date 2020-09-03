@@ -1,6 +1,7 @@
-<h2>${title}</h2>
+<h2>Welcome</h2>
 
-<nav style.visibility.if="$globals.menuVisible == true ? '' : 'hidden'">
+<nav>
+    <a href="#context-actions">Context Actions</a>
     <a href="#component">Complex Binding</a>
     <a href="#collections">Collections</a>
     <a href="#inflation">Inflation</a>
@@ -13,20 +14,3 @@
     <a href="#pages">Pages</a>
     <a href="#binding1">Binding 1</a>
 </nav>
-</nav>
-
-<h3>Events</h3>
-
-<button click.call="fn1">First</button>
-<button click.call="fn1($event)">Second</button>
-<button click.call="fn1('test', $event)">Third</button>
-<button click.call="fn1($event, 10, 30)">Fourth</button>
-<button click.setValue="selectedItem = $event.target">Set Selected</button>
-
-<button id="btnI1" click.setValue="$globals.menuVisible = !$globals.menuVisible">Menu</button>
-<button id="btnI2" click.setValue="title='Hello World'">Set Title</button>
-<button id="btnI3" click.setValue="$globals.myDate = new Date()">New Date</button>
-<button id="btnI4" click.setValue="$globals.object = {title: ${title}}">Set globals object</button>
-<button id="btnI5" click.setValue="$globals.mousePos = {x: $event.x, y: $event.y}">Set globals mouse pos</button>
-
-

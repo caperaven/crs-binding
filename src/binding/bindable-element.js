@@ -13,7 +13,13 @@ export class BindableElement extends HTMLElement {
 
     dispose() {
         this._disposing = true;
+        crsbinding.utils.forceClean(this);
         crsbinding.dom.disableEvents(this);
+
+        const properties = Object.getOwnPropertyNames(this);
+        for (let property of properties) {
+            delete this[property];
+        }
     }
 
     async connectedCallback() {

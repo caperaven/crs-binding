@@ -65,8 +65,7 @@ export function releaseExp(exp) {
         x.count -= 1;
 
         if (x.count == 0) {
-            x.function = null;
-            x.parameters = null;
+            crsbinding.utils.disposeProperties(x);
             crsbinding._expFn.delete(key);
         }
     }
