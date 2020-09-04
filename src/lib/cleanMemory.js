@@ -1,4 +1,6 @@
 export function forceClean(id) {
+    if (id == null) return;
+
     if (typeof id == "object") {
         id = id.__uid || id._dataId;
     }
