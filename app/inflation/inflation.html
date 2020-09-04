@@ -10,29 +10,29 @@
     </symbol>
 </svg>
 
-<!--<template id="items-template">-->
-<!--    <div data-person="${person}" data-trade="${trade}" type="${type}" value="${value}">-->
-<!--        <div remove.if="title == null ? true">${title}</div>-->
-<!--        <svg class="icon" remove.if="value == null ? true">-->
-<!--            <use href="${value == true ? '#checked' : '#unchecked'}" />-->
-<!--        </svg>-->
-<!--    </div>-->
-<!--</template>-->
+<template id="items-template">
+    <div data-person="${person}" data-trade="${trade}" type="${type}" value="${value}">
+        <div remove.if="title == null ? true">${title}</div>
+        <svg class="icon" remove.if="value == null ? true">
+            <use href="${value == true ? '#checked' : '#unchecked'}" />
+        </svg>
+    </div>
+</template>
 
-<!--<div id="container" class="container">-->
+<div id="container" class="container">
 
-<!--</div>-->
+</div>
 
-<!--<div class="container">-->
-<!--    <template for.once="item of data">-->
-<!--        <div data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">-->
-<!--            <div remove.if="item.title == null ? true">${item.title}</div>-->
-<!--            <svg class="icon" remove.if="item.value == null ? true">-->
-<!--                <use href="${item.value == true ? '#checked' : '#unchecked'}" />-->
-<!--            </svg>-->
-<!--        </div>-->
-<!--    </template>-->
-<!--</div>-->
+<div class="container">
+    <template for.once="item of data">
+        <div data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">
+            <div remove.if="item.title == null ? true">${item.title}</div>
+            <svg class="icon" remove.if="item.value == null ? true">
+                <use href="${item.value == true ? '#checked' : '#unchecked'}" />
+            </svg>
+        </div>
+    </template>
+</div>
 
 <div class="container">
     <template for="item of data">
