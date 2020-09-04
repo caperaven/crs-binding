@@ -6,6 +6,7 @@ export default class Svg extends ViewBase {
             setProperty("rect1Title", "Rect 1");
             setProperty("rect2Title", "Rect 2");
             setProperty("rect3Title", "Rect 3");
+            setProperty("shape", '<rectangle x="10" y="10" width="50" height="50" fill="red">');
             resolve();
         })
     }

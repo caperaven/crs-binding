@@ -26,7 +26,11 @@ function capitalizePropertyPath(str) {
     for (let i = 1; i < parts.length; i++) {
         parts[i] = parts[i].capitalize();
     }
-    return parts.join("");
+    let result = parts.join("");
+    if (result === "innerHtml") {
+        result = "innerHTML";
+    }
+    return result;
 }
 
 const crsbinding = {

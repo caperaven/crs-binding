@@ -6,7 +6,7 @@
 
 <h2>${title}</h2>
 
-<svg width="1024" height="768">
+<svg width="1024" height="400">
     <g>
         <rect x="100" y="100" fill="red" width="200" height="200" click.setValue="title='Rectangle 1'"></rect>
         <text x="120" y="130" fill="white">${rect1Title}</text>
@@ -22,3 +22,7 @@
         <text x="620" y="130" fill="white">${rect3Title}</text>
     </g>
 </svg>
+
+<div inner-html.once="shape">
+
+</div>
