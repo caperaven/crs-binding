@@ -13,15 +13,20 @@ export default class Component extends ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
 
-        const template = this._element.querySelector("#items-template");
-        crsbinding.inflationManager.register("items", template);
-
-        const fragment = crsbinding.inflationManager.get("items", this.data);
-        this._element.querySelector("#container").appendChild(fragment);
+        // const template = this._element.querySelector("#items-template");
+        // crsbinding.inflationManager.register("items", template);
+        //
+        // const fragment = crsbinding.inflationManager.get("items", this.data);
+        // this._element.querySelector("#container").appendChild(fragment);
     }
 
     preLoad() {
         this.data = getRenderData();
+    }
+
+    load() {
+        crsbinding.data.updateUI(this, "data");
+        super.load();
     }
 
     async disconnectedCallback() {
