@@ -37,10 +37,10 @@ export class ViewBase {
     }
 
     async disconnectedCallback() {
+        crsbinding.utils.forceClean(this._dataId);
         crsbinding.observation.releaseBinding(this.element);
         crsbinding.utils.disposeProperties(this);
         this.element = null;
-        crsbinding.utils.forceClean(this._dataId);
     }
 
     getProperty(property) {

@@ -405,7 +405,7 @@ function removeData(id) {
     const result = removeReferences(id);
     data.delete(id);
     if (data.size == 0) {
-        idStore.nextId = 0;
+        idStore.nextId = 1;
         idStore.nextArrayId = 0;
     }
     result.push(id);
@@ -604,7 +604,7 @@ export const bindingData = {
             delete value.data;
         });
         data.clear();
-        idStore.nextId = 0;
+        idStore.nextId = 1;
         idStore.nextArrayId = 0;
     },
 
