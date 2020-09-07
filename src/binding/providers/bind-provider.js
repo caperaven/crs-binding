@@ -17,6 +17,11 @@ export class BindProvider extends OneWayProvider {
         
         this._eventName = (changeElements.indexOf(this._element.nodeName) !== -1) ? "change" :  `${this._property}Change`; 
         this._element.addEventListener(this._eventName, this._changeHandler);
+
+        if(this._value.indexOf("$globals.") !== -1) {
+            this._context = crsbinding.$globals;
+            this._value = this._value.split("$globals.").join("");
+        }
     }
 
     _change(event) {
