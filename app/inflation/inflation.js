@@ -24,6 +24,11 @@ export default class Component extends ViewBase {
         this.data = getRenderData();
     }
 
+    load() {
+        crsbinding.data.updateUI(this, "data");
+        super.load();
+    }
+
     async disconnectedCallback() {
         crsbinding.inflationManager.unregister("items");
         super.disconnectedCallback();

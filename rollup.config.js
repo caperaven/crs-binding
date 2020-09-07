@@ -1,11 +1,11 @@
-//import {terser} from "rollup-plugin-terser";
-function terser() {}
+import {terser} from "rollup-plugin-terser";
+//function terser() {}
 
 export default [
     {
         input: "src/index.js",
         output: [
-            {file: 'dist/crs-binding.js', format: 'es', sourcemap: false}
+            {file: 'dist/crs-binding.js', format: 'es', sourcemap: true}
         ],
         plugins: [
             terser()

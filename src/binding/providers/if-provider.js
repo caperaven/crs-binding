@@ -131,9 +131,9 @@ else {
 
 const initCndValueExp = `
 if (__exp__) {
-    element.setAttribute("__attr__", "__true__");
+    element.setAttribute("__attr__", __true__);
 }
 else {
-    element.setAttribute("__attr__", "__false__");
+    element.setAttribute("__attr__", __false__);
 }
 `;
