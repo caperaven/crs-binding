@@ -73,6 +73,11 @@
       "title": "Binding Memory Leak",
       "hash": "#binding1",
       "view": "binding1"
+    },
+    {
+      "title": "shared-references",
+      "hash": "#shared-references",
+      "view": "shared-references"
     }
   ]
 }
