@@ -33,7 +33,7 @@ export class BindProvider extends OneWayProvider {
             value = this[typeFn](value, event.target);
         }
 
-        crsbinding.data.setProperty(this._context, this._value, value, this._ctxName, type == "text" ? "string" : type);
+        crsbinding.data.setContextProperty(this._context, this._value, value, this._ctxName, type == "text" ? "string" : type);
 
         event.stopPropagation();
     }

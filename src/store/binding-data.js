@@ -186,12 +186,8 @@ function setPropertyPath(obj, path, value) {
     return result;
 }
 
-function getProperty(obj, property) {
+function getObjectProperty(obj, property) {
     return obj[property]
-}
-
-function getPropertyPath(obj, path) {
-    return getValueOnPath(obj, path);
 }
 
 function createReference(refId, name, path, index) {
@@ -486,7 +482,37 @@ export const bindingData = {
         return property.indexOf(".") == -1 ? addCallback(obj, property, callback) : addCallbackPath(obj, property, callback);
     },
 
-    setProperty(id, property, value, ctxName, dataType) {
+    getProperty(obj, property) {
+        const field = `_${property}`;
+        if (obj[field] != null) {
+            return obj[field];
+        }
+
+        return crsbinding.data.getValue(obj._dataId, property);
+    },
+
+    setProperty(obj, property, value) {
+        let oldValue = this.getProperty(obj, property);
+
+        if (Array.isArray(oldValue)) {
+            crsbinding.data.array(obj, property).splice(0, oldValue.length);
+        }
+        if (value && value.__uid != null) {
+            oldValue && crsbinding.data.unlinkArrayItem(oldValue);
+        }
+
+        this.setContextProperty(obj, property, value);
+
+        if (Array.isArray(value)) {
+            obj[`_${property}`] = crsbinding.data.array(obj._dataId, property);
+        }
+
+        if (value && value.__uid) {
+            crsbinding.data.linkToArrayItem(obj._dataId, property, value.__uid);
+        }
+    },
+
+    setContextProperty(id, property, value, ctxName, dataType) {
         if (typeof id == "object") {
             id = id.__uid || id._dataId;
         }
@@ -533,7 +559,7 @@ export const bindingData = {
         if (obj.type == "data") {
             const data = obj.data;
             if (property == null) return data;
-            return property.indexOf(".") == -1 ? getProperty(data, property) : getPropertyPath(data, property);
+            return property.indexOf(".") == -1 ? getObjectProperty(data, property) : getValueOnPath(data, property);
         }
         else {
             const refId = obj.refId;
