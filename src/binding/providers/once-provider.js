@@ -27,10 +27,7 @@ function setItem(element, context, property, value, ctxName) {
 function setProperty(element, property, value) {
     if (property.indexOf("data-") == -1) {
         property = crsbinding.utils.capitalizePropertyPath(property);
-        if(property === "value" || property === "placeholder") return;
-
-        const fn = new Function("element", "value", `element.${property} = value`);
-        fn(element, value);
+        element[property] = value;
     }
     else {
         const prop = property.replace("data-", "");
