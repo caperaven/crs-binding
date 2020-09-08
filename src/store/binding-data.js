@@ -116,10 +116,11 @@ async function callFunctionsOnObject(obj, id, property) {
 }
 
 function performUpdates(id, property, value) {
-    const obj = updates.get(id);
-    if (obj != null && obj[property] != null) {
-        bindingData.setProperty(obj[property].originId, obj[property].originProperty, value);
-    }
+    // JHR: Do we really need this?
+    // const obj = updates.get(id);
+    // if (obj != null && obj[property] != null) {
+    //     bindingData.setProperty(obj[property].originId, obj[property].originProperty, value);
+    // }
 
     const ctx = context.get(id);
     const fnName = `${property}Changed`;
