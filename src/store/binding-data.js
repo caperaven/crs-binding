@@ -362,15 +362,6 @@ function makeShared(id, property, sharedItems) {
     }
 }
 
-function notifyArrayItemsAdded(collection, items) {
-    crsbinding.data.arrayItemsAdded(collection.__id, collection.__property, Array.isArray(items) ? items: [items], collection);
-}
-
-function notifyArrayItemsRemoved(collection, items) {
-    crsbinding.data.arrayItemsRemoved(collection.__id, collection.__property, Array.isArray(items) ? items: [items], collection);
-}
-
-
 function arrayItemsAdded(id, prop, items, collection) {
     const obj = callbacks.get(id);
     const clbObj = getValueOnPath(obj, prop);
@@ -488,7 +479,7 @@ export const bindingData = {
             return obj[field];
         }
 
-        return crsbinding.data.getValue(obj._dataId, property);
+        return this.getValue(obj._dataId, property);
     },
 
     setProperty(obj, property, value) {
@@ -649,8 +640,6 @@ export const bindingData = {
     },
 
     setArrayEvents: setArrayEvents,
-    notifyArrayItemsAdded: notifyArrayItemsAdded,
-    notifyArrayItemsRemoved: notifyArrayItemsRemoved,
     arrayItemsAdded: arrayItemsAdded,
     arrayItemsRemoved: arrayItemsRemoved,
     linkToArrayItem: linkToArrayItem,
