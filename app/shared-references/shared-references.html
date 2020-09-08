@@ -1,0 +1,21 @@
+<h2>${title}</h2>
+
+<ul click.setValue="model.sharedObject = $data($event.target.dataset.uid)">
+    <template for="item of variables.items">
+        <li>${item.title}</li>
+    </template>
+</ul>
+
+<ul>
+    <template for="item of variables.items">
+        <li>${item.title}</li>
+    </template>
+</ul>
+
+<label>
+    <div>Selected Item Title</div>
+    <input value.bind="model.sharedObject.title" />
+</label>
+
+<my-component data.bind="model.sharedObject"></my-component>
+
