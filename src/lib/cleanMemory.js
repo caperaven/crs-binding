@@ -1,9 +1,9 @@
 export function forceClean(id) {
-    if (id == null) return;
-
     if (typeof id == "object") {
         id = id.__uid || id._dataId;
     }
+
+    if (id == null) return;
 
     const toRemove = crsbinding.data.removeObject(id);
     const elements = new Set();
