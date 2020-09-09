@@ -12,6 +12,7 @@ export function listenOnPath(context, property, callback) {
     for (let p of collection) {
         if (p.indexOf("$globals.") != -1) {
             context = crsbinding.$globals;
+            p = p.replace("$globals.", "");
             addCleanUp(cleanEvents, crsbinding.$globals, p, callback);
         }
 
