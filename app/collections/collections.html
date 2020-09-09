@@ -5,7 +5,7 @@
         <section>
             <h2>Active Items</h2>
             <ul click.call="selectItem($event)">
-                <template for="item of items">
+                <template for="item of items" data-reference="main-collection">
                     <li class="list-item" data-id.once="item.id"  style.background.if="item.__isSelected == true ? '#ffd69a'" style.color.if="item.priority == 2 ? 'red'">
                         <div>${item.title}</div>
                         <input type="checkbox" checked.bind="item.isDone" />
