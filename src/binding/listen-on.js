@@ -5,18 +5,22 @@
  * @param callback {function} the callback to execute when the property changes
  * @returns {array} array defining cleanup properties for when you need to remove it.
  */
-export function listenOnPath(context, property, callback) {
+export function listenOnPath(id, property, callback) {
+    if (typeof id == "object") {
+        id = id.__uid || id._dataId;
+    }
+
     const collection = Array.isArray(property) == true ? property : [property];
     const cleanEvents = [];
 
     for (let p of collection) {
         if (p.indexOf("$globals.") != -1) {
-            context = crsbinding.$globals;
+            id = crsbinding.$globals;
             p = p.replace("$globals.", "");
             addCleanUp(cleanEvents, crsbinding.$globals, p, callback);
         }
 
-        addCallback(context, p, callback, cleanEvents);
+        addCallback(id, p, callback, cleanEvents);
     }
 
     return cleanEvents;
