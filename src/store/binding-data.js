@@ -545,6 +545,11 @@ export const bindingData = {
             id = id.__uid || id._dataId;
         }
 
+        if (property != null && property.indexOf("$globals.") != -1) {
+            id = crsbinding.$globals;
+            property = property.replace("$globals.", "");
+        }
+
         const obj = data.get(Number(id));
 
         if (obj.type == "data") {
