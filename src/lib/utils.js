@@ -1,3 +1,8 @@
+/**
+ * Get the HTML string value for a given document fragment
+ * @param fragment
+ * @returns {string}
+ */
 export function fragmentToText(fragment) {
     const text = [];
     for (let child of fragment.children) {
@@ -6,6 +11,11 @@ export function fragmentToText(fragment) {
     return text.join("");
 }
 
+/**
+ * Measure element dimensions
+ * @param element
+ * @returns {Promise<unknown>}
+ */
 export function measureElement(element) {
     return new Promise(resolve => {
         let el = element;
@@ -31,6 +41,10 @@ export function measureElement(element) {
     })
 }
 
+/**
+ * Clean up and dispose all properties of a object
+ * @type {string[]}
+ */
 const ignoreDispose = ["_element"];
 export function disposeProperties(obj) {
     if (obj == null) return;

@@ -36,7 +36,8 @@ export class IfProvider extends ProviderBase {
             sanProp.properties.forEach(path => {
                 if (path.indexOf("$parent.") != -1) {
                     const p = path.replace("$parent.", "");
-                    this._addCallback(this._parentId, p, this._eventHandler);
+                    const events = crsbinding.events.listenOnPath(this._parentId, p, this._eventHandler);
+                    this._cleanEvents = [...this._cleanEvents, events];
                 }
             });
         }

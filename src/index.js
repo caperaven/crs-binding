@@ -3,7 +3,7 @@ import {sanitizeExp} from "./events/expressions.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
-import {listenOn, listenOnPath} from "./binding/listen-on.js";
+import {listenOnPath, removeOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
@@ -65,8 +65,8 @@ const crsbinding = {
     },
 
     events: {
-        listenOn: listenOn,
         listenOnPath: listenOnPath,
+        removeOnPath: removeOnPath,
         emitter: new EventEmitter()
     },
 

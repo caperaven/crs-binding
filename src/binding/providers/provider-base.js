@@ -5,8 +5,6 @@ export class ProviderBase {
 
     constructor(element, context, property, value, ctxName, parentId, changeParentToContext = true) {
         this._cleanEvents = [];
-        this._globals = {};
-
         this._element = element;
         this._context = context;
         this._property = property;
@@ -42,21 +40,8 @@ export class ProviderBase {
         this._property = null;
         this._value = null;
         this._ctxName = null;
-
-        this._cleanEvents.forEach(item => {
-            crsbinding.data.removeCallback(item.context, item.path, item.callback);
-            delete item.context;
-            delete item.path;
-            delete item.callback;
-        });
-
+        crsbinding.events.removeOnPath(this._cleanEvents);
         this._cleanEvents = null;
-
-        for (let key of Object.keys(this._globals)) {
-            crsbinding.data.removeCallback(crsbinding.$globals, key, this._globals[key]);
-            delete this._globals[key];
-        }
-        this._globals = null;
     }
 
     /**
@@ -69,24 +54,8 @@ export class ProviderBase {
         const collection = Array.isArray(property) == true ? property : [property];
 
         for (let p of collection) {
-            let context = this._context;
-
-            if (p.indexOf("$globals.") != -1) {
-                context = crsbinding.$globals;
-                p = p.split("$globals.").join("");
-                this._globals[p] = callback;
-            }
-
-            this._addCallback(context, p, callback);
+            const events = crsbinding.events.listenOnPath(this._context, p, callback);
+            this._cleanEvents = [...this._cleanEvents, ...events];
         }
-    }
-
-    _addCallback(context, path, callback) {
-        crsbinding.data.addCallback(context, path, callback);
-        this._cleanEvents.push({
-            context: context,
-            path: path.split("$parent.").join("").split("$context.").join(""),
-            callback: callback
-        });
     }
 }
