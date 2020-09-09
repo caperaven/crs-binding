@@ -116,12 +116,6 @@ async function callFunctionsOnObject(obj, id, property) {
 }
 
 function performUpdates(id, property, value) {
-    // JHR: Do we really need this?
-    // const obj = updates.get(id);
-    // if (obj != null && obj[property] != null) {
-    //     bindingData.setProperty(obj[property].originId, obj[property].originProperty, value);
-    // }
-
     const ctx = context.get(id);
     const fnName = `${property}Changed`;
     ctx && ctx[fnName] && ctx[fnName](value);
@@ -473,33 +467,37 @@ export const bindingData = {
         return property.indexOf(".") == -1 ? addCallback(obj, property, callback) : addCallbackPath(obj, property, callback);
     },
 
-    getProperty(obj, property) {
-        const field = `_${property}`;
-        if (obj[field] != null) {
-            return obj[field];
+    getProperty(id, property) {
+        if (typeof id == "object") {
+            id = id.__uid || id._dataId;
         }
 
-        return this.getValue(obj._dataId, property);
+        return this.getValue(id, property);
     },
 
     setProperty(obj, property, value) {
-        let oldValue = this.getProperty(obj, property);
+        let id = obj;
+        if (typeof id == "object") {
+            id = id.__uid || id._dataId;
+        }
+
+        let oldValue = this.getProperty(id, property);
 
         if (Array.isArray(oldValue)) {
-            crsbinding.data.array(obj, property).splice(0, oldValue.length);
+            crsbinding.data.array(id, property).splice(0, oldValue.length);
         }
         if (value && value.__uid != null) {
             oldValue && crsbinding.data.unlinkArrayItem(oldValue);
         }
 
-        this.setContextProperty(obj, property, value);
+        this.setContextProperty(id, property, value);
 
         if (Array.isArray(value)) {
-            obj[`_${property}`] = crsbinding.data.array(obj._dataId, property);
+            obj[`_${property}`] = crsbinding.data.array(id, property);
         }
 
         if (value && value.__uid) {
-            crsbinding.data.linkToArrayItem(obj._dataId, property, value.__uid);
+            crsbinding.data.linkToArrayItem(id, property, value.__uid);
         }
     },
 
