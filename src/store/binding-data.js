@@ -472,7 +472,13 @@ export const bindingData = {
             id = id.__uid || id._dataId;
         }
 
-        return this.getValue(id, property);
+        let value =  this.getValue(id, property);
+
+        if (Array.isArray(value)) {
+            value = createArrayProxy(value, id, property);
+        }
+
+        return value;
     },
 
     setProperty(obj, property, value) {
