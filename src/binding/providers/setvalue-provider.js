@@ -1,5 +1,4 @@
 import {CallProvider} from "./call-provider.js";
-import {setProperty} from "./../binding-helper.js";
 
 export class SetValueProvider extends CallProvider {
     async initialize() {
@@ -26,7 +25,7 @@ export class SetValueProvider extends CallProvider {
 
     _getGlobalSetter(part, value) {
         const path = part.replace("$globals.", "");
-        return `setProperty({_dataId: crsbinding.$globals}, "${path}", ${value});`;
+        return `crsbinding.data.setProperty({_dataId: crsbinding.$globals}, "${path}", ${value});`;
     }
 
     _getContextSetter(part, value) {
@@ -39,7 +38,7 @@ export class SetValueProvider extends CallProvider {
             value = `${prefix}crsbinding.data.getValue({_dataId: ${this._context}}, "${property}")`;
         }
 
-        return `setProperty({_dataId: ${this._context}}, "${part}", ${value});`;
+        return `crsbinding.data.setProperty({_dataId: ${this._context}}, "${part}", ${value});`;
     }
 
     event(event) {
@@ -50,7 +49,7 @@ export class SetValueProvider extends CallProvider {
 
     _setProperty(obj, property, value) {
         if (value !== undefined) {
-            setProperty(obj, property, value);
+            crsbinding.data.setProperty(this, property, value);
         }
     }
 }

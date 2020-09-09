@@ -1,5 +1,3 @@
-import {getProperty, setProperty} from "../binding/binding-helper.js";
-
 export class ViewBase {
     get title() {
         return this.getProperty("title");
@@ -44,11 +42,11 @@ export class ViewBase {
     }
 
     getProperty(property) {
-        return getProperty(this, property);
+        return crsbinding.data.getProperty(this, property);
     }
 
     setProperty(property, value) {
-        setProperty(this, property,  value);
+        crsbinding.data.setProperty(this, property, value);
     }
 
     load() {
