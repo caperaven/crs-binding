@@ -492,10 +492,6 @@ export const bindingData = {
 
         this.setContextProperty(id, property, value);
 
-        if (Array.isArray(value)) {
-            obj[`_${property}`] = crsbinding.data.array(id, property);
-        }
-
         if (value && value.__uid) {
             crsbinding.data.linkToArrayItem(id, property, value.__uid);
         }
