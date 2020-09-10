@@ -19,6 +19,11 @@ export class ProviderBase {
             this._context = parentId;
         }
 
+        if (this._value && this._value.indexOf("$self") != -1) {
+            this._value = this._value.split("$self.").join("");
+            this._context = this._element._dataId;
+        }
+
         this.init && this.init();
 
         crsbinding.providerManager.register(this);

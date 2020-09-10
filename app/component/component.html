@@ -13,5 +13,5 @@
 <div id="lblCell">${data.contacts.phone.cell}</div>
 <div id="lblFax">${data.contacts.phone.fax}</div>
 
-<input-form name="Import Form 1" data.bind="data"></input-form>
+<input-form name="Import Form 1" data.bind="data" style.background.if="$self.data != null ? 'silver' : 'white'"></input-form>
 <first-name name="First Name Component" value.bind="data.firstName"></first-name>
