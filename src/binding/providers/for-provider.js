@@ -47,6 +47,8 @@ export class ForProvider extends RepeatBaseProvider {
         if (this._container.__providers.indexOf(this.id) == -1) {
             this._container.__providers.push(this.id);
         }
+
+        this._container.dispatchEvent(new CustomEvent("rendered"));
     }
 
     _itemsAdded(added, collection) {
