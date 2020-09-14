@@ -135,6 +135,11 @@ test("sanitizeExp - $data", () => {
    expect(result.expression).toBe("context.selectedObj = crsbinding.data.getValue(event.target.dataset.id)");
 });
 
+test("sanitizeExp - inner-text", () => {
+   const result = sanitizeExp("This is the ${item.position} article", "item");
+   expect(result.expression).toBe("This is the ${item.position} article");
+});
+
 // test("sanitizeExp - attribute condition", () => {
 //    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");
 //    expect(result.expression).toBe("item.value == true ? '#checked' : '#unchecked'");
