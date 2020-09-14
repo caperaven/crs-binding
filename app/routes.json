@@ -78,6 +78,11 @@
       "title": "shared-references",
       "hash": "#shared-references",
       "view": "shared-references"
+    },
+    {
+      "title": "Shared Context",
+      "hash": "#shared-context",
+      "view": "shared-context"
     }
   ]
 }

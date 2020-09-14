@@ -1,7 +1,11 @@
 export class BindableElement extends HTMLElement {
+    get hasOwnContext() {
+        return true;
+    }
+
     constructor() {
         super();
-        this._dataId = crsbinding.data.addObject(this.constructor.name);
+        this._dataId = this.hasOwnContext == true && crsbinding.data.addObject(this.constructor.name);
 
         crsbinding.data.addContext(this._dataId, this);
         crsbinding.dom.enableEvents(this);
