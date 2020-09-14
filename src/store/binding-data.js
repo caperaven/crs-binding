@@ -33,10 +33,19 @@ const triggers = new Map();
  */
 const context = new Map();
 
+/**
+ * Sync objects used for array sync operations
+ * @type {Map<any, any>}
+ */
+const sync = new Map();
+
+const frozenObjects = [];
+
 const idStore = {
     nextId: 0,
     nextTriggerId: 0,
-    nextArrayId: 0
+    nextArrayId: 0,
+    nextSyncId: 0
 };
 
 
@@ -64,6 +73,25 @@ function callFunctionsOnPath(id, path) {
     if (result != null) {
         callFunctionsOnObject(result, id, path);
     }
+}
+
+function setSyncValues(syncId, property, value, source) {
+    frozenObjects.push(source);
+
+    const sync = crsbinding.data.details.sync.get(syncId);
+    const idValue = source[sync.primaryKey];
+
+    for (let item of sync.collection) {
+        const array = crsbinding.data.getValue(item.id, item.path);
+        const data = array.find(item => item[sync.primaryKey] == idValue);
+        frozenObjects.push(data);
+
+        if (data != source) {
+            crsbinding.data.setProperty(data, property, value);
+        }
+    }
+
+    frozenObjects.length = 0;
 }
 
 async function callFunctions(id, property) {
@@ -433,8 +461,47 @@ function removeTriggers(id) {
     }
 }
 
+function createArraySync(id, property, primaryKey) {
+    const array = crsbinding.data.getValue(id, property);
+    return addArraySync(array.__syncId, id, property, array, primaryKey);
+}
+
+function addArraySync(syncId, id, property, array, primaryKey) {
+    return new Promise(resolve => {
+        if (typeof id == "object") {
+            id = id.__uid || id._dataId;
+        }
+
+        ensurePath(id, property, () => {
+            let sync = crsbinding.data.details.sync.get(syncId);
+
+            if (sync == null) {
+                syncId = idStore.nextSyncId;
+                idStore.nextSyncId += 1;
+                sync = {
+                    primaryKey: primaryKey,
+                    collection: []
+                };
+                crsbinding.data.details.sync.set(syncId, sync);
+            }
+
+            sync.collection.push({
+                id: id,
+                path: property
+            })
+
+            if (array == null) {
+                array = crsbinding.data.getValue(id, property);
+            }
+
+            array.__syncId = syncId;
+            resolve(syncId);
+        });
+    });
+}
+
 export const bindingData = {
-    details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers, context:  context},
+    details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers, context:  context, sync: sync},
 
     link: link,
 
@@ -492,6 +559,7 @@ export const bindingData = {
         if (Array.isArray(oldValue)) {
             crsbinding.data.array(id, property).splice(0, oldValue.length);
         }
+
         if (value && value.__uid != null) {
             oldValue && crsbinding.data.unlinkArrayItem(oldValue);
         }
@@ -509,6 +577,7 @@ export const bindingData = {
         }
 
         let obj = data.get(id);
+        if (obj.__frozen == true) return;
 
         if (dataType == "boolean" || typeof value === "boolean") {
             value = Boolean(value);
@@ -602,6 +671,7 @@ export const bindingData = {
 
         if (obj.type == "data") {
             let v = getValueOnPath(obj.data, refPath);
+            const syncId = v.__syncId;
 
             if (refaId != null) {
                 v = v.find(i => i.__aId == refaId);
@@ -613,6 +683,11 @@ export const bindingData = {
 
             setPropertyPath(v, property, value);
             callFunctionsOnPath(id, property);
+            if (syncId != null) {
+                if (frozenObjects.indexOf(v) == -1) {
+                    setSyncValues(syncId, property, value, v);
+                }
+            }
         }
         else {
             let pString = `${obj.path}.${path}`; // subObj.field1
@@ -651,5 +726,8 @@ export const bindingData = {
     unlinkArrayItem: unlinkArrayItem,
     nextArrayId: nextArrayId,
 
-    removeCallback: removeCallback
+    removeCallback: removeCallback,
+
+    createArraySync: createArraySync,
+    addArraySync: addArraySync
 };

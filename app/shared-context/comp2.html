@@ -2,3 +2,9 @@
     <span>${title}</span>
     <input value.bind="value"></input>
 </label>
+
+<ul>
+    <template for="item of selected">
+        <li>${item.title}</li>
+    </template>
+</ul>

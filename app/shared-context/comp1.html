@@ -2,3 +2,14 @@
     <span>${title}</span>
     <input value.bind="value"></input>
 </label>
+
+<ul>
+    <template for="item of available">
+        <li>
+            <input type="checkbox" checked.bind="item.isSelected" />
+            <input value.bind="item.title"></input>
+        </li>
+    </template>
+</ul>
+
+<button click.call="setSelected">Set Selected</button>

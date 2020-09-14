@@ -10,5 +10,36 @@ export default class SharedContext extends ViewBase {
     preLoad() {
         this.setProperty("title", "Title 1");
         this.setProperty("value", "Hello World");
+        this.setProperty("available", [
+            {
+                id: 0,
+                title: "item 1",
+                isSelected: true
+            },
+            {
+                id: 1,
+                title: "item 2",
+                isSelected: true
+            },
+            {
+                id: 2,
+                title: "item 3",
+                isSelected: true
+            }
+        ]);
+
+        crsbinding.data.createArraySync(this, "available", "id").then(syncId => this.syncId = syncId);
+    }
+
+    setSelected() {
+        const selected = this.getProperty("available").filter(item => item.isSelected == true).map(item => {
+            return {
+                id: item.id,
+                title: item.title
+            }
+        })
+
+        this.setProperty("selected", selected);
+        crsbinding.data.addArraySync(this.syncId, this, "selected");
     }
 }
