@@ -5,9 +5,12 @@ export class BindableElement extends HTMLElement {
 
     constructor() {
         super();
-        this._dataId = this.hasOwnContext == true && crsbinding.data.addObject(this.constructor.name);
 
-        crsbinding.data.addContext(this._dataId, this);
+        if (this.hasOwnContext == true) {
+            this._dataId = crsbinding.data.addObject(this.constructor.name);
+            crsbinding.data.addContext(this._dataId, this);
+        }
+
         crsbinding.dom.enableEvents(this);
 
         this.__properties = new Map();
