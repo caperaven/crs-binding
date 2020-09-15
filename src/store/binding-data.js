@@ -410,6 +410,7 @@ function removeObject(id) {
     removeCallbacks(id);
     removeUpdates(id);
     removeTriggers(id);
+    removeSync(id);
     return result;
 }
 
@@ -461,6 +462,16 @@ function removeTriggers(id) {
     if (triggers.size == 0) {
         idStore.nextTriggerId = 0;
     }
+}
+
+function removeSync(id) {
+    sync.forEach((value, key) => {
+       const items = value.collection.filter(item => item.id == id);
+       items.forEach(item => value.collection.splice(value.collection.indexOf(item), 1));
+       if (value.collection.length == 0) {
+           sync.delete(key);
+       }
+    });
 }
 
 function createArraySync(id, property, primaryKey, fields) {
