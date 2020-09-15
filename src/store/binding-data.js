@@ -561,6 +561,10 @@ export const bindingData = {
 
         if (Array.isArray(oldValue)) {
             crsbinding.data.array(id, property).splice(0, oldValue.length);
+
+            if (value != null) {
+                value.__syncId = oldValue.__syncId;
+            }
         }
 
         if (value && value.__uid != null) {
@@ -580,7 +584,7 @@ export const bindingData = {
         }
 
         let obj = data.get(id);
-        if (obj.__frozen == true) return;
+        if (obj == null || obj.__frozen == true) return;
 
         if (dataType == "boolean" || typeof value === "boolean") {
             value = Boolean(value);
