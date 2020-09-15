@@ -28,7 +28,7 @@ export default class SharedContext extends ViewBase {
             }
         ]);
 
-        crsbinding.data.createArraySync(this, "available", "id").then(syncId => this.syncId = syncId);
+        crsbinding.data.createArraySync(this, "available", "id", ["title"]).then(syncId => this.syncId = syncId);
     }
 
     setSelected() {

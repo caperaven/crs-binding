@@ -79,15 +79,17 @@ function setSyncValues(syncId, property, value, source) {
     frozenObjects.push(source);
 
     const sync = crsbinding.data.details.sync.get(syncId);
-    const idValue = source[sync.primaryKey];
+    if (sync.fields.indexOf(property) != -1) {
+        const idValue = source[sync.primaryKey];
 
-    for (let item of sync.collection) {
-        const array = crsbinding.data.getValue(item.id, item.path);
-        const data = array.find(item => item[sync.primaryKey] == idValue);
-        frozenObjects.push(data);
+        for (let item of sync.collection) {
+            const array = crsbinding.data.getValue(item.id, item.path);
+            const data = array.find(item => item[sync.primaryKey] == idValue);
+            frozenObjects.push(data);
 
-        if (data != source) {
-            crsbinding.data.setProperty(data, property, value);
+            if (data != source) {
+                crsbinding.data.setProperty(data, property, value);
+            }
         }
     }
 
@@ -461,29 +463,30 @@ function removeTriggers(id) {
     }
 }
 
-function createArraySync(id, property, primaryKey) {
+function createArraySync(id, property, primaryKey, fields) {
     const array = crsbinding.data.getValue(id, property);
-    return addArraySync(array.__syncId, id, property, array, primaryKey);
+
+    const syncId = idStore.nextSyncId;
+    idStore.nextSyncId += 1;
+    const sync = {
+        primaryKey: primaryKey,
+        fields: fields,
+        collection: []
+    };
+
+    crsbinding.data.details.sync.set(syncId, sync);
+
+    return addArraySync(syncId, id, property, array);
 }
 
-function addArraySync(syncId, id, property, array, primaryKey) {
+function addArraySync(syncId, id, property, array) {
     return new Promise(resolve => {
         if (typeof id == "object") {
             id = id.__uid || id._dataId;
         }
 
         ensurePath(id, property, () => {
-            let sync = crsbinding.data.details.sync.get(syncId);
-
-            if (sync == null) {
-                syncId = idStore.nextSyncId;
-                idStore.nextSyncId += 1;
-                sync = {
-                    primaryKey: primaryKey,
-                    collection: []
-                };
-                crsbinding.data.details.sync.set(syncId, sync);
-            }
+            const sync = crsbinding.data.details.sync.get(syncId);
 
             sync.collection.push({
                 id: id,
