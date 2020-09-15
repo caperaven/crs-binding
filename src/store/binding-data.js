@@ -514,6 +514,17 @@ function addArraySync(syncId, id, property, array) {
     });
 }
 
+function removeArraySync(syncId, id, property) {
+    const syncObj = sync.get(syncId);
+    if (syncObj != null) {
+        const items = syncObj.collection.filter(item => item.id == id && item.path == property);
+        items.forEach(item => syncObj.collection.splice(syncObj.collection.indexOf(item), 1));
+        if (syncObj.collection.length == 0) {
+            sync.delete(syncId);
+        }
+    }
+}
+
 export const bindingData = {
     details: {data: data, callbacks: callbacks, updates: updates, triggers: triggers, context:  context, sync: sync},
 
@@ -747,5 +758,6 @@ export const bindingData = {
     removeCallback: removeCallback,
 
     createArraySync: createArraySync,
-    addArraySync: addArraySync
+    addArraySync: addArraySync,
+    removeArraySync: removeArraySync
 };
