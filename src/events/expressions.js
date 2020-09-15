@@ -3,7 +3,16 @@
  * @param exp
  * @returns {{expression: *, properties: *}}
  */
+const sanitizeKeywords = ["false", "true", "null"];
+
 export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
+    if (exp == null || exp == "null" || exp == "undefined" || sanitizeKeywords.indexOf(exp.toString()) != -1 || isNaN(exp) == false) {
+        return {
+            isLiteral: true,
+            expression: exp
+        }
+    }
+
     const namedExp = ctxName != "context";
     const prefix = `${ctxName}.`;
     const tokens = tokenize(exp, namedExp ? ctxName : null);

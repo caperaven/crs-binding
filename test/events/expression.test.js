@@ -140,6 +140,33 @@ test("sanitizeExp - inner-text", () => {
    expect(result.expression).toBe("This is the ${item.position} article");
 });
 
+test("sanitizeExp - keywords", () => {
+   let result = sanitizeExp("true");
+   expect(result.expression).toBe("true");
+
+   result = sanitizeExp("false");
+   expect(result.expression).toBe("false");
+
+   result = sanitizeExp("null");
+   expect(result.expression).toBe("null");
+
+   result = sanitizeExp(true);
+   expect(result.expression).toBe(true);
+
+   result = sanitizeExp(false);
+   expect(result.expression).toBe(false);
+
+   result = sanitizeExp(null);
+   expect(result.expression).toBe(null);
+
+   result = sanitizeExp(10);
+   expect(result.expression).toBe(10);
+
+   result = sanitizeExp("10");
+   expect(result.expression).toBe("10");
+
+})
+
 // test("sanitizeExp - attribute condition", () => {
 //    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");
 //    expect(result.expression).toBe("item.value == true ? '#checked' : '#unchecked'");
