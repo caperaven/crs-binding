@@ -9,7 +9,7 @@ export default class Welcome extends ViewBase {
 
     showWidget() {
         crsbinding.events.emitter.postMessage("#my-widget", {
-            contextId: this,
+            context: this,
             html: "<h2>${title}</h2><p>Some paragraph stuff that is not bound</p>"
         })
     }

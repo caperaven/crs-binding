@@ -6,7 +6,7 @@ export class Widget extends HTMLElement {
     onMessage(args) {
         this._clearElements();
 
-        let id = args.contextId;
+        let id = args.context;
         if (typeof id == "object") {
             id = id.__uid || id._dataId;
         }
