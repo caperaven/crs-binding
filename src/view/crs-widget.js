@@ -6,7 +6,12 @@ export class Widget extends HTMLElement {
     onMessage(args) {
         this._clearElements();
 
-        this._dataId = args.contextId;
+        let id = args.contextId;
+        if (typeof id == "object") {
+            id = id.__uid || id._dataId;
+        }
+
+        this._dataId = id;
         this.innerHTML = args.html;
 
         crsbinding.parsers.parseElements(this.children, this._dataId);
