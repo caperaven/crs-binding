@@ -2,12 +2,32 @@ import {CallProvider} from "./call-provider.js";
 
 export class SetValueProvider extends CallProvider {
     async initialize() {
-        const parts = this._value.split("=");
+        const src = this._createSource();
+        this._fn = new Function("context", "event", "setProperty", src);
+    }
+
+    _createSource() {
+        if (this._value.trim()[0] != "[") {
+            return this._createSourceFrom(this._value);
+        }
+
+        const result = [];
+        const exps = this._value.substr(1, this._value.length - 2);
+        const parts = exps.split(";");
+
+        for (let part of parts) {
+            result.push(this._createSourceFrom(part.trim()));
+        }
+
+        return result.join(";\n");
+    }
+
+    _createSourceFrom(exp) {
+        const parts = exp.split("=");
 
         const value = this._processRightPart(parts[1].trim());
         const src = this._processLeftPart(parts[0].trim(), value);
-
-        this._fn = new Function("context", "event", "setProperty", src);
+        return src;
     }
 
     _processRightPart(part) {

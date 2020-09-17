@@ -17,7 +17,7 @@
     <a href="#shared-context">Shared Context</a>
 </nav>
 
-<button click.setValue="isOpen = true" style="width: 100px">Open True</button>
+<button click.setValue="[isOpen = true; value2 = 10]" style="width: 100px">Open True and Value2</button>
 <button click.setValue="isOpen = false" style="width: 100px">Open False</button>
 <button click.setValue="isOpen = null" style="width: 100px">Open Null</button>
 <button click.call="showWidget" style="width: 100px">Show Widget</button>
