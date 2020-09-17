@@ -167,7 +167,7 @@ test("sanitizeExp - keywords", () => {
 
 })
 
-test("sanitizeExp - epression with (....)", () => {
+test("sanitizeExp - expression with (....)", () => {
    const result = sanitizeExp("model.monitoringPointTriggerExpressionId != null || (model.status == 'CancelledByUser' || model.status == 'CancelledBySystem' || model.status == 'Closed')");
    expect(result.expression).toBe("context.model.monitoringPointTriggerExpressionId != null || (context.model.status == 'CancelledByUser' || context.model.status == 'CancelledBySystem' || context.model.status == 'Closed')");
 });
@@ -181,6 +181,17 @@ test("sanitize - expression with (...) simple combined with function and paramet
    const result = sanitizeExp("(model.property.isValid('abc', 10) == true)");
    expect(result.expression).toBe("(context.model.property.isValid('abc', 10) == true)");
 })
+
+test("sanitize - expression with (()) simple", () => {
+   const result = sanitizeExp("(model.isOpen == true) || (model.isOpen == null)");
+   expect(result.expression).toBe("(context.model.isOpen == true) || (context.model.isOpen == null)");
+})
+
+test("sanitize - expression with (()) complex", () => {
+   const result = sanitizeExp("((model.isOpen == true) || (model.isOpen == null))");
+   expect(result.expression).toBe("((context.model.isOpen == true) || (context.model.isOpen == null))");
+})
+
 
 // test("sanitizeExp - attribute condition", () => {
 //    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");

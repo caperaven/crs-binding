@@ -72,7 +72,14 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
             path.push(`$${token}`);
         }
         else {
-            path.push(token);
+            if (token == "(") {
+                if (path.length > 0) {
+                    path.push(token);
+                }
+            }
+            else {
+                path.push(token);
+            }
         }
 
         oldToken = token;
