@@ -13,6 +13,7 @@ import {EventEmitter} from "./events/events.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
 import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
+import {Widget} from "../src/view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
 import {measureElement, fragmentToText, disposeProperties} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
@@ -61,7 +62,8 @@ const crsbinding = {
     classes: {
         BindableElement: BindableElement,
         ViewBase: ViewBase,
-        RepeatBaseProvider: RepeatBaseProvider
+        RepeatBaseProvider: RepeatBaseProvider,
+        Widget: Widget
     },
 
     events: {

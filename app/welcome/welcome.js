@@ -10,4 +10,11 @@ export default class Welcome extends ViewBase {
             name: "Johan"
         })
     }
+
+    showWidget() {
+        crsbinding.events.emitter.postMessage("#my-widget", {
+            contextId: this._dataId,
+            html: "<h2>${title}</h2><p>Some paragraph stuff that is not bound</p>"
+        })
+    }
 }

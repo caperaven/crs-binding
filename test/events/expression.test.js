@@ -192,8 +192,8 @@ test("sanitize - expression with (()) complex", () => {
    expect(result.expression).toBe("((context.model.isOpen == true) || (context.model.isOpen == null))");
 })
 
-
+// JHR:  todo, enable this feature
 // test("sanitizeExp - attribute condition", () => {
 //    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");
-//    expect(result.expression).toBe("item.value == true ? '#checked' : '#unchecked'");
+//    expect(result.expression).toBe("${context.item.value == true ? '#checked' : '#unchecked'}");
 // })
