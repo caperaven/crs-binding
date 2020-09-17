@@ -3,6 +3,8 @@
  * @param exp
  * @returns {{expression: *, properties: *}}
  */
+import index from "../../index.js";
+
 const sanitizeKeywords = ["false", "true", "null"];
 
 export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
@@ -35,7 +37,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
 
-        if (quotes.indexOf(oldToken) != -1 || (reserved.indexOf(token) != -1 && ignore.indexOf(token) == -1))
+        if (quotes.indexOf(oldToken) != -1 || isNaN(token) == false || (reserved.indexOf(token) != -1 && ignore.indexOf(token) == -1))
         {
             oldToken = token;
 
@@ -43,7 +45,18 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
                 if (isLiteral == false || oldToken == "}") {
                     if (isNaN(path)) {
                         if (ignoreTokens.indexOf(path[0]) == -1 && token != ":") {
-                            indexes.push(i - path.length);
+                            if (path.length == 1 && path[0] == ")") {
+                                path.length = 0;
+                            }
+                            else {
+                                let index = i - path.length;
+
+                                if (path[0] == "(") {
+                                    index += 1;
+                                }
+
+                                indexes.push(index);
+                            }
                         }
                         properties.push(extractProperty(`${path.join("")}`));
                     }

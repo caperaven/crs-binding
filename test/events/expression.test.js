@@ -167,6 +167,21 @@ test("sanitizeExp - keywords", () => {
 
 })
 
+test("sanitizeExp - epression with (....)", () => {
+   const result = sanitizeExp("model.monitoringPointTriggerExpressionId != null || (model.status == 'CancelledByUser' || model.status == 'CancelledBySystem' || model.status == 'Closed')");
+   expect(result.expression).toBe("context.model.monitoringPointTriggerExpressionId != null || (context.model.status == 'CancelledByUser' || context.model.status == 'CancelledBySystem' || context.model.status == 'Closed')");
+});
+
+test("sanitize - expression with (...) simple combined with function", () => {
+   const result = sanitizeExp("(model.property.isValid() == true)");
+   expect(result.expression).toBe("(context.model.property.isValid() == true)");
+})
+
+test("sanitize - expression with (...) simple combined with function and parameters", () => {
+   const result = sanitizeExp("(model.property.isValid('abc', 10) == true)");
+   expect(result.expression).toBe("(context.model.property.isValid('abc', 10) == true)");
+})
+
 // test("sanitizeExp - attribute condition", () => {
 //    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");
 //    expect(result.expression).toBe("item.value == true ? '#checked' : '#unchecked'");

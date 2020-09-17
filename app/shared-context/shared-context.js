@@ -35,7 +35,7 @@ export default class SharedContext extends ViewBase {
         const selected = this.getProperty("available").filter(item => item.isSelected == true).map(item => {
             return {
                 id: item.id,
-                title: item.title
+                title: item.title,
             }
         })
 
