@@ -1,6 +1,7 @@
 export class Widget extends HTMLElement {
     disconnectedCallback() {
         this._clearElements();
+        delete this._dataId;
     }
 
     onMessage(args) {
