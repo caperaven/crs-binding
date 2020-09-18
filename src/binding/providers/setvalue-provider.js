@@ -19,7 +19,7 @@ export class SetValueProvider extends CallProvider {
             result.push(this._createSourceFrom(part.trim()));
         }
 
-        return result.join(";\n");
+        return result.join("\n");
     }
 
     _createSourceFrom(exp) {
