@@ -199,7 +199,7 @@ class InflationCodeGenerator {
 
     _processStyle(attr) {
         const parts = attr.name.split(".");
-        const prop = parts[1];
+        const prop = crsbinding.utils.capitalizePropertyPath(parts[1]);
         const value = crsbinding.expression.sanitize(attr.value.trim(), this._ctxName).expression;
 
         this.inflateSrc.push(`${this.path}.style.${prop} = ${value};`);
