@@ -28,6 +28,8 @@ export class BindableElement extends HTMLElement {
     }
 
     async connectedCallback() {
+        if (this._dataId == null) return;
+
         if(this.preLoad != null) {
             const setPropertyCallback = (path, value)=> {
                 crsbinding.data.setProperty(this._dataId, path, value);
