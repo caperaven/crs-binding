@@ -536,8 +536,9 @@ export const bindingData = {
 
     addObject(name, type = {}) {
         const id = getNextId();
+        type.contextId = id;
+
         data.set(id, {
-            id: id,
             name: name,
             type: "data",
             data: type

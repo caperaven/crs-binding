@@ -35,7 +35,6 @@ export default class ContextActions extends ViewBase {
     }
 
     remove(path, id) {
-        pr.actions.removeArrayItem(this, path, [id]);
     }
 
     edit(path, id) {

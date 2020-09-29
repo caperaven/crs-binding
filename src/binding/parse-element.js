@@ -45,7 +45,7 @@ export function parseAttribute(attr, context, ctxName, parentId) {
 
     const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName, attr, parentId);
 
-    if (provider == null || provider.constructor.name != "AttrProvider") {
+    if (provider == null || provider.constructor.name != "AttrProvider" || attr.nodeName.indexOf(".attr") != -1) {
         attr.ownerElement.removeAttribute(attr.nodeName);
     }
 
