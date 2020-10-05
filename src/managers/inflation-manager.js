@@ -16,6 +16,7 @@ export class InflationManager {
      * @param template
      */
     register(id, template, ctxName = "context", measure = false) {
+        template = this.validateTemplate(template);
         const generator = new InflationCodeGenerator(ctxName);
         const result = generator.generateCodeFor(template);
         generator.dispose();
@@ -40,6 +41,21 @@ export class InflationManager {
             this._items.delete(id);
         }
         crsbinding.elementStoreManager.unregister(id);
+    }
+
+    /**
+     * When using templates in svg the template is not valid.
+     * This will create a new template if required.
+     * @param template
+     */
+    validateTemplate(template) {
+        if (template instanceof HTMLTemplateElement) {
+            return template;
+        }
+
+        const result = document.createElement("template");
+        result.innerHTML = template.innerHTML.trim();
+        return result;
     }
 
     /**
@@ -154,15 +170,24 @@ class InflationCodeGenerator {
     }
 
     _processAttributes(element) {
-        const attributes = Array.from(element.attributes).filter(attr => attr.value.indexOf("${") != -1 || attr.name.indexOf(".if") != -1);
+        const attributes = Array.from(element.attributes).filter(attr => attr.value.indexOf("${") != -1 || attr.name.indexOf(".if") != -1 || attr.name.indexOf(".attr") != -1);
         for (let attr of attributes) {
-            if (attr.value.indexOf("${") != -1) {
+            if (attr.name.indexOf(".attr") != -1) {
+                this._processAttr(attr);
+            }
+            else if (attr.value.indexOf("${") != -1) {
                 this._processAttrValue(attr);
             }
             else {
                 this._processAttrCondition(attr);
             }
         }
+    }
+
+    _processAttr(attr) {
+        const attrName = attr.name.replace(".attr", "");
+        const exp = crsbinding.expression.sanitize(attr.value, this._ctxName).expression;
+        this.inflateSrc.push(`${this.path}.setAttribute("${attrName}", ${exp})`);
     }
 
     _processAttrValue(attr) {

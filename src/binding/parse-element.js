@@ -1,21 +1,24 @@
 import {ProviderFactory} from "./provider-factory.js";
 
-const ignore = ["STYLE"];
+const ignore = ["style", "script"];
 
 export function parseElements(collection, context, ctxName = "context", parentId) {
     for (let element of collection || []) {
-        if (ignore.indexOf(element.nodeName) == -1) {            
-            parseElement(element, context, ctxName, parentId);
-        }
+        parseElement(element, context, ctxName, parentId);
     }
 }
 
 export function parseElement(element, context, ctxName = "context", parentId) {
-    parseElements(element.children, context, ctxName, parentId);
+    const nodeName = element.nodeName.toLowerCase();
+    if (ignore.indexOf(nodeName) != -1) return;
+
+    if (nodeName != "template") {
+        parseElements(element.children, context, ctxName, parentId);
+    }
 
     const attributes = Array.from(element.attributes || []);
     const boundAttributes = attributes.filter(attr =>
-        (attr.ownerElement.tagName == "TEMPLATE" && attr.name == "for") ||
+        (attr.ownerElement.tagName.toLowerCase() == "template" && attr.name == "for") ||
         (attr.name.indexOf(".") != -1) ||
         ((attr.value || "").indexOf("${") == 0)
     );
