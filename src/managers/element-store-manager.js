@@ -9,7 +9,7 @@ export class ElementStoreManager {
     }
 
     register(id, template, measure = false) {
-        const instance = template.content.cloneNode(true);
+        const instance = template.content != null ? template.content.cloneNode(true) : template.children[0].cloneNode(true);
 
         const result = {
             elements: [instance],

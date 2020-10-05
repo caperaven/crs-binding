@@ -16,7 +16,6 @@ export class InflationManager {
      * @param template
      */
     register(id, template, ctxName = "context", measure = false) {
-        template = this.validateTemplate(template);
         const generator = new InflationCodeGenerator(ctxName);
         const result = generator.generateCodeFor(template);
         generator.dispose();
@@ -41,21 +40,6 @@ export class InflationManager {
             this._items.delete(id);
         }
         crsbinding.elementStoreManager.unregister(id);
-    }
-
-    /**
-     * When using templates in svg the template is not valid.
-     * This will create a new template if required.
-     * @param template
-     */
-    validateTemplate(template) {
-        if (template instanceof HTMLTemplateElement) {
-            return template;
-        }
-
-        const result = document.createElement("template");
-        result.innerHTML = template.innerHTML.trim();
-        return result;
     }
 
     /**
@@ -132,7 +116,8 @@ class InflationCodeGenerator {
     };
 
     generateCodeFor(template) {
-        const element = template.content.children[0];
+        const children = template.content == null ? template.children : template.content.children;
+        const element = children[0];
         this.path = "element";
 
         this._processElement(element);
