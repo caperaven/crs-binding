@@ -137,7 +137,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
 }
 
 function addProperty(set, property) {
-    if (property[0] != "$") {
+    if (property.length > 0 && property[0] != "$") {
         set.add(property);
     }
 }

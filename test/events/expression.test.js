@@ -141,21 +141,26 @@ test("sanitizeExp - !expression", () => {
 test("sanitizeExp - $event.target", () => {
    const result = sanitizeExp("$event.target");
    expect(result.expression).toBe("event.target");
+   expect(result.properties.length).toBe(0);
 });
 
 test("sanitizeExp - $parentId in expression", () => {
    const result = sanitizeExp("$parent.property1 == item.property2", "item");
    expect(result.expression).toBe("parent.property1 == item.property2");
+   expect(result.properties[0]).toBe("property2");
 });
 
 test("sanitizeExp - $data", () => {
    const result = sanitizeExp("selectedObj = $data($event.target.dataset.id)");
    expect(result.expression).toBe("context.selectedObj = crsbinding.data.getValue(event.target.dataset.id)");
+   expect(result.properties.length).toBe(1);
+   expect(result.properties[0]).toBe("selectedObj");
 });
 
 test("sanitizeExp - inner-text", () => {
    const result = sanitizeExp("This is the ${item.position} article", "item");
    expect(result.expression).toBe("This is the ${item.position} article");
+   expect(result.properties[0]).toBe("position");
 });
 
 test("sanitizeExp - keywords", () => {
@@ -188,26 +193,33 @@ test("sanitizeExp - keywords", () => {
 test("sanitizeExp - expression with (....)", () => {
    const result = sanitizeExp("model.monitoringPointTriggerExpressionId != null || (model.status == 'CancelledByUser' || model.status == 'CancelledBySystem' || model.status == 'Closed')");
    expect(result.expression).toBe("context.model.monitoringPointTriggerExpressionId != null || (context.model.status == 'CancelledByUser' || context.model.status == 'CancelledBySystem' || context.model.status == 'Closed')");
+   expect(result.properties.length).toBe(2);
+   expect(result.properties[0]).toBe("model.monitoringPointTriggerExpressionId");
+   expect(result.properties[1]).toBe("model.status");
 });
 
 test("sanitize - expression with (...) simple combined with function", () => {
    const result = sanitizeExp("(model.property.isValid() == true)");
    expect(result.expression).toBe("(context.model.property.isValid() == true)");
+   expect(result.properties[0]).toBe("model.property");
 })
 
 test("sanitize - expression with (...) simple combined with function and parameters", () => {
    const result = sanitizeExp("(model.property.isValid('abc', 10) == true)");
    expect(result.expression).toBe("(context.model.property.isValid('abc', 10) == true)");
+   expect(result.properties[0]).toBe("model.property");
 })
 
 test("sanitize - expression with (()) simple", () => {
    const result = sanitizeExp("(model.isOpen == true) || (model.isOpen == null)");
    expect(result.expression).toBe("(context.model.isOpen == true) || (context.model.isOpen == null)");
+   expect(result.properties[0]).toBe("model.isOpen");
 })
 
 test("sanitize - expression with (()) complex", () => {
    const result = sanitizeExp("((model.isOpen == true) || (model.isOpen == null))");
    expect(result.expression).toBe("((context.model.isOpen == true) || (context.model.isOpen == null))");
+   expect(result.properties[0]).toBe("model.isOpen");
 })
 
 // JHR:  todo, enable this feature
