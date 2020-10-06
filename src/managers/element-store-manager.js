@@ -9,7 +9,7 @@ export class ElementStoreManager {
     }
 
     register(id, template, measure = false) {
-        const instance = template.content != null ? template.content.cloneNode(true) : template.children[0].cloneNode(true);
+        const instance = this._cloneTemplate(template);
 
         const result = {
             elements: [instance],
@@ -23,8 +23,12 @@ export class ElementStoreManager {
         this._items.set(id, result);
     }
 
+    _cloneTemplate(template) {
+        return template.content != null ? template.content.cloneNode(true) : template.children[0].cloneNode(true)
+    }
+
     _getItemElement(item) {
-        return item.elements.pop() || item.template.content.cloneNode(true);
+        return item.elements.pop() || this._cloneTemplate(item.template);
     }
 
     getElement(id) {

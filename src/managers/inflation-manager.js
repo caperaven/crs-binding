@@ -53,7 +53,13 @@ export class InflationManager {
 
         const fragment = crsbinding.elementStoreManager.getElements(id, data.length);
         for (let i = 0; i < data.length; i++) {
-            this.inflate(id, fragment.children[i], data[i], item.inflate);
+            const child = fragment.children[i];
+            this.inflate(id, child, data[i], item.inflate);
+            child.__inflated = true;
+            const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
+            for (let attr of attrAttributes) {
+                child.removeAttribute(attr.name);
+            }
         }
 
         return fragment;

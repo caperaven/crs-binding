@@ -9,6 +9,8 @@ export function parseElements(collection, context, ctxName = "context", parentId
 }
 
 export function parseElement(element, context, ctxName = "context", parentId) {
+    if (element.__inflated == true) return;
+
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 

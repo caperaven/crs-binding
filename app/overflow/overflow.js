@@ -11,7 +11,7 @@ export default class Overflow extends crsbinding.classes.ViewBase {
         const rectangles = [];
         const height = 24;
         const padding = 2;
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 10; i++) {
             rectangles.push({
                 x: 0,
                 y: (i * height) + padding,
