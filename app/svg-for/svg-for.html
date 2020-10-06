@@ -1,13 +1,13 @@
 <h2>${title}</h2>
 
-<svg id="once" width="100" height="200" style="background: #dadada" overflow="scroll" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+<svg id="once" width="100" height="200" style="background: #dadada" xmlns="http://www.w3.org/2000/svg">
     <template for.once="rect of rectangles">
         <rect x.attr="rect.x" y.attr="rect.y" width.attr="rect.width" height.attr="rect.height" style="fill: blue"></rect>
     </template>
 </svg>
 
 
-<svg id="bound" width="100" height="200" style="background: #dadada" overflow="scroll" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+<svg id="bound" width="100" height="200" style="background: #dadada" xmlns="http://www.w3.org/2000/svg">
     <template for="rect of rectangles">
         <rect x.attr="rect.x" y.attr="rect.y" width.attr="rect.width" height.attr="rect.height" style="fill: red"></rect>
     </template>

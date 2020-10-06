@@ -257,3 +257,12 @@ test("list", async() => {
 
     await page.goBack();
 });
+
+test("svg-for", async() => {
+    await navigateTo("svg-for");
+
+    expect(await countElements("#once rect")).toEqual(10);
+    expect(await countElements("#bound rect")).toEqual(11);
+
+    await page.goBack();
+});
