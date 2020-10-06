@@ -1,4 +1,4 @@
-export default class Overflow extends crsbinding.classes.ViewBase {
+export default class SvgFor extends crsbinding.classes.ViewBase {
     preLoad() {
         this.createRectangles();
     }
@@ -24,7 +24,6 @@ export default class Overflow extends crsbinding.classes.ViewBase {
 
             y = y + height + padding;
         }
-        console.log(rectangles);
         this.setProperty("rectangles", rectangles);
     }
 }

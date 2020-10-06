@@ -15,9 +15,9 @@
       "view": "welcome"
     },
     {
-      "title": "Overflow",
-      "hash": "#overflow",
-      "view": "overflow"
+      "title": "SVG for binding",
+      "hash": "#svg-for",
+      "view": "svg-for"
     },
     {
       "title": "List",
