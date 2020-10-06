@@ -89,7 +89,7 @@ export class RepeatBaseProvider extends ProviderBase {
         // 2. get the elements to remove
         const elementsToRemove = [];
         for (let i = startIndex + 1; i < endIndex; i++) {
-            if (elements[i].nodeName != "TEMPLATE") {
+            if (elements[i].nodeName.toLowerCase() != "template") {
                 elementsToRemove.push(elements[i]);
             }
         }
@@ -110,7 +110,7 @@ export class RepeatBaseProvider extends ProviderBase {
     }
 
     _clearAll() {
-        const elements = Array.from(this._container.children).filter(el => el.nodeName != "TEMPLATE");
+        const elements = Array.from(this._container.children).filter(el => el.nodeName.toLowerCase() != "template");
 
         for (let child of elements) {
             child.parentElement.removeChild(child);
@@ -129,7 +129,7 @@ export class RepeatBaseProvider extends ProviderBase {
     createElement(item, arrayId) {
         const reference = this._element.dataset.reference || "array-item";
         const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-${reference}-${arrayId}`, this._plural, arrayId);
-        const element = this._element.content.cloneNode(true);
+        const element = crsbinding.utils.cloneTemplate(this._element);
         crsbinding.parsers.parseElement(element, id, this._singular, this._context);
 
         item.__uid = id;

@@ -12,6 +12,14 @@ export function fragmentToText(fragment) {
 }
 
 /**
+ * Create a clone from the template element
+ * @param element
+ */
+export function cloneTemplate(element) {
+    return element.content != null ? element.content.cloneNode(true) : element.children[0].cloneNode(true);
+}
+
+/**
  * Measure element dimensions
  * @param element
  * @returns {Promise<unknown>}

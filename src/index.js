@@ -15,7 +15,7 @@ import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
 import {Widget} from "../src/view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
-import {measureElement, fragmentToText, disposeProperties} from "./lib/utils.js";
+import {measureElement, fragmentToText, disposeProperties, cloneTemplate} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
 
 String.prototype.capitalize = function() {
@@ -82,6 +82,7 @@ const crsbinding = {
         clone: clone,
         disposeProperties: disposeProperties,
         fragmentToText: fragmentToText,
+        cloneTemplate: cloneTemplate,
         measureElement: measureElement,
         forceClean: forceClean
     }
