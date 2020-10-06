@@ -27,7 +27,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
-    const properties = [];
+    const properties = new Set();
     const isLiteral = exp.indexOf("${") != -1;
 
     let oldToken = null;
@@ -58,7 +58,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
                                 indexes.push(index);
                             }
                         }
-                        properties.push(extractProperty(`${path.join("")}`));
+                        addProperty(properties, extractProperty(`${path.join("")}`));
                     }
                 }
 
@@ -89,7 +89,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         if (isLiteral == false || oldToken == "}") {
             if (isNaN(path)) {
                 indexes.push(tokens.length - 1);
-                properties.push(extractProperty(`${path.join("")}`));
+                addProperty(properties, extractProperty(`${path.join("")}`));
             }
         }
     }
@@ -120,6 +120,10 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
+    if (properties.size == 0) {
+        addProperty(properties, exp);
+    }
+
     return {
         isLiteral: isLiteral,
         expression: tokens.join("")
@@ -128,7 +132,13 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
             .split("$context").join("context")
             .split("$data").join("crsbinding.data.getValue")
             .split("$parent").join("parent"),
-        properties: properties
+        properties: Array.from(properties)
+    }
+}
+
+function addProperty(set, property) {
+    if (property[0] != "$") {
+        set.add(property);
     }
 }
 
