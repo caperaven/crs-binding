@@ -20,6 +20,11 @@
       "view": "svg-for"
     },
     {
+      "title": "SVG Binding",
+      "hash": "#svg-binding",
+      "view": "svg-binding"
+    },
+    {
       "title": "List",
       "hash": "#list",
       "view": "list"

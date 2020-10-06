@@ -1,0 +1,18 @@
+<style>
+    circle {
+        transition: all 0.5s;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<div class="toolbar">
+    <button click.call="startAnimate">Start Animate</button>
+    <button click.call="stopAnimate">Stop Animation</button>
+</div>
+
+<svg width="800" height="600">
+    <template for="item of items">
+        <circle cx.attr="item.x" cy.attr="item.y" r.attr="item.r" style.fill.if="item.r < 7 ? 'green' : 'red'"></circle>
+    </template>
+</svg>
