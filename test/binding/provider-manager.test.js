@@ -8,8 +8,8 @@ let provider;
 let element;
 
 beforeEach(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
     element = new ElementMock();
 });
 
@@ -35,6 +35,6 @@ test("provider manager - releaseElement", async () => {
     expect(provider._element.__providers).not.toBeNull();
     await crsbinding.providerManager.releaseElement(provider._element);
 
-    expect(element.__providers).toBeNull();
+    expect(element.__providers).toBeUndefined();
     expect(crsbinding.providerManager.items.size).toBe(0);
 });

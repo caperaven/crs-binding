@@ -7,11 +7,9 @@ beforeEach(async () => {
 
     global.requestAnimationFrame = (callback) => callback();
 
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
-
-    global.HTMLElement = class {
-    };
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
+    crsbinding.data.clear();
 
     global.fetch = () => {
         return new Promise(resolve => {

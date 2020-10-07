@@ -1,12 +1,15 @@
 beforeAll(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
-    crsbinding.data.clear();
+    return new Promise(async resolve => {
+        const load = (await import("./../crsbinding.mock.js")).load;
+        await load();
+        crsbinding.data.clear();
+        resolve();
+    })
 });
 
 test("create object", () => {
     const id = crsbinding.data.addObject("View model");
-    expect(id).toEqual(0);
+    expect(id).toEqual(1);
 
     const result = crsbinding.data.getValue(id);
     expect(result).not.toBeUndefined();
@@ -50,3 +53,8 @@ test("createReference", () => {
     expect(value).toEqual("Hello World");
 });
 
+test("listen-on-path", () => {
+    crsbinding.events.listenOnPath(2, "$globals.menu.isVisible", null);
+    expect(crsbinding.data.details.callbacks.get(0).menu.isVisible).not.toBeNull();
+    expect(crsbinding.data.details.callbacks.get(0).menu.isVisible).not.toBeUndefined();
+});

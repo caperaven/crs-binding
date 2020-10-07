@@ -7,9 +7,8 @@ let template;
 let model;
 
 async function createTemplate() {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
-    global.document = new DocumentMock();
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
 
     template = new ElementMock("template");
     const li = new ElementMock("li", "listitem");

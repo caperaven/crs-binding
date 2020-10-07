@@ -5,8 +5,8 @@ let element;
 let context;
 
 beforeEach(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
 
     context = crsbinding.data.addObject("test object");
     crsbinding.data.setProperty(context, "firstName", "John");
