@@ -1,5 +1,6 @@
 import {BindProvider} from "./providers/bind-provider.js";
 import {OneWayProvider} from "./providers/one-way-provider.js";
+import {OneWayStringProvider} from "./providers/one-way-string-provider.js";
 import {OnceProvider} from "./providers/once-provider.js";
 import {CallProvider} from "./providers/call-provider.js";
 import {InnerProvider} from "./providers/inner-provider.js";
@@ -29,6 +30,9 @@ export class ProviderFactory {
     }
 
     static "one-way"(element, context, property, value, ctxName, attr, parentId) {
+        if (value[0] == "`") {
+            return new OneWayStringProvider(element, context, property, value, ctxName, parentId)
+        }
         return new OneWayProvider(element, context, property, value, ctxName, parentId);
     }
 

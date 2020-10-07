@@ -22,6 +22,11 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
         super.load();
     }
 
+    async disconnectedCallback() {
+        this.stopAnimate();
+        await super.disconnectedCallback();
+    }
+
     dataToPath() {
         const parts = [`M0,${this.pathData[0]}`];
         let x = 100;

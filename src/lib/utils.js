@@ -65,3 +65,9 @@ export function disposeProperties(obj) {
         delete obj[property];
     }
 }
+
+export function setElementCleanupProperty(element, property, value) {
+    element[property] = value;
+    element.__cleanup = element.__cleanup || [];
+    element.__cleanup.push(property);
+}
