@@ -1,6 +1,7 @@
 export default class SvgBinding extends crsbinding.classes.ViewBase {
     preLoad() {
         this.createItems();
+        this.setProperty("circle", {x: 30, y: 100, r: 20});
     }
 
     load() {
@@ -46,6 +47,10 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
                     crsbinding.data.updateUI(item);
                 }
             }
+
+            this.setProperty("circle.x", this.getRndInteger(30, 770));
+            this.setProperty("circle.r", this.getRndInteger(10, 100));
+
         }, 1000)
     }
 

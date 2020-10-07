@@ -1,6 +1,6 @@
 <style>
     circle {
-        transition: all 0.5s;
+        transition: all 0.5s cubic-bezier(0, 0, 0.62, 1.79);
     }
 </style>
 
@@ -11,8 +11,12 @@
     <button click.call="stopAnimate">Stop Animation</button>
 </div>
 
-<svg width="800" height="600">
+<svg width="800" height="200">
     <template for="item of items">
         <circle cx.attr="item.x" cy.attr="item.y" r.attr="item.r" style.fill.if="item.r < 7 ? 'green' : 'red'"></circle>
     </template>
+</svg>
+
+<svg width="800" height="200">
+    <circle cx.attr="circle.x" cy.attr="circle.y" r.attr="circle.r" style="fill: #ffbb00"></circle>
 </svg>
