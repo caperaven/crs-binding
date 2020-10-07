@@ -224,6 +224,13 @@ test("sanitize - expression with (()) complex", () => {
    expect(result.properties[0]).toBe("model.isOpen");
 })
 
+test("sanitize - function", () => {
+   const result = sanitizeExp("`rotate(${angle}deg)`");
+   expect(result.expression).toBe("`rotate(${context.angle}deg)`");
+   expect(result.properties[0]).toBe("angle");
+})
+
+
 // JHR:  todo, enable this feature
 // test("sanitizeExp - attribute condition", () => {
 //    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");
