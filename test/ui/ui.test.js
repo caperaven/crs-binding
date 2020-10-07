@@ -216,11 +216,21 @@ test("maps", async() => {
 
 test("drawer", async() => {
     await navigateTo("drawer");
-    await click("#btnToggle");
-    expect(await hasAttribute("#container", "hidden")).toBeFalsy();
 
-    await click("#btnToggle");
-    expect(await hasAttribute("#container", "hidden")).toBeTruthy();
+    expect(await isHidden("#lstContext")).toBe(true);
+    expect(await isHidden("#lstGlobal")).toBe(true);
+
+    await click("#btnContext");
+    await click("#btnGlobal");
+
+    expect(await isHidden("#lstContext")).toBe(false);
+    expect(await isHidden("#lstGlobal")).toBe(false);
+
+    await click("#btnContext");
+    await click("#btnGlobal");
+
+    expect(await isHidden("#lstContext")).toBe(true);
+    expect(await isHidden("#lstGlobal")).toBe(true);
 
     await page.goBack();
 });

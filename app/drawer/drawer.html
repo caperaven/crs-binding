@@ -1,17 +1,17 @@
 <h2>Open and close toggle button</h2>
 
 <div class="toolbar">
-    <button click.setValue="$context.isVisible = !$context.isVisible">Toggle Context</button>
-    <button click.setValue="$globals.menu.isVisible = !$globals.menu.isVisible">Toggle Globals</button>
+    <button id="btnContext" click.setValue="$context.isVisible = !$context.isVisible">Toggle Context</button>
+    <button id="btnGlobal" click.setValue="$globals.menu.isVisible = !$globals.menu.isVisible">Toggle Globals</button>
 </div>
 
-<ul hidden.if="isVisible != true">
+<ul id="lstContext" hidden.if="isVisible != true">
     <li>item 1</li>
     <li>item 1</li>
     <li>item 1</li>
 </ul>
 
-<ul hidden.if="$globals.menu.isVisible != true">
+<ul id="lstGlobal" hidden.if="$globals.menu.isVisible != true">
     <li>global item 1</li>
     <li>global item 1</li>
     <li>global item 1</li>
