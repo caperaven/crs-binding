@@ -10,6 +10,11 @@ The focus is on web technology standards as far as possible.
 A core focus of crs-binding is to manage binding or context data, responding to those context changes.  
 There is a clear separation between component properties and binding data so that they can operate in isolation of each other.
 
+Please note that crs binding is still under active development as we are using it in an enterprise scale application.   
+Changes are made as we require new features or discover usability issues and bugs.  
+At this point of time the binding engine is stable.   
+We do not anticipate any breaking changes though more features will be added.  
+
 ## Documentation
 Documentation comes in two main forms.
 
