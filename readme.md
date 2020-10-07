@@ -27,6 +27,8 @@ The sample application is [opensource](https://github.com/caperaven/crs-binding-
 Tests are written in both unit and puppeteer tests.
 Unit testing are used for core mechanics but DOM features are tested using puppeteer.
 
+For the puppeteer tests to run you must have an active server running on port 8000.  
+
 ## Getting Started
 
 One of the easiest ways to get started is to create a sample application where everything is setup for you.
@@ -50,6 +52,11 @@ If you don't want to use an existing template, you can easily set up your own pr
 
 Once you have included the library, crsbinding is registered on globalThis for usage.  
 You can look at the [sample application](https://github.com/caperaven/crs-binding-examples) for details.
+
+## Package
+
+When installing crs binding you will notice that the library is bundled into one file but not minified.  
+This gives the end user a bit of flexibility around how they want to handle deploying crs binding with their application.
 
 ## Other interesting opensource libraries
 
