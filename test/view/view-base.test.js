@@ -6,8 +6,8 @@ let parseElementSpy;
 let element;
 
 beforeEach(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
 
     element = new ElementMock();
 
