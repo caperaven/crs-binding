@@ -1,8 +1,9 @@
 import {clone} from "./../../src/lib/clone.js";
 
 beforeAll(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
+    crsbinding.data.clear();
 });
 
 test("clone - none", () => {

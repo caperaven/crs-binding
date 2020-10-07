@@ -1,10 +1,7 @@
 beforeAll(async () => {
-    return new Promise(async resolve => {
-        const load = (await import("./../crsbinding.mock.js")).load;
-        await load();
-        crsbinding.data.clear();
-        resolve();
-    })
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
+    crsbinding.data.clear();
 });
 
 test("create object", () => {

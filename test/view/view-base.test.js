@@ -28,5 +28,5 @@ test("view base - disconnectedCallback", () => {
     const releaseBindingSpy = jest.spyOn(crsbinding.observation, "releaseBinding");
     instance.disconnectedCallback();
     expect(releaseBindingSpy).toHaveBeenCalled();
-    expect(instance.__evetns).toBeUndefined();
+    expect(instance.__events).toBeUndefined();
 });
