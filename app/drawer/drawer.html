@@ -2,7 +2,7 @@
 
 <div class="toolbar">
     <button click.setValue="$context.isVisible = !$context.isVisible">Toggle Context</button>
-    <button click.setValue="$globals.menu.isVisible = $globals.menu.isVisible">Toggle Globals</button>
+    <button click.setValue="$globals.menu.isVisible = !$globals.menu.isVisible">Toggle Globals</button>
 </div>
 
 <ul hidden.if="isVisible != true">
