@@ -27,7 +27,7 @@ export class ProviderManager {
 
     async releaseElement(element) {
         for (let property of element.__cleanup || []) {
-            delete element[property];
+            element[property] = null;
         }
 
         for (let child of element.children || []) {
