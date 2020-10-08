@@ -1,5 +1,4 @@
-import {OneWayProvider} from "./one-way-provider.js";
-import {getExpForProvider, setContext} from "./one-way-utils.js";
+import {getExpForProvider} from "./one-way-utils.js";
 import {ProviderBase} from "./provider-base.js";
 
 export class OneWayStringProvider extends ProviderBase {
@@ -27,6 +26,8 @@ export class OneWayStringProvider extends ProviderBase {
         for (let property of san.properties) {
             this.listenOnPath(property, this._eventHandler);
         }
+
+        this.propertyChanged();
     }
 
     propertyChanged() {

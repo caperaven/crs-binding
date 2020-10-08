@@ -29,6 +29,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
 
     const properties = new Set();
     const isLiteral = exp.indexOf("${") != -1;
+    const isCalculatedLiteral = exp.indexOf("${(") != -1;
 
     let oldToken = null;
     let path = [];
@@ -37,12 +38,16 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
 
+        if (isCalculatedLiteral == true && tokens[i - 1] == "}") {
+            continue;
+        }
+
         if (quotes.indexOf(oldToken) != -1 || isNaN(token) == false || (reserved.indexOf(token) != -1 && ignore.indexOf(token) == -1))
         {
             oldToken = token;
 
             if (path.length > 0) {
-                if (isLiteral == false || oldToken == "}") {
+                if (isLiteral == false || isCalculatedLiteral == true || oldToken == "}") {
                     if (isNaN(path)) {
                         if (ignoreTokens.indexOf(path[0]) == -1 && token != ":") {
                             if (path.length == 1 && path[0] == ")") {
@@ -94,7 +99,8 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
-    if (indexes.length == 0 &&
+    if (exp[0] != "`" &&
+        indexes.length == 0 &&
         exp.indexOf(".") != -1 &&
         exp.indexOf("$globals") == -1 &&
         exp.indexOf("$context") == -1 &&
@@ -120,7 +126,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
-    if (properties.size == 0) {
+    if (properties.size == 0 && isLiteral == false) {
         addProperty(properties, exp);
     }
 

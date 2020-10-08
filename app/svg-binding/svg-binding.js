@@ -6,6 +6,7 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
         this.angle = 0;
         this.rotation = 0;
         this.pathData = [100, 50, 150, 120, 130];
+        this.rect = {x: 10, y: 100, scale: 1, rotate: 0};
     }
 
     preLoad() {
@@ -14,6 +15,7 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
         this.setProperty("arc2", describeArc(200, 200, 100, 180, 270))
         this.setProperty("arc", describeArc(200, 200, 100, 0, 90))
         this.setProperty("rotation", `rotate(${this.rotation}deg)`);
+        this.setProperty("rect", Object.assign({}, this.rect));
         this.dataToPath()
     }
 
@@ -68,6 +70,8 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
 
     startAnimate() {
         const array = this.getProperty("items");
+        let direction = 50;
+        let scale = 0.1;
 
         const fn = () => {
             this.setProperty("circle.x", this.getRndInteger(30, 770));
@@ -75,6 +79,11 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
             this.setProperty("arc", describeArc(200, 200, 100, this.angle, this.angle + 90))
             this.setProperty("rotation", `rotate(${this.rotation}deg)`);
             this.setProperty("angle", this.angle);
+
+            this.setProperty("rect.x", this.rect.x);
+            this.setProperty("rect.scale", this.rect.scale);
+            this.setProperty("rect.rotate", this.rect.rotate);
+
             this.dataToPath();
         }
 
@@ -98,6 +107,18 @@ export default class SvgBinding extends crsbinding.classes.ViewBase {
             }
 
             this.rotation += 90;
+
+            this.rect.x += direction;
+            this.rect.scale += scale;
+            this.rect.rotate += 45;
+
+            if (this.rect.x >= 700 || this.rect.x <= 10) {
+                direction *= -1;
+            }
+
+            if (this.rect.scale < 1 || this.rect.scale > 2) {
+                scale *= -1;
+            }
 
             crsbinding.idleTaskManager.add(fn);
 

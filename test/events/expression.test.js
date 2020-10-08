@@ -230,6 +230,13 @@ test("sanitize - function", () => {
    expect(result.properties[0]).toBe("angle");
 })
 
+test("sanitize - calculated string", () => {
+   const result = sanitizeExp("`${(rect.x / 2)}px ${(rect.y / 2)}px`");
+   expect(result.expression).toBe("`${(context.rect.x / 2)}px ${(context.rect.y / 2)}px`");
+   expect(result.properties[0]).toBe("rect.x");
+   expect(result.properties[1]).toBe("rect.y");
+})
+
 
 // JHR:  todo, enable this feature
 // test("sanitizeExp - attribute condition", () => {
