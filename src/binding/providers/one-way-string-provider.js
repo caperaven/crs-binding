@@ -20,8 +20,8 @@ export class OneWayStringProvider extends ProviderBase {
         this._exp = getExpForProvider(this);
         this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], {sanitize: false, ctxName: this._ctxName});
 
-        const san = crsbinding.expression.sanitize(this._value);
-        this._getValueFn = new Function("context", `return ${san.expression}`);
+        const san = crsbinding.expression.sanitize(this._value, this._ctxName);
+        this._getValueFn = new Function(this._ctxName, `return ${san.expression}`);;
 
         for (let property of san.properties) {
             this.listenOnPath(property, this._eventHandler);
