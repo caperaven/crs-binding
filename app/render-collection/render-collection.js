@@ -5,7 +5,8 @@ export default class RenderCollection extends ViewBase {
         const data = [];
         for (let i = 0; i < 10; i++) {
             data.push({
-                title: `item ${i}`
+                title: `item ${i}`,
+                color: `#ff0090`
             })
         }
 

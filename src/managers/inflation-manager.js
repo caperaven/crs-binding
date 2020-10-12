@@ -161,7 +161,14 @@ class InflationCodeGenerator {
     }
 
     _processAttributes(element) {
-        const attributes = Array.from(element.attributes).filter(attr => attr.value.indexOf("${") != -1 || attr.name.indexOf(".if") != -1 || attr.name.indexOf(".attr") != -1);
+        const attributes = Array.from(element.attributes).filter(attr =>
+            attr.value.indexOf("${") != -1 ||
+            attr.name.indexOf(".if") != -1 ||
+            attr.name.indexOf(".attr") != -1 ||
+            attr.name.indexOf("style.") != -1 ||
+            attr.name.indexOf("classlist." != -1)
+        );
+
         for (let attr of attributes) {
             if (attr.name.indexOf(".attr") != -1) {
                 this._processAttr(attr);
