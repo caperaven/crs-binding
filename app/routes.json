@@ -93,6 +93,11 @@
       "title": "Shared Context",
       "hash": "#shared-context",
       "view": "shared-context"
+    },
+    {
+      "title": "Render Collection",
+      "hash": "#render-collection",
+      "view": "render-collection"
     }
   ]
 }
