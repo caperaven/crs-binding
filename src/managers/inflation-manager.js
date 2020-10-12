@@ -207,7 +207,7 @@ class InflationCodeGenerator {
     }
 
     _processAttrCondition(attr) {
-        if (attr.name.trim().indexOf("style") == 0) {
+        if (attr.name.trim().indexOf("style.") == 0) {
             return this._processStyle(attr);
         }
         
