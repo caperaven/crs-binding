@@ -276,3 +276,16 @@ test("svg-for", async() => {
 
     await page.goBack();
 });
+
+test("render-collection", async() => {
+    await navigateTo("render-collection");
+
+    await click("#btnRenderCollection");
+    expect(await countElements("ul li")).toEqual(10);
+
+    // This will delete the old values and re-render the content again.
+    await click("#btnRenderCollection");
+    expect(await countElements("ul li")).toEqual(10);
+
+    await page.goBack();
+});
