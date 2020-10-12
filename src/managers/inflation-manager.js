@@ -16,6 +16,7 @@ export class InflationManager {
      * @param template
      */
     register(id, template, ctxName = "context", measure = false) {
+        template = template.cloneNode(true);
         const generator = new InflationCodeGenerator(ctxName);
         const result = generator.generateCodeFor(template);
         generator.dispose();
