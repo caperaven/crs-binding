@@ -48,22 +48,55 @@ export class InflationManager {
      * @param id
      * @param data
      */
-    get(id, data) {
+    get(id, data, elements) {
+        if (elements != null) {
+            return this._getWithElements(id, data, elements);
+        }
+
+        const fragment = crsbinding.elementStoreManager.getElements(id, data.length);
+        this._inflateElements(id, fragment.children, data);
+        return fragment;
+    }
+
+    _getWithElements(id, data, elements) {
         const item = this._items.get(id);
         if (item == null) return null;
 
-        const fragment = crsbinding.elementStoreManager.getElements(id, data.length);
+        const diff = elements.length - data.length;
+        const fragment = document.createDocumentFragment();
+
+        if (diff > 0) {
+            for (let i = 0; i < diff; i++) {
+                const removed = elements.pop();
+                removed.parentElement.removeChild(removed);
+            }
+        }
+        else if (diff < 0) {
+            for (let i = 0; i > diff; i--) {
+                fragment.appendChild(crsbinding.elementStoreManager.getElement(id));
+            }
+        }
+
+        const processArray = [...elements, ...Array.from(fragment.children)];
+        this._inflateElements(id, processArray, data);
+
+        return fragment;
+    }
+
+    _inflateElements(id, elements, data) {
+        const item = this._items.get(id);
+        if (item == null) return;
+
         for (let i = 0; i < data.length; i++) {
-            const child = fragment.children[i];
+            const child = elements[i];
             this.inflate(id, child, data[i], item.inflate);
             child.__inflated = true;
+
             const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
             for (let attr of attrAttributes) {
                 child.removeAttribute(attr.name);
             }
         }
-
-        return fragment;
     }
 
     /**

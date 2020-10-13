@@ -23,13 +23,13 @@ export class ElementStoreManager {
         this._items.set(id, result);
     }
 
-    _getItemElement(item) {
+    getItemElement(item) {
         return item.elements.pop() || crsbinding.utils.cloneTemplate(item.template);
     }
 
     getElement(id) {
         const item = this._items.get(id);
-        return this._getItemElement(item);
+        return this.getItemElement(item);
     }
 
     getElements(id, quantity) {
@@ -37,7 +37,7 @@ export class ElementStoreManager {
         const fragment = document.createDocumentFragment();
 
         while(fragment.children.length < quantity) {
-            fragment.appendChild(this._getItemElement(item));
+            fragment.appendChild(this.getItemElement(item));
         }
 
         return fragment;
@@ -45,7 +45,7 @@ export class ElementStoreManager {
 
     getBoundElement(id, context) {
         const item = this._items.get(id);
-        const result = this._getItemElement(item);
+        const result = this.getItemElement(item);
         crsbinding.parsers.parseElement(result, context);
         return result;
     }
