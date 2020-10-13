@@ -283,7 +283,12 @@ test("render-collection", async() => {
     await click("#btnRenderCollection");
     expect(await countElements("ul li")).toEqual(10);
 
-    // This will delete the old values and re-render the content again.
+    await click("#btnRenderMore");
+    expect(await countElements("ul li")).toEqual(15);
+
+    await click("#btnRenderLess");
+    expect(await countElements("ul li")).toEqual(5);
+
     await click("#btnRenderCollection");
     expect(await countElements("ul li")).toEqual(10);
 
