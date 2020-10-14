@@ -25,6 +25,12 @@ export class AttrProvider extends ProviderBase {
 
     _change() {
         const value = this._expObj.function(this.data);
-        this._element.setAttribute(this._property, value);
+
+        if (value == null) {
+            this._element.removeAttribute(this._property);
+        }
+        else {
+            this._element.setAttribute(this._property, value);
+        }
     }
 }
