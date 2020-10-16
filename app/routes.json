@@ -98,6 +98,11 @@
       "title": "Render Collection",
       "hash": "#render-collection",
       "view": "render-collection"
+    },
+    {
+      "title": "SVG Form",
+      "hash": "#svg-form",
+      "view": "svg-form"
     }
   ]
 }

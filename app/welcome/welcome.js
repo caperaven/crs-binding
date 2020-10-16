@@ -7,6 +7,11 @@ export default class Welcome extends ViewBase {
         })
     }
 
+    load() {
+        this.showWidget();
+        super.load();
+    }
+
     showWidget() {
         crsbinding.events.emitter.postMessage("#my-widget", {
             context: this,

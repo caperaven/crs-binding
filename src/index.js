@@ -4,16 +4,12 @@ import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {listenOnPath, removeOnPath} from "./binding/listen-on.js";
-import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
 import {bindingData} from "./store/binding-data.js";
 import {EventEmitter} from "./events/events.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
-import {BindableElement} from "../src/binding/bindable-element.js";
-import {ViewBase} from "../src/view/view-base.js";
-import {Widget} from "../src/view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
 import {measureElement, fragmentToText, disposeProperties, cloneTemplate} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
@@ -62,21 +58,13 @@ const crsbinding = {
     },
 
     classes: {
-        BindableElement: BindableElement,
-        ViewBase: ViewBase,
         RepeatBaseProvider: RepeatBaseProvider,
-        Widget: Widget
     },
 
     events: {
         listenOnPath: listenOnPath,
         removeOnPath: removeOnPath,
         emitter: new EventEmitter()
-    },
-
-    dom: {
-        enableEvents: domEnableEvents,
-        disableEvents: domDisableEvents,
     },
 
     utils: {
