@@ -8,7 +8,6 @@ import {InflationManager} from "./managers/inflation-manager.js";
 import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
 import {bindingData} from "./store/binding-data.js";
-import {EventEmitter} from "./events/events.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
 import {measureElement, fragmentToText, disposeProperties, cloneTemplate} from "./lib/utils.js";
@@ -63,8 +62,7 @@ const crsbinding = {
 
     events: {
         listenOnPath: listenOnPath,
-        removeOnPath: removeOnPath,
-        emitter: new EventEmitter()
+        removeOnPath: removeOnPath
     },
 
     utils: {

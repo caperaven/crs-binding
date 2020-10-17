@@ -6,27 +6,33 @@ export default [
         ]
     },
     {
-        input: "src/views-loader.js",
+        input: "src/plugin-loaders/views-loader.js",
         output: [
-            {file: 'dist/views-loader.js', format: 'es', sourcemap: false}
+            {file: 'dist/plugin-loaders/views-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/attr-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/attr-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/event-aggregator-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/event-aggregator-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/if-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/if-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/setvalue-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/setvalue-loader.js', format: 'es', sourcemap: false}
         ]
     }
-    // {
-    //     input: "src/binding/bindable-element.js",
-    //     output: [
-    //         {file: 'dist/crs-bindable-element.js', format: 'es', sourcemap: false}
-    //     ],
-    //     plugins: [
-    //         terser()
-    //     ]
-    // },
-    // {
-    //     input: "src/view/view-base",
-    //     output: [
-    //         {file: 'dist/crs-view-base.js', format: 'es', sourcemap: false}
-    //     ],
-    //     plugins: [
-    //         terser()
-    //     ]
-    // }
 ];

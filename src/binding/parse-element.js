@@ -1,5 +1,3 @@
-import {ProviderFactory} from "./provider-factory.js";
-
 const ignore = ["style", "script"];
 
 export function parseElements(collection, context, ctxName = "context", parentId) {
@@ -28,7 +26,7 @@ export function parseElement(element, context, ctxName = "context", parentId) {
     parseAttributes(boundAttributes, context, ctxName, parentId);
 
     if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
-        ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
+        crsbinding.providerManager.factory["inner"](element, context, null, null, ctxName, null, parentId);
     }
 }
 
@@ -48,7 +46,7 @@ export function parseAttribute(attr, context, ctxName, parentId) {
         prov = "attr";
     }
 
-    const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName, attr, parentId);
+    const provider = crsbinding.providerManager.factory[prov](attr.ownerElement, context, prop, attr.value, ctxName, attr, parentId);
 
     if (provider == null || provider.constructor.name != "AttrProvider" || attr.nodeName.indexOf(".attr") != -1) {
         attr.ownerElement.removeAttribute(attr.nodeName);

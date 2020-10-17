@@ -1,10 +1,13 @@
-import {ForOnceProvider} from "../binding/providers/for-once-provider.js";
-import {ForMapProvider} from "../binding/providers/for-map-provider.js";
+import {ProviderFactory} from "./../binding/provider-factory.js";
+import {ForOnceProvider} from "./../binding/providers/for-once-provider.js";
+import {ForMapProvider} from "./../binding/providers/for-map-provider.js";
+
 
 export class ProviderManager {
     constructor() {
         this._nextId = 0;
         this.items = new Map();
+        this.factory = new ProviderFactory();
         this.providers = {
             for: {
                 map: ForMapProvider,
