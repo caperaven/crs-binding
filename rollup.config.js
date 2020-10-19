@@ -6,6 +6,12 @@ export default [
         ]
     },
     {
+        input: "src/all.js",
+        output: [
+            {file: 'dist/crs-binding-all.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
         input: "src/plugin-loaders/views-loader.js",
         output: [
             {file: 'dist/plugin-loaders/views-loader.js', format: 'es', sourcemap: false}

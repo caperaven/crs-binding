@@ -1,0 +1,11 @@
+import "./index.js";
+import "./../src/plugin-loaders/views-loader.js";
+import "./../src/plugin-loaders/attr-loader.js";
+import "./../src/plugin-loaders/event-aggregator-loader.js";
+import "./../src/plugin-loaders/if-loader.js";
+import "./../src/plugin-loaders/setvalue-loader.js";
+import "./../src/plugin-loaders/render-collection-loader.js";
+import "./../src/plugin-loaders/measure-element-loader.js";
+import "./../src/plugin-loaders/clone-template-loader.js";
+import "./../src/plugin-loaders/fragment-to-text-loader.js";
+import "./../src/plugin-loaders/for-map-loader.js";

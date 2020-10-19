@@ -1,6 +1,5 @@
 import {ProviderFactory} from "./../binding/provider-factory.js";
 import {ForOnceProvider} from "./../binding/providers/for-once-provider.js";
-import {ForMapProvider} from "./../binding/providers/for-map-provider.js";
 
 
 export class ProviderManager {
@@ -10,7 +9,6 @@ export class ProviderManager {
         this.factory = new ProviderFactory();
         this.providers = {
             for: {
-                map: ForMapProvider,
                 once: ForOnceProvider
             }
         }
