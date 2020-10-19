@@ -59,12 +59,16 @@
 
     <script type="module">
         import "/node_modules/crs-router/crs-router.js";
-        import "/src/index.js";
-        import "/src/plugin-loaders/views-loader.js";
-        import "/src/plugin-loaders/attr-loader.js";
-        import "/src/plugin-loaders/event-aggregator-loader.js";
-        import "/src/plugin-loaders/if-loader.js";
-        import "/src/plugin-loaders/setvalue-loader.js";
+        import "./src/index.js";
+        import "./src/plugin-loaders/views-loader.js";
+        import "./src/plugin-loaders/attr-loader.js";
+        import "./src/plugin-loaders/event-aggregator-loader.js";
+        import "./src/plugin-loaders/if-loader.js";
+        import "./src/plugin-loaders/setvalue-loader.js";
+        import "./src/plugin-loaders/render-collection-loader.js";
+        import "./src/plugin-loaders/measure-element-loader.js";
+        import "./src/plugin-loaders/clone-template-loader.js";
+        import "./src/plugin-loaders/fragment-to-text-loader.js";
 
         crsbinding.data.setProperty(crsbinding.$globals, "menuVisible", true, null, "boolean");
         crsbinding.data.setProperty(crsbinding.$globals, "myDate", null);

@@ -34,5 +34,29 @@ export default [
         output: [
             {file: 'dist/plugin-loaders/setvalue-loader.js', format: 'es', sourcemap: false}
         ]
+    },
+    {
+        input: "src/plugin-loaders/clone-template-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/clone-template-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/fragment-to-text-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/fragment-to-text-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/measure-element-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/measure-element-loader.js', format: 'es', sourcemap: false}
+        ]
+    },
+    {
+        input: "src/plugin-loaders/render-collection-loader.js",
+        output: [
+            {file: 'dist/plugin-loaders/render-collection-loader.js', format: 'es', sourcemap: false}
+        ]
     }
 ];

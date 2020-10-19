@@ -10,9 +10,8 @@ import {clone} from "./lib/clone.js";
 import {bindingData} from "./store/binding-data.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
-import {measureElement, fragmentToText, disposeProperties, cloneTemplate} from "./lib/utils.js";
+import {disposeProperties} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
-import {renderCollection} from "./lib/renderCollection.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -69,11 +68,7 @@ const crsbinding = {
         capitalizePropertyPath: capitalizePropertyPath,
         clone: clone,
         disposeProperties: disposeProperties,
-        fragmentToText: fragmentToText,
-        cloneTemplate: cloneTemplate,
-        measureElement: measureElement,
         forceClean: forceClean,
-        renderCollection: renderCollection
     }
 };
 

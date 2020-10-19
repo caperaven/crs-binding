@@ -1,0 +1,11 @@
+terser ./dist/crs-binding.js -o ./dist/crs-binding.js -c -m
+terser ./dist/plugin-loaders/attr-loader.js -o ./dist/plugin-loaders/attr-loader.js -c -m
+terser ./dist/plugin-loaders/attr-loader.js -o ./dist/plugin-loaders/attr-loader.js -c -m
+terser ./dist/plugin-loaders/clone-template-loader.js -o ./dist/plugin-loaders/clone-template-loader.js -c -m
+terser ./dist/plugin-loaders/event-aggregator-loader.js -o ./dist/plugin-loaders/event-aggregator-loader.js -c -m
+terser ./dist/plugin-loaders/fragment-to-text-loader.js -o ./dist/plugin-loaders/fragment-to-text-loader.js -c -m
+terser ./dist/plugin-loaders/if-loader.js -o ./dist/plugin-loaders/if-loader.js -c -m
+terser ./dist/plugin-loaders/measure-element-loader.js -o ./dist/plugin-loaders/measure-element-loader.js -c -m
+terser ./dist/plugin-loaders/render-collection-loader.js -o ./dist/plugin-loaders/render-collection-loader.js -c -m
+terser ./dist/plugin-loaders/setvalue-loader.js -o ./dist/plugin-loaders/setvalue-loader.js -c -m
+terser ./dist/plugin-loaders/views-loader.js -o ./dist/plugin-loaders/views-loader.js -c -m

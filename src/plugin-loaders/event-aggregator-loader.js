@@ -10,4 +10,4 @@ crsbinding.providerManager.factory.post = function(element, context, property, v
     return new PostProvider(element, context, property, value, ctxName, parentId);
 }
 
-crsbinding.events.emitter = new EventEmitter()
+crsbinding.events.emitter = new EventEmitter();
