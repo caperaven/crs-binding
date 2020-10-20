@@ -147,8 +147,15 @@ async function callFunctionsOnObject(obj, id, property) {
 
 function performUpdates(id, property, value) {
     const ctx = context.get(id);
+    if (ctx == null) return;
+
     const fnName = `${property}Changed`;
-    ctx && ctx[fnName] && ctx[fnName](value);
+    if (ctx[fnName]) {
+        ctx[fnName](value)
+    }
+    else if (ctx["propertyChanged"]) {
+        ctx["propertyChanged"](property, value);
+    }
 }
 
 function addCallback(obj, property, callback) {
