@@ -19,6 +19,20 @@ export class BindingData {
     }
 
     /**
+     * It's more convenient to use "this" instead of "this._dataId".
+     * We want to cater for both so this function makes sense how to get the right context id for further use.
+     * @param id {number|object} the context id to use or a object that contains either _dataId or __uid field.
+     * @returns {number|*}
+     * @private
+     */
+    _getContextId(id) {
+        if (typeof id == "object") {
+            return id.__uid || id._dataId;
+        }
+        return id;
+    }
+
+    /**
      * Get the context object
      * @param id {number} context id
      * @returns {object}
@@ -34,9 +48,7 @@ export class BindingData {
      * @returns {null|*}
      */
     array(id, property) {
-        if (typeof id == "object") {
-            id = id._dataId;
-        }
+        id = this._getContextId(id);
 
         const value = this.getValue(id, property);
         return createArrayProxy(value, id, property);
@@ -100,9 +112,7 @@ export class BindingData {
     getValue(id, property) {
         if (id == "undefined" || id == null) return undefined;
 
-        if (typeof id == "object") {
-            id = id.__uid || id._dataId;
-        }
+        id = this._getContextId(id);
 
         if (property != null && property.indexOf("$globals.") !== -1) {
             id = crsbinding.$globals;
@@ -129,9 +139,7 @@ export class BindingData {
      * @param sharedItems {array} string array of property names to sync
      */
     makeShared(id, property, sharedItems) {
-        if (typeof id == "object") {
-            id = id.__uid || id._dataId;
-        }
+        id = this._getContextId(id);
 
         const obj = this._callbacks.get(id);
         for (let prop of sharedItems) {
@@ -156,9 +164,7 @@ export class BindingData {
      * @returns {value}
      */
     getProperty(id, property) {
-        if (typeof id == "object") {
-            id = id.__uid || id._dataId;
-        }
+        id = this._getContextId(id);
 
         let value =  this.getValue(id, property);
 
@@ -177,9 +183,7 @@ export class BindingData {
      * @param value {any} the value to set
      */
     setProperty(id, property, value) {
-        if (typeof id == "object") {
-            id = id.__uid || id._dataId;
-        }
+        id = this._getContextId(id);
 
         let oldValue = this.getProperty(id, property);
 
@@ -214,9 +218,7 @@ export class BindingData {
      * @param dataType {string} "number", "boolean" or null
      */
     _setContextProperty(id, property, value, ctxName, dataType) {
-        if (typeof id == "object") {
-            id = id.__uid || id._dataId;
-        }
+        id = this._getContextId(id);
 
         let obj = this._data.get(id);
         if (obj == null || obj.__frozen == true) return;
@@ -411,6 +413,8 @@ export class BindingData {
      */
     removeArraySync(syncId, id, property) {
         const syncObj = this._sync.get(syncId);
+        id = this._getContextId(id);
+
         if (syncObj != null) {
             const items = syncObj.collection.filter(item => item.id == id && item.path == property);
             items.forEach(item => syncObj.collection.splice(syncObj.collection.indexOf(item), 1));
@@ -430,9 +434,7 @@ export class BindingData {
      */
     addArraySync(syncId, id, property, array) {
         return new Promise(resolve => {
-            if (typeof id == "object") {
-                id = id.__uid || id._dataId;
-            }
+            id = this._getContextId(id);
 
             this._ensurePath(id, property, () => {
                 const sync = this._sync.get(syncId);
@@ -581,9 +583,7 @@ export class BindingData {
      * @returns {Promise<*>}
      */
     async updateUI(id, property) {
-        if (typeof id == "object") {
-            id = id.__uid || id._dataId;
-        }
+        id = this._getContextId(id);
 
         const obj = this._callbacks.get(id);
 
