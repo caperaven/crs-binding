@@ -325,4 +325,18 @@ test("array sync", async() => {
     expect(await getTextContent("comp-two li[data-id='0']")).toEqual("item 11");
     expect(await getTextContent("comp-two li[data-id='1']")).toEqual("item 12");
     expect(await getTextContent("comp-two li[data-id='2']")).toEqual("item 13");
+
+    await click("#btnRemoveShare");
+    await setInputText("comp-one input[data-id='0']", "item 21");
+    await setInputText("comp-one input[data-id='1']", "item 22");
+    await setInputText("comp-one input[data-id='2']", "item 23");
+
+    expect(await getTextContent("comp-two li[data-id='0']")).toEqual("item 11");
+    expect(await getTextContent("comp-two li[data-id='1']")).toEqual("item 12");
+    expect(await getTextContent("comp-two li[data-id='2']")).toEqual("item 13");
+
+    await click("#btnShare");
+    expect(await getTextContent("comp-two li[data-id='0']")).toEqual("item 21");
+    expect(await getTextContent("comp-two li[data-id='1']")).toEqual("item 22");
+    expect(await getTextContent("comp-two li[data-id='2']")).toEqual("item 23");
 })
