@@ -78,8 +78,12 @@ async function countElements(query) {
 
 beforeAll(async () => {
     jest.setTimeout(100000);
-    browser = await puppeteer.launch({headless: false, slowMo: 50, args: ['--disable-dev-shm-usage']});
+    browser = await puppeteer.launch({headless: false, slowMo: 50, args: ['--disable-dev-shm-usage', '--start-maximized']});
     page = await browser.newPage();
+    await page.setViewport({
+        width: 1366,
+        height: 1366,
+    });
 
     await Promise.all([
         page.coverage.startJSCoverage(),
@@ -133,7 +137,16 @@ test("component", async() => {
     expect(values["1"]).toEqual("input 2");
     expect(values["2"]).toEqual("input 2");
 
-    return;
+    await setInputText('#edtFirstNameFirstName', "input 3").catch(e => console.error(e));
+
+    values["0"] = await getValue('#edtFirstName');
+    values["1"] = await getValue('#edtInputFirstName');
+    values["2"] = await getValue('#edtFirstNameFirstName');
+
+    expect(values["0"]).toEqual("input 3");
+    expect(values["1"]).toEqual("input 3");
+    expect(values["2"]).toEqual("input 3");
+
     await setInputText('#edtLand', "1").catch(e => console.error(e));
     await setInputText('#edtCell', "2").catch(e => console.error(e));
     await setInputText('#edtFax', "3").catch(e => console.error(e));
@@ -145,11 +158,6 @@ test("component", async() => {
     expect(values["0"]).toEqual("1");
     expect(values["1"]).toEqual("2");
     expect(values["2"]).toEqual("3");
-
-
-    await click('#edtShowContacts');
-    isHidden = await isHidden('input-contacts');
-    expect(isHidden).toEqual(true);
 
     await page.goBack();
 });
