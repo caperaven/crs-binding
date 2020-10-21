@@ -32,7 +32,7 @@ export class ForProvider extends RepeatBaseProvider {
 
         // loop through items and add them to fragment after being parsed
         await this._forExp.function(array, (item) => {
-            item.__aId = crsbinding.data.nextArrayId();
+            item.__aId = crsbinding.data._nextArrayId();
             const element = this.createElement(item, item.__aId);
             fragment.appendChild(element);
         });
@@ -56,7 +56,7 @@ export class ForProvider extends RepeatBaseProvider {
             const item = added[i];
             const index = collection.indexOf(item);
 
-            item.__aId = crsbinding.data.nextArrayId();
+            item.__aId = crsbinding.data._nextArrayId();
             const element = this.createElement(item, item.__aId);
             const update = element.children[0];
             const child = this._container.children[index + this.positionStruct.startIndex + 1];
