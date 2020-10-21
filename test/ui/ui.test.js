@@ -302,3 +302,27 @@ test("render-collection", async() => {
 
     await page.goBack();
 });
+
+test("array sync", async() => {
+    await navigateTo("shared-context");
+    await click("#btnShare");
+
+    expect(await countElements("comp-one ul li")).toEqual(3);
+    expect(await countElements("comp-two ul li")).toEqual(3);
+
+    await setInputText("#c1Input", "value 1");
+    expect(await getValue('#c1Input')).toEqual("value 1");
+    expect(await getValue('#c2Input')).toEqual("value 1");
+
+    await setInputText("#c2Input", "value 2");
+    expect(await getValue('#c1Input')).toEqual("value 2");
+    expect(await getValue('#c2Input')).toEqual("value 2");
+
+    await setInputText("comp-one input[data-id='0']", "item 11");
+    await setInputText("comp-one input[data-id='1']", "item 12");
+    await setInputText("comp-one input[data-id='2']", "item 13");
+
+    expect(await getTextContent("comp-two li[data-id='0']")).toEqual("item 11");
+    expect(await getTextContent("comp-two li[data-id='1']")).toEqual("item 12");
+    expect(await getTextContent("comp-two li[data-id='2']")).toEqual("item 13");
+})
