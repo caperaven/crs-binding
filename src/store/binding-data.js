@@ -421,6 +421,10 @@ export class BindingData {
             if (syncObj.collection.length == 0) {
                 this._sync.delete(syncId);
             }
+
+            const array = this.getValue(id, property);
+            delete array.__syncId;
+            array.filter(item => item.__syncId == syncId).forEach(item => delete item.__syncId);
         }
     }
 
@@ -438,6 +442,10 @@ export class BindingData {
 
             this._ensurePath(id, property, () => {
                 const sync = this._sync.get(syncId);
+
+                if (sync.collection.filter(item => item.id == id && item.path == property).length > 0) {
+                    return resolve(syncId);
+                }
 
                 sync.collection.push({
                     id: id,
