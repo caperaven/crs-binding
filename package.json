@@ -1,6 +1,6 @@
 {
     "name": "crs-binding",
-    "version": "0.0.205",
+    "version": "0.0.206",
     "description": "zero dependency binding engine",
     "main": "index.js",
     "directories": {

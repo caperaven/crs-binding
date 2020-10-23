@@ -6,7 +6,6 @@ import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {listenOnPath, removeOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
-import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
 import {BindingData} from "./store/binding-data.js";
 import {EventEmitter} from "./events/events.js";
@@ -43,7 +42,6 @@ const crsbinding = {
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
     elementStoreManager: new ElementStoreManager(),
-    valueConverters: new ValueConverters(),
 
     expression: {
         sanitize: sanitizeExp,
