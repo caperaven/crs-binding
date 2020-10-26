@@ -1,5 +1,10 @@
 import {sanitizeExp} from "../../src/events/expressions.js"
 
+test("sanitizeExp - exp = context", () => {
+   const result = sanitizeExp("color", "color");
+   expect(result.expression).toBe("color");
+})
+
 test("sanitizeExp - single", () => {
    const result = sanitizeExp("name");
    expect(result.properties[0]).toBe("name");

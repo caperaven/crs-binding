@@ -8,7 +8,7 @@ import index from "../../index.js";
 const sanitizeKeywords = ["false", "true", "null"];
 
 export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
-    if (exp == null || exp == "null" || exp == "undefined" || sanitizeKeywords.indexOf(exp.toString()) != -1 || isNaN(exp) == false) {
+    if (exp == null || exp == "null" || exp == "undefined" || sanitizeKeywords.indexOf(exp.toString()) != -1 || isNaN(exp) == false || exp.trim() == ctxName) {
         return {
             isLiteral: true,
             expression: exp
