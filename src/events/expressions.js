@@ -16,6 +16,14 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
     }
 
     const namedExp = ctxName != "context";
+
+    if (namedExp == true && exp == ["${", ctxName, "}"].join("")) {
+        return {
+            isLiteral: true,
+            expression: exp
+        }
+    }
+
     const prefix = `${ctxName}.`;
     const tokens = tokenize(exp, namedExp ? ctxName : null);
 

@@ -98,6 +98,11 @@
       "title": "Render Collection",
       "hash": "#render-collection",
       "view": "render-collection"
+    },
+    {
+      "title": "Array Values",
+      "hash": "#array-values",
+      "view": "array-values"
     }
   ]
 }
