@@ -339,4 +339,13 @@ test("array sync", async() => {
     expect(await getTextContent("comp-two li[data-id='0']")).toEqual("item 21");
     expect(await getTextContent("comp-two li[data-id='1']")).toEqual("item 22");
     expect(await getTextContent("comp-two li[data-id='2']")).toEqual("item 23");
+
+    await page.goBack();
+});
+
+test("array - values", async() => {
+    await navigateTo("array-values");
+    expect(await countElements("li")).toBe(3);
+
+    await page.goBack();
 })
