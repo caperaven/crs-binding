@@ -40,7 +40,7 @@ export class BindableElement extends HTMLElement {
 
         if (this.html != null) {
             this.innerHTML = await fetch(this.html).then(result => result.text());
-            crsbinding.parsers.parseElements(this.children, this._dataId);
+            await crsbinding.parsers.parseElements(this.children, this._dataId);
         }
 
         requestAnimationFrame(() => {

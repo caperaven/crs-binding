@@ -2,20 +2,20 @@ import {ProviderFactory} from "./provider-factory.js";
 
 const ignore = ["style", "script"];
 
-export function parseElements(collection, context, ctxName = "context", parentId) {
+export async function parseElements(collection, context, ctxName = "context", parentId) {
     for (let element of collection || []) {
-        parseElement(element, context, ctxName, parentId);
+        await parseElement(element, context, ctxName, parentId);
     }
 }
 
-export function parseElement(element, context, ctxName = "context", parentId) {
+export async function parseElement(element, context, ctxName = "context", parentId) {
     if (element.__inflated == true) return;
 
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 
     if (nodeName != "template") {
-        parseElements(element.children, context, ctxName, parentId);
+        await parseElements(element.children, context, ctxName, parentId);
     }
 
     const attributes = Array.from(element.attributes || []);
@@ -25,20 +25,20 @@ export function parseElement(element, context, ctxName = "context", parentId) {
         ((attr.value || "").indexOf("${") == 0)
     );
 
-    parseAttributes(boundAttributes, context, ctxName, parentId);
+    await parseAttributes(boundAttributes, context, ctxName, parentId);
 
     if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
     }
 }
 
-export function parseAttributes(collection, context, ctxName, parentId) {
+export async function parseAttributes(collection, context, ctxName, parentId) {
     for (let attr of collection) {
-        parseAttribute(attr, context, ctxName, parentId);
+        await parseAttribute(attr, context, ctxName, parentId);
     }
 }
 
-export function parseAttribute(attr, context, ctxName, parentId) {
+export async function parseAttribute(attr, context, ctxName, parentId) {
     const parts = attr.name.split(".");
     let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
     let prov = prop == "for" ? prop : parts[parts.length - 1];

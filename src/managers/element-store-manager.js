@@ -43,10 +43,10 @@ export class ElementStoreManager {
         return fragment;
     }
 
-    getBoundElement(id, context) {
+    async getBoundElement(id, context) {
         const item = this._items.get(id);
         const result = this.getItemElement(item);
-        crsbinding.parsers.parseElement(result, context);
+        await crsbinding.parsers.parseElement(result, context);
         return result;
     }
 

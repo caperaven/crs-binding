@@ -103,6 +103,11 @@
       "title": "Array Values",
       "hash": "#array-values",
       "view": "array-values"
+    },
+    {
+      "title": "HTML Fragments",
+      "hash": "#html-fragments",
+      "view": "html-fragments"
     }
   ]
 }

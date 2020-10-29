@@ -19,7 +19,7 @@ export class ForProvider extends RepeatBaseProvider {
     async initialize() {
         super.initialize();
 
-        const forExp = "for (let i = 0; i < context.length; i++) { callback(context[i], i) }";
+        const forExp = "for (let i = 0; i < context.length; i++) { await callback(context[i], i) }";
         this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
         crsbinding.data.setArrayEvents(this._context, this._plural, this._itemsAddedHandler, this._itemsDeletedHandler);
     }
@@ -31,9 +31,9 @@ export class ForProvider extends RepeatBaseProvider {
         const fragment = document.createDocumentFragment();
 
         // loop through items and add them to fragment after being parsed
-        await this._forExp.function(array, (item) => {
+        await this._forExp.function(array, async (item) => {
             item.__aId = crsbinding.data._nextArrayId();
-            const element = this.createElement(item, item.__aId);
+            const element = await this.createElement(item, item.__aId);
             fragment.appendChild(element);
         });
 
@@ -57,12 +57,13 @@ export class ForProvider extends RepeatBaseProvider {
             const index = collection.indexOf(item);
 
             item.__aId = crsbinding.data._nextArrayId();
-            const element = this.createElement(item, item.__aId);
-            const update = element.children[0];
-            const child = this._container.children[index + this.positionStruct.startIndex + 1];
-            this._container.insertBefore(element, child);
+            this.createElement(item, item.__aId).then(element => {
+                const update = element.children[0];
+                const child = this._container.children[index + this.positionStruct.startIndex + 1];
+                this._container.insertBefore(element, child);
 
-            this.updateAttributeProviders(update);
+                this.updateAttributeProviders(update);
+            })
         }
     }
 

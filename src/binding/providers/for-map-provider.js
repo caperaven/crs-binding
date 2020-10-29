@@ -9,13 +9,13 @@ export class ForMapProvider extends RepeatBaseProvider {
         await super._renderItems();
 
         const fragment = document.createDocumentFragment();
+        const keys = array.keys();
 
-        array.forEach((value, key) => {
-            const element = this.createElement(value, key);
+        for (let key of keys) {
+            const value = array.get(key);
             value.__aId = key;
-
-            fragment.appendChild(element);
-        });
+            fragment.appendChild(await this.createElement(value, key));
+        }
 
         this.positionStruct.addAction(fragment);
 

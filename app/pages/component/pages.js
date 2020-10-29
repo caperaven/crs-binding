@@ -43,12 +43,12 @@ export class Pages extends BindableElement {
         this._show(this._firstPage);
     }
 
-    _click(event) {
+    async _click(event) {
         const target = event.target.dataset.template;
-        target && this._show(target);
+        target && await this._show(target);
     }
 
-    _show(target) {
+    async _show(target) {
         if (this._panel.children.length > 0) {
             const oldChild = this._panel.children[0];
             this._panel.removeChild(oldChild);
@@ -58,7 +58,7 @@ export class Pages extends BindableElement {
         }
 
         const id = `${this.id}_${target}`;
-        const element = crsbinding.elementStoreManager.getBoundElement(id, this.context);
+        const element = await crsbinding.elementStoreManager.getBoundElement(id, this.context);
 
         const child = document.createElement("div");
         child.id = target;
