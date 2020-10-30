@@ -349,3 +349,29 @@ test("array - values", async() => {
 
     await page.goBack();
 })
+
+test("html fragments", async() => {
+    await navigateTo("html-fragments");
+
+    await setInputText('[data-id="line1"]', "Value 1");
+    await setInputText('[data-id="line2"]', "Value 2");
+    await setInputText('[data-id="line3"]', "Value 3");
+
+    const line1Values = await getValues('input[data-id="line1"]');
+    const line2Values = await getValues('input[data-id="line2"]');
+    const line3Values = await getValues('input[data-id="line3"]');
+
+    expect(line1Values[0]).toBe("Value 1");
+    expect(line1Values[1]).toBe("Value 1");
+    expect(await getTextContent(`div[data-id="line1"]`)).toBe("Value 1");
+
+    expect(line2Values[0]).toBe("Value 2");
+    expect(line2Values[1]).toBe("Value 2");
+    expect(await getTextContent(`div[data-id="line2"]`)).toBe("Value 2");
+
+    expect(line3Values[0]).toBe("Value 3");
+    expect(line3Values[1]).toBe("Value 3");
+    expect(await getTextContent(`div[data-id="line3"]`)).toBe("Value 3");
+
+    await page.goBack();
+})
