@@ -130,7 +130,10 @@ export class RepeatBaseProvider extends ProviderBase {
         const reference = this._element.dataset.reference || "array-item";
         const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-${reference}-${arrayId}`, this._plural, arrayId);
         const element = crsbinding.utils.cloneTemplate(this._element);
-        await crsbinding.parsers.parseElement(element, id, this._singular, this._context);
+        await crsbinding.parsers.parseElement(element, id, {
+            ctxName: this._singular,
+            parentId: this._context
+        });
 
         item.__uid = id;
 

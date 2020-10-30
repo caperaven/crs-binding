@@ -2,20 +2,35 @@ import {ProviderFactory} from "./provider-factory.js";
 
 const ignore = ["style", "script"];
 
-export async function parseElements(collection, context, ctxName = "context", parentId) {
+export async function parseElements(collection, context, options) {
     for (let element of collection || []) {
-        await parseElement(element, context, ctxName, parentId);
+        await parseElement(element, context, options);
     }
 }
 
-export async function parseElement(element, context, ctxName = "context", parentId) {
+export async function parseElement(element, context, options) {
+    let ctxName = "context";
+    let parentId = null;
+    let folder = null;
+
+    if (options != null) {
+        ctxName = options.ctxName || "context";
+        parentId = options.parentId || null;
+        folder = options.folder || null;
+    }
+
+
     if (element.__inflated == true) return;
 
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 
     if (nodeName != "template") {
-        await parseElements(element.children, context, ctxName, parentId);
+        await parseElements(element.children, context, options);
+    }
+
+    if (nodeName == "template" && element.getAttribute("src") != null) {
+        return parseHTMLFragment(element, context, ctxName, parentId);
     }
 
     const attributes = Array.from(element.attributes || []);
@@ -32,13 +47,13 @@ export async function parseElement(element, context, ctxName = "context", parent
     }
 }
 
-export async function parseAttributes(collection, context, ctxName, parentId) {
+async function parseAttributes(collection, context, ctxName, parentId) {
     for (let attr of collection) {
         await parseAttribute(attr, context, ctxName, parentId);
     }
 }
 
-export async function parseAttribute(attr, context, ctxName, parentId) {
+async function parseAttribute(attr, context, ctxName, parentId) {
     const parts = attr.name.split(".");
     let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
     let prov = prop == "for" ? prop : parts[parts.length - 1];
@@ -55,6 +70,13 @@ export async function parseAttribute(attr, context, ctxName, parentId) {
     }
 
     return provider;
+}
+
+async function parseHTMLFragment(element, context, options) {
+    const fragment = document.createDocumentFragment();
+    fragment.innerHTML = await fetch(element.getAttribute('src'));
+    await parseElements(fragment.children, context, options);
+    element.parentElement.replaceChild(fragment, element);
 }
 
 export function releaseBinding(element) {
