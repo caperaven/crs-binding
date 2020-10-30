@@ -1,8 +1,21 @@
+<style>
+    label {
+        display: block;
+        margin-bottom: 1rem;
+    }
+</style>
+
 <h2>${title}</h2>
+
+<h3>View </h3>
 
 <template src="./fragments/fragment1.html"></template>
 <template src="./fragments/fragment2.html"></template>
 <template src="./fragments/fragment3.html"></template>
+
+<fragment-component data-uid.attr="contextId"></fragment-component>
+
+<h3>Summary</h3>
 
 <div>
     <div>${line1}</div>

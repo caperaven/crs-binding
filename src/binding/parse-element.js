@@ -30,7 +30,7 @@ export async function parseElement(element, context, options) {
     }
 
     if (nodeName == "template" && element.getAttribute("src") != null) {
-        return parseHTMLFragment(element, context, ctxName, parentId);
+        return parseHTMLFragment(element, context, options);
     }
 
     const attributes = Array.from(element.attributes || []);
@@ -73,10 +73,18 @@ async function parseAttribute(attr, context, ctxName, parentId) {
 }
 
 async function parseHTMLFragment(element, context, options) {
-    const fragment = document.createDocumentFragment();
-    fragment.innerHTML = await fetch(element.getAttribute('src'));
-    await parseElements(fragment.children, context, options);
-    element.parentElement.replaceChild(fragment, element);
+    if (options.folder == null) return;
+
+    const file = crsbinding.utils.relativePathFrom(options.folder, element.getAttribute('src'));
+
+    const tpl = document.createElement("template");
+    tpl.innerHTML = await fetch(file).then(result => result.text());
+    const instance = tpl.content.cloneNode(true);
+    await parseElements(instance.children, context, options);
+
+    const parent = element.parentElement;
+    parent.insertBefore(instance, element);
+    parent.removeChild(element);
 }
 
 export function releaseBinding(element) {

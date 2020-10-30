@@ -40,7 +40,9 @@ export class BindableElement extends HTMLElement {
 
         if (this.html != null) {
             this.innerHTML = await fetch(this.html).then(result => result.text());
-            await crsbinding.parsers.parseElements(this.children, this._dataId);
+
+            const path = crsbinding.utils.getPathOfFile(this.html);
+            await crsbinding.parsers.parseElements(this.children, this._dataId, path ? {folder: path} : null);
         }
 
         requestAnimationFrame(() => {

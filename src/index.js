@@ -14,7 +14,7 @@ import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
 import {Widget} from "../src/view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
-import {measureElement, fragmentToText, disposeProperties, cloneTemplate} from "./lib/utils.js";
+import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
 import {renderCollection} from "./lib/renderCollection.js";
 
@@ -85,7 +85,9 @@ const crsbinding = {
         cloneTemplate: cloneTemplate,
         measureElement: measureElement,
         forceClean: forceClean,
-        renderCollection: renderCollection
+        renderCollection: renderCollection,
+        relativePathFrom: relativePathFrom,
+        getPathOfFile: getPathOfFile
     }
 };
 

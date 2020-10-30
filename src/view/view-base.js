@@ -1,3 +1,5 @@
+import {relativePathFrom} from "../lib/utils.js";
+
 export class ViewBase {
     get title() {
         return this.getProperty("title");
@@ -30,7 +32,9 @@ export class ViewBase {
             await this.preLoad(setPropertyCallback);
         }
 
-        await crsbinding.parsers.parseElement(this.element, this._dataId);
+        const path = crsbinding.utils.getPathOfFile(this.html);
+
+        await crsbinding.parsers.parseElement(this.element, this._dataId, path ? {folder: path} : null);
         this.load();
     }
 

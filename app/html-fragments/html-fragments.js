@@ -1,4 +1,5 @@
 import {ViewBase} from "../../src/view/view-base.js";
+import "./component/fragment-component.js";
 
 export default class HtmlFragments extends ViewBase {
     get html() {
