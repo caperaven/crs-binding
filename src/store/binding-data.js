@@ -191,7 +191,12 @@ export class BindingData {
             this.array(id, property).splice(0, oldValue.length);
 
             if (value != null) {
-                value.__syncId = oldValue.__syncId;
+                if (oldValue.__syncId != null) {
+                    value.__syncId = oldValue.__syncId;
+                }
+                else {
+                    delete value.__syncId;
+                }
             }
         }
 
@@ -786,6 +791,7 @@ export class BindingData {
     arrayItemsAdded(id, prop, items, collection) {
         const obj = this._callbacks.get(id);
         const clbObj = getValueOnPath(obj, prop);
+        if (clbObj == null) return;
 
         for (let callback of clbObj.__itemsAdded || []) {
             callback(items, collection);
@@ -802,6 +808,8 @@ export class BindingData {
     arrayItemsRemoved(id, prop, items, collection) {
         const obj = this._callbacks.get(id);
         const clbObj = getValueOnPath(obj, prop);
+        if (clbObj == null) return;
+
         for (let callback of clbObj.__itemsDeleted || []) {
             callback(items, collection);
         }

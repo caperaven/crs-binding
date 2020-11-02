@@ -76,6 +76,15 @@ async function countElements(query) {
     return await page.$$eval(query, elements => elements.length);
 }
 
+async function getAttributeValue(query, attrName) {
+    return await page.evaluate(`document.querySelector("${query}").getAttribute("${attrName}")`);
+}
+
+async function getBindingPropertyValue(contextId, property) {
+    const result = await page.evaluate(`window.crsbinding.data.getValue(${Number(contextId)}, "${property}")`);
+    return result;
+}
+
 beforeAll(async () => {
     jest.setTimeout(100000);
     browser = await puppeteer.launch({headless: false, slowMo: 10, args: ['--disable-dev-shm-usage', '--start-maximized']});
@@ -346,6 +355,12 @@ test("array sync", async() => {
 test("array - values", async() => {
     await navigateTo("array-values");
     expect(await countElements("li")).toBe(3);
+
+    await click("#btnSetValue");
+    const contextId = await getAttributeValue("#btnSetValue", "data-context");
+    const array = await getBindingPropertyValue(contextId, "oldArray");
+
+    expect(array.length).toBe(1);
 
     await page.goBack();
 })
