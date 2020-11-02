@@ -14,7 +14,7 @@ class FirstName extends BindableElement{
     }
 
     load() {
-        this.setProperty("model", {translations: {firstName: "First Name"}})
+        this.setProperty("model", {translations: {firstName: "First Name", firstNameOld: ""}})
     }
 }
 

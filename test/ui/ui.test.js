@@ -43,9 +43,8 @@ async function getValue(query) {
 
 async function setInputText(query, value) {
     const handle = await page.$(query);
-    await page.evaluate(element => element.value = "", handle);
 
-    await handle.click();
+    await handle.click({clickCount: 3});
     await page.keyboard.type(value);
     await page.keyboard.press("Tab");
 }
@@ -131,10 +130,12 @@ test("component", async() => {
     values["0"] = await getValue('#edtFirstName');
     values["1"] = await getValue('#edtInputFirstName');
     values["2"] = await getValue('#edtFirstNameFirstName');
+    values["3"] = await getValue("#edtOldName");
 
     expect(values["0"]).toEqual("input 1");
     expect(values["1"]).toEqual("input 1");
     expect(values["2"]).toEqual("input 1");
+    expect(values["3"]).toEqual("John");
 
     await setInputText('#edtFirstName', "input 2").catch(e => console.error(e));
 

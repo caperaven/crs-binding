@@ -204,7 +204,7 @@ export class BindingData {
             oldValue && this._unlinkArrayItem(oldValue);
         }
 
-        this._setContextProperty(id, property, value);
+        this._setContextProperty(id, property, value, oldValue);
 
         if (value && value.__uid) {
             this.linkToArrayItem(id, property, value.__uid);
@@ -219,10 +219,11 @@ export class BindingData {
      * @param id {number} context id
      * @param property {string} property path to set value on
      * @param value {any} value to be set
+     * @param oldValue {any} old value before set
      * @param ctxName {string}
      * @param dataType {string} "number", "boolean" or null
      */
-    _setContextProperty(id, property, value, ctxName, dataType) {
+    _setContextProperty(id, property, value, oldValue, ctxName, dataType) {
         id = this._getContextId(id);
 
         let obj = this._data.get(id);
@@ -240,7 +241,7 @@ export class BindingData {
             const changed = property.indexOf(".") === -1 ? this._setObjectProperty(obj, property, value) : this._setObjectPropertyPath(obj, property, value);
 
             if (changed == true) {
-                this._performUpdates(id, property, value);
+                this._performUpdates(id, property, value, oldValue);
                 this.updateUI(id, property);
             }
         }
@@ -670,7 +671,7 @@ export class BindingData {
      * @param value {any} value to be passed onto the callbacks in the value parameter
      * @returns {Promise<void>}
      */
-    async _performUpdates(id, property, value) {
+    async _performUpdates(id, property, value, oldValue) {
         this._performUpdatesChanges(id, property, value);
 
         const ctx = this._context.get(id);
@@ -678,10 +679,10 @@ export class BindingData {
 
         const fnName = `${property}Changed`;
         if (ctx[fnName]) {
-            await ctx[fnName](value)
+            await ctx[fnName](value, oldValue)
         }
         else if (ctx["propertyChanged"]) {
-            await ctx["propertyChanged"](property, value);
+            await ctx["propertyChanged"](property, value, oldValue);
         }
     }
 
