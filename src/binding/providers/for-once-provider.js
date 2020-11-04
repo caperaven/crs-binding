@@ -7,13 +7,13 @@ export function ForOnceProvider(element, context, property, value, ctxName = "co
     const singular = parts[0].trim();
     const plural = parts[1].trim();
 
-    crsbinding.inflationManager.register("for-once", element, singular);
+    const key = `for-once-${singular}`;
 
+    crsbinding.inflationManager.register(key, element, singular);
     const data = crsbinding.data.getValue(context, plural);
+    const elements = crsbinding.inflationManager.get(key, data);
+    crsbinding.inflationManager.unregister(key);
 
-    const elements = crsbinding.inflationManager.get("for-once", data);
     element.parentElement.appendChild(elements);
     element.parentElement.removeChild(element);
-
-    crsbinding.inflationManager.unregister("for-once");
 }

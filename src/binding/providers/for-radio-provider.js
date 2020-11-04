@@ -27,6 +27,7 @@ export class ForRadioProvider extends ProviderBase {
 
         const data = crsbinding.data.getValue(this._context, plural);
         const elements = crsbinding.inflationManager.get(key, data);
+        crsbinding.inflationManager.unregister(key);
 
         const currentSelectedValue = crsbinding.data.getProperty(this._context, this._propertyToSet);
 
@@ -44,7 +45,6 @@ export class ForRadioProvider extends ProviderBase {
         this._element.parentElement.appendChild(elements);
         this._element.parentElement.removeChild(this._element);
 
-        crsbinding.inflationManager.unregister(key);
     }
 
     async _change(event) {
