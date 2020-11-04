@@ -64,6 +64,14 @@ export class InflationManager {
         return fragment;
     }
 
+    /**
+     * Calculate the width of the element
+     * @param item
+     * @param data
+     * @param elements
+     * @returns {DocumentFragment}
+     * @private
+     */
     _getWithElements(item, data, elements) {
         const diff = elements.length - data.length;
         const fragment = document.createDocumentFragment();
@@ -135,7 +143,7 @@ export class InflationManager {
 
         for (let i = 0; i < data.length; i++) {
             const elements = srcElements.slice(index, index + item.childCount);
-            this.inflate(item.id, elements, data[i], item.inflate);
+            this.inflate(item.id, elements, data[i], item.inflate, false);
             index += item.childCount;
         }
 
@@ -147,6 +155,8 @@ export class InflationManager {
                 child.removeAttribute(attr.name);
             }
         });
+
+        srcElements.filter(el => el.getAttribute("remove") == "true").forEach(rem => rem.parentNode.removeChild(rem));
     }
 
     /**
@@ -174,10 +184,21 @@ export class InflationManager {
      * @param element
      * @param data
      */
-    inflate(id, element, data, inflate = null) {
+    inflate(id, element, data, inflate = null, removeMarked = true) {
         const fn = inflate || this._items.get(id).inflate;
         fn(element, data);
 
+        if (removeMarked == true) {
+            this._removeElements(element);
+        }
+    }
+
+    /**
+     * Remove elements that are tagged for removal
+     * @param element
+     * @private
+     */
+    _removeElements(element) {
         let removedElements = [];
 
         if (Array.isArray(element)) {
