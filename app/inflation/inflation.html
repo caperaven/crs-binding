@@ -10,14 +10,7 @@
     </symbol>
 </svg>
 
-<template id="items-template">
-    <div data-person="${person}" data-trade="${trade}" type="${type}" value="${value}">
-        <div remove.if="title == null ? true">${title}</div>
-        <svg class="icon" remove.if="value == null ? true">
-            <use href="${value == true ? '#checked' : '#unchecked'}" />
-        </svg>
-    </div>
-</template>
+<h3>Parented single record inflation using code</h3>
 
 <template id="person-template">
     <div>
@@ -31,6 +24,8 @@
 
 </div>
 
+<h3>Flat single record inflation using code</h3>
+
 <template id="person-template2">
     <div >${firstName}</div>
     <div>${lastName}</div>
@@ -41,11 +36,34 @@
 
 </div>
 
+<h3>Flat structure once off inflation</h3>
+
+<div class="container">
+    <template for.once="item of data">
+        <div remove.if="item.title == null ? true">${item.title}</div>
+        <svg class="icon" remove.if="item.value == null ? true">
+            <use href="${item.value == true ? '#checked' : '#unchecked'}" />
+        </svg>
+    </template>
+</div>
+
+
+<h3>Inflation of collection using code</h3>
+
+<template id="items-template">
+    <div data-person="${person}" data-trade="${trade}" type="${type}" value="${value}">
+        <div remove.if="title == null ? true">${title}</div>
+        <svg class="icon" remove.if="value == null ? true">
+            <use href="${value == true ? '#checked' : '#unchecked'}" />
+        </svg>
+    </div>
+</template>
 
 <div id="container" class="container">
 
 </div>
 
+<h3>Parented structure once off inflation</h3>
 <div class="container">
     <template for.once="item of data">
         <div data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">
@@ -57,6 +75,7 @@
     </template>
 </div>
 
+<h3>Standard for behaviour</h3>
 <div class="container">
     <template for="item of data">
         <div someattr.attr="item.type" data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">

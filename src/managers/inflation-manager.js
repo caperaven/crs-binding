@@ -24,6 +24,7 @@ export class InflationManager {
         crsbinding.elementStoreManager.register(id, template, measure);
 
         this._items.set(id, {
+            id: id,
             childCount: result.childCount,
             inflate: result.inflate,
             deflate: result.deflate
@@ -50,20 +51,20 @@ export class InflationManager {
      * @param data
      */
     get(id, data, elements) {
-        if (elements != null) {
-            return this._getWithElements(id, data, elements);
-        }
-
-        const length = Array.isArray(data) ? data.length : 1;
-        const fragment = crsbinding.elementStoreManager.getElements(id, length);
-        this._inflateElements(id, fragment, data);
-        return fragment;
-    }
-
-    _getWithElements(id, data, elements) {
         const item = this._items.get(id);
         if (item == null) return null;
 
+        if (elements != null) {
+            return this._getWithElements(item, data, elements);
+        }
+
+        const length = Array.isArray(data) ? data.length * item.childCount : 1;
+        const fragment = crsbinding.elementStoreManager.getElements(id, length);
+        this._inflateElements(item, fragment, data);
+        return fragment;
+    }
+
+    _getWithElements(item, data, elements) {
         const diff = elements.length - data.length;
         const fragment = document.createDocumentFragment();
 
@@ -80,36 +81,92 @@ export class InflationManager {
         }
 
         const processArray = [...elements, ...Array.from(fragment.children)];
-        this._inflateElements(id, processArray, data);
+        this._inflateElements(item, processArray, data);
 
         return fragment;
     }
 
-    _inflateElements(id, fragment, data) {
-        const item = this._items.get(id);
-        if (item == null) return;
+    /**
+     * This function inflates a single item template with a single item data object
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateSingleElement(item, fragment, data) {
+        this.inflate(item.id, item.childCount == 1 ? fragment.children[0] : Array.from(fragment.children), data, item.inflate);
+    }
 
-        if (Array.isArray(data) == false) {
-            this.inflate(id, item.childCount == 1 ? fragment.children[0] : Array.from(fragment.children), data, item.inflate);
-        }
-
+    /**
+     * Inflate a template that has only a single child
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateSingleChildFragment(item, fragment, data) {
         const isArray = Array.isArray(fragment);
-        if (item.childCount == 1) {
-            data = Array.isArray(data) ? data : [data];
 
-            for (let i = 0; i < data.length; i++) {
-                const child = isArray ? fragment[i] : fragment.children[i];
-                this.inflate(id, child, data[i], item.inflate);
-                child.__inflated = true;
+        data = Array.isArray(data) ? data : [data];
 
-                const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
-                for (let attr of attrAttributes) {
-                    child.removeAttribute(attr.name);
-                }
+        for (let i = 0; i < data.length; i++) {
+            const child = isArray ? fragment[i] : fragment.children[i];
+            this.inflate(item.id, child, data[i], item.inflate);
+            child.__inflated = true;
+
+            const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
+            for (let attr of attrAttributes) {
+                child.removeAttribute(attr.name);
             }
         }
     }
 
+    /**
+     * Inflate a template that has multiple children for multiple records but no structure element
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateMultiChildFragment(item, fragment, data) {
+        const srcElements = Array.from(fragment.children);
+
+        let index = 0;
+
+        for (let i = 0; i < data.length; i++) {
+            const elements = srcElements.slice(index, index + item.childCount);
+            this.inflate(item.id, elements, data[i], item.inflate);
+            index += item.childCount;
+        }
+
+        srcElements.forEach(child => {
+            child.__inflated = true;
+
+            const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
+            for (let attr of attrAttributes) {
+                child.removeAttribute(attr.name);
+            }
+        });
+    }
+
+    /**
+     * Inflation of element entry point that calls the appropriate functions depending on the work required.
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateElements(item, fragment, data) {
+        if (Array.isArray(data) == false) {
+            this._inflateSingleElement(item, fragment, data)
+        }
+        else if (item.childCount == 1) {
+            this._inflateSingleChildFragment(item, fragment, data);
+        }
+        else {
+            this._inflateMultiChildFragment(item, fragment, data);
+        }
+    }
 
     /**
      * Inflate a element
