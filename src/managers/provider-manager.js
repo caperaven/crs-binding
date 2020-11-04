@@ -1,5 +1,6 @@
 import {ForOnceProvider} from "../binding/providers/for-once-provider.js";
 import {ForMapProvider} from "../binding/providers/for-map-provider.js";
+import {ForRadioProvider} from "../binding/providers/for-radio-provider.js"
 
 export class ProviderManager {
     constructor() {
@@ -8,7 +9,8 @@ export class ProviderManager {
         this.providers = {
             for: {
                 map: ForMapProvider,
-                once: ForOnceProvider
+                once: ForOnceProvider,
+                radio: ForRadioProvider
             }
         }
     }

@@ -1,0 +1,27 @@
+<h2>Radio Group</h2>
+
+<h3>People</h3>
+
+<div style="display: flex; flex-direction: column">
+    <template for.radio="person of people" property="selectedPerson">
+        <label>
+            <input value="${person.value}" />
+            <span>${person.title}</span>
+        </label>
+    </template>
+</div>
+
+<h3>Selected Person Value: ${selectedPerson}</h3>
+
+<h3>Animals</h3>
+
+<div style="display: flex; flex-direction: column">
+    <template for.radio="animal of animals" property="selectedAnimal">
+        <label>
+            <input value="${animal.value}" />
+            <span>${animal.title}</span>
+        </label>
+    </template>
+</div>
+
+<h3>Selected Animal Value: ${selectedAnimal}</h3>

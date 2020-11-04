@@ -108,6 +108,11 @@
       "title": "HTML Fragments",
       "hash": "#html-fragments",
       "view": "html-fragments"
+    },
+    {
+      "title": "Radio Groups",
+      "hash": "#radio-group",
+      "view": "radio-group"
     }
   ]
 }
