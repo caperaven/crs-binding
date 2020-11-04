@@ -53,7 +53,8 @@ export class InflationManager {
             return this._getWithElements(id, data, elements);
         }
 
-        const fragment = crsbinding.elementStoreManager.getElements(id, data.length);
+        const length = Array.isArray(data) ? data.length : 1;
+        const fragment = crsbinding.elementStoreManager.getElements(id, length);
         this._inflateElements(id, fragment.children, data);
         return fragment;
     }
@@ -86,6 +87,8 @@ export class InflationManager {
     _inflateElements(id, elements, data) {
         const item = this._items.get(id);
         if (item == null) return;
+
+        data = Array.isArray(data) ? data : [data];
 
         for (let i = 0; i < data.length; i++) {
             const child = elements[i];

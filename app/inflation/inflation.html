@@ -19,6 +19,18 @@
     </div>
 </template>
 
+<template id="person-template">
+    <div>
+        <div >${firstName}</div>
+        <div>${lastName}</div>
+        <div classlist.if="age < 18 ? 'red' : 'black'">${age}</div>
+    </div>
+</template>
+
+<div id="personContainer">
+
+</div>
+
 <div id="container" class="container">
 
 </div>

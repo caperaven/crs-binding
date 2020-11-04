@@ -13,11 +13,8 @@ export default class Component extends ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
 
-        const template = this._element.querySelector("#items-template");
-        crsbinding.inflationManager.register("items", template);
-
-        const fragment = crsbinding.inflationManager.get("items", this.data);
-        this._element.querySelector("#container").appendChild(fragment);
+        this._inflatePerson();
+        this._inflateCollection();
     }
 
     preLoad() {
@@ -32,5 +29,28 @@ export default class Component extends ViewBase {
     async disconnectedCallback() {
         crsbinding.inflationManager.unregister("items");
         super.disconnectedCallback();
+    }
+
+    _inflatePerson() {
+        const template = this._element.querySelector("#person-template");
+        crsbinding.inflationManager.register("person", template);
+
+        const fragment = crsbinding.inflationManager.get("person", {
+            firstName: "Johh",
+            lastName: "Doe",
+            age: 20
+        });
+
+        this._element.querySelector("#personContainer").appendChild(fragment);
+        crsbinding.inflationManager.unregister("person");
+    }
+
+    _inflateCollection() {
+        const template = this._element.querySelector("#items-template");
+        crsbinding.inflationManager.register("items", template);
+
+        const fragment = crsbinding.inflationManager.get("items", this.data);
+        this._element.querySelector("#container").appendChild(fragment);
+        crsbinding.inflationManager.unregister("items");
     }
 }
