@@ -232,7 +232,7 @@ export class BindingData {
         if (dataType === "boolean" || typeof value === "boolean") {
             value = Boolean(value);
         }
-        else if (dataType === "number" || (dataType == null && typeof value !== "object" && isNaN(value) == false)) {
+        else if (dataType === "number" || (dataType == null && typeof value !== "object" && (isNaN(value) == false && value != ""))) {
             value = Number(value);
         }
 
@@ -372,7 +372,7 @@ export class BindingData {
      * Get the next array id
      * @returns {number} next array id
      */
-    _nextArrayId() {
+    nextArrayId() {
         return this._nextId("nextArrayId");
     }
 

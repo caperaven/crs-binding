@@ -4,7 +4,6 @@ import {crsbindingMock} from "../crsbinding.mock.js";
 beforeAll(async () => {
     const load = (await import("./../crsbinding.mock.js")).load;
     await load();
-    crsbinding.data.clear();
 });
 
 test("releaseExp - count down", () => {

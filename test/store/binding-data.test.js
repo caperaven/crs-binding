@@ -54,3 +54,9 @@ test("listen-on-path", () => {
     expect(crsbinding.data._callbacks.get(0).menu.isVisible).not.toBeNull();
     expect(crsbinding.data._callbacks.get(0).menu.isVisible).not.toBeUndefined();
 });
+
+test("setproperty - empty", () => {
+    const id = crsbinding.data.addObject("View model");
+    crsbinding.data.setProperty(id, "model.empty", "");
+    expect(crsbinding.data.getProperty(id, "model.empty")).toBe("");
+})

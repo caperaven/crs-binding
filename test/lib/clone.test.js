@@ -3,7 +3,6 @@ import {clone} from "./../../src/lib/clone.js";
 beforeAll(async () => {
     const load = (await import("./../crsbinding.mock.js")).load;
     await load();
-    crsbinding.data.clear();
 });
 
 test("clone - none", () => {
