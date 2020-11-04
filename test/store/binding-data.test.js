@@ -1,7 +1,6 @@
 beforeAll(async () => {
     const load = (await import("./../crsbinding.mock.js")).load;
     await load();
-    crsbinding.data.clear();
 });
 
 test("create object", () => {
@@ -52,6 +51,6 @@ test("createReference", () => {
 
 test("listen-on-path", () => {
     crsbinding.events.listenOnPath(2, "$globals.menu.isVisible", null);
-    expect(crsbinding.data.details.callbacks.get(0).menu.isVisible).not.toBeNull();
-    expect(crsbinding.data.details.callbacks.get(0).menu.isVisible).not.toBeUndefined();
+    expect(crsbinding.data._callbacks.get(0).menu.isVisible).not.toBeNull();
+    expect(crsbinding.data._callbacks.get(0).menu.isVisible).not.toBeUndefined();
 });
