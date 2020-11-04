@@ -84,7 +84,7 @@ export class InflationManager {
         }
         else if (diff < 0) {
             for (let i = 0; i > diff; i--) {
-                fragment.appendChild(crsbinding.elementStoreManager.getElement(id));
+                fragment.appendChild(crsbinding.elementStoreManager.getElement(item.id));
             }
         }
 
