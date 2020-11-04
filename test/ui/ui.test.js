@@ -391,3 +391,23 @@ test("html fragments", async() => {
 
     await page.goBack();
 })
+
+test("radio-group", async() => {
+    await navigateTo("radio-group");
+
+    const peopleCount = await countElements("#people label");
+    expect(peopleCount).toEqual(4);
+    expect(await getInnerText("#selectedPerson")).toBe("Selected Person Value: 2");
+
+    const animalCount = await countElements("#animals label");
+    expect(animalCount).toEqual(4);
+    expect(await getInnerText("#selectedAnimal")).toBe("Selected Animal Value: 4");
+
+    await click("[value='4'][name='people']");
+    await click("[value='1'][name='animals']");
+
+    expect(await getInnerText("#selectedPerson")).toBe("Selected Person Value: 4");
+    expect(await getInnerText("#selectedAnimal")).toBe("Selected Animal Value: 1");
+
+    await page.goBack();
+})
