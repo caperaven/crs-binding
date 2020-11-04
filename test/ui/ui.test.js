@@ -315,6 +315,9 @@ test("render-collection", async() => {
 
 test("array sync", async() => {
     await navigateTo("shared-context");
+
+    // Test for error if you un-share something you have not shared yet.
+    await click("#btnRemoveShare");
     await click("#btnShare");
 
     expect(await countElements("comp-one ul li")).toEqual(3);

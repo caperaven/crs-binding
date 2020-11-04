@@ -24,6 +24,7 @@ export class InflationManager {
         crsbinding.elementStoreManager.register(id, template, measure);
 
         this._items.set(id, {
+            childCount: result.childCount,
             inflate: result.inflate,
             deflate: result.deflate
         })
@@ -55,7 +56,7 @@ export class InflationManager {
 
         const length = Array.isArray(data) ? data.length : 1;
         const fragment = crsbinding.elementStoreManager.getElements(id, length);
-        this._inflateElements(id, fragment.children, data);
+        this._inflateElements(id, fragment, data);
         return fragment;
     }
 
@@ -84,23 +85,31 @@ export class InflationManager {
         return fragment;
     }
 
-    _inflateElements(id, elements, data) {
+    _inflateElements(id, fragment, data) {
         const item = this._items.get(id);
         if (item == null) return;
 
-        data = Array.isArray(data) ? data : [data];
+        if (Array.isArray(data) == false) {
+            this.inflate(id, item.childCount == 1 ? fragment.children[0] : Array.from(fragment.children), data, item.inflate);
+        }
 
-        for (let i = 0; i < data.length; i++) {
-            const child = elements[i];
-            this.inflate(id, child, data[i], item.inflate);
-            child.__inflated = true;
+        const isArray = Array.isArray(fragment);
+        if (item.childCount == 1) {
+            data = Array.isArray(data) ? data : [data];
 
-            const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
-            for (let attr of attrAttributes) {
-                child.removeAttribute(attr.name);
+            for (let i = 0; i < data.length; i++) {
+                const child = isArray ? fragment[i] : fragment.children[i];
+                this.inflate(id, child, data[i], item.inflate);
+                child.__inflated = true;
+
+                const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
+                for (let attr of attrAttributes) {
+                    child.removeAttribute(attr.name);
+                }
             }
         }
     }
+
 
     /**
      * Inflate a element
@@ -111,7 +120,21 @@ export class InflationManager {
     inflate(id, element, data, inflate = null) {
         const fn = inflate || this._items.get(id).inflate;
         fn(element, data);
-        const removedElements = element.querySelectorAll('[remove="true"]');
+
+        let removedElements = [];
+
+        if (Array.isArray(element)) {
+            element.forEach(el => {
+                const removed = el.querySelectorAll('[remove="true"]');
+                if (removed.length > 0) {
+                    removedElements = [...removedElements, ...removed];
+                }
+            })
+        }
+        else {
+            removedElements = element.querySelectorAll('[remove="true"]');
+        }
+
         for (let rel of removedElements) {
             rel.parentElement.removeChild(rel);
         }
@@ -160,15 +183,28 @@ class InflationCodeGenerator {
 
     generateCodeFor(template) {
         const children = template.content == null ? template.children : template.content.children;
-        const element = children[0];
-        this.path = "element";
+        const childCount = children.length;
 
-        this._processElement(element);
+        if (childCount == 1) {
+            this.path = "element";
+
+            for (let element of children) {
+                this._processElement(element);
+            }
+        }
+        else {
+            // process as array - must pass an array of elements to inflation not just a single element
+            for (let i = 0; i < children.length; i++) {
+                this.path = `element[${i}]`;
+                this._processElement(children[i]);
+            }
+        }
 
         const inflateCode = this.inflateSrc.join("\n");
         const deflateCode = this.deflateSrc.join("\n");
 
         return {
+            childCount: childCount,
             inflate: new Function("element", this._ctxName, inflateCode),
             deflate: new Function("element", this._ctxName, deflateCode)
         }

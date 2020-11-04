@@ -13,7 +13,8 @@ export default class Component extends ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
 
-        this._inflatePerson();
+        this._inflatePerson("person-template", "personContainer");
+        this._inflatePerson("person-template2", "personContainer2");
         this._inflateCollection();
     }
 
@@ -31,17 +32,17 @@ export default class Component extends ViewBase {
         super.disconnectedCallback();
     }
 
-    _inflatePerson() {
-        const template = this._element.querySelector("#person-template");
+    _inflatePerson(templateId, containerId) {
+        const template = this._element.querySelector(`#${templateId}`);
         crsbinding.inflationManager.register("person", template);
 
         const fragment = crsbinding.inflationManager.get("person", {
-            firstName: "Johh",
+            firstName: "John",
             lastName: "Doe",
             age: 20
         });
 
-        this._element.querySelector("#personContainer").appendChild(fragment);
+        this._element.querySelector(`#${containerId}`).appendChild(fragment);
         crsbinding.inflationManager.unregister("person");
     }
 

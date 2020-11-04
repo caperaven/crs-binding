@@ -429,8 +429,10 @@ export class BindingData {
             }
 
             const array = this.getValue(id, property);
-            delete array.__syncId;
-            array.filter(item => item.__syncId == syncId).forEach(item => delete item.__syncId);
+            if (array != null) {
+                delete array.__syncId;
+                array.filter(item => item.__syncId == syncId).forEach(item => delete item.__syncId);
+            }
         }
     }
 

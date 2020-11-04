@@ -28,7 +28,8 @@ export class BindableElement extends HTMLElement {
     }
 
     async connectedCallback() {
-        if (this._dataId == null) return;
+        if (this._dataId == null || this.__isLoading == true) return;
+        this.__isLoading = true;
 
         if(this.preLoad != null) {
             const setPropertyCallback = (path, value)=> {
@@ -62,6 +63,7 @@ export class BindableElement extends HTMLElement {
 
         this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
+        delete this.__isLoading;
     }
 
     async disconnectedCallback() {

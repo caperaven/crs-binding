@@ -7,9 +7,13 @@ class Comp1 extends crsbinding.classes.BindableElement {
         return false;
     }
 
-    constructor() {
-        super();
-        this._dataId = this.parentElement.viewModel._dataId;
+    static get observedAttributes() {
+        return ["data-uid"];
+    }
+
+    attributeChangedCallback() {
+        this._dataId = Number(this.dataset.uid);
+        this.connectedCallback();
     }
 
     load() {
