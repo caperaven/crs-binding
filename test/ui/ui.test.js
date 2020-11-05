@@ -210,6 +210,13 @@ test("inflation", async() => {
     const count = await childCount('#container');
     expect(count).toEqual(16);
 
+    expect(await countElements("#personContainer div")).toBe(4);
+    expect(await countElements("#personContainer2 div")).toBe(3);
+    expect(await countElements("#flat-once-container > *")).toBe(16);
+    expect(await countElements("#container > *")).toBe(16);
+    expect(await countElements("#parented-structure-container > *")).toBe(16);
+    expect(await countElements("#standard-for-container > *")).toBe(17);
+
     await page.goBack();
 });
 
@@ -398,11 +405,11 @@ test("html fragments", async() => {
 test("radio-group", async() => {
     await navigateTo("radio-group");
 
-    const peopleCount = await countElements("#people label");
+    const peopleCount = await countElements("#people input");
     expect(peopleCount).toEqual(4);
     expect(await getInnerText("#selectedPerson")).toBe("Selected Person Value: 2");
 
-    const animalCount = await countElements("#animals label");
+    const animalCount = await countElements("#animals input");
     expect(animalCount).toEqual(4);
     expect(await getInnerText("#selectedAnimal")).toBe("Selected Animal Value: 4");
 

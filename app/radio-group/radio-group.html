@@ -17,10 +17,8 @@
 
 <div style="display: flex; flex-direction: column" id="animals">
     <template for.radio="animal of animals" property="selectedAnimal">
-        <label>
-            <input value="${animal.value}" />
-            <span>${animal.title}</span>
-        </label>
+        <input value="${animal.value}" />
+        <label>${animal.title}</label>
     </template>
 </div>
 

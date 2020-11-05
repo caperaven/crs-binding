@@ -38,7 +38,7 @@
 
 <h3>Flat structure once off inflation</h3>
 
-<div class="container">
+<div class="container" id="flat-once-container">
     <template for.once="item of data">
         <div remove.if="item.title == null ? true">${item.title}</div>
         <svg class="icon" remove.if="item.value == null ? true">
@@ -64,7 +64,7 @@
 </div>
 
 <h3>Parented structure once off inflation</h3>
-<div class="container">
+<div class="container" id="parented-structure-container">
     <template for.once="item of data">
         <div data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">
             <div remove.if="item.title == null ? true">${item.title}</div>
@@ -76,7 +76,7 @@
 </div>
 
 <h3>Standard for behaviour</h3>
-<div class="container">
+<div class="container" id="standard-for-container">
     <template for="item of data">
         <div someattr.attr="item.type" data-person="${item.person}" data-trade="${item.trade}" type="${item.type}" value="${item.value}">
             <div hidden.if="item.title == null">${item.title}</div>
