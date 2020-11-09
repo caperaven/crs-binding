@@ -114,6 +114,7 @@ export class BindingData {
         this._removeUpdates(id);
         this._removeTriggers(id);
         this._removeSync(id);
+        this._removeConverters(id);
 
         return result;
     }
@@ -965,6 +966,15 @@ export class BindingData {
                 this._sync.delete(key);
             }
         });
+    }
+
+    /**
+     * Remove all the converters for a given context
+     * @param id {number} binding context
+     * @private
+     */
+    _removeConverters(id) {
+        this._converters.delete(id);
     }
 
     /**
