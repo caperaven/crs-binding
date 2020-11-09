@@ -4,6 +4,7 @@ import {createArrayProxy} from "./binding-data-arrays.js";
 export class BindingData {
     constructor() {
         this._data = new Map();
+        this._converters = new Map();
         this._callbacks = new Map();
         this._updates = new Map();
         this._triggers = new Map();
@@ -16,6 +17,21 @@ export class BindingData {
             nextArrayId: 0,
             nextSyncId: 0
         };
+    }
+
+    /**
+     * Get the value converter for a given key.
+     * @param key
+     * @returns {null|converter}
+     * @private
+     */
+    _getConverter(id, path) {
+        const obj = this._converters.get(id);
+        if (obj == null) return null;
+
+        const key = getValueOnPath(obj, path);
+        if (key == null) return null;
+        return crsbinding.valueConvertersManager.get(key);
     }
 
     /**
@@ -121,15 +137,24 @@ export class BindingData {
 
         const obj = this._data.get(Number(id));
 
+        let value;
+
         if (obj.type == "data") {
             const data = obj.data;
             if (property == null) return data;
-            return property.indexOf(".") === -1 ? data[property] : getValueOnPath(data, property);
+            value = property.indexOf(".") === -1 ? data[property] : getValueOnPath(data, property);
         }
         else {
             const refId = obj.refId;
-            return this._getReferenceValue(refId, property, obj.path, obj.aId);
+            value = this._getReferenceValue(refId, property, obj.path, obj.aId);
         }
+
+        const converter = this._getConverter(id, property);
+        if (converter != null) {
+            value = converter.get(value);
+        }
+
+        return value;
     }
 
     /**
@@ -228,6 +253,11 @@ export class BindingData {
 
         let obj = this._data.get(id);
         if (obj == null || obj.__frozen == true) return;
+
+        const converter = this._getConverter(id, property);
+        if (converter != null) {
+            value = converter.set(value);
+        }
 
         if (dataType === "boolean" || typeof value === "boolean") {
             value = Boolean(value);
@@ -1039,5 +1069,53 @@ export class BindingData {
                 this._copyTriggers(so, sp, obj, prop, targetId, targetProp);
             });
         }
+    }
+
+    /**
+     * Register a property conversion to happen on a given context and path
+     * @param id {number} context id or object containing it
+     * @param path {string} property path
+     * @param converterKey {string} conversion key to use
+     */
+    setPropertyConverter(id, path, converterKey) {
+        if (Array.isArray(converterKey)) {
+            return this.setPropertyConverterTriggers(id, path, converterKey);
+        }
+
+        id = this._getContextId(id);
+        let obj = this._converters.get(id);
+
+        if (obj == null) {
+           obj = {};
+           this._converters.set(id, obj);
+        }
+
+        this._ensurePath(obj, path, (triggerObject, triggerProperty) => {
+            triggerObject[triggerProperty] = converterKey;
+        });
+    }
+
+    /**
+     * When a property changes, also copy the values over to other properties that are used for conversion.
+     * This allows you to have multiple fields representing different converters of the same initial value.
+     * @param id
+     * @param path
+     * @param conversions
+     */
+    setPropertyConverterTriggers(id, path, conversions) {
+        id = this._getContextId(id);
+
+        const code = [];
+        for (let conversion of conversions) {
+            const parts = conversion.split(":");
+            const path = parts[0];
+            const converter = parts[1];
+
+            this.setPropertyConverter(id, path, converter);
+            code.push(`crsbinding.data.setProperty(${id}, "${path}", value);`);
+        }
+
+        const fn = new Function("property", "value", code.join("\n"));
+        this.addCallback(id, path, fn);
     }
 }

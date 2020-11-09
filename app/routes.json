@@ -113,6 +113,11 @@
       "title": "Radio Groups",
       "hash": "#radio-group",
       "view": "radio-group"
+    },
+    {
+      "title": "Value Converters",
+      "hash": "#value-converters",
+      "view": "value-converters"
     }
   ]
 }

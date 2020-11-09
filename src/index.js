@@ -14,6 +14,7 @@ import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
 import {Widget} from "../src/view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
+import {ValueConvertersManager} from "./managers/value-converters-manager.js";
 import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
 import {renderCollection} from "./lib/renderCollection.js";
@@ -42,6 +43,7 @@ const crsbinding = {
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
     elementStoreManager: new ElementStoreManager(),
+    valueConvertersManager: new ValueConvertersManager(),
 
     expression: {
         sanitize: sanitizeExp,
