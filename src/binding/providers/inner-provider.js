@@ -15,7 +15,7 @@ export class InnerProvider extends ProviderBase {
 
         this._value = element.innerText || element.textContent;
         this._eventHandler = this._change.bind(this);
-        this._expObj = crsbinding.expression.compile(element.innerText || element.textContent, null, {ctxName: this._ctxName});
+        this._expObj = crsbinding.expression.compile(this._value, null, {ctxName: this._ctxName});
 
         for (let prop of this._expObj.parameters.properties) {
             this.listenOnPath(prop, this._eventHandler);
@@ -33,19 +33,10 @@ export class InnerProvider extends ProviderBase {
         this._eventHandler = null;
     }
 
-    _change(property, sourceValue) {
+    _change() {
         if (this._expObj == null) return;
         const target = this._element.textContent ? "textContent" : "innerText";
         let value = this._expObj.function(this.data);
-
-        if (sourceValue != value && property != null) {
-            // if converter exists it means that the value has already been converted and should be used as is.
-            const converter = crsbinding.data._getConverter(this._context, property);
-            if (converter != null) {
-                value = sourceValue;
-            }
-        }
-
         value = value == null ? "" : value.split("undefined").join("");
         this._element[target] = value;
     }

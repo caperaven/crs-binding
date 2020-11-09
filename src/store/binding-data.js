@@ -25,7 +25,7 @@ export class BindingData {
      * @returns {null|converter}
      * @private
      */
-    _getConverter(id, path) {
+    getConverter(id, path) {
         const obj = this._converters.get(id);
         if (obj == null) return null;
 
@@ -149,7 +149,7 @@ export class BindingData {
             value = this._getReferenceValue(refId, property, obj.path, obj.aId);
         }
 
-        const converter = this._getConverter(id, property);
+        const converter = this.getConverter(id, property);
         if (converter != null) {
             value = converter.get(value);
         }
@@ -254,7 +254,7 @@ export class BindingData {
         let obj = this._data.get(id);
         if (obj == null || obj.__frozen == true) return;
 
-        const converter = this._getConverter(id, property);
+        const converter = this.getConverter(id, property);
         if (converter != null) {
             value = converter.set(value);
         }
