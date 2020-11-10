@@ -124,9 +124,10 @@ export class BindingData {
      * or get the object by just defining the id.
      * @param id {number} id of the data object to use, see _dataId on component
      * @param property {string} optional - path to the property
+     * @param convert {boolean} if a converter is available do you want to use it, default: true
      * @returns {value}
      */
-    getValue(id, property) {
+    getValue(id, property, convert = true) {
         if (id == "undefined" || id == null) return undefined;
 
         id = this._getContextId(id);
@@ -150,9 +151,11 @@ export class BindingData {
             value = this._getReferenceValue(refId, property, obj.path, obj.aId);
         }
 
-        const converter = this.getConverter(id, property);
-        if (converter != null) {
-            value = converter.get(value);
+        if (convert == true) {
+            const converter = this.getConverter(id, property);
+            if (converter != null) {
+                value = converter.get(value);
+            }
         }
 
         return value;
@@ -187,12 +190,13 @@ export class BindingData {
      * If the result is an array it will also wrap it in a proxy
      * @param id {number / object} context id or object with fields _dataId or __uid
      * @param property {string}
+     * @param convert {boolean} if a converter is available do you want to use it, default: true
      * @returns {value}
      */
-    getProperty(id, property) {
+    getProperty(id, property, convert = true) {
         id = this._getContextId(id);
 
-        let value =  this.getValue(id, property);
+        let value =  this.getValue(id, property, convert);
 
         if (Array.isArray(value)) {
             value = createArrayProxy(value, id, property);
@@ -208,7 +212,7 @@ export class BindingData {
      * @param property {string} property path to set the value on
      * @param value {any} the value to set
      */
-    setProperty(id, property, value) {
+    setProperty(id, property, value, convert = true) {
         id = this._getContextId(id);
 
         let oldValue = this.getProperty(id, property);
@@ -230,7 +234,7 @@ export class BindingData {
             oldValue && this._unlinkArrayItem(oldValue);
         }
 
-        this._setContextProperty(id, property, value, oldValue);
+        this._setContextProperty(id, property, value, {oldValue: oldValue, convert: convert});
 
         if (value && value.__uid) {
             this.linkToArrayItem(id, property, value.__uid);
@@ -249,15 +253,22 @@ export class BindingData {
      * @param ctxName {string}
      * @param dataType {string} "number", "boolean" or null
      */
-    _setContextProperty(id, property, value, oldValue, ctxName, dataType) {
+    _setContextProperty(id, property, value, options) {
+        const oldValue = options.oldValue;
+        const ctxName = options.ctxName;
+        const dataType = options.dataType;
+        const convert = options.convert || true;
+
         id = this._getContextId(id);
 
         let obj = this._data.get(id);
         if (obj == null || obj.__frozen == true) return;
 
-        const converter = this.getConverter(id, property);
-        if (converter != null) {
-            value = converter.set(value);
+        if (convert == true) {
+            const converter = this.getConverter(id, property);
+            if (converter != null) {
+                value = converter.set(value);
+            }
         }
 
         if (dataType === "boolean" || typeof value === "boolean") {

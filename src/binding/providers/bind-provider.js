@@ -34,7 +34,7 @@ export class BindProvider extends OneWayProvider {
         }
 
         const oldValue = crsbinding.data.getValue(this._context, this._value);
-        crsbinding.data._setContextProperty(this._context, this._value, value, oldValue, this._ctxName, type == "text" ? "string" : type);
+        crsbinding.data._setContextProperty(this._context, this._value, value, {oldValue: oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type});
 
         event.stopPropagation();
     }
