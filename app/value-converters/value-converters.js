@@ -20,6 +20,8 @@ export default class ValueConverters extends crsbinding.classes.ViewBase {
         this.setProperty("model.date", new Date());
         console.log(this.getProperty("model.date"));
 
+        console.log(this.getProperty("model.date", false));
+
         super.load();
     }
 

@@ -30,7 +30,7 @@ export class ValueConvertersManager {
     }
 
     /**
-     *
+     * Use the converter defined by key and convert the value using either get or set as defined by direction
      * @param value {any} value to convert
      * @param key {string} converter key
      * @param direction {string} get || set
