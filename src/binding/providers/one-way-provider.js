@@ -49,10 +49,6 @@ export class OneWayProvider extends ProviderBase {
             this._isLinked = true;
         }
 
-        if (this._element.type == "date") {
-            value = (new Date(value)).toISOString().split('T')[0];
-        }
-
         crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
     }
 }

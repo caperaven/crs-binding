@@ -1087,22 +1087,24 @@ export class BindingData {
      * @param path {string} property path
      * @param converterKey {string} conversion key to use
      */
-    setPropertyConverter(id, path, converterKey) {
-        if (Array.isArray(converterKey)) {
-            return this.setPropertyConverterTriggers(id, path, converterKey);
+    setPropertyConverter(id, path, converterKey, triggers) {
+        if (converterKey != null) {
+            id = this._getContextId(id);
+            let obj = this._converters.get(id);
+
+            if (obj == null) {
+                obj = {};
+                this._converters.set(id, obj);
+            }
+
+            this._ensurePath(obj, path, (triggerObject, triggerProperty) => {
+                triggerObject[triggerProperty] = converterKey;
+            });
         }
 
-        id = this._getContextId(id);
-        let obj = this._converters.get(id);
-
-        if (obj == null) {
-           obj = {};
-           this._converters.set(id, obj);
+        if (triggers != null) {
+            this.setPropertyConverterTriggers(id, path, triggers);
         }
-
-        this._ensurePath(obj, path, (triggerObject, triggerProperty) => {
-            triggerObject[triggerProperty] = converterKey;
-        });
     }
 
     /**
