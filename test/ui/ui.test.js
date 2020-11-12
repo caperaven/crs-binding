@@ -421,3 +421,8 @@ test("radio-group", async() => {
 
     await page.goBack();
 })
+
+test("value conversion", async () => {
+    await navigateTo("radio-group");
+
+})
