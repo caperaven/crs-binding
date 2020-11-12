@@ -118,6 +118,11 @@
       "title": "Value Converters",
       "hash": "#value-converters",
       "view": "value-converters"
+    },
+    {
+      "title": "InnerHTML",
+      "hash": "#innerHTML",
+      "view": "innerHTML"
     }
   ]
 }

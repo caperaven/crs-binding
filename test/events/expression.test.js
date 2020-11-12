@@ -242,6 +242,12 @@ test("sanitize - calculated string", () => {
    expect(result.properties[1]).toBe("rect.y");
 })
 
+test("sanitize - html", () => {
+   const result = sanitizeExp("$html.model.property");
+   expect(result.isHTML).toBeTruthy();
+   expect(result.expression).toBe("context.model.property");
+})
+
 
 // JHR:  todo, enable this feature
 // test("sanitizeExp - attribute condition", () => {

@@ -8,10 +8,18 @@ import index from "../../index.js";
 const sanitizeKeywords = ["false", "true", "null"];
 
 export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
+    let isHTML = false;
+
+    if (typeof exp == "string" && exp.indexOf("$html") != -1) {
+        isHTML = true;
+        exp = exp.split("$html.").join("");
+    }
+
     if (exp == null || exp == "null" || exp == "undefined" || sanitizeKeywords.indexOf(exp.toString()) != -1 || isNaN(exp) == false || exp.trim() == ctxName) {
         return {
             isLiteral: true,
-            expression: exp
+            expression: exp,
+            isHTML: isHTML
         }
     }
 
@@ -140,6 +148,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
 
     return {
         isLiteral: isLiteral,
+        isHTML: isHTML,
         expression: tokens.join("")
             .split("$globals").join("crsbinding.data.globals")
             .split("$event").join("event")

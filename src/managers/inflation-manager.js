@@ -303,10 +303,16 @@ class InflationCodeGenerator {
         if (element.children == null || element.children.length > 0 || element.innerHTML.indexOf("${") == -1) return;
 
         const text = (element.innerHTML || "").trim();
-        const target = element.textContent ? "textContent" : "innerText";
+        let target = element.textContent ? "textContent" : "innerText";
 
         let exp = text;
-        exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
+        const san = crsbinding.expression.sanitize(exp, this._ctxName);
+        exp = san.expression;
+
+        if (san.isHTML == true) {
+            target = "innerHTML";
+        }
+
         this.inflateSrc.push([`${this.path}.${target} = ` + "`" + exp + "`"].join(" "));
         this.deflateSrc.push(`${this.path}.${target} = "";`);
     }

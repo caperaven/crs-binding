@@ -1,6 +1,7 @@
 import {stringResultConverter} from "./../../value-converters/string-result.js";
 import {dayOfWeekConverter} from "./../../value-converters/day-of-week.js";
 import {dateToIso} from "./../../value-converters/date-iso.js";
+import {alphaNumeric} from "./../../value-converters/alphaNumeric.js";
 
 export default class ValueConverters extends crsbinding.classes.ViewBase {
     preLoad() {
@@ -10,6 +11,7 @@ export default class ValueConverters extends crsbinding.classes.ViewBase {
 
         crsbinding.data.setPropertyConverter(this, "model.numberValue", "string");
         crsbinding.data.setPropertyConverter(this, "model.date", "date", ["model.day:day", "model.week:week"]);
+        crsbinding.data.setPropertyConverter(this, "model.number", "alphaNumeric");
     }
 
     load() {
