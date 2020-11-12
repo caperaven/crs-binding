@@ -215,7 +215,7 @@ export class BindingData {
     setProperty(id, property, value, convert = true) {
         id = this._getContextId(id);
 
-        let oldValue = this.getProperty(id, property);
+        let oldValue = this.getProperty(id, property, false);
 
         if (Array.isArray(oldValue)) {
             this.array(id, property).splice(0, oldValue.length);

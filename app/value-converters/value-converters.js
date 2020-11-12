@@ -16,14 +16,10 @@ export default class ValueConverters extends crsbinding.classes.ViewBase {
     }
 
     load() {
+        this.setProperty("model.number", "a");
         this.setProperty("model.numberValue", 255);
         const value = this.getProperty("model.numberValue");
-        console.log(typeof value, value);
-
         this.setProperty("model.date", new Date());
-        console.log(this.getProperty("model.date"));
-
-        console.log(this.getProperty("model.date", false));
 
         super.load();
     }
