@@ -13,11 +13,11 @@
 
 <h2>${title}</h2>
 
-<div>${$html.model.value}</div>
+<div id="h1">${$html.model.value}</div>
 
 <h2>Items</h2>
 
-<ul>
+<ul id="list1">
     <template for="item of model.values">
         <li>${$html.item.title}</li>
     </template>
@@ -25,7 +25,7 @@
 
 <h2>Items Once</h2>
 
-<ul>
+<ul id="list2">
     <template for.once="item of model.values">
         <li>${$html.item.title}</li>
     </template>

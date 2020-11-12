@@ -423,6 +423,16 @@ test("radio-group", async() => {
 })
 
 test("value conversion", async () => {
-    await navigateTo("radio-group");
+    await navigateTo("value-converters");
 
+})
+
+test("value conversion", async () => {
+    await navigateTo("innerHTML");
+
+    expect(await getInnerText("#h1")).toBe("<h2>HTML Heading 2</h2>");
+    expect(await childCount("#list1")).toBe(4);
+    expect(await childCount("#list2")).toBe(3);
+    expect(await getInnerText("#list1 li")).toBe("<h2>Item 1</h2>");
+    expect(await getInnerText("#list2 li")).toBe("<h2>Item 1</h2>");
 })
