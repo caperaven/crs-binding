@@ -20,4 +20,8 @@ export default class List extends ViewBase {
         crsbinding.data.updateUI(this, "model.values");
         super.load();
     }
+
+    update() {
+        this.setProperty("model.value", "<h3>Hello New World</h3>");
+    }
 }

@@ -15,11 +15,13 @@ export class Widget extends HTMLElement {
         this._dataId = id;
         this.innerHTML = args.html;
 
-        const ctx = crsbinding.data._context.get(this._dataId);
+        if (this._dataId != null) {
+            const ctx = crsbinding.data._context.get(this._dataId);
 
-        await crsbinding.parsers.parseElements(this.children, this._dataId, {
-            folder: ctx.html
-        });
+            await crsbinding.parsers.parseElements(this.children, this._dataId, {
+                folder: ctx.html
+            });
+        }
     }
 
     _clearElements() {
