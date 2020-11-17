@@ -123,6 +123,11 @@
       "title": "InnerHTML",
       "hash": "#innerHTML",
       "view": "innerHTML"
+    },
+    {
+      "title": "Nested For",
+      "hash": "#nested-for",
+      "view": "nested-for"
     }
   ]
 }

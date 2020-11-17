@@ -1,0 +1,74 @@
+<h2>${title}</h2>
+
+<div role="toolbar">
+    <button>add parent item</button>
+    <button>add child item</button>
+</div>
+
+<!-- all static ui, once printed you are done -->
+
+<h2>For Once Example</h2>
+
+<ul>
+    <template for.once="item of data">
+        <li>
+            <div>${item.title}</div>
+            <ul>
+                <template for.once="child of item.items">
+                    <li>${child.title}</li>
+                </template>
+            </ul>
+        </li>
+    </template>
+</ul>
+
+<!-- both the parent and the child collections are dynaic and can change -->
+
+<h2>For Example</h2>
+
+<ul>
+    <template for="item of data">
+        <li>
+            <div>${item.title}</div>
+            <ul>
+                <template for="child of item.items">
+                    <li>${child.title}</li>
+                </template>
+            </ul>
+        </li>
+    </template>
+</ul>
+
+<!-- the parent stack is static and does not change but the children of each parent is dynamic -->
+
+<h2>For once with a for</h2>
+
+<ul>
+    <template for.once="item of data">
+        <li>
+            <div>${item.title}</div>
+            <ul>
+                <template for="child of item.items">
+                    <li>${child.title}</li>
+                </template>
+            </ul>
+        </li>
+    </template>
+</ul>
+
+<!-- the parent is dynamic but the children are static  -->
+
+<h2>For with a for once</h2>
+
+<ul>
+    <template for="item of data">
+        <li>
+            <div>${item.title}</div>
+            <ul>
+                <template for.once="child of item.items">
+                    <li>${child.title}</li>
+                </template>
+            </ul>
+        </li>
+    </template>
+</ul>
