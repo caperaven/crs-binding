@@ -437,6 +437,21 @@ test("value conversion", async () => {
     expect(await getInnerText("#list2 li")).toBe("<h2>Item 1</h2>");
 })
 
+test("expressions", async () => {
+    await navigateTo("expressions");
+
+    expect(await getTextContent("#expression")).toBe("Site A11");
+
+    await setInputText("#siteCode", "A12");
+    expect(await getTextContent("#expression")).toBe("Code1");
+
+    await setInputText("#code", "Code2");
+    expect(await getTextContent("#expression")).toBe("Code2");
+
+    await setInputText("#siteCode", "A11");
+    expect(await getTextContent("#expression")).toBe("Site A11");
+})
+
 test("nested for", async () => {
     await navigateTo("nested-for");
 

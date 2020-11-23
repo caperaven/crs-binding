@@ -128,6 +128,11 @@
       "title": "Nested For",
       "hash": "#nested-for",
       "view": "nested-for"
+    },
+    {
+      "title": "Expressions",
+      "hash": "#expressions",
+      "view": "expressions"
     }
   ]
 }
