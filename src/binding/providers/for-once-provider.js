@@ -1,11 +1,14 @@
+import {forStatementParts} from "./../../lib/utils.js";
+
 export function ForOnceProvider(element, context, property, value, ctxName = "context", parentId) {
     if (value.indexOf("$parent.") != -1) {
         value = value.split("$parent.").join("");
         context = parentId;
     }
-    const parts = value.split("of");
-    const singular = parts[0].trim();
-    const plural = parts[1].trim();
+
+    const parts = forStatementParts(value);
+    const singular = parts.singular;
+    const plural = parts.plural;
 
     const key = `for-once-${singular}`;
 
@@ -17,3 +20,17 @@ export function ForOnceProvider(element, context, property, value, ctxName = "co
     element.parentElement.appendChild(elements);
     element.parentElement.removeChild(element);
 }
+
+
+
+
+
+/**
+
+ 1. check for nexted templates.
+    exist = yes
+        1.1 register
+        1.2 set the key on the template
+            1.2.1 code gen then uses "element.elements[n].appendChild(crsb.inflationManager.get(key, item.items))"
+
+ **/

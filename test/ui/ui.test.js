@@ -436,3 +436,35 @@ test("value conversion", async () => {
     expect(await getInnerText("#list1 li")).toBe("<h2>Item 1</h2>");
     expect(await getInnerText("#list2 li")).toBe("<h2>Item 1</h2>");
 })
+
+test("nested for", async () => {
+    await navigateTo("nested-for");
+
+    async function getResults(query) {
+        return await page.$eval(query, ul => {
+            const result = [];
+            result.push(ul.children.length);
+            result.push(ul.children[0].children[1].children.length);
+            result.push(ul.children[1].children[1].children.length);
+            result.push(ul.children[2].children[1].children.length);
+            return result;
+        });
+    }
+
+    async function assert(results) {
+        expect(results[0]).toBe(3);
+        expect(results[1]).toBe(1);
+        expect(results[2]).toBe(2);
+        expect(results[3]).toBe(3);
+    }
+
+    const list1 = await getResults("#list1");
+    // const list2 = await getResults("#list2");
+    // const list3 = await getResults("#list3");
+    // const list4 = await getResults("#list4");
+
+    await assert(list1);
+    // await assert(list2);
+    // await assert(list3);
+    // await assert(list4);
+})

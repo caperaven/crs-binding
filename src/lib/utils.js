@@ -113,3 +113,13 @@ export function relativePathFrom(source, target) {
 
     return `${sourceStr}/${targetStr}`;
 }
+
+export function forStatementParts(value) {
+    const parts = value.split("of");
+    const singular = parts[0].trim();
+    const plural = parts[1].trim();
+    return {
+        singular: singular,
+        plural: plural
+    }
+}

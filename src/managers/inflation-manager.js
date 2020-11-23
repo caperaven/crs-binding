@@ -1,4 +1,4 @@
-import {ProviderFactory} from "../binding/provider-factory.js";
+import {forStatementParts} from "./../lib/utils.js";
 
 export class InflationManager {
     constructor() {
@@ -17,8 +17,9 @@ export class InflationManager {
      */
     register(id, template, ctxName = "context", measure = false) {
         template = template.cloneNode(true);
-        const generator = new InflationCodeGenerator(ctxName);
+        const generator = new InflationCodeGenerator(ctxName, id);
         const result = generator.generateCodeFor(template);
+        const templates = generator.templateKeys;
         generator.dispose();
 
         crsbinding.elementStoreManager.register(id, template, measure);
@@ -27,7 +28,8 @@ export class InflationManager {
             id: id,
             childCount: result.childCount,
             inflate: result.inflate,
-            deflate: result.deflate
+            deflate: result.deflate,
+            templates: templates
         })
     }
 
@@ -40,6 +42,11 @@ export class InflationManager {
         if (item != null) {
             item.inflate = null;
             item.defaulte = null;
+
+            if (item.templates != null) {
+                item.templates.forEach(tplId => this.unregister(tplId));
+            }
+
             this._items.delete(id);
         }
         crsbinding.elementStoreManager.unregister(id);
@@ -248,7 +255,9 @@ export class InflationManager {
 }
 
 class InflationCodeGenerator {
-    constructor(ctxName) {
+    constructor(ctxName, parentKey) {
+        this.parentKey = parentKey;
+        this.templateKeys = [];
         this.inflateSrc = [];
         this.deflateSrc = [];
         this._ctxName = ctxName;
@@ -294,8 +303,31 @@ class InflationCodeGenerator {
 
         const path = this.path;
         for (let i = 0; i < element.children.length; i++) {
-            this.path = `${path}.children[${i}]`;
-            this._processElement(element.children[i]);
+            const child = element.children[i];
+
+            if (child.nodeName == "TEMPLATE") {
+                this._processTemplate(child);
+            }
+            else {
+                this.path = `${path}.children[${i}]`;
+                this._processElement(element.children[i]);
+            }
+        }
+    }
+
+    _processTemplate(element) {
+        const key = `${this.parentKey}_${this.templateKeys.length + 1}`;
+        this.templateKeys.push(key);
+        element.dataset.key = key;
+
+        const value = element.getAttribute("for.once");
+        if (value != null) {
+            const parts = forStatementParts(value);
+            const code = `${this.path}.appendChild(crsbinding.inflationManager.get("${key}", ${parts.plural}));`;
+            this.inflateSrc.push(code);
+
+            crsbinding.inflationManager.register(key, element, parts.singular);
+            element.parentElement.removeChild(element);
         }
     }
 
