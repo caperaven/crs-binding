@@ -82,6 +82,13 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
                         addProperty(properties, extractProperty(`${path.join("")}`));
                     }
                 }
+                else {
+                    let index = i - path.length;
+                    if (tokens[index - 2] == "$") {
+                        indexes.push(index);
+                        addProperty(properties, extractProperty(`${path.join("")}`));
+                    }
+                }
 
                 path.length = 0;
             }

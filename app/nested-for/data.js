@@ -4,12 +4,6 @@ export const data = [
         items: [
             {
                 title: "Item 1 - Child 1"
-            },
-            {
-                title: "Item 1 - Child 2"
-            },
-            {
-                title: "Item 1 - Child 3"
             }
         ]
     },
@@ -21,9 +15,6 @@ export const data = [
             },
             {
                 title: "Item 2 - Child 2"
-            },
-            {
-                title: "Item 2 - Child 3"
             }
         ]
     },
