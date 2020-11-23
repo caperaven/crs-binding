@@ -253,6 +253,11 @@ test("sinitize - expression", () => {
    expect(result.expression).toBe("${context.model.siteCode == 'A21' ? 'Hello A21' : context.model.code}");
 })
 
+test("sinitize - expression literal", () => {
+   const result = sanitizeExp("`${model.siteCode == 'A21' ? 'Hello A21' : model.code}`");
+   expect(result.expression).toBe("`${context.model.siteCode == 'A21' ? 'Hello A21' : context.model.code}`");
+})
+
 
 // JHR:  todo, enable this feature
 // test("sanitizeExp - attribute condition", () => {

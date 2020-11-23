@@ -29,7 +29,7 @@ async function getValues(query) {
     const values = [];
 
     for (let handle of handles) {
-        values.push(await page.evaluate(element => element.value, handle));
+        values.push(await page.evaluate(element => element.value == null ? element.textContent : element.value, handle));
     }
 
     return values;
@@ -450,6 +450,22 @@ test("expressions", async () => {
 
     await setInputText("#siteCode", "A11");
     expect(await getTextContent("#expression")).toBe("Site A11");
+})
+
+test("innerHTML", async () => {
+    await navigateTo("innerHTML");
+
+    expect(await getTextContent("#h1 h2")).toBe("HTML Heading 2");
+
+    const list1Values = await getValues("#list1 h2");
+    expect(list1Values[0]).toBe("Item 1");
+    expect(list1Values[1]).toBe("Item 2");
+    expect(list1Values[2]).toBe("Item 3");
+
+    const list2Values = await getValues("#list2 h2");
+    expect(list2Values[0]).toBe("Item 1");
+    expect(list2Values[1]).toBe("Item 2");
+    expect(list2Values[2]).toBe("Item 3");
 })
 
 test("nested for", async () => {
