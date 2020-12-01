@@ -18,6 +18,7 @@ import {ValueConvertersManager} from "./managers/value-converters-manager.js";
 import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
 import {renderCollection} from "./lib/renderCollection.js";
+import {getValueOnPath} from "./lib/path-utils.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -89,7 +90,8 @@ const crsbinding = {
         forceClean: forceClean,
         renderCollection: renderCollection,
         relativePathFrom: relativePathFrom,
-        getPathOfFile: getPathOfFile
+        getPathOfFile: getPathOfFile,
+        getValueOnPath: getValueOnPath
     }
 };
 
