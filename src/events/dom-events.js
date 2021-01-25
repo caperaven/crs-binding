@@ -18,8 +18,8 @@ export function domDisableEvents(element) {
     delete element.unregisterEvent;
 }
 
-function registerEvent(element, event, callback) {
-    element.addEventListener(event, callback);
+function registerEvent(element, event, callback, eventOptions = null) {
+    element.addEventListener(event, callback, eventOptions);
     this._domEvents.push({
         element: element,
         event: event,
