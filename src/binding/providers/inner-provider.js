@@ -37,7 +37,7 @@ export class InnerProvider extends ProviderBase {
         if (this._expObj == null) return;
         let value = this._expObj.function(this.data);
         value = value == null ? "" : value.split("undefined").join("");
-        let target = this._element.textContent ? "textContent" : "innerText";
+        let target = this._element.textContent != null ? "textContent" : "innerText";
 
         if (this._expObj.parameters.isHTML == true) {
             target = "innerHTML";
