@@ -133,6 +133,11 @@
       "title": "Expressions",
       "hash": "#expressions",
       "view": "expressions"
+    },
+    {
+      "title": "SVG Element",
+      "hash": "#svg-element",
+      "view": "svg-element"
     }
   ]
 }

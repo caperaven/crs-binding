@@ -45,6 +45,10 @@ export async function parseElement(element, context, options) {
     if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
     }
+
+    if (nodeName === "svg") {
+        crsbinding.svgCustomElements.parse(element);
+    }
 }
 
 async function parseAttributes(collection, context, ctxName, parentId) {

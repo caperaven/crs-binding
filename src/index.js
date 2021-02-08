@@ -19,6 +19,8 @@ import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relati
 import {forceClean} from "./lib/cleanMemory.js";
 import {renderCollection} from "./lib/renderCollection.js";
 import {getValueOnPath} from "./lib/path-utils.js";
+import {SvgElementsManager} from "./managers/svg-elements-manager.js";
+import {SvgElement} from "./view/svg-element.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -44,6 +46,7 @@ const crsbinding = {
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
     elementStoreManager: new ElementStoreManager(),
+    svgCustomElements: new SvgElementsManager(),
     valueConvertersManager: new ValueConvertersManager(),
 
     expression: {
@@ -66,7 +69,8 @@ const crsbinding = {
         BindableElement: BindableElement,
         ViewBase: ViewBase,
         RepeatBaseProvider: RepeatBaseProvider,
-        Widget: Widget
+        Widget: Widget,
+        SvgElement: SvgElement
     },
 
     events: {

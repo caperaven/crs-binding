@@ -248,14 +248,39 @@ test("sanitize - html", () => {
    expect(result.expression).toBe("context.model.property");
 })
 
-test("sinitize - expression", () => {
+test("sanitize - expression", () => {
    const result = sanitizeExp("${model.siteCode == 'A21' ? 'Hello A21' : model.code}");
    expect(result.expression).toBe("${context.model.siteCode == 'A21' ? 'Hello A21' : context.model.code}");
 })
 
-test("sinitize - expression literal", () => {
+test("sanitize - expression literal", () => {
    const result = sanitizeExp("`${model.siteCode == 'A21' ? 'Hello A21' : model.code}`");
    expect(result.expression).toBe("`${context.model.siteCode == 'A21' ? 'Hello A21' : context.model.code}`");
+})
+
+test("sanitize - Not expressions", () => {
+   const result = sanitizeExp("!isActive");
+   expect(result.expression).toBe("!context.isActive");
+})
+
+test("sanitize - Not expressions on path", () => {
+   const result = sanitizeExp("!model.isActive");
+   expect(result.expression).toBe("!context.model.isActive");
+})
+
+test("sanitize - Not expressions in literals", () => {
+   const result = sanitizeExp("`!model.isActive`");
+   expect(result.expression).toBe("`!context.model.isActive`");
+})
+
+test("sanitize - Not expressions in expressions", () => {
+   const result = sanitizeExp("!isActive && !isOn");
+   expect(result.expression).toBe("!context.isActive && !context.isOn");
+})
+
+test("sanitize - Not expression with prefix", () => {
+   const result = sanitizeExp("!$globals.isActive");
+   expect(result.expression).toBe("!crsbinding.data.globals.isActive")
 })
 
 

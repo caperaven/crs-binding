@@ -122,6 +122,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         }
     }
 
+    exp = exp.trim();
     if (exp[0] != "`" &&
         indexes.length == 0 &&
         exp.indexOf(".") != -1 &&
@@ -130,7 +131,8 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
         exp.indexOf("$event") == -1 &&
         exp.indexOf("$parent") == -1 &&
         exp.indexOf("$data") == -1 &&
-        exp.trim()[0] != "{") {
+        exp[0] != "{" &&
+        exp[0] != "!") {
         indexes.push(0);
     }
 
@@ -229,12 +231,12 @@ function tokenize(exp, ctxName) {
                 word.push(char);
             }
             else {
-                pushToken(tokens, word, char);
+                pushToken(tokens, word, char, exp[i + 1]);
                 isString = false;
             }
         }
         else if (reserved.indexOf(char) != -1) {
-            pushToken(tokens, word, char);
+            pushToken(tokens, word, char, exp[i + 1]);
             if (stdQuotes.indexOf(char) != -1) {
                 isString = true;
             }
@@ -269,12 +271,20 @@ function removeNamedCtx(collection, ctxName) {
     return collection;
 }
 
-function pushToken(tokens, word, char) {
+function pushToken(tokens, word, char, nextChar) {
     if (word.length > 0) {
         tokens.push(word.join(""));
         word.length = 0;
     }
 
-    tokens.push(char);
+    if (char == "!" && nextChar != "=" && nextChar != "$") {
+        tokens.push("!");
+        tokens.push("$context");
+        tokens.push(".");
+    }
+    else {
+        tokens.push(char);
+    }
+
     return false;
 }

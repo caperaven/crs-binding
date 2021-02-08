@@ -84,6 +84,17 @@ async function getBindingPropertyValue(contextId, property) {
     return result;
 }
 
+async function getSVGElementStoreSize() {
+    return await page.evaluate("window.crsbinding.svgCustomElements._tagMap.size");
+}
+
+async function svgElementStoreBusy() {
+    let isBusy = true;
+    while (isBusy == true) {
+        isBusy = await page.evaluate("window.crsbinding.svgCustomElements._queue.length > 0");
+    }
+}
+
 beforeAll(async () => {
     jest.setTimeout(100000);
     browser = await puppeteer.launch({headless: false, slowMo: 10, args: ['--disable-dev-shm-usage', '--start-maximized']});
@@ -424,7 +435,7 @@ test("radio-group", async() => {
 
 test("value conversion", async () => {
     await navigateTo("value-converters");
-
+    await page.goBack();
 })
 
 test("value conversion", async () => {
@@ -435,6 +446,7 @@ test("value conversion", async () => {
     expect(await childCount("#list2")).toBe(3);
     expect(await getInnerText("#list1 li")).toBe("<h2>Item 1</h2>");
     expect(await getInnerText("#list2 li")).toBe("<h2>Item 1</h2>");
+    await page.goBack();
 })
 
 test("expressions", async () => {
@@ -450,6 +462,7 @@ test("expressions", async () => {
 
     await setInputText("#siteCode", "A11");
     expect(await getTextContent("#expression")).toBe("Site A11");
+    await page.goBack();
 })
 
 test("innerHTML", async () => {
@@ -466,6 +479,28 @@ test("innerHTML", async () => {
     expect(list2Values[0]).toBe("Item 1");
     expect(list2Values[1]).toBe("Item 2");
     expect(list2Values[2]).toBe("Item 3");
+    await page.goBack();
+})
+
+test("svg element", async() => {
+    await navigateTo("svg-element");
+
+    await page.waitForSelector("g[transform='translate(0, 16)']");
+
+    const count = await page.evaluate("Array.from(crsbinding.svgCustomElements._observed)[0][1].children.size");
+    expect(count).toBe(3);
+
+    let color = await getAttributeValue("rect", "fill");
+    expect(color).toBe("blue");
+
+    await page.waitForSelector("rect[data-is-ready='true']");
+    await page.evaluate('document.querySelector("rect").dispatchEvent(new CustomEvent("click"))');
+    await page.waitForSelector("rect[fill='#ff0090']");
+
+    color = await getAttributeValue("rect", "fill");
+    expect(color).toBe("#ff0090");
+
+    await page.goBack();
 })
 
 test("nested for", async () => {
@@ -498,4 +533,5 @@ test("nested for", async () => {
     // await assert(list2);
     // await assert(list3);
     // await assert(list4);
+    await page.goBack();
 })
