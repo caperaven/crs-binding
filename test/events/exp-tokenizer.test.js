@@ -327,7 +327,7 @@ test("sanitize", () => {
     assert(result[7], "keyword", ")");
 })
 
-test("sanitize", () => {
+test("sanitize - not expressions", () => {
     const result = tokenize("!isActive && !isOn");
     expect(result.length).toBe(7);
 
@@ -340,44 +340,41 @@ test("sanitize", () => {
     assert(result[6], "property", "isOn");
 })
 
+test("sanitize - parameters", () => {
+    const result = tokenize("(model.property.isValid('abc', 10) == true)");
+    expect(result.length).toBe(13);
+
+    assert(result[0], "keyword", "(");
+    assert(result[1], "property", "model.property.isValid");
+    assert(result[2], "keyword", "(");
+    assert(result[3], "string", "'abc'");
+    assert(result[4], "keyword", ",");
+    assert(result[5], "space");
+    assert(result[6], "number", "10");
+    assert(result[7], "keyword", ")");
+    assert(result[8], "space");
+    assert(result[9], "operator", "==");
+    assert(result[10], "space");
+    assert(result[11], "keyword", "true");
+    assert(result[12], "keyword", ")");
+})
+
+test("sanitize - literal with function", () => {
+    const result = tokenize("`rotate(${angle}deg)`");
+    expect(result.length).toBe(9);
+
+    assert(result[0], "literal", "`");
+    assert(result[1], "word", "rotate");
+    assert(result[2], "keyword", "(");
+    assert(result[3], "keyword", "${");
+    assert(result[4], "property", "angle");
+    assert(result[5], "keyword", "}");
+    assert(result[6], "word", "deg");
+    assert(result[7], "keyword", ")");
+    assert(result[8], "literal", "`");
+})
 
 /*
-
-
-
-
-test("sanitizeExp - expression with (....)", () => {
-    const result = sanitizeExp("model.monitoringPointTriggerExpressionId != null || (model.status == 'CancelledByUser' || model.status == 'CancelledBySystem' || model.status == 'Closed')");
-    expect(result.expression).toBe("context.model.monitoringPointTriggerExpressionId != null || (context.model.status == 'CancelledByUser' || context.model.status == 'CancelledBySystem' || context.model.status == 'Closed')");
-    expect(result.properties.length).toBe(2);
-    expect(result.properties[0]).toBe("model.monitoringPointTriggerExpressionId");
-    expect(result.properties[1]).toBe("model.status");
-});
-
-test("sanitize - expression with (...) simple combined with function", () => {
-    const result = sanitizeExp("(model.property.isValid() == true)");
-    expect(result.expression).toBe("(context.model.property.isValid() == true)");
-    expect(result.properties[0]).toBe("model.property");
-})
-
-test("sanitize - expression with (...) simple combined with function and parameters", () => {
-    const result = sanitizeExp("(model.property.isValid('abc', 10) == true)");
-    expect(result.expression).toBe("(context.model.property.isValid('abc', 10) == true)");
-    expect(result.properties[0]).toBe("model.property");
-})
-
-test("sanitize - expression with (()) simple", () => {
-    const result = sanitizeExp("(model.isOpen == true) || (model.isOpen == null)");
-    expect(result.expression).toBe("(context.model.isOpen == true) || (context.model.isOpen == null)");
-    expect(result.properties[0]).toBe("model.isOpen");
-})
-
-test("sanitize - expression with (()) complex", () => {
-    const result = sanitizeExp("((model.isOpen == true) || (model.isOpen == null))");
-    expect(result.expression).toBe("((context.model.isOpen == true) || (context.model.isOpen == null))");
-    expect(result.properties[0]).toBe("model.isOpen");
-})
-
 test("sanitize - function", () => {
     const result = sanitizeExp("`rotate(${angle}deg)`");
     expect(result.expression).toBe("`rotate(${context.angle}deg)`");
