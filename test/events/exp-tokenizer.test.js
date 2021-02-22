@@ -301,84 +301,50 @@ test ("tokenize - set object with event", () => {
     assert(result[13], "keyword", "}");
 })
 
+test("sanitizeExp - toggle boolean", () => {
+    const result = tokenize("$context.isOpen = !$context.isOpen");
+    expect(result.length).toBe(6);
+
+    assert(result[0], "property", "$context.isOpen");
+    assert(result[1], "space");
+    assert(result[2], "operator", "=");
+    assert(result[3], "space");
+    assert(result[4], "operator", "!");
+    assert(result[5], "property", "$context.isOpen");
+});
+
+test("sanitize", () => {
+    const result = tokenize("selectedObj = $data($event.target.dataset.id)");
+    expect(result.length).toBe(8);
+
+    assert(result[0], "property", "selectedObj");
+    assert(result[1], "space");
+    assert(result[2], "operator", "=");
+    assert(result[3], "space");
+    assert(result[4], "property", "$data");
+    assert(result[5], "keyword", "(");
+    assert(result[6], "property", "$event.target.dataset.id");
+    assert(result[7], "keyword", ")");
+})
+
+test("sanitize", () => {
+    const result = tokenize("!isActive && !isOn");
+    expect(result.length).toBe(7);
+
+    assert(result[0], "operator", "!");
+    assert(result[1], "property", "isActive");
+    assert(result[2], "space");
+    assert(result[3], "operator", "&&");
+    assert(result[4], "space");
+    assert(result[5], "operator", "!");
+    assert(result[6], "property", "isOn");
+})
+
+
 /*
 
 
-test("sanitizeExp - set object with event", () => {
-    const result = sanitizeExp("{ x: $event.x, y: $event.y }");
-    expect(result.expression).toBe("{ x: event.x, y: event.y }");
-    expect(result.properties[0]).toBe("x");
-    expect(result.properties[1]).toBe("y");
-});
 
-test("sanitizeExp - toggle boolean", () => {
-    const result = sanitizeExp("$context.isOpen = !$context.isOpen");
-    expect(result.expression).toBe("context.isOpen = !context.isOpen");
-});
-
-test("sanitizeExp - !$context.expression", () => {
-    const result = sanitizeExp("!$context.isOpen");
-    expect(result.expression).toBe("!context.isOpen");
-});
-
-test("sanitizeExp - !expression", () => {
-    const result = sanitizeExp("${!isOpen}");
-    expect(result.expression).toBe("${!context.isOpen}");
-});
-
-test("sanitizeExp - $event.target", () => {
-    const result = sanitizeExp("$event.target");
-    expect(result.expression).toBe("event.target");
-    expect(result.properties.length).toBe(0);
-});
-
-test("sanitizeExp - $parentId in expression", () => {
-    const result = sanitizeExp("$parent.property1 == item.property2", "item");
-    expect(result.expression).toBe("parent.property1 == item.property2");
-
-    expect(result.properties[0]).toBe("$parent.property1");
-    expect(result.properties[1]).toBe("property2");
-});
-
-test("sanitizeExp - $data", () => {
-    const result = sanitizeExp("selectedObj = $data($event.target.dataset.id)");
-    expect(result.expression).toBe("context.selectedObj = crsbinding.data.getValue(event.target.dataset.id)");
-    expect(result.properties.length).toBe(1);
-    expect(result.properties[0]).toBe("selectedObj");
-});
-
-test("sanitizeExp - inner-text", () => {
-    const result = sanitizeExp("This is the ${item.position} article", "item");
-    expect(result.expression).toBe("This is the ${item.position} article");
-    expect(result.properties[0]).toBe("position");
-});
-
-test("sanitizeExp - keywords", () => {
-    let result = sanitizeExp("true");
-    expect(result.expression).toBe("true");
-
-    result = sanitizeExp("false");
-    expect(result.expression).toBe("false");
-
-    result = sanitizeExp("null");
-    expect(result.expression).toBe("null");
-
-    result = sanitizeExp(true);
-    expect(result.expression).toBe(true);
-
-    result = sanitizeExp(false);
-    expect(result.expression).toBe(false);
-
-    result = sanitizeExp(null);
-    expect(result.expression).toBe(null);
-
-    result = sanitizeExp(10);
-    expect(result.expression).toBe(10);
-
-    result = sanitizeExp("10");
-    expect(result.expression).toBe("10");
-
-})
 
 test("sanitizeExp - expression with (....)", () => {
     const result = sanitizeExp("model.monitoringPointTriggerExpressionId != null || (model.status == 'CancelledByUser' || model.status == 'CancelledBySystem' || model.status == 'Closed')");
