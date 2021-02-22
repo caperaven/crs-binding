@@ -26,7 +26,17 @@ test("tokenize - string with expression", () => {
     assert(result[2], "property", "address.street");
     assert(result[3], "keyword", "}");
     assert(result[4], "string", '"');
+})
 
+test("tokenize - tripple =", () => {
+    const result = tokenize("value1 === value2");
+    expect(result.length).toBe(5);
+
+    assert(result[0], "property", "value1");
+    assert(result[1], "space");
+    assert(result[2], "operator", "===");
+    assert(result[1], "space");
+    assert(result[4], "property", "value2");
 })
 
 test("tokenizer - evaluate string expression", () => {
@@ -374,12 +384,36 @@ test("sanitize - literal with function", () => {
     assert(result[8], "literal", "`");
 })
 
-/*
-test("sanitize - function", () => {
-    const result = sanitizeExp("`rotate(${angle}deg)`");
-    expect(result.expression).toBe("`rotate(${context.angle}deg)`");
-    expect(result.properties[0]).toBe("angle");
+test("sanitize - literal with math expression", () => {
+    const result = tokenize("`${(rect.x / 2)}px ${(rect.y / 2)}px`");
+    expect(result.length).toBe(23);
+
+    assert(result[0], "literal", "`");
+    assert(result[1], "keyword", "${");
+    assert(result[2], "keyword", "(");
+    assert(result[3], "property", "rect.x");
+    assert(result[4], "space");
+    assert(result[5], "operator", "/");
+    assert(result[6], "space");
+    assert(result[7], "number", "2");
+    assert(result[8], "keyword", ")");
+    assert(result[9], "keyword", "}");
+    assert(result[10], "word", "px");
+    assert(result[11], "space");
+    assert(result[12], "keyword", "${");
+    assert(result[13], "keyword", "(");
+    assert(result[14], "property", "rect.y");
+    assert(result[15], "space");
+    assert(result[16], "operator", "/");
+    assert(result[17], "space");
+    assert(result[18], "number", "2");
+    assert(result[19], "keyword", ")");
+    assert(result[20], "keyword", "}");
+    assert(result[21], "word", "px");
+    assert(result[22], "literal", "`");
 })
+
+/*
 
 test("sanitize - calculated string", () => {
     const result = sanitizeExp("`${(rect.x / 2)}px ${(rect.y / 2)}px`");
