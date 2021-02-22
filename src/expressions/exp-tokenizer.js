@@ -6,21 +6,25 @@ export function tokenize(exp) {
     function step(type, value) {
         if (word.length > 0) {
             const value = word.join("");
-            let wordType = "word"
-
-            if (keywords.indexOf(value) != -1) {
-                wordType = "keyword";
-            }
-
-            if (isNaN(Number(value)) == false) {
-                wordType = "number";
-            }
-
-            result.push({type: wordType, value: value});
-            word.length = 0;
+            pushWord(value);
         }
 
         result.push({type: type, value: value});
+    }
+
+    function pushWord(value) {
+        let wordType = "word"
+
+        if (keywords.indexOf(value) != -1) {
+            wordType = "keyword";
+        }
+
+        if (isNaN(Number(value)) == false) {
+            wordType = "number";
+        }
+
+        result.push({type: wordType, value: value});
+        word.length = 0;
     }
 
     for (i; i < exp.length; i++) {
@@ -32,7 +36,7 @@ export function tokenize(exp) {
         }
 
         if (char == "`") {
-            step("literal", "`null`");
+            step("literal", "`");
             continue;
         }
 
@@ -53,9 +57,10 @@ export function tokenize(exp) {
                 if (exp[j] == char) {
                     const value = exp.substring(i, j + 1);
                     step("string", value);
+                    break;
                 }
             }
-            i = j + 1;
+            i = j;
             continue;
         }
 
@@ -83,7 +88,7 @@ export function tokenize(exp) {
     }
 
     if (word.length > 0) {
-        result.push({type: "word", value: word.join("")});
+        pushWord(word.join(""));
     }
 
     return postProcessTokens(result);
@@ -102,6 +107,11 @@ function postProcessTokens(tokens) {
         if (token.type == "word") {
             // word is inside a ${...} expression so must be a property
             if (state == "literal") {
+                // if the word starts with "." it's part of a bigger expression after a function call
+                if (token.value[0] == ".") {
+                    continue;
+                }
+
                 token.type = "property";
             }
 
@@ -140,4 +150,4 @@ function isOperator(token) {
 }
 
 const operatorStart = ["=", "!", "<", ">", "+", "-", "*", "/", "&", "|"];
-const keywords = ["{", "}", "(", ")", "true", "false", "null", "undefined"];
+const keywords = ["{", "}", "(", ")", "?", ":", "true", "false", "null", "undefined"];

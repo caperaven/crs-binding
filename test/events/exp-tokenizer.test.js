@@ -1,150 +1,158 @@
 import {tokenize} from "../../src/expressions/exp-tokenizer.js"
 
+function assert(token, type, value = " ") {
+    expect(token.type).toBe(type);
+    expect(token.value).toBe(value);
+}
+
 test("tokenize - single world", () => {
     const result = tokenize("color");
     expect(result.length).toBe(1);
-    expect(result[0].type).toBe("property");
-    expect(result[0].value).toBe("color");
+    assert(result[0], "property", "color");
 })
 
 test("tokenize - single world string literal", () => {
     const result = tokenize("${color}");
     expect(result.length).toBe(3);
 
-    expect(result[0].type).toBe("keyword");
-    expect(result[0].value).toBe("${");
-
-    expect(result[1].type).toBe("property");
-    expect(result[1].value).toBe("color");
-
-    expect(result[2].type).toBe("keyword");
-    expect(result[2].value).toBe("}");
+    assert(result[0], "keyword", "${");
+    assert(result[1], "property", "color");
+    assert(result[2], "keyword", "}");
 })
 
 test("tokenize - simple expression", () => {
     const result = tokenize("property1 == 'a'");
     expect(result.length).toBe(5);
 
-    expect(result[0].type).toBe("property");
-    expect(result[0].value).toBe("property1");
-
-    expect(result[1].type).toBe("space");
-
-    expect(result[2].type).toBe("operator");
-    expect(result[2].value).toBe("==");
-
-    expect(result[3].type).toBe("space");
-
-    expect(result[4].type).toBe("string");
-    expect(result[4].value).toBe("'a'");
+    assert(result[0], "property", "property1");
+    assert(result[1], "space");
+    assert(result[2], "operator", "==");
+    assert(result[3], "space");
+    assert(result[4], "string", "'a'");
 })
 
 test("tokenize - simple string literal expression", () => {
     const result = tokenize("property1 == `${value1}`");
     expect(result.length).toBe(9);
 
-    expect(result[0].type).toBe("property");
-    expect(result[0].value).toBe("property1");
-
-    expect(result[1].type).toBe("space");
-
-    expect(result[2].type).toBe("operator");
-    expect(result[2].value).toBe("==");
-
-    expect(result[3].type).toBe("space");
-
-    expect(result[4].type).toBe("literal");
-
-    expect(result[5].type).toBe("keyword");
-    expect(result[5].value).toBe("${");
-
-    expect(result[6].type).toBe("property");
-    expect(result[6].value).toBe("value1");
-
-    expect(result[7].type).toBe("keyword");
-    expect(result[7].value).toBe("}");
-
-    expect(result[8].type).toBe("literal");
+    assert(result[0], "property", "property1");
+    assert(result[1], "space");
+    assert(result[2], "operator", "==");
+    assert(result[3], "space");
+    assert(result[4], "literal", "`");
+    assert(result[5], "keyword", "${");
+    assert(result[6], "property", "value1");
+    assert(result[7], "keyword", "}");
+    assert(result[8], "literal", "`");
 })
 
 test("tokenize - simple property with function", () => {
     const result = tokenize("property1.toUpper() == 'A'");
     expect(result.length).toBe(7);
 
-    expect(result[0].type).toBe("property");
-    expect(result[0].value).toBe("property1.toUpper");
-    expect(result[1].type).toBe("keyword");
-    expect(result[1].value).toBe("(");
-    expect(result[2].type).toBe("keyword");
-    expect(result[2].value).toBe(")");
-    expect(result[3].type).toBe("space");
-    expect(result[4].type).toBe("operator");
-    expect(result[4].value).toBe("==");
-    expect(result[5].type).toBe("space");
-    expect(result[6].type).toBe("string");
-    expect(result[6].value).toBe("'A'");
+    assert(result[0], "property", "property1.toUpper");
+    assert(result[1], "keyword", "(");
+    assert(result[2], "keyword", ")");
+    assert(result[3], "space");
+    assert(result[4], "operator", "==");
+    assert(result[5], "space");
+    assert(result[6], "string", "'A'");
 })
 
 test("tokenize - simple composite expression", () => {
     const result = tokenize("${model.name} is ${model.age} old");
     expect(result.length).toBe(11);
 
-    expect(result[0].type).toBe("keyword");
-    expect(result[0].value).toBe("${");
-
-    expect(result[1].type).toBe("property");
-    expect(result[1].value).toBe("model.name");
-
-    expect(result[2].type).toBe("keyword");
-    expect(result[2].value).toBe("}");
-
-    expect(result[3].type).toBe("space");
-
-    expect(result[4].type).toBe("word");
-    expect(result[4].value).toBe("is");
-
-    expect(result[5].type).toBe("space");
-
-    expect(result[6].type).toBe("keyword");
-    expect(result[6].value).toBe("${");
-
-    expect(result[7].type).toBe("property");
-    expect(result[7].value).toBe("model.age");
-
-    expect(result[8].type).toBe("keyword");
-    expect(result[8].value).toBe("}");
-
-    expect(result[9].type).toBe("space");
-
-    expect(result[10].type).toBe("word");
-    expect(result[10].value).toBe("old");
+    assert(result[0], "keyword", "${");
+    assert(result[1], "property", "model.name");
+    assert(result[2], "keyword", "}");
+    assert(result[3], "space");
+    assert(result[4], "word", "is");
+    assert(result[5], "space");
+    assert(result[6], "keyword", "${");
+    assert(result[7], "property", "model.age");
+    assert(result[8], "keyword", "}");
+    assert(result[9], "space");
+    assert(result[10], "word", "old");
 })
 
+test("tokenize - numeric expression with property", () => {
+    const result = tokenize("1 + 1 + property1");
+    expect(result.length).toBe(9);
+
+    assert(result[0], "number", "1");
+    assert(result[1], "space");
+    assert(result[2], "operator", "+");
+    assert(result[3], "space");
+    assert(result[4], "number", "1");
+    assert(result[5], "space");
+    assert(result[6], "operator", "+");
+    assert(result[7], "space");
+    assert(result[8], "property", "property1");
+})
+
+test("tokenize - numeric expression with property in literal", () => {
+    const result = tokenize("${1 + 1 + property1}");
+    expect(result.length).toBe(11);
+
+    assert(result[0], "keyword", "${");
+    assert(result[1], "number", "1");
+    assert(result[2], "space");
+    assert(result[3], "operator", "+");
+    assert(result[4], "space");
+    assert(result[5], "number", "1");
+    assert(result[6], "space");
+    assert(result[7], "operator", "+");
+    assert(result[8], "space");
+    assert(result[9], "property", "property1");
+    assert(result[10], "keyword", "}");
+})
+
+test("tokenize - simple composite expression", () => {
+    const result = tokenize("${firstName.trim().toLowerCase()} > ${lastName.trim().toLowerCase()}");
+    expect(result.length).toBe(19);
+
+    assert(result[0], "keyword", "${");
+    assert(result[1], "property", "firstName.trim");
+    assert(result[2], "keyword", "(");
+    assert(result[3], "keyword", ")");
+    assert(result[4], "word", ".toLowerCase");
+    assert(result[5], "keyword", "(");
+    assert(result[6], "keyword", ")");
+    assert(result[7], "keyword", "}");
+    assert(result[8], "space");
+    assert(result[9], "operator", ">");
+    assert(result[10], "space");
+    assert(result[11], "keyword", "${");
+    assert(result[12], "property", "lastName.trim");
+    assert(result[13], "keyword", "(");
+    assert(result[14], "keyword", ")");
+    assert(result[15], "word", ".toLowerCase");
+    assert(result[16], "keyword", "(");
+    assert(result[17], "keyword", ")");
+    assert(result[18], "keyword", "}");
+})
+
+test("tokenize - simple conditional expression", () => {
+    const result = tokenize("title == 'a' ? true : false");
+    expect(result.length).toBe(13);
+
+    assert(result[0], "property", "title");
+    assert(result[1], "space");
+    assert(result[2], "operator", "==");
+    assert(result[3], "space");
+    assert(result[4], "string", "'a'");
+    assert(result[5], "space");
+    assert(result[6], "keyword", "?");
+    assert(result[7], "space");
+    assert(result[8], "keyword", "true");
+    assert(result[9], "space");
+    assert(result[10], "keyword", ":");
+    assert(result[11], "space");
+    assert(result[12], "keyword", "false");
+})
 
 /*
-
-test("sanitizeExp - composite", () => {
-    const result = sanitizeExp("${model.name} is ${model.age} old");
-    expect(result.properties[0]).toBe("model.name");
-    expect(result.properties[1]).toBe("model.age");
-    expect(result.expression).toBe("${context.model.name} is ${context.model.age} old");
-    expect(result.isLiteral).toBe(true);
-});
-
-test("sanitizeExp - expression", () => {
-    const result = sanitizeExp("${1 + 1 + property1}");
-    expect(result.properties[0]).toBe("property1");
-    expect(result.expression).toBe("${1 + 1 + context.property1}");
-    expect(result.isLiteral).toBe(true);
-});
-
-test("sanitizeExp - multiple functions", () => {
-    const result = sanitizeExp("${firstName.trim().toLowerCase()} > ${lastName.trim().toLowerCase()}");
-    expect(result.expression).toBe("${context.firstName.trim().toLowerCase()} > ${context.lastName.trim().toLowerCase()}");
-    expect(result.properties[0]).toBe("firstName");
-    expect(result.properties[1]).toBe("lastName");
-    expect(result.isLiteral).toBe(true);
-});
 
 test("sanitizeExp - conditional value", () => {
     const result = sanitizeExp("title == 'a' ? true : false");
