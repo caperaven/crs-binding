@@ -11,6 +11,46 @@ test("tokenize - single world", () => {
     assert(result[0], "property", "color");
 })
 
+test("tokenizer - single path", () => {
+    const result = tokenize("address.street");
+    expect(result.length).toBe(1);
+    assert(result[0], "property", "address.street");
+})
+
+test("tokenize - string with expression", () => {
+    const result = tokenize('"${address.street}"');
+    expect(result.length).toBe(5);
+
+    assert(result[0], "string", '"');
+    assert(result[1], "keyword", "${");
+    assert(result[2], "property", "address.street");
+    assert(result[3], "keyword", "}");
+    assert(result[4], "string", '"');
+
+})
+
+test("tokenizer - evaluate string expression", () => {
+    const result = tokenize("value == 'v-height'");
+    expect(result.length).toBe(5);
+
+    assert(result[0], "property", "value");
+    assert(result[1], "space");
+    assert(result[2], "operator", "==");
+    assert(result[3], "space");
+    assert(result[4], "string", "'v-height'");
+})
+
+test("tokenizer - evaluate string expression", () => {
+    const result = tokenize("value == 25");
+    expect(result.length).toBe(5);
+
+    assert(result[0], "property", "value");
+    assert(result[1], "space");
+    assert(result[2], "operator", "==");
+    assert(result[3], "space");
+    assert(result[4], "number", "25");
+})
+
 test("tokenize - single world string literal", () => {
     const result = tokenize("${color}");
     expect(result.length).toBe(3);
@@ -152,74 +192,97 @@ test("tokenize - simple conditional expression", () => {
     assert(result[12], "keyword", "false");
 })
 
+test("tokenize - simple conditional expression", () => {
+    const result = tokenize("firstName == 'John' && lastName == 'Doe'");
+    expect(result.length).toBe(13);
+
+    assert(result[0], "property", "firstName");
+    assert(result[1], "space");
+    assert(result[2], "operator", "==");
+    assert(result[3], "space");
+    assert(result[4], "string", "'John'");
+    assert(result[5], "space");
+    assert(result[6], "operator", "&&");
+    assert(result[7], "space");
+    assert(result[8], "property", "lastName");
+    assert(result[9], "space");
+    assert(result[10], "operator", "==");
+    assert(result[11], "space");
+    assert(result[12], "string", "'Doe'");
+})
+
+test ("tokenize - not keyword with != operator", () => {
+    const result = tokenize("arrayfield != null || arrayfield.length == 0");
+    expect(result.length).toBe(13);
+
+    assert(result[0], "property", "arrayfield");
+    assert(result[1], "space");
+    assert(result[2], "operator", "!=");
+    assert(result[3], "space");
+    assert(result[4], "keyword", "null");
+    assert(result[5], "space");
+    assert(result[6], "operator", "||");
+    assert(result[7], "space");
+    assert(result[8], "property", "arrayfield.length");
+    assert(result[9], "space");
+    assert(result[10], "operator", "==");
+    assert(result[11], "space");
+    assert(result[12], "number", "0");
+})
+
+test ("tokenize - complex worded expression", () => {
+    const result = tokenize('${firstName} ${lastName} is ${age} old and lives at "${address.street}"');
+    expect(result.length).toBe(27);
+
+    assert(result[0], "keyword", "${");
+    assert(result[1], "property", "firstName");
+    assert(result[2], "keyword", "}");
+    assert(result[3], "space");
+    assert(result[4], "keyword", "${");
+    assert(result[5], "property", "lastName");
+    assert(result[6], "keyword", "}");
+    assert(result[7], "space");
+    assert(result[8], "word", "is");
+    assert(result[9], "space");
+    assert(result[10], "keyword", "${");
+    assert(result[11], "property", "age");
+    assert(result[12], "keyword", "}");
+    assert(result[13], "space");
+    assert(result[14], "word", "old");
+    assert(result[15], "space");
+    assert(result[16], "word", "and");
+    assert(result[17], "space");
+    assert(result[18], "word", "lives");
+    assert(result[19], "space");
+    assert(result[20], "word", "at");
+    assert(result[21], "space");
+    assert(result[22], "string", '"');
+    assert(result[23], "keyword", "${");
+    assert(result[24], "property", 'address.street');
+    assert(result[25], "keyword", "}");
+    assert(result[26], "string", `"`);
+})
+
+test ("tokenize - globals with objects", () => {
+    const result = tokenize("$globals.date = {title: ${title}}");
+    expect(result.length).toBe(12);
+
+    assert(result[0], "property", "$globals.date");
+    assert(result[1], "space");
+    assert(result[2], "operator", "=");
+    assert(result[3], "space");
+    assert(result[4], "keyword", "{");
+    assert(result[5], "word", "title");
+    assert(result[6], "keyword", ":");
+    assert(result[7], "space");
+    assert(result[8], "keyword", "${");
+    assert(result[9], "property", "title");
+    assert(result[10], "keyword", "}");
+    assert(result[11], "keyword", "}");
+})
+
 /*
 
-test("sanitizeExp - conditional value", () => {
-    const result = sanitizeExp("title == 'a' ? true : false");
-    expect(result.expression).toBe("context.title == 'a' ? true : false");
-    expect(result.properties.length).toBe(1);
-    expect(result.properties[0]).toBe("title");
-});
-
-test ("sanitizeExp - path", () => {
-    const result = sanitizeExp("address.street");
-    expect(result.expression).toBe("context.address.street");
-    expect(result.properties[0]).toBe("address.street");
-});
-
-test ("sanitizeExp - special string", () => {
-    const result = sanitizeExp("value == 'v-height'");
-    expect(result.expression).toBe("context.value == 'v-height'");
-});
-
-test ("sanitizeExp - when", () => {
-    const result = sanitizeExp("firstName == 'John' && lastName == 'Doe'");
-    expect(result.expression).toBe("context.firstName == 'John' && context.lastName == 'Doe'");
-    expect(result.properties[0]).toBe("firstName");
-    expect(result.properties[1]).toBe("lastName");
-});
-
-test ("sanitizeExp - string token", () => {
-    const result = sanitizeExp("${firstName} ${lastName} is ${age} old and lives at \"${address.street}\"");
-    expect(result.expression).toBe("${context.firstName} ${context.lastName} is ${context.age} old and lives at \"${context.address.street}\"")
-    expect(result.properties[0]).toBe("firstName");
-    expect(result.properties[1]).toBe("lastName");
-    expect(result.properties[2]).toBe("age");
-    expect(result.properties[3]).toBe("address.street");
-});
-
-test("sanitizeExp - ignore named expression", () => {
-    const result = sanitizeExp("person.firstName", "person");
-    expect(result.expression).toBe("person.firstName");
-    expect(result.properties[0]).toBe("person.firstName");
-});
-
-test("sanitizeExp - ignore named expression - multiple", () => {
-    const result = sanitizeExp("person.firstName && person.lastName", "person");
-    expect(result.expression).toBe("person.firstName && person.lastName");
-    expect(result.properties[0]).toBe("firstName");
-    expect(result.properties[1]).toBe("lastName");
-});
-
-test("sanitizeExp - ignore null", () => {
-    const result = sanitizeExp("validation.editing == null", "context");
-    expect(result.expression).toBe("context.validation.editing == null");
-    expect(result.properties[0]).toBe("validation.editing");
-});
-
-test("sanitizeExp - array in expression", () => {
-    const result = sanitizeExp("arrayfield != null || arrayfield.length == 0", "person");
-    expect(result.expression).toBe("person.arrayfield != null || person.arrayfield.length == 0");
-    expect(result.properties[0]).toBe("arrayfield");
-    expect(result.properties[1]).toBe("arrayfield.length");
-});
-
-test("sanitizeExp - array in expression", () => {
-    const result = sanitizeExp("arrayfield.length == 0 || arrayfield.length == 5", "person");
-    expect(result.expression).toBe("person.arrayfield.length == 0 || person.arrayfield.length == 5");
-    expect(result.properties[0]).toBe("arrayfield.length");
-    expect(result.properties.length).toBe(1);
-});
 
 test("sanitizeExp - set object", () => {
     const result = sanitizeExp("$globals.date = {title: ${title}}");

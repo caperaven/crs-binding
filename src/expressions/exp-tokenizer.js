@@ -51,16 +51,39 @@ export function tokenize(exp) {
 
         // check for hardcoded string values
         if (char == "'" || char == '"') {
-            const lastIndex = i + 1 + exp.length - i;
+            const lastIndex = i + exp.length - i;
+            let hasLiteral = false;
+
+            // check for end of expression
+            if (exp[i + 1] == undefined) {
+                step("string", char);
+                break;
+            }
+
             let j = i + 1;
             for (j; j < lastIndex; j++) {
+                // Once you see the string contains a literal expression, stop the processing of the string
+                if (exp[j] == "$" && exp[j + 1] == "{") {
+                    hasLiteral = true;
+                    break;
+                }
+
+                // If you hit the end of string char stop the process and add the string value to the tokens
                 if (exp[j] == char) {
                     const value = exp.substring(i, j + 1);
                     step("string", value);
                     break;
                 }
             }
-            i = j;
+
+            if (hasLiteral == true) {
+                step("string", char);
+            }
+            // if we did copy a string value, move the marker up to the end of the string
+            else {
+                i = j;
+            }
+
             continue;
         }
 
@@ -100,13 +123,15 @@ function postProcessTokens(tokens) {
         return tokens;
     }
 
-    let state = null;
+    let state = [];
 
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
+        const currentState = state.length == 0 ? "none" : state[state.length - 1];
+
         if (token.type == "word") {
             // word is inside a ${...} expression so must be a property
-            if (state == "literal") {
+            if (currentState == "literal") {
                 // if the word starts with "." it's part of a bigger expression after a function call
                 if (token.value[0] == ".") {
                     continue;
@@ -132,12 +157,14 @@ function postProcessTokens(tokens) {
         }
 
         // manage current state for processing
-        if (token.type == "keyword" && "${") {
-            state = "literal";
+        if (token.value == "${") {
+            state.push("literal");
         }
-
-        if (state == "literal" && token.value == "}") {
-            state = null;
+        else if (token.value == "{") {
+            state.push("object");
+        }
+        else if (token.value == "}") {
+            state.pop();
         }
     }
 
