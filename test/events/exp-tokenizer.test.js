@@ -281,14 +281,28 @@ test ("tokenize - globals with objects", () => {
     assert(result[11], "keyword", "}");
 })
 
+test ("tokenize - set object with event", () => {
+    const result = tokenize("{ x: $event.x, y: $event.y }");
+    expect(result.length).toBe(14);
+
+    assert(result[0], "keyword", "{");
+    assert(result[1], "space");
+    assert(result[2], "word", "x");
+    assert(result[3], "keyword", ":");
+    assert(result[4], "space");
+    assert(result[5], "property", "$event.x");
+    assert(result[6], "keyword", ",")
+    assert(result[7], "space");
+    assert(result[8], "word", "y");
+    assert(result[9], "keyword", ":");
+    assert(result[10], "space");
+    assert(result[11], "property", "$event.y");
+    assert(result[12], "space");
+    assert(result[13], "keyword", "}");
+})
+
 /*
 
-
-test("sanitizeExp - set object", () => {
-    const result = sanitizeExp("$globals.date = {title: ${title}}");
-    expect(result.expression).toBe("crsbinding.data.globals.date = {title: ${context.title}}");
-    expect(result.properties[0]).toBe("title");
-});
 
 test("sanitizeExp - set object with event", () => {
     const result = sanitizeExp("{ x: $event.x, y: $event.y }");

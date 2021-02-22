@@ -177,4 +177,4 @@ function isOperator(token) {
 }
 
 const operatorStart = ["=", "!", "<", ">", "+", "-", "*", "/", "&", "|"];
-const keywords = ["{", "}", "(", ")", "?", ":", "true", "false", "null", "undefined"];
+const keywords = ["{", "}", "(", ")", "?", ":", ",", "true", "false", "null", "undefined"];
