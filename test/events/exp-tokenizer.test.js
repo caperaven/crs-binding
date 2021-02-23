@@ -98,15 +98,16 @@ test("tokenize - simple string literal expression", () => {
 
 test("tokenize - simple property with function", () => {
     const result = tokenize("property1.toUpper() == 'A'");
-    expect(result.length).toBe(7);
+    expect(result.length).toBe(8);
 
-    assert(result[0], "property", "property1.toUpper");
-    assert(result[1], "keyword", "(");
-    assert(result[2], "keyword", ")");
-    assert(result[3], "space");
-    assert(result[4], "operator", "==");
-    assert(result[5], "space");
-    assert(result[6], "string", "'A'");
+    assert(result[0], "property", "property1");
+    assert(result[1], "function", ".toUpper");
+    assert(result[2], "keyword", "(");
+    assert(result[3], "keyword", ")");
+    assert(result[4], "space");
+    assert(result[5], "operator", "==");
+    assert(result[6], "space");
+    assert(result[7], "string", "'A'");
 })
 
 test("tokenize - simple composite expression", () => {
@@ -160,27 +161,29 @@ test("tokenize - numeric expression with property in literal", () => {
 
 test("tokenize - simple composite expression", () => {
     const result = tokenize("${firstName.trim().toLowerCase()} > ${lastName.trim().toLowerCase()}");
-    expect(result.length).toBe(19);
+    expect(result.length).toBe(21);
 
     assert(result[0], "keyword", "${");
-    assert(result[1], "property", "firstName.trim");
-    assert(result[2], "keyword", "(");
-    assert(result[3], "keyword", ")");
-    assert(result[4], "word", ".toLowerCase");
-    assert(result[5], "keyword", "(");
-    assert(result[6], "keyword", ")");
-    assert(result[7], "keyword", "}");
-    assert(result[8], "space");
-    assert(result[9], "operator", ">");
-    assert(result[10], "space");
-    assert(result[11], "keyword", "${");
-    assert(result[12], "property", "lastName.trim");
-    assert(result[13], "keyword", "(");
-    assert(result[14], "keyword", ")");
-    assert(result[15], "word", ".toLowerCase");
-    assert(result[16], "keyword", "(");
-    assert(result[17], "keyword", ")");
-    assert(result[18], "keyword", "}");
+    assert(result[1], "property", "firstName");
+    assert(result[2], "function", ".trim");
+    assert(result[3], "keyword", "(");
+    assert(result[4], "keyword", ")");
+    assert(result[5], "function", ".toLowerCase");
+    assert(result[6], "keyword", "(");
+    assert(result[7], "keyword", ")");
+    assert(result[8], "keyword", "}");
+    assert(result[9], "space");
+    assert(result[10], "operator", ">");
+    assert(result[11], "space");
+    assert(result[12], "keyword", "${");
+    assert(result[13], "property", "lastName");
+    assert(result[14], "function", ".trim");
+    assert(result[15], "keyword", "(");
+    assert(result[16], "keyword", ")");
+    assert(result[17], "function", ".toLowerCase");
+    assert(result[18], "keyword", "(");
+    assert(result[19], "keyword", ")");
+    assert(result[20], "keyword", "}");
 })
 
 test("tokenize - simple conditional expression", () => {
@@ -352,21 +355,22 @@ test("sanitize - not expressions", () => {
 
 test("sanitize - parameters", () => {
     const result = tokenize("(model.property.isValid('abc', 10) == true)");
-    expect(result.length).toBe(13);
+    expect(result.length).toBe(14);
 
     assert(result[0], "keyword", "(");
-    assert(result[1], "property", "model.property.isValid");
-    assert(result[2], "keyword", "(");
-    assert(result[3], "string", "'abc'");
-    assert(result[4], "keyword", ",");
-    assert(result[5], "space");
-    assert(result[6], "number", "10");
-    assert(result[7], "keyword", ")");
-    assert(result[8], "space");
-    assert(result[9], "operator", "==");
-    assert(result[10], "space");
-    assert(result[11], "keyword", "true");
-    assert(result[12], "keyword", ")");
+    assert(result[1], "property", "model.property");
+    assert(result[2], "function", ".isValid");
+    assert(result[3], "keyword", "(");
+    assert(result[4], "string", "'abc'");
+    assert(result[5], "keyword", ",");
+    assert(result[6], "space");
+    assert(result[7], "number", "10");
+    assert(result[8], "keyword", ")");
+    assert(result[9], "space");
+    assert(result[10], "operator", "==");
+    assert(result[11], "space");
+    assert(result[12], "keyword", "true");
+    assert(result[13], "keyword", ")");
 })
 
 test("sanitize - literal with function", () => {
@@ -413,68 +417,46 @@ test("sanitize - literal with math expression", () => {
     assert(result[22], "literal", "`");
 })
 
-/*
+test("sanitize - simple function", () => {
+    const result = tokenize("property = myFunction()");
+    expect(result.length).toBe(7);
 
-test("sanitize - calculated string", () => {
-    const result = sanitizeExp("`${(rect.x / 2)}px ${(rect.y / 2)}px`");
-    expect(result.expression).toBe("`${(context.rect.x / 2)}px ${(context.rect.y / 2)}px`");
-    expect(result.properties[0]).toBe("rect.x");
-    expect(result.properties[1]).toBe("rect.y");
+    assert(result[0], "property", "property");
+    assert(result[1], "space");
+    assert(result[2], "operator", "=");
+    assert(result[3], "space");
+    assert(result[4], "function", "myFunction");
+    assert(result[5], "keyword", "(");
+    assert(result[6], "keyword", ")");
 })
 
-test("sanitize - html", () => {
-    const result = sanitizeExp("$html.model.property");
-    expect(result.isHTML).toBeTruthy();
-    expect(result.expression).toBe("context.model.property");
+test("sanitize - simple function", () => {
+    const result = tokenize("property = object.myFunction()");
+    expect(result.length).toBe(8);
+
+    assert(result[0], "property", "property");
+    assert(result[1], "space");
+    assert(result[2], "operator", "=");
+    assert(result[3], "space");
+    assert(result[4], "property", "object");
+    assert(result[5], "function", ".myFunction");
+    assert(result[6], "keyword", "(");
+    assert(result[7], "keyword", ")");
 })
 
-test("sanitize - expression", () => {
-    const result = sanitizeExp("${model.siteCode == 'A21' ? 'Hello A21' : model.code}");
-    expect(result.expression).toBe("${context.model.siteCode == 'A21' ? 'Hello A21' : context.model.code}");
-})
+test("sanitize - chained function calls", () => {
+    const result = tokenize("property = string.trim().toLowerCase()");
+    expect(result.length).toBe(11);
 
-test("sanitize - expression literal", () => {
-    const result = sanitizeExp("`${model.siteCode == 'A21' ? 'Hello A21' : model.code}`");
-    expect(result.expression).toBe("`${context.model.siteCode == 'A21' ? 'Hello A21' : context.model.code}`");
+    assert(result[0], "property", "property");
+    assert(result[1], "space");
+    assert(result[2], "operator", "=");
+    assert(result[3], "space");
+    assert(result[4], "property", "string");
+    assert(result[5], "function", ".trim");
+    assert(result[6], "keyword", "(");
+    assert(result[7], "keyword", ")");
+    assert(result[8], "function", ".toLowerCase");
+    assert(result[9], "keyword", "(");
+    assert(result[10], "keyword", ")");
 })
-
-test("sanitize - Not expressions", () => {
-    const result = sanitizeExp("!isActive");
-    expect(result.expression).toBe("!context.isActive");
-})
-
-test("sanitize - Not expressions on path", () => {
-    const result = sanitizeExp("!model.isActive");
-    expect(result.expression).toBe("!context.model.isActive");
-})
-
-test("sanitize - Not expressions in literals", () => {
-    const result = sanitizeExp("`!model.isActive`");
-    expect(result.expression).toBe("`!context.model.isActive`");
-})
-
-test("sanitize - Not expressions in expressions", () => {
-    const result = sanitizeExp("!isActive && !isOn");
-    expect(result.expression).toBe("!context.isActive && !context.isOn");
-})
-
-test("sanitize - Not expression with prefix", () => {
-    const result = sanitizeExp("!$globals.isActive");
-    expect(result.expression).toBe("!crsbinding.data.globals.isActive");
-})
-
-test("sanitize - $context equals expression", () => {
-    const result = sanitizeExp("$context.value1 == $context.value2");
-    expect(result.expression).toBe("context.value1 == context.value2");
-})
-
-test("sanitize - equals expression using '=='", () => {
-    const result = sanitizeExp("value1 == value2");
-    expect(result.expression).toBe("context.value1 == context.value2");
-})
-
-test("sanitize - equals expression using '==='", () => {
-    const result = sanitizeExp("value1 === value2");
-    expect(result.expression).toBe("context.value1 === context.value2");
-})
- */

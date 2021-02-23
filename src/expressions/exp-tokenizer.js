@@ -125,7 +125,8 @@ function postProcessTokens(tokens) {
 
     let state = [];
 
-    for (let i = 0; i < tokens.length; i++) {
+    let i = 0;
+    while(tokens[i] != undefined) {
         const token = tokens[i];
         const currentState = state.length == 0 ? "none" : state[state.length - 1];
 
@@ -133,7 +134,9 @@ function postProcessTokens(tokens) {
             // word is inside a ${...} expression so must be a property
             if (currentState == "literal") {
                 // if the word starts with "." it's part of a bigger expression after a function call
-                if (token.value[0] == ".") {
+                if (token.value[0] == "." && tokens[i + 1].value == "(") {
+                    token.type = "function";
+                    i++;
                     continue;
                 }
 
@@ -156,6 +159,39 @@ function postProcessTokens(tokens) {
             }
         }
 
+        // Check if this is part of a function expression and update the property accordingly.
+        if (token.type == "keyword" && token.value == "(" && (tokens[i - 1] && tokens[i - 1].type == "property" && tokens[i - 1].value[0] != "$")) {
+            const path = tokens[i - 1].value;
+
+            if (path.indexOf(".") == -1) {
+                tokens[i - 1].type = "function";
+            }
+            else {
+                let dotIndex = path.length -1;
+
+                // get the location of the dot so you can separate the function from the property;
+                for (let i = path.length -1 ; i >= 0; i--) {
+                    if (path[i] == ".") {
+                        dotIndex = i;
+                        break;
+                    }
+                }
+
+                if (dotIndex > 0) {
+                    // split the property name from the function name
+                    const property = path.substring(0, dotIndex);
+                    const fnName = path.substring(dotIndex, path.length);
+
+                    tokens[i - 1].value = property;
+                    tokens.splice(i, 0, {type: "function", value: fnName});
+                    i++;
+                }
+                else {
+                    tokens[i - 1].type = "function";
+                }
+            }
+        }
+
         // manage current state for processing
         if (token.value == "${") {
             state.push("literal");
@@ -166,6 +202,8 @@ function postProcessTokens(tokens) {
         else if (token.value == "}") {
             state.pop();
         }
+
+        i++;
     }
 
     return tokens;

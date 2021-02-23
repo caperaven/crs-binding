@@ -1,9 +1,23 @@
-import {sanitizeExp} from "../../src/events/expressions.js"
+import {sanitizeExp} from "../../src/expressions/exp-sanitizer.js"
 
 test("sanitizeExp - exp = context", () => {
    expect(sanitizeExp("color", "color").expression).toBe("color");
    expect(sanitizeExp("${color}", "color").expression).toBe("${color}");
 })
+
+test("sanitizeExp - single assignment expression", () => {
+   const result = sanitizeExp("value1 == value2");
+   expect(result.expression).toBe("context.value1 == context.value2");
+   expect(result.properties[0]).toBe("value1");
+   expect(result.properties[1]).toBe("value2");
+});
+
+test("sanitizeExp - single assignment expression", () => {
+   const result = sanitizeExp("value1 === value2");
+   expect(result.expression).toBe("context.value1 === context.value2");
+   expect(result.properties[0]).toBe("value1");
+   expect(result.properties[1]).toBe("value2");
+});
 
 test("sanitizeExp - single", () => {
    const result = sanitizeExp("name");
@@ -85,7 +99,7 @@ test ("sanitizeExp - string token", () => {
 test("sanitizeExp - ignore named expression", () => {
    const result = sanitizeExp("person.firstName", "person");
    expect(result.expression).toBe("person.firstName");
-   expect(result.properties[0]).toBe("person.firstName");
+   expect(result.properties[0]).toBe("firstName");
 });
 
 test("sanitizeExp - ignore named expression - multiple", () => {
@@ -124,8 +138,7 @@ test("sanitizeExp - set object", () => {
 test("sanitizeExp - set object with event", () => {
    const result = sanitizeExp("{ x: $event.x, y: $event.y }");
    expect(result.expression).toBe("{ x: event.x, y: event.y }");
-   expect(result.properties[0]).toBe("x");
-   expect(result.properties[1]).toBe("y");
+   expect(result.properties.length).toBe(0);
 });
 
 test("sanitizeExp - toggle boolean", () => {
