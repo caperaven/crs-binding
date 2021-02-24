@@ -73,7 +73,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
 }
 
 const fnNames = [".trim", ".toLowerCase", "toUpperCase"];
-const ignoreProperties = ["$data", "$event", "$globals"];
+const ignoreProperties = ["$data", "$event"];
 
 function addProperty(set, property, ctxName) {
     if (property.length == 0) return;

@@ -1,4 +1,18 @@
 import {sanitizeExp} from "../../src/expressions/exp-sanitizer.js"
+import {sanitizeExpOld} from "./../../src/events/expressions.js";
+
+test("san", () => {
+   const result = sanitizeExpOld("$globals.menu.isVisible = !$globals.menu.isVisible");
+   const properties = result.properties;
+   debugger;
+})
+
+test ("sanitizeExp - globals variable", () => {
+   const result = sanitizeExp("$globals.menu.isVisible = !$globals.menu.isVisible");
+   expect(result.expression).toBe("crsbinding.data.globals.menu.isVisible = !crsbinding.data.globals.menu.isVisible");
+   expect(result.properties.length).toBe(1);
+   expect(result.properties[0]).toBe("$globals.menu.isVisible");
+})
 
 test("sanitizeExp - exp = context", () => {
    expect(sanitizeExp("color", "color").expression).toBe("color");
@@ -132,7 +146,8 @@ test("sanitizeExp - array in expression", () => {
 test("sanitizeExp - set object", () => {
    const result = sanitizeExp("$globals.date = {title: ${title}}");
    expect(result.expression).toBe("crsbinding.data.globals.date = {title: ${context.title}}");
-   expect(result.properties[0]).toBe("title");
+   expect(result.properties[0]).toBe("$globals.date");
+   expect(result.properties[1]).toBe("title");
 });
 
 test("sanitizeExp - set object with event", () => {

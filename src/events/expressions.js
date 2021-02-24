@@ -3,11 +3,10 @@
  * @param exp
  * @returns {{expression: *, properties: *}}
  */
-import index from "../../index.js";
 
 const sanitizeKeywords = ["false", "true", "null"];
 
-export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
+export function sanitizeExpOld(exp, ctxName = "context", cleanLiterals = false) {
     let isHTML = false;
 
     if (typeof exp == "string" && exp.indexOf("$html") != -1) {
