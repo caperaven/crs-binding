@@ -1,0 +1,13 @@
+<style>
+    select {
+        display: block;
+    }
+</style>
+
+<component-1 datasource.one-way="model.datasource"></component-1>
+
+<select>
+    <template for="item of model.items">
+        <option value="${item.id}">${item.title}</option>
+    </template>
+</select>

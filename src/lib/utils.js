@@ -62,7 +62,11 @@ export function disposeProperties(obj) {
         if (typeof pObj == "object" && Array.isArray(pObj) != true) {
             disposeProperties(pObj);
         }
-        delete obj[property];
+        try{
+            delete obj[property];
+        }
+        catch(e) {
+        }
     }
 }
 

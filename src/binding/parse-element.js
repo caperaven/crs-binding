@@ -4,7 +4,7 @@ const ignore = ["style", "script"];
 
 export async function parseElements(collection, context, options) {
     for (let element of collection || []) {
-        await parseElement(element, context, options);
+        await crsbinding.parsers.parseElement(element, context, options);
     }
 }
 
@@ -19,7 +19,6 @@ export async function parseElement(element, context, options) {
         folder = options.folder || null;
     }
 
-
     if (element.__inflated == true) return;
 
     const nodeName = element.nodeName.toLowerCase();
@@ -30,7 +29,7 @@ export async function parseElement(element, context, options) {
     }
 
     if (nodeName == "template" && element.getAttribute("src") != null) {
-        return parseHTMLFragment(element, context, options);
+        return await parseHTMLFragment(element, context, options);
     }
 
     const attributes = Array.from(element.attributes || []);
