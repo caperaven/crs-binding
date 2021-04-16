@@ -15,6 +15,12 @@ Changes are made as we require new features or discover usability issues and bug
 At this point of time the binding engine is stable.   
 We do not anticipate any breaking changes though more features will be added.  
 
+## Installing
+
+```
+npm install crs-binding@latest
+```
+
 ## Documentation
 Documentation comes in two main forms.
 

@@ -143,6 +143,11 @@
       "title": "Property Binding",
       "hash": "#property-binding",
       "view": "property-binding"
+    },
+    {
+      "title": "Idle Task Manager",
+      "hash": "#idleTaskManager",
+      "view": "idleTaskManager"
     }
   ]
 }
