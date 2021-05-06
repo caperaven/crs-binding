@@ -1,11 +1,4 @@
 import {sanitizeExp} from "../../src/expressions/exp-sanitizer.js"
-import {sanitizeExpOld} from "./../../src/events/expressions.js";
-
-test("san", () => {
-   const result = sanitizeExpOld("$globals.menu.isVisible = !$globals.menu.isVisible");
-   const properties = result.properties;
-   debugger;
-})
 
 test ("sanitizeExp - globals variable", () => {
    const result = sanitizeExp("$globals.menu.isVisible = !$globals.menu.isVisible");

@@ -7,10 +7,10 @@ export default class IdleTaskManager extends ViewBase {
     }
 }
 
-function throwError() {
+async function throwError() {
     throw new Error("oops");
 }
 
-function setInputValue() {
+async function setInputValue() {
     document.querySelector("#value").value = "Hello World";
 }
