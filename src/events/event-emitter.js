@@ -49,7 +49,7 @@ export class EventEmitter {
         const promises = [];
 
         for (let item of items) {
-            promises.push(item.onMessage?.call(item, args));
+            promises.push(item.onMessage.call(item, args));
         }
 
         await Promise.all(promises);
