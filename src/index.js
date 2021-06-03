@@ -39,13 +39,14 @@ function capitalizePropertyPath(str) {
 }
 
 function unloadTemplates(componentNames) {
-    for (let name of componentNames) {
+    const collection = Array.isArray(componentNames) == true ? componentNames : [componentNames];
+    for (let name of collection) {
         delete crsbinding.templates.data[name];
     }
 }
 
 function unloadAllTemplates() {
-    const keys = Object.keys(crsbinding.templates);
+    const keys = Object.keys(crsbinding.templates.data);
     for (let key of keys) {
         delete crsbinding.templates.data[key];
     }
