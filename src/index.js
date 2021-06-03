@@ -21,6 +21,7 @@ import {renderCollection} from "./lib/renderCollection.js";
 import {getValueOnPath} from "./lib/path-utils.js";
 import {SvgElementsManager} from "./managers/svg-elements-manager.js";
 import {SvgElement} from "./view/svg-element.js";
+import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate} from "./store/templates.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -36,32 +37,6 @@ function capitalizePropertyPath(str) {
         result = "innerHTML";
     }
     return result;
-}
-
-function unloadTemplates(componentNames) {
-    const collection = Array.isArray(componentNames) == true ? componentNames : [componentNames];
-    for (let name of collection) {
-        delete crsbinding.templates.data[name];
-    }
-}
-
-function unloadAllTemplates() {
-    const keys = Object.keys(crsbinding.templates.data);
-    for (let key of keys) {
-        delete crsbinding.templates.data[key];
-    }
-}
-
-async function getTemplate(componentName, url) {
-    let template = crsbinding.templates.data[componentName];
-
-    if (template == null) {
-        template = document.createElement("template");
-        template.innerHTML = await fetch(url).then(result => result.text());
-        crsbinding.templates.data[componentName] = template;
-    }
-
-    return template.cloneNode(true).innerHTML;
 }
 
 const crsbinding = {
@@ -126,6 +101,7 @@ const crsbinding = {
 
     templates: {
         data: {},
+        add: addTemplate,
         get: getTemplate,
         unload: unloadTemplates,
         unloadAll: unloadAllTemplates
