@@ -1,5 +1,4 @@
 import {compileExp, releaseExp} from "./events/compiler.js";
-//import {sanitizeExp} from "./events/expressions.js";
 import {sanitizeExp} from "./expressions/exp-sanitizer.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
@@ -37,6 +36,31 @@ function capitalizePropertyPath(str) {
         result = "innerHTML";
     }
     return result;
+}
+
+function unloadTemplates(componentNames) {
+    for (let name of componentNames) {
+        delete crsbinding.templates.data[name];
+    }
+}
+
+function unloadAllTemplates() {
+    const keys = Object.keys(crsbinding.templates);
+    for (let key of keys) {
+        delete crsbinding.templates.data[key];
+    }
+}
+
+async function getTemplate(componentName, url) {
+    let template = crsbinding.templates.data[componentName];
+
+    if (template == null) {
+        template = document.createElement("template");
+        template.innerHTML = await fetch(url).then(result => result.text());
+        crsbinding.templates.data[componentName] = template;
+    }
+
+    return template.cloneNode(true).innerHTML;
 }
 
 const crsbinding = {
@@ -97,6 +121,13 @@ const crsbinding = {
         relativePathFrom: relativePathFrom,
         getPathOfFile: getPathOfFile,
         getValueOnPath: getValueOnPath
+    },
+
+    templates: {
+        data: {},
+        get: getTemplate,
+        unload: unloadTemplates,
+        unloadAll: unloadAllTemplates
     }
 };
 
