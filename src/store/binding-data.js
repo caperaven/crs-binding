@@ -26,7 +26,7 @@ export class BindingData {
      * @private
      */
     getConverter(id, path) {
-        const obj = this._converters.get(id);
+        const obj = this._converters[id];
         if (obj == null) return null;
 
         const key = getValueOnPath(obj, path);
@@ -991,7 +991,7 @@ export class BindingData {
      * @private
      */
     _removeConverters(id) {
-        this._converters.delete(id);
+        delete this._converters[id];
     }
 
     /**
@@ -1107,11 +1107,11 @@ export class BindingData {
     setPropertyConverter(id, path, converterKey, triggers) {
         if (converterKey != null) {
             id = this._getContextId(id);
-            let obj = this._converters.get(id);
+            let obj = this._converters[id];
 
             if (obj == null) {
                 obj = {};
-                this._converters.set(id, obj);
+                this._converters[id] = obj;
             }
 
             this._ensurePath(obj, path, (triggerObject, triggerProperty) => {
