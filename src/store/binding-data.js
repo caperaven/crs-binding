@@ -4,7 +4,7 @@ import {createArrayProxy} from "./binding-data-arrays.js";
 export class BindingData {
     constructor() {
         this._data = {};
-        this._converters = new Map();
+        this._converters = {};
         this._callbacks = new Map();
         this._updates = new Map();
         this._triggers = new Map();
