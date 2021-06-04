@@ -8,7 +8,7 @@ export class BindingData {
         this._callbacks = {};
         this._updates = {};
         this._triggers = new Map();
-        this._context = new Map();
+        this._context = {};
         this._sync = new Map();
         this._frozenObjects = [];
         this._idStore = {
@@ -54,7 +54,7 @@ export class BindingData {
      * @returns {object}
      */
     getContext(id) {
-        return this._context.get(id);
+        return this._context[id];
     }
 
     /**
@@ -107,7 +107,7 @@ export class BindingData {
      * @returns {*}
      */
     removeObject(id) {
-        this._context.delete(id);
+        delete this._context[id];
 
         const result = this._removeData(id);
         this._removeCallbacks(id);
@@ -546,7 +546,7 @@ export class BindingData {
      * @param obj {object} the context instance
      */
     addContext(id, obj) {
-        this._context.set(id, obj);
+        this._context[id] = obj;
     }
 
     /**
@@ -718,7 +718,7 @@ export class BindingData {
     async _performUpdates(id, property, value, oldValue) {
         this._performUpdatesChanges(id, property, value);
 
-        const ctx = this._context.get(id);
+        const ctx = this._context[id];
         if (ctx == null) return;
 
         const fnName = `${property}Changed`;
