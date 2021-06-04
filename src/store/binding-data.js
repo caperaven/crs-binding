@@ -3,7 +3,7 @@ import {createArrayProxy} from "./binding-data-arrays.js";
 
 export class BindingData {
     constructor() {
-        this._data = new Map();
+        this._data = {};
         this._converters = new Map();
         this._callbacks = new Map();
         this._updates = new Map();
@@ -76,7 +76,7 @@ export class BindingData {
      * @param name {string} the name to set on that context object
      */
     setName(id, name) {
-        this._data.get(id).name = name;
+        this._data[id].name = name;
     }
 
     /**
@@ -90,11 +90,11 @@ export class BindingData {
         const id = this._getNextId();
         type.contextId = id;
 
-        this._data.set(id, {
+        this._data[id] = {
             name: name,
             type: "data",
             data: type
-        });
+        };
 
         this._callbacks.set(id, {});
 
@@ -137,7 +137,7 @@ export class BindingData {
             property = property.replace("$globals.", "");
         }
 
-        const obj = this._data.get(Number(id));
+        const obj = this._data[Number(id)];
 
         let value;
 
@@ -261,7 +261,7 @@ export class BindingData {
 
         id = this._getContextId(id);
 
-        let obj = this._data.get(id);
+        let obj = this._data[id];
         if (obj == null || obj.__frozen == true) return;
 
         if (convert == true) {
@@ -279,7 +279,7 @@ export class BindingData {
         }
 
         if (obj.type == "data") {
-            obj = this._data.get(id).data;
+            obj = this._data[id].data;
             const changed = property.indexOf(".") === -1 ? this._setObjectProperty(obj, property, value) : this._setObjectPropertyPath(obj, property, value);
 
             if (changed == true) {
@@ -297,7 +297,7 @@ export class BindingData {
      * used internally only
      */
     _setReferenceValue(id, property, value, refId, refPath, refaId, ctxName) {
-        const obj = this._data.get(refId);
+        const obj = this._data[refId];
 
         if (obj.type == "data") {
             let v = getValueOnPath(obj.data, refPath);
@@ -350,7 +350,7 @@ export class BindingData {
             ref.aId = index;
         }
 
-        this._data.set(id, ref);
+        this._data[id] = ref;
         this._callbacks.set(id, {});
         return id;
     }
@@ -365,7 +365,7 @@ export class BindingData {
      * @private
      */
     _getReferenceValue(id, property, path, aId) {
-        const obj = this._data.get(id);
+        const obj = this._data[id];
 
         if (obj.type == "data") {
             if (aId === undefined) {
@@ -895,8 +895,9 @@ export class BindingData {
      */
     _removeData(id) {
         const result = this._removeReferences(id);
-        this._data.delete(id);
-        if (this._data.size == 0) {
+        delete this._data[id];
+        const length = Object.keys(this._data).length;
+        if (length == 0) {
             this._idStore.nextId = 1;
             this._idStore.nextArrayId = 0;
         }
@@ -912,11 +913,16 @@ export class BindingData {
      */
     _removeReferences(parentId) {
         const result = [];
-        const references = Array.from(this._data).filter(item => item[1].refId == parentId);
-        for (let ref of references) {
-            result.push(ref[1].id);
-            this.removeObject(ref[1].id);
+
+        const keys = Object.keys(this._data);
+        for (let key of keys) {
+            const ref = this._data[key];
+            if (ref.refId == parentId) {
+                result.push(ref.id);
+                this.removeObject(ref.id);
+            }
         }
+
         return result;
     }
 
