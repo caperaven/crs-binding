@@ -5,7 +5,7 @@ export class BindingData {
     constructor() {
         this._data = {};
         this._converters = {};
-        this._callbacks = new Map();
+        this._callbacks = {};
         this._updates = new Map();
         this._triggers = new Map();
         this._context = new Map();
@@ -96,7 +96,7 @@ export class BindingData {
             data: type
         };
 
-        this._callbacks.set(id, {});
+        this._callbacks[id] = {};
 
         return id;
     }
@@ -170,7 +170,7 @@ export class BindingData {
     makeShared(id, property, sharedItems) {
         id = this._getContextId(id);
 
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
         for (let prop of sharedItems) {
             const path = `${property}.${prop}`;
             this._ensurePath(obj, path, (triggerObject, triggerProperty) => {
@@ -351,7 +351,7 @@ export class BindingData {
         }
 
         this._data[id] = ref;
-        this._callbacks.set(id, {});
+        this._callbacks[id] = {};
         return id;
     }
 
@@ -557,7 +557,7 @@ export class BindingData {
      * @returns {*}
      */
     addCallback(id, property, callback) {
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
         return property.indexOf(".") === -1 ? this._addCallbackToObject(obj, property, callback) : this._addCallbackToObjectOnPath(obj, property, callback);
     }
 
@@ -616,7 +616,7 @@ export class BindingData {
      * @param callback {function} the callback to call
      */
     removeCallback(id, path, callback) {
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
         if (obj == null) return;
 
         const property = getValueOnPath(obj, path);
@@ -643,7 +643,7 @@ export class BindingData {
     async updateUI(id, property) {
         id = this._getContextId(id);
 
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
 
         if (property == null) {
             const properties = this._getOwnProperties(obj);
@@ -701,7 +701,7 @@ export class BindingData {
      * @param path {string} property path to call callbacks on
      */
     async _callFunctionsOnPath(id, path) {
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
         const result =  getValueOnPath(obj, path);
         if (result != null) {
             await this._callFunctionsOnObject(result, id, path);
@@ -770,10 +770,10 @@ export class BindingData {
      * @param itemId {number} the uid of the array item
      */
     linkToArrayItem(id, path, itemId) {
-        let sourceObj = getValueOnPath(this._callbacks.get(id), path);
+        let sourceObj = getValueOnPath(this._callbacks[id], path);
         if (sourceObj == null) return;
 
-        let targetObj = this._callbacks.get(itemId);
+        let targetObj = this._callbacks[itemId];
 
         const properties = this._getOwnProperties(sourceObj);
         for (let property of properties) {
@@ -803,7 +803,7 @@ export class BindingData {
      * @private
      */
     _unlinkArrayItem(object) {
-        const clbObj = this._callbacks.get(object.__uid);
+        const clbObj = this._callbacks[object.__uid];
         this._removeTriggersOnCallbacks(clbObj, object.__uid);
     }
 
@@ -812,7 +812,7 @@ export class BindingData {
      * See the for provider for details
      */
     setArrayEvents(id, path, itemsAddedCallback, itemsDeletedCallback) {
-        const cbObj = this._callbacks.get(id);
+        const cbObj = this._callbacks[id];
 
         this._ensurePath(cbObj, path, (obj, property) => {
             obj[property] = obj[property] || {};
@@ -834,7 +834,7 @@ export class BindingData {
      * @param collection
      */
     arrayItemsAdded(id, prop, items, collection) {
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
         const clbObj = getValueOnPath(obj, prop);
         if (clbObj == null) return;
 
@@ -851,7 +851,7 @@ export class BindingData {
      * @param collection
      */
     arrayItemsRemoved(id, prop, items, collection) {
-        const obj = this._callbacks.get(id);
+        const obj = this._callbacks[id];
         const clbObj = getValueOnPath(obj, prop);
         if (clbObj == null) return;
 
@@ -932,7 +932,7 @@ export class BindingData {
      * @private
      */
     _removeCallbacks(id) {
-        this._callbacks.delete(id);
+        delete this._callbacks[id];
     }
 
     /**
@@ -1066,8 +1066,8 @@ export class BindingData {
     }
 
     _syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
-        let sourceObj = this._callbacks.get(sourceId);
-        let targetObj = this._callbacks.get(targetId);
+        let sourceObj = this._callbacks[sourceId];
+        let targetObj = this._callbacks[targetId];
 
         const trigger = getValueOnPath(sourceObj, `${sourceProp}.__trigger`);
         if (trigger != null) {
@@ -1080,8 +1080,8 @@ export class BindingData {
     }
 
     _syncTriggers(sourceId, sourceProp, targetId, targetProp) {
-        let sourceObj = this._callbacks.get(sourceId);
-        let targetObj = this._callbacks.get(targetId);
+        let sourceObj = this._callbacks[sourceId];
+        let targetObj = this._callbacks[targetId];
 
         if (sourceProp.indexOf(".") === -1) {
             this._copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetProp);
