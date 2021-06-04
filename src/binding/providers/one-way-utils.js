@@ -23,7 +23,8 @@ export function setContext(element, property, context) {
     if (element != null && property != null) {
         const fn = () => {
             element.removeEventListener("ready", fn);
-            setElementCleanupProperty(element, property, crsbinding.data.getValue(context));
+            const value = crsbinding.data.getValue(context);
+            setElementCleanupProperty(element, property, value);
         };
 
         if (element.isReady == true) {

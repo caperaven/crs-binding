@@ -148,6 +148,11 @@
       "title": "Idle Task Manager",
       "hash": "#idleTaskManager",
       "view": "idleTaskManager"
+    },
+    {
+      "title": "Component Templates",
+      "hash": "#component-templates",
+      "view": "component-templates"
     }
   ]
 }

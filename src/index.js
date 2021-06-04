@@ -21,7 +21,7 @@ import {renderCollection} from "./lib/renderCollection.js";
 import {getValueOnPath} from "./lib/path-utils.js";
 import {SvgElementsManager} from "./managers/svg-elements-manager.js";
 import {SvgElement} from "./view/svg-element.js";
-import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate} from "./store/templates.js";
+import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate} from "./store/templates.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -101,6 +101,7 @@ const crsbinding = {
 
     templates: {
         data: {},
+        load: loadTemplate,
         add: addTemplate,
         get: getTemplate,
         unload: unloadTemplates,
