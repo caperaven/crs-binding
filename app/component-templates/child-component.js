@@ -5,12 +5,9 @@ class ChildComponent extends BindableElement{
         return import.meta.url.replace(".js", ".html");
     }
 
-    get parent() {
-        return this.getProperty("parent");
-    }
-
-    set parent(newValue) {
-        this.setProperty("parent", newValue);
+    async connectedCallback() {
+        await super.connectedCallback();
+        this.setProperty("item", this.item);
     }
 
     // get parent() {
