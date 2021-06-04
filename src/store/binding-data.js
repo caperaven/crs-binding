@@ -9,7 +9,7 @@ export class BindingData {
         this._updates = {};
         this._triggers = new Map();
         this._context = {};
-        this._sync = new Map();
+        this._sync = {};
         this._frozenObjects = [];
         this._idStore = {
             nextId: 0,
@@ -448,7 +448,7 @@ export class BindingData {
             collection: []
         };
 
-        this._sync.set(syncId, sync);
+        this._sync[syncId] = sync;
 
         return this.addArraySync(syncId, id, property, array);
     }
@@ -460,14 +460,14 @@ export class BindingData {
      * @param property {string} property
      */
     removeArraySync(syncId, id, property) {
-        const syncObj = this._sync.get(syncId);
+        const syncObj = this._sync[syncId];
         id = this._getContextId(id);
 
         if (syncObj != null) {
             const items = syncObj.collection.filter(item => item.id == id && item.path == property);
             items.forEach(item => syncObj.collection.splice(syncObj.collection.indexOf(item), 1));
             if (syncObj.collection.length == 0) {
-                this._sync.delete(syncId);
+                delete this._sync[syncId];
             }
 
             const array = this.getValue(id, property);
@@ -491,7 +491,7 @@ export class BindingData {
             id = this._getContextId(id);
 
             this._ensurePath(id, property, () => {
-                const sync = this._sync.get(syncId);
+                const sync = this._sync[syncId];
 
                 if (sync.collection.filter(item => item.id == id && item.path == property).length > 0) {
                     return resolve(syncId);
@@ -522,7 +522,7 @@ export class BindingData {
     _setSyncValues(syncId, property, value, source) {
         this._frozenObjects.push(source);
 
-        const sync = this._sync.get(syncId);
+        const sync = this._sync[syncId];
         if (sync.fields.indexOf(property) !== -1) {
             const idValue = source[sync.primaryKey];
 
@@ -976,13 +976,15 @@ export class BindingData {
      * @private
      */
     _removeSync(id) {
-        this._sync.forEach((value, key) => {
+        const keys = Object.keys(this._sync);
+        for (let key of keys) {
+            const value = this._sync[key];
             const items = value.collection.filter(item => item.id == id);
             items.forEach(item => value.collection.splice(value.collection.indexOf(item), 1));
             if (value.collection.length == 0) {
-                this._sync.delete(key);
+                delete this._sync[key];
             }
-        });
+        }
     }
 
     /**
