@@ -6,7 +6,7 @@ export class BindingData {
         this._data = {};
         this._converters = {};
         this._callbacks = {};
-        this._updates = new Map();
+        this._updates = {};
         this._triggers = new Map();
         this._context = new Map();
         this._sync = new Map();
@@ -739,7 +739,7 @@ export class BindingData {
      * @private
      */
     _performUpdatesChanges(id, property, value) {
-        const obj = this._updates.get(id);
+        const obj = this._updates[id];
         if (obj == null || obj[property] == null) return;
         this.setProperty(obj[property].originId, obj[property].originProperty, value);
     }
@@ -786,7 +786,7 @@ export class BindingData {
      * This is used internally during the linking process
      */
     _addUpdateOrigin(sourceId, sourceProp, targetId, targetProp) {
-        const update = this._updates.get(targetId) || {};
+        const update = this._updates[targetId] || {};
         const source = update[targetProp] || {};
 
         if (source.originId == sourceId && source.originProperty == sourceProp) return;
@@ -794,7 +794,7 @@ export class BindingData {
         source.originId = sourceId;
         source.originProperty = sourceProp;
         update[targetProp] = source;
-        this._updates.set(targetId, update);
+        this._updates[targetId] = update;
     }
 
     /**
@@ -943,7 +943,7 @@ export class BindingData {
     _removeUpdates(id) {
         const remove = Array.from(this._updates).filter(item => item[0] == id || (item[1].value && item[1].value.originId == id));
         for (let rem of remove) {
-            this._updates.delete(rem[0]);
+            delete this._updates[rem[0]];
         }
     }
 
