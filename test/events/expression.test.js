@@ -309,9 +309,7 @@ test("sanitize - Bracket array check", () => {
    expect(result.expression).toBe("(context.schema.variable.items || []).length == 0)");
 })
 
-
-// JHR:  todo, enable this feature
-// test("sanitizeExp - attribute condition", () => {
-//    const result = sanitizeExp("${item.value == true ? '#checked' : '#unchecked'}", "item");
-//    expect(result.expression).toBe("${context.item.value == true ? '#checked' : '#unchecked'}");
-// })
+test("sanitizeExp - attribute condition", () => {
+   const result = sanitizeExp("${$context.item.value == true ? '#checked' : '#unchecked'}", "item");
+   expect(result.expression).toBe("${context.item.value == true ? '#checked' : '#unchecked'}");
+})
