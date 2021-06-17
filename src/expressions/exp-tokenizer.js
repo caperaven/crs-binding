@@ -1,3 +1,16 @@
+const TokenTypes = Object.freeze({
+    WORD    : "word",
+    LITERAL : "literal",
+    FUNCTION: "function",
+    PROPERTY: "property",
+    OBJECT  : "object",
+    KEYWORD : "keyword",
+    OPERATOR: "operator",
+    NUMBER  : "number",
+    SPACE   : "space",
+    STRING  : "string"
+})
+
 export function tokenize(exp) {
     const result = [];
     let word = [];
@@ -13,14 +26,14 @@ export function tokenize(exp) {
     }
 
     function pushWord(value) {
-        let wordType = "word"
+        let wordType = TokenTypes.WORD
 
         if (keywords.indexOf(value) != -1) {
-            wordType = "keyword";
+            wordType = TokenTypes.KEYWORD;
         }
 
         if (isNaN(Number(value)) == false) {
-            wordType = "number";
+            wordType = TokenTypes.NUMBER;
         }
 
         result.push({type: wordType, value: value});
@@ -31,19 +44,19 @@ export function tokenize(exp) {
         const char = exp[i];
 
         if (char == " ") {
-            step("space", " ");
+            step(TokenTypes.SPACE, " ");
             continue;
         }
 
         if (char == "`") {
-            step("literal", "`");
+            step(TokenTypes.LITERAL, "`");
             continue;
         }
 
         // check for string literal variable markers
         if (char == "$") {
             if (exp[i + 1] == "{") {
-                step("keyword", "${");
+                step(TokenTypes.KEYWORD, "${");
                 i++;
                 continue;
             }
@@ -56,7 +69,7 @@ export function tokenize(exp) {
 
             // check for end of expression
             if (exp[i + 1] == undefined) {
-                step("string", char);
+                step(TokenTypes.STRING, char);
                 break;
             }
 
@@ -71,13 +84,13 @@ export function tokenize(exp) {
                 // If you hit the end of string char stop the process and add the string value to the tokens
                 if (exp[j] == char) {
                     const value = exp.substring(i, j + 1);
-                    step("string", value);
+                    step(TokenTypes.STRING, value);
                     break;
                 }
             }
 
             if (hasLiteral == true) {
-                step("string", char);
+                step(TokenTypes.STRING, char);
             }
             // if we did copy a string value, move the marker up to the end of the string
             else {
@@ -89,7 +102,7 @@ export function tokenize(exp) {
 
         // check for single character key words
         if (keywords.indexOf(char) != -1) {
-            step("keyword", char);
+            step(TokenTypes.KEYWORD, char);
             continue;
         }
 
@@ -99,7 +112,7 @@ export function tokenize(exp) {
                 const charNext = exp[j];
                 if (operatorStart.indexOf(charNext) == -1) {
                     const value = exp.substring(i, j);
-                    step("operator", value);
+                    step(TokenTypes.OPERATOR, value);
                     i = j - 1;
                     break;
                 }
@@ -118,8 +131,8 @@ export function tokenize(exp) {
 }
 
 function postProcessTokens(tokens) {
-    if (tokens.length == 1 && tokens[0].type == "word") {
-        tokens[0].type = "property";
+    if (tokens.length == 1 && tokens[0].type == TokenTypes.WORD) {
+        tokens[0].type = TokenTypes.PROPERTY;
         return tokens;
     }
 
@@ -129,42 +142,49 @@ function postProcessTokens(tokens) {
     while(tokens[i] != undefined) {
         const token = tokens[i];
         const currentState = state.length == 0 ? "none" : state[state.length - 1];
+        const index = token.value.indexOf(".");
 
-        if (token.type == "word") {
+        if (token.type == TokenTypes.WORD) {
             // word is inside a ${...} expression so must be a property
-            if (currentState == "literal") {
+            if (currentState == TokenTypes.LITERAL) {
                 // if the word starts with "." it's part of a bigger expression after a function call
                 if (token.value[0] == "." && tokens[i + 1].value == "(") {
-                    token.type = "function";
+                    token.type = TokenTypes.FUNCTION;
                     i++;
                     continue;
                 }
 
-                token.type = "property";
+                token.type = TokenTypes.PROPERTY;
             }
 
             // word contains "." indicating a path expression
-            else if (token.value.indexOf(".") != -1) {
-                token.type = "property";
+            else if (index != -1) {
+                if (tokens[i - 1]?.value === ")" && index === 0) {
+                    // This is part of a property path on a function call for example ().length
+                    token.type = TokenTypes.FUNCTION;
+                }
+                else {
+                    token.type = TokenTypes.PROPERTY;
+                }
             }
 
             // left of operator
             else if (isOperator(tokens[i + 1]) || isOperator(tokens[i + 2])) {
-                token.type = "property";
+                token.type = TokenTypes.PROPERTY;
             }
 
             // right of operator
             else if (isOperator(tokens[i - 1]) || isOperator(tokens[i - 2])) {
-                token.type = "property";
+                token.type = TokenTypes.PROPERTY;
             }
         }
 
         // Check if this is part of a function expression and update the property accordingly.
-        if (token.type == "keyword" && token.value == "(" && (tokens[i - 1] && tokens[i - 1].type == "property" && tokens[i - 1].value[0] != "$")) {
+        if (token.type == TokenTypes.KEYWORD && token.value == "(" && (tokens[i - 1] && tokens[i - 1].type == TokenTypes.PROPERTY && tokens[i - 1].value[0] != "$")) {
             const path = tokens[i - 1].value;
 
             if (path.indexOf(".") == -1) {
-                tokens[i - 1].type = "function";
+                tokens[i - 1].type = TokenTypes.FUNCTION;
             }
             else {
                 let dotIndex = path.length -1;
@@ -183,21 +203,21 @@ function postProcessTokens(tokens) {
                     const fnName = path.substring(dotIndex, path.length);
 
                     tokens[i - 1].value = property;
-                    tokens.splice(i, 0, {type: "function", value: fnName});
+                    tokens.splice(i, 0, {type: TokenTypes.FUNCTION, value: fnName});
                     i++;
                 }
                 else {
-                    tokens[i - 1].type = "function";
+                    tokens[i - 1].type = TokenTypes.FUNCTION;
                 }
             }
         }
 
         // manage current state for processing
         if (token.value == "${") {
-            state.push("literal");
+            state.push(TokenTypes.LITERAL);
         }
         else if (token.value == "{") {
-            state.push("object");
+            state.push(TokenTypes.OBJECT);
         }
         else if (token.value == "}") {
             state.pop();
@@ -211,8 +231,8 @@ function postProcessTokens(tokens) {
 
 function isOperator(token) {
     if (token == null) return false;
-    return token.type == "operator";
+    return token.type == TokenTypes.OPERATOR;
 }
 
 const operatorStart = ["=", "!", "<", ">", "+", "-", "*", "/", "&", "|"];
-const keywords = ["{", "}", "(", ")", "?", ":", ",", "true", "false", "null", "undefined"];
+const keywords = ["{", "}", "(", ")", "?", ":", ",", "true", "false", "null", "undefined", "[]"];

@@ -304,6 +304,11 @@ test("sanitize - Not expression with prefix", () => {
    expect(result.expression).toBe("!crsbinding.data.globals.isActive")
 })
 
+test("sanitize - Bracket array check", () => {
+   const result = sanitizeExp("(schema.variable.items || []).length == 0)");
+   expect(result.expression).toBe("(context.schema.variable.items || []).length == 0)");
+})
+
 
 // JHR:  todo, enable this feature
 // test("sanitizeExp - attribute condition", () => {
