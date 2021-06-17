@@ -50,6 +50,10 @@ export default class Component extends ViewBase {
         super.load();
     }
 
+    "data.firstNameChanged"(value, oldValue) {
+        this.setProperty("data.oldName", oldValue);
+    }
+
     newObject() {
         this.data = {
             firstName: "Test",

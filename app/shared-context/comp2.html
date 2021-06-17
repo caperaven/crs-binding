@@ -1,10 +1,10 @@
 <label>
     <span>${title}</span>
-    <input value.bind="value"></input>
+    <input value.bind="value" id="c2Input"></input>
 </label>
 
 <ul>
     <template for="item of selected">
-        <li>${item.title}</li>
+        <li data-id.once="item.id">${item.title}</li>
     </template>
 </ul>

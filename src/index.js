@@ -1,22 +1,27 @@
 import {compileExp, releaseExp} from "./events/compiler.js";
-import {sanitizeExp} from "./events/expressions.js";
+import {sanitizeExp} from "./expressions/exp-sanitizer.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {listenOnPath, removeOnPath} from "./binding/listen-on.js";
 import {domEnableEvents, domDisableEvents} from "./events/dom-events.js";
 import {InflationManager} from "./managers/inflation-manager.js";
-import {ValueConverters} from "./managers/value-converters.js";
 import {clone} from "./lib/clone.js";
-import {bindingData} from "./store/binding-data.js";
-import {EventEmitter} from "./events/events.js";
+import {BindingData} from "./store/binding-data.js";
+import {EventEmitter} from "./events/event-emitter.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
 import {BindableElement} from "../src/binding/bindable-element.js";
 import {ViewBase} from "../src/view/view-base.js";
 import {Widget} from "../src/view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
-import {measureElement, fragmentToText, disposeProperties} from "./lib/utils.js";
+import {ValueConvertersManager} from "./managers/value-converters-manager.js";
+import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
+import {renderCollection} from "./lib/renderCollection.js";
+import {getValueOnPath} from "./lib/path-utils.js";
+import {SvgElementsManager} from "./managers/svg-elements-manager.js";
+import {SvgElement} from "./view/svg-element.js";
+import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate} from "./store/templates.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -37,12 +42,14 @@ function capitalizePropertyPath(str) {
 const crsbinding = {
     _expFn: new Map(),
 
-    data: bindingData,
+    data: new BindingData(),
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
     elementStoreManager: new ElementStoreManager(),
-    valueConverters: new ValueConverters(),
+    svgCustomElements: new SvgElementsManager(),
+    valueConvertersManager: new ValueConvertersManager(),
+
     expression: {
         sanitize: sanitizeExp,
         compile: compileExp,
@@ -63,7 +70,8 @@ const crsbinding = {
         BindableElement: BindableElement,
         ViewBase: ViewBase,
         RepeatBaseProvider: RepeatBaseProvider,
-        Widget: Widget
+        Widget: Widget,
+        SvgElement: SvgElement
     },
 
     events: {
@@ -74,7 +82,7 @@ const crsbinding = {
 
     dom: {
         enableEvents: domEnableEvents,
-        disableEvents: domDisableEvents
+        disableEvents: domDisableEvents,
     },
 
     utils: {
@@ -82,11 +90,27 @@ const crsbinding = {
         clone: clone,
         disposeProperties: disposeProperties,
         fragmentToText: fragmentToText,
+        cloneTemplate: cloneTemplate,
         measureElement: measureElement,
-        forceClean: forceClean
+        forceClean: forceClean,
+        renderCollection: renderCollection,
+        relativePathFrom: relativePathFrom,
+        getPathOfFile: getPathOfFile,
+        getValueOnPath: getValueOnPath
+    },
+
+    templates: {
+        data: {},
+        load: loadTemplate,
+        add: addTemplate,
+        get: getTemplate,
+        unload: unloadTemplates,
+        unloadAll: unloadAllTemplates
     }
 };
 
 globalThis.crsbinding = crsbinding;
 crsbinding.$globals = crsbinding.data.addObject("globals");
 crsbinding.data.globals = crsbinding.data.getValue(crsbinding.$globals);
+
+globalThis.crsb = crsbinding;

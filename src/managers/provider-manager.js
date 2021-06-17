@@ -1,5 +1,6 @@
 import {ForOnceProvider} from "../binding/providers/for-once-provider.js";
 import {ForMapProvider} from "../binding/providers/for-map-provider.js";
+import {ForRadioProvider} from "../binding/providers/for-radio-provider.js"
 
 export class ProviderManager {
     constructor() {
@@ -8,7 +9,8 @@ export class ProviderManager {
         this.providers = {
             for: {
                 map: ForMapProvider,
-                once: ForOnceProvider
+                once: ForOnceProvider,
+                radio: ForRadioProvider
             }
         }
     }
@@ -26,6 +28,14 @@ export class ProviderManager {
     }
 
     async releaseElement(element) {
+        if (element.nodeName.toLowerCase() == "svg") {
+            crsbinding.svgCustomElements.release(element);
+        }
+
+        for (let property of element.__cleanup || []) {
+            element[property] = null;
+        }
+
         for (let child of element.children || []) {
             await this.releaseElement(child);
         }

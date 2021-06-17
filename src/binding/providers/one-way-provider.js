@@ -1,5 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
-import {setElementProperty, setElementValueProperty, setClassList, setDataset} from "./code-constants.js";
+import {getExpForProvider, setContext} from "./one-way-utils.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
@@ -20,7 +20,7 @@ export class OneWayProvider extends ProviderBase {
 
     async initialize() {
         if (this._value == "$context" || this._value == this._ctxName) {
-            return this.setContext();
+            return setContext(this._element, this._property, this._context);
         }
 
         this._eventHandler = this.propertyChanged.bind(this);
@@ -41,22 +41,6 @@ export class OneWayProvider extends ProviderBase {
         }
     }
 
-    setContext() {
-        if (this._element != null && this._property != null) {
-            const fn = () => {
-                this._element.removeEventListener("ready", fn);
-                this._element[this._property] = crsbinding.data.getValue(this._context);
-            };
-
-            if (this._element.isReady == true) {
-                fn();
-            }
-            else {
-                this._element.addEventListener("ready", fn);
-            }
-        }
-    }
-
     propertyChanged(prop, value) {
         if (this._expObj == null) return;
 
@@ -67,22 +51,4 @@ export class OneWayProvider extends ProviderBase {
 
         crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
     }
-}
-
-function getExpForProvider(provider) {
-    let result;
-
-    if (provider._property.toLocaleLowerCase() == "classlist") {
-        return setClassList;
-    }
-
-    if (provider._property.indexOf("data-") != -1) {
-        const prop = provider._property.replace("data-", "");
-        return setDataset.split("__property__").join(prop);
-    }
-    
-    result = provider._property == "value" || provider._property == "placeholder" ? setElementValueProperty : setElementProperty;
-    provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
-    
-    return result.split("__property__").join(provider._property);
 }

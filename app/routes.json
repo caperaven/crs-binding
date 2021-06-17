@@ -15,6 +15,16 @@
       "view": "welcome"
     },
     {
+      "title": "SVG for binding",
+      "hash": "#svg-for",
+      "view": "svg-for"
+    },
+    {
+      "title": "SVG Binding",
+      "hash": "#svg-binding",
+      "view": "svg-binding"
+    },
+    {
       "title": "List",
       "hash": "#list",
       "view": "list"
@@ -83,6 +93,66 @@
       "title": "Shared Context",
       "hash": "#shared-context",
       "view": "shared-context"
+    },
+    {
+      "title": "Render Collection",
+      "hash": "#render-collection",
+      "view": "render-collection"
+    },
+    {
+      "title": "Array Values",
+      "hash": "#array-values",
+      "view": "array-values"
+    },
+    {
+      "title": "HTML Fragments",
+      "hash": "#html-fragments",
+      "view": "html-fragments"
+    },
+    {
+      "title": "Radio Groups",
+      "hash": "#radio-group",
+      "view": "radio-group"
+    },
+    {
+      "title": "Value Converters",
+      "hash": "#value-converters",
+      "view": "value-converters"
+    },
+    {
+      "title": "InnerHTML",
+      "hash": "#innerHTML",
+      "view": "innerHTML"
+    },
+    {
+      "title": "Nested For",
+      "hash": "#nested-for",
+      "view": "nested-for"
+    },
+    {
+      "title": "Expressions",
+      "hash": "#expressions",
+      "view": "expressions"
+    },
+    {
+      "title": "SVG Element",
+      "hash": "#svg-element",
+      "view": "svg-element"
+    },
+    {
+      "title": "Property Binding",
+      "hash": "#property-binding",
+      "view": "property-binding"
+    },
+    {
+      "title": "Idle Task Manager",
+      "hash": "#idleTaskManager",
+      "view": "idleTaskManager"
+    },
+    {
+      "title": "Component Templates",
+      "hash": "#component-templates",
+      "view": "component-templates"
     }
   ]
 }

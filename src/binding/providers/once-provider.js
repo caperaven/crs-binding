@@ -1,4 +1,4 @@
-import {getValueOnPath} from "./../../lib/path-utils.js";
+import {setElementCleanupProperty} from "../../lib/utils.js";
 
 export function OnceProvider(element, context, property, value, ctxName = "context", parentId) {
     if (ctxName == "context") {
@@ -27,7 +27,7 @@ function setItem(element, context, property, value, ctxName) {
 function setProperty(element, property, value) {
     if (property.indexOf("data-") == -1) {
         property = crsbinding.utils.capitalizePropertyPath(property);
-        element[property] = value;
+        setElementCleanupProperty(element, property, value);
     }
     else {
         const prop = property.replace("data-", "");

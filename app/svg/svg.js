@@ -1,6 +1,14 @@
 import {ViewBase} from "../../src/view/view-base.js";
 
 export default class Svg extends ViewBase {
+    get name() {
+        return this.getProperty("name");
+    }
+
+    set name(newValue) {
+        this.setProperty("name", newValue);
+    }
+
     async preLoad(setProperty) {
         return new Promise(resolve => {
             setProperty("rect1Title", "Rect 1");

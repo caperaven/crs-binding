@@ -12,6 +12,14 @@ export function fragmentToText(fragment) {
 }
 
 /**
+ * Create a clone from the template element
+ * @param element
+ */
+export function cloneTemplate(element) {
+    return element.content != null ? element.content.cloneNode(true) : element.children[0].cloneNode(true);
+}
+
+/**
  * Measure element dimensions
  * @param element
  * @returns {Promise<unknown>}
@@ -54,6 +62,68 @@ export function disposeProperties(obj) {
         if (typeof pObj == "object" && Array.isArray(pObj) != true) {
             disposeProperties(pObj);
         }
-        delete obj[property];
+        try{
+            delete obj[property];
+        }
+        catch(e) {
+        }
+    }
+}
+
+export function setElementCleanupProperty(element, property, value) {
+    element[property] = value;
+    element.__cleanup = element.__cleanup || [];
+    element.__cleanup.push(property);
+}
+
+export function getPathOfFile(file) {
+    if (file == null) return file;
+
+    if (file[file.length - 1] == "/") {
+        return file;
+    }
+
+    const parts = file.split("/");
+    parts.pop();
+    return `${parts.join("/")}/`;
+}
+
+export function relativePathFrom(source, target) {
+    const folder = getPathOfFile(source);
+
+    const processParts = ["", "."];
+    const targetParts = target.split("./");
+    const sourceParts = folder.split("/");
+
+    sourceParts.pop();
+
+    let count = 0;
+    for (let i = 0; i < targetParts.length; i++) {
+        const str = targetParts[i]
+        if (processParts.indexOf(str) === -1) {
+            break;
+        }
+
+        if (str == ".") {
+            sourceParts.pop();
+        }
+
+        count += 1;
+    }
+
+    targetParts.splice(0, count);
+    const targetStr = targetParts.join("/");
+    const sourceStr = sourceParts.join("/");
+
+    return `${sourceStr}/${targetStr}`;
+}
+
+export function forStatementParts(value) {
+    const parts = value.split("of");
+    const singular = parts[0].trim();
+    const plural = parts[1].trim();
+    return {
+        singular: singular,
+        plural: plural
     }
 }

@@ -1,0 +1,13 @@
+<h1>${title}</h1>
+
+<div class="toolbar">
+    <button id="btnRenderCollection" click.call="render">Render Collection</button>
+    <button id="btnRenderMore" click.call="renderMore">Render More</button>
+    <button id="btnRenderLess" click.call="renderLess">Render Less</button>
+</div>
+
+<ul>
+    <template>
+        <li style.color.one-way="color">${title}</li>
+    </template>
+</ul>

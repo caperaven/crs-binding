@@ -4,7 +4,7 @@ export class Widget extends HTMLElement {
         delete this._dataId;
     }
 
-    onMessage(args) {
+    async onMessage(args) {
         this._clearElements();
 
         let id = args.context;
@@ -15,7 +15,13 @@ export class Widget extends HTMLElement {
         this._dataId = id;
         this.innerHTML = args.html;
 
-        crsbinding.parsers.parseElements(this.children, this._dataId);
+        if (this._dataId != null) {
+            const ctx = crsbinding.data._context.get(this._dataId);
+
+            await crsbinding.parsers.parseElements(this.children, this._dataId, {
+                folder: ctx.html
+            });
+        }
     }
 
     _clearElements() {

@@ -1,4 +1,5 @@
 <h2>${title}</h2>
+<h2>${SomeValue}</h2>
 
 <nav>
     <a href="#context-actions">Context Actions</a>
@@ -9,13 +10,33 @@
     <a href="#mouse-event">Mouse Event</a>
     <a href="#drawer">Drawer example using setValue</a>
     <a href="#svg">Svg</a>
+    <a href="#svg-for">SVG for</a>
+    <a href="#svg-binding">SVG binding</a>
     <a href="#master-detail">Master Detail</a>
     <a href="#list">List</a>
     <a href="#pages">Pages</a>
     <a href="#binding1">Binding 1</a>
     <a href="#shared-references">shared-reference</a>
     <a href="#shared-context">Shared Context</a>
+    <a href="#render-collection">Render Collection</a>
+    <a href="#array-values">Array Values</a>
+    <a href="#html-fragments">HTML Fragments</a>
+    <a href="#radio-group">Radio Group</a>
+    <a href="#value-converters">Value Converters</a>
+    <a href="#innerHTML">Inner HTML</a>
+    <a href="#nested-for">Nested For</a>
+    <a href="#expressions">Expressions</a>
+    <a href="#svg-element">SVG Element</a>
+    <a href="#property-binding">Property Binding</a>
+    <a href="#idleTaskManager">Idle Task Manager</a>
+    <a href="#component-templates">Component Templates</a>
 </nav>
+
+<hr/>
+
+<div>${$html.title}</div>
+
+<br />
 
 <button click.setValue="[isOpen = true; value2 = 10]" style="width: 100px">Open True and Value2</button>
 <button click.setValue="isOpen = false" style="width: 100px">Open False</button>

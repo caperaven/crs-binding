@@ -41,6 +41,11 @@ export class IdleTaskManager {
      */
     _runNextFunction() {
         let fn = this._list.shift();
-        fn && fn();
+        try {
+            fn && fn();
+        }
+        catch(e) {
+            console.error(e);
+        }
     }
 }

@@ -6,8 +6,8 @@ let parseElementSpy;
 let element;
 
 beforeEach(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
 
     element = new ElementMock();
 
@@ -28,5 +28,5 @@ test("view base - disconnectedCallback", () => {
     const releaseBindingSpy = jest.spyOn(crsbinding.observation, "releaseBinding");
     instance.disconnectedCallback();
     expect(releaseBindingSpy).toHaveBeenCalled();
-    expect(instance.__evetns).toBeUndefined();
+    expect(instance.__events).toBeUndefined();
 });

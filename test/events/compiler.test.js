@@ -2,8 +2,8 @@ import {compileExp, releaseExp} from "../../src/events/compiler.js";
 import {crsbindingMock} from "../crsbinding.mock.js";
 
 beforeAll(async () => {
-    const bindingModule = await import("./../crsbinding.mock.js");
-    global.crsbinding = bindingModule.crsbinding;
+    const load = (await import("./../crsbinding.mock.js")).load;
+    await load();
 });
 
 test("releaseExp - count down", () => {

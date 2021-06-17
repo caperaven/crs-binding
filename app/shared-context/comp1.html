@@ -1,15 +1,16 @@
 <label>
     <span>${title}</span>
-    <input value.bind="value"></input>
+    <input value.bind="value" id="c1Input"></input>
 </label>
 
 <ul>
     <template for="item of available">
         <li>
             <input type="checkbox" checked.bind="item.isSelected" />
-            <input value.bind="item.title"></input>
+            <input value.bind="item.title" data-id.once="item.id"></input>
         </li>
     </template>
 </ul>
 
-<button click.call="setSelected">Set Selected</button>
+<button click.call="setSelected" id="btnShare">Set Selected</button>
+<button click.call="removeShare" id="btnRemoveShare">Remove Share</button>

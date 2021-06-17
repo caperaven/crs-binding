@@ -1,4 +1,4 @@
-import {ProviderFactory} from "../binding/provider-factory.js";
+import {forStatementParts} from "./../lib/utils.js";
 
 export class InflationManager {
     constructor() {
@@ -16,15 +16,20 @@ export class InflationManager {
      * @param template
      */
     register(id, template, ctxName = "context", measure = false) {
-        const generator = new InflationCodeGenerator(ctxName);
+        template = template.cloneNode(true);
+        const generator = new InflationCodeGenerator(ctxName, id);
         const result = generator.generateCodeFor(template);
+        const templates = generator.templateKeys;
         generator.dispose();
 
         crsbinding.elementStoreManager.register(id, template, measure);
 
         this._items.set(id, {
+            id: id,
+            childCount: result.childCount,
             inflate: result.inflate,
-            deflate: result.deflate
+            deflate: result.deflate,
+            templates: templates
         })
     }
 
@@ -37,6 +42,11 @@ export class InflationManager {
         if (item != null) {
             item.inflate = null;
             item.defaulte = null;
+
+            if (item.templates != null) {
+                item.templates.forEach(tplId => this.unregister(tplId));
+            }
+
             this._items.delete(id);
         }
         crsbinding.elementStoreManager.unregister(id);
@@ -47,16 +57,132 @@ export class InflationManager {
      * @param id
      * @param data
      */
-    get(id, data) {
+    get(id, data, elements) {
         const item = this._items.get(id);
         if (item == null) return null;
 
-        const fragment = crsbinding.elementStoreManager.getElements(id, data.length);
-        for (let i = 0; i < data.length; i++) {
-            this.inflate(id, fragment.children[i], data[i], item.inflate);
+        if (elements != null) {
+            return this._getWithElements(item, data, elements);
         }
 
+        const length = Array.isArray(data) ? data.length * item.childCount : 1;
+        const fragment = crsbinding.elementStoreManager.getElements(id, length);
+        this._inflateElements(item, fragment, data);
         return fragment;
+    }
+
+    /**
+     * Calculate the width of the element
+     * @param item
+     * @param data
+     * @param elements
+     * @returns {DocumentFragment}
+     * @private
+     */
+    _getWithElements(item, data, elements) {
+        const diff = elements.length - data.length;
+        const fragment = document.createDocumentFragment();
+
+        if (diff > 0) {
+            for (let i = 0; i < diff; i++) {
+                const removed = elements.pop();
+                removed.parentElement.removeChild(removed);
+            }
+        }
+        else if (diff < 0) {
+            for (let i = 0; i > diff; i--) {
+                fragment.appendChild(crsbinding.elementStoreManager.getElement(item.id));
+            }
+        }
+
+        const processArray = [...elements, ...Array.from(fragment.children)];
+        this._inflateElements(item, processArray, data);
+
+        return fragment;
+    }
+
+    /**
+     * This function inflates a single item template with a single item data object
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateSingleElement(item, fragment, data) {
+        this.inflate(item.id, item.childCount == 1 ? fragment.children[0] : Array.from(fragment.children), data, item.inflate);
+    }
+
+    /**
+     * Inflate a template that has only a single child
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateSingleChildFragment(item, fragment, data) {
+        const isArray = Array.isArray(fragment);
+
+        data = Array.isArray(data) ? data : [data];
+
+        for (let i = 0; i < data.length; i++) {
+            const child = isArray ? fragment[i] : fragment.children[i];
+            this.inflate(item.id, child, data[i], item.inflate);
+            child.__inflated = true;
+
+            const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
+            for (let attr of attrAttributes) {
+                child.removeAttribute(attr.name);
+            }
+        }
+    }
+
+    /**
+     * Inflate a template that has multiple children for multiple records but no structure element
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateMultiChildFragment(item, fragment, data) {
+        const srcElements = Array.from(fragment.children);
+
+        let index = 0;
+
+        for (let i = 0; i < data.length; i++) {
+            const elements = srcElements.slice(index, index + item.childCount);
+            this.inflate(item.id, elements, data[i], item.inflate, false);
+            index += item.childCount;
+        }
+
+        srcElements.forEach(child => {
+            child.__inflated = true;
+
+            const attrAttributes = Array.from(child.attributes).filter(attr => attr.name.indexOf(".attr") != -1);
+            for (let attr of attrAttributes) {
+                child.removeAttribute(attr.name);
+            }
+        });
+
+        srcElements.filter(el => el.getAttribute("remove") == "true").forEach(rem => rem.parentNode.removeChild(rem));
+    }
+
+    /**
+     * Inflation of element entry point that calls the appropriate functions depending on the work required.
+     * @param item
+     * @param fragment
+     * @param data
+     * @private
+     */
+    _inflateElements(item, fragment, data) {
+        if (Array.isArray(data) == false) {
+            this._inflateSingleElement(item, fragment, data)
+        }
+        else if (item.childCount == 1) {
+            this._inflateSingleChildFragment(item, fragment, data);
+        }
+        else {
+            this._inflateMultiChildFragment(item, fragment, data);
+        }
     }
 
     /**
@@ -65,10 +191,35 @@ export class InflationManager {
      * @param element
      * @param data
      */
-    inflate(id, element, data, inflate = null) {
+    inflate(id, element, data, inflate = null, removeMarked = true) {
         const fn = inflate || this._items.get(id).inflate;
         fn(element, data);
-        const removedElements = element.querySelectorAll('[remove="true"]');
+
+        if (removeMarked == true) {
+            this._removeElements(element);
+        }
+    }
+
+    /**
+     * Remove elements that are tagged for removal
+     * @param element
+     * @private
+     */
+    _removeElements(element) {
+        let removedElements = [];
+
+        if (Array.isArray(element)) {
+            element.forEach(el => {
+                const removed = el.querySelectorAll('[remove="true"]');
+                if (removed.length > 0) {
+                    removedElements = [...removedElements, ...removed];
+                }
+            })
+        }
+        else {
+            removedElements = element.querySelectorAll('[remove="true"]');
+        }
+
         for (let rel of removedElements) {
             rel.parentElement.removeChild(rel);
         }
@@ -104,7 +255,9 @@ export class InflationManager {
 }
 
 class InflationCodeGenerator {
-    constructor(ctxName) {
+    constructor(ctxName, parentKey) {
+        this.parentKey = parentKey;
+        this.templateKeys = [];
         this.inflateSrc = [];
         this.deflateSrc = [];
         this._ctxName = ctxName;
@@ -116,15 +269,29 @@ class InflationCodeGenerator {
     };
 
     generateCodeFor(template) {
-        const element = template.content.children[0];
-        this.path = "element";
+        const children = template.content == null ? template.children : template.content.children;
+        const childCount = children.length;
 
-        this._processElement(element);
+        if (childCount == 1) {
+            this.path = "element";
+
+            for (let element of children) {
+                this._processElement(element);
+            }
+        }
+        else {
+            // process as array - must pass an array of elements to inflation not just a single element
+            for (let i = 0; i < children.length; i++) {
+                this.path = `element[${i}]`;
+                this._processElement(children[i]);
+            }
+        }
 
         const inflateCode = this.inflateSrc.join("\n");
         const deflateCode = this.deflateSrc.join("\n");
 
         return {
+            childCount: childCount,
             inflate: new Function("element", this._ctxName, inflateCode),
             deflate: new Function("element", this._ctxName, deflateCode)
         }
@@ -136,8 +303,31 @@ class InflationCodeGenerator {
 
         const path = this.path;
         for (let i = 0; i < element.children.length; i++) {
-            this.path = `${path}.children[${i}]`;
-            this._processElement(element.children[i]);
+            const child = element.children[i];
+
+            if (child.nodeName == "TEMPLATE") {
+                this._processTemplate(child);
+            }
+            else {
+                this.path = `${path}.children[${i}]`;
+                this._processElement(element.children[i]);
+            }
+        }
+    }
+
+    _processTemplate(element) {
+        const key = `${this.parentKey}_${this.templateKeys.length + 1}`;
+        this.templateKeys.push(key);
+        element.dataset.key = key;
+
+        const value = element.getAttribute("for.once");
+        if (value != null) {
+            const parts = forStatementParts(value);
+            const code = `${this.path}.appendChild(crsbinding.inflationManager.get("${key}", ${parts.plural}));`;
+            this.inflateSrc.push(code);
+
+            crsbinding.inflationManager.register(key, element, parts.singular);
+            element.parentElement.removeChild(element);
         }
     }
 
@@ -145,24 +335,46 @@ class InflationCodeGenerator {
         if (element.children == null || element.children.length > 0 || element.innerHTML.indexOf("${") == -1) return;
 
         const text = (element.innerHTML || "").trim();
-        const target = element.textContent ? "textContent" : "innerText";
+        let target = element.textContent ? "textContent" : "innerText";
 
         let exp = text;
-        exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
+        const san = crsbinding.expression.sanitize(exp, this._ctxName);
+        exp = san.expression;
+
+        if (san.isHTML == true) {
+            target = "innerHTML";
+        }
+
         this.inflateSrc.push([`${this.path}.${target} = ` + "`" + exp + "`"].join(" "));
         this.deflateSrc.push(`${this.path}.${target} = "";`);
     }
 
     _processAttributes(element) {
-        const attributes = Array.from(element.attributes).filter(attr => attr.value.indexOf("${") != -1 || attr.name.indexOf(".if") != -1);
+        const attributes = Array.from(element.attributes).filter(attr =>
+            attr.value.indexOf("${") != -1 ||
+            attr.name.indexOf(".if") != -1 ||
+            attr.name.indexOf(".attr") != -1 ||
+            attr.name.indexOf("style.") != -1 ||
+            attr.name.indexOf("classlist." != -1)
+        );
+
         for (let attr of attributes) {
-            if (attr.value.indexOf("${") != -1) {
+            if (attr.name.indexOf(".attr") != -1) {
+                this._processAttr(attr);
+            }
+            else if (attr.value.indexOf("${") != -1) {
                 this._processAttrValue(attr);
             }
             else {
                 this._processAttrCondition(attr);
             }
         }
+    }
+
+    _processAttr(attr) {
+        const attrName = attr.name.replace(".attr", "");
+        const exp = crsbinding.expression.sanitize(attr.value, this._ctxName).expression;
+        this.inflateSrc.push(`${this.path}.setAttribute("${attrName}", ${exp})`);
     }
 
     _processAttrValue(attr) {
@@ -184,7 +396,7 @@ class InflationCodeGenerator {
     }
 
     _processAttrCondition(attr) {
-        if (attr.name.trim().indexOf("style") == 0) {
+        if (attr.name.trim().indexOf("style.") == 0) {
             return this._processStyle(attr);
         }
         

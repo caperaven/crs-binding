@@ -28,6 +28,9 @@ export class BindableElement extends HTMLElement {
     }
 
     async connectedCallback() {
+        if (this._dataId == null || this.__isLoading == true) return;
+        this.__isLoading = true;
+
         if(this.preLoad != null) {
             const setPropertyCallback = (path, value)=> {
                 crsbinding.data.setProperty(this._dataId, path, value);
@@ -37,8 +40,10 @@ export class BindableElement extends HTMLElement {
         }
 
         if (this.html != null) {
-            this.innerHTML = await fetch(this.html).then(result => result.text());
-            crsbinding.parsers.parseElements(this.children, this._dataId);
+            this.innerHTML = await crsbinding.templates.get(this.constructor.name, this.html);
+
+            const path = crsbinding.utils.getPathOfFile(this.html);
+            await crsbinding.parsers.parseElements(this.children, this._dataId, path ? {folder: path} : null);
         }
 
         requestAnimationFrame(() => {
@@ -58,6 +63,7 @@ export class BindableElement extends HTMLElement {
 
         this.isReady = true;
         this.dispatchEvent(new CustomEvent("ready"));
+        delete this.__isLoading;
     }
 
     async disconnectedCallback() {

@@ -8,8 +8,6 @@ export class ForProvider extends RepeatBaseProvider {
     }
 
     dispose() {
-        crsbinding.expression.release(this._forExp);
-        this._forExp = null;
         this._itemsAddedHandler = null;
         this._itemsDeletedHandler = null;
 
@@ -19,8 +17,6 @@ export class ForProvider extends RepeatBaseProvider {
     async initialize() {
         super.initialize();
 
-        const forExp = "for (let i = 0; i < context.length; i++) { callback(context[i], i) }";
-        this._forExp = crsbinding.expression.compile(forExp, ["callback"], {sanitize: false, async: true, ctxName: this._ctxName});
         crsbinding.data.setArrayEvents(this._context, this._plural, this._itemsAddedHandler, this._itemsDeletedHandler);
     }
 
@@ -31,11 +27,11 @@ export class ForProvider extends RepeatBaseProvider {
         const fragment = document.createDocumentFragment();
 
         // loop through items and add them to fragment after being parsed
-        await this._forExp.function(array, (item) => {
+        for (let item of array) {
             item.__aId = crsbinding.data.nextArrayId();
-            const element = this.createElement(item, item.__aId);
+            const element = await this.createElement(item, item.__aId);
             fragment.appendChild(element);
-        });
+        }
 
         this.positionStruct.addAction(fragment);
 
@@ -57,12 +53,13 @@ export class ForProvider extends RepeatBaseProvider {
             const index = collection.indexOf(item);
 
             item.__aId = crsbinding.data.nextArrayId();
-            const element = this.createElement(item, item.__aId);
-            const update = element.children[0];
-            const child = this._container.children[index + this.positionStruct.startIndex + 1];
-            this._container.insertBefore(element, child);
+            this.createElement(item, item.__aId).then(element => {
+                const update = element.children[0];
+                const child = this._container.children[index + this.positionStruct.startIndex + 1];
+                this._container.insertBefore(element, child);
 
-            this.updateAttributeProviders(update);
+                this.updateAttributeProviders(update);
+            })
         }
     }
 

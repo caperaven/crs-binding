@@ -11,7 +11,7 @@ class TasksSummary extends BindableElement{
 
     set parent(newValue) {
         this.setProperty("parent", newValue);
-        this.taskCount = newValue.tasks.length;
+        this.taskCount = newValue == null ? 0 : newValue.tasks.length;
     }
 
     get taskCount() {

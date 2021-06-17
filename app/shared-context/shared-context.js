@@ -42,4 +42,8 @@ export default class SharedContext extends ViewBase {
         this.setProperty("selected", selected);
         crsbinding.data.addArraySync(this.syncId, this, "selected");
     }
+
+    removeShare() {
+        crsbinding.data.removeArraySync(this.syncId, this, "selected");
+    }
 }

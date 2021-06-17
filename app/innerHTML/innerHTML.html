@@ -1,0 +1,35 @@
+<style>
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+
+    li h2 {
+        margin: 0;
+        font-size: 1rem;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<div id="h1">${$html.model.value}</div>
+<button click.call="update">Update Title</button>
+
+<h2>Items</h2>
+
+<ul id="list1">
+    <template for="item of model.values">
+        <li>${$html.item.title}</li>
+    </template>
+</ul>
+
+<h2>Items Once</h2>
+
+<ul id="list2">
+    <template for.once="item of model.values">
+        <li>${$html.item.title}</li>
+    </template>
+</ul>
+
+

@@ -7,7 +7,7 @@ export class EventEmitter {
         this._events.clear();
     }
 
-    on(event, callback) {
+    async on(event, callback) {
         let events = [];
 
         if (this._events.has(event)) {
@@ -21,14 +21,16 @@ export class EventEmitter {
         }
     }
 
-    emit(event, args) {
+    async emit(event, args) {
         if (this._events.has(event)) {
             const events = this._events.get(event);
-            events.forEach(e => e(args));
+            for (let e of events) {
+                await e(args);
+            }
         }
     }
 
-    remove(event, callback) {
+    async remove(event, callback) {
         if (this._events.has(event)) {
             const events = this._events.get(event);
             const index = events.indexOf(callback);
@@ -41,14 +43,15 @@ export class EventEmitter {
         }
     }
 
-    postMessage(query, args, scope) {
+    async postMessage(query, args, scope) {
         const element = scope || document;
         const items = Array.from(element.querySelectorAll(query));
+        const promises = [];
 
-        items.forEach(item => {
-            if (item.onMessage != undefined) {
-                item.onMessage.call(item, args);
-            }
-        });
+        for (let item of items) {
+            promises.push(item.onMessage.call(item, args));
+        }
+
+        await Promise.all(promises);
     }
 }
