@@ -16,7 +16,7 @@ export class Widget extends HTMLElement {
         this.innerHTML = args.html;
 
         if (this._dataId != null) {
-            const ctx = crsbinding.data._context.get(this._dataId);
+            const ctx = crsbinding.data._context[this._dataId];
 
             await crsbinding.parsers.parseElements(this.children, this._dataId, {
                 folder: ctx.html
