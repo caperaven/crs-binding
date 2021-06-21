@@ -51,8 +51,8 @@ test("createReference", () => {
 
 test("listen-on-path", () => {
     crsbinding.events.listenOnPath(2, "$globals.menu.isVisible", null);
-    expect(crsbinding.data._callbacks.get(0).menu.isVisible).not.toBeNull();
-    expect(crsbinding.data._callbacks.get(0).menu.isVisible).not.toBeUndefined();
+    expect(crsbinding.data._callbacks[0].menu.isVisible).not.toBeNull();
+    expect(crsbinding.data._callbacks[0].menu.isVisible).not.toBeUndefined();
 });
 
 test("setproperty - empty", () => {

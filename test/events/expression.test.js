@@ -313,3 +313,8 @@ test("sanitizeExp - attribute condition", () => {
    const result = sanitizeExp("${$context.item.value == true ? '#checked' : '#unchecked'}", "item");
    expect(result.expression).toBe("${context.item.value == true ? '#checked' : '#unchecked'}");
 })
+
+test("sanitizeExp - context condition expression", () => {
+   const result = sanitizeExp("context.isDialog == true ? true : false");
+   expect(result.expression).toBe("context.context.isDialog == true ? true : false");
+})

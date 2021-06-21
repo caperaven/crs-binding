@@ -50,7 +50,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
             else if (token.value.indexOf("$parent") != -1) {
                 expression.push(token.value.replace("$parent", "parent"));
             }
-            else if (token.value.indexOf(`${ctxName}.`) != -1) {
+            else if (ctxName !== "context" && token.value.indexOf(`${ctxName}.`) != -1) {
                 expression.push(token.value);
             }
             else {
