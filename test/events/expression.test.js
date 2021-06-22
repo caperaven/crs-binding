@@ -318,3 +318,13 @@ test("sanitizeExp - context condition expression", () => {
    const result = sanitizeExp("context.isDialog == true ? true : false");
    expect(result.expression).toBe("context.context.isDialog == true ? true : false");
 })
+
+test("sanitizeExp - if true property", () => {
+   const result = sanitizeExp("columnSpan != null ? columnSpan : ''");
+   expect(result.expression).toBe("context.columnSpan != null ? context.columnSpan : ''");
+})
+
+test("sanitizeExp - if false property", () => {
+   const result = sanitizeExp("columnSpan != null ? '' : defaultSpan");
+   expect(result.expression).toBe("context.columnSpan != null ? '' : context.defaultSpan");
+})
