@@ -170,12 +170,16 @@ function postProcessTokens(tokens) {
 
             // left of operator
             else if (isOperator(tokens[i + 1]) || isOperator(tokens[i + 2])) {
-                token.type = TokenTypes.PROPERTY;
+                if (currentState !== TokenTypes.OBJECT) {
+                    token.type = TokenTypes.PROPERTY;
+                }
             }
 
             // right of operator
             else if (isOperator(tokens[i - 1]) || isOperator(tokens[i - 2])) {
-                token.type = TokenTypes.PROPERTY;
+                if (currentState !== TokenTypes.OBJECT) {
+                    token.type = TokenTypes.PROPERTY;
+                }
             }
         }
 
@@ -234,5 +238,5 @@ function isOperator(token) {
     return token.type == TokenTypes.OPERATOR;
 }
 
-const operatorStart = ["=", "!", "<", ">", "+", "-", "*", "/", "&", "|"];
-const keywords = ["{", "}", "(", ")", "?", ":", ",", "true", "false", "null", "undefined", "[]"];
+const operatorStart = ["=", "!", "<", ">", "+", "-", "*", "/", "&", "|", "?", ":"];
+const keywords = ["{", "}", "(", ")", ",", "true", "false", "null", "undefined", "[]"];
