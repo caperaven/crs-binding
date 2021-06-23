@@ -83,7 +83,7 @@ export async function loadFromElement(store, element, url) {
 
     let defaultTemplate;
     for (let template of templates) {
-        storeItem.templates[template.id] = template;
+        storeItem.templates[template.dataset.id] = template;
         template.parentElement?.removeChild(template);
         if (template.dataset.default === "true") {
             defaultTemplate = template;

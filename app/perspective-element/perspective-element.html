@@ -27,7 +27,7 @@
 <h2>Perspective Content</h2>
 <toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
 <perspective-element data-store="perspective1" view.bind="selected" context.once="context" changed.call="viewChanged">
-    <template id="person" data-default="true">
+    <template data-id="person" data-default="true">
         <label>
             <div>First Name</div>
             <input value.bind="model.person.firstName" />
@@ -42,7 +42,7 @@
         </label>
     </template>
 
-    <template id="address">
+    <template data-id="address">
         <label>
             <div>Street 1</div>
             <input value.bind="model.address.street1" />
@@ -69,10 +69,10 @@
 <h2>Perspective Fragment</h2>
 <toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
 <perspective-element data-store="perspective2" view.bind="selected" context.once="context" data-folder="/app/perspective-element/">
-    <template id="person" data-default="true">
+    <template data-id="person" data-default="true">
         <template src="./templates/person.html"></template>
     </template>
-    <template id="address">
+    <template data-id="address">
         <template src="./templates/address.html"></template>
     </template>
 </perspective-element>
