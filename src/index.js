@@ -110,7 +110,6 @@ const crsbinding = {
         unloadAll: unloadAllTemplates,
         loadFromElement: loadFromElement,
         getById: getTemplateById,
-        // addById: addTemplateById,
     }
 };
 

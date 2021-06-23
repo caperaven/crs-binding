@@ -36,6 +36,7 @@ export class PerspectiveElement extends HTMLElement {
         this._disposing = true;
         crsbinding.utils.forceClean(this);
         crsbinding.dom.disableEvents(this);
+        crsbinding.templates.unload(this.store);
     }
 
     async connectedCallback() {
@@ -43,28 +44,29 @@ export class PerspectiveElement extends HTMLElement {
         this.__isLoading = true;
 
         this.store = this.dataset.store || this.constructor.name;
-        const fragment = await crsbinding.templates.loadFromElement(this.store, this, this.html);
-        this._currentView = fragment.name;
-        this.appendChild(fragment);
+        await crsbinding.templates.loadFromElement(this.store, this, this.html, async fragment => {
+            this._currentView = fragment.name;
+            this.appendChild(fragment);
 
-        if(this.preLoad != null) {
-            await this.preLoad();
-        }
-
-        requestAnimationFrame(() => {
-            const name = this.getAttribute("name");
-            if (name != null) {
-                crsbinding.data.setName(this._dataId, name);
+            if(this.preLoad != null) {
+                await this.preLoad();
             }
+
+            requestAnimationFrame(() => {
+                const name = this.getAttribute("name");
+                if (name != null) {
+                    crsbinding.data.setName(this._dataId, name);
+                }
+            });
+
+            if (this.load != null) {
+                this.load();
+            }
+
+            this.isReady = true;
+            this.dispatchEvent(new CustomEvent("ready"));
+            delete this.__isLoading;
         });
-
-        if (this.load != null) {
-            this.load();
-        }
-
-        this.isReady = true;
-        this.dispatchEvent(new CustomEvent("ready"));
-        delete this.__isLoading;
     }
 
     async disconnectedCallback() {

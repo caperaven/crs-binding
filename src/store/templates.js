@@ -14,7 +14,15 @@ export function addTemplate(componentName, template) {
 export function unloadTemplates(componentNames) {
     const collection = Array.isArray(componentNames) == true ? componentNames : [componentNames];
     for (let name of collection) {
-        delete crsbinding.templates.data[name];
+        if (crsbinding.templates.data[name]?.count != null) {
+            crsbinding.templates.data[name].count -= 1;
+            if (crsbinding.templates.data[name].count == 0) {
+                delete crsbinding.templates.data[name];
+            }
+        }
+        else {
+            delete crsbinding.templates.data[name];
+        }
     }
 }
 
@@ -61,15 +69,20 @@ export async function loadTemplate(componentName, url) {
     return template;
 }
 
-export async function loadFromElement(store, element, url) {
+export async function loadFromElement(store, element, url, callback) {
     if (crsbinding.templates.data[store] != null) {
-        return crsbinding.templates.data[store].count += 1;
+        crsbinding.templates.data[store].count += 1;
+        crsbinding.templates.data[store].callbacks.push(callback);
+        return;
     }
 
     const storeItem = {
         count: 1,
-        templates: {}
+        templates: {},
+        callbacks: [callback]
     }
+
+    crsbinding.templates.data[store] = storeItem;
 
     let templates;
     if (url != null) {
@@ -85,14 +98,23 @@ export async function loadFromElement(store, element, url) {
     for (let template of templates) {
         storeItem.templates[template.dataset.id] = template;
         template.parentElement?.removeChild(template);
-        if (template.dataset.default === "true") {
+        if (template.dataset.default == "true") {
             defaultTemplate = template;
         }
     }
 
-    crsbinding.templates.data[store] = storeItem;
-    const result = defaultTemplate?.content.cloneNode(true);
-    result.name = defaultTemplate.id;
+    for (let callback of storeItem.callbacks) {
+        const instance = createInstance(defaultTemplate);
+        callback(instance);
+    }
+
+    storeItem.callbacks.length = 0;
+    delete storeItem.callbacks;
+}
+
+function createInstance(template) {
+    const result = template.content.cloneNode(true);
+    result.name = template.id;
     return result;
 }
 
