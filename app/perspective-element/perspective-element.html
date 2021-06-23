@@ -1,0 +1,62 @@
+<style>
+    .options {
+        margin-bottom: 1rem;
+    }
+
+    toolbar-element {
+        padding: 0.5rem;
+        background: #efefef;
+        margin-bottom: 1rem;
+    }
+</style>
+<h2>${title}</h2>
+
+<label class="options">
+    <div>View</div>
+    <select value.bind="selected">
+        <option value="person">Person</option>
+        <option value="address">Address</option>
+    </select>
+</label>
+
+<toolbar-element view.bind="selected"></toolbar-element>
+
+<perspective-element view.bind="selected" context.once="context" changed.call="viewChanged">
+    <template id="person" data-default="true">
+        <label>
+            <div>First Name</div>
+            <input value.bind="model.person.firstName" />
+        </label>
+        <label>
+            <div>Last Name</div>
+            <input value.bind="model.person.lastName" />
+        </label>
+        <label>
+            <div>Age Name</div>
+            <input value.bind="model.person.age" />
+        </label>
+    </template>
+
+    <template id="address">
+        <label>
+            <div>Street 1</div>
+            <input value.bind="model.address.street1" />
+        </label>
+        <label>
+            <div>Street 2</div>
+            <input value.bind="model.address.street2" />
+        </label>
+        <label>
+            <div>Street 3</div>
+            <input value.bind="model.address.street3" />
+        </label>
+        <label>
+            <div>City</div>
+            <input value.bind="model.address.city" />
+        </label>
+        <label>
+            <div>Zip Code</div>
+            <input value.bind="model.address.zipcode" />
+        </label>
+    </template>
+</perspective-element>

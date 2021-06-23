@@ -10,9 +10,10 @@ import {clone} from "./lib/clone.js";
 import {BindingData} from "./store/binding-data.js";
 import {EventEmitter} from "./events/event-emitter.js";
 import {RepeatBaseProvider} from "./binding/providers/repeat-base-provider.js";
-import {BindableElement} from "../src/binding/bindable-element.js";
-import {ViewBase} from "../src/view/view-base.js";
-import {Widget} from "../src/view/crs-widget.js";
+import {BindableElement} from "./binding/bindable-element.js";
+import {PerspectiveElement} from "./binding/perspective-element.js";
+import {ViewBase} from "./view/view-base.js";
+import {Widget} from "./view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
 import {ValueConvertersManager} from "./managers/value-converters-manager.js";
 import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile} from "./lib/utils.js";
@@ -21,7 +22,7 @@ import {renderCollection} from "./lib/renderCollection.js";
 import {getValueOnPath} from "./lib/path-utils.js";
 import {SvgElementsManager} from "./managers/svg-elements-manager.js";
 import {SvgElement} from "./view/svg-element.js";
-import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate} from "./store/templates.js";
+import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate, loadFromElement, getTemplateById} from "./store/templates.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -68,6 +69,7 @@ const crsbinding = {
 
     classes: {
         BindableElement: BindableElement,
+        PerspectiveElement: PerspectiveElement,
         ViewBase: ViewBase,
         RepeatBaseProvider: RepeatBaseProvider,
         Widget: Widget,
@@ -105,7 +107,10 @@ const crsbinding = {
         add: addTemplate,
         get: getTemplate,
         unload: unloadTemplates,
-        unloadAll: unloadAllTemplates
+        unloadAll: unloadAllTemplates,
+        loadFromElement: loadFromElement,
+        getById: getTemplateById,
+        // addById: addTemplateById,
     }
 };
 

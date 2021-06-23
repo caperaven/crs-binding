@@ -153,6 +153,10 @@
       "title": "Component Templates",
       "hash": "#component-templates",
       "view": "component-templates"
-    }
-  ]
+    },
+    {
+      "title": "Perspective Element",
+      "hash": "#perspective-element",
+      "view": "perspective-element"
+    }]
 }

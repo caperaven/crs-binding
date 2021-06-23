@@ -60,3 +60,44 @@ export async function loadTemplate(componentName, url) {
 
     return template;
 }
+
+export async function loadFromElement(store, element, url) {
+    if (crsbinding.templates.data[store] != null) {
+        return crsbinding.templates.data[store].count += 1;
+    }
+
+    const storeItem = {
+        count: 1,
+        templates: {}
+    }
+
+    let templates;
+    if (url != null) {
+        const fragment = document.createElement("template");
+        fragment.innerHTML = await fetch(url).then(result => result.text());
+        templates = fragment.content.querySelectorAll("template");
+    }
+    else {
+        templates = element.querySelectorAll("template");
+    }
+
+    let defaultTemplate;
+    for (let template of templates) {
+        storeItem.templates[template.id] = template;
+        template.parentElement?.removeChild(template);
+        if (template.dataset.default === "true") {
+            defaultTemplate = template;
+        }
+    }
+
+    crsbinding.templates.data[store] = storeItem;
+    const result = defaultTemplate?.content.cloneNode(true);
+    result.name = defaultTemplate.id;
+    return result;
+}
+
+export async function getTemplateById(store, id) {
+    const storeItem = crsbinding.templates.data[store];
+    const template = storeItem.templates[id];
+    return template.content.cloneNode(true);
+}
