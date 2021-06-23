@@ -76,7 +76,7 @@ async function parseAttribute(attr, context, ctxName, parentId) {
 }
 
 async function parseHTMLFragment(element, context, options) {
-    if (options.folder == null) return;
+    if (options?.folder == null) return;
 
     const file = crsbinding.utils.relativePathFrom(options.folder, element.getAttribute('src'));
 

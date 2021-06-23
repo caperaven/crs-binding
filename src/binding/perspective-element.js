@@ -87,14 +87,13 @@ export class PerspectiveElement extends HTMLElement {
     }
 
     async _loadView(view) {
-        if (this._currentView == view) return;
         if (this.__isLoading == true) return;
 
         crsbinding.observation.releaseChildBinding(this);
         this.innerHTML = "";
         const template = await crsbinding.templates.getById(this.store, view);
         this.appendChild(template);
-        await crsbinding.parsers.parseElements(this.children, this._dataId);
+        await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
         this._currentView = view;
     }
 }

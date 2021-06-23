@@ -8,6 +8,11 @@
         background: #efefef;
         margin-bottom: 1rem;
     }
+
+    label {
+        display:block;
+        margin-bottom: 0.5rem;
+    }
 </style>
 <h2>${title}</h2>
 
@@ -19,9 +24,9 @@
     </select>
 </label>
 
-<toolbar-element view.bind="selected"></toolbar-element>
-
-<perspective-element view.bind="selected" context.once="context" changed.call="viewChanged">
+<h2>Perspective Content</h2>
+<toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
+<perspective-element data-store="perspective1" view.bind="selected" context.once="context" changed.call="viewChanged">
     <template id="person" data-default="true">
         <label>
             <div>First Name</div>
@@ -58,5 +63,16 @@
             <div>Zip Code</div>
             <input value.bind="model.address.zipcode" />
         </label>
+    </template>
+</perspective-element>
+
+<h2>Perspective Fragment</h2>
+<toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
+<perspective-element data-store="perspective2" view.bind="selected" context.once="context" data-folder="/app/perspective-element/">
+    <template id="person" data-default="true">
+        <template src="./templates/person.html"></template>
+    </template>
+    <template id="address">
+        <template src="./templates/address.html"></template>
     </template>
 </perspective-element>

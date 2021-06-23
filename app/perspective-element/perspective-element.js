@@ -21,4 +21,8 @@ export default class PerspectiveElement extends ViewBase {
             }
         })
     }
+
+    performAction(event) {
+        console.log(event.detail);
+    }
 }
