@@ -41,6 +41,11 @@ async function getValue(query) {
     return value;
 }
 
+async function setValue(query, value) {
+    const handle = await page.$(query);
+    await page.evaluate((element, value) => element.value = value, handle, value);
+}
+
 async function setInputText(query, value) {
     const handle = await page.$(query);
 
@@ -499,6 +504,24 @@ test("svg element", async() => {
 
     color = await getAttributeValue("rect", "fill");
     expect(color).toBe("#ff0090");
+
+    await page.goBack();
+})
+
+test("perspective-element", async ()=> {
+    await navigateTo("perspective-element");
+    await page.waitForSelector("button");
+
+    expect(await page.evaluate('document.querySelector("#with-context").children.length')).toBe(3);
+    expect(await page.evaluate('document.querySelector("#with-fragment").children.length')).toBe(3);
+    expect(await page.evaluate('document.querySelectorAll("button").length')).toBe(4);
+
+    await page.select('select', 'address');
+    await page.waitForSelector("#end");
+
+    expect(await page.evaluate('document.querySelector("#with-context").children.length')).toBe(5);
+    expect(await page.evaluate('document.querySelector("#with-fragment").children.length')).toBe(6);
+    expect(await page.evaluate('document.querySelectorAll("button").length')).toBe(8);
 
     await page.goBack();
 })

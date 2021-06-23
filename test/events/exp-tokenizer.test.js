@@ -196,11 +196,11 @@ test("tokenize - simple conditional expression", () => {
     assert(result[3], "space");
     assert(result[4], "string", "'a'");
     assert(result[5], "space");
-    assert(result[6], "keyword", "?");
+    assert(result[6], "operator", "?");
     assert(result[7], "space");
     assert(result[8], "keyword", "true");
     assert(result[9], "space");
-    assert(result[10], "keyword", ":");
+    assert(result[10], "operator", ":");
     assert(result[11], "space");
     assert(result[12], "keyword", "false");
 })
@@ -286,7 +286,7 @@ test ("tokenize - globals with objects", () => {
     assert(result[3], "space");
     assert(result[4], "keyword", "{");
     assert(result[5], "word", "title");
-    assert(result[6], "keyword", ":");
+    assert(result[6], "operator", ":");
     assert(result[7], "space");
     assert(result[8], "keyword", "${");
     assert(result[9], "property", "title");
@@ -301,13 +301,13 @@ test ("tokenize - set object with event", () => {
     assert(result[0], "keyword", "{");
     assert(result[1], "space");
     assert(result[2], "word", "x");
-    assert(result[3], "keyword", ":");
+    assert(result[3], "operator", ":");
     assert(result[4], "space");
     assert(result[5], "property", "$event.x");
     assert(result[6], "keyword", ",")
     assert(result[7], "space");
     assert(result[8], "word", "y");
-    assert(result[9], "keyword", ":");
+    assert(result[9], "operator", ":");
     assert(result[10], "space");
     assert(result[11], "property", "$event.y");
     assert(result[12], "space");

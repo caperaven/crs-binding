@@ -26,7 +26,7 @@
 
 <h2>Perspective Content</h2>
 <toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
-<perspective-element data-store="perspective1" view.bind="selected" context.once="context" changed.call="viewChanged">
+<perspective-element id="with-context" data-store="perspective1" view.bind="selected" context.once="context" changed.call="viewChanged">
     <template data-id="person" data-default="true">
         <label>
             <div>First Name</div>
@@ -68,7 +68,7 @@
 
 <h2>Perspective Fragment</h2>
 <toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
-<perspective-element data-store="perspective2" view.bind="selected" context.once="context" data-folder="/app/perspective-element/">
+<perspective-element id="with-fragment" data-store="perspective2" view.bind="selected" context.once="context" data-folder="/app/perspective-element/">
     <template data-id="person" data-default="true">
         <template src="./templates/person.html"></template>
     </template>
