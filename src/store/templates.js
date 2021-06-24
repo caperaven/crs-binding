@@ -114,7 +114,7 @@ export async function loadFromElement(store, element, url, callback) {
 
 function createInstance(template) {
     const result = template.content.cloneNode(true);
-    result.name = template.id;
+    result.name = template.dataset.id;
     return result;
 }
 

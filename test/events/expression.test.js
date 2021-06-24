@@ -328,3 +328,8 @@ test("sanitizeExp - if false property", () => {
    const result = sanitizeExp("columnSpan != null ? '' : defaultSpan");
    expect(result.expression).toBe("context.columnSpan != null ? '' : context.defaultSpan");
 })
+
+test.skip("sanitizeExp - object literal", () => {
+   const result = sanitizeExp("Selected Person Value: ${selectedPerson}");
+   expect(result.expression).toBe("Selected Person Value: ${context.selectedPerson}");
+})

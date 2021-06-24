@@ -63,6 +63,7 @@ export class PerspectiveElement extends HTMLElement {
                 this.load();
             }
 
+            await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
             this.isReady = true;
             this.dispatchEvent(new CustomEvent("ready"));
             delete this.__isLoading;
