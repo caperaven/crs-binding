@@ -333,3 +333,9 @@ test.skip("sanitizeExp - object literal", () => {
    const result = sanitizeExp("Selected Person Value: ${selectedPerson}");
    expect(result.expression).toBe("Selected Person Value: ${context.selectedPerson}");
 })
+
+
+test("sanitizeExp - function on context", () => {
+   const result = sanitizeExp("getInitialValue('code')");
+   expect(result.expression).toBe("context.getInitialValue('code')");
+})
