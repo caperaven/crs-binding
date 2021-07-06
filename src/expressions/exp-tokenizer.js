@@ -181,6 +181,11 @@ function postProcessTokens(tokens) {
                     token.type = TokenTypes.PROPERTY;
                 }
             }
+
+            // the first item in the expression is a function but treat it like a property so that context. is added
+            else if (i === 0 && tokens[i + 1]?.value === "(") {
+                token.type = TokenTypes.PROPERTY
+            }
         }
 
         // Check if this is part of a function expression and update the property accordingly.
@@ -228,6 +233,10 @@ function postProcessTokens(tokens) {
         }
 
         i++;
+    }
+
+    if (tokens[0].type === TokenTypes.FUNCTION) {
+        tokens[0].type = TokenTypes.PROPERTY;
     }
 
     return tokens;
