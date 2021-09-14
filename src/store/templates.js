@@ -17,6 +17,8 @@ export function unloadTemplates(componentNames) {
         if (crsbinding.templates.data[name]?.count != null) {
             crsbinding.templates.data[name].count -= 1;
             if (crsbinding.templates.data[name].count == 0) {
+                delete crsbinding.templates.data[name].templates;
+                delete crsbinding.templates.data[name].style;
                 delete crsbinding.templates.data[name];
             }
         }
@@ -85,14 +87,19 @@ export async function loadFromElement(store, element, url, callback) {
     crsbinding.templates.data[store] = storeItem;
 
     let templates;
+    let style;
     if (url != null) {
         const fragment = document.createElement("template");
         fragment.innerHTML = await fetch(url).then(result => result.text());
         templates = fragment.content.querySelectorAll("template");
+        style = fragment.content.querySelector("style");
     }
     else {
         templates = element.querySelectorAll("template");
+        style = element.querySelector("style");
     }
+
+    storeItem.style = style;
 
     let defaultTemplate;
     for (let template of templates) {
@@ -105,6 +112,11 @@ export async function loadFromElement(store, element, url, callback) {
 
     for (let callback of storeItem.callbacks) {
         const instance = createInstance(defaultTemplate);
+
+        if (style != null) {
+            instance.insertBefore(style, instance.firstChild);
+        }
+
         callback(instance);
     }
 
@@ -121,5 +133,12 @@ function createInstance(template) {
 export async function getTemplateById(store, id) {
     const storeItem = crsbinding.templates.data[store];
     const template = storeItem.templates[id];
-    return template.content.cloneNode(true);
+
+    let instance = template.content.cloneNode(true);
+
+    if (storeItem.style != null) {
+        instance.insertBefore(storeItem.style, instance.firstChild);
+    }
+
+    return instance;
 }

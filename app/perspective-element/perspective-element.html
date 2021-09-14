@@ -27,6 +27,11 @@
 <h2>Perspective Content</h2>
 <toolbar-element view.bind="selected" action.call="performAction"></toolbar-element>
 <perspective-element id="with-context" data-store="perspective1" view.bind="selected" context.once="context" changed.call="viewChanged">
+    <style>
+        input {
+            color: red;
+        }
+    </style>
     <template data-id="person" data-default="true">
         <label>
             <div>First Name</div>

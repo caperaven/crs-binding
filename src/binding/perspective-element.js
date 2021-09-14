@@ -72,7 +72,6 @@ export class PerspectiveElement extends HTMLElement {
 
     async disconnectedCallback() {
         this.dispose();
-
         crsbinding.utils.disposeProperties(this);
         crsbinding.observation.releaseBinding(this);
     }
@@ -94,6 +93,7 @@ export class PerspectiveElement extends HTMLElement {
 
         crsbinding.observation.releaseChildBinding(this);
         this.innerHTML = "";
+
         const template = await crsbinding.templates.getById(this.store, view);
         this.appendChild(template);
         await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
