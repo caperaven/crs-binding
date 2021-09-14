@@ -11,7 +11,7 @@ const TokenTypes = Object.freeze({
     STRING  : "string"
 })
 
-export function tokenize(exp) {
+export function tokenize(exp, isLiteral) {
     const result = [];
     let word = [];
     let i = 0;
@@ -127,16 +127,17 @@ export function tokenize(exp) {
         pushWord(word.join(""));
     }
 
-    return postProcessTokens(result);
+    return postProcessTokens(result, isLiteral);
 }
 
-function postProcessTokens(tokens) {
+function postProcessTokens(tokens, isLiteral) {
     if (tokens.length == 1 && tokens[0].type == TokenTypes.WORD) {
         tokens[0].type = TokenTypes.PROPERTY;
         return tokens;
     }
 
     let state = [];
+    let isObject = false;
 
     let i = 0;
     while(tokens[i] != undefined) {
@@ -170,13 +171,13 @@ function postProcessTokens(tokens) {
 
             // left of operator
             else if (isOperator(tokens[i + 1]) || isOperator(tokens[i + 2])) {
-                if (currentState !== TokenTypes.OBJECT) {
+                if (isLiteral !== true && currentState !== TokenTypes.OBJECT) {
                     token.type = TokenTypes.PROPERTY;
                 }
             }
 
             // right of operator
-            else if (isOperator(tokens[i - 1]) || isOperator(tokens[i - 2])) {
+            else if (isLiteral !== true && isOperator(tokens[i - 1]) || isOperator(tokens[i - 2])) {
                 if (currentState !== TokenTypes.OBJECT) {
                     token.type = TokenTypes.PROPERTY;
                 }

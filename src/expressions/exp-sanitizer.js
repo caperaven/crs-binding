@@ -30,7 +30,7 @@ export function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
     const properties = new Set();
     const isLiteral = exp.indexOf("${") != -1;
 
-    const tokens = tokenize(exp);
+    const tokens = tokenize(exp, isLiteral);
     const expression = [];
 
     for (let token of tokens) {
