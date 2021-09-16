@@ -67,6 +67,10 @@ export class PerspectiveElement extends HTMLElement {
             this.isReady = true;
             this.dispatchEvent(new CustomEvent("ready"));
             delete this.__isLoading;
+
+            requestAnimationFrame(() => {
+                this.dataset.view = fragment.name;
+            });
         });
     }
 
