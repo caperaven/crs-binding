@@ -55,7 +55,7 @@ export function measureElement(element) {
  */
 const ignoreDispose = ["_element"];
 export function disposeProperties(obj) {
-    if (obj == null) return;
+    if (obj == null || Object.isFrozen(obj)) return;
 
     const properties = Object.getOwnPropertyNames(obj).filter(name => ignoreDispose.indexOf(name) == -1);
 
