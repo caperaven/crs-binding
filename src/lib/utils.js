@@ -56,17 +56,23 @@ export function measureElement(element) {
 const ignoreDispose = ["_element"];
 export function disposeProperties(obj) {
     if (obj == null) return;
+
     const properties = Object.getOwnPropertyNames(obj).filter(name => ignoreDispose.indexOf(name) == -1);
+
     for (let property of properties) {
         const pObj = obj[property];
-        if (typeof pObj == "object" && Array.isArray(pObj) != true) {
-            disposeProperties(pObj);
+
+        if (typeof pObj == "object") {
+            if (pObj == null || pObj.autoDispose == false) {
+                continue;
+            }
+
+            if (Array.isArray(pObj) != true) {
+                disposeProperties(pObj);
+            }
         }
-        try{
-            delete obj[property];
-        }
-        catch(e) {
-        }
+
+        delete obj[property];
     }
 }
 
