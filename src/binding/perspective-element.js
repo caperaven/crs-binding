@@ -98,6 +98,10 @@ export class PerspectiveElement extends HTMLElement {
         this.appendChild(template);
         await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
         this._currentView = view;
+
+        requestAnimationFrame(() => {
+            this.dataset.view = view;
+        })
     }
 }
 
