@@ -188,6 +188,22 @@ test("component", async() => {
     await page.goBack();
 });
 
+test("translations", async() => {
+    await navigateTo("translations");
+
+    expect(await getTextContent("#btnOne")).toEqual("Save");
+    expect(await getTextContent("#btnTwo")).toEqual("Cancel");
+    expect(await getTextContent("#btnThree")).toEqual("Save");
+    expect(await getTextContent("#btnFour")).toEqual("Cancel");
+    expect(await getTextContent("#h2One")).toEqual("Translation Title");
+    expect(await getTextContent("#h2Two")).toEqual("Translation Title");
+
+    expect(await getAttributeValue("#btnThree", "data-title")).toEqual("Save");
+    expect(await getAttributeValue("#btnFour", "data-title")).toEqual("Cancel");
+
+    await page.goBack();
+})
+
 test("collections", async() => {
     await navigateTo("collections");
 
