@@ -23,6 +23,7 @@ import {getValueOnPath} from "./lib/path-utils.js";
 import {SvgElementsManager} from "./managers/svg-elements-manager.js";
 import {SvgElement} from "./view/svg-element.js";
 import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate, loadFromElement, getTemplateById} from "./store/templates.js";
+import {TranslationsManager} from "./managers/translations-manager.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -50,6 +51,7 @@ const crsbinding = {
     elementStoreManager: new ElementStoreManager(),
     svgCustomElements: new SvgElementsManager(),
     valueConvertersManager: new ValueConvertersManager(),
+    translations: new TranslationsManager(),
 
     expression: {
         sanitize: sanitizeExp,
