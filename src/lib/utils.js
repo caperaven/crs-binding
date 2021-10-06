@@ -133,3 +133,24 @@ export function forStatementParts(value) {
         plural: plural
     }
 }
+
+/**
+ * Flatten an object path structure to a key value pair on the target
+ * @param prefix
+ * @param obj
+ * @param target
+ */
+export function flattenPropertyPath(prefix, obj, target) {
+    if (typeof obj === "string") {
+        if (prefix[0] === ".") {
+            prefix = prefix.substring(1);
+        }
+        target[prefix] = obj;
+    }
+    else {
+        const keys = Object.keys(obj);
+        for (let key of keys) {
+            flattenPropertyPath(`${prefix}.${key}`, obj[key], target);
+        }
+    }
+}

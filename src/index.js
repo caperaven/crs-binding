@@ -16,7 +16,7 @@ import {ViewBase} from "./view/view-base.js";
 import {Widget} from "./view/crs-widget.js";
 import {ElementStoreManager} from "./managers/element-store-manager.js";
 import {ValueConvertersManager} from "./managers/value-converters-manager.js";
-import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile} from "./lib/utils.js";
+import {measureElement, fragmentToText, disposeProperties, cloneTemplate, relativePathFrom, getPathOfFile, flattenPropertyPath} from "./lib/utils.js";
 import {forceClean} from "./lib/cleanMemory.js";
 import {renderCollection} from "./lib/renderCollection.js";
 import {getValueOnPath} from "./lib/path-utils.js";
@@ -100,7 +100,8 @@ const crsbinding = {
         renderCollection: renderCollection,
         relativePathFrom: relativePathFrom,
         getPathOfFile: getPathOfFile,
-        getValueOnPath: getValueOnPath
+        getValueOnPath: getValueOnPath,
+        flattenPropertyPath: flattenPropertyPath
     },
 
     templates: {

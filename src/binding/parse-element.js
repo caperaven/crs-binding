@@ -36,23 +36,31 @@ export async function parseElement(element, context, options) {
     const boundAttributes = attributes.filter(attr =>
         (attr.ownerElement.tagName.toLowerCase() == "template" && attr.name == "for") ||
         (attr.name.indexOf(".") != -1) ||
-        ((attr.value || "").indexOf("${") == 0)
+        ((attr.value || "").indexOf("${") == 0) ||
+        ((attr.value || "").indexOf("&{") == 0)
     );
 
     await parseAttributes(boundAttributes, context, ctxName, parentId);
 
-    if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
+    if (element.textContent.indexOf("&{") !== -1) {
+        element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
+    }
+    else if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
     }
-
-    if (nodeName === "svg") {
+    else if (nodeName === "svg") {
         crsbinding.svgCustomElements.parse(element);
     }
 }
 
 async function parseAttributes(collection, context, ctxName, parentId) {
     for (let attr of collection) {
-        await parseAttribute(attr, context, ctxName, parentId);
+        if (attr.nodeValue.indexOf("&{") !== -1) {
+            attr.nodeValue = await crsbinding.translations.get_with_markup(attr.nodeValue);
+        }
+        else {
+            await parseAttribute(attr, context, ctxName, parentId);
+        }
     }
 }
 

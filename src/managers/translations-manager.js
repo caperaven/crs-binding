@@ -1,3 +1,5 @@
+import {flattenPropertyPath} from "./../lib/utils.js";
+
 export class TranslationsManager {
     constructor() {
         this.dictionary = {};
@@ -8,19 +10,35 @@ export class TranslationsManager {
     }
 
     async add(obj, context) {
-        flatten(context || "", obj, this.dictionary);
+        flattenPropertyPath(context || "", obj, this.dictionary);
     }
 
     async delete(context) {
-
+        const filterKey = `${context}.`;
+        const keys = Object.keys(this.dictionary).filter(item => item.indexOf(filterKey) === 0);
+        for (let key of keys) {
+            delete this.dictionary[key];
+        }
     }
 
     async parseElement(element) {
+        if (element.textContent.indexOf("&{") != -1) {
+            element.textContent = await this.get_with_markup(element.textContent.trim());
+        }
 
+        for (let attribute of element.attributes) {
+            await this.parseAttribute(attribute);
+        }
+
+        for (let child of element.children) {
+            await this.parseElement(child);
+        }
     }
 
-    async parseAttribute(element, attribute) {
-
+    async parseAttribute(attribute) {
+        if (attribute.nodeValue.indexOf("&{") !== -1) {
+            attribute.nodeValue = await this.get_with_markup(attribute.nodeValue);
+        }
     }
 
     async get(key) {
@@ -37,19 +55,9 @@ export class TranslationsManager {
 
         return result;
     }
-}
 
-function flatten(prefix, obj, target) {
-    if (typeof obj === "string") {
-        if (prefix[0] === ".") {
-            prefix = prefix.substring(1);
-        }
-        target[prefix] = obj;
-    }
-    else {
-        const keys = Object.keys(obj);
-        for (let key of keys) {
-            flatten(`${prefix}.${key}`, obj[key], target);
-        }
+    async get_with_markup(key) {
+        key = key.split("&{").join("").split("}").join("");
+        return await this.get(key);
     }
 }

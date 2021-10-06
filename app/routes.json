@@ -158,5 +158,11 @@
       "title": "Perspective Element",
       "hash": "#perspective-element",
       "view": "perspective-element"
-    }]
+    },
+    {
+      "title": "Translations",
+      "hash": "#translations",
+      "view": "translations"
+    }
+  ]
 }

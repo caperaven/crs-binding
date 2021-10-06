@@ -53,3 +53,34 @@ test("translations - get from fetch - not set", async () => {
     let result = await instance.get("no.such.key");
     expect(result).toBeNull();
 })
+
+test ("translations - delete context", async () => {
+    await instance.add(translations);
+    await instance.add(translations, "context");
+
+    expect(await instance.get("buttons.save")).toEqual("Save");
+    expect(await instance.get("buttons.cancel")).toEqual("Cancel");
+    expect(await instance.get("labels.code")).toEqual("Code");
+    expect(await instance.get("labels.description")).toEqual("Description");
+    expect(await instance.get("context.buttons.save")).toEqual("Save");
+    expect(await instance.get("context.buttons.cancel")).toEqual("Cancel");
+    expect(await instance.get("context.labels.code")).toEqual("Code");
+    expect(await instance.get("context.labels.description")).toEqual("Description");
+
+    await instance.delete("context");
+
+    expect(await instance.get("buttons.save")).toEqual("Save");
+    expect(await instance.get("buttons.cancel")).toEqual("Cancel");
+    expect(await instance.get("labels.code")).toEqual("Code");
+    expect(await instance.get("labels.description")).toEqual("Description");
+    expect(await instance.get("context.buttons.save")).toBeNull();
+    expect(await instance.get("context.buttons.cancel")).toBeNull();
+    expect(await instance.get("context.labels. code")).toBeNull();
+    expect(await instance.get("context.labels.description")).toBeNull();
+})
+
+test ("translations - get with markup", async () => {
+    await instance.add(translations);
+    const value = await instance.get_with_markup("&{buttons.save}");
+    expect(value).toEqual("Save");
+})
