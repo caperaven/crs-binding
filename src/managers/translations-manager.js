@@ -22,7 +22,7 @@ export class TranslationsManager {
     }
 
     async parseElement(element) {
-        if (element.textContent.indexOf("&{") != -1) {
+        if (element.children.length == 0 && element.textContent.indexOf("&{") != -1) {
             element.textContent = await this.get_with_markup(element.textContent.trim());
         }
 

@@ -64,6 +64,17 @@
         crsbinding.data.setProperty(crsbinding.$globals, "menuVisible", true, null, "boolean");
         crsbinding.data.setProperty(crsbinding.$globals, "myDate", null);
 
+        const translations = {
+            title: "Translation Title",
+            buttons: {
+                save: "Save",
+                cancel: "Cancel"
+            }
+        }
+debugger;
+        await crsbinding.translations.add(translations);
+        await crsbinding.translations.add(translations, "context");
+
         import Index from "./index.js";
         document.viewModel = new Index(document.body);
 

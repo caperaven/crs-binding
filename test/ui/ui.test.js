@@ -190,13 +190,21 @@ test("component", async() => {
 
 test("translations", async() => {
     await navigateTo("translations");
+    await page.waitForSelector("#btnOne");
 
     expect(await getTextContent("#btnOne")).toEqual("Save");
     expect(await getTextContent("#btnTwo")).toEqual("Cancel");
     expect(await getTextContent("#btnThree")).toEqual("Save");
     expect(await getTextContent("#btnFour")).toEqual("Cancel");
+    expect(await getTextContent("#btnFive")).toEqual("Save");
+    expect(await getTextContent("#btnSix")).toEqual("Cancel");
+    expect(await getTextContent("#btnSeven")).toEqual("Save");
+    expect(await getTextContent("#btnEight")).toEqual("Cancel");
+
     expect(await getTextContent("#h2One")).toEqual("Translation Title");
     expect(await getTextContent("#h2Two")).toEqual("Translation Title");
+    expect(await getTextContent("#h2Three")).toEqual("Translation Title");
+    expect(await getTextContent("#h2Four")).toEqual("Translation Title");
 
     expect(await getAttributeValue("#btnThree", "data-title")).toEqual("Save");
     expect(await getAttributeValue("#btnFour", "data-title")).toEqual("Cancel");

@@ -5,3 +5,13 @@
 <h2 id="h2Two">&{context.title}</h2>
 <button id="btnThree" data-title="&{context.buttons.save}">&{context.buttons.save}</button>
 <button id="btnFour" data-title="&{context.buttons.cancel}">&{context.buttons.cancel}</button>
+
+<perspective-element id="with-context" data-store="perspective1" view.bind="selected">
+    <template id="selected" data-default="true">
+        <h2 id="h2Three">&{context.title}</h2>
+        <button id="btnFive" data-title="&{context.buttons.save}">&{context.buttons.save}</button>
+        <button id="btnSix" data-title="&{context.buttons.cancel}">&{context.buttons.cancel}</button>
+    </template>
+</perspective-element>
+
+<component-element></component-element>
