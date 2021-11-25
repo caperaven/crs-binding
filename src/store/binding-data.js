@@ -58,6 +58,15 @@ export class BindingData {
     }
 
     /**
+     * Get the binding data object for the id provided
+     * @param id
+     * @returns {*}
+     */
+    getData(id) {
+        return this._data[id];
+    }
+
+    /**
      * Get the array proxy based on the context id and property path
      * @param id {number} context id
      * @param property {string} property path

@@ -27,12 +27,15 @@
         "babel-jest": "^24.9.0",
         "crs-router": "0.0.48",
         "glob": "^7.1.4",
-        "jest": "^24.9.0",
+        "jest": "^27.3.1",
         "mkdirp": "^0.5.1",
+        "nyc": "^15.1.0",
         "puppeteer": "^2.1.1",
         "puppeteer-to-istanbul": "^1.4.0",
         "rollup": "^1.23.0",
-        "rollup-plugin-terser": "^5.1.2",
-        "nyc": "^15.1.0"
+        "rollup-plugin-terser": "^5.1.2"
+    },
+    "dependencies": {
+        "crs-process-api": "^0.0.26"
     }
 }

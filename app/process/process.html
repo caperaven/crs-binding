@@ -1,0 +1,25 @@
+<style>
+    button {
+        height: 32px;
+        width: 200px;
+    }
+</style>
+
+<h2>Process</h2>
+
+<!-- passing a process step object as if it was a process step -->
+<!-- think of using this on the form for pass fail actions instead of the pass fail -->
+
+<!-- execute this for me in context of the current process -->
+<button click.process="{type: 'console', action: 'log', args: {messages: [$context.value, 'world']}, next_step:''}">Execute Step</button>
+
+<!-- call a function on a system with this args -->
+<!-- call this as if it was a js function -->
+<button click.process="console.log({ messages: ['wazaaap', 'yall'] })">Call Function</button>
+
+<!-- call a process on a schema with these parameters -->
+<button click.process="process_schema[simple()]">Simple Process</button>
+<button click.process="process_schema[binding(bId, value: $context.value)]">Bound Process</button>
+
+
+

@@ -14,6 +14,7 @@ import {ForMapProvider} from "./providers/for-map-provider.js";
 import {EmitProvider} from "./providers/emit-provider.js";
 import {PostProvider} from "./providers/post-provider.js";
 import {SetValueProvider} from "./providers/setvalue-provider.js";
+import {ProcessProvider} from "./providers/process-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName, attr, parentId) {
@@ -90,5 +91,9 @@ export class ProviderFactory {
 
     static "attr"(element, context, property, value, ctxName, attr, parentId) {
         return new AttrProvider(element, context, property, value, ctxName, parentId);
+    }
+
+    static "process"(element, context, property, value, ctxName, attr, parentId) {
+        return new ProcessProvider(element, context, property, value, ctxName, parentId);
     }
 }

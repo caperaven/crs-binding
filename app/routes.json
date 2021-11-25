@@ -5,6 +5,11 @@
   "auto-hide": true,
   "routes": [
     {
+      "title": "Process",
+      "hash": "#process",
+      "view": "process"
+    },
+    {
       "title": "Context Actions",
       "hash": "#context-actions",
       "view": "context-actions"
