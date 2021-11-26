@@ -13,6 +13,10 @@
         display:block;
         margin-bottom: 0.5rem;
     }
+
+    .summary {
+        text-transform: uppercase;
+    }
 </style>
 <h2>${title}</h2>
 
@@ -45,6 +49,8 @@
             <div>Age Name</div>
             <input value.bind="model.person.age" />
         </label>
+
+        <div class="summary">${model.person.firstName} ${model.person.lastName} ${model.person.age}</div>
     </template>
 
     <template data-id="address">

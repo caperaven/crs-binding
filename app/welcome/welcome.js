@@ -4,7 +4,7 @@ export default class Welcome extends ViewBase {
     preLoad() {
         this.setProperty("item", {
             name: "Johan"
-        })
+        });
     }
 
     showWidget() {

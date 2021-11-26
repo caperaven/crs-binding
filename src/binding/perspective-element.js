@@ -105,6 +105,7 @@ export class PerspectiveElement extends HTMLElement {
 
         requestAnimationFrame(() => {
             this.dataset.view = view;
+            this.dispatchEvent(new CustomEvent("view-loaded"));
         })
     }
 }

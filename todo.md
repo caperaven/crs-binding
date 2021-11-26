@@ -5,3 +5,6 @@
     1. Bindable Element
     1. ...
    
+
+1. css on perspective element capitalization bug
+2. do parsing of shadow root and set up example test.
