@@ -4,7 +4,7 @@ export class InnerProvider extends ProviderBase {
     constructor(element, context, property, value, ctxName, parentId) {
         super(element, context, property, value, ctxName, parentId);
 
-        const elementText = element.textContent || element.innerText;
+        const elementText = element.textContent;
 
         if (elementText.indexOf("$parent.") != -1) {
             element.textContent = elementText.split("$parent.").join("");
@@ -35,7 +35,7 @@ export class InnerProvider extends ProviderBase {
         if (this._expObj == null) return;
         let value = this._expObj.function(this.data);
         value = value == null ? "" : value.split("undefined").join("");
-        let target = this._element.textContent != null ? "textContent" : "innerText";
+        let target = "textContent";
 
         if (this._expObj.parameters.isHTML == true) {
             target = "innerHTML";

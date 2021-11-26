@@ -45,7 +45,7 @@ export async function parseElement(element, context, options) {
     if (element.textContent.indexOf("&{") !== -1) {
         element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
     }
-    else if (element.children && element.children.length == 0 && (element.innerText || element.textContent || "").indexOf("${") != -1) {
+    else if (element.children && element.children.length == 0 && (element.textContent || "").indexOf("${") != -1) {
         ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
     }
     else if (nodeName === "svg") {

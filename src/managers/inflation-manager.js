@@ -298,7 +298,7 @@ class InflationCodeGenerator {
     }
 
     _processElement(element) {
-        this._processInnerText(element);
+        this._processTextContent(element);
         this._processAttributes(element);
 
         const path = this.path;
@@ -331,11 +331,11 @@ class InflationCodeGenerator {
         }
     }
 
-    _processInnerText(element) {
-        if (element.children == null || element.children.length > 0 || element.innerHTML.indexOf("${") == -1) return;
+    _processTextContent(element) {
+        if (element.children == null || element.children.length > 0 || element.textContent.indexOf("${") == -1) return;
 
         const text = (element.innerHTML || "").trim();
-        let target = element.textContent ? "textContent" : "innerText";
+        let target = "textContent";
 
         let exp = text;
         const san = crsbinding.expression.sanitize(exp, this._ctxName);
