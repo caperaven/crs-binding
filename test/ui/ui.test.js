@@ -582,3 +582,27 @@ test("nested for", async () => {
     // await assert(list4);
     await page.goBack();
 })
+
+test("inflation - cells", async () => {
+    await navigateTo("inflation-cells");
+    await page.waitForSelector("#inflation-grid[data-loaded='true']");
+
+    await click("#btnUpdate");
+    let count = await childCount("#inflation-grid");
+    expect(count).toEqual(30);
+
+    await setInputText("#edtEnd", "4");
+    await click("#btnUpdate");
+    count = await childCount("#inflation-grid");
+    await page.waitFor(1000);
+    expect(count).toEqual(15);
+
+    await setInputText("#edtStart", "10");
+    await setInputText("#edtEnd", "19");
+    await click("#btnUpdate");
+
+    count = await childCount("#inflation-grid");
+    await page.waitFor(1000);
+    expect(count).toEqual(30);
+
+})

@@ -13,11 +13,11 @@
 <div class="toolbar">
     <h2>Inflation Cells</h2>
     <span>Start: </span>
-    <input value.bind="start" type="number">
+    <input value.bind="start" type="number" id="edtStart">
     <span>End: </span>
-    <input value.bind="end" type="number">
-    <button click.call="update">Update</button>
-    <button click.call="updateRow">Update Row</button>
+    <input value.bind="end" type="number" id="edtEnd">
+    <button click.call="update" id="btnUpdate">Update</button>
+    <button click.call="updateRow" id="updateRow">Update Row</button>
 </div>
 
 <div class="grid" id="inflation-grid">

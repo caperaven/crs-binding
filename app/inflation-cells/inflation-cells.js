@@ -37,6 +37,7 @@ export default class InflationCells extends ViewBase {
 
     load() {
         super.load();
+        this.element.querySelector("#inflation-grid").dataset.loaded = true;
     }
 
     async renderBatch(start, end) {
