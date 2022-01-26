@@ -87,14 +87,16 @@ export class InflationManager {
         let fragment = null;
 
         if (diff < 0) {
-            let length = (-1 * diff);
+            const length = (-1 * diff);
             fragment = crsbinding.elementStoreManager.getElements(item.id, length);
-            let offset = length / item.childCount;
-            let subData = data.slice(data.length - offset, data.length);
+            const offset = length / item.childCount;
+            const sub_start_index = data.length - offset;
+            const subData = data.slice(sub_start_index, data.length);
             this._inflateElements(item, fragment, subData);
+            data = data.slice(0, sub_start_index);
         }
 
-        if (diff >= 0) {
+        //if (diff >= 0) {
             let index = 0;
             let elementsCollection = [];
 
@@ -111,14 +113,14 @@ export class InflationManager {
             }
 
             // delete excess elements
-            if (start == 0) {
+            if (start == 0 && diff > 0) {
                 elementsCollection = Array.from(elements);
                 for (let i = diff; i > 0; i--) {
                     const element = elementsCollection.pop();
                     element.parentElement.removeChild(element);
                 }
             }
-        }
+        //}
 
         return fragment;
     }
