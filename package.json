@@ -36,6 +36,6 @@
         "rollup-plugin-terser": "^5.1.2"
     },
     "dependencies": {
-        "crs-process-api": "^0.0.26"
+        "crs-process-api": "^0.0.76"
     }
 }

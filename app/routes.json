@@ -168,6 +168,11 @@
       "title": "Translations",
       "hash": "#translations",
       "view": "translations"
+    },
+    {
+      "title": "Inflation Cells",
+      "hash": "#inflation-cells",
+      "view": "inflation-cells"
     }
   ]
 }

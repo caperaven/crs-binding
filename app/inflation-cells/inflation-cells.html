@@ -1,0 +1,24 @@
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .cell {
+        padding: 1rem
+    }
+</style>
+
+<div class="toolbar">
+    <h2>Inflation Cells</h2>
+    <span>Start: </span>
+    <input value.bind="start" type="number">
+    <span>End: </span>
+    <input value.bind="end" type="number">
+    <button click.call="update">Update</button>
+</div>
+
+<div class="grid" id="inflation-grid">
+
+</div>

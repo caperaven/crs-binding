@@ -57,12 +57,12 @@ export class InflationManager {
      * @param id
      * @param data
      */
-    get(id, data, elements) {
+    get(id, data, elements, start) {
         const item = this._items.get(id);
         if (item == null) return null;
 
         if (elements != null) {
-            return this._getWithElements(item, data, elements);
+            return this._getWithElements(item, data, elements, start || 0);
         }
 
         const length = Array.isArray(data) ? data.length * item.childCount : 1;
@@ -79,27 +79,49 @@ export class InflationManager {
      * @returns {DocumentFragment}
      * @private
      */
-    _getWithElements(item, data, elements) {
-        const diff = elements.length - data.length;
-        const fragment = document.createDocumentFragment();
+    _getWithElements(item, data, elements, start) {
+        if (data.length == 0) return null;
 
-        if (diff > 0) {
-            for (let i = 0; i < diff; i++) {
-                const removed = elements.pop();
-                removed.parentElement.removeChild(removed);
+        const diff = elements.length - (data.length * item.childCount);
+
+        let fragment = null;
+
+        if (diff < 0) {
+            let length = (-1 * diff);
+            fragment = crsbinding.elementStoreManager.getElements(item.id, length);
+            let offset = length / item.childCount;
+            let subData = data.slice(data.length - offset, data.length);
+            this._inflateElements(item, fragment, subData);
+        }
+
+        if (diff >= 0) {
+            let index = 0;
+            let elementsCollection = [];
+
+            for (let record of data) {
+                elementsCollection.length = 0;
+
+                let start_index = index * item.childCount;
+                for (let i = 0; i < item.childCount; i++) {
+                    elementsCollection.push(elements[start_index + i]);
+                }
+
+                item.inflate(elementsCollection, record);
+                index += 1;
+            }
+
+            // delete excess elements
+            elementsCollection = Array.from(elements);
+            for (let i = diff; i > 0; i--) {
+                const element = elementsCollection.pop();
+                element.parentElement.removeChild(element);
             }
         }
-        else if (diff < 0) {
-            for (let i = 0; i > diff; i--) {
-                fragment.appendChild(crsbinding.elementStoreManager.getElement(item.id));
-            }
-        }
-
-        const processArray = [...elements, ...Array.from(fragment.children)];
-        this._inflateElements(item, processArray, data);
 
         return fragment;
     }
+
+
 
     /**
      * This function inflates a single item template with a single item data object
