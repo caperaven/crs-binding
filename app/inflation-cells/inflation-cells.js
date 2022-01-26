@@ -51,7 +51,6 @@ export default class InflationCells extends ViewBase {
                 template_id     : "tpl_generated",
                 data            : batch,
                 parent          : "#inflation-grid",
-                cell_count      : 3,
                 row_index       : 0
             }}, this)
 
@@ -62,5 +61,21 @@ export default class InflationCells extends ViewBase {
         const start = this.getProperty("start");
         const end = this.getProperty("end");
         await this.renderBatch(start, end);
+    }
+
+    async updateRow() {
+        let batch = await crs.intent.db.get_batch({ args: {
+                db: this.db,
+                store: "data",
+                start: 90,
+                end: 92
+            }})
+
+        await crs.intent.dom.elements_from_template({ args: {
+                template_id     : "tpl_generated",
+                data            : batch,
+                parent          : "#inflation-grid",
+                row_index       : 5
+            }}, this)
     }
 }

@@ -101,7 +101,7 @@ export class InflationManager {
             for (let record of data) {
                 elementsCollection.length = 0;
 
-                let start_index = index * item.childCount;
+                let start_index = (start * item.childCount) + index * item.childCount;
                 for (let i = 0; i < item.childCount; i++) {
                     elementsCollection.push(elements[start_index + i]);
                 }
@@ -111,10 +111,12 @@ export class InflationManager {
             }
 
             // delete excess elements
-            elementsCollection = Array.from(elements);
-            for (let i = diff; i > 0; i--) {
-                const element = elementsCollection.pop();
-                element.parentElement.removeChild(element);
+            if (start == 0) {
+                elementsCollection = Array.from(elements);
+                for (let i = diff; i > 0; i--) {
+                    const element = elementsCollection.pop();
+                    element.parentElement.removeChild(element);
+                }
             }
         }
 
