@@ -51,8 +51,7 @@ export default class InflationCells extends ViewBase {
         await crs.intent.dom.elements_from_template({ args: {
                 template_id     : "tpl_generated",
                 data            : batch,
-                parent          : "#inflation-grid",
-                row_index       : 0
+                parent          : "#inflation-grid"
             }}, this)
 
         batch = null;
