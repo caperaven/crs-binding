@@ -96,31 +96,29 @@ export class InflationManager {
             data = data.slice(0, sub_start_index);
         }
 
-        //if (diff >= 0) {
-            let index = 0;
-            let elementsCollection = [];
+        let index = 0;
+        let elementsCollection = [];
 
-            for (let record of data) {
-                elementsCollection.length = 0;
+        for (let record of data) {
+            elementsCollection.length = 0;
 
-                let start_index = (start * item.childCount) + index * item.childCount;
-                for (let i = 0; i < item.childCount; i++) {
-                    elementsCollection.push(elements[start_index + i]);
-                }
-
-                item.inflate(elementsCollection, record);
-                index += 1;
+            let start_index = (start * item.childCount) + index * item.childCount;
+            for (let i = 0; i < item.childCount; i++) {
+                elementsCollection.push(elements[start_index + i]);
             }
 
-            // delete excess elements
-            if (start == 0 && diff > 0) {
-                elementsCollection = Array.from(elements);
-                for (let i = diff; i > 0; i--) {
-                    const element = elementsCollection.pop();
-                    element.parentElement.removeChild(element);
-                }
+            item.inflate(elementsCollection.length > 1 ? elementsCollection : elementsCollection[0], record);
+            index += 1;
+        }
+
+        // delete excess elements
+        if (start == 0 && diff > 0) {
+            elementsCollection = Array.from(elements);
+            for (let i = diff; i > 0; i--) {
+                const element = elementsCollection.pop();
+                element.parentElement.removeChild(element);
             }
-        //}
+        }
 
         return fragment;
     }

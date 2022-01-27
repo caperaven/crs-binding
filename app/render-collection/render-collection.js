@@ -3,9 +3,9 @@ import {ViewBase} from "../../src/view/view-base.js";
 export default class RenderCollection extends ViewBase {
     updateUI(data) {
         const template = this._element.querySelector("template");
-        let elements = Array.from(template.parentElement.children).filter(item => item.__inflated == true);
-        if (elements.length == 0) elements = null;
-        crsbinding.utils.renderCollection(template, data, elements);
+        const parent = document.querySelector("#parent-collection");
+        let elements = parent.childElementCount == 0 ? null : parent.children;
+        crsbinding.utils.renderCollection(template, data, elements, parent);
     }
 
     render() {
