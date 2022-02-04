@@ -3,7 +3,6 @@ import "./toolbar-element/toolbar-element.js";
 
 export default class PerspectiveElement extends ViewBase {
     preLoad() {
-        this.setProperty("context", this._dataId);
         this.setProperty("selected", "person");
 
         this.setProperty("model", {
@@ -24,5 +23,9 @@ export default class PerspectiveElement extends ViewBase {
 
     performAction(event) {
         console.log(event.detail);
+    }
+
+    setDataId() {
+        this.setProperty("ctx", this._dataId);
     }
 }

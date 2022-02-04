@@ -3,13 +3,22 @@ export class PerspectiveElement extends HTMLElement {
         return true;
     }
 
-    get context() {
+    get ctx() {
         return this._dataId;
     }
 
-    set context(newValue) {
+    set ctx(newValue) {
         this._dataId = newValue;
-        this._initialize();
+
+        if (newValue != null) {
+            const name = this.getAttribute("name");
+
+            if (name != null) {
+                crsbinding.data.setName(this._dataId, name);
+            }
+
+            this._loadView();
+        }
     }
 
     get view() {
@@ -19,14 +28,13 @@ export class PerspectiveElement extends HTMLElement {
     set view(newValue) {
         if (this._view != newValue) {
             this._view = newValue;
-            this._loadView(newValue);
+            this._loadView();
         }
     }
 
     constructor() {
         super();
-
-        const contextAttribute = this.getAttribute("context.one-way");
+        const contextAttribute = this.getAttribute("ctx.one-way") || this.getAttribute("ctx.once");
         if (this.hasOwnContext == true && contextAttribute == null) {
             this._dataId = crsbinding.data.addObject(this.constructor.name);
             crsbinding.data.addContext(this._dataId, this);
@@ -43,45 +51,30 @@ export class PerspectiveElement extends HTMLElement {
     }
 
     async connectedCallback() {
-        if (this._dataId == null || this.__isLoading == true) return;
         await this._initialize();
     }
 
     async _initialize() {
-        if (this.__initialized == true) {
-            return;
-        }
-
-        this.__initialized = true;
+        // 1. I am busy loading, if the context or view changes just stop it.
         this.__isLoading = true;
         this.store = this.dataset.store || this.constructor.name;
-        await crsbinding.templates.loadFromElement(this.store, this, this.html, async fragment => {
-            this.appendChild(fragment);
 
+        // 2. Load the HTML of this element as a store item in the store defined.
+        await crsbinding.templates.loadFromElement(this.store, this, this.html, async fragment => {
+            // 3. Once the store has been created, perform initialization functions
             if(this.preLoad != null) {
                 await this.preLoad();
             }
-
-            requestAnimationFrame(() => {
-                const name = this.getAttribute("name");
-                if (name != null) {
-                    crsbinding.data.setName(this._dataId, name);
-                }
-            });
 
             if (this.load != null) {
                 this.load();
             }
 
-            await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
-            this.isReady = true;
-            this.dispatchEvent(new CustomEvent("ready"));
-            delete this.__isLoading;
+            this.__isLoading = false;
 
-            requestAnimationFrame(() => {
-                this.dataset.view = fragment.name;
-            });
-        });
+            // 4. If we already have a view defined and a data id, perform the binding operations.
+            await this._loadView();
+        })
     }
 
     async disconnectedCallback() {
@@ -102,18 +95,22 @@ export class PerspectiveElement extends HTMLElement {
         crsbinding.data.setProperty(this, property, value);
     }
 
-    async _loadView(view) {
+    async _loadView() {
         if (this.__isLoading == true) return;
+
+        if (this._view == null || this._dataId == null) {
+            return;
+        }
 
         crsbinding.observation.releaseChildBinding(this);
         this.innerHTML = "";
 
-        const template = await crsbinding.templates.getById(this.store, view);
+        const template = await crsbinding.templates.getById(this.store, this._view);
         this.appendChild(template);
         await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
 
         requestAnimationFrame(() => {
-            this.dataset.view = view;
+            this.dataset.view = this._view;
             this.dispatchEvent(new CustomEvent("view-loaded"));
         })
     }
