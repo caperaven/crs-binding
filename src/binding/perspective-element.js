@@ -9,6 +9,7 @@ export class PerspectiveElement extends HTMLElement {
 
     set context(newValue) {
         this._dataId = newValue;
+        this._initialize();
     }
 
     get view() {
@@ -41,8 +42,16 @@ export class PerspectiveElement extends HTMLElement {
 
     async connectedCallback() {
         if (this._dataId == null || this.__isLoading == true) return;
-        this.__isLoading = true;
+        await this._initialize();
+    }
 
+    async _initialize() {
+        if (this.__initialized == true) {
+            return;
+        }
+
+        this.__initialized = true;
+        this.__isLoading = true;
         this.store = this.dataset.store || this.constructor.name;
         await crsbinding.templates.loadFromElement(this.store, this, this.html, async fragment => {
             this._currentView = fragment.name;
