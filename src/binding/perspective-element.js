@@ -71,9 +71,7 @@ export class PerspectiveElement extends HTMLElement {
             }
 
             this.__isLoading = false;
-
-            // 4. If we already have a view defined and a data id, perform the binding operations.
-            await this._loadView();
+            this.view = fragment.name;
         })
     }
 

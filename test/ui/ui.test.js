@@ -535,12 +535,13 @@ test("svg element", async() => {
 test("perspective-element", async ()=> {
     await navigateTo("perspective-element");
     await page.waitForSelector("button");
+    await page.waitForSelector("#view-selection");
 
     expect(await page.evaluate('document.querySelector("#with-context").children.length')).toBe(5);
     expect(await page.evaluate('document.querySelector("#with-fragment").children.length')).toBe(3);
     expect(await page.evaluate('document.querySelectorAll("button").length')).toBe(4);
 
-    await page.select('select', 'address');
+    await page.select('#view-selection', 'address');
     await page.waitForSelector("#end");
 
     expect(await page.evaluate('document.querySelector("#with-context").children.length')).toBe(6);
