@@ -17,8 +17,10 @@ export class PerspectiveElement extends HTMLElement {
     }
 
     set view(newValue) {
-        this._view = newValue;
-        this._loadView(newValue);
+        if (this._view != newValue) {
+            this._view = newValue;
+            this._loadView(newValue);
+        }
     }
 
     constructor() {
@@ -54,7 +56,6 @@ export class PerspectiveElement extends HTMLElement {
         this.__isLoading = true;
         this.store = this.dataset.store || this.constructor.name;
         await crsbinding.templates.loadFromElement(this.store, this, this.html, async fragment => {
-            this._currentView = fragment.name;
             this.appendChild(fragment);
 
             if(this.preLoad != null) {
@@ -110,7 +111,6 @@ export class PerspectiveElement extends HTMLElement {
         const template = await crsbinding.templates.getById(this.store, view);
         this.appendChild(template);
         await crsbinding.parsers.parseElements(this.children, this._dataId, {folder: this.dataset.folder});
-        this._currentView = view;
 
         requestAnimationFrame(() => {
             this.dataset.view = view;
