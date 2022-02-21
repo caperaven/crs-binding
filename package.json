@@ -1,6 +1,6 @@
 {
     "name": "crs-binding",
-    "version": "0.0.252",
+    "version": "0.0.254",
     "description": "zero dependency binding engine",
     "main": "index.js",
     "directories": {
@@ -33,9 +33,7 @@
         "puppeteer": "^13.1.3",
         "puppeteer-to-istanbul": "^1.4.0",
         "rollup": "^1.23.0",
-        "rollup-plugin-terser": "^5.1.2"
-    },
-    "dependencies": {
+        "rollup-plugin-terser": "^5.1.2",
         "crs-process-api": "^0.0.76"
     }
 }
