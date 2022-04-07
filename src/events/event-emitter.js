@@ -27,7 +27,7 @@ export class EventEmitter {
 
             if (events.length == 1) {
                 const result = await events[0](args);
-                if (typeof args === "object") {
+                if (typeof args === "object" && result != null) {
                     args.result = result;
                 }
             }

@@ -22,6 +22,19 @@ test("EventEmitter - emit - result", async () => {
     await instance.remove("test", fn)
 })
 
+test("EventEmitter - emit - result undefined", async () => {
+    const fn = (args) => null;
+    const args = {};
+    const instance = new EventEmitter();
+    await instance.on("test", fn);
+    await instance.emit("test", args);
+
+    const keys = Object.keys(args);
+    expect(keys.length).toBe(0);
+
+    await instance.remove("test", fn)
+})
+
 test("EventEmitter - postMessage", async () => {
     const item = {
         async onMessage(args) {
