@@ -14,23 +14,20 @@ test("EventEmitter - emit", async () => {
 
 test("EventEmitter - emit - result", async () => {
     const fn = (args) => 10;
-    const args = {};
     const instance = new EventEmitter();
     await instance.on("test", fn);
-    await instance.emit("test", args);
-    expect(args.result).toBe(10);
+    const result = await instance.emit("test");
+    expect(result).toBe(10);
     await instance.remove("test", fn)
 })
 
 test("EventEmitter - emit - result undefined", async () => {
     const fn = (args) => null;
-    const args = {};
     const instance = new EventEmitter();
     await instance.on("test", fn);
-    await instance.emit("test", args);
+    let result = await instance.emit("test");
 
-    const keys = Object.keys(args);
-    expect(keys.length).toBe(0);
+    expect(result).toBeNull();
 
     await instance.remove("test", fn)
 })

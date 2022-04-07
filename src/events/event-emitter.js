@@ -26,10 +26,7 @@ export class EventEmitter {
             const events = this._events.get(event);
 
             if (events.length == 1) {
-                const result = await events[0](args);
-                if (typeof args === "object" && result != null) {
-                    args.result = result;
-                }
+                return await events[0](args);
             }
             else {
                 for (let e of events) {
