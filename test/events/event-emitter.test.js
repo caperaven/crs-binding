@@ -12,6 +12,16 @@ test("EventEmitter - emit", async () => {
     await instance.remove("test", fn)
 })
 
+test("EventEmitter - emit - result", async () => {
+    const fn = (args) => 10;
+    const args = {};
+    const instance = new EventEmitter();
+    await instance.on("test", fn);
+    await instance.emit("test", args);
+    expect(args.result).toBe(10);
+    await instance.remove("test", fn)
+})
+
 test("EventEmitter - postMessage", async () => {
     const item = {
         async onMessage(args) {

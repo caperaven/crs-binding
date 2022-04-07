@@ -24,8 +24,17 @@ export class EventEmitter {
     async emit(event, args) {
         if (this._events.has(event)) {
             const events = this._events.get(event);
-            for (let e of events) {
-                await e(args);
+
+            if (events.length == 1) {
+                const result = await events[0](args);
+                if (typeof args === "object") {
+                    args.result = result;
+                }
+            }
+            else {
+                for (let e of events) {
+                    await e(args);
+                }
             }
         }
     }
