@@ -584,7 +584,7 @@ test("nested for", async () => {
     await page.goBack();
 })
 
-test("inflation - cells", async () => {
+test.skip("inflation - cells", async () => {
     await navigateTo("inflation-cells");
     await page.waitForSelector("#inflation-grid[data-loaded='true']");
 

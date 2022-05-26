@@ -14,38 +14,39 @@ export class IdleTaskManager {
      * Add a function to the manager to call once the system is idle
      * @param fn {Function}
      */
-    add(fn) {
-        fn && this._list.push(fn);
-        !this.processing && this._processQueue();
+    async add(fn) {
+        if (typeof fn != "function") return;
+
+        // no support, just call the function
+        if (requestIdleCallback == null) return await fn();
+
+        // add callback to list for processing
+        this._list.push(fn);
+        // if it is busy processing, don't do anything as the queue is already being processed.
+        if (this.processing == true) return;
+
+        // start processing
+        await this._processQueue();
     }
 
-    /**
-     * Loop through the required functions and execute them in turn.
-     * @private
-     */
-    _processQueue() {
-        if (requestIdleCallback == null) return this._runNextFunction();
-
+    async _processQueue() {
         this.processing = true;
-        requestIdleCallback(deadline => {
-            while((deadline.timeRemaining() > 0 || deadline.didTimeout) && this._list.length) {
-                this._runNextFunction();
-            }
-            this.processing = false;
-        }, {timeout: 1000})
-    }
-
-    /**
-     * Shift the list and run the function
-     * @private
-     */
-    _runNextFunction() {
-        let fn = this._list.shift();
         try {
-            fn && fn();
+            requestIdleCallback(async () => {
+                while(this._list.length > 0) {
+                    const fn = this._list.shift();
+
+                    try {
+                        await fn();
+                    }
+                    catch(e) {
+                        console.error(e);
+                    }
+                }
+            }, {timeout: 1000})
         }
-        catch(e) {
-            console.error(e);
+        finally {
+            this.processing = false;
         }
     }
 }
