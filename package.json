@@ -9,8 +9,7 @@
     "scripts": {
         "test": "jest --detectOpenHandles",
         "testui": "jest test/ui/ui.test.js --detectOpenHandles && nyc report --reporter=html",
-        "bundle": "rollup -c",
-        "build-publish": "rollup -c & node build/publish.js"
+        "bundle": "deno run --allow-read --allow-write --allow-env --allow-run ./build/package.js"
     },
     "keywords": [
         "binding"
