@@ -24,6 +24,10 @@ export async function parseElement(element, context, options) {
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 
+    if (nodeName == "form" && element.dataset.dataset != null) {
+        ProviderFactory["dataset"](element, context, null, null, ctxName, null, parentId);
+    }
+
     if ((nodeName != "template" && nodeName != "perspective-element") && element.children?.length > 0) {
         await parseElements(element.children, context, options);
     }

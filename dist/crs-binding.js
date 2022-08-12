@@ -1,36 +1,3553 @@
-var Je=Object.getPrototypeOf(async function(){}).constructor;function he(r,e,t){e=e||[];let n=!0,s=!1,i="context";if(t!=null&&(t.sanitize!=null&&(n=t.sanitize),t.async!=null&&(s=t.async),t.ctxName!=null&&(i=t.ctxName)),crsbinding._expFn.has(r)){let h=crsbinding._expFn.get(r);return h.count+=1,h}let l=r,a;if(n==!0){if(a=crsbinding.expression.sanitize(r,i),crsbinding._expFn.has(a.expression)){let p=crsbinding._expFn.get(a.expression);return p.count+=1,p}l=a.isLiteral===!0?["return `",a.expression,"`"].join(""):`return ${a.expression}`,a.expression.split(".").length>2&&(l=`try { ${l} } catch(error) { return null }`)}else a={expression:r};let c={function:s==!0?new Je(i,...e,l):new Function(i,...e,l),parameters:a,count:1};return crsbinding._expFn.set(a.expression,c),c}function de(r){if(r==null||typeof r!="object")return;let e=r.parameters.expression;if(crsbinding._expFn.has(e)){let t=crsbinding._expFn.get(e);t.count-=1,t.count==0&&(crsbinding.utils.disposeProperties(t),crsbinding._expFn.delete(e))}}var d=Object.freeze({WORD:"word",LITERAL:"literal",FUNCTION:"function",PROPERTY:"property",OBJECT:"object",KEYWORD:"keyword",OPERATOR:"operator",NUMBER:"number",SPACE:"space",STRING:"string"});function _e(r,e){let t=[],n=[],s=0;function i(a,o){if(n.length>0){let c=n.join("");l(c)}t.push({type:a,value:o})}function l(a){let o=d.WORD;pe.indexOf(a)!=-1&&(o=d.KEYWORD),isNaN(Number(a))==!1&&(o=d.NUMBER),t.push({type:o,value:a}),n.length=0}for(s;s<r.length;s++){let a=r[s];if(a==" "){i(d.SPACE," ");continue}if(a=="`"){i(d.LITERAL,"`");continue}if(a=="$"&&r[s+1]=="{"){i(d.KEYWORD,"${"),s++;continue}if(a=="'"||a=='"'){let o=s+r.length-s,c=!1;if(r[s+1]==null){i(d.STRING,a);break}let h=s+1;for(h;h<o;h++){if(r[h]=="$"&&r[h+1]=="{"){c=!0;break}if(r[h]==a){let p=r.substring(s,h+1);i(d.STRING,p);break}}c==!0?i(d.STRING,a):s=h;continue}if(pe.indexOf(a)!=-1){i(d.KEYWORD,a);continue}if(ue.indexOf(a)!=-1){for(let o=s;o<s+4;o++){let c=r[o];if(ue.indexOf(c)==-1){let h=r.substring(s,o);i(d.OPERATOR,h),s=o-1;break}}continue}n.push(a)}return n.length>0&&l(n.join("")),Qe(t,e)}function Qe(r,e){if(r.length==1&&r[0].type==d.WORD)return r[0].type=d.PROPERTY,r;let t=[],n=!1,s=0;for(;r[s]!=null;){let i=r[s],l=t.length==0?"none":t[t.length-1],a=i.value.indexOf(".");if(i.type==d.WORD)if(l==d.LITERAL){if(i.value[0]=="."&&r[s+1].value=="("){i.type=d.FUNCTION,s++;continue}i.type=d.PROPERTY}else a!=-1?r[s-1]?.value===")"&&a===0?i.type=d.FUNCTION:i.type=d.PROPERTY:w(r[s+1])||w(r[s+2])?e!==!0&&l!==d.OBJECT&&(i.type=d.PROPERTY):e!==!0&&w(r[s-1])||w(r[s-2])?l!==d.OBJECT&&(i.type=d.PROPERTY):s===0&&r[s+1]?.value==="("&&(i.type=d.PROPERTY);if(i.type==d.KEYWORD&&i.value=="("&&r[s-1]&&r[s-1].type==d.PROPERTY&&r[s-1].value[0]!="$"){let o=r[s-1].value;if(o.indexOf(".")==-1)r[s-1].type=d.FUNCTION;else{let c=o.length-1;for(let h=o.length-1;h>=0;h--)if(o[h]=="."){c=h;break}if(c>0){let h=o.substring(0,c),p=o.substring(c,o.length);r[s-1].value=h,r.splice(s,0,{type:d.FUNCTION,value:p}),s++}else r[s-1].type=d.FUNCTION}}i.value=="${"?t.push(d.LITERAL):i.value=="{"?t.push(d.OBJECT):i.value=="}"&&t.pop(),s++}return r[0].type===d.FUNCTION&&(r[0].type=d.PROPERTY),r}function w(r){return r==null?!1:r.type==d.OPERATOR}var ue=["=","!","<",">","+","-","*","/","&","|","?",":"],pe=["{","}","(",")",",","true","false","null","undefined","[]"];var Xe=["false","true","null"];function fe(r,e="context",t=!1){let n=!1;if(typeof r=="string"&&r.indexOf("$html")!=-1&&(n=!0,r=r.split("$html.").join("")),r==null||r=="null"||r=="undefined"||Xe.indexOf(r.toString())!=-1||isNaN(r)==!1||r.trim()==e)return{isLiteral:!0,expression:r,isHTML:n};if(e!="context"==!0&&r==["${",e,"}"].join(""))return{isLiteral:!0,expression:r};let i=new Set,l=r.indexOf("${")!=-1,a=_e(r,l),o=[];for(let c of a)c.type=="property"?(c.value.indexOf("$globals")!=-1?o.push(c.value.replace("$globals","crsbinding.data.globals")):c.value.indexOf("$event")!=-1?o.push(c.value.replace("$event","event")):c.value.indexOf("$context")!=-1?o.push(c.value.replace("$context","context")):c.value.indexOf("$data")!=-1?o.push(c.value.replace("$data","crsbinding.data.getValue")):c.value.indexOf("$parent")!=-1?o.push(c.value.replace("$parent","parent")):e!=="context"&&c.value.indexOf(`${e}.`)!=-1?o.push(c.value):o.push(`${e}.${c.value}`),tt(i,c.value,e)):o.push(c.value);return{isLiteral:l,isHTML:n,expression:o.join(""),properties:Array.from(i)}}var Ze=[".trim",".toLowerCase","toUpperCase"],et=["$data","$event"];function tt(r,e,t){if(e.length==0)return;for(let i of et)if(e.indexOf(i)!=-1)return;let n=e,s=`${t}.`;n.indexOf(s)==0&&(n=n.replace(s,""));for(let i of Ze)n.indexOf(i)!=-1&&(n=n.split(i).join(""));r.add(n)}var u=class{get data(){return crsbinding.data.getValue(this._context)}constructor(e,t,n,s,i,l,a=!0){this._cleanEvents=[],this._element=e,this._context=t,this._property=n,this._value=s,this._ctxName=i||"context",this._eventsToRemove=[],this._isNamedContext=this._ctxName!="context",this._parentId=l,this._value&&this._value.indexOf("$parent")!=-1&&a==!0&&(this._value=this._value.split("$parent.").join(""),this._context=l),this._value&&this._value.indexOf("$self")!=-1&&(this._value=this._value.split("$self.").join(""),this._context=this._element._dataId),this.init&&this.init(),crsbinding.providerManager.register(this),this.initialize().catch(o=>{throw o}),this._element.nodeName.indexOf("-")!=-1&&this._property==this._ctxName&&(this._element[this._property]=this._context)}dispose(){this._eventsToRemove.length=0,this._eventsToRemove=null,this._element=null,this._context=null,this._property=null,this._value=null,this._ctxName=null,crsbinding.events.removeOnPath(this._cleanEvents),this._cleanEvents=null}async initialize(){}listenOnPath(e,t){let n=Array.isArray(e)==!0?e:[e];for(let s of n){let i=crsbinding.events.listenOnPath(this._context,s,t);this._cleanEvents=[...this._cleanEvents,...i]}}};var me="requestAnimationFrame(() => element.__property__ = value);",ge='requestAnimationFrame(() => element.__property__ = value == null ? "" : value);';var xe="requestAnimationFrame(() => element.__property__ = (__exp__) ? __true__ : __false__)",be='element.dataset["__property__"] = value == null ? "" : value',ve=`
+// src/events/compiler.js
+var AsyncFunction = Object.getPrototypeOf(async function() {
+}).constructor;
+function compileExp(exp, parameters, options) {
+  parameters = parameters || [];
+  let sanitize2 = true;
+  let async = false;
+  let ctxName = "context";
+  if (options != null) {
+    if (options.sanitize != null)
+      sanitize2 = options.sanitize;
+    if (options.async != null)
+      async = options.async;
+    if (options.ctxName != null)
+      ctxName = options.ctxName;
+  }
+  if (crsbinding._expFn.has(exp)) {
+    const x = crsbinding._expFn.get(exp);
+    x.count += 1;
+    return x;
+  }
+  let src = exp;
+  let san;
+  if (sanitize2 == true) {
+    san = crsbinding.expression.sanitize(exp, ctxName);
+    if (crsbinding._expFn.has(san.expression)) {
+      const x = crsbinding._expFn.get(san.expression);
+      x.count += 1;
+      return x;
+    }
+    src = san.isLiteral === true ? ["return `", san.expression, "`"].join("") : `return ${san.expression}`;
+    const parts = san.expression.split(".");
+    if (parts.length > 2) {
+      src = `try { ${src} } catch(error) { return null }`;
+    }
+  } else {
+    san = {
+      expression: exp
+    };
+  }
+  const fn = async == true ? new AsyncFunction(ctxName, ...parameters, src) : new Function(ctxName, ...parameters, src);
+  const result = {
+    function: fn,
+    parameters: san,
+    count: 1
+  };
+  crsbinding._expFn.set(san.expression, result);
+  return result;
+}
+function releaseExp(exp) {
+  if (exp == null || typeof exp != "object")
+    return;
+  const key = exp.parameters.expression;
+  if (crsbinding._expFn.has(key)) {
+    const x = crsbinding._expFn.get(key);
+    x.count -= 1;
+    if (x.count == 0) {
+      crsbinding.utils.disposeProperties(x);
+      crsbinding._expFn.delete(key);
+    }
+  }
+}
+
+// src/expressions/exp-tokenizer.js
+var TokenTypes = Object.freeze({
+  WORD: "word",
+  LITERAL: "literal",
+  FUNCTION: "function",
+  PROPERTY: "property",
+  OBJECT: "object",
+  KEYWORD: "keyword",
+  OPERATOR: "operator",
+  NUMBER: "number",
+  SPACE: "space",
+  STRING: "string"
+});
+function tokenize(exp, isLiteral) {
+  const result = [];
+  let word = [];
+  let i = 0;
+  function step(type, value) {
+    if (word.length > 0) {
+      const value2 = word.join("");
+      pushWord(value2);
+    }
+    result.push({ type, value });
+  }
+  function pushWord(value) {
+    let wordType = TokenTypes.WORD;
+    if (keywords.indexOf(value) != -1) {
+      wordType = TokenTypes.KEYWORD;
+    }
+    if (isNaN(Number(value)) == false) {
+      wordType = TokenTypes.NUMBER;
+    }
+    result.push({ type: wordType, value });
+    word.length = 0;
+  }
+  for (i; i < exp.length; i++) {
+    const char = exp[i];
+    if (char == " ") {
+      step(TokenTypes.SPACE, " ");
+      continue;
+    }
+    if (char == "`") {
+      step(TokenTypes.LITERAL, "`");
+      continue;
+    }
+    if (char == "$") {
+      if (exp[i + 1] == "{") {
+        step(TokenTypes.KEYWORD, "${");
+        i++;
+        continue;
+      }
+    }
+    if (char == "'" || char == '"') {
+      const lastIndex = i + exp.length - i;
+      let hasLiteral = false;
+      if (exp[i + 1] == void 0) {
+        step(TokenTypes.STRING, char);
+        break;
+      }
+      let j = i + 1;
+      for (j; j < lastIndex; j++) {
+        if (exp[j] == "$" && exp[j + 1] == "{") {
+          hasLiteral = true;
+          break;
+        }
+        if (exp[j] == char) {
+          const value = exp.substring(i, j + 1);
+          step(TokenTypes.STRING, value);
+          break;
+        }
+      }
+      if (hasLiteral == true) {
+        step(TokenTypes.STRING, char);
+      } else {
+        i = j;
+      }
+      continue;
+    }
+    if (keywords.indexOf(char) != -1) {
+      step(TokenTypes.KEYWORD, char);
+      continue;
+    }
+    if (operatorStart.indexOf(char) != -1) {
+      for (let j = i; j < i + 4; j++) {
+        const charNext = exp[j];
+        if (operatorStart.indexOf(charNext) == -1) {
+          const value = exp.substring(i, j);
+          step(TokenTypes.OPERATOR, value);
+          i = j - 1;
+          break;
+        }
+      }
+      continue;
+    }
+    word.push(char);
+  }
+  if (word.length > 0) {
+    pushWord(word.join(""));
+  }
+  return postProcessTokens(result, isLiteral);
+}
+function postProcessTokens(tokens, isLiteral) {
+  if (tokens.length == 1 && tokens[0].type == TokenTypes.WORD) {
+    tokens[0].type = TokenTypes.PROPERTY;
+    return tokens;
+  }
+  let state = [];
+  let isObject = false;
+  let i = 0;
+  while (tokens[i] != void 0) {
+    const token = tokens[i];
+    const currentState = state.length == 0 ? "none" : state[state.length - 1];
+    const index = token.value.indexOf(".");
+    if (token.type == TokenTypes.WORD) {
+      if (currentState == TokenTypes.LITERAL) {
+        if (token.value[0] == "." && tokens[i + 1].value == "(") {
+          token.type = TokenTypes.FUNCTION;
+          i++;
+          continue;
+        }
+        token.type = TokenTypes.PROPERTY;
+      } else if (index != -1) {
+        if (tokens[i - 1]?.value === ")" && index === 0) {
+          token.type = TokenTypes.FUNCTION;
+        } else {
+          token.type = TokenTypes.PROPERTY;
+        }
+      } else if (isOperator(tokens[i + 1]) || isOperator(tokens[i + 2])) {
+        if (isLiteral !== true && currentState !== TokenTypes.OBJECT) {
+          token.type = TokenTypes.PROPERTY;
+        }
+      } else if (isLiteral !== true && isOperator(tokens[i - 1]) || isOperator(tokens[i - 2])) {
+        if (currentState !== TokenTypes.OBJECT) {
+          token.type = TokenTypes.PROPERTY;
+        }
+      } else if (i === 0 && tokens[i + 1]?.value === "(") {
+        token.type = TokenTypes.PROPERTY;
+      }
+    }
+    if (token.type == TokenTypes.KEYWORD && token.value == "(" && (tokens[i - 1] && tokens[i - 1].type == TokenTypes.PROPERTY && tokens[i - 1].value[0] != "$")) {
+      const path2 = tokens[i - 1].value;
+      if (path2.indexOf(".") == -1) {
+        tokens[i - 1].type = TokenTypes.FUNCTION;
+      } else {
+        let dotIndex = path2.length - 1;
+        for (let i2 = path2.length - 1; i2 >= 0; i2--) {
+          if (path2[i2] == ".") {
+            dotIndex = i2;
+            break;
+          }
+        }
+        if (dotIndex > 0) {
+          const property = path2.substring(0, dotIndex);
+          const fnName = path2.substring(dotIndex, path2.length);
+          tokens[i - 1].value = property;
+          tokens.splice(i, 0, { type: TokenTypes.FUNCTION, value: fnName });
+          i++;
+        } else {
+          tokens[i - 1].type = TokenTypes.FUNCTION;
+        }
+      }
+    }
+    if (token.value == "${") {
+      state.push(TokenTypes.LITERAL);
+    } else if (token.value == "{") {
+      state.push(TokenTypes.OBJECT);
+    } else if (token.value == "}") {
+      state.pop();
+    }
+    i++;
+  }
+  if (tokens[0].type === TokenTypes.FUNCTION) {
+    tokens[0].type = TokenTypes.PROPERTY;
+  }
+  return tokens;
+}
+function isOperator(token) {
+  if (token == null)
+    return false;
+  return token.type == TokenTypes.OPERATOR;
+}
+var operatorStart = ["=", "!", "<", ">", "+", "-", "*", "/", "&", "|", "?", ":"];
+var keywords = ["{", "}", "(", ")", ",", "true", "false", "null", "undefined", "[]"];
+
+// src/expressions/exp-sanitizer.js
+var sanitizeKeywords = ["false", "true", "null"];
+function sanitizeExp(exp, ctxName = "context", cleanLiterals = false) {
+  let isHTML = false;
+  if (typeof exp == "string" && exp.indexOf("$html") != -1) {
+    isHTML = true;
+    exp = exp.split("$html.").join("");
+  }
+  if (exp == null || exp == "null" || exp == "undefined" || sanitizeKeywords.indexOf(exp.toString()) != -1 || isNaN(exp) == false || exp.trim() == ctxName) {
+    return {
+      isLiteral: true,
+      expression: exp,
+      isHTML
+    };
+  }
+  const namedExp = ctxName != "context";
+  if (namedExp == true && exp == ["${", ctxName, "}"].join("")) {
+    return {
+      isLiteral: true,
+      expression: exp
+    };
+  }
+  const properties = /* @__PURE__ */ new Set();
+  const isLiteral = exp.indexOf("${") != -1;
+  const tokens = tokenize(exp, isLiteral);
+  const expression = [];
+  for (let token of tokens) {
+    if (token.type == "property") {
+      if (token.value.indexOf("$globals") != -1) {
+        expression.push(token.value.replace("$globals", "crsbinding.data.globals"));
+      } else if (token.value.indexOf("$event") != -1) {
+        expression.push(token.value.replace("$event", "event"));
+      } else if (token.value.indexOf("$context") != -1) {
+        expression.push(token.value.replace("$context", "context"));
+      } else if (token.value.indexOf("$data") != -1) {
+        expression.push(token.value.replace("$data", "crsbinding.data.getValue"));
+      } else if (token.value.indexOf("$parent") != -1) {
+        expression.push(token.value.replace("$parent", "parent"));
+      } else if (ctxName !== "context" && token.value.indexOf(`${ctxName}.`) != -1) {
+        expression.push(token.value);
+      } else {
+        expression.push(`${ctxName}.${token.value}`);
+      }
+      addProperty(properties, token.value, ctxName);
+    } else {
+      expression.push(token.value);
+    }
+  }
+  return {
+    isLiteral,
+    isHTML,
+    expression: expression.join(""),
+    properties: Array.from(properties)
+  };
+}
+var fnNames = [".trim", ".toLowerCase", "toUpperCase"];
+var ignoreProperties = ["$data", "$event"];
+function addProperty(set, property, ctxName) {
+  if (property.length == 0)
+    return;
+  for (let ignore2 of ignoreProperties) {
+    if (property.indexOf(ignore2) != -1)
+      return;
+  }
+  let propertyValue = property;
+  const ctxPrefix = `${ctxName}.`;
+  if (propertyValue.indexOf(ctxPrefix) == 0) {
+    propertyValue = propertyValue.replace(ctxPrefix, "");
+  }
+  for (let fnName of fnNames) {
+    if (propertyValue.indexOf(fnName) != -1) {
+      propertyValue = propertyValue.split(fnName).join("");
+    }
+  }
+  set.add(propertyValue);
+}
+
+// src/binding/providers/provider-base.js
+var ProviderBase = class {
+  get data() {
+    return crsbinding.data.getValue(this._context);
+  }
+  constructor(element, context, property, value, ctxName, parentId, changeParentToContext = true) {
+    this._cleanEvents = [];
+    this._element = element;
+    this._context = context;
+    this._property = property;
+    this._value = value;
+    this._ctxName = ctxName || "context";
+    this._eventsToRemove = [];
+    this._isNamedContext = this._ctxName != "context";
+    this._parentId = parentId;
+    if (this._value && this._value.indexOf("$parent") != -1 && changeParentToContext == true) {
+      this._value = this._value.split("$parent.").join("");
+      this._context = parentId;
+    }
+    if (this._value && this._value.indexOf("$self") != -1) {
+      this._value = this._value.split("$self.").join("");
+      this._context = this._element._dataId;
+    }
+    this.init && this.init();
+    crsbinding.providerManager.register(this);
+    this.initialize().catch((error) => {
+      throw error;
+    });
+    if (this._element.nodeName.indexOf("-") != -1 && this._property == this._ctxName) {
+      this._element[this._property] = this._context;
+    }
+  }
+  dispose() {
+    this._eventsToRemove.length = 0;
+    this._eventsToRemove = null;
+    this._element = null;
+    this._context = null;
+    this._property = null;
+    this._value = null;
+    this._ctxName = null;
+    crsbinding.events.removeOnPath(this._cleanEvents);
+    this._cleanEvents = null;
+  }
+  async initialize() {
+  }
+  listenOnPath(property, callback) {
+    const collection = Array.isArray(property) == true ? property : [property];
+    for (let p of collection) {
+      const events = crsbinding.events.listenOnPath(this._context, p, callback);
+      this._cleanEvents = [...this._cleanEvents, ...events];
+    }
+  }
+};
+
+// src/binding/providers/code-constants.js
+var setElementProperty = `requestAnimationFrame(() => element.__property__ = value);`;
+var setElementValueProperty = `requestAnimationFrame(() => element.__property__ = value == null ? "" : value);`;
+var setElementConditional = "requestAnimationFrame(() => element.__property__ = (__exp__) ? __true__ : __false__)";
+var setDataset = `element.dataset["__property__"] = value == null ? "" : value`;
+var setClassListRemove = `
 if (element.__classList!=null) {
     const remove = Array.isArray(element.__classList) ? element.__classList : [element.__classList];
     remove.forEach(cls => element.classList.remove(cls));
-}`,te=`
+}`;
+var setClassListValue = `
 element.__classList = value;
 const add = Array.isArray(value) ? value : [value];
-add.forEach(cls => element.classList.add(cls));`,ye=`${ve} ${te}`,Oe=`
-    ${ve}
+add.forEach(cls => element.classList.add(cls));`;
+var setClassList = `${setClassListRemove} ${setClassListValue}`;
+var setClassListCondition = `
+    ${setClassListRemove}
 
     if (__exp__) {
-        ${te.split("value").join("__true__")}
+        ${setClassListValue.split("value").join("__true__")}
     }
     else {
-        ${te.split("value").join("__false__")}
+        ${setClassListValue.split("value").join("__false__")}
     }
-`;function Ce(r){let e=[];for(let t of r.children)e.push(t.outerHTML);return e.join("")}function Ee(r){return r.content!=null?r.content.cloneNode(!0):r.children[0].cloneNode(!0)}function Pe(r){return new Promise(e=>{let t=r,n;r.nodeName==="#document-fragment"?(t=document.createElement("div"),t.appendChild(r),t.style.width="max-content",t.style.height="max-content",t.style.position="fixed",t.style.transform="translate(-100px, -100px)",document.body.appendChild(t),n=t.getBoundingClientRect(),document.body.removeChild(t)):n=t.getBoundingClientRect(),e(n)})}var nt=["_element"];function ne(r){if(r==null||Object.isFrozen(r))return;let e=Object.getOwnPropertyNames(r).filter(t=>nt.indexOf(t)==-1);for(let t of e){let n=r[t];if(typeof n=="object"){if(n==null||n.autoDispose==!1)continue;Array.isArray(n)!=!0&&ne(n)}delete r[t]}}function A(r,e,t){r[e]=t,r.__cleanup=r.__cleanup||[],r.__cleanup.push(e)}function se(r){if(r==null||r[r.length-1]=="/")return r;let e=r.split("/");return e.pop(),`${e.join("/")}/`}function we(r,e){let t=se(r),n=["","."],s=e.split("./"),i=t.split("/");i.pop();let l=0;for(let c=0;c<s.length;c++){let h=s[c];if(n.indexOf(h)===-1)break;h=="."&&i.pop(),l+=1}s.splice(0,l);let a=s.join("/");return`${i.join("/")}/${a}`}function $(r){let e=r.split("of"),t=e[0].trim(),n=e[1].trim();return{singular:t,plural:n}}function y(r,e,t){if(typeof e=="string")r[0]==="."&&(r=r.substring(1)),t[r]=e;else{let n=Object.keys(e);for(let s of n)y(`${r}.${s}`,e[s],t)}}function j(r){let e;if(r._property.toLocaleLowerCase()=="classlist")return ye;if(r._property.indexOf("data-")!=-1){let t=r._property.replace("data-","");return be.split("__property__").join(t)}return e=r._property=="value"||r._property=="placeholder"?ge:me,r._property=crsbinding.utils.capitalizePropertyPath(r._property),e.split("__property__").join(r._property)}function Ae(r,e,t){if(r!=null&&e!=null){let n=()=>{r.removeEventListener("ready",n);let s=crsbinding.data.getValue(t);A(r,e,s)};r.isReady==!0?n():r.addEventListener("ready",n)}}var x=class extends u{dispose(){let e=`${this._ctxName}.`;this._value.indexOf(e)==0&&(this._value=this._value.replace(e,"")),this._expObj!=null&&(crsbinding.expression.release(this._expObj),delete this._expObj),this._exp=null,this._eventHandler=null,super.dispose()}async initialize(){if(this._value=="$context"||this._value==this._ctxName)return Ae(this._element,this._property,this._context);this._eventHandler=this.propertyChanged.bind(this),this._exp=j(this),this._expObj=crsbinding.expression.compile(this._exp,["element","value"],{sanitize:!1,ctxName:this._ctxName});let e=this._value;this._isNamedContext==!0&&(e=this._value.split(`${this._ctxName}.`).join("")),this.listenOnPath(e,this._eventHandler);let t=crsbinding.data.getValue(this._context,e);t!=null&&this.propertyChanged(e,t)}propertyChanged(e,t){this._expObj!=null&&(this._isLinked!=!0&&this._element._dataId!=null&&(crsbinding.data.link(this._context,e,this._element._dataId,this._property,t),this._isLinked=!0),crsbinding.idleTaskManager.add(this._expObj.function(this.data,this._element,t)))}};var st=["INPUT","SELECT","TEXTAREA"],O=class extends x{dispose(){this._element.removeEventListener(this._eventName,this._changeHandler),this._eventName=null,this._changeHandler=null,super.dispose()}async initialize(){await super.initialize(),this._changeHandler=this._change.bind(this),this._eventName=st.indexOf(this._element.nodeName)!==-1?"change":`${this._property}Change`,this._element.addEventListener(this._eventName,this._changeHandler),this._value.indexOf("$globals.")!==-1&&(this._context=crsbinding.$globals,this._value=this._value.split("$globals.").join(""))}_change(e){let t=e.target[this._property],n=e.target.type||"text",s=`_${n}`;this[s]!=null&&(t=this[s](t,e.target));let i=crsbinding.data.getValue(this._context,this._value);crsbinding.data._setContextProperty(this._context,this._value,t,{oldValue:i,ctxName:this._ctxName,dataType:n=="text"?"string":n}),e.stopPropagation()}_number(e){return Number(e)}_date(e){return new Date(e)}_checkbox(e,t){return t.checked==!0}};var T=class extends u{dispose(){this._expObj!=null&&(crsbinding.expression.release(this._expObj),delete this._expObj),this._exp=null,this._getValueFn=null,this._eventHandler=null,super.dispose()}async initialize(){this._eventHandler=this.propertyChanged.bind(this),this._exp=j(this),this._expObj=crsbinding.expression.compile(this._exp,["element","value"],{sanitize:!1,ctxName:this._ctxName});let e=crsbinding.expression.sanitize(this._value,this._ctxName);this._getValueFn=new Function(this._ctxName,`return ${e.expression}`);for(let t of e.properties)this.listenOnPath(t,this._eventHandler);this.propertyChanged()}propertyChanged(){let e=this._getValueFn(this.data);crsbinding.idleTaskManager.add(this._expObj.function(this.data,this._element,e))}};function $e(r,e,t,n,s="context",i){return s=="context"?it(r,e,t,n,i):rt(r,e,t,n,s,i),null}function it(r,e,t,n){je(r,t,crsbinding.data.getValue(e,n))}function rt(r,e,t,n,s){s!="context"&&(n=n.split(`${s}.`).join(""));let i=crsbinding.data.getValue(e,n);je(r,t,i)}function je(r,e,t){if(e.indexOf("data-")==-1)e=crsbinding.utils.capitalizePropertyPath(e),A(r,e,t);else{let n=e.replace("data-","");r.dataset[n]=t}}var f=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l),this._eventHandler=this.event.bind(this),this._element.addEventListener(this._property,this._eventHandler)}dispose(){this._element.removeEventListener(this._property,this._eventHandler),this._eventHandler=null,this._fn=null,super.dispose()}async initialize(){let e=`context.${this._value}`.split("$event").join("event");e.indexOf(")")==-1&&(e=`${e}.call(context, event)`),this._fn=new Function("context","event",e)}event(e){let t=crsbinding.data.getContext(this._context);crsbinding.idleTaskManager.add(this._fn(t,e))}};var I=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l);let a=e.textContent;a.indexOf("$parent.")!=-1&&(e.textContent=a.split("$parent.").join(""),this._context=l),this._value=a,this._eventHandler=this._change.bind(this),this._expObj=crsbinding.expression.compile(this._value,null,{ctxName:this._ctxName});for(let o of this._expObj.parameters.properties)this.listenOnPath(o,this._eventHandler);this._change()}dispose(){crsbinding.expression.release(this._expObj),this._expObj=null,super.dispose(),this._eventHandler=null}_change(){if(this._expObj==null)return;let e=this._expObj.function(this.data);e=e==null?"":e.split("undefined").join("");let t="textContent";this._expObj.parameters.isHTML==!0&&(t="innerHTML"),this._element[t]=e}};var b=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l),this._eventHandler=this._change.bind(this),this._expObj=crsbinding.expression.compile(this._value,null,{ctxName:this._ctxName});for(let a of this._expObj.parameters.properties)this.listenOnPath(a,this._eventHandler);this._change()}dispose(){crsbinding.expression.release(this._expObj),this._expObj=null,super.dispose(),this._eventHandler=null}_change(){let e=this._expObj.function(this.data);e==null?this._element.removeAttribute(this._property):this._element.setAttribute(this._property,e)}};var m=class extends u{dispose(){this._singular=null,this._plural=null,this._container=null,this._collectionChangedHandler=null,this.positionStruct.addAction=null,this.positionStruct.removeAction=null,this.positionStruct=null,super.dispose()}async initialize(){this._container=this._element.parentElement,this._shouldClearAll=this._container.children.length==1,this._determineInsertParameters();let e=this._value.split("of");this._singular=e[0].trim(),this._plural=e[1].trim(),this._collectionChangedHandler=this._collectionChanged.bind(this),this.listenOnPath(this._plural,this._collectionChangedHandler)}async _collectionChanged(e,t){if(t==null)return this._clear();await this._renderItems(t)}_determineInsertParameters(){let e=this._element.nextElementSibling,t=this._element.previousElementSibling;this.positionStruct={startIndex:Array.from(this._container.children).indexOf(this._element),addAction:e!=null?this._insertBefore.bind(e):this._appendItems.bind(this._element),removeAction:()=>this._removeBetween.call(this._element,t,e)}}_appendItems(e){this.parentElement.appendChild(e)}_insertBefore(e){this.parentElement.insertBefore(e,this)}_removeBetween(e,t){let n=Array.from(this.parentElement.children),s=n.indexOf(e),i=n.indexOf(t);s==-1&&(s=0),i==-1&&(i=n.length);let l=[];for(let a=s+1;a<i;a++)n[a].nodeName.toLowerCase()!="template"&&l.push(n[a]);for(let a of l)a.parentElement.removeChild(a)}_clear(){this._shouldClearAll==!0?this._clearAll():this._clearPartial()}_clearAll(){let e=Array.from(this._container.children).filter(t=>t.nodeName.toLowerCase()!="template");for(let t of e)t.parentElement.removeChild(t),crsbinding.observation.releaseBinding(t)}_clearPartial(){this.positionStruct.removeAction()}async _renderItems(){this._clear()}async createElement(e,t){let n=this._element.dataset.reference||"array-item",s=crsbinding.data.createReferenceTo(this._context,`${this._context}-${n}-${t}`,this._plural,t),i=crsbinding.utils.cloneTemplate(this._element);await crsbinding.parsers.parseElement(i,s,{ctxName:this._singular,parentId:this._context}),e.__uid=s;for(let l of i.children)l.dataset.uid=s;return i}updateAttributeProviders(e){for(let t of e.__providers||[]){let n=crsbinding.providerManager.items.get(t);n instanceof b&&n._change()}}};var S=class extends m{init(){this._itemsAddedHandler=this._itemsAdded.bind(this),this._itemsDeletedHandler=this._itemsDeleted.bind(this)}dispose(){this._itemsAddedHandler=null,this._itemsDeletedHandler=null,super.dispose()}async initialize(){super.initialize(),crsbinding.data.setArrayEvents(this._context,this._plural,this._itemsAddedHandler,this._itemsDeletedHandler)}async _renderItems(e){await super._renderItems();let t=document.createDocumentFragment();for(let n of e){n.__aId=crsbinding.data.nextArrayId();let s=await this.createElement(n,n.__aId);t.appendChild(s)}this.positionStruct.addAction(t),this._container.__providers==null&&(this._container.__providers=[]),this._container.__providers.indexOf(this.id)==-1&&this._container.__providers.push(this.id),this._container.dispatchEvent(new CustomEvent("rendered"))}_itemsAdded(e,t){for(let n=0;n<e.length;n++){let s=e[n],i=t.indexOf(s);s.__aId=crsbinding.data.nextArrayId(),this.createElement(s,s.__aId).then(l=>{let a=l.children[0],o=this._container.children[i+this.positionStruct.startIndex+1];this._container.insertBefore(l,o),this.updateAttributeProviders(a)})}}_itemsDeleted(e,t){if(e==null)return;let n=[],s=Array.isArray(e)?e:[e];for(let i of s){let l=i.__uid;this._container.querySelectorAll([`[data-uid="${l}"]`]).forEach(o=>n.push(o)),crsbinding.data.removeObject(l)}for(let i of n)i!=null&&(i.parentElement.removeChild(i),crsbinding.observation.releaseBinding(i))}};var N=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l,!1)}dispose(){crsbinding.expression.release(this._expObj),delete this._expObj.parentObj,delete this._expObj,this._eventHandler=null,super.dispose()}async initialize(){this._sanitizeProperties=["fill","stroke"],this._eventHandler=this.propertyChanged.bind(this);let e;this._value.indexOf("?")==-1?e=this._initCndAttr():this._value.indexOf(":")!=-1?e=this._initCndValue():e=this._initCndAttrValue(),this._value.indexOf("$parent")!=-1&&(this._expObj.parentObj=crsbinding.data.getValue(this._parentId),e.properties.forEach(t=>{if(t.indexOf("$parent.")!=-1){let n=t.replace("$parent.",""),s=crsbinding.events.listenOnPath(this._parentId,n,this._eventHandler);this._cleanEvents=[...this._cleanEvents,s]}})),this.propertyChanged()}_initCndAttr(){let e=crsbinding.expression.sanitize(this._value,this._ctxName),t=Te.split("__exp__").join(e.expression).split("__attr__").join(this._property).split("__attr-value__").join(this._property);return this._expObj=crsbinding.expression.compile(t,["element","parent"],{sanitize:!1,ctxName:this._ctxName}),this.listenOnPath(e.properties.filter(n=>n.indexOf("$parent")==-1),this._eventHandler),e}_initCndValue(){let e=crsbinding.expression.sanitize(this._value,this._ctxName),t=e.expression.split("?"),n=t[1].split(":"),s=this._sanitizeValue(n[0].trim()),i=this._sanitizeValue(n[1].trim()),l=lt.split("__exp__").join(t[0].trim()).split("__attr__").join(this._property).split("__true__").join(s).split("__false__").join(i);return this._expObj=crsbinding.expression.compile(l,["element","parent"],{sanitize:!1,ctxName:this._ctxName}),this.listenOnPath(e.properties,this._eventHandler),e}_initCndAttrValue(){let e=crsbinding.expression.sanitize(this._value,this._ctxName),t=e.expression.split("?"),n=Te.split("__exp__").join(t[0].trim()).split("__attr__").join(this._property).split("__attr-value__").join(t[1].trim());return this._expObj=crsbinding.expression.compile(n,["element","parent"],{sanitize:!1,ctxName:this._ctxName}),this.listenOnPath(e.properties,this._eventHandler),this.propertyChanged(),e}_sanitizeValue(e){return this._sanitizeProperties.indexOf(this._property)==-1?e:e.split("'").join("")}propertyChanged(){try{crsbinding.idleTaskManager.add(this._expObj.function(this.data,this._element,this._expObj.parentObj))}catch{return}}},Te=`
+`;
+
+// src/lib/utils.js
+function fragmentToText(fragment) {
+  const text = [];
+  for (let child of fragment.children) {
+    text.push(child.outerHTML);
+  }
+  return text.join("");
+}
+function cloneTemplate(element) {
+  return element.content != null ? element.content.cloneNode(true) : element.children[0].cloneNode(true);
+}
+function measureElement(element) {
+  return new Promise((resolve) => {
+    let el = element;
+    let result;
+    if (element.nodeName === "#document-fragment") {
+      el = document.createElement("div");
+      el.appendChild(element);
+      el.style.width = "max-content";
+      el.style.height = "max-content";
+      el.style.position = "fixed";
+      el.style.transform = "translate(-100px, -100px)";
+      document.body.appendChild(el);
+      result = el.getBoundingClientRect();
+      document.body.removeChild(el);
+    } else {
+      result = el.getBoundingClientRect();
+    }
+    resolve(result);
+  });
+}
+var ignoreDispose = ["_element"];
+function disposeProperties(obj) {
+  if (obj == null || Object.isFrozen(obj))
+    return;
+  const properties = Object.getOwnPropertyNames(obj).filter((name) => ignoreDispose.indexOf(name) == -1);
+  for (let property of properties) {
+    const pObj = obj[property];
+    if (typeof pObj == "object") {
+      if (pObj == null || pObj.autoDispose == false) {
+        continue;
+      }
+      if (Array.isArray(pObj) != true) {
+        disposeProperties(pObj);
+      }
+    }
+    delete obj[property];
+  }
+}
+function setElementCleanupProperty(element, property, value) {
+  element[property] = value;
+  element.__cleanup = element.__cleanup || [];
+  element.__cleanup.push(property);
+}
+function getPathOfFile(file) {
+  if (file == null)
+    return file;
+  if (file[file.length - 1] == "/") {
+    return file;
+  }
+  const parts = file.split("/");
+  parts.pop();
+  return `${parts.join("/")}/`;
+}
+function relativePathFrom(source, target) {
+  const folder = getPathOfFile(source);
+  const processParts = ["", "."];
+  const targetParts = target.split("./");
+  const sourceParts = folder.split("/");
+  sourceParts.pop();
+  let count = 0;
+  for (let i = 0; i < targetParts.length; i++) {
+    const str = targetParts[i];
+    if (processParts.indexOf(str) === -1) {
+      break;
+    }
+    if (str == ".") {
+      sourceParts.pop();
+    }
+    count += 1;
+  }
+  targetParts.splice(0, count);
+  const targetStr = targetParts.join("/");
+  const sourceStr = sourceParts.join("/");
+  return `${sourceStr}/${targetStr}`;
+}
+function forStatementParts(value) {
+  const parts = value.split("of");
+  const singular = parts[0].trim();
+  const plural = parts[1].trim();
+  return {
+    singular,
+    plural
+  };
+}
+function flattenPropertyPath(prefix, obj, target) {
+  if (typeof obj === "string") {
+    if (prefix[0] === ".") {
+      prefix = prefix.substring(1);
+    }
+    target[prefix] = obj;
+  } else {
+    const keys = Object.keys(obj);
+    for (let key of keys) {
+      flattenPropertyPath(`${prefix}.${key}`, obj[key], target);
+    }
+  }
+}
+
+// src/binding/providers/one-way-utils.js
+function getExpForProvider(provider) {
+  let result;
+  if (provider._property.toLocaleLowerCase() == "classlist") {
+    return setClassList;
+  }
+  if (provider._property.indexOf("data-") != -1) {
+    const prop = provider._property.replace("data-", "");
+    return setDataset.split("__property__").join(prop);
+  }
+  result = provider._property == "value" || provider._property == "placeholder" ? setElementValueProperty : setElementProperty;
+  provider._property = crsbinding.utils.capitalizePropertyPath(provider._property);
+  return result.split("__property__").join(provider._property);
+}
+function setContext(element, property, context) {
+  if (element != null && property != null) {
+    const fn = () => {
+      element.removeEventListener("ready", fn);
+      const value = crsbinding.data.getValue(context);
+      setElementCleanupProperty(element, property, value);
+    };
+    if (element.isReady == true) {
+      fn();
+    } else {
+      element.addEventListener("ready", fn);
+    }
+  }
+}
+
+// src/binding/providers/one-way-provider.js
+var OneWayProvider = class extends ProviderBase {
+  dispose() {
+    const contextPrefix = `${this._ctxName}.`;
+    if (this._value.indexOf(contextPrefix) == 0) {
+      this._value = this._value.replace(contextPrefix, "");
+    }
+    if (this._expObj != null) {
+      crsbinding.expression.release(this._expObj);
+      delete this._expObj;
+    }
+    this._exp = null;
+    this._eventHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    if (this._value == "$context" || this._value == this._ctxName) {
+      return setContext(this._element, this._property, this._context);
+    }
+    this._eventHandler = this.propertyChanged.bind(this);
+    this._exp = getExpForProvider(this);
+    this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], { sanitize: false, ctxName: this._ctxName });
+    let path2 = this._value;
+    if (this._isNamedContext == true) {
+      path2 = this._value.split(`${this._ctxName}.`).join("");
+    }
+    this.listenOnPath(path2, this._eventHandler);
+    const value = crsbinding.data.getValue(this._context, path2);
+    if (value != null) {
+      this.propertyChanged(path2, value);
+    }
+  }
+  propertyChanged(prop, value) {
+    if (this._expObj == null)
+      return;
+    if (this._isLinked != true && this._element._dataId != null) {
+      crsbinding.data.link(this._context, prop, this._element._dataId, this._property, value);
+      this._isLinked = true;
+    }
+    crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
+  }
+};
+
+// src/binding/providers/bind-provider.js
+var changeElements = ["INPUT", "SELECT", "TEXTAREA"];
+var BindProvider = class extends OneWayProvider {
+  dispose() {
+    this._element.removeEventListener(this._eventName, this._changeHandler);
+    this._eventName = null;
+    this._changeHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    await super.initialize();
+    this._changeHandler = this._change.bind(this);
+    this._eventName = changeElements.indexOf(this._element.nodeName) !== -1 ? "change" : `${this._property}Change`;
+    this._element.addEventListener(this._eventName, this._changeHandler);
+    if (this._value.indexOf("$globals.") !== -1) {
+      this._context = crsbinding.$globals;
+      this._value = this._value.split("$globals.").join("");
+    }
+  }
+  _change(event) {
+    let value = event.target[this._property];
+    const type = event.target.type || "text";
+    const typeFn = `_${type}`;
+    if (this[typeFn] != null) {
+      value = this[typeFn](value, event.target);
+    }
+    const oldValue = crsbinding.data.getValue(this._context, this._value);
+    crsbinding.data._setContextProperty(this._context, this._value, value, { oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type });
+    event.stopPropagation();
+  }
+  _number(value) {
+    return Number(value);
+  }
+  _date(value) {
+    return new Date(value);
+  }
+  _checkbox(value, element) {
+    return element.checked == true;
+  }
+};
+
+// src/binding/providers/one-way-string-provider.js
+var OneWayStringProvider = class extends ProviderBase {
+  dispose() {
+    if (this._expObj != null) {
+      crsbinding.expression.release(this._expObj);
+      delete this._expObj;
+    }
+    this._exp = null;
+    this._getValueFn = null;
+    this._eventHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    this._eventHandler = this.propertyChanged.bind(this);
+    this._exp = getExpForProvider(this);
+    this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], { sanitize: false, ctxName: this._ctxName });
+    const san = crsbinding.expression.sanitize(this._value, this._ctxName);
+    this._getValueFn = new Function(this._ctxName, `return ${san.expression}`);
+    ;
+    for (let property of san.properties) {
+      this.listenOnPath(property, this._eventHandler);
+    }
+    this.propertyChanged();
+  }
+  propertyChanged() {
+    const value = this._getValueFn(this.data);
+    crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));
+  }
+};
+
+// src/binding/providers/once-provider.js
+function OnceProvider(element, context, property, value, ctxName = "context", parentId) {
+  if (ctxName == "context") {
+    setContext2(element, context, property, value, parentId);
+  } else {
+    setItem(element, context, property, value, ctxName, parentId);
+  }
+  return null;
+}
+function setContext2(element, context, property, value) {
+  setProperty(element, property, crsbinding.data.getValue(context, value));
+}
+function setItem(element, context, property, value, ctxName) {
+  if (ctxName != "context") {
+    value = value.split(`${ctxName}.`).join("");
+  }
+  const data = crsbinding.data.getValue(context, value);
+  setProperty(element, property, data);
+}
+function setProperty(element, property, value) {
+  if (property.indexOf("data-") == -1) {
+    property = crsbinding.utils.capitalizePropertyPath(property);
+    setElementCleanupProperty(element, property, value);
+  } else {
+    const prop = property.replace("data-", "");
+    element.dataset[prop] = value;
+  }
+}
+
+// src/binding/providers/call-provider.js
+var CallProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId);
+    this._eventHandler = this.event.bind(this);
+    this._element.addEventListener(this._property, this._eventHandler);
+  }
+  dispose() {
+    this._element.removeEventListener(this._property, this._eventHandler);
+    this._eventHandler = null;
+    this._fn = null;
+    super.dispose();
+  }
+  async initialize() {
+    let src = `context.${this._value}`.split("$event").join("event");
+    if (src.indexOf(")") == -1) {
+      src = `${src}.call(context, event)`;
+    }
+    this._fn = new Function("context", "event", src);
+  }
+  event(event) {
+    const context = crsbinding.data.getContext(this._context);
+    crsbinding.idleTaskManager.add(this._fn(context, event));
+  }
+};
+
+// src/binding/providers/inner-provider.js
+var InnerProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId);
+    const elementText = element.textContent;
+    if (elementText.indexOf("$parent.") != -1) {
+      element.textContent = elementText.split("$parent.").join("");
+      this._context = parentId;
+    }
+    this._value = elementText;
+    this._eventHandler = this._change.bind(this);
+    this._expObj = crsbinding.expression.compile(this._value, null, { ctxName: this._ctxName });
+    for (let prop of this._expObj.parameters.properties) {
+      this.listenOnPath(prop, this._eventHandler);
+    }
+    this._change();
+  }
+  dispose() {
+    crsbinding.expression.release(this._expObj);
+    this._expObj = null;
+    super.dispose();
+    this._eventHandler = null;
+  }
+  _change() {
+    if (this._expObj == null)
+      return;
+    let value = this._expObj.function(this.data);
+    value = value == null ? "" : value.split("undefined").join("");
+    let target = "textContent";
+    if (this._expObj.parameters.isHTML == true) {
+      target = "innerHTML";
+    }
+    this._element[target] = value;
+  }
+};
+
+// src/binding/providers/attr-provider.js
+var AttrProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId);
+    this._eventHandler = this._change.bind(this);
+    this._expObj = crsbinding.expression.compile(this._value, null, { ctxName: this._ctxName });
+    for (let prop of this._expObj.parameters.properties) {
+      this.listenOnPath(prop, this._eventHandler);
+    }
+    this._change();
+  }
+  dispose() {
+    crsbinding.expression.release(this._expObj);
+    this._expObj = null;
+    super.dispose();
+    this._eventHandler = null;
+  }
+  _change() {
+    const value = this._expObj.function(this.data);
+    if (value == null) {
+      this._element.removeAttribute(this._property);
+    } else {
+      this._element.setAttribute(this._property, value);
+    }
+  }
+};
+
+// src/binding/providers/repeat-base-provider.js
+var RepeatBaseProvider = class extends ProviderBase {
+  dispose() {
+    this._singular = null;
+    this._plural = null;
+    this._container = null;
+    this._collectionChangedHandler = null;
+    this.positionStruct.addAction = null;
+    this.positionStruct.removeAction = null;
+    this.positionStruct = null;
+    super.dispose();
+  }
+  async initialize() {
+    this._container = this._element.parentElement;
+    this._shouldClearAll = this._container.children.length == 1;
+    this._determineInsertParameters();
+    const parts = this._value.split("of");
+    this._singular = parts[0].trim();
+    this._plural = parts[1].trim();
+    this._collectionChangedHandler = this._collectionChanged.bind(this);
+    this.listenOnPath(this._plural, this._collectionChangedHandler);
+  }
+  async _collectionChanged(context, newValue) {
+    if (newValue == null)
+      return this._clear();
+    await this._renderItems(newValue);
+  }
+  _determineInsertParameters() {
+    const nSibling = this._element.nextElementSibling;
+    const pSibling = this._element.previousElementSibling;
+    this.positionStruct = {
+      startIndex: Array.from(this._container.children).indexOf(this._element),
+      addAction: nSibling != null ? this._insertBefore.bind(nSibling) : this._appendItems.bind(this._element),
+      removeAction: () => this._removeBetween.call(this._element, pSibling, nSibling)
+    };
+  }
+  _appendItems(element) {
+    this.parentElement.appendChild(element);
+  }
+  _insertBefore(element) {
+    this.parentElement.insertBefore(element, this);
+  }
+  _removeBetween(beforeElement, afterElement) {
+    const elements = Array.from(this.parentElement.children);
+    let startIndex = elements.indexOf(beforeElement);
+    let endIndex = elements.indexOf(afterElement);
+    if (startIndex == -1)
+      startIndex = 0;
+    if (endIndex == -1)
+      endIndex = elements.length;
+    const elementsToRemove = [];
+    for (let i = startIndex + 1; i < endIndex; i++) {
+      if (elements[i].nodeName.toLowerCase() != "template") {
+        elementsToRemove.push(elements[i]);
+      }
+    }
+    for (let element of elementsToRemove) {
+      element.parentElement.removeChild(element);
+    }
+  }
+  _clear() {
+    if (this._shouldClearAll == true) {
+      this._clearAll();
+    } else {
+      this._clearPartial();
+    }
+  }
+  _clearAll() {
+    const elements = Array.from(this._container.children).filter((el) => el.nodeName.toLowerCase() != "template");
+    for (let child of elements) {
+      child.parentElement.removeChild(child);
+      crsbinding.observation.releaseBinding(child);
+    }
+  }
+  _clearPartial() {
+    this.positionStruct.removeAction();
+  }
+  async _renderItems() {
+    this._clear();
+  }
+  async createElement(item, arrayId) {
+    const reference = this._element.dataset.reference || "array-item";
+    const id = crsbinding.data.createReferenceTo(this._context, `${this._context}-${reference}-${arrayId}`, this._plural, arrayId);
+    const element = crsbinding.utils.cloneTemplate(this._element);
+    await crsbinding.parsers.parseElement(element, id, {
+      ctxName: this._singular,
+      parentId: this._context
+    });
+    item.__uid = id;
+    for (let child of element.children) {
+      child.dataset.uid = id;
+    }
+    return element;
+  }
+  updateAttributeProviders(element) {
+    for (let p of element.__providers || []) {
+      const provider = crsbinding.providerManager.items.get(p);
+      if (provider instanceof AttrProvider) {
+        provider._change();
+      }
+    }
+  }
+};
+
+// src/binding/providers/for-provider.js
+var ForProvider = class extends RepeatBaseProvider {
+  init() {
+    this._itemsAddedHandler = this._itemsAdded.bind(this);
+    this._itemsDeletedHandler = this._itemsDeleted.bind(this);
+  }
+  dispose() {
+    this._itemsAddedHandler = null;
+    this._itemsDeletedHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    super.initialize();
+    crsbinding.data.setArrayEvents(this._context, this._plural, this._itemsAddedHandler, this._itemsDeletedHandler);
+  }
+  async _renderItems(array) {
+    await super._renderItems();
+    const fragment = document.createDocumentFragment();
+    for (let item of array) {
+      item.__aId = crsbinding.data.nextArrayId();
+      const element = await this.createElement(item, item.__aId);
+      fragment.appendChild(element);
+    }
+    this.positionStruct.addAction(fragment);
+    if (this._container.__providers == null) {
+      this._container.__providers = [];
+    }
+    if (this._container.__providers.indexOf(this.id) == -1) {
+      this._container.__providers.push(this.id);
+    }
+    this._container.dispatchEvent(new CustomEvent("rendered"));
+  }
+  _itemsAdded(added, collection) {
+    for (let i = 0; i < added.length; i++) {
+      const item = added[i];
+      const index = collection.indexOf(item);
+      item.__aId = crsbinding.data.nextArrayId();
+      this.createElement(item, item.__aId).then((element) => {
+        const update = element.children[0];
+        const child = this._container.children[index + this.positionStruct.startIndex + 1];
+        this._container.insertBefore(element, child);
+        this.updateAttributeProviders(update);
+      });
+    }
+  }
+  _itemsDeleted(removed, collection) {
+    if (removed == null)
+      return;
+    const elements = [];
+    const array = Array.isArray(removed) ? removed : [removed];
+    for (let item of array) {
+      const uid = item.__uid;
+      const result = this._container.querySelectorAll([`[data-uid="${uid}"]`]);
+      result.forEach((element) => elements.push(element));
+      crsbinding.data.removeObject(uid);
+    }
+    for (let element of elements) {
+      if (element != null) {
+        element.parentElement.removeChild(element);
+        crsbinding.observation.releaseBinding(element);
+      }
+    }
+  }
+};
+
+// src/binding/providers/if-provider.js
+var IfProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId, false);
+  }
+  dispose() {
+    crsbinding.expression.release(this._expObj);
+    delete this._expObj.parentObj;
+    delete this._expObj;
+    this._eventHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    this._sanitizeProperties = ["fill", "stroke"];
+    this._eventHandler = this.propertyChanged.bind(this);
+    let sanProp;
+    if (this._value.indexOf("?") == -1) {
+      sanProp = this._initCndAttr();
+    } else if (this._value.indexOf(":") != -1) {
+      sanProp = this._initCndValue();
+    } else {
+      sanProp = this._initCndAttrValue();
+    }
+    if (this._value.indexOf("$parent") != -1) {
+      this._expObj.parentObj = crsbinding.data.getValue(this._parentId);
+      sanProp.properties.forEach((path2) => {
+        if (path2.indexOf("$parent.") != -1) {
+          const p = path2.replace("$parent.", "");
+          const events = crsbinding.events.listenOnPath(this._parentId, p, this._eventHandler);
+          this._cleanEvents = [...this._cleanEvents, events];
+        }
+      });
+    }
+    this.propertyChanged();
+  }
+  _initCndAttr() {
+    const value = crsbinding.expression.sanitize(this._value, this._ctxName);
+    const fnCode = initCndAttrExp.split("__exp__").join(value.expression).split("__attr__").join(this._property).split("__attr-value__").join(this._property);
+    this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], { sanitize: false, ctxName: this._ctxName });
+    this.listenOnPath(value.properties.filter((item) => item.indexOf("$parent") == -1), this._eventHandler);
+    return value;
+  }
+  _initCndValue() {
+    const value = crsbinding.expression.sanitize(this._value, this._ctxName);
+    const parts = value.expression.split("?");
+    const valueParts = parts[1].split(":");
+    const tval = this._sanitizeValue(valueParts[0].trim());
+    const fval = this._sanitizeValue(valueParts[1].trim());
+    const fnCode = initCndValueExp.split("__exp__").join(parts[0].trim()).split("__attr__").join(this._property).split("__true__").join(tval).split("__false__").join(fval);
+    this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], { sanitize: false, ctxName: this._ctxName });
+    this.listenOnPath(value.properties, this._eventHandler);
+    return value;
+  }
+  _initCndAttrValue() {
+    const value = crsbinding.expression.sanitize(this._value, this._ctxName);
+    const parts = value.expression.split("?");
+    const fnCode = initCndAttrExp.split("__exp__").join(parts[0].trim()).split("__attr__").join(this._property).split("__attr-value__").join(parts[1].trim());
+    this._expObj = crsbinding.expression.compile(fnCode, ["element", "parent"], { sanitize: false, ctxName: this._ctxName });
+    this.listenOnPath(value.properties, this._eventHandler);
+    this.propertyChanged();
+    return value;
+  }
+  _sanitizeValue(value) {
+    if (this._sanitizeProperties.indexOf(this._property) == -1)
+      return value;
+    return value.split("'").join("");
+  }
+  propertyChanged() {
+    try {
+      crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, this._expObj.parentObj));
+    } catch {
+      return;
+    }
+  }
+};
+var initCndAttrExp = `
 if (__exp__) {
     element.setAttribute("__attr__", "__attr-value__");
 }
 else {
     element.removeAttribute("__attr__");
 }
-`,lt=`
+`;
+var initCndValueExp = `
 if (__exp__) {
     element.setAttribute("__attr__", __true__);
 }
 else {
     element.setAttribute("__attr__", __false__);
 }
-`;var k=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l)}dispose(){crsbinding.expression.release(this._expObj),delete this._expObj,this._eventHandler=null,super.dispose()}async initialize(){this._eventHandler=this.propertyChanged.bind(this);let e=this._value.split("?"),t=crsbinding.expression.sanitize(e[0],this._ctxName),n=t.expression,s=e[1].split(":"),i=s[0].trim(),l=s.length>1?s[1].trim():"[]",a=Oe.split("__property__").join(this._property).split("__exp__").join(n).split("__true__").join(i).split("__false__").join(l);this._expObj=crsbinding.expression.compile(a,["element"],{sanitize:!1,ctxName:this._ctxName}),this.listenOnPath(t.properties,this._eventHandler),this.propertyChanged()}propertyChanged(){try{crsbinding.idleTaskManager.add(this._expObj.function(this.data,this._element))}catch{return}}};var L=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l)}dispose(){crsbinding.expression.release(this._expObj),delete this._expObj,this._eventHandler=null,super.dispose()}async initialize(){this._eventHandler=this.propertyChanged.bind(this);let e=crsbinding.expression.sanitize(this._value,this._ctxName),t=e.expression.split("?"),n=t[0].trim(),s=t[1].split(":"),i=s[0].trim(),l=s.length>1?s[1].trim():'""',a=xe.split("__property__").join(crsbinding.utils.capitalizePropertyPath(this._property)).split("__exp__").join(n).split("__true__").join(i).split("__false__").join(l);this._expObj=crsbinding.expression.compile(a,["element"],{sanitize:!1,ctxName:this._ctxName}),this.listenOnPath(e.properties,this._eventHandler),this.propertyChanged()}propertyChanged(){try{crsbinding.idleTaskManager.add(this._expObj.function(this.data,this._element))}catch{return}}};function Ie(r,e,t,n,s="context",i){n.indexOf("$parent.")!=-1&&(n=n.split("$parent.").join(""),e=i);let l=$(n),a=l.singular,o=l.plural,c=`for-once-${a}`;crsbinding.inflationManager.register(c,r,a);let h=crsbinding.data.getValue(e,o),p=crsbinding.inflationManager.get(c,h);crsbinding.inflationManager.unregister(c),r.parentElement.appendChild(p),r.parentElement.removeChild(r)}var F=class extends m{dispose(){super.dispose()}async _renderItems(e){await super._renderItems();let t=document.createDocumentFragment(),n=e.keys();for(let s of n){let i=e.get(s);i.__aId=s,t.appendChild(await this.createElement(i,s))}this.positionStruct.addAction(t),this._container.__providers==null&&(this._container.__providers=[]),this._container.__providers.indexOf(this.id)==-1&&this._container.__providers.push(this.id)}};var v=class extends f{async initialize(){let e=this._value.split("("),t=e[0],n=["{"];e.length>0&&this._getParametersCode(e[1],n),n.push("}");let s=this._getSource(t,n.join(""));this._fn=new Function("context",s)}_getSource(e,t){return`crsbinding.events.emitter.emit("${e}", ${t});`}_getParametersCode(e,t){if(e==null)return;let n=e.split(")").join("").split(",");for(let s=0;s<n.length;s++){let l=n[s].trim();this[l]!=null?this[l](t):this._processArg(l,t),s<n.length-1&&t.push(",")}}$event(e){e.push("event: event")}$context(e){e.push("context: context")}_processArg(e,t){let n=e.split("="),s=n[0].trim(),i=this._processValue(n[1]);t.push(`${s}:${i}`)}_processValue(e){return e.indexOf("${")!=-1?e.split("${").join("context.").split("}").join(""):e}};var M=class extends v{async initialize(){let e=this._value.indexOf("["),t=this._value.indexOf("]"),n=this._value.substring(e+1,t).split(" ").join("").split(","),i=[`{key: "${this._value.substring(0,e).trim()}",`],l=this._value.indexOf("("),a=this._value.indexOf(")");if(l!=-1){let c=this._value.substring(l+1,a);this._getParametersCode(c,i)}i.push("}");let o=this._getSource(n,i.join(""));this._fn=new Function("context",o)}_getSource(e,t){let n=[];for(let s of e)s=s.split("'").join("").split('"').join(""),n.push(`crsbinding.events.emitter.postMessage("${s}", ${t});`);return n.join(`
-`)}};var z=class extends f{async initialize(){let e=this._createSource();this._fn=new Function("context","event","setProperty",e)}_createSource(){if(this._value.trim()[0]!="[")return this._createSourceFrom(this._value);let e=[],n=this._value.substr(1,this._value.length-2).split(";");for(let s of n)e.push(this._createSourceFrom(s.trim()));return e.join(`
-`)}_createSourceFrom(e){let t=e.split("="),n=this._processRightPart(t[1].trim());return this._processLeftPart(t[0].trim(),n)}_processRightPart(e){return crsbinding.expression.sanitize(e,this._ctxName,!0).expression}_processLeftPart(e,t){return e.indexOf("$globals")!=-1?this._getGlobalSetter(e,t):this._getContextSetter(e,t)}_getGlobalSetter(e,t){return`crsbinding.data.setProperty({_dataId: crsbinding.$globals}, "${e.replace("$globals.","")}", ${t});`}_getContextSetter(e,t){if(e=e.replace("$context.",""),t.indexOf("context.")!=-1){let n=t.split("context."),s=n[n.length-1];t=`${n[0]=="!"?"!":""}crsbinding.data.getValue({_dataId: ${this._context}}, "${s}")`}return`crsbinding.data.setProperty({_dataId: ${this._context}}, "${e}", ${t});`}event(e){let t=crsbinding.data.getContext(this._context);crsbinding.idleTaskManager.add(this._fn(t,e,this._setProperty)),e.stopPropagation()}_setProperty(e,t,n){n!==void 0&&crsbinding.data.setProperty(this,t,n)}};var R=class extends u{constructor(e,t,n,s,i,l){super(e,t,n,s,i,l),this._eventHandler=this.event.bind(this),this._element.addEventListener(this._property,this._eventHandler)}dispose(){this._element.removeEventListener(this._property,this._eventHandler),this._eventHandler=null,super.dispose()}event(){if(globalThis.crs?.process==null)return console.error("crs-process-api not present or running at this time");this._value[0]=="{"?at(this):this._value.split("{")[0].indexOf("[")==-1?ot(this):ct(this)}};function at(r){let e=re(r._value,r._context),t=ie(e,r._context),n=crsbinding.data.getContext(r._context);crs.process.runStep(t,n,null,null)}function ot(r){let t=re(r._value,r._context).split("("),n=t[0].split("."),s=`{type: "${n[0]}", action: "${n[1]}", args: ${t[1]}}`.replace(")",""),i=ie(s,r._context),l=crsbinding.data.getContext(r._context);crs.process.runStep(i,l,null,null)}function ct(r){let t=re(r._value,r._context).split("["),n=t[0],s=t[1].replace("]","").split("("),i=s[0],l=ht(s[1].replace(")","").trim(),r._context),o={context:crsbinding.data.getContext(r._context),step:{action:i,args:{schema:n}}};l!=null&&(o.parameters=l),crsbinding.events.emitter.emit("run-process",o)}function ie(r,e){r.indexOf("{")==-1&&(r=`{${r}}`);let t=new Function("context",`return ${r};`),n=crsbinding.data.getContext(e),s=crsbinding.data.getData(e).data,i={};Object.assign(i,s),Object.assign(i,n);let l=t(i);return i=null,l}function ht(r,e){return r.length==0?null:ie(r,e)}function re(r,e){return r.replace("bId",`bId: ${e}`).split("$context.").join("context.")}var C=class{static bind(e,t,n,s,i,l,a){return["value","checked"].indexOf(n)!=-1?new O(e,t,n,s,i,a):this["one-way"](e,t,n,s,i,a)}static"two-way"(e,t,n,s,i,l,a){return new O(e,t,n,s,i,a)}static"one-way"(e,t,n,s,i,l,a){return s[0]=="`"?new T(e,t,n,s,i,a):new x(e,t,n,s,i,a)}static once(e,t,n,s,i,l,a){return $e(e,t,n,s,i,a)}static call(e,t,n,s,i,l,a){return new f(e,t,n,s,i,a)}static delegate(e,t,n,s,i,l,a){return new f(e,t,n,s,i,a)}static emit(e,t,n,s,i,l,a){return new v(e,t,n,s,i,a)}static post(e,t,n,s,i,l,a){return new M(e,t,n,s,i,a)}static setvalue(e,t,n,s,i,l,a){return new z(e,t,n,s,i,a)}static inner(e,t,n,s,i,l,a){return new I(e,t,n,s,i,a)}static for(e,t,n,s,i,l,a){let o=l.name.split("."),c=o.length>1?crsbinding.providerManager.providers.for[o[1]]:null;return c!=null?new c(e,t,n,s,i,a):new S(e,t,n,s,i,a)}static if(e,t,n,s,i,l,a){return n.toLowerCase()=="classlist"?new k(e,t,n,s,i,a):n.toLowerCase().indexOf("style.")!=-1?new L(e,t,n,s,i,a):new N(e,t,n,s,i,a)}static attr(e,t,n,s,i,l,a){return new b(e,t,n,s,i,a)}static process(e,t,n,s,i,l,a){return new R(e,t,n,s,i,a)}};var dt=["style","script"];async function V(r,e,t){for(let n of r||[])await crsbinding.parsers.parseElement(n,e,t)}async function Se(r,e,t){let n="context",s=null,i=null;if(t!=null&&(n=t.ctxName||"context",s=t.parentId||null,i=t.folder||null),r.__inflated==!0)return;let l=r.nodeName.toLowerCase();if(dt.indexOf(l)!=-1)return;if(l!="template"&&l!="perspective-element"&&r.children?.length>0&&await V(r.children,e,t),l=="template"&&r.getAttribute("src")!=null)return await _t(r,e,t);let o=Array.from(r.attributes||[]).filter(c=>c.ownerElement.tagName.toLowerCase()=="template"&&c.name=="for"||c.name.indexOf(".")!=-1||(c.value||"").indexOf("${")==0||(c.value||"").indexOf("&{")==0);await ut(o,e,n,s),r.textContent.indexOf("&{")!==-1?r.textContent=await crsbinding.translations.get_with_markup(r.textContent):r.children&&r.children.length==0&&(r.textContent||"").indexOf("${")!=-1?C.inner(r,e,null,null,n,null,s):l==="svg"&&crsbinding.svgCustomElements.parse(r)}async function ut(r,e,t,n){for(let s of r)s.nodeValue.indexOf("&{")!==-1?s.nodeValue=await crsbinding.translations.get_with_markup(s.nodeValue):await pt(s,e,t,n)}async function pt(r,e,t,n){let s=r.name.split("."),i=s.length==2?s[0]:s.slice(0,s.length-1).join("."),l=i=="for"?i:s[s.length-1];i.length==0&&r.value[0]=="$"&&(i=l,l="attr");let a=C[l](r.ownerElement,e,i,r.value,t,r,n);return(a==null||a.constructor.name!="AttrProvider"||r.nodeName.indexOf(".attr")!=-1)&&r.ownerElement.removeAttribute(r.nodeName),a}async function _t(r,e,t){if(t?.folder==null)return;let n=crsbinding.utils.relativePathFrom(t.folder,r.getAttribute("src")),s=document.createElement("template");s.innerHTML=await fetch(n).then(a=>a.text());let i=s.content.cloneNode(!0);await V(i.children,e,t);let l=r.parentElement;l.insertBefore(i,r),l.removeChild(r)}function le(r){crsbinding.providerManager.releaseElement(r)}function Ne(r){for(let e of r.children)le(e)}var H=class extends u{dispose(){for(let e of this.inputs)e.removeEventListener("change",this._changeHandler);this.inputs=null,this._changeHandler=null,this._propertyToSet=null,super.dispose()}async initialize(){this._propertyToSet=this._element.getAttribute("property"),this._changeHandler=this._change.bind(this);let e=this._value.split("of"),t=e[0].trim(),n=e[1].trim(),s=`for-group-${t}`;crsbinding.inflationManager.register(s,this._element,t);let i=crsbinding.data.getValue(this._context,n),l=crsbinding.inflationManager.get(s,i);crsbinding.inflationManager.unregister(s);let a=crsbinding.data.getProperty(this._context,this._propertyToSet);this.inputs=l.querySelectorAll("input");for(let o of this.inputs)o.setAttribute("type","radio"),o.setAttribute("name",n),o.addEventListener("change",this._changeHandler),a&&o.getAttribute("value")==a.toString()&&o.setAttribute("checked","checked");this._element.parentElement.appendChild(l),this._element.parentElement.removeChild(this._element)}async _change(e){crsbinding.data.setProperty(this._context,this._propertyToSet,e.target.value)}};var B=class{constructor(){this._nextId=0,this.items=new Map,this.providers={for:{map:F,once:Ie,radio:H}}}async register(e){e.id=this._nextId,e._element.__providers==null&&Reflect.set(e._element,"__providers",[]),e._element.__providers.push(this._nextId),this.items.set(this._nextId,e),this._nextId+=1}async releaseElement(e){e.nodeName.toLowerCase()=="svg"&&crsbinding.svgCustomElements.release(e);for(let t of e.__cleanup||[])e[t]=null;for(let t of e.children||[])await this.releaseElement(t);if(e.__providers!=null){for(let t of e.__providers){let n=this.items.get(t);this.items.delete(t),n&&n.dispose(),n=null}delete e.__providers,this.items.size==0&&(this._nextId=0)}}};globalThis.requestIdleCallback=globalThis.requestIdleCallback||function(r){let e=Date.now();return setTimeout(function(){r({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-e))}})},1)};globalThis.cancelIdleCallback=globalThis.cancelIdleCallback||function(r){clearTimeout(r)};var D=class{constructor(){this.processing=!1,this._list=[]}dispose(){this._list=null}async add(e){if(typeof e=="function"){if(requestIdleCallback==null)return await e();this._list.push(e),this.processing!=!0&&await this._processQueue()}}async _processQueue(){this.processing=!0;try{requestIdleCallback(async()=>{for(;this._list.length>0;){let e=this._list.shift();try{await e()}catch(t){console.error(t)}}},{timeout:1e3})}finally{this.processing=!1}}};function ke(r,e,t){typeof r=="object"&&(r=r.__uid||r._dataId);let n=Array.isArray(e)==!0?e:[e],s=[];for(let i of n)i.indexOf("$globals.")!=-1&&(r=crsbinding.$globals,i=i.replace("$globals.",""),Fe(s,crsbinding.$globals,i,t)),ft(r,i,t,s);return s}function Le(r){for(let e of r)crsbinding.data.removeCallback(e.context,e.path,e.callback),delete e.context,delete e.path,delete e.callback;r.length=0}function ft(r,e,t,n){crsbinding.data.addCallback(r,e,t),Fe(n,r,e.split("$parent.").join("").split("$context.").join(""),t)}function Fe(r,e,t,n){r.push({context:e,path:t,callback:n})}function Me(r){r._domEvents=[],r.registerEvent=mt,r.unregisterEvent=gt}function ze(r){if(r._domEvents!=null){for(let e of r._domEvents)r.removeEventListener(e.event,e.callback),delete e.element,delete e.callback,delete e.event;r._domEvents.length=0,delete r._domEvents,delete r.registerEvent,delete r.unregisterEvent}}function mt(r,e,t,n=null){r.addEventListener(e,t,n),this._domEvents.push({element:r,event:e,callback:t})}function gt(r,e,t){let n=this._domEvents.find(s=>s.element==r&&s.event==e&&s.callback==t);n!=null&&(r.removeEventListener(n.event,n.callback),this._domEvents.splice(this._domEvents.indexOf(n),1),delete n.element,delete n.callback,delete n.event)}var q=class{constructor(){this._items=new Map}dispose(){this._items.clear(),this._items=null}register(e,t,n="context",s=!1){t=t.cloneNode(!0);let i=new ae(n,e),l=i.generateCodeFor(t),a=i.templateKeys;i.dispose(),crsbinding.elementStoreManager.register(e,t,s),this._items.set(e,{id:e,childCount:l.childCount,inflate:l.inflate,deflate:l.deflate,templates:a})}unregister(e){let t=this._items.get(e);t!=null&&(t.inflate=null,t.defaulte=null,t.templates!=null&&t.templates.forEach(n=>this.unregister(n)),this._items.delete(e)),crsbinding.elementStoreManager.unregister(e)}get(e,t,n,s){let i=this._items.get(e);if(i==null)return null;if(n!=null)return this._getWithElements(i,t,n,s||0);let l=Array.isArray(t)?t.length*i.childCount:1,a=crsbinding.elementStoreManager.getElements(e,l);return this._inflateElements(i,a,t),a}_getWithElements(e,t,n,s){if(t.length==0)return null;let i=n.length-t.length*e.childCount,l=null;if(i<0){let c=-1*i;l=crsbinding.elementStoreManager.getElements(e.id,c);let h=c/e.childCount,p=t.length-h,ee=t.slice(p,t.length);this._inflateElements(e,l,ee),t=t.slice(0,p)}let a=0,o=[];for(let c of t){o.length=0;let h=s*e.childCount+a*e.childCount;for(let p=0;p<e.childCount;p++)o.push(n[h+p]);e.inflate(o.length>1?o:o[0],c),a+=1}if(s==0&&i>0){o=Array.from(n);for(let c=i;c>0;c--){let h=o.pop();h.parentElement.removeChild(h)}}return l}_inflateSingleElement(e,t,n){this.inflate(e.id,e.childCount==1?t.children[0]:Array.from(t.children),n,e.inflate)}_inflateSingleChildFragment(e,t,n){let s=Array.isArray(t);n=Array.isArray(n)?n:[n];for(let i=0;i<n.length;i++){let l=s?t[i]:t.children[i];this.inflate(e.id,l,n[i],e.inflate),l.__inflated=!0;let a=Array.from(l.attributes).filter(o=>o.name.indexOf(".attr")!=-1);for(let o of a)l.removeAttribute(o.name)}}_inflateMultiChildFragment(e,t,n){let s=Array.from(t.children),i=0;for(let l=0;l<n.length;l++){let a=s.slice(i,i+e.childCount);this.inflate(e.id,a,n[l],e.inflate,!1),i+=e.childCount}s.forEach(l=>{l.__inflated=!0;let a=Array.from(l.attributes).filter(o=>o.name.indexOf(".attr")!=-1);for(let o of a)l.removeAttribute(o.name)}),s.filter(l=>l.getAttribute("remove")=="true").forEach(l=>l.parentNode.removeChild(l))}_inflateElements(e,t,n){Array.isArray(n)==!1?this._inflateSingleElement(e,t,n):e.childCount==1?this._inflateSingleChildFragment(e,t,n):this._inflateMultiChildFragment(e,t,n)}inflate(e,t,n,s=null,i=!0){(s||this._items.get(e).inflate)(t,n),i==!0&&this._removeElements(t)}_removeElements(e){let t=[];Array.isArray(e)?e.forEach(n=>{let s=n.querySelectorAll('[remove="true"]');s.length>0&&(t=[...t,...s])}):t=e.querySelectorAll('[remove="true"]');for(let n of t)n.parentElement.removeChild(n)}deflate(e,t){let n=this._items.get(e).deflate;if(Array.isArray(t))for(let s of t)n(s);else n(t)}returnElements(e,t,n=!1){crsbinding.elementStoreManager.returnElements(e,t,n)}},ae=class{constructor(e,t){this.parentKey=t,this.templateKeys=[],this.inflateSrc=[],this.deflateSrc=[],this._ctxName=e}dispose(){this.inflateSrc=null,this.deflateSrc=null}generateCodeFor(e){let t=e.content==null?e.children:e.content.children,n=t.length;if(n==1){this.path="element";for(let l of t)this._processElement(l)}else for(let l=0;l<t.length;l++)this.path=`element[${l}]`,this._processElement(t[l]);let s=this.inflateSrc.join(`
-`),i=this.deflateSrc.join(`
-`);return{childCount:n,inflate:new Function("element",this._ctxName,s),deflate:new Function("element",this._ctxName,i)}}_processElement(e){this._processTextContent(e),this._processAttributes(e);let t=this.path;for(let n=0;n<e.children.length;n++){let s=e.children[n];s.nodeName=="TEMPLATE"?this._processTemplate(s):(this.path=`${t}.children[${n}]`,this._processElement(e.children[n]))}}_processTemplate(e){let t=`${this.parentKey}_${this.templateKeys.length+1}`;this.templateKeys.push(t),e.dataset.key=t;let n=e.getAttribute("for.once");if(n!=null){let s=$(n),i=`${this.path}.appendChild(crsbinding.inflationManager.get("${t}", ${s.plural}));`;this.inflateSrc.push(i),crsbinding.inflationManager.register(t,e,s.singular),e.parentElement.removeChild(e)}}_processTextContent(e){if(e.children==null||e.children.length>0||e.textContent.indexOf("${")==-1)return;let t=(e.innerHTML||"").trim(),n="textContent",s=t,i=crsbinding.expression.sanitize(s,this._ctxName);s=i.expression,i.isHTML==!0&&(n="innerHTML"),this.inflateSrc.push([`${this.path}.${n} = \``+s+"`"].join(" ")),this.deflateSrc.push(`${this.path}.${n} = "";`)}_processAttributes(e){let t=Array.from(e.attributes).filter(n=>n.value.indexOf("${")!=-1||n.name.indexOf(".if")!=-1||n.name.indexOf(".attr")!=-1||n.name.indexOf("style.")!=-1||n.name.indexOf("classlist."!=-1));for(let n of t)n.name.indexOf(".attr")!=-1?this._processAttr(n):n.value.indexOf("${")!=-1?this._processAttrValue(n):this._processAttrCondition(n)}_processAttr(e){let t=e.name.replace(".attr",""),n=crsbinding.expression.sanitize(e.value,this._ctxName).expression;this.inflateSrc.push(`${this.path}.setAttribute("${t}", ${n})`)}_processAttrValue(e){let t=e.value.trim(),n=t.substr(2,t.length-3);if(n=crsbinding.expression.sanitize(n,this._ctxName).expression,e.name=="xlink:href")this.inflateSrc.push(`${this.path}.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", ${n});`);else{let s=n.split("?");this.inflateSrc.push(`if (${s[0].trim()} != null) {${this.path}.setAttribute("${e.name}", ${n});}`)}this.deflateSrc.push(`${this.path}.removeAttribute("${e.name}");`),e.ownerElement.removeAttribute(e.name)}_processAttrCondition(e){if(e.name.trim().indexOf("style.")==0)return this._processStyle(e);if(e.name.trim().indexOf("classlist")==0)return this._processClassList(e);if(e.name.trim().indexOf(".if")!=-1)return this._processConditional(e)}_processStyle(e){let t=e.name.split("."),n=crsbinding.utils.capitalizePropertyPath(t[1]),s=crsbinding.expression.sanitize(e.value.trim(),this._ctxName).expression;this.inflateSrc.push(`${this.path}.style.${n} = ${s};`),this.deflateSrc.push(`${this.path}.style.${n} = "";`),e.ownerElement.removeAttribute(e.name)}_processClassList(e){let t=e.value.split("?"),n=crsbinding.expression.sanitize(t[0],this._ctxName).expression,s=t[1].split(":"),i=s[0].trim(),l=s.length>1?s[1].trim():"",a=i.indexOf("[")==-1?i:`...${i}`,o=`if (${n}) {${this.path}.classList.add(${a});}`;if(l.length>0){let h=l.indexOf("[")==-1?l:`...${l}`;o+=`else {${this.path}.classList.add(${h});}`}let c=`while (${this.path}.classList.length > 0) {${this.path}.classList.remove(${this.path}.classList.item(0));}`;this.inflateSrc.push(o),this.deflateSrc.push(c),e.ownerElement.removeAttribute(e.name)}_processConditional(e){let t=e.name.split(".if")[0].trim(),n=e.value.split("?"),i=[`if(${crsbinding.expression.sanitize(n[0].trim(),this._ctxName).expression})`],l=n.length>1?n[1].trim():`"${t}"`;if(l.indexOf(":")==-1)i.push("{"),i.push(`${this.path}.setAttribute("${t}", ${l});`),i.push("}"),i.push(`else {${this.path}.removeAttribute("${t}")}`);else{let a=n[1].split(":");i.push("{"),i.push(`${this.path}.setAttribute("${t}", ${a[0].trim()});`),i.push("}"),i.push(`else {${this.path}.setAttribute("${t}", ${a[1].trim()})}`)}this.inflateSrc.push(i.join("")),this.deflateSrc.push(`${this.path}.removeAttribute("${t}")`),e.ownerElement.removeAttribute(e.name)}};function Re(r){return r==null?r:Ve(Object.assign({},r))}function Ve(r){let e=Object.getOwnPropertyNames(r).filter(t=>t.indexOf("__")==0);for(let t of e)delete r[t];e=Object.getOwnPropertyNames(r).filter(t=>t.indexOf("__")==-1&&typeof r[t]=="object");for(let t of e)Ve(r[t]);return r}function _(r,e){let t=r;if(e.indexOf(".")==-1)return t[e];let n=e.split(".");for(let s=0;s<n.length-1;s++){let i=n[s];if(t=t[i],t==null)return null}return t[n[n.length-1]]}function oe(r,e,t){return r==null?null:(r.__id=e,r.__property=t,new Proxy(r,{get:vt}))}var xt=["pop","splice"],bt=["push"];function vt(r,e){let t=r[e];return typeof t=="function"?(...n)=>{let s=r[e](...n);return xt.indexOf(e)!=-1?(yt(r,s),e=="splice"&&n.length>2&&(n=n.splice(2,n.length),He(r,n))):bt.indexOf(e)!=-1&&He(r,n),s}:t}function yt(r,e){let t=r.__id,n=r.__property;crsbinding.data.arrayItemsRemoved(t,n,e,r)}function He(r,e){let t=r.__id,n=r.__property;crsbinding.data.arrayItemsAdded(t,n,e,r)}var U=class{constructor(){this._data={},this._converters={},this._callbacks={},this._updates={},this._triggers=new Map,this._context={},this._sync={},this._frozenObjects=[],this._idStore={nextId:0,nextTriggerId:0,nextArrayId:0,nextSyncId:0}}getConverter(e,t){let n=this._converters[e];if(n==null)return null;let s=_(n,t);return s==null?null:crsbinding.valueConvertersManager.get(s)}_getContextId(e){return typeof e=="object"?e.__uid||e._dataId:e}getContext(e){return this._context[e]}getData(e){return this._data[e]}array(e,t){e=this._getContextId(e);let n=this.getValue(e,t);return oe(n,e,t)}setName(e,t){this._data[e].name=t}addObject(e,t={}){let n=this._getNextId();return t.contextId=n,this._data[n]={name:e,type:"data",data:t},this._callbacks[n]={},n}removeObject(e){delete this._context[e];let t=this._removeData(e);return this._removeCallbacks(e),this._removeUpdates(e),this._removeTriggers(e),this._removeSync(e),this._removeConverters(e),t}getValue(e,t,n=!0){if(e=="undefined"||e==null)return;e=this._getContextId(e),t!=null&&t.indexOf("$globals.")!==-1&&(e=crsbinding.$globals,t=t.replace("$globals.",""));let s=this._data[Number(e)],i;if(s.type=="data"){let l=s.data;if(t==null)return l;i=t.indexOf(".")===-1?l[t]:_(l,t)}else{let l=s.refId;i=this._getReferenceValue(l,t,s.path,s.aId)}if(n==!0){let l=this.getConverter(e,t);l!=null&&(i=l.get(i))}return i}makeShared(e,t,n){e=this._getContextId(e);let s=this._callbacks[e];for(let i of n){let l=`${t}.${i}`;this._ensurePath(s,l,(a,o)=>{a[o]==null&&(a[o]={});let c=this._getNextTriggerId();this._triggers.set(c,{values:[{id:e,path:l}]}),a[o].__trigger=c})}}getProperty(e,t,n=!0){e=this._getContextId(e);let s=this.getValue(e,t,n);return Array.isArray(s)&&(s=oe(s,e,t)),s}setProperty(e,t,n,s=!0){e=this._getContextId(e);let i=this.getProperty(e,t,!1);Array.isArray(i)&&(this.array(e,t).splice(0,i.length),n!=null&&(i.__syncId!=null?n.__syncId=i.__syncId:delete n.__syncId)),n&&n.__uid!=null&&i&&this._unlinkArrayItem(i),this._setContextProperty(e,t,n,{oldValue:i,convert:s}),n&&n.__uid&&this.linkToArrayItem(e,t,n.__uid)}_setContextProperty(e,t,n,s){let i=s.oldValue,l=s.ctxName,a=s.dataType,o=s.convert||!0;e=this._getContextId(e);let c=this._data[e];if(!(c==null||c.__frozen==!0)){if(o==!0){let h=this.getConverter(e,t);h!=null&&(n=h.set(n))}a==="boolean"||typeof n=="boolean"?n=Boolean(n):(a==="number"||a==null&&typeof n!="object"&&isNaN(n)==!1&&n!="")&&(n=Number(n)),c.type=="data"?(c=this._data[e].data,(t.indexOf(".")===-1?this._setObjectProperty(c,t,n):this._setObjectPropertyPath(c,t,n))==!0&&(this._performUpdates(e,t,n,i),this.updateUI(e,t))):this._setReferenceValue(e,t,n,c.refId,c.path,c.aId,l)}}_setReferenceValue(e,t,n,s,i,l,a){let o=this._data[s];if(o.type=="data"){let c=_(o.data,i),h=c.__syncId;l!=null&&(c=c.find(p=>p.__aId==l)),a!="context"&&(t=t.split(`${a}.`).join("")),this._setObjectPropertyPath(c,t,n),h!=null&&this._frozenObjects.indexOf(c)===-1&&this._setSyncValues(h,t,n,c),this._callFunctionsOnPath(e,t)}else{let c=`${o.path}.${path}`;return this._getReferenceValue(o.refId,t,c)}}createReferenceTo(e,t,n,s){let i=this._getNextId(),l={id:i,name:t,type:"ref",refId:e,path:n};return s!==void 0&&(l.aId=s),this._data[i]=l,this._callbacks[i]={},i}_getReferenceValue(e,t,n,s){let i=this._data[e];if(i.type=="data")if(s===void 0){let l=t==null?n:`${n}.${t}`;return this.getValue(e,l)}else{let l=this.getValue(e,n),a;if(Array.isArray(l))a=l.find(o=>o.__aId==s);else{let o=l.get(s);a={key:s,value:o}}return t==null||a==null?a:_(a,t)}else{let l=`${i.path}.${n}`;return this._getReferenceValue(i.refId,t,l)}}_getNextId(){return this._nextId("nextId")}_getNextTriggerId(){return this._nextId("nextTriggerId")}nextArrayId(){return this._nextId("nextArrayId")}_nextId(e){let t=this._idStore[e];return this._idStore[e]+=1,t}createArraySync(e,t,n,s){let i=this.getValue(e,t),l=this._idStore.nextSyncId;this._idStore.nextSyncId+=1;let a={primaryKey:n,fields:s,collection:[]};return this._sync[l]=a,this.addArraySync(l,e,t,i)}removeArraySync(e,t,n){let s=this._sync[e];if(t=this._getContextId(t),s!=null){s.collection.filter(a=>a.id==t&&a.path==n).forEach(a=>s.collection.splice(s.collection.indexOf(a),1)),s.collection.length==0&&delete this._sync[e];let l=this.getValue(t,n);l!=null&&(delete l.__syncId,l.filter(a=>a.__syncId==e).forEach(a=>delete a.__syncId))}}addArraySync(e,t,n,s){return new Promise(i=>{t=this._getContextId(t),this._ensurePath(t,n,()=>{let l=this._sync[e];if(l.collection.filter(a=>a.id==t&&a.path==n).length>0)return i(e);l.collection.push({id:t,path:n}),s==null&&(s=this.getValue(t,n)),s.__syncId=e,i(e)})})}_setSyncValues(e,t,n,s){this._frozenObjects.push(s);let i=this._sync[e];if(i.fields.indexOf(t)!==-1){let l=s[i.primaryKey];for(let a of i.collection){let c=this.getValue(a.id,a.path).find(h=>h[i.primaryKey]==l);this._frozenObjects.push(c),c!=s&&this.setProperty(c,t,n)}}this._frozenObjects.length=0}addContext(e,t){this._context[e]=t}addCallback(e,t,n){let s=this._callbacks[e];return t.indexOf(".")===-1?this._addCallbackToObject(s,t,n):this._addCallbackToObjectOnPath(s,t,n)}_addCallbackToObject(e,t,n){e[t]=e[t]||{},e[t].__functions=e[t].__functions||[],e[t].__functions.push(n)}_addCallbackToObjectOnPath(e,t,n){this._ensurePath(e,t,(s,i)=>{this._addCallbackToObject(s,i,n)})}_ensurePath(e,t,n){let s=e,i=t.split(".");for(let l=0;l<i.length-1;l++){let a=i[l];s[a]==null&&(s[a]={}),s=s[a]}n&&n(s,i[i.length-1])}removeCallback(e,t,n){let s=this._callbacks[e];if(s==null)return;let i=_(s,t);if(i.__functions){let l=i.__functions.indexOf(n);l!==-1&&(i.__functions.splice(l,1),i.__functions.length==0&&delete i.__functions)}}async updateUI(e,t){e=this._getContextId(e);let n=this._callbacks[e];if(t==null){let s=this._getOwnProperties(n);for(let i of s)await this._callFunctionsOnObject(n[i],e,i)}else{if(t.indexOf(".")!==-1)return this._callFunctionsOnPath(e,t);if(n==null||n[t]==null)return;await this._callFunctionsOnObject(n[t],e,t)}}async _callFunctionsOnObject(e,t,n){if(e.__functions!=null)for(let l of e.__functions){let a=this.getValue(t,n);await l(n,a)}if(e.__trigger!=null){let l=this._triggers.get(e.__trigger);if(l.frozen!=!0){l.frozen=!0;for(let a of l.values)a.id==t&&a.path==n||await this.updateUI(a.id,a.path);delete l.frozen}}let i=this._getOwnProperties(e);for(let l of i)await this._callFunctionsOnObject(e[l],t,`${n}.${l}`)}async _callFunctionsOnPath(e,t){let n=this._callbacks[e],s=_(n,t);s!=null&&await this._callFunctionsOnObject(s,e,t)}async _performUpdates(e,t,n,s){this._performUpdatesChanges(e,t,n);let i=this._context[e];if(i==null)return;let l=`${t}Changed`;i[l]?await i[l](n,s):i.propertyChanged&&await i.propertyChanged(t,n,s)}_performUpdatesChanges(e,t,n){let s=this._updates[e];s==null||s[t]==null||this.setProperty(s[t].originId,s[t].originProperty,n)}link(e,t,n,s,i){typeof i!="object"||i===null?(this._addUpdateOrigin(e,t,n,s),this._addUpdateOrigin(n,s,e,t),this._syncValueTrigger(e,t,n,s)):this._syncTriggers(e,t,n,s)}linkToArrayItem(e,t,n){let s=_(this._callbacks[e],t);if(s==null)return;let i=this._callbacks[n],l=this._getOwnProperties(s);for(let a of l)this._copyTriggers(s,a,i,a,n,a)}_addUpdateOrigin(e,t,n,s){let i=this._updates[n]||{},l=i[s]||{};l.originId==e&&l.originProperty==t||(l.originId=e,l.originProperty=t,i[s]=l,this._updates[n]=i)}_unlinkArrayItem(e){let t=this._callbacks[e.__uid];this._removeTriggersOnCallbacks(t,e.__uid)}setArrayEvents(e,t,n,s){let i=this._callbacks[e];this._ensurePath(i,t,(l,a)=>{l[a]=l[a]||{},l[a].__itemsAdded=l[a].itemsAdded||[],l[a].__itemsAdded.push(n),l[a].__itemsDeleted=l[a].itemsDeleted||[],l[a].__itemsDeleted.push(s)})}arrayItemsAdded(e,t,n,s){let i=this._callbacks[e],l=_(i,t);if(l!=null)for(let a of l.__itemsAdded||[])a(n,s)}arrayItemsRemoved(e,t,n,s){let i=this._callbacks[e],l=_(i,t);if(l!=null)for(let a of l.__itemsDeleted||[])a(n,s)}_copyTriggers(e,t,n,s,i,l){let a=e[t],o=n[s]=n[s]||{};a.__trigger!=null&&(o.__trigger=a.__trigger,this._triggers.get(a.__trigger).values.push({id:i,path:l}));let c=this._getOwnProperties(a);for(let h of c)this._copyTriggers(a,h,o,h,i,`${l}.${h}`)}_removeData(e){let t=this._removeReferences(e);return delete this._data[e],Object.keys(this._data).length==0&&(this._idStore.nextId=1,this._idStore.nextArrayId=0),t.push(e),t}_removeReferences(e){let t=[],n=Object.keys(this._data);for(let s of n){let i=this._data[s];i.refId==e&&(t.push(i.id),this.removeObject(i.id))}return t}_removeCallbacks(e){delete this._callbacks[e]}_removeUpdates(e){let t=Array.from(this._updates).filter(n=>n[0]==e||n[1].value&&n[1].value.originId==e);for(let n of t)delete this._updates[n[0]]}_removeTriggers(e){let t=Array.from(this._triggers);for(let n of t){let s=n[1].values.findIndex(i=>i.id==e);s!=-1&&(n[1].values.splice(s,1),n.values.length==0&&this._triggers.delete(n[0]))}this._triggers.size==0&&(this._idStore.nextTriggerId=0)}_removeSync(e){let t=Object.keys(this._sync);for(let n of t){let s=this._sync[n];s.collection.filter(l=>l.id==e).forEach(l=>s.collection.splice(s.collection.indexOf(l),1)),s.collection.length==0&&delete this._sync[n]}}_removeConverters(e){delete this._converters[e]}_setObjectProperty(e,t,n){return e[t]!==n?(e[t]=n,!0):!1}_setObjectPropertyPath(e,t,n){let s=!0;return this._ensurePath(e,t,(i,l)=>s=this._setObjectProperty(i,l,n)),s}_getOwnProperties(e){return Object.getOwnPropertyNames(e).filter(t=>t.indexOf("__")===-1)}_removeTriggersOnCallbacks(e,t){let n=this._getOwnProperties(e);for(let s of n){let i=e[s].__trigger;i!=null&&(delete e[s].__trigger,this._removeTriggersOnTriggers(t,i)),typeof e[s]=="object"&&this._removeTriggersOnCallbacks(e[s])}}_removeTriggersOnTriggers(e,t){let n=this._triggers.get(t),s=n.values.filter(i=>i.id==e);for(let i of s){let l=n.values.indexOf(i);n.values.splice(l,1)}}_syncValueTrigger(e,t,n,s){let i=this._callbacks[e],l=this._callbacks[n],a=_(i,`${t}.__trigger`);a!=null&&(l[s]=l[s]||{},l[s].__trigger=a,this._triggers.get(a).values.push({id:n,path:s}))}_syncTriggers(e,t,n,s){let i=this._callbacks[e],l=this._callbacks[n];t.indexOf(".")===-1?this._copyTriggers(i,t,l,s,n,s):this._ensurePath(l,s,(a,o)=>{a[o]=a[o]||{};let c=t.split("."),h=c[c.length-1],p=c.splice(0,c.length-1).join(),ee=_(i,p);this._copyTriggers(ee,h,a,o,n,s)})}setPropertyConverter(e,t,n,s){if(n!=null){e=this._getContextId(e);let i=this._converters[e];i==null&&(i={},this._converters[e]=i),this._ensurePath(i,t,(l,a)=>{l[a]=n})}s!=null&&this.setPropertyConverterTriggers(e,t,s)}setPropertyConverterTriggers(e,t,n){e=this._getContextId(e);let s=[];for(let l of n){let a=l.split(":"),o=a[0],c=a[1];this.setPropertyConverter(e,o,c),s.push(`crsbinding.data.setProperty(${e}, "${o}", value);`)}let i=new Function("property","value",s.join(`
-`));this.addCallback(e,t,i)}};var K=class{constructor(){this._events=new Map}dispose(){this._events.clear()}async on(e,t){let n=[];this._events.has(e)?n=this._events.get(e):this._events.set(e,n),n.indexOf(t)==-1&&n.push(t)}async emit(e,t){if(this._events.has(e)){let n=this._events.get(e);if(n.length==1)return await n[0](t);for(let s of n)await s(t)}}async remove(e,t){if(this._events.has(e)){let n=this._events.get(e),s=n.indexOf(t);s!=-1&&n.splice(s,1),n.length===0&&this._events.delete(e)}}async postMessage(e,t,n){let s=n||document,i=Array.from(s.querySelectorAll(e)),l=[];for(let a of i)l.push(a.onMessage.call(a,t));await Promise.all(l)}};var W=class extends HTMLElement{get hasOwnContext(){return!0}constructor(){super(),this.hasOwnContext==!0&&(this._dataId=crsbinding.data.addObject(this.constructor.name),crsbinding.data.addContext(this._dataId,this)),crsbinding.dom.enableEvents(this),this.__properties=new Map}dispose(){this._disposing=!0,crsbinding.utils.forceClean(this),crsbinding.dom.disableEvents(this);let e=Object.getOwnPropertyNames(this);for(let t of e)delete this[t]}async connectedCallback(){if(!(this._dataId==null||this.__isLoading==!0)){if(this.__isLoading=!0,this.preLoad!=null){let e=(t,n)=>{crsbinding.data.setProperty(this._dataId,t,n)};await this.preLoad(e)}if(this.html!=null){this.innerHTML=await crsbinding.templates.get(this.constructor.name,this.html);let e=crsbinding.utils.getPathOfFile(this.html);await crsbinding.parsers.parseElements(this.children,this._dataId,e?{folder:e}:null)}requestAnimationFrame(()=>{let e=this.getAttribute("name");e!=null&&crsbinding.data.setName(this._dataId,e)}),this.__properties.forEach((e,t)=>crsbinding.data.setProperty(this._dataId,t,e)),this.__properties.clear(),delete this.__properties,this.load!=null&&this.load(),this.isReady=!0,this.dispatchEvent(new CustomEvent("ready")),delete this.__isLoading}}async disconnectedCallback(){this.dispose(),crsbinding.utils.disposeProperties(this),crsbinding.observation.releaseBinding(this)}getProperty(e){return crsbinding.data.getProperty(this,e)}setProperty(e,t,n=!1){if(this.isReady!=!0&&n===!1&&this.__properties)return this.__properties.set(e,t);crsbinding.data.setProperty(this,e,t)}};var E=class extends HTMLElement{get hasOwnContext(){return!0}get ctx(){return this._dataId}set ctx(e){if(this._dataId=e,e!=null){let t=this.getAttribute("name");t!=null&&crsbinding.data.setName(this._dataId,t),this._loadView()}}get view(){return this._view}set view(e){this._view!=e&&(this._view=e,this._loadView())}constructor(){super();let e=this.getAttribute("ctx.one-way")||this.getAttribute("ctx.once");this.hasOwnContext==!0&&e==null&&(this._dataId=crsbinding.data.addObject(this.constructor.name),crsbinding.data.addContext(this._dataId,this)),crsbinding.dom.enableEvents(this)}dispose(){this._disposing=!0,crsbinding.utils.forceClean(this),crsbinding.dom.disableEvents(this),crsbinding.templates.unload(this.store)}async connectedCallback(){await this._initialize()}async _initialize(){this.__isLoading=!0,this.store=this.dataset.store||this.constructor.name,await crsbinding.templates.loadFromElement(this.store,this,this.html,async e=>{this.preLoad!=null&&await this.preLoad(),this.load!=null&&this.load(),this.__isLoading=!1,this.view=e.name})}async disconnectedCallback(){this.dispose(),crsbinding.utils.disposeProperties(this),crsbinding.observation.releaseBinding(this)}getProperty(e){return crsbinding.data.getProperty(this,e)}setProperty(e,t,n=!1){if(this.isReady!=!0&&n===!1&&this.__properties)return this.__properties.set(e,t);crsbinding.data.setProperty(this,e,t)}async _loadView(){if(this.__isLoading==!0||this._view==null||this._dataId==null)return;crsbinding.observation.releaseChildBinding(this),this.innerHTML="";let e=await crsbinding.templates.getById(this.store,this._view);this.appendChild(e),await crsbinding.parsers.parseElements(this.children,this._dataId,{folder:this.dataset.folder}),requestAnimationFrame(()=>{this.dataset.view=this._view,this.dispatchEvent(new CustomEvent("view-loaded"))})}};customElements.define("perspective-element",E);var Y=class{get title(){return this.getProperty("title")}set title(e){this.setProperty("title",e)}get element(){return this._element}set element(e){this._element=e}constructor(e){this._dataId=crsbinding.data.addObject(this.constructor.name),crsbinding.data.addContext(this._dataId,this),this.element=e}async connectedCallback(){if(this.preLoad!=null){let t=(n,s)=>{crsbinding.data.setProperty(this._dataId,n,s)};await this.preLoad(t)}let e=crsbinding.utils.getPathOfFile(this.html);await crsbinding.parsers.parseElement(this.element,this._dataId,e?{folder:e}:null),this.load()}async disconnectedCallback(){crsbinding.utils.forceClean(this._dataId),crsbinding.observation.releaseBinding(this.element),crsbinding.utils.disposeProperties(this),this.element=null}getProperty(e,t=!0){return crsbinding.data.getProperty(this,e,t)}setProperty(e,t,n=!0){crsbinding.data.setProperty(this,e,t,n)}load(){this._element.style.visibility="",this._loaded=!0}};var P=class extends HTMLElement{disconnectedCallback(){this._clearElements(),delete this._dataId}async onMessage(e){this._clearElements();let t=e.context;if(t&&typeof t=="object"&&(t=t.__uid||t._dataId),this._dataId=t,this.innerHTML=e.html,this._dataId!=null){let n=crsbinding.data._context[this._dataId];await crsbinding.parsers.parseElements(this.children,this._dataId,{folder:n.html})}}_clearElements(){for(let e of this.children)crsbinding.observation.releaseBinding(e)}};customElements.define("crs-widget",P);var G=class{constructor(){this._items=new Map}dispose(){this._items.clear(),this._items=null}register(e,t,n=!1){let s=crsbinding.utils.cloneTemplate(t),i={elements:[s],template:t};n===!0&&crsbinding.utils.measureElement(s).then(l=>i.size=l),this._items.set(e,i)}getItemElement(e){return e.elements.pop()||crsbinding.utils.cloneTemplate(e.template)}getElement(e){let t=this._items.get(e);return this.getItemElement(t)}getElements(e,t){let n=this._items.get(e),s=document.createDocumentFragment();for(;s.children.length<t;)s.appendChild(this.getItemElement(n));return s}async getBoundElement(e,t){let n=this._items.get(e),s=this.getItemElement(n);return await crsbinding.parsers.parseElement(s,t),s}returnElements(e,t){let n=this._items.get(e);for(let s of t)n.elements.push(s)}unregister(e){let t=this._items.get(e);t!=null&&(this._items.delete(e),t.elements.length=0,t.template=null)}};var J=class{constructor(){this._converters=new Map}add(e,t){this._converters.set(e,t)}get(e){return this._converters.get(e)}remove(e){this._converters.delete(e)}convert(e,t,n){let s=this._converters.get(t);return s==null?null:s[n](e)}};function Be(r){if(typeof r=="object"&&(r=r.__uid||r._dataId),r==null)return;let e=crsbinding.data.removeObject(r),t=new Set;for(let n of e){let s=Array.from(crsbinding.providerManager.items).filter(i=>i[1]._context===n);for(let i of s)t.add(i[1]._element)}for(let n of t)crsbinding.providerManager.releaseElement(n);t.length=0}function De(r,e,t=null,n=null){let s="render-collection";crsbinding.inflationManager.register(s,r);let i=crsbinding.inflationManager.get(s,e,t,0);i!=null&&n!=null&&n.appendChild(i),crsbinding.inflationManager.unregister(s)}var Q=class{constructor(){this._tagMap=new Map,this._queue=[],this._observed=new Map}dispose(){this._tagMap.clear(),this._tagMap=null}define(e,t){this._tagMap.has(e)==!1&&this._tagMap.set(e,t),this._processElements(e)}parse(e){let t=e.querySelectorAll("[is]");if(t.length!=0){this._observe(e);for(let n of t){let s=n.getAttribute("is");this._tagMap.has(s)==!1?this._queue.push({parent:e,cName:s,el:n}):this._createComponent({parent:e,cName:s,el:n})}}}removeComponent(e){let t=null,n=e,s=0;for(;t==null||s==100;){if(s++,n.nodeName.toLocaleString()=="svg"){t=n;break}n=n.parentElement}this._removeComponentFromSvg(t,e)}_removeComponentFromSvg(e,t){let n=this._observed.get(e);if(n==null)return;let s=n.children.get(t);s!=null&&(s.disconnectedCallback(),s.dispose(),n.children.delete(t),t.parentElement.removeChild(t),s=null,t=null)}release(e){if(this._observed.size==0)return;let t=e.querySelectorAll("[is]");for(let s of t)this._removeComponentFromSvg(e,s);let n=this._observed.get(e);n.children.clear(),n.children=null,this._observed.delete(e)}_observe(e){if(this._observed.has(e))return;let t={children:new Map};this._observed.set(e,t)}_createComponent(e){let t=this._tagMap.get(e.cName),n=this._observed.get(e.parent);if(n.children.has(e.el)==!1){let s=new t(e.el);n.children.set(e.el,s),s.connectedCallback()}delete e.parent,delete e.cName,delete e.el}_processElements(e){let t=this._queue.filter(n=>n.cName==e);for(let n of t)this._createComponent(n),this._queue.splice(this._queue.indexOf(n),1)}};var X=class{constructor(e){this.element=e}dispose(){this.element=null}async connectedCallback(){}async suspend(){}async restore(){}};function qe(r,e){crsbinding.templates.data[r]=e}function Ue(r){let e=Array.isArray(r)==!0?r:[r];for(let t of e)crsbinding.templates.data[t]?.count!=null?(crsbinding.templates.data[t].count-=1,crsbinding.templates.data[t].count==0&&(delete crsbinding.templates.data[t].templates,delete crsbinding.templates.data[t].style,delete crsbinding.templates.data[t])):delete crsbinding.templates.data[t]}function Ke(){let r=Object.keys(crsbinding.templates.data);for(let e of r)delete crsbinding.templates.data[e]}async function We(r,e){let t=crsbinding.templates.data[r];return t==null&&(t=await ce(r,e)),t.cloneNode(!0).innerHTML}async function ce(r,e){let t=crsbinding.templates.data[r];return t!=null||(t=document.createElement("template"),t.innerHTML=await fetch(e).then(n=>n.text()),crsbinding.templates.data[r]=t),t}async function Ye(r,e,t,n){if(crsbinding.templates.data[r]!=null){crsbinding.templates.data[r].count+=1,crsbinding.templates.data[r].callbacks.push(n);return}let s={count:1,templates:{},callbacks:[n]};crsbinding.templates.data[r]=s;let i,l;if(t!=null){let o=document.createElement("template");o.innerHTML=await fetch(t).then(c=>c.text()),i=o.content.querySelectorAll("template"),l=o.content.querySelector("style")}else i=e.querySelectorAll("template"),l=e.querySelector("style");s.style=l;let a;for(let o of i)s.templates[o.dataset.id]=o,o.parentElement?.removeChild(o),o.dataset.default=="true"&&(a=o);for(let o of s.callbacks){let c=Ot(a);l!=null&&c.insertBefore(l,c.firstChild),o(c)}s.callbacks.length=0,delete s.callbacks}function Ot(r){let e=r.content.cloneNode(!0);return e.name=r.dataset.id,e}async function Ge(r,e){let t=crsbinding.templates.data[r],s=t.templates[e].content.cloneNode(!0);return t.style!=null&&s.insertBefore(t.style,s.firstChild),s}var Z=class{constructor(){this.dictionary={}}dispose(){this.dictionary=null}async add(e,t){y(t||"",e,this.dictionary)}async delete(e){let t=`${e}.`,n=Object.keys(this.dictionary).filter(s=>s.indexOf(t)===0);for(let s of n)delete this.dictionary[s]}async parseElement(e){e.children.length==0&&e.textContent.indexOf("&{")!=-1&&(e.textContent=await this.get_with_markup(e.textContent.trim()));for(let t of e.attributes)await this.parseAttribute(t);for(let t of e.children)await this.parseElement(t)}async parseAttribute(e){e.nodeValue.indexOf("&{")!==-1&&(e.nodeValue=await this.get_with_markup(e.nodeValue))}async get(e){let t=this.dictionary[e];return t!=null||(t=this.fetch==null?null:await this.fetch(e),t!=null&&(this.dictionary[e]=t)),t}async get_with_markup(e){return e=e.split("&{").join("").split("}").join(""),await this.get(e)}};String.prototype.capitalize=function(){return this.charAt(0).toUpperCase()+this.slice(1)};function Ct(r){let e=r.split("-");for(let n=1;n<e.length;n++)e[n]=e[n].capitalize();let t=e.join("");return t==="innerHtml"&&(t="innerHTML"),t}var g={_expFn:new Map,data:new U,idleTaskManager:new D,providerManager:new B,inflationManager:new q,elementStoreManager:new G,svgCustomElements:new Q,valueConvertersManager:new J,translations:new Z,expression:{sanitize:fe,compile:he,release:de},observation:{releaseBinding:le,releaseChildBinding:Ne},parsers:{parseElement:Se,parseElements:V},classes:{BindableElement:W,PerspectiveElement:E,ViewBase:Y,RepeatBaseProvider:m,Widget:P,SvgElement:X},events:{listenOnPath:ke,removeOnPath:Le,emitter:new K},dom:{enableEvents:Me,disableEvents:ze},utils:{capitalizePropertyPath:Ct,clone:Re,disposeProperties:ne,fragmentToText:Ce,cloneTemplate:Ee,measureElement:Pe,forceClean:Be,renderCollection:De,relativePathFrom:we,getPathOfFile:se,getValueOnPath:_,flattenPropertyPath:y},templates:{data:{},load:ce,add:qe,get:We,unload:Ue,unloadAll:Ke,loadFromElement:Ye,getById:Ge}};globalThis.crsbinding=g;g.$globals=g.data.addObject("globals");g.data.globals=g.data.getValue(g.$globals);globalThis.crsb=g;
+`;
+
+// src/binding/providers/if-classlist-provider.js
+var IfClassProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId);
+  }
+  dispose() {
+    crsbinding.expression.release(this._expObj);
+    delete this._expObj;
+    this._eventHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    this._eventHandler = this.propertyChanged.bind(this);
+    const parts = this._value.split("?");
+    const value = crsbinding.expression.sanitize(parts[0], this._ctxName);
+    const condition = value.expression;
+    const values = parts[1].split(":");
+    const trueValue = values[0].trim();
+    const falseValue = values.length > 1 ? values[1].trim() : "[]";
+    const fnCode = setClassListCondition.split("__property__").join(this._property).split("__exp__").join(condition).split("__true__").join(trueValue).split("__false__").join(falseValue);
+    this._expObj = crsbinding.expression.compile(fnCode, ["element"], { sanitize: false, ctxName: this._ctxName });
+    this.listenOnPath(value.properties, this._eventHandler);
+    this.propertyChanged();
+  }
+  propertyChanged() {
+    try {
+      crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element));
+    } catch {
+      return;
+    }
+  }
+};
+
+// src/binding/providers/if-styles-provider.js
+var IfStylesProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId);
+  }
+  dispose() {
+    crsbinding.expression.release(this._expObj);
+    delete this._expObj;
+    this._eventHandler = null;
+    super.dispose();
+  }
+  async initialize() {
+    this._eventHandler = this.propertyChanged.bind(this);
+    const value = crsbinding.expression.sanitize(this._value, this._ctxName);
+    const parts = value.expression.split("?");
+    const condition = parts[0].trim();
+    const values = parts[1].split(":");
+    const trueValue = values[0].trim();
+    const falseValue = values.length > 1 ? values[1].trim() : '""';
+    const fnCode = setElementConditional.split("__property__").join(crsbinding.utils.capitalizePropertyPath(this._property)).split("__exp__").join(condition).split("__true__").join(trueValue).split("__false__").join(falseValue);
+    this._expObj = crsbinding.expression.compile(fnCode, ["element"], { sanitize: false, ctxName: this._ctxName });
+    this.listenOnPath(value.properties, this._eventHandler);
+    this.propertyChanged();
+  }
+  propertyChanged() {
+    try {
+      crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element));
+    } catch {
+      return;
+    }
+  }
+};
+
+// src/binding/providers/for-once-provider.js
+function ForOnceProvider(element, context, property, value, ctxName = "context", parentId) {
+  if (value.indexOf("$parent.") != -1) {
+    value = value.split("$parent.").join("");
+    context = parentId;
+  }
+  const parts = forStatementParts(value);
+  const singular = parts.singular;
+  const plural = parts.plural;
+  const key = `for-once-${singular}`;
+  crsbinding.inflationManager.register(key, element, singular);
+  const data = crsbinding.data.getValue(context, plural);
+  const elements = crsbinding.inflationManager.get(key, data);
+  crsbinding.inflationManager.unregister(key);
+  element.parentElement.appendChild(elements);
+  element.parentElement.removeChild(element);
+}
+
+// src/binding/providers/for-map-provider.js
+var ForMapProvider = class extends RepeatBaseProvider {
+  dispose() {
+    super.dispose();
+  }
+  async _renderItems(array) {
+    await super._renderItems();
+    const fragment = document.createDocumentFragment();
+    const keys = array.keys();
+    for (let key of keys) {
+      const value = array.get(key);
+      value.__aId = key;
+      fragment.appendChild(await this.createElement(value, key));
+    }
+    this.positionStruct.addAction(fragment);
+    if (this._container.__providers == null) {
+      this._container.__providers = [];
+    }
+    if (this._container.__providers.indexOf(this.id) == -1) {
+      this._container.__providers.push(this.id);
+    }
+  }
+};
+
+// src/binding/providers/emit-provider.js
+var EmitProvider = class extends CallProvider {
+  async initialize() {
+    const fnParts = this._value.split("(");
+    const name = fnParts[0];
+    const argsStr = [`{`];
+    if (fnParts.length > 0) {
+      this._getParametersCode(fnParts[1], argsStr);
+    }
+    argsStr.push("}");
+    const src = this._getSource(name, argsStr.join(""));
+    this._fn = new Function("context", src);
+  }
+  _getSource(name, args) {
+    return `crsbinding.events.emitter.emit("${name}", ${args});`;
+  }
+  _getParametersCode(parameters, args) {
+    if (parameters == null)
+      return;
+    const argParts = parameters.split(")").join("").split(",");
+    for (let i = 0; i < argParts.length; i++) {
+      const ap = argParts[i];
+      const v = ap.trim();
+      if (this[v] != null) {
+        this[v](args);
+      } else {
+        this._processArg(v, args);
+      }
+      if (i < argParts.length - 1) {
+        args.push(",");
+      }
+    }
+  }
+  "$event"(args) {
+    args.push("event: event");
+  }
+  "$context"(args) {
+    args.push("context: context");
+  }
+  _processArg(value, args) {
+    const parts = value.split("=");
+    const property = parts[0].trim();
+    const code = this._processValue(parts[1]);
+    args.push(`${property}:${code}`);
+  }
+  _processValue(value) {
+    if (value.indexOf("${") != -1) {
+      return value.split("${").join("context.").split("}").join("");
+    }
+    return value;
+  }
+};
+
+// src/binding/providers/post-provider.js
+var PostProvider = class extends EmitProvider {
+  async initialize() {
+    const queryStartIndex = this._value.indexOf("[");
+    const queryEndIndex = this._value.indexOf("]");
+    const queries = this._value.substring(queryStartIndex + 1, queryEndIndex).split(" ").join("").split(",");
+    const name = this._value.substring(0, queryStartIndex).trim();
+    const argsStr = [`{key: "${name}",`];
+    const argsStartIndex = this._value.indexOf("(");
+    const argsEndIndex = this._value.indexOf(")");
+    if (argsStartIndex != -1) {
+      const args = this._value.substring(argsStartIndex + 1, argsEndIndex);
+      this._getParametersCode(args, argsStr);
+    }
+    argsStr.push("}");
+    const src = this._getSource(queries, argsStr.join(""));
+    this._fn = new Function("context", src);
+  }
+  _getSource(queries, args) {
+    const code = [];
+    for (let query of queries) {
+      query = query.split("'").join("").split('"').join("");
+      code.push(`crsbinding.events.emitter.postMessage("${query}", ${args});`);
+    }
+    return code.join("\n");
+  }
+};
+
+// src/binding/providers/setvalue-provider.js
+var SetValueProvider = class extends CallProvider {
+  async initialize() {
+    const src = this._createSource();
+    this._fn = new Function("context", "event", "setProperty", src);
+  }
+  _createSource() {
+    if (this._value.trim()[0] != "[") {
+      return this._createSourceFrom(this._value);
+    }
+    const result = [];
+    const exps = this._value.substr(1, this._value.length - 2);
+    const parts = exps.split(";");
+    for (let part of parts) {
+      result.push(this._createSourceFrom(part.trim()));
+    }
+    return result.join("\n");
+  }
+  _createSourceFrom(exp) {
+    const parts = exp.split("=");
+    const value = this._processRightPart(parts[1].trim());
+    const src = this._processLeftPart(parts[0].trim(), value);
+    return src;
+  }
+  _processRightPart(part) {
+    return crsbinding.expression.sanitize(part, this._ctxName, true).expression;
+  }
+  _processLeftPart(part, value) {
+    if (part.indexOf("$globals") != -1) {
+      return this._getGlobalSetter(part, value);
+    } else {
+      return this._getContextSetter(part, value);
+    }
+  }
+  _getGlobalSetter(part, value) {
+    const path2 = part.replace("$globals.", "");
+    return `crsbinding.data.setProperty({_dataId: crsbinding.$globals}, "${path2}", ${value});`;
+  }
+  _getContextSetter(part, value) {
+    part = part.replace("$context.", "");
+    if (value.indexOf("context.") != -1) {
+      const parts = value.split("context.");
+      const property = parts[parts.length - 1];
+      let prefix = parts[0] == "!" ? "!" : "";
+      value = `${prefix}crsbinding.data.getValue({_dataId: ${this._context}}, "${property}")`;
+    }
+    return `crsbinding.data.setProperty({_dataId: ${this._context}}, "${part}", ${value});`;
+  }
+  event(event) {
+    const context = crsbinding.data.getContext(this._context);
+    crsbinding.idleTaskManager.add(this._fn(context, event, this._setProperty));
+    event.stopPropagation();
+  }
+  _setProperty(obj, property, value) {
+    if (value !== void 0) {
+      crsbinding.data.setProperty(this, property, value);
+    }
+  }
+};
+
+// src/binding/providers/process-provider.js
+var ProcessProvider = class extends ProviderBase {
+  constructor(element, context, property, value, ctxName, parentId) {
+    super(element, context, property, value, ctxName, parentId);
+    this._eventHandler = this.event.bind(this);
+    this._element.addEventListener(this._property, this._eventHandler);
+  }
+  dispose() {
+    this._element.removeEventListener(this._property, this._eventHandler);
+    this._eventHandler = null;
+    super.dispose();
+  }
+  event() {
+    if (globalThis.crs?.process == null) {
+      return console.error("crs-process-api not present or running at this time");
+    }
+    if (this._value[0] == "{") {
+      executeStep(this);
+    } else {
+      const left = this._value.split("{")[0];
+      if (left.indexOf("[") == -1) {
+        executeFunction(this);
+      } else {
+        executeProcess(this);
+      }
+    }
+  }
+};
+function executeStep(provider) {
+  const exp = sanitize(provider._value, provider._context);
+  const step = getObject(exp, provider._context);
+  const ctx = crsbinding.data.getContext(provider._context);
+  crs.process.runStep(step, ctx, null, null);
+}
+function executeFunction(provider) {
+  const exp = sanitize(provider._value, provider._context);
+  const parts = exp.split("(");
+  const fnParts = parts[0].split(".");
+  const stepStr = `{type: "${fnParts[0]}", action: "${fnParts[1]}", args: ${parts[1]}}`.replace(")", "");
+  const step = getObject(stepStr, provider._context);
+  const ctx = crsbinding.data.getContext(provider._context);
+  crs.process.runStep(step, ctx, null, null);
+}
+function executeProcess(provider) {
+  const exp = sanitize(provider._value, provider._context);
+  const schemaParts = exp.split("[");
+  const schema = schemaParts[0];
+  const processParts = schemaParts[1].replace("]", "").split("(");
+  const process = processParts[0];
+  const parameters = getParameters(processParts[1].replace(")", "").trim(), provider._context);
+  const ctx = crsbinding.data.getContext(provider._context);
+  const args = {
+    context: ctx,
+    step: {
+      action: process,
+      args: {
+        schema
+      }
+    }
+  };
+  if (parameters != null) {
+    args.parameters = parameters;
+  }
+  crsbinding.events.emitter.emit("run-process", args);
+}
+function getObject(str, id) {
+  if (str.indexOf("{") == -1) {
+    str = `{${str}}`;
+  }
+  const fn = new Function("context", `return ${str};`);
+  const context = crsbinding.data.getContext(id);
+  const binding = crsbinding.data.getData(id).data;
+  let ctx = {};
+  Object.assign(ctx, binding);
+  Object.assign(ctx, context);
+  const result = fn(ctx);
+  ctx = null;
+  return result;
+}
+function getParameters(str, id) {
+  if (str.length == 0)
+    return null;
+  return getObject(str, id);
+}
+function sanitize(str, bId) {
+  return str.replace("bId", `bId: ${bId}`).split("$context.").join("context.");
+}
+
+// src/binding/provider-factory.js
+var ProviderFactory = class {
+  static "bind"(element, context, property, value, ctxName, attr, parentId) {
+    if (["value", "checked"].indexOf(property) != -1) {
+      return new BindProvider(element, context, property, value, ctxName, parentId);
+    } else {
+      return this["one-way"](element, context, property, value, ctxName, parentId);
+    }
+  }
+  static "two-way"(element, context, property, value, ctxName, attr, parentId) {
+    return new BindProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "one-way"(element, context, property, value, ctxName, attr, parentId) {
+    if (value[0] == "`") {
+      return new OneWayStringProvider(element, context, property, value, ctxName, parentId);
+    }
+    return new OneWayProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "once"(element, context, property, value, ctxName, attr, parentId) {
+    return OnceProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "call"(element, context, property, value, ctxName, attr, parentId) {
+    return new CallProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "delegate"(element, context, property, value, ctxName, attr, parentId) {
+    return new CallProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "emit"(element, context, property, value, ctxName, attr, parentId) {
+    return new EmitProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "post"(element, context, property, value, ctxName, attr, parentId) {
+    return new PostProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "setvalue"(element, context, property, value, ctxName, attr, parentId) {
+    return new SetValueProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "inner"(element, context, property, value, ctxName, attr, parentId) {
+    return new InnerProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "for"(element, context, property, value, ctxName, attr, parentId) {
+    const parts = attr.name.split(".");
+    const customProvider = parts.length > 1 ? crsbinding.providerManager.providers.for[parts[1]] : null;
+    if (customProvider != null) {
+      return new customProvider(element, context, property, value, ctxName, parentId);
+    } else {
+      return new ForProvider(element, context, property, value, ctxName, parentId);
+    }
+  }
+  static "if"(element, context, property, value, ctxName, attr, parentId) {
+    if (property.toLowerCase() == "classlist") {
+      return new IfClassProvider(element, context, property, value, ctxName, parentId);
+    }
+    if (property.toLowerCase().indexOf("style.") != -1) {
+      return new IfStylesProvider(element, context, property, value, ctxName, parentId);
+    }
+    return new IfProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "attr"(element, context, property, value, ctxName, attr, parentId) {
+    return new AttrProvider(element, context, property, value, ctxName, parentId);
+  }
+  static "process"(element, context, property, value, ctxName, attr, parentId) {
+    return new ProcessProvider(element, context, property, value, ctxName, parentId);
+  }
+};
+
+// src/binding/parse-element.js
+var ignore = ["style", "script"];
+async function parseElements(collection, context, options) {
+  for (let element of collection || []) {
+    await crsbinding.parsers.parseElement(element, context, options);
+  }
+}
+async function parseElement(element, context, options) {
+  let ctxName = "context";
+  let parentId = null;
+  let folder = null;
+  if (options != null) {
+    ctxName = options.ctxName || "context";
+    parentId = options.parentId || null;
+    folder = options.folder || null;
+  }
+  if (element.__inflated == true)
+    return;
+  const nodeName = element.nodeName.toLowerCase();
+  if (ignore.indexOf(nodeName) != -1)
+    return;
+  if (nodeName != "template" && nodeName != "perspective-element" && element.children?.length > 0) {
+    await parseElements(element.children, context, options);
+  }
+  if (nodeName == "template" && element.getAttribute("src") != null) {
+    return await parseHTMLFragment(element, context, options);
+  }
+  const attributes = Array.from(element.attributes || []);
+  const boundAttributes = attributes.filter(
+    (attr) => attr.ownerElement.tagName.toLowerCase() == "template" && attr.name == "for" || attr.name.indexOf(".") != -1 || (attr.value || "").indexOf("${") == 0 || (attr.value || "").indexOf("&{") == 0
+  );
+  await parseAttributes(boundAttributes, context, ctxName, parentId);
+  if (element.textContent.indexOf("&{") !== -1) {
+    element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
+  } else if (element.children && element.children.length == 0 && (element.textContent || "").indexOf("${") != -1) {
+    ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
+  } else if (nodeName === "svg") {
+    crsbinding.svgCustomElements.parse(element);
+  }
+}
+async function parseAttributes(collection, context, ctxName, parentId) {
+  for (let attr of collection) {
+    if (attr.nodeValue.indexOf("&{") !== -1) {
+      attr.nodeValue = await crsbinding.translations.get_with_markup(attr.nodeValue);
+    } else {
+      await parseAttribute(attr, context, ctxName, parentId);
+    }
+  }
+}
+async function parseAttribute(attr, context, ctxName, parentId) {
+  const parts = attr.name.split(".");
+  let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length - 1).join(".");
+  let prov = prop == "for" ? prop : parts[parts.length - 1];
+  if (prop.length == 0 && attr.value[0] == "$") {
+    prop = prov;
+    prov = "attr";
+  }
+  const provider = ProviderFactory[prov](attr.ownerElement, context, prop, attr.value, ctxName, attr, parentId);
+  if (provider == null || provider.constructor.name != "AttrProvider" || attr.nodeName.indexOf(".attr") != -1) {
+    attr.ownerElement.removeAttribute(attr.nodeName);
+  }
+  return provider;
+}
+async function parseHTMLFragment(element, context, options) {
+  if (options?.folder == null)
+    return;
+  const file = crsbinding.utils.relativePathFrom(options.folder, element.getAttribute("src"));
+  const tpl = document.createElement("template");
+  tpl.innerHTML = await fetch(file).then((result) => result.text());
+  const instance = tpl.content.cloneNode(true);
+  await parseElements(instance.children, context, options);
+  const parent = element.parentElement;
+  parent.insertBefore(instance, element);
+  parent.removeChild(element);
+}
+function releaseBinding(element) {
+  crsbinding.providerManager.releaseElement(element);
+}
+function releaseChildBinding(element) {
+  for (let child of element.children) {
+    releaseBinding(child);
+  }
+}
+
+// src/binding/providers/for-radio-provider.js
+var ForRadioProvider = class extends ProviderBase {
+  dispose() {
+    for (let input of this.inputs) {
+      input.removeEventListener("change", this._changeHandler);
+    }
+    this.inputs = null;
+    this._changeHandler = null;
+    this._propertyToSet = null;
+    super.dispose();
+  }
+  async initialize() {
+    this._propertyToSet = this._element.getAttribute("property");
+    this._changeHandler = this._change.bind(this);
+    const parts = this._value.split("of");
+    const singular = parts[0].trim();
+    const plural = parts[1].trim();
+    const key = `for-group-${singular}`;
+    crsbinding.inflationManager.register(key, this._element, singular);
+    const data = crsbinding.data.getValue(this._context, plural);
+    const elements = crsbinding.inflationManager.get(key, data);
+    crsbinding.inflationManager.unregister(key);
+    const currentSelectedValue = crsbinding.data.getProperty(this._context, this._propertyToSet);
+    this.inputs = elements.querySelectorAll("input");
+    for (let input of this.inputs) {
+      input.setAttribute("type", "radio");
+      input.setAttribute("name", plural);
+      input.addEventListener("change", this._changeHandler);
+      if (currentSelectedValue && input.getAttribute("value") == currentSelectedValue.toString()) {
+        input.setAttribute("checked", "checked");
+      }
+    }
+    this._element.parentElement.appendChild(elements);
+    this._element.parentElement.removeChild(this._element);
+  }
+  async _change(event) {
+    crsbinding.data.setProperty(this._context, this._propertyToSet, event.target.value);
+  }
+};
+
+// src/managers/provider-manager.js
+var ProviderManager = class {
+  constructor() {
+    this._nextId = 0;
+    this.items = /* @__PURE__ */ new Map();
+    this.providers = {
+      for: {
+        map: ForMapProvider,
+        once: ForOnceProvider,
+        radio: ForRadioProvider
+      }
+    };
+  }
+  async register(provider) {
+    provider.id = this._nextId;
+    if (provider._element.__providers == null) {
+      Reflect.set(provider._element, "__providers", []);
+    }
+    provider._element.__providers.push(this._nextId);
+    this.items.set(this._nextId, provider);
+    this._nextId += 1;
+  }
+  async releaseElement(element) {
+    if (element.nodeName.toLowerCase() == "svg") {
+      crsbinding.svgCustomElements.release(element);
+    }
+    for (let property of element.__cleanup || []) {
+      element[property] = null;
+    }
+    for (let child of element.children || []) {
+      await this.releaseElement(child);
+    }
+    if (element.__providers == null)
+      return;
+    for (let id of element.__providers) {
+      let provider = this.items.get(id);
+      this.items.delete(id);
+      provider && provider.dispose();
+      provider = null;
+    }
+    delete element.__providers;
+    if (this.items.size == 0) {
+      this._nextId = 0;
+    }
+  }
+};
+
+// src/idle/idleCallback.js
+globalThis.requestIdleCallback = globalThis.requestIdleCallback || function(cb) {
+  const start = Date.now();
+  return setTimeout(function() {
+    cb({
+      didTimeout: false,
+      timeRemaining: function() {
+        return Math.max(0, 50 - (Date.now() - start));
+      }
+    });
+  }, 1);
+};
+globalThis.cancelIdleCallback = globalThis.cancelIdleCallback || function(id) {
+  clearTimeout(id);
+};
+
+// src/idle/idleTaskManager.js
+var IdleTaskManager = class {
+  constructor() {
+    this.processing = false;
+    this._list = [];
+  }
+  dispose() {
+    this._list = null;
+  }
+  async add(fn) {
+    if (typeof fn != "function")
+      return;
+    if (requestIdleCallback == null)
+      return await fn();
+    this._list.push(fn);
+    if (this.processing == true)
+      return;
+    await this._processQueue();
+  }
+  async _processQueue() {
+    this.processing = true;
+    try {
+      requestIdleCallback(async () => {
+        while (this._list.length > 0) {
+          const fn = this._list.shift();
+          try {
+            await fn();
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }, { timeout: 1e3 });
+    } finally {
+      this.processing = false;
+    }
+  }
+};
+
+// src/binding/listen-on.js
+function listenOnPath(id, property, callback) {
+  if (typeof id == "object") {
+    id = id.__uid || id._dataId;
+  }
+  const collection = Array.isArray(property) == true ? property : [property];
+  const cleanEvents = [];
+  for (let p of collection) {
+    if (p.indexOf("$globals.") != -1) {
+      id = crsbinding.$globals;
+      p = p.replace("$globals.", "");
+      addCleanUp(cleanEvents, crsbinding.$globals, p, callback);
+    }
+    addCallback(id, p, callback, cleanEvents);
+  }
+  return cleanEvents;
+}
+function removeOnPath(itemsToRemove) {
+  for (let item of itemsToRemove) {
+    crsbinding.data.removeCallback(item.context, item.path, item.callback);
+    delete item.context;
+    delete item.path;
+    delete item.callback;
+  }
+  itemsToRemove.length = 0;
+}
+function addCallback(context, path2, callback, cleanEvents) {
+  crsbinding.data.addCallback(context, path2, callback);
+  addCleanUp(cleanEvents, context, path2.split("$parent.").join("").split("$context.").join(""), callback);
+}
+function addCleanUp(collection, context, path2, callback) {
+  collection.push({
+    context,
+    path: path2,
+    callback
+  });
+}
+
+// src/events/dom-events.js
+function domEnableEvents(element) {
+  element._domEvents = [];
+  element.registerEvent = registerEvent;
+  element.unregisterEvent = unregisterEvent;
+}
+function domDisableEvents(element) {
+  if (element._domEvents == null)
+    return;
+  for (let event of element._domEvents) {
+    element.removeEventListener(event.event, event.callback);
+    delete event.element;
+    delete event.callback;
+    delete event.event;
+  }
+  element._domEvents.length = 0;
+  delete element._domEvents;
+  delete element.registerEvent;
+  delete element.unregisterEvent;
+}
+function registerEvent(element, event, callback, eventOptions = null) {
+  element.addEventListener(event, callback, eventOptions);
+  this._domEvents.push({
+    element,
+    event,
+    callback
+  });
+}
+function unregisterEvent(element, event, callback) {
+  const item = this._domEvents.find((item2) => item2.element == element && item2.event == event && item2.callback == callback);
+  if (item == null)
+    return;
+  element.removeEventListener(item.event, item.callback);
+  this._domEvents.splice(this._domEvents.indexOf(item), 1);
+  delete item.element;
+  delete item.callback;
+  delete item.event;
+}
+
+// src/managers/inflation-manager.js
+var InflationManager = class {
+  constructor() {
+    this._items = /* @__PURE__ */ new Map();
+  }
+  dispose() {
+    this._items.clear();
+    this._items = null;
+  }
+  register(id, template, ctxName = "context", measure = false) {
+    template = template.cloneNode(true);
+    const generator = new InflationCodeGenerator(ctxName, id);
+    const result = generator.generateCodeFor(template);
+    const templates = generator.templateKeys;
+    generator.dispose();
+    crsbinding.elementStoreManager.register(id, template, measure);
+    this._items.set(id, {
+      id,
+      childCount: result.childCount,
+      inflate: result.inflate,
+      deflate: result.deflate,
+      templates
+    });
+  }
+  unregister(id) {
+    const item = this._items.get(id);
+    if (item != null) {
+      item.inflate = null;
+      item.defaulte = null;
+      if (item.templates != null) {
+        item.templates.forEach((tplId) => this.unregister(tplId));
+      }
+      this._items.delete(id);
+    }
+    crsbinding.elementStoreManager.unregister(id);
+  }
+  get(id, data, elements, start) {
+    const item = this._items.get(id);
+    if (item == null)
+      return null;
+    if (elements != null) {
+      return this._getWithElements(item, data, elements, start || 0);
+    }
+    const length = Array.isArray(data) ? data.length * item.childCount : 1;
+    const fragment = crsbinding.elementStoreManager.getElements(id, length);
+    this._inflateElements(item, fragment, data);
+    return fragment;
+  }
+  _getWithElements(item, data, elements, start) {
+    if (data.length == 0)
+      return null;
+    const diff = elements.length - data.length * item.childCount;
+    let fragment = null;
+    if (diff < 0) {
+      const length = -1 * diff;
+      fragment = crsbinding.elementStoreManager.getElements(item.id, length);
+      const offset = length / item.childCount;
+      const sub_start_index = data.length - offset;
+      const subData = data.slice(sub_start_index, data.length);
+      this._inflateElements(item, fragment, subData);
+      data = data.slice(0, sub_start_index);
+    }
+    let index = 0;
+    let elementsCollection = [];
+    for (let record of data) {
+      elementsCollection.length = 0;
+      let start_index = start * item.childCount + index * item.childCount;
+      for (let i = 0; i < item.childCount; i++) {
+        elementsCollection.push(elements[start_index + i]);
+      }
+      item.inflate(elementsCollection.length > 1 ? elementsCollection : elementsCollection[0], record);
+      index += 1;
+    }
+    if (start == 0 && diff > 0) {
+      elementsCollection = Array.from(elements);
+      for (let i = diff; i > 0; i--) {
+        const element = elementsCollection.pop();
+        element.parentElement.removeChild(element);
+      }
+    }
+    return fragment;
+  }
+  _inflateSingleElement(item, fragment, data) {
+    this.inflate(item.id, item.childCount == 1 ? fragment.children[0] : Array.from(fragment.children), data, item.inflate);
+  }
+  _inflateSingleChildFragment(item, fragment, data) {
+    const isArray = Array.isArray(fragment);
+    data = Array.isArray(data) ? data : [data];
+    for (let i = 0; i < data.length; i++) {
+      const child = isArray ? fragment[i] : fragment.children[i];
+      this.inflate(item.id, child, data[i], item.inflate);
+      child.__inflated = true;
+      const attrAttributes = Array.from(child.attributes).filter((attr) => attr.name.indexOf(".attr") != -1);
+      for (let attr of attrAttributes) {
+        child.removeAttribute(attr.name);
+      }
+    }
+  }
+  _inflateMultiChildFragment(item, fragment, data) {
+    const srcElements = Array.from(fragment.children);
+    let index = 0;
+    for (let i = 0; i < data.length; i++) {
+      const elements = srcElements.slice(index, index + item.childCount);
+      this.inflate(item.id, elements, data[i], item.inflate, false);
+      index += item.childCount;
+    }
+    srcElements.forEach((child) => {
+      child.__inflated = true;
+      const attrAttributes = Array.from(child.attributes).filter((attr) => attr.name.indexOf(".attr") != -1);
+      for (let attr of attrAttributes) {
+        child.removeAttribute(attr.name);
+      }
+    });
+    srcElements.filter((el) => el.getAttribute("remove") == "true").forEach((rem) => rem.parentNode.removeChild(rem));
+  }
+  _inflateElements(item, fragment, data) {
+    if (Array.isArray(data) == false) {
+      this._inflateSingleElement(item, fragment, data);
+    } else if (item.childCount == 1) {
+      this._inflateSingleChildFragment(item, fragment, data);
+    } else {
+      this._inflateMultiChildFragment(item, fragment, data);
+    }
+  }
+  inflate(id, element, data, inflate = null, removeMarked = true) {
+    const fn = inflate || this._items.get(id).inflate;
+    fn(element, data);
+    if (removeMarked == true) {
+      this._removeElements(element);
+    }
+  }
+  _removeElements(element) {
+    let removedElements = [];
+    if (Array.isArray(element)) {
+      element.forEach((el) => {
+        const removed = el.querySelectorAll('[remove="true"]');
+        if (removed.length > 0) {
+          removedElements = [...removedElements, ...removed];
+        }
+      });
+    } else {
+      removedElements = element.querySelectorAll('[remove="true"]');
+    }
+    for (let rel of removedElements) {
+      rel.parentElement.removeChild(rel);
+    }
+  }
+  deflate(id, elements) {
+    const fn = this._items.get(id).deflate;
+    if (Array.isArray(elements)) {
+      for (let element of elements) {
+        fn(element);
+      }
+    } else {
+      fn(elements);
+    }
+  }
+  returnElements(id, elements, restore = false) {
+    crsbinding.elementStoreManager.returnElements(id, elements, restore);
+  }
+};
+var InflationCodeGenerator = class {
+  constructor(ctxName, parentKey) {
+    this.parentKey = parentKey;
+    this.templateKeys = [];
+    this.inflateSrc = [];
+    this.deflateSrc = [];
+    this._ctxName = ctxName;
+  }
+  dispose() {
+    this.inflateSrc = null;
+    this.deflateSrc = null;
+  }
+  generateCodeFor(template) {
+    const children = template.content == null ? template.children : template.content.children;
+    const childCount = children.length;
+    if (childCount == 1) {
+      this.path = "element";
+      for (let element of children) {
+        this._processElement(element);
+      }
+    } else {
+      for (let i = 0; i < children.length; i++) {
+        this.path = `element[${i}]`;
+        this._processElement(children[i]);
+      }
+    }
+    const inflateCode = this.inflateSrc.join("\n");
+    const deflateCode = this.deflateSrc.join("\n");
+    return {
+      childCount,
+      inflate: new Function("element", this._ctxName, inflateCode),
+      deflate: new Function("element", this._ctxName, deflateCode)
+    };
+  }
+  _processElement(element) {
+    this._processTextContent(element);
+    this._processAttributes(element);
+    const path2 = this.path;
+    for (let i = 0; i < element.children.length; i++) {
+      const child = element.children[i];
+      if (child.nodeName == "TEMPLATE") {
+        this._processTemplate(child);
+      } else {
+        this.path = `${path2}.children[${i}]`;
+        this._processElement(element.children[i]);
+      }
+    }
+  }
+  _processTemplate(element) {
+    const key = `${this.parentKey}_${this.templateKeys.length + 1}`;
+    this.templateKeys.push(key);
+    element.dataset.key = key;
+    const value = element.getAttribute("for.once");
+    if (value != null) {
+      const parts = forStatementParts(value);
+      const code = `${this.path}.appendChild(crsbinding.inflationManager.get("${key}", ${parts.plural}));`;
+      this.inflateSrc.push(code);
+      crsbinding.inflationManager.register(key, element, parts.singular);
+      element.parentElement.removeChild(element);
+    }
+  }
+  _processTextContent(element) {
+    if (element.children == null || element.children.length > 0 || element.textContent.indexOf("${") == -1)
+      return;
+    const text = (element.innerHTML || "").trim();
+    let target = "textContent";
+    let exp = text;
+    const san = crsbinding.expression.sanitize(exp, this._ctxName);
+    exp = san.expression;
+    if (san.isHTML == true) {
+      target = "innerHTML";
+    }
+    this.inflateSrc.push([`${this.path}.${target} = \`` + exp + "`"].join(" "));
+    this.deflateSrc.push(`${this.path}.${target} = "";`);
+  }
+  _processAttributes(element) {
+    const attributes = Array.from(element.attributes).filter(
+      (attr) => attr.value.indexOf("${") != -1 || attr.name.indexOf(".if") != -1 || attr.name.indexOf(".attr") != -1 || attr.name.indexOf("style.") != -1 || attr.name.indexOf("classlist." != -1)
+    );
+    for (let attr of attributes) {
+      if (attr.name.indexOf(".attr") != -1) {
+        this._processAttr(attr);
+      } else if (attr.value.indexOf("${") != -1) {
+        this._processAttrValue(attr);
+      } else {
+        this._processAttrCondition(attr);
+      }
+    }
+  }
+  _processAttr(attr) {
+    const attrName = attr.name.replace(".attr", "");
+    const exp = crsbinding.expression.sanitize(attr.value, this._ctxName).expression;
+    this.inflateSrc.push(`${this.path}.setAttribute("${attrName}", ${exp})`);
+  }
+  _processAttrValue(attr) {
+    const text = attr.value.trim();
+    let exp = text.substr(2, text.length - 3);
+    exp = crsbinding.expression.sanitize(exp, this._ctxName).expression;
+    if (attr.name == "xlink:href") {
+      this.inflateSrc.push(`${this.path}.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", ${exp});`);
+    } else {
+      const parts = exp.split("?");
+      this.inflateSrc.push(`if (${parts[0].trim()} != null) {${this.path}.setAttribute("${attr.name}", ${exp});}`);
+    }
+    this.deflateSrc.push(`${this.path}.removeAttribute("${attr.name}");`);
+    attr.ownerElement.removeAttribute(attr.name);
+  }
+  _processAttrCondition(attr) {
+    if (attr.name.trim().indexOf("style.") == 0) {
+      return this._processStyle(attr);
+    }
+    if (attr.name.trim().indexOf("classlist") == 0) {
+      return this._processClassList(attr);
+    }
+    if (attr.name.trim().indexOf(".if") != -1) {
+      return this._processConditional(attr);
+    }
+  }
+  _processStyle(attr) {
+    const parts = attr.name.split(".");
+    const prop = crsbinding.utils.capitalizePropertyPath(parts[1]);
+    const value = crsbinding.expression.sanitize(attr.value.trim(), this._ctxName).expression;
+    this.inflateSrc.push(`${this.path}.style.${prop} = ${value};`);
+    this.deflateSrc.push(`${this.path}.style.${prop} = "";`);
+    attr.ownerElement.removeAttribute(attr.name);
+  }
+  _processClassList(attr) {
+    const parts = attr.value.split("?");
+    const condition = crsbinding.expression.sanitize(parts[0], this._ctxName).expression;
+    const values = parts[1].split(":");
+    const trueValue = values[0].trim();
+    const falseValue = values.length > 1 ? values[1].trim() : "";
+    const trueCode = trueValue.indexOf("[") == -1 ? trueValue : `...${trueValue}`;
+    let code = `if (${condition}) {${this.path}.classList.add(${trueCode});}`;
+    if (falseValue.length > 0) {
+      let falseCode = falseValue.indexOf("[") == -1 ? falseValue : `...${falseValue}`;
+      code += `else {${this.path}.classList.add(${falseCode});}`;
+    }
+    const deflateCode = `while (${this.path}.classList.length > 0) {${this.path}.classList.remove(${this.path}.classList.item(0));}`;
+    this.inflateSrc.push(code);
+    this.deflateSrc.push(deflateCode);
+    attr.ownerElement.removeAttribute(attr.name);
+  }
+  _processConditional(attr) {
+    const attrName = attr.name.split(".if")[0].trim();
+    const expParts = attr.value.split("?");
+    const condition = crsbinding.expression.sanitize(expParts[0].trim(), this._ctxName).expression;
+    let code = [`if(${condition})`];
+    const expValue = expParts.length > 1 ? expParts[1].trim() : `"${attrName}"`;
+    if (expValue.indexOf(":") == -1) {
+      code.push("{");
+      code.push(`${this.path}.setAttribute("${attrName}", ${expValue});`);
+      code.push("}");
+      code.push(`else {${this.path}.removeAttribute("${attrName}")}`);
+    } else {
+      const condParts = expParts[1].split(":");
+      code.push("{");
+      code.push(`${this.path}.setAttribute("${attrName}", ${condParts[0].trim()});`);
+      code.push("}");
+      code.push(`else {${this.path}.setAttribute("${attrName}", ${condParts[1].trim()})}`);
+    }
+    this.inflateSrc.push(code.join(""));
+    this.deflateSrc.push(`${this.path}.removeAttribute("${attrName}")`);
+    attr.ownerElement.removeAttribute(attr.name);
+  }
+};
+
+// src/lib/clone.js
+function clone(obj) {
+  if (obj == null)
+    return obj;
+  const result = cleanClone(Object.assign({}, obj));
+  return result;
+}
+function cleanClone(obj) {
+  let properties = Object.getOwnPropertyNames(obj).filter((item) => item.indexOf("__") == 0);
+  for (let property of properties) {
+    delete obj[property];
+  }
+  properties = Object.getOwnPropertyNames(obj).filter((item) => item.indexOf("__") == -1 && typeof obj[item] == "object");
+  for (let property of properties) {
+    cleanClone(obj[property]);
+  }
+  return obj;
+}
+
+// src/lib/path-utils.js
+function getValueOnPath(object, path2) {
+  let obj = object;
+  if (path2.indexOf(".") == -1) {
+    return obj[path2];
+  }
+  const parts = path2.split(".");
+  for (let i = 0; i < parts.length - 1; i++) {
+    const part = parts[i];
+    obj = obj[part];
+    if (obj == null)
+      return null;
+  }
+  return obj[parts[parts.length - 1]];
+}
+
+// src/store/binding-data-arrays.js
+function createArrayProxy(array, id, property) {
+  if (array == null)
+    return null;
+  array.__id = id;
+  array.__property = property;
+  return new Proxy(array, { get });
+}
+var deleteFunctions = ["pop", "splice"];
+var addFunctions = ["push"];
+function get(collection, property) {
+  const value = collection[property];
+  if (typeof value == "function") {
+    return (...args) => {
+      const result = collection[property](...args);
+      if (deleteFunctions.indexOf(property) != -1) {
+        itemsRemoved(collection, result);
+        if (property == "splice" && args.length > 2) {
+          args = args.splice(2, args.length);
+          itemsAdded(collection, args);
+        }
+      } else if (addFunctions.indexOf(property) != -1) {
+        itemsAdded(collection, args);
+      }
+      return result;
+    };
+  }
+  return value;
+}
+function itemsRemoved(collection, items) {
+  const id = collection.__id;
+  const property = collection.__property;
+  crsbinding.data.arrayItemsRemoved(id, property, items, collection);
+}
+function itemsAdded(collection, items) {
+  const id = collection.__id;
+  const property = collection.__property;
+  crsbinding.data.arrayItemsAdded(id, property, items, collection);
+}
+
+// src/store/binding-data.js
+var BindingData = class {
+  constructor() {
+    this._data = {};
+    this._converters = {};
+    this._callbacks = {};
+    this._updates = {};
+    this._triggers = /* @__PURE__ */ new Map();
+    this._context = {};
+    this._sync = {};
+    this._frozenObjects = [];
+    this._idStore = {
+      nextId: 0,
+      nextTriggerId: 0,
+      nextArrayId: 0,
+      nextSyncId: 0
+    };
+  }
+  getConverter(id, path2) {
+    const obj = this._converters[id];
+    if (obj == null)
+      return null;
+    const key = getValueOnPath(obj, path2);
+    if (key == null)
+      return null;
+    return crsbinding.valueConvertersManager.get(key);
+  }
+  _getContextId(id) {
+    if (typeof id == "object") {
+      return id.__uid || id._dataId;
+    }
+    return id;
+  }
+  getContext(id) {
+    return this._context[id];
+  }
+  getData(id) {
+    return this._data[id];
+  }
+  array(id, property) {
+    id = this._getContextId(id);
+    const value = this.getValue(id, property);
+    return createArrayProxy(value, id, property);
+  }
+  setName(id, name) {
+    this._data[id].name = name;
+  }
+  addObject(name, type = {}) {
+    const id = this._getNextId();
+    type.contextId = id;
+    this._data[id] = {
+      name,
+      type: "data",
+      data: type
+    };
+    this._callbacks[id] = {};
+    return id;
+  }
+  removeObject(id) {
+    delete this._context[id];
+    const result = this._removeData(id);
+    this._removeCallbacks(id);
+    this._removeUpdates(id);
+    this._removeTriggers(id);
+    this._removeSync(id);
+    this._removeConverters(id);
+    return result;
+  }
+  getValue(id, property, convert = true) {
+    if (id == "undefined" || id == null)
+      return void 0;
+    id = this._getContextId(id);
+    if (property != null && property.indexOf("$globals.") !== -1) {
+      id = crsbinding.$globals;
+      property = property.replace("$globals.", "");
+    }
+    const obj = this._data[Number(id)];
+    let value;
+    if (obj.type == "data") {
+      const data = obj.data;
+      if (property == null)
+        return data;
+      value = property.indexOf(".") === -1 ? data[property] : getValueOnPath(data, property);
+    } else {
+      const refId = obj.refId;
+      value = this._getReferenceValue(refId, property, obj.path, obj.aId);
+    }
+    if (convert == true) {
+      const converter = this.getConverter(id, property);
+      if (converter != null) {
+        value = converter.get(value);
+      }
+    }
+    return value;
+  }
+  makeShared(id, property, sharedItems) {
+    id = this._getContextId(id);
+    const obj = this._callbacks[id];
+    for (let prop of sharedItems) {
+      const path2 = `${property}.${prop}`;
+      this._ensurePath(obj, path2, (triggerObject, triggerProperty) => {
+        if (triggerObject[triggerProperty] == null) {
+          triggerObject[triggerProperty] = {};
+        }
+        const nextId = this._getNextTriggerId();
+        this._triggers.set(nextId, { values: [{ id, path: path2 }] });
+        triggerObject[triggerProperty].__trigger = nextId;
+      });
+    }
+  }
+  getProperty(id, property, convert = true) {
+    id = this._getContextId(id);
+    let value = this.getValue(id, property, convert);
+    if (Array.isArray(value)) {
+      value = createArrayProxy(value, id, property);
+    }
+    return value;
+  }
+  setProperty(id, property, value, convert = true) {
+    id = this._getContextId(id);
+    let oldValue = this.getProperty(id, property, false);
+    if (Array.isArray(oldValue)) {
+      this.array(id, property).splice(0, oldValue.length);
+      if (value != null) {
+        if (oldValue.__syncId != null) {
+          value.__syncId = oldValue.__syncId;
+        } else {
+          delete value.__syncId;
+        }
+      }
+    }
+    if (value && value.__uid != null) {
+      oldValue && this._unlinkArrayItem(oldValue);
+    }
+    this._setContextProperty(id, property, value, { oldValue, convert });
+    if (value && value.__uid) {
+      this.linkToArrayItem(id, property, value.__uid);
+    }
+  }
+  _setContextProperty(id, property, value, options) {
+    const oldValue = options.oldValue;
+    const ctxName = options.ctxName;
+    const dataType = options.dataType;
+    const convert = options.convert || true;
+    id = this._getContextId(id);
+    let obj = this._data[id];
+    if (obj == null || obj.__frozen == true)
+      return;
+    if (convert == true) {
+      const converter = this.getConverter(id, property);
+      if (converter != null) {
+        value = converter.set(value);
+      }
+    }
+    if (dataType === "boolean" || typeof value === "boolean") {
+      value = Boolean(value);
+    } else if (dataType === "number" || dataType == null && typeof value !== "object" && (isNaN(value) == false && value != "")) {
+      value = Number(value);
+    }
+    if (obj.type == "data") {
+      obj = this._data[id].data;
+      const changed = property.indexOf(".") === -1 ? this._setObjectProperty(obj, property, value) : this._setObjectPropertyPath(obj, property, value);
+      if (changed == true) {
+        this._performUpdates(id, property, value, oldValue);
+        this.updateUI(id, property);
+      }
+    } else {
+      this._setReferenceValue(id, property, value, obj.refId, obj.path, obj.aId, ctxName);
+    }
+  }
+  _setReferenceValue(id, property, value, refId, refPath, refaId, ctxName) {
+    const obj = this._data[refId];
+    if (obj.type == "data") {
+      let v = getValueOnPath(obj.data, refPath);
+      const syncId = v.__syncId;
+      if (refaId != null) {
+        v = v.find((i) => i.__aId == refaId);
+      }
+      if (ctxName != "context") {
+        property = property.split(`${ctxName}.`).join("");
+      }
+      this._setObjectPropertyPath(v, property, value);
+      if (syncId != null) {
+        if (this._frozenObjects.indexOf(v) === -1) {
+          this._setSyncValues(syncId, property, value, v);
+        }
+      }
+      this._callFunctionsOnPath(id, property);
+    } else {
+      let pString = `${obj.path}.${path}`;
+      return this._getReferenceValue(obj.refId, property, pString);
+    }
+  }
+  createReferenceTo(refId, name, path2, index) {
+    const id = this._getNextId();
+    const ref = {
+      id,
+      name,
+      type: "ref",
+      refId,
+      path: path2
+    };
+    if (index !== void 0) {
+      ref.aId = index;
+    }
+    this._data[id] = ref;
+    this._callbacks[id] = {};
+    return id;
+  }
+  _getReferenceValue(id, property, path2, aId) {
+    const obj = this._data[id];
+    if (obj.type == "data") {
+      if (aId === void 0) {
+        const p = property == null ? path2 : `${path2}.${property}`;
+        return this.getValue(id, p);
+      } else {
+        const ar = this.getValue(id, path2);
+        let result;
+        if (Array.isArray(ar)) {
+          result = ar.find((i) => i.__aId == aId);
+        } else {
+          const item = ar.get(aId);
+          result = { key: aId, value: item };
+        }
+        return property == null || result == null ? result : getValueOnPath(result, property);
+      }
+    } else {
+      let pString = `${obj.path}.${path2}`;
+      return this._getReferenceValue(obj.refId, property, pString);
+    }
+  }
+  _getNextId() {
+    return this._nextId("nextId");
+  }
+  _getNextTriggerId() {
+    return this._nextId("nextTriggerId");
+  }
+  nextArrayId() {
+    return this._nextId("nextArrayId");
+  }
+  _nextId(idVariable) {
+    const id = this._idStore[idVariable];
+    this._idStore[idVariable] += 1;
+    return id;
+  }
+  createArraySync(id, property, primaryKey, fields) {
+    const array = this.getValue(id, property);
+    const syncId = this._idStore.nextSyncId;
+    this._idStore.nextSyncId += 1;
+    const sync = {
+      primaryKey,
+      fields,
+      collection: []
+    };
+    this._sync[syncId] = sync;
+    return this.addArraySync(syncId, id, property, array);
+  }
+  removeArraySync(syncId, id, property) {
+    const syncObj = this._sync[syncId];
+    id = this._getContextId(id);
+    if (syncObj != null) {
+      const items = syncObj.collection.filter((item) => item.id == id && item.path == property);
+      items.forEach((item) => syncObj.collection.splice(syncObj.collection.indexOf(item), 1));
+      if (syncObj.collection.length == 0) {
+        delete this._sync[syncId];
+      }
+      const array = this.getValue(id, property);
+      if (array != null) {
+        delete array.__syncId;
+        array.filter((item) => item.__syncId == syncId).forEach((item) => delete item.__syncId);
+      }
+    }
+  }
+  addArraySync(syncId, id, property, array) {
+    return new Promise((resolve) => {
+      id = this._getContextId(id);
+      this._ensurePath(id, property, () => {
+        const sync = this._sync[syncId];
+        if (sync.collection.filter((item) => item.id == id && item.path == property).length > 0) {
+          return resolve(syncId);
+        }
+        sync.collection.push({
+          id,
+          path: property
+        });
+        if (array == null) {
+          array = this.getValue(id, property);
+        }
+        array.__syncId = syncId;
+        resolve(syncId);
+      });
+    });
+  }
+  _setSyncValues(syncId, property, value, source) {
+    this._frozenObjects.push(source);
+    const sync = this._sync[syncId];
+    if (sync.fields.indexOf(property) !== -1) {
+      const idValue = source[sync.primaryKey];
+      for (let item of sync.collection) {
+        const array = this.getValue(item.id, item.path);
+        const data = array.find((item2) => item2[sync.primaryKey] == idValue);
+        this._frozenObjects.push(data);
+        if (data != source) {
+          this.setProperty(data, property, value);
+        }
+      }
+    }
+    this._frozenObjects.length = 0;
+  }
+  addContext(id, obj) {
+    this._context[id] = obj;
+  }
+  addCallback(id, property, callback) {
+    const obj = this._callbacks[id];
+    return property.indexOf(".") === -1 ? this._addCallbackToObject(obj, property, callback) : this._addCallbackToObjectOnPath(obj, property, callback);
+  }
+  _addCallbackToObject(obj, property, callback) {
+    obj[property] = obj[property] || {};
+    obj[property].__functions = obj[property].__functions || [];
+    obj[property].__functions.push(callback);
+  }
+  _addCallbackToObjectOnPath(obj, path2, callback) {
+    this._ensurePath(obj, path2, (obj2, prop) => {
+      this._addCallbackToObject(obj2, prop, callback);
+    });
+  }
+  _ensurePath(obj, path2, callback) {
+    let cobj = obj;
+    const parts = path2.split(".");
+    for (let i = 0; i < parts.length - 1; i++) {
+      const part = parts[i];
+      if (cobj[part] == null) {
+        cobj[part] = {};
+      }
+      cobj = cobj[part];
+    }
+    callback && callback(cobj, parts[parts.length - 1]);
+  }
+  removeCallback(id, path2, callback) {
+    const obj = this._callbacks[id];
+    if (obj == null)
+      return;
+    const property = getValueOnPath(obj, path2);
+    if (property.__functions) {
+      const index = property.__functions.indexOf(callback);
+      if (index !== -1) {
+        property.__functions.splice(index, 1);
+        if (property.__functions.length == 0) {
+          delete property.__functions;
+        }
+      }
+    }
+  }
+  async updateUI(id, property) {
+    id = this._getContextId(id);
+    const obj = this._callbacks[id];
+    if (property == null) {
+      const properties = this._getOwnProperties(obj);
+      for (let prop of properties) {
+        await this._callFunctionsOnObject(obj[prop], id, prop);
+      }
+    } else {
+      if (property.indexOf(".") !== -1)
+        return this._callFunctionsOnPath(id, property);
+      if (obj == null)
+        return;
+      if (obj[property] == null)
+        return;
+      await this._callFunctionsOnObject(obj[property], id, property);
+    }
+  }
+  async _callFunctionsOnObject(obj, id, property) {
+    const functions = obj.__functions;
+    if (functions != null) {
+      for (let fn of obj.__functions) {
+        const value = this.getValue(id, property);
+        await fn(property, value);
+      }
+    }
+    if (obj.__trigger != null) {
+      const triggerObj = this._triggers.get(obj.__trigger);
+      if (triggerObj.frozen != true) {
+        triggerObj.frozen = true;
+        for (let trigger of triggerObj.values) {
+          if (trigger.id == id && trigger.path == property)
+            continue;
+          await this.updateUI(trigger.id, trigger.path);
+        }
+        delete triggerObj.frozen;
+      }
+    }
+    const properties = this._getOwnProperties(obj);
+    for (let prop of properties) {
+      await this._callFunctionsOnObject(obj[prop], id, `${property}.${prop}`);
+    }
+  }
+  async _callFunctionsOnPath(id, path2) {
+    const obj = this._callbacks[id];
+    const result = getValueOnPath(obj, path2);
+    if (result != null) {
+      await this._callFunctionsOnObject(result, id, path2);
+    }
+  }
+  async _performUpdates(id, property, value, oldValue) {
+    this._performUpdatesChanges(id, property, value);
+    const ctx = this._context[id];
+    if (ctx == null)
+      return;
+    const fnName = `${property}Changed`;
+    if (ctx[fnName]) {
+      await ctx[fnName](value, oldValue);
+    } else if (ctx["propertyChanged"]) {
+      await ctx["propertyChanged"](property, value, oldValue);
+    }
+  }
+  _performUpdatesChanges(id, property, value) {
+    const obj = this._updates[id];
+    if (obj == null || obj[property] == null)
+      return;
+    this.setProperty(obj[property].originId, obj[property].originProperty, value);
+  }
+  link(sourceId, sourceProp, targetId, targetProp, value) {
+    if (typeof value != "object" || value === null) {
+      this._addUpdateOrigin(sourceId, sourceProp, targetId, targetProp);
+      this._addUpdateOrigin(targetId, targetProp, sourceId, sourceProp);
+      this._syncValueTrigger(sourceId, sourceProp, targetId, targetProp);
+    } else {
+      this._syncTriggers(sourceId, sourceProp, targetId, targetProp);
+    }
+  }
+  linkToArrayItem(id, path2, itemId) {
+    let sourceObj = getValueOnPath(this._callbacks[id], path2);
+    if (sourceObj == null)
+      return;
+    let targetObj = this._callbacks[itemId];
+    const properties = this._getOwnProperties(sourceObj);
+    for (let property of properties) {
+      this._copyTriggers(sourceObj, property, targetObj, property, itemId, property);
+    }
+  }
+  _addUpdateOrigin(sourceId, sourceProp, targetId, targetProp) {
+    const update = this._updates[targetId] || {};
+    const source = update[targetProp] || {};
+    if (source.originId == sourceId && source.originProperty == sourceProp)
+      return;
+    source.originId = sourceId;
+    source.originProperty = sourceProp;
+    update[targetProp] = source;
+    this._updates[targetId] = update;
+  }
+  _unlinkArrayItem(object) {
+    const clbObj = this._callbacks[object.__uid];
+    this._removeTriggersOnCallbacks(clbObj, object.__uid);
+  }
+  setArrayEvents(id, path2, itemsAddedCallback, itemsDeletedCallback) {
+    const cbObj = this._callbacks[id];
+    this._ensurePath(cbObj, path2, (obj, property) => {
+      obj[property] = obj[property] || {};
+      obj[property].__itemsAdded = obj[property].itemsAdded || [];
+      obj[property].__itemsAdded.push(itemsAddedCallback);
+      obj[property].__itemsDeleted = obj[property].itemsDeleted || [];
+      obj[property].__itemsDeleted.push(itemsDeletedCallback);
+    });
+  }
+  arrayItemsAdded(id, prop, items, collection) {
+    const obj = this._callbacks[id];
+    const clbObj = getValueOnPath(obj, prop);
+    if (clbObj == null)
+      return;
+    for (let callback of clbObj.__itemsAdded || []) {
+      callback(items, collection);
+    }
+  }
+  arrayItemsRemoved(id, prop, items, collection) {
+    const obj = this._callbacks[id];
+    const clbObj = getValueOnPath(obj, prop);
+    if (clbObj == null)
+      return;
+    for (let callback of clbObj.__itemsDeleted || []) {
+      callback(items, collection);
+    }
+  }
+  _copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetPath) {
+    const source = sourceObj[sourceProp];
+    const target = targetObj[targetProp] = targetObj[targetProp] || {};
+    if (source.__trigger != null) {
+      target.__trigger = source.__trigger;
+      const tr = this._triggers.get(source.__trigger);
+      tr.values.push({ id: targetId, path: targetPath });
+    }
+    const properties = this._getOwnProperties(source);
+    for (let property of properties) {
+      this._copyTriggers(source, property, target, property, targetId, `${targetPath}.${property}`);
+    }
+  }
+  _removeData(id) {
+    const result = this._removeReferences(id);
+    delete this._data[id];
+    const length = Object.keys(this._data).length;
+    if (length == 0) {
+      this._idStore.nextId = 1;
+      this._idStore.nextArrayId = 0;
+    }
+    result.push(id);
+    return result;
+  }
+  _removeReferences(parentId) {
+    const result = [];
+    const keys = Object.keys(this._data);
+    for (let key of keys) {
+      const ref = this._data[key];
+      if (ref.refId == parentId) {
+        result.push(ref.id);
+        this.removeObject(ref.id);
+      }
+    }
+    return result;
+  }
+  _removeCallbacks(id) {
+    delete this._callbacks[id];
+  }
+  _removeUpdates(id) {
+    const remove = Array.from(this._updates).filter((item) => item[0] == id || item[1].value && item[1].value.originId == id);
+    for (let rem of remove) {
+      delete this._updates[rem[0]];
+    }
+  }
+  _removeTriggers(id) {
+    const tr = Array.from(this._triggers);
+    for (let trigger of tr) {
+      const index = trigger[1].values.findIndex((item) => item.id == id);
+      if (index != -1) {
+        trigger[1].values.splice(index, 1);
+        if (trigger.values.length == 0) {
+          this._triggers.delete(trigger[0]);
+        }
+      }
+    }
+    if (this._triggers.size == 0) {
+      this._idStore.nextTriggerId = 0;
+    }
+  }
+  _removeSync(id) {
+    const keys = Object.keys(this._sync);
+    for (let key of keys) {
+      const value = this._sync[key];
+      const items = value.collection.filter((item) => item.id == id);
+      items.forEach((item) => value.collection.splice(value.collection.indexOf(item), 1));
+      if (value.collection.length == 0) {
+        delete this._sync[key];
+      }
+    }
+  }
+  _removeConverters(id) {
+    delete this._converters[id];
+  }
+  _setObjectProperty(obj, property, value) {
+    if (obj[property] !== value) {
+      obj[property] = value;
+      return true;
+    }
+    return false;
+  }
+  _setObjectPropertyPath(obj, path2, value) {
+    let result = true;
+    this._ensurePath(obj, path2, (obj2, prop) => result = this._setObjectProperty(obj2, prop, value));
+    return result;
+  }
+  _getOwnProperties(obj) {
+    return Object.getOwnPropertyNames(obj).filter((item) => item.indexOf("__") === -1);
+  }
+  _removeTriggersOnCallbacks(obj, id) {
+    const properties = this._getOwnProperties(obj);
+    for (let property of properties) {
+      const trigger = obj[property].__trigger;
+      if (trigger != null) {
+        delete obj[property].__trigger;
+        this._removeTriggersOnTriggers(id, trigger);
+      }
+      if (typeof obj[property] == "object") {
+        this._removeTriggersOnCallbacks(obj[property]);
+      }
+    }
+  }
+  _removeTriggersOnTriggers(id, triggerId) {
+    const obj = this._triggers.get(triggerId);
+    const items = obj.values.filter((item) => item.id == id);
+    for (let item of items) {
+      const index = obj.values.indexOf(item);
+      obj.values.splice(index, 1);
+    }
+  }
+  _syncValueTrigger(sourceId, sourceProp, targetId, targetProp) {
+    let sourceObj = this._callbacks[sourceId];
+    let targetObj = this._callbacks[targetId];
+    const trigger = getValueOnPath(sourceObj, `${sourceProp}.__trigger`);
+    if (trigger != null) {
+      targetObj[targetProp] = targetObj[targetProp] || {};
+      targetObj[targetProp].__trigger = trigger;
+      const tr = this._triggers.get(trigger);
+      tr.values.push({ id: targetId, path: targetProp });
+    }
+  }
+  _syncTriggers(sourceId, sourceProp, targetId, targetProp) {
+    let sourceObj = this._callbacks[sourceId];
+    let targetObj = this._callbacks[targetId];
+    if (sourceProp.indexOf(".") === -1) {
+      this._copyTriggers(sourceObj, sourceProp, targetObj, targetProp, targetId, targetProp);
+    } else {
+      this._ensurePath(targetObj, targetProp, (obj, prop) => {
+        obj[prop] = obj[prop] || {};
+        const parts = sourceProp.split(".");
+        const sp = parts[parts.length - 1];
+        const np = parts.splice(0, parts.length - 1).join();
+        const so = getValueOnPath(sourceObj, np);
+        this._copyTriggers(so, sp, obj, prop, targetId, targetProp);
+      });
+    }
+  }
+  setPropertyConverter(id, path2, converterKey, triggers) {
+    if (converterKey != null) {
+      id = this._getContextId(id);
+      let obj = this._converters[id];
+      if (obj == null) {
+        obj = {};
+        this._converters[id] = obj;
+      }
+      this._ensurePath(obj, path2, (triggerObject, triggerProperty) => {
+        triggerObject[triggerProperty] = converterKey;
+      });
+    }
+    if (triggers != null) {
+      this.setPropertyConverterTriggers(id, path2, triggers);
+    }
+  }
+  setPropertyConverterTriggers(id, path2, conversions) {
+    id = this._getContextId(id);
+    const code = [];
+    for (let conversion of conversions) {
+      const parts = conversion.split(":");
+      const path3 = parts[0];
+      const converter = parts[1];
+      this.setPropertyConverter(id, path3, converter);
+      code.push(`crsbinding.data.setProperty(${id}, "${path3}", value);`);
+    }
+    const fn = new Function("property", "value", code.join("\n"));
+    this.addCallback(id, path2, fn);
+  }
+};
+
+// src/events/event-emitter.js
+var EventEmitter = class {
+  constructor() {
+    this._events = /* @__PURE__ */ new Map();
+  }
+  dispose() {
+    this._events.clear();
+  }
+  async on(event, callback) {
+    let events = [];
+    if (this._events.has(event)) {
+      events = this._events.get(event);
+    } else {
+      this._events.set(event, events);
+    }
+    if (events.indexOf(callback) == -1) {
+      events.push(callback);
+    }
+  }
+  async emit(event, args) {
+    if (this._events.has(event)) {
+      const events = this._events.get(event);
+      if (events.length == 1) {
+        return await events[0](args);
+      } else {
+        for (let e of events) {
+          await e(args);
+        }
+      }
+    }
+  }
+  async remove(event, callback) {
+    if (this._events.has(event)) {
+      const events = this._events.get(event);
+      const index = events.indexOf(callback);
+      if (index != -1) {
+        events.splice(index, 1);
+      }
+      if (events.length === 0) {
+        this._events.delete(event);
+      }
+    }
+  }
+  async postMessage(query, args, scope) {
+    const element = scope || document;
+    const items = Array.from(element.querySelectorAll(query));
+    const promises = [];
+    for (let item of items) {
+      promises.push(item.onMessage.call(item, args));
+    }
+    await Promise.all(promises);
+  }
+};
+
+// src/binding/bindable-element.js
+var BindableElement = class extends HTMLElement {
+  get hasOwnContext() {
+    return true;
+  }
+  constructor() {
+    super();
+    if (this.hasOwnContext == true) {
+      this._dataId = crsbinding.data.addObject(this.constructor.name);
+      crsbinding.data.addContext(this._dataId, this);
+    }
+    crsbinding.dom.enableEvents(this);
+    this.__properties = /* @__PURE__ */ new Map();
+  }
+  dispose() {
+    this._disposing = true;
+    crsbinding.utils.forceClean(this);
+    crsbinding.dom.disableEvents(this);
+    const properties = Object.getOwnPropertyNames(this);
+    for (let property of properties) {
+      delete this[property];
+    }
+  }
+  async connectedCallback() {
+    if (this._dataId == null || this.__isLoading == true)
+      return;
+    this.__isLoading = true;
+    if (this.preLoad != null) {
+      const setPropertyCallback = (path2, value) => {
+        crsbinding.data.setProperty(this._dataId, path2, value);
+      };
+      await this.preLoad(setPropertyCallback);
+    }
+    if (this.html != null) {
+      this.innerHTML = await crsbinding.templates.get(this.constructor.name, this.html);
+      const path2 = crsbinding.utils.getPathOfFile(this.html);
+      await crsbinding.parsers.parseElements(this.children, this._dataId, path2 ? { folder: path2 } : null);
+    }
+    requestAnimationFrame(() => {
+      const name = this.getAttribute("name");
+      if (name != null) {
+        crsbinding.data.setName(this._dataId, name);
+      }
+    });
+    this.__properties.forEach((value, key) => crsbinding.data.setProperty(this._dataId, key, value));
+    this.__properties.clear();
+    delete this.__properties;
+    if (this.load != null) {
+      this.load();
+    }
+    this.isReady = true;
+    this.dispatchEvent(new CustomEvent("ready"));
+    delete this.__isLoading;
+  }
+  async disconnectedCallback() {
+    this.dispose();
+    crsbinding.utils.disposeProperties(this);
+    crsbinding.observation.releaseBinding(this);
+  }
+  getProperty(property) {
+    return crsbinding.data.getProperty(this, property);
+  }
+  setProperty(property, value, once = false) {
+    if (this.isReady != true && once === false && this.__properties) {
+      return this.__properties.set(property, value);
+    }
+    crsbinding.data.setProperty(this, property, value);
+  }
+};
+
+// src/binding/perspective-element.js
+var PerspectiveElement = class extends HTMLElement {
+  get hasOwnContext() {
+    return true;
+  }
+  get ctx() {
+    return this._dataId;
+  }
+  set ctx(newValue) {
+    this._dataId = newValue;
+    if (newValue != null) {
+      const name = this.getAttribute("name");
+      if (name != null) {
+        crsbinding.data.setName(this._dataId, name);
+      }
+      this._loadView();
+    }
+  }
+  get view() {
+    return this._view;
+  }
+  set view(newValue) {
+    if (this._view != newValue) {
+      this._view = newValue;
+      this._loadView();
+    }
+  }
+  constructor() {
+    super();
+    const contextAttribute = this.getAttribute("ctx.one-way") || this.getAttribute("ctx.once");
+    if (this.hasOwnContext == true && contextAttribute == null) {
+      this._dataId = crsbinding.data.addObject(this.constructor.name);
+      crsbinding.data.addContext(this._dataId, this);
+    }
+    crsbinding.dom.enableEvents(this);
+  }
+  dispose() {
+    this._disposing = true;
+    crsbinding.utils.forceClean(this);
+    crsbinding.dom.disableEvents(this);
+    crsbinding.templates.unload(this.store);
+  }
+  async connectedCallback() {
+    await this._initialize();
+  }
+  async _initialize() {
+    this.__isLoading = true;
+    this.store = this.dataset.store || this.constructor.name;
+    await crsbinding.templates.loadFromElement(this.store, this, this.html, async (fragment) => {
+      if (this.preLoad != null) {
+        await this.preLoad();
+      }
+      if (this.load != null) {
+        this.load();
+      }
+      this.__isLoading = false;
+      this.view = fragment.name;
+    });
+  }
+  async disconnectedCallback() {
+    this.dispose();
+    crsbinding.utils.disposeProperties(this);
+    crsbinding.observation.releaseBinding(this);
+  }
+  getProperty(property) {
+    return crsbinding.data.getProperty(this, property);
+  }
+  setProperty(property, value, once = false) {
+    if (this.isReady != true && once === false && this.__properties) {
+      return this.__properties.set(property, value);
+    }
+    crsbinding.data.setProperty(this, property, value);
+  }
+  async _loadView() {
+    if (this.__isLoading == true)
+      return;
+    if (this._view == null || this._dataId == null) {
+      return;
+    }
+    crsbinding.observation.releaseChildBinding(this);
+    this.innerHTML = "";
+    const template = await crsbinding.templates.getById(this.store, this._view);
+    this.appendChild(template);
+    await crsbinding.parsers.parseElements(this.children, this._dataId, { folder: this.dataset.folder });
+    requestAnimationFrame(() => {
+      this.dataset.view = this._view;
+      this.dispatchEvent(new CustomEvent("view-loaded"));
+    });
+  }
+};
+customElements.define("perspective-element", PerspectiveElement);
+
+// src/view/view-base.js
+var ViewBase = class {
+  get title() {
+    return this.getProperty("title");
+  }
+  set title(newValue) {
+    this.setProperty("title", newValue);
+  }
+  get element() {
+    return this._element;
+  }
+  set element(newValue) {
+    this._element = newValue;
+  }
+  constructor(element) {
+    this._dataId = crsbinding.data.addObject(this.constructor.name);
+    crsbinding.data.addContext(this._dataId, this);
+    this.element = element;
+  }
+  async connectedCallback() {
+    if (this.preLoad != null) {
+      const setPropertyCallback = (path3, value) => {
+        crsbinding.data.setProperty(this._dataId, path3, value);
+      };
+      await this.preLoad(setPropertyCallback);
+    }
+    const path2 = crsbinding.utils.getPathOfFile(this.html);
+    await crsbinding.parsers.parseElement(this.element, this._dataId, path2 ? { folder: path2 } : null);
+    this.load();
+  }
+  async disconnectedCallback() {
+    crsbinding.utils.forceClean(this._dataId);
+    crsbinding.observation.releaseBinding(this.element);
+    crsbinding.utils.disposeProperties(this);
+    this.element = null;
+  }
+  getProperty(property, convert = true) {
+    return crsbinding.data.getProperty(this, property, convert);
+  }
+  setProperty(property, value, convert = true) {
+    crsbinding.data.setProperty(this, property, value, convert);
+  }
+  load() {
+    this._element.style.visibility = "";
+    this._loaded = true;
+  }
+};
+
+// src/view/crs-widget.js
+var Widget = class extends HTMLElement {
+  disconnectedCallback() {
+    this._clearElements();
+    delete this._dataId;
+  }
+  async onMessage(args) {
+    this._clearElements();
+    let id = args.context;
+    if (id && typeof id == "object") {
+      id = id.__uid || id._dataId;
+    }
+    this._dataId = id;
+    this.innerHTML = args.html;
+    if (this._dataId != null) {
+      const ctx = crsbinding.data._context[this._dataId];
+      await crsbinding.parsers.parseElements(this.children, this._dataId, {
+        folder: ctx.html
+      });
+    }
+  }
+  _clearElements() {
+    for (let child of this.children) {
+      crsbinding.observation.releaseBinding(child);
+    }
+  }
+};
+customElements.define("crs-widget", Widget);
+
+// src/managers/element-store-manager.js
+var ElementStoreManager = class {
+  constructor() {
+    this._items = /* @__PURE__ */ new Map();
+  }
+  dispose() {
+    this._items.clear();
+    this._items = null;
+  }
+  register(id, template, measure = false) {
+    const instance = crsbinding.utils.cloneTemplate(template);
+    const result = {
+      elements: [instance],
+      template
+    };
+    if (measure === true) {
+      crsbinding.utils.measureElement(instance).then((size) => result.size = size);
+    }
+    this._items.set(id, result);
+  }
+  getItemElement(item) {
+    return item.elements.pop() || crsbinding.utils.cloneTemplate(item.template);
+  }
+  getElement(id) {
+    const item = this._items.get(id);
+    return this.getItemElement(item);
+  }
+  getElements(id, quantity) {
+    const item = this._items.get(id);
+    const fragment = document.createDocumentFragment();
+    while (fragment.children.length < quantity) {
+      fragment.appendChild(this.getItemElement(item));
+    }
+    return fragment;
+  }
+  async getBoundElement(id, context) {
+    const item = this._items.get(id);
+    const result = this.getItemElement(item);
+    await crsbinding.parsers.parseElement(result, context);
+    return result;
+  }
+  returnElements(id, elements) {
+    const item = this._items.get(id);
+    for (let element of elements) {
+      item.elements.push(element);
+    }
+  }
+  unregister(id) {
+    const item = this._items.get(id);
+    if (item != null) {
+      this._items.delete(id);
+      item.elements.length = 0;
+      item.template = null;
+    }
+  }
+};
+
+// src/managers/value-converters-manager.js
+var ValueConvertersManager = class {
+  constructor() {
+    this._converters = /* @__PURE__ */ new Map();
+  }
+  add(key, converter) {
+    this._converters.set(key, converter);
+  }
+  get(key) {
+    return this._converters.get(key);
+  }
+  remove(key) {
+    this._converters.delete(key);
+  }
+  convert(value, key, direction) {
+    const converter = this._converters.get(key);
+    if (converter == null)
+      return null;
+    return converter[direction](value);
+  }
+};
+
+// src/lib/cleanMemory.js
+function forceClean(id) {
+  if (typeof id == "object") {
+    id = id.__uid || id._dataId;
+  }
+  if (id == null)
+    return;
+  const toRemove = crsbinding.data.removeObject(id);
+  const elements = /* @__PURE__ */ new Set();
+  for (let did of toRemove) {
+    const providers = Array.from(crsbinding.providerManager.items).filter((item) => item[1]._context === did);
+    for (let provider of providers) {
+      elements.add(provider[1]._element);
+    }
+  }
+  for (let element of elements) {
+    crsbinding.providerManager.releaseElement(element);
+  }
+  elements.length = 0;
+}
+
+// src/lib/renderCollection.js
+function renderCollection(template, data, elements = null, parentElement = null) {
+  const id = "render-collection";
+  crsbinding.inflationManager.register(id, template);
+  let fragment = crsbinding.inflationManager.get(id, data, elements, 0);
+  if (fragment != null && parentElement != null) {
+    parentElement.appendChild(fragment);
+  }
+  crsbinding.inflationManager.unregister(id);
+}
+
+// src/managers/svg-elements-manager.js
+var SvgElementsManager = class {
+  constructor() {
+    this._tagMap = /* @__PURE__ */ new Map();
+    this._queue = [];
+    this._observed = /* @__PURE__ */ new Map();
+  }
+  dispose() {
+    this._tagMap.clear();
+    this._tagMap = null;
+  }
+  define(tagName, proto) {
+    if (this._tagMap.has(tagName) == false) {
+      this._tagMap.set(tagName, proto);
+    }
+    this._processElements(tagName);
+  }
+  parse(svgElement) {
+    const elements = svgElement.querySelectorAll("[is]");
+    if (elements.length == 0)
+      return;
+    this._observe(svgElement);
+    for (let element of elements) {
+      const cName = element.getAttribute("is");
+      if (this._tagMap.has(cName) == false) {
+        this._queue.push({
+          parent: svgElement,
+          cName,
+          el: element
+        });
+      } else {
+        this._createComponent({
+          parent: svgElement,
+          cName,
+          el: element
+        });
+      }
+    }
+  }
+  removeComponent(element) {
+    let svg = null;
+    let parent = element;
+    let count = 0;
+    while (svg == null || count == 100) {
+      count++;
+      if (parent.nodeName.toLocaleString() == "svg") {
+        svg = parent;
+        break;
+      }
+      parent = parent.parentElement;
+    }
+    this._removeComponentFromSvg(svg, element);
+  }
+  _removeComponentFromSvg(svg, element) {
+    const def = this._observed.get(svg);
+    if (def == null)
+      return;
+    let component = def.children.get(element);
+    if (component == null)
+      return;
+    component.disconnectedCallback();
+    component.dispose();
+    def.children.delete(element);
+    element.parentElement.removeChild(element);
+    component = null;
+    element = null;
+  }
+  release(svgElement) {
+    if (this._observed.size == 0)
+      return;
+    const elements = svgElement.querySelectorAll("[is]");
+    for (let element of elements) {
+      this._removeComponentFromSvg(svgElement, element);
+    }
+    const def = this._observed.get(svgElement);
+    def.children.clear();
+    def.children = null;
+    this._observed.delete(svgElement);
+  }
+  _observe(element) {
+    if (this._observed.has(element))
+      return;
+    const detail = {
+      children: /* @__PURE__ */ new Map()
+    };
+    this._observed.set(element, detail);
+  }
+  _createComponent(def) {
+    const proto = this._tagMap.get(def.cName);
+    const svgDef = this._observed.get(def.parent);
+    if (svgDef.children.has(def.el) == false) {
+      const instance = new proto(def.el);
+      svgDef.children.set(def.el, instance);
+      instance.connectedCallback();
+    }
+    delete def.parent;
+    delete def.cName;
+    delete def.el;
+  }
+  _processElements(component) {
+    const definitions = this._queue.filter((el) => el.cName == component);
+    for (let def of definitions) {
+      this._createComponent(def);
+      this._queue.splice(this._queue.indexOf(def), 1);
+    }
+  }
+};
+
+// src/view/svg-element.js
+var SvgElement = class {
+  constructor(element) {
+    this.element = element;
+  }
+  dispose() {
+    this.element = null;
+  }
+  async connectedCallback() {
+  }
+  async suspend() {
+  }
+  async restore() {
+  }
+};
+
+// src/store/templates.js
+function addTemplate(componentName, template) {
+  crsbinding.templates.data[componentName] = template;
+}
+function unloadTemplates(componentNames) {
+  const collection = Array.isArray(componentNames) == true ? componentNames : [componentNames];
+  for (let name of collection) {
+    if (crsbinding.templates.data[name]?.count != null) {
+      crsbinding.templates.data[name].count -= 1;
+      if (crsbinding.templates.data[name].count == 0) {
+        delete crsbinding.templates.data[name].templates;
+        delete crsbinding.templates.data[name].style;
+        delete crsbinding.templates.data[name];
+      }
+    } else {
+      delete crsbinding.templates.data[name];
+    }
+  }
+}
+function unloadAllTemplates() {
+  const keys = Object.keys(crsbinding.templates.data);
+  for (let key of keys) {
+    delete crsbinding.templates.data[key];
+  }
+}
+async function getTemplate(componentName, url) {
+  let template = crsbinding.templates.data[componentName];
+  if (template == null) {
+    template = await loadTemplate(componentName, url);
+  }
+  return template.cloneNode(true).innerHTML;
+}
+async function loadTemplate(componentName, url) {
+  let template = crsbinding.templates.data[componentName];
+  if (template != null)
+    return template;
+  template = document.createElement("template");
+  template.innerHTML = await fetch(url).then((result) => result.text());
+  crsbinding.templates.data[componentName] = template;
+  return template;
+}
+async function loadFromElement(store, element, url, callback) {
+  if (crsbinding.templates.data[store] != null) {
+    crsbinding.templates.data[store].count += 1;
+    crsbinding.templates.data[store].callbacks.push(callback);
+    return;
+  }
+  const storeItem = {
+    count: 1,
+    templates: {},
+    callbacks: [callback]
+  };
+  crsbinding.templates.data[store] = storeItem;
+  let templates;
+  let style;
+  if (url != null) {
+    const fragment = document.createElement("template");
+    fragment.innerHTML = await fetch(url).then((result) => result.text());
+    templates = fragment.content.querySelectorAll("template");
+    style = fragment.content.querySelector("style");
+  } else {
+    templates = element.querySelectorAll("template");
+    style = element.querySelector("style");
+  }
+  storeItem.style = style;
+  let defaultTemplate;
+  for (let template of templates) {
+    storeItem.templates[template.dataset.id] = template;
+    template.parentElement?.removeChild(template);
+    if (template.dataset.default == "true") {
+      defaultTemplate = template;
+    }
+  }
+  for (let callback2 of storeItem.callbacks) {
+    const instance = createInstance(defaultTemplate);
+    if (style != null) {
+      instance.insertBefore(style, instance.firstChild);
+    }
+    callback2(instance);
+  }
+  storeItem.callbacks.length = 0;
+  delete storeItem.callbacks;
+}
+function createInstance(template) {
+  const result = template.content.cloneNode(true);
+  result.name = template.dataset.id;
+  return result;
+}
+async function getTemplateById(store, id) {
+  const storeItem = crsbinding.templates.data[store];
+  const template = storeItem.templates[id];
+  let instance = template.content.cloneNode(true);
+  if (storeItem.style != null) {
+    instance.insertBefore(storeItem.style, instance.firstChild);
+  }
+  return instance;
+}
+
+// src/managers/translations-manager.js
+var TranslationsManager = class {
+  constructor() {
+    this.dictionary = {};
+  }
+  dispose() {
+    this.dictionary = null;
+  }
+  async add(obj, context) {
+    flattenPropertyPath(context || "", obj, this.dictionary);
+  }
+  async delete(context) {
+    const filterKey = `${context}.`;
+    const keys = Object.keys(this.dictionary).filter((item) => item.indexOf(filterKey) === 0);
+    for (let key of keys) {
+      delete this.dictionary[key];
+    }
+  }
+  async parseElement(element) {
+    if (element.children.length == 0 && element.textContent.indexOf("&{") != -1) {
+      element.textContent = await this.get_with_markup(element.textContent.trim());
+    }
+    for (let attribute of element.attributes) {
+      await this.parseAttribute(attribute);
+    }
+    for (let child of element.children) {
+      await this.parseElement(child);
+    }
+  }
+  async parseAttribute(attribute) {
+    if (attribute.nodeValue.indexOf("&{") !== -1) {
+      attribute.nodeValue = await this.get_with_markup(attribute.nodeValue);
+    }
+  }
+  async get(key) {
+    let result = this.dictionary[key];
+    if (result != null) {
+      return result;
+    }
+    result = this.fetch == null ? null : await this.fetch(key);
+    if (result != null) {
+      this.dictionary[key] = result;
+    }
+    return result;
+  }
+  async get_with_markup(key) {
+    key = key.split("&{").join("").split("}").join("");
+    return await this.get(key);
+  }
+};
+
+// src/index.js
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
+function capitalizePropertyPath(str) {
+  const parts = str.split("-");
+  for (let i = 1; i < parts.length; i++) {
+    parts[i] = parts[i].capitalize();
+  }
+  let result = parts.join("");
+  if (result === "innerHtml") {
+    result = "innerHTML";
+  }
+  return result;
+}
+var crsbinding2 = {
+  _expFn: /* @__PURE__ */ new Map(),
+  data: new BindingData(),
+  idleTaskManager: new IdleTaskManager(),
+  providerManager: new ProviderManager(),
+  inflationManager: new InflationManager(),
+  elementStoreManager: new ElementStoreManager(),
+  svgCustomElements: new SvgElementsManager(),
+  valueConvertersManager: new ValueConvertersManager(),
+  translations: new TranslationsManager(),
+  expression: {
+    sanitize: sanitizeExp,
+    compile: compileExp,
+    release: releaseExp
+  },
+  observation: {
+    releaseBinding,
+    releaseChildBinding
+  },
+  parsers: {
+    parseElement,
+    parseElements
+  },
+  classes: {
+    BindableElement,
+    PerspectiveElement,
+    ViewBase,
+    RepeatBaseProvider,
+    Widget,
+    SvgElement
+  },
+  events: {
+    listenOnPath,
+    removeOnPath,
+    emitter: new EventEmitter()
+  },
+  dom: {
+    enableEvents: domEnableEvents,
+    disableEvents: domDisableEvents
+  },
+  utils: {
+    capitalizePropertyPath,
+    clone,
+    disposeProperties,
+    fragmentToText,
+    cloneTemplate,
+    measureElement,
+    forceClean,
+    renderCollection,
+    relativePathFrom,
+    getPathOfFile,
+    getValueOnPath,
+    flattenPropertyPath
+  },
+  templates: {
+    data: {},
+    load: loadTemplate,
+    add: addTemplate,
+    get: getTemplate,
+    unload: unloadTemplates,
+    unloadAll: unloadAllTemplates,
+    loadFromElement,
+    getById: getTemplateById
+  }
+};
+globalThis.crsbinding = crsbinding2;
+crsbinding2.$globals = crsbinding2.data.addObject("globals");
+crsbinding2.data.globals = crsbinding2.data.getValue(crsbinding2.$globals);
+globalThis.crsb = crsbinding2;

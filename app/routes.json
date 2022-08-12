@@ -5,6 +5,11 @@
   "auto-hide": true,
   "routes": [
     {
+      "title": "Form Binding",
+      "hash": "#form-binding",
+      "view": "form-binding"
+    },
+    {
       "title": "Process",
       "hash": "#process",
       "view": "process"

@@ -39,13 +39,13 @@ async function packageFile(sourceFile, targetFile, loader, format, minified) {
     await Deno.writeTextFile(targetFile, result.code);
 }
 
-async function bundle(file, output) {
+async function bundle(file, output, minified) {
     const result = await esbuild.build({
         entryPoints: [file],
         bundle: true,
         outfile: output,
         format: "esm",
-        minify: true
+        minify: minified
     })
 
     console.log(result);
@@ -53,5 +53,5 @@ async function bundle(file, output) {
 
 
 await createFolderStructure();
-await bundle("./src/index.js", "./dist/crs-binding.js");
+await bundle("./src/index.js", "./dist/crs-binding.js", false);
 Deno.exit(0);

@@ -9,12 +9,11 @@ import {IfProvider} from "./providers/if-provider.js";
 import {IfClassProvider} from "./providers/if-classlist-provider.js";
 import {IfStylesProvider} from "./providers/if-styles-provider.js";
 import {AttrProvider} from "./providers/attr-provider.js";
-import {ForOnceProvider} from "./providers/for-once-provider.js";
-import {ForMapProvider} from "./providers/for-map-provider.js";
 import {EmitProvider} from "./providers/emit-provider.js";
 import {PostProvider} from "./providers/post-provider.js";
 import {SetValueProvider} from "./providers/setvalue-provider.js";
 import {ProcessProvider} from "./providers/process-provider.js";
+import {DatasetProvider} from "./providers/dataset-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName, attr, parentId) {
@@ -24,6 +23,10 @@ export class ProviderFactory {
         else {
             return this["one-way"](element, context, property, value, ctxName, parentId);
         }
+    }
+
+    static "dataset"(element, context, property, value, ctxName, attr, parentId) {
+        return new DatasetProvider(element, context, property, value, ctxName, parentId);
     }
 
     static "two-way"(element, context, property, value, ctxName, attr, parentId) {
