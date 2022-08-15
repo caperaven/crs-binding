@@ -6,18 +6,25 @@
     <button click.call="removeInput">Remove Input</button>
 </div>
 
+<template id="tplAge">
+    <label data-id="lblAge">
+        <div>&{screen.age}</div>
+        <input data-field="age">
+    </label>
+</template>
+
 <form data-dataset="my-dataset" data-update="true">
-    <label>
+    <label data-id="lblFirstName">
         <div>&{screen.firstName}</div>
         <input data-field="firstName">
     </label>
 
-    <label>
+    <label data-id="lblLastName">
         <div>&{screen.lastName}</div>
         <input data-field="lastName">
     </label>
 
-    <label>
+    <label data-id="lblAge">
         <div>&{screen.age}</div>
         <input data-field="age">
     </label>

@@ -25,10 +25,13 @@ export default class FormBinding extends ViewBase {
     }
 
     async addInput() {
-
+        const template = this._element.querySelector("#tplAge");
+        const instance = template.content.cloneNode(true);
+        this._element.querySelector('[data-dataset="my-dataset"]').appendChild(instance);
     }
 
     async removeInput() {
-
+        const element = this._element.querySelector("[data-id='lblAge']");
+        element?.parentElement.removeChild(element);
     }
 }
