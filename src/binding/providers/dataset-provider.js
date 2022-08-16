@@ -3,21 +3,18 @@ import {ProviderBase} from "./provider-base.js";
 export class DatasetProvider extends ProviderBase {
     constructor(element, context, property, value, ctxName, parentId) {
         super(element, context, property, value, ctxName, parentId, false);
-        this._observeChanges();
     }
 
     dispose() {
         this.clear();
 
-        if (this._observer != null) {
-            this._observer.disconnect();
-            this._mutationHandler = null;
-            this._observer = null;
-        }
-
         this._element.removeEventListener("change", this._changeHandler);
         this._changeHandler = null;
         this._eventHandler = null;
+
+        this._perspectiveElement.removeEventListener("view-loaded", this.viewLoadedHandler);
+        this.viewLoadedHandler = null
+        this._perspectiveElement = null;
 
         super.dispose();
     }
@@ -27,16 +24,16 @@ export class DatasetProvider extends ProviderBase {
         this._element.addEventListener("change", this._changeHandler);
         this._eventHandler = this.propertyChanged.bind(this);
 
-        await this._initFields(this._element);
+        this.viewLoadedHandler = this.viewLoaded.bind(this);
+        this._perspectiveElement = this._element.querySelector("perspective-element");
+        this._perspectiveElement.addEventListener("view-loaded", this.viewLoadedHandler);
+
+        await this._initFields(this._perspectiveElement);
     }
 
-    _observeChanges() {
-        if (this._element.dataset.update == "true") {
-            const config = { attributes: false, childList: true, subtree: true, characterData: false };
-            this._mutationHandler = this.mutated.bind(this);
-            this._observer = new MutationObserver(this._mutationHandler);
-            this._observer.observe(this._element, config);
-        }
+    async viewLoaded() {
+        this.clear();
+        await this._initFields(this._perspectiveElement);
     }
 
     _change(event) {
@@ -50,48 +47,45 @@ export class DatasetProvider extends ProviderBase {
         event.stopPropagation();
     }
 
-    async _initFields(element, update = false) {
+    async _initFields(element) {
         this.inputs = this.inputs || {}
         const inputs = element.querySelectorAll("input[data-field]");
 
         for (const input of inputs) {
             this.inputs[input.dataset.field] = input;
             this.listenOnPath(input.dataset.field, this._eventHandler);
-
-            if (update == true) {
-                await crsbinding.data.updateUI(this._context, input.dataset.field);
-            }
+            await crsbinding.data.updateUI(this._context, input.dataset.field);
         }
     }
 
-    async mutated(mutationList, observer) {
-        for (const mutation of mutationList) {
-            if (mutation.addedNodes.length > 0) {
-                for (let element of mutation.addedNodes) {
-                    if (element.dataset == null) continue;
-
-                    await crsbinding.parsers.parseElement(element, this._context);
-                    await this._initFields(element, true);
-                }
-            }
-
-            if (mutation.removedNodes.length > 0) {
-                for (let element of mutation.removedNodes) {
-                    if (element.dataset == null) continue;
-
-                    if (element.dataset.field != null) {
-                        this.removeCallback(element.dataset.field);
-                    }
-                    else {
-                        const elements = element.querySelectorAll("input[data-field]");
-                        for (element of elements) {
-                            this.removeCallback(element.dataset.field);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // async mutated(mutationList, observer) {
+    //     for (const mutation of mutationList) {
+    //         if (mutation.addedNodes.length > 0) {
+    //             for (let element of mutation.addedNodes) {
+    //                 if (element.dataset == null) continue;
+    //
+    //                 await crsbinding.parsers.parseElement(element, this._context);
+    //                 await this._initFields(element, true);
+    //             }
+    //         }
+    //
+    //         if (mutation.removedNodes.length > 0) {
+    //             for (let element of mutation.removedNodes) {
+    //                 if (element.dataset == null) continue;
+    //
+    //                 if (element.dataset.field != null) {
+    //                     this.removeCallback(element.dataset.field);
+    //                 }
+    //                 else {
+    //                     const elements = element.querySelectorAll("input[data-field]");
+    //                     for (element of elements) {
+    //                         this.removeCallback(element.dataset.field);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     propertyChanged(prop, value) {
         const element = this.inputs[prop];

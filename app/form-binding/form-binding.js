@@ -6,6 +6,9 @@ export default class FormBinding extends ViewBase {
     }
 
     preLoad() {
+        this.setProperty("context", this._dataId);
+        this.setProperty("currentView", "person-view");
+
         crsbinding.translations.add({
             firstName: "First Name",
             lastName: "Last Name",
@@ -22,16 +25,5 @@ export default class FormBinding extends ViewBase {
         this.setProperty("firstName", "Peter");
         this.setProperty("lastName", "Parker");
         this.setProperty("age", 30);
-    }
-
-    async addInput() {
-        const template = this._element.querySelector("#tplAge");
-        const instance = template.content.cloneNode(true);
-        this._element.querySelector('[data-dataset="my-dataset"]').appendChild(instance);
-    }
-
-    async removeInput() {
-        const element = this._element.querySelector("[data-id='lblAge']");
-        element?.parentElement.removeChild(element);
     }
 }
