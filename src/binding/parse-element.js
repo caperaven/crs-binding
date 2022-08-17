@@ -24,7 +24,7 @@ export async function parseElement(element, context, options) {
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 
-    if (nodeName == "form" && element.dataset.dataset != null) {
+    if (element.dataset.dataset != null) {
         ProviderFactory["dataset"](element, context, null, null, ctxName, null, parentId);
     }
 
@@ -46,11 +46,15 @@ export async function parseElement(element, context, options) {
 
     await parseAttributes(boundAttributes, context, ctxName, parentId);
 
-    if (element.textContent.indexOf("&{") !== -1) {
-        element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
-    }
-    else if (element.children && element.children.length == 0 && (element.textContent || "").indexOf("${") != -1) {
-        ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
+    if (element.children && element.children.length == 0) {
+        const innerText = (element.textContent || "");
+
+        if (innerText.indexOf("&{") != -1) {
+            element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
+        }
+        else if (innerText.indexOf("${") != -1) {
+            ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
+        }
     }
     else if (nodeName === "svg") {
         crsbinding.svgCustomElements.parse(element);

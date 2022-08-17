@@ -7,21 +7,21 @@
     </select>
 </div>
 
-<form data-dataset="tab-dataset">
+<test-form data-dataset="tab-dataset">
+    <button click.call="changeValues">Update Values</button>
     <perspective-element data-dynamic="true" view.one-way="currentView" ctx.once="context">
         <template data-id="person-view" data-default="true">
             <h3>Person</h3>
-            <button click.call="changeValues">Change Values</button>
             <label>
-                <div>First Name</div>
+                <div>&{screen.firstName}</div>
                 <input value.bind="firstName" />
             </label>
             <label>
-                <div>Last Name</div>
+                <div>&{screen.lastName}</div>
                 <input value.bind="lastName" />
             </label>
             <label>
-                <div>Age</div>
+                <div>&{screen.age}</div>
                 <input value.bind="age" />
             </label>
         </template>
@@ -29,13 +29,13 @@
         <template data-id="age">
             <h3>Age</h3>
             <select data-field="age">
-                <option value="10">Young</option>
-                <option value="20">Adult</option>
-                <option value="30">Old</option>
-                <option value="40">Older</option>
-                <option value="50">Basically Dead</option>
+                <option value="10">&{screen.young}</option>
+                <option value="20">&{screen.adults}</option>
+                <option value="30">&{screen.old}</option>
+                <option value="40">&{screen.older}</option>
+                <option value="50">&{screen.dead}</option>
             </select>
             <input data-field="age">
         </template>
     </perspective-element>
-</form>
+</test-form>

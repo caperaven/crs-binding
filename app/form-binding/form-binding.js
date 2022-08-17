@@ -3,6 +3,10 @@ import {ViewBase} from "../../src/view/view-base.js";
 export default class FormBinding extends ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
+
+        window.addEventListener('popstate', function () {
+            debugger;
+        });
     }
 
     preLoad() {
@@ -12,7 +16,12 @@ export default class FormBinding extends ViewBase {
         crsbinding.translations.add({
             firstName: "First Name",
             lastName: "Last Name",
-            age: "Age"
+            age: "Age",
+            young: "Young Guns",
+            adults: "Wise People",
+            old: "Oldies",
+            older: "Rusted",
+            dead: "Basically Dead"
         }, "screen")
     }
 
