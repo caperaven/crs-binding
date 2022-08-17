@@ -49,7 +49,7 @@ export class DatasetProvider extends ProviderBase {
 
     async _initFields(element) {
         this.inputs = this.inputs || {}
-        const inputs = element.querySelectorAll("input[data-field]");
+        const inputs = element.querySelectorAll("[data-field]");
 
         for (const input of inputs) {
             this.inputs[input.dataset.field] = input;
@@ -58,39 +58,10 @@ export class DatasetProvider extends ProviderBase {
         }
     }
 
-    // async mutated(mutationList, observer) {
-    //     for (const mutation of mutationList) {
-    //         if (mutation.addedNodes.length > 0) {
-    //             for (let element of mutation.addedNodes) {
-    //                 if (element.dataset == null) continue;
-    //
-    //                 await crsbinding.parsers.parseElement(element, this._context);
-    //                 await this._initFields(element, true);
-    //             }
-    //         }
-    //
-    //         if (mutation.removedNodes.length > 0) {
-    //             for (let element of mutation.removedNodes) {
-    //                 if (element.dataset == null) continue;
-    //
-    //                 if (element.dataset.field != null) {
-    //                     this.removeCallback(element.dataset.field);
-    //                 }
-    //                 else {
-    //                     const elements = element.querySelectorAll("input[data-field]");
-    //                     for (element of elements) {
-    //                         this.removeCallback(element.dataset.field);
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     propertyChanged(prop, value) {
         const element = this.inputs[prop];
         if (element != null && element.value != value) {
-            element.value = value;
+            element.value = value == null ? "" : value;
         }
     }
 
