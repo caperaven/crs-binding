@@ -10,6 +10,11 @@
       "view": "form-binding"
     },
     {
+      "title": "Case",
+      "hash": "#case",
+      "view": "case"
+    },
+    {
       "title": "Process",
       "hash": "#process",
       "view": "process"

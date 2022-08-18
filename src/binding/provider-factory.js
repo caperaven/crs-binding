@@ -14,6 +14,9 @@ import {PostProvider} from "./providers/post-provider.js";
 import {SetValueProvider} from "./providers/setvalue-provider.js";
 import {ProcessProvider} from "./providers/process-provider.js";
 import {DatasetProvider} from "./providers/dataset-provider.js";
+import {CaseClassListProvider} from "./providers/case-classlist-provider.js";
+import {CaseStyleProvider} from "./providers/case-style-provider.js";
+import {CaseAttrProvider} from "./providers/case-attr-provider.js";
 
 export class ProviderFactory {
     static "bind"(element, context, property, value, ctxName, attr, parentId) {
@@ -98,5 +101,17 @@ export class ProviderFactory {
 
     static "process"(element, context, property, value, ctxName, attr, parentId) {
         return new ProcessProvider(element, context, property, value, ctxName, parentId);
+    }
+
+    static "case"(element, context, property, value, ctxName, attr, parentId) {
+        if (property.toLowerCase() == "classlist") {
+            return new CaseClassListProvider(element, context, property, value, ctxName, attr, parentId)
+        }
+
+        if (property.toLowerCase().indexOf("style.") != -1) {
+            return new CaseStyleProvider(element, context, property, value, ctxName, attr, parentId);
+        }
+
+        return new CaseAttrProvider(element, context, property, value, ctxName, attr, parentId);
     }
 }
