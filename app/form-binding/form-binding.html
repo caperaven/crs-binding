@@ -7,9 +7,25 @@
     </select>
 </div>
 
-<test-form data-dataset="tab-dataset">
+<test-form data-dataset="true">
+    <label>
+        <div>&{screen.firstName}</div>
+        <input data-field="firstName" />
+    </label>
+    <label>
+        <div>&{screen.lastName}</div>
+        <input data-field="lastName" />
+    </label>
+    <label>
+        <div>&{screen.age}</div>
+        <input data-field="age" />
+    </label>
+</test-form>
+
+
+<test-form data-dataset="true">
     <button click.call="changeValues">Update Values</button>
-    <perspective-element data-dynamic="true" view.one-way="currentView" ctx.once="context">
+    <perspective-element data-dynamic="true" view.one-way="currentView" ctx.once="context" data-dataset="true">
         <template data-id="person-view" data-default="true">
             <h3>Person</h3>
             <label>

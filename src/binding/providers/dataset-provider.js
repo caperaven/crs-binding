@@ -12,9 +12,11 @@ export class DatasetProvider extends ProviderBase {
         this._changeHandler = null;
         this._eventHandler = null;
 
-        this._perspectiveElement.removeEventListener("view-loaded", this.viewLoadedHandler);
-        this.viewLoadedHandler = null
-        this._perspectiveElement = null;
+        if (this._perspectiveElement != null) {
+            this._perspectiveElement.removeEventListener("view-loaded", this.viewLoadedHandler);
+            this.viewLoadedHandler = null
+            this._perspectiveElement = null;
+        }
 
         super.dispose();
     }
@@ -24,11 +26,13 @@ export class DatasetProvider extends ProviderBase {
         this._element.addEventListener("change", this._changeHandler);
         this._eventHandler = this.propertyChanged.bind(this);
 
-        this.viewLoadedHandler = this.viewLoaded.bind(this);
         this._perspectiveElement = this._element.querySelector("perspective-element");
-        this._perspectiveElement.addEventListener("view-loaded", this.viewLoadedHandler);
+        if (this._perspectiveElement != null) {
+            this.viewLoadedHandler = this.viewLoaded.bind(this);
+            this._perspectiveElement.addEventListener("view-loaded", this.viewLoadedHandler);
+        }
 
-        await this._initFields(this._perspectiveElement);
+        await this._initFields(this._perspectiveElement || this._element);
     }
 
     async viewLoaded() {
