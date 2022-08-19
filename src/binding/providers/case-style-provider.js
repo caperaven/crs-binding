@@ -21,8 +21,9 @@ export class CaseStyleProvider extends ProviderBase {
     }
 
     dispose() {
-        this.san_exp = null;
+        this.properties = null;
         this.fn = null;
+        this._eventHandler = null;
         super.dispose();
     }
 
