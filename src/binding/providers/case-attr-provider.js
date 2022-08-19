@@ -11,7 +11,28 @@ const setAttrCode = 'return element.setAttribute("__attr__", __value__);';
 
 export class CaseAttrProvider extends ProviderBase {
     async initialize() {
+        this._eventHandler = this.propertyChanged.bind(this);
+        this._properties = [];
+
         createConditionsCode.call(this);
+
+        this.listenOnPath(this._properties, this._eventHandler);
+        this.propertyChanged();
+    }
+
+    dispose() {
+        this._properties =  null;
+        this.fn = null;
+        super.dispose();
+    }
+
+    propertyChanged() {
+        try {
+            crsbinding.idleTaskManager.add(this.fn(this.data, this._element));
+        }
+        catch {
+            return;
+        }
     }
 }
 
@@ -33,6 +54,7 @@ function createConditionsCode() {
         }
 
         const san_exp = crsbinding.expression.sanitize(subParts[0].trim(), this._ctxName);
+        this._properties = [...this._properties, ...san_exp.properties];
 
         code.push(setValueCode
             .replace("__expr__", san_exp.expression)
@@ -41,5 +63,8 @@ function createConditionsCode() {
         )
     }
 
-    this.fn = new AsyncFunction(this.ctxName, "element", code.join(""));
+    const set = new Set(this._properties);
+    this._properties = Array.from(set);
+
+    this.fn = new AsyncFunction("context", "element", code.join(""));
 }
