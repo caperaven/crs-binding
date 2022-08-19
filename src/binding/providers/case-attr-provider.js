@@ -41,12 +41,16 @@ function createConditionsCode() {
     const parts = this._value.split(",");
     const code = [];
 
+    let hasDefault = false;
+
     for (const part of parts) {
         const subParts = part.split(":");
         const attr = this._property;
         const value = subParts[1].trim();
 
         if (subParts[0].trim() == "default") {
+            hasDefault = true;
+
             code.push(setAttrCode
                 .replace("__attr__", attr)
                 .replace("__value__", value));
@@ -62,6 +66,10 @@ function createConditionsCode() {
             .replace("__attr__", attr)
             .replace("__value__", value)
         )
+    }
+
+    if (hasDefault == false) {
+        code.push(`element.removeAttribute("${this._property}");`)
     }
 
     const set = new Set(this._properties);

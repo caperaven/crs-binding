@@ -41,11 +41,15 @@ function createConditionsCode() {
     const parts = this._value.split(",");
     const code = [];
 
+    let hasDefault = false;
+
     for (const part of parts) {
         const subParts = part.split(":");
         const value = subParts[1].trim();
 
         if (subParts[0].trim() == "default") {
+            hasDefault = true;
+
             code.push(setAttrCode
                 .replace("__property__", this._property)
                 .replace("__value__", value));
@@ -62,6 +66,18 @@ function createConditionsCode() {
             .replace("__value__", value)
         )
     }
+
+    if (hasDefault == false) {
+        code.push(setAttrCode
+            .replace("__property__", this._property)
+            .replace("__value__", "'inherit'"));
+    }
+
+    /**
+     * If no default defined
+     * set to unset
+     * @type {Set<any>}
+     */
 
     const set = new Set(this._properties);
     this._properties = Array.from(set);
