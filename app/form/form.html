@@ -7,14 +7,14 @@
 
 <h2>${title}</h2>
 
-<label>
-    <div>First Name</div>
+<label id="edtFirstName">
+    <div>&{form.firstName}</div>
     <input value.bind="data.firstName">
 </label>
 
-<label>
-    <div>Last Name</div>
+<label id="edtLastName">
+    <div>&{form.lastName}</div>
     <input value.bind="data.lastName">
 </label>
 
-<div class="booking">Booking for ${data.firstName} ${data.lastName}</div>
+<div id="summary" class="booking">Booking for ${data.firstName} ${data.lastName}</div>

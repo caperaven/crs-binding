@@ -1,0 +1,91 @@
+{
+	"id": "inflation-static",
+	
+	"sequences": [
+		{
+			"caption": "main",
+			"process": "main"
+		},
+		{
+			"caption": "check translations",
+			"process": "translations"
+		},
+		{
+			"caption": "check input",
+			"process": "input"
+		}
+	],
+	
+	"main": {
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "navigate",
+				"args": {
+					"url": "${state.server}/#form"
+				}
+			}
+		}
+	},
+	
+	"translations": {
+		"steps": {
+			"start": {
+				"type": "wait",
+				"action": "text_content",
+				"args": {
+					"query": "#edtFirstName div",
+					"value": "First Name"
+				},
+				"next_step": "check_last_name"
+			},
+			"check_last_name": {
+				"type": "wait",
+				"action": "text_content",
+				"args": {
+					"query": "#edtLastName div",
+					"value": "Last Name"
+				}
+			}
+		}
+	},
+	
+	"input": {
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "type_text",
+				"args": {
+					"query": "#edtFirstName input",
+					"value": "Hello"
+				},
+				"next_step": "last_name"
+			},
+			"last_name": {
+				"type": "perform",
+				"action": "type_text",
+				"args": {
+					"query": "#edtLastName input",
+					"value": "World"
+				},
+				"next_step": "wait_for_update"
+			},
+			"wait_for_update": {
+				"type": "wait",
+				"action": "text_content",
+				"args": {
+					"query": "#summary",
+					"value": "Booking for Hello World"
+				},
+				"next_step": "sleep"
+			},
+			"sleep": {
+				"type": "system",
+				"action": "sleep",
+				"args": {
+					"duration": 1
+				}
+			}
+		}
+	}
+}
