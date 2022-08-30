@@ -2,86 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<style>
-    html, body {
-        padding: 0;
-        margin: 0;
-        width: 100vw;
-        height: 100vh;
-    }
-    a {
-        display: block;
-    }
-    body {
-        display: grid;
-        grid-template-rows: 3rem 1fr 2rem;
-    }
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="/styles/styles.css" rel="stylesheet">
+    <title>My Application</title>
 
-    header {
-        display: flex;
-        padding: 1rem;
-        align-items: center;
-    }
-
-    main {
-        flex: 1;
-    }
-
-    h1 {
-        text-align: center;
-        color: cornflowerblue;
-        flex: 1;
-        padding: 0;
-        margin: 0;
-    }
-
-    crs-router {
-        padding: 1rem;
-        display: grid;
-    }
-</style>
-<body style="visibility: hidden">
-    <header>
-        <h1>Binding test app</h1>
-    </header>
-
-    <main>
-        <crs-router></crs-router>
-    </main>
-
-    <footer>
-    </footer>
-
-    <script type="module">
-        import "/node_modules/crs-router/crs-router.js";
-        import "/src/index.js";
-        import "/node_modules/crs-process-api/crs-process-api.js";
-
-        crsbinding.data.setProperty(crsbinding.$globals, "menuVisible", true, null, "boolean");
-        crsbinding.data.setProperty(crsbinding.$globals, "myDate", null);
-
-        const trans = {
-            title: "Translation Title",
-            buttons: {
-                save: "Save",
-                cancel: "Cancel"
-            }
+    <style>
+        html, body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            color: var(--text);
+            fill: var(--text);
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
         }
 
-        crsbinding.translations.add(trans);
-        crsbinding.translations.add(trans, "context");
+        body {
+            display: grid;
+            grid-template-rows: 3rem auto 2rem;
+        }
 
-        import Index from "./index.js";
-        document.viewModel = new Index(document.body);
+        header, footer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body style="visibility: hidden" oncontextmenu="return false;">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="menu" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </symbol>
+</svg>
+
+<header>
+    <button aria-label="menu" class="icon" click.setValue="$globals.isMenuOpen = !$globals.isMenuOpen" classlist.if="$globals.isMenuOpen == true ? 'highlight-fill'"><svg><use xlink:href="#menu" /></svg></button>
+    <h1>My Application</h1>
+</header>
+
+<main autofocus tabindex="0">
+    <crs-router routes="app/routes.json"></crs-router>
+</main>
+
+<aside classlist.if="$globals.isMenuOpen ==  true? 'open'" click.setValue="$globals.isMenuOpen = !$globals.isMenuOpen">
+    <nav id="main-menu" aria-label="main menu">
+        <ol>
+            <template for="route of routes">
+                <li><a href.one-way="route.hash">${route.title}</a></li>
+            </template>
+        </ol>
+    </nav>
+</aside>
+
+<footer>
+    <span>copyright @me</span>
+</footer>
+
+<script type="module">
+    import "./src/index.js";
+    import "./packages/crs-modules/crs-modules.js";
+    import "./packages/crs-router/crs-router.js";
+    import IndexViewModel from "./index.js";
+
+    async function load() {
+        document.viewModel = new IndexViewModel(document.body);
 
         window.addEventListener("load", (event) => {
             document.viewModel.connectedCallback();
         });
-    </script>
+    }
+
+    load();
+</script>
 </body>
 </html>

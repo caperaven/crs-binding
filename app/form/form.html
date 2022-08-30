@@ -1,0 +1,20 @@
+<style>
+    label, .booking {
+        display: block;
+        margin: 0.5rem;
+    }
+</style>
+
+<h2>${title}</h2>
+
+<label>
+    <div>First Name</div>
+    <input value.bind="data.firstName">
+</label>
+
+<label>
+    <div>Last Name</div>
+    <input value.bind="data.lastName">
+</label>
+
+<div class="booking">Booking for ${data.firstName} ${data.lastName}</div>

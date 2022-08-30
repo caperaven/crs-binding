@@ -24,7 +24,7 @@ export async function parseElement(element, context, options) {
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 
-    if (element.dataset.dataset != null) {
+    if (element.dataset?.dataset != null) {
         ProviderFactory["dataset"](element, context, null, null, ctxName, null, parentId);
     }
 

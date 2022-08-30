@@ -1,0 +1,57 @@
+aside {
+    background: var(--cl-primary);
+    color: var(--cl-primary-alt);
+    box-shadow: 5px 0px 5px 0px var(--cl-primary-shadow);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 15rem;
+    transform: translateX(-20rem);
+    transition: transform 0.3s;
+    will-change: transition;
+    z-index: 1;
+}
+
+aside.open {
+    transform: translateX(0);
+}
+
+aside.open:before {
+    content: "";
+    position: absolute;
+    background: transparent;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: -2;
+}
+
+aside.open:after {
+    background: var(--cl-primary);
+
+    content: "";
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+aside nav li {
+    cursor: pointer;
+}
+
+aside nav li:hover {
+    background: #00adff;
+}
+
+aside nav a, aside nav a:visited {
+    padding: 0.5rem;
+    color: var(--cl-primary-alt);
+    text-decoration: none;
+    display: block;
+}

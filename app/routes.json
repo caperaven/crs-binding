@@ -5,184 +5,29 @@
   "auto-hide": true,
   "routes": [
     {
-      "title": "Form Binding",
-      "hash": "#form-binding",
-      "view": "form-binding"
-    },
-    {
-      "title": "Case",
-      "hash": "#case",
-      "view": "case"
-    },
-    {
-      "title": "Process",
-      "hash": "#process",
-      "view": "process"
-    },
-    {
-      "title": "Context Actions",
-      "hash": "#context-actions",
-      "view": "context-actions"
-    },
-    {
       "title": "Welcome",
       "hash": "#welcome",
-      "view": "welcome"
-    },
-    {
-      "title": "SVG for binding",
-      "hash": "#svg-for",
-      "view": "svg-for"
-    },
-    {
-      "title": "SVG Binding",
-      "hash": "#svg-binding",
-      "view": "svg-binding"
-    },
-    {
-      "title": "List",
-      "hash": "#list",
-      "view": "list"
-    },
-    {
-      "title": "Pages",
-      "hash": "#pages",
-      "view": "pages"
-    },
-    {
-      "title": "Component Test",
-      "hash": "#component",
-      "view": "component"
-    },
-    {
-      "title": "Collections Example",
-      "hash": "#collections",
-      "view": "collections",
+      "view": "welcome",
       "hasStyle": true
     },
     {
-      "title": "Inflation Example",
-      "hash": "#inflation",
-      "view": "inflation",
+      "title": "Form",
+      "hash": "#form",
+      "view": "form"
+    },
+    {
+      "title": "About",
+      "hash": "#about",
+      "view": "about",
+      "html-only": true,
       "hasStyle": true
     },
     {
-      "title": "Binding using maps Example",
-      "hash": "#maps",
-      "view": "maps",
+      "title": "404",
+      "hash": "#404",
+      "view": "404",
+      "html-only": true,
       "hasStyle": true
-    },
-    {
-      "title": "Mouse event",
-      "hash": "#mouse-event",
-      "view": "mouse-event",
-      "hasStyle": true
-    },
-    {
-      "title": "Drawer using set value",
-      "hash": "#drawer",
-      "view": "drawer"
-    },
-    {
-      "title": "SVG",
-      "hash": "#svg",
-      "view": "svg"
-    },
-    {
-      "title": "Master Detail",
-      "hash": "#master-detail",
-      "view": "master-detail",
-      "hasStyle": true
-    },
-    {
-      "title": "Binding Memory Leak",
-      "hash": "#binding1",
-      "view": "binding1"
-    },
-    {
-      "title": "shared-references",
-      "hash": "#shared-references",
-      "view": "shared-references"
-    },
-    {
-      "title": "Shared Context",
-      "hash": "#shared-context",
-      "view": "shared-context"
-    },
-    {
-      "title": "Render Collection",
-      "hash": "#render-collection",
-      "view": "render-collection"
-    },
-    {
-      "title": "Array Values",
-      "hash": "#array-values",
-      "view": "array-values"
-    },
-    {
-      "title": "HTML Fragments",
-      "hash": "#html-fragments",
-      "view": "html-fragments"
-    },
-    {
-      "title": "Radio Groups",
-      "hash": "#radio-group",
-      "view": "radio-group"
-    },
-    {
-      "title": "Value Converters",
-      "hash": "#value-converters",
-      "view": "value-converters"
-    },
-    {
-      "title": "InnerHTML",
-      "hash": "#innerHTML",
-      "view": "innerHTML"
-    },
-    {
-      "title": "Nested For",
-      "hash": "#nested-for",
-      "view": "nested-for"
-    },
-    {
-      "title": "Expressions",
-      "hash": "#expressions",
-      "view": "expressions"
-    },
-    {
-      "title": "SVG Element",
-      "hash": "#svg-element",
-      "view": "svg-element"
-    },
-    {
-      "title": "Property Binding",
-      "hash": "#property-binding",
-      "view": "property-binding"
-    },
-    {
-      "title": "Idle Task Manager",
-      "hash": "#idleTaskManager",
-      "view": "idleTaskManager"
-    },
-    {
-      "title": "Component Templates",
-      "hash": "#component-templates",
-      "view": "component-templates"
-    },
-    {
-      "title": "Perspective Element",
-      "hash": "#perspective-element",
-      "view": "perspective-element"
-    },
-    {
-      "title": "Translations",
-      "hash": "#translations",
-      "view": "translations"
-    },
-    {
-      "title": "Inflation Cells",
-      "hash": "#inflation-cells",
-      "view": "inflation-cells"
     }
   ]
 }

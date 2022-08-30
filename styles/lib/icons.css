@@ -1,0 +1,9 @@
+button.icon svg, svg.icon {
+    width: 100%;
+    height: 100%;
+}
+
+button.icon {
+    width: 2.5rem;
+    height: 2.5rem;
+}
