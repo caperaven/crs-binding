@@ -66,13 +66,15 @@
     import "./src/index.js";
     import "./packages/crs-modules/crs-modules.js";
     import "./packages/crs-router/crs-router.js";
+    import {initialize} from "./packages/crs-process-api/index.js";
     import IndexViewModel from "./index.js";
 
     async function load() {
         document.viewModel = new IndexViewModel(document.body);
 
-        window.addEventListener("load", (event) => {
+        window.addEventListener("load", async (event) => {
             document.viewModel.connectedCallback();
+            await initialize("/packages/crs-process-api");
         });
     }
 

@@ -58,6 +58,10 @@ export class InflationManager {
      * @param data
      */
     get(id, data, elements, start) {
+        if (data == null) {
+            console.error("inflation manager - get, data may not be null");
+        }
+
         const item = this._items.get(id);
         if (item == null) return null;
 

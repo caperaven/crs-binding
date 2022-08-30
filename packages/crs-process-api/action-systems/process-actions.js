@@ -1,0 +1,1 @@
+class o{static async perform(e,s,r,a){const t={};if(e.args?.parameters!=null){const n=Object.keys(e.args.parameters);for(let c of n)t[c]=await crs.process.getValue(e.args.parameters[c],s,r,a)}await crsbinding.events.emitter.emit("run-process",{step:e,context:s,process:r,item:a,parameters:t})}}crs.intent.process=o;export{o as ProcessActions};
