@@ -76,14 +76,6 @@
 				"args": {
 					"query": "#summary",
 					"value": "Booking for Hello World"
-				},
-				"next_step": "sleep"
-			},
-			"sleep": {
-				"type": "system",
-				"action": "sleep",
-				"args": {
-					"duration": 1
 				}
 			}
 		}

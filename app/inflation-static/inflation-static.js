@@ -3,10 +3,6 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
         return this._element.querySelector("ul");
     }
 
-    async connectedCallback() {
-        await super.connectedCallback();
-    }
-
     load() {
         // 1. setup inflation manager
         const template = this._element.querySelector("template");
@@ -23,7 +19,7 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
     }
 
     async getData() {
-        const data = []
+        const data = [];
 
         for (let i = 0; i < 5; i++) {
             const number = await crs.call("random", "integer", {min: 0, max: 100});
