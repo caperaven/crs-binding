@@ -7,8 +7,7 @@
         "example": "examples"
     },
     "scripts": {
-        "test": "jest --detectOpenHandles",
-        "testui": "jest test/ui/ui.test.js --detectOpenHandles && nyc report --reporter=html",
+        "testui": "ui_testing --folder ./tests/ui --auto-open --server http://127.0.0.1:8000",
         "bundle": "deno run --allow-read --allow-write --allow-env --allow-run ./build/package.js"
     },
     "keywords": [

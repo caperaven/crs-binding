@@ -1,0 +1,52 @@
+{
+	"id": "inflation-static",
+	"main": {
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "navigate",
+				"args": {
+					"url": "${state.server}/#inflation-static"
+				},
+				"next_step": "wait_for_ul"
+			},
+			"wait_for_ul": {
+				"type": "wait",
+				"action": "child_count",
+				"args": {
+					"query": "[ref='container']",
+					"count": 5
+				},
+				"next_step": "set_variable1"
+			},
+			"set_variable1": {
+				"type": "system",
+				"action": "attributes_to_variables",
+				"args": {
+					"[ref='container'] li:first-child": {
+						"data-value": "$data.first_item_value"
+					}
+				},
+				"next_step": "update"
+			},
+			"update": {
+				"type": "perform",
+				"action": "click",
+				"args": {
+					"query": "#btnUpdate"
+				},
+				"next_step": "wait_for_update"
+			},
+			"wait_for_update": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "[ref='container'] li:first-child",
+					"attr": "data-value",
+					"value": "$data.first_item_value",
+					"eval": "ne"
+				}
+			}
+		}
+	}
+}
