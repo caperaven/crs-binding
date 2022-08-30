@@ -37,8 +37,13 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
     }
 
     async update() {
+        // 1. get the data to use
         const data = await this.getData();
+
+        // 2. get the elements to update
         const elements = this.ul.children;
+
+        // 3. update the elements with the new data
         crsbinding.inflationManager.get("list-items", data, elements);
     }
 }
