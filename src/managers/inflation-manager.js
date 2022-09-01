@@ -326,6 +326,7 @@ class InflationCodeGenerator {
     }
 
     _processElement(element) {
+        this._clearAttributes(element);
         this._processTextContent(element);
         this._processAttributes(element);
 
@@ -397,6 +398,13 @@ class InflationCodeGenerator {
                 this._processAttrCondition(attr);
             }
         }
+    }
+
+    _clearAttributes(element) {
+        this.inflateSrc.push(`while(${this.path}.attributes.length > 0) { ${this.path}.removeAttribute(${this.path}.attributes[0].name) };`);
+
+        const classes = element.getAttribute("class")
+        this.inflateSrc.push(`${this.path}.setAttribute("class", "${classes}");`)
     }
 
     _processAttr(attr) {

@@ -40,7 +40,7 @@ export class ForInflateProvider extends ProviderBase {
 
         const fragment = crsbinding.inflationManager.get(this.key, newValue, this._parentElement.children);
 
-        if (fragment.childElementCount > 0) {
+        if (fragment?.childElementCount > 0) {
             this._parentElement.appendChild(fragment);
         }
    }
