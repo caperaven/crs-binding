@@ -22,11 +22,15 @@
     </label>
 
     <button id="btnUpdate" click.call="update">Update</button>
+    <button id="btnPartialUpdate" click.call="partialUpdate">Partial Update</button>
 </div>
 
 <ul>
     <template for.inflate="item of data" data-id="test-for-inflate">
-        <li data-value.attr="item.value" class="list-item" classlist.if="item.value < 50 ? 'red'">${item.caption}</li>
+        <li data-value.attr="item.value" class="list-item" data-label="&{form.label}">
+            <div>&{form.label}</div>
+            <div>${item.caption}</div>
+        </li>
     </template>
 </ul>
 

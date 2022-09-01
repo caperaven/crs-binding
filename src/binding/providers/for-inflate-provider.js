@@ -43,6 +43,11 @@ export class ForInflateProvider extends ProviderBase {
         if (fragment?.childElementCount > 0) {
             this._parentElement.appendChild(fragment);
         }
+
+        const removed = this._parentElement.querySelectorAll("[remove='true']");
+        for (let element of removed) {
+            this._parentElement.removeChild(element);
+        }
    }
 
     clear() {

@@ -15,10 +15,10 @@ export class InflationManager {
      * @param id
      * @param template
      */
-    register(id, template, ctxName = "context", measure = false) {
+    async register(id, template, ctxName = "context", measure = false) {
         template = template.cloneNode(true);
         const generator = new InflationCodeGenerator(ctxName, id);
-        const result = generator.generateCodeFor(template);
+        const result = await generator.generateCodeFor(template);
         const templates = generator.templateKeys;
         generator.dispose();
 
@@ -296,7 +296,7 @@ class InflationCodeGenerator {
         this.deflateSrc = null;
     };
 
-    generateCodeFor(template) {
+    async generateCodeFor(template) {
         const children = template.content == null ? template.children : template.content.children;
         const childCount = children.length;
 
@@ -304,14 +304,14 @@ class InflationCodeGenerator {
             this.path = "element";
 
             for (let element of children) {
-                this._processElement(element);
+                await this._processElement(element);
             }
         }
         else {
             // process as array - must pass an array of elements to inflation not just a single element
             for (let i = 0; i < children.length; i++) {
                 this.path = `element[${i}]`;
-                this._processElement(children[i]);
+                await this._processElement(children[i]);
             }
         }
 
@@ -325,10 +325,10 @@ class InflationCodeGenerator {
         }
     }
 
-    _processElement(element) {
+    async _processElement(element) {
         this._clearAttributes(element);
-        this._processTextContent(element);
-        this._processAttributes(element);
+        await this._processTextContent(element);
+        await this._processAttributes(element);
 
         const path = this.path;
         for (let i = 0; i < element.children.length; i++) {
@@ -339,7 +339,7 @@ class InflationCodeGenerator {
             }
             else {
                 this.path = `${path}.children[${i}]`;
-                this._processElement(element.children[i]);
+                await this._processElement(element.children[i]);
             }
         }
     }
@@ -360,27 +360,41 @@ class InflationCodeGenerator {
         }
     }
 
-    _processTextContent(element) {
-        if (element.children == null || element.children.length > 0 || element.textContent.indexOf("${") == -1) return;
+    async _processTextContent(element) {
+        if (element.children == null || element.children.length > 0 || (element.textContent.indexOf("${") == -1 && element.textContent.indexOf("&{") == -1)) return;
 
         const text = (element.innerHTML || "").trim();
         let target = "textContent";
-
         let exp = text;
-        const san = crsbinding.expression.sanitize(exp, this._ctxName);
-        exp = san.expression;
 
-        if (san.isHTML == true) {
-            target = "innerHTML";
+        if (exp.indexOf("&amp;{") != -1) {
+            const path = exp.replace("&amp;{", "").replace("}", "");
+
+            const value = await crsbinding.translations.get(path);
+            if (value == null) {
+                this.inflateSrc.push(`crsbinding.translations.get("${path}").then(result => ${this.path}.textContent = result);`);
+            }
+            else {
+                this.inflateSrc.push(`${this.path}.textContent = "${value}"`);
+            }
+        }
+        else {
+            const san = crsbinding.expression.sanitize(exp, this._ctxName);
+            exp = san.expression;
+
+            if (san.isHTML == true) {
+                target = "innerHTML";
+            }
+            this.inflateSrc.push([`${this.path}.${target} = ` + "`" + exp + "`"].join(" "));
         }
 
-        this.inflateSrc.push([`${this.path}.${target} = ` + "`" + exp + "`"].join(" "));
         this.deflateSrc.push(`${this.path}.${target} = "";`);
     }
 
-    _processAttributes(element) {
+    async _processAttributes(element) {
         const attributes = Array.from(element.attributes).filter(attr =>
             attr.value.indexOf("${") != -1 ||
+            attr.value.indexOf("&{") != -1 ||
             attr.name.indexOf(".if") != -1 ||
             attr.name.indexOf(".attr") != -1 ||
             attr.name.indexOf("style.") != -1 ||
@@ -393,6 +407,9 @@ class InflationCodeGenerator {
             }
             else if (attr.value.indexOf("${") != -1) {
                 this._processAttrValue(attr);
+            }
+            else if (attr.value.indexOf("&{") != -1) {
+                await this._processTranslationValue(attr);
             }
             else {
                 this._processAttrCondition(attr);
@@ -429,6 +446,17 @@ class InflationCodeGenerator {
 
         this.deflateSrc.push(`${this.path}.removeAttribute("${attr.name}");`);
         attr.ownerElement.removeAttribute(attr.name);
+    }
+
+    async _processTranslationValue(attr) {
+        const path = attr.value.replace("&{", "").replace("}", "");
+        const value = await crsbinding.translations.get(path);
+        if (value == null) {
+            this.inflateSrc.push(`crsbinding.translations.get("${path}").then(result => ${this.path}.setAttribute("${attr.name}", result);`);
+        }
+        else {
+            this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", "${value}");`);
+        }
     }
 
     _processAttrCondition(attr) {

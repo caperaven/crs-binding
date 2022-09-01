@@ -1,5 +1,6 @@
 {
 	"id": "inflation-for-tests",
+	
 	"main": {
 		"steps": {
 			"start": {

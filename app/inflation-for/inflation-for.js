@@ -6,6 +6,9 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
 
     preLoad() {
         this.setProperty("count", 5);
+        crsbinding.translations.add({
+            label: "My Label:"
+        }, "form");
     }
 
     async getData() {
@@ -26,5 +29,13 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
 
     async update() {
         await this.getData();
+    }
+
+    async partialUpdate() {
+        const data = this.getProperty("data");
+        data[0].value = 100;
+        data[0].caption = "item 100"
+
+        await crsbinding.data.updateUI(this._dataId, "data");
     }
 }
