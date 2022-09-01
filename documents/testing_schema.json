@@ -1,0 +1,1045 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "crs testing schema",
+	"title": "crs testing schema",
+	"description": "this schema defines validation for crs testing json files",
+	"type": "object",
+	"properties": {
+		"id": {
+			"description": "The unique identifier for a test file",
+			"type": "string"
+		},
+		
+		"sequences": {
+			"description": "from a set of processes in this file, run them in this sequence",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"caption": {
+						"description": "descriptive display name for process",
+						"type": "string"
+					},
+					"process": {
+						"description": "name of the process to run",
+						"type": "string"
+					}
+				},
+				"required": ["caption", "process"]
+			}
+		}
+	},
+	
+	"additionalProperties": {
+		"$ref": "#/$defs/schema"
+	},
+	
+	"required": ["id", "main"],
+	
+	"$defs": {
+		"query": {
+			"description": "query selector of element",
+			"type": "string"
+		},
+		
+		"value": {
+			"description": "value to enter or select"
+		},
+		
+		"queried": {
+			"properties": {
+				"args": {
+					"properties": {
+						"query": { "$ref": "#/$defs/query" }
+					},
+					"required": ["query"]
+				}
+			}
+		},
+		
+		"point": {
+			"properties": {
+				"x": {
+					"type": "integer",
+					"default": 0
+				},
+				"y": {
+					"type": "integer",
+					"default": 0
+				}
+			},
+			"required": ["x", "y"]
+		},
+		
+		"queried-value": {
+			"properties": {
+				"args": {
+					"properties": {
+						"query": { "$ref": "#/$defs/query" },
+						"value": { "$ref": "#/$defs/value" }
+					},
+					"required": ["query", "value"]
+				}
+			}
+		},
+		
+		"query-property-value": {
+			"properties": {
+				"query": { "$ref":  "#/$defs/query" },
+				"property":  {"type":  "string"},
+				"value": {"type":  "string"}
+			},
+			"required": ["query", "property", "value"]
+		},
+		
+		"schema": {
+			"properties": {
+				"steps": {
+					"description": "object that defines the process steps",
+					"type": "object",
+					"properties": {
+						"start": {
+							"description": "object that defines the first process step",
+							"$ref": "#/$defs/step"
+						}
+					},
+					"required": ["start"],
+					"additionalProperties": {
+						"$ref": "#/$defs/step"
+					}
+				}
+			},
+			"required": ["steps"]
+		},
+		
+		"step": {
+			"properties": {
+				"type": {
+					"type": "string",
+					"enum": ["perform", "wait", "assert", "system"]
+				},
+				"action": {
+					"type": "string"
+				},
+				"args": {
+					"type": "object"
+				},
+				"next_step": {
+					"type": "string"
+				}
+			},
+			"required": ["type", "action", "args"],
+			
+			"allOf": [
+				{
+					"if": {
+						"properties": {
+							"type": { "const": "wait" }
+						}
+					},
+					"then": {
+						"properties": {
+							"action": {
+								"type": "string",
+								"enum": [
+									"time",
+									"is_ready",
+									"element",
+									"attribute",
+									"attributes",
+									"style_property",
+									"element_property",
+									"text_content",
+									"text_value",
+									"selected",
+									"child_count"
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const": "perform" }
+						}
+					},
+					"then": {
+						"properties": {
+							"action": {
+								"type": "string",
+								"enum": [
+									"navigate",
+									"close_window",
+									"refresh",
+									"click",
+									"dbl_click",
+									"context_click",
+									"click_sequence",
+									"press_key",
+									"print_screen",
+									"select_option",
+									"switch_to_frame",
+									"switch_to_default",
+									"switch_to_tab",
+									"type_text",
+									"drag_by",
+									"hover_over_element",
+									"mouse_drag"
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "system" }
+						}
+					},
+					"then": {
+						"properties": {
+							"action": {
+								"type": "string",
+								"enum": [
+									"attributes_to_variables",
+									"properties_to_variables",
+									"dimensions_to_variables",
+									"set_variables",
+									"audit",
+									"add_to_variables",
+									"sleep"
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" }
+						}
+					},
+					"then": {
+						"properties": {
+							"action": {
+								"type": "string",
+								"enum": [
+									"attributes",
+									"attribute_eq",
+									"attribute_neq",
+									"child_count_eq",
+									"child_count_neq",
+									"style_property_eq",
+									"style_property_neq",
+									"element_property_eq",
+									"element_property_neq",
+									"tag_name_eq",
+									"tag_name_neq",
+									"text_content_eq",
+									"text_content_neq",
+									"value_eq",
+									"value_neq",
+									"variables_eq",
+									"variables_neq"
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "navigate" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"url": { "type": "string" }
+								},
+								"required": ["url"]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "close_window" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"index": { }
+								},
+								"required": ["index"]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "click" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "dbl_click" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "context_click" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "click_sequence" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"type": "object",
+								"properties": {
+									"sequence": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									}
+								},
+								"required": ["sequence"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "press_key" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"type": "object",
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"key": {
+										"type": "string"
+									}
+								},
+								"required": ["key", "query"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "print_screen" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "string"
+									}
+								},
+								"required": ["file"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "select_option" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "switch_to_frame" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "switch_to_tab" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"index": {
+										"type": "integer"
+									}
+								},
+								"required": ["index"]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "type_text" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "drag_by" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": { "$ref": "#/$defs/point" }
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "hover_over_element" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "perform" },
+							"action": { "const":  "mouse_drag" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"start_at": {
+										"type": "object",
+										"$ref": "#/$defs/point"
+									},
+									"move_to": {
+										"type": "object",
+										"$ref": "#/$defs/point"
+									}
+								},
+								"required": ["query","start_at", "move_to"]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "system" },
+							"action": { "const":  "attributes_to_variables" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "system" },
+							"action": { "const":  "properties_to_variables" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "system" },
+							"action": { "const":  "dimensions_to_variables" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "system" },
+							"action": { "const":  "audit" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "system" },
+							"action": { "const":  "sleep" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"duration": {
+										"type": "integer",
+										"default": 1
+									}
+								},
+								"required": ["duration"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "time" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"timeout": {
+										"type": "integer",
+										"default": 1
+									}
+								},
+								"required": ["timeout"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "is_ready" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "element" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried"}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "attribute" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref":  "#/$defs/query" },
+									"attr":  { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "attr", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "attributes" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref":  "#/$defs/query" },
+									"attributes":  { "type": "object" }
+								},
+								"required": ["query", "attributes"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "style_property" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": { "$ref": "#/$defs/query-property-value" }
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "element_property" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": { "$ref": "#/$defs/query-property-value" }
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "text_content" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "text_value" }
+						}
+					},
+					"then": {
+						"$ref": "#/$defs/queried-value"
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "selected" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"value": { "type": "boolean" }
+								},
+								"required": ["query", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "child_count" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"count": { "type": "integer" }
+								},
+								"required": ["query", "count"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "element_count" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"count": { "type": "integer" }
+								},
+								"required": ["query", "count"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "window_count" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"count": { "type": "integer" }
+								},
+								"required": ["count"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "has_attribute" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"attr": { "type": "string" }
+								},
+								"required": ["query", "attr"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "wait" },
+							"action": { "const":  "has_not_attribute" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"attr": { "type": "string" }
+								},
+								"required": ["query", "attr"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "attributes" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"attributes": { "type": "object" }
+								},
+								"required": ["attributes"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "attribute_eq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"attr": { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "attr", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "attribute_neq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"attr": { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "attr", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "child_count_eq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"count": { "type": "integer" }
+								},
+								"required": ["query", "count"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "child_count_neq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"count": { "type": "integer" }
+								},
+								"required": ["query", "count"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "style_property_eq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"property": { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "property", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "style_property_neq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"property": { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "property", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "element_property_eq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"property": { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "property", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "element_property_neq" }
+						}
+					},
+					"then": {
+						"properties": {
+							"args": {
+								"properties": {
+									"query": { "$ref": "#/$defs/query" },
+									"property": { "type": "string" },
+									"value": { "type": "string" }
+								},
+								"required": ["query", "property", "value"]
+							}
+						},
+						"required": ["args"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "tag_name_eq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "tag_name_neq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "text_content_eq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "text_content_neq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "assert_value_eq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "assert_value_eq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried-value" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "variables_eq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried" }
+				},
+				{
+					"if": {
+						"properties": {
+							"type": { "const":  "assert" },
+							"action": { "const":  "variables_neq" }
+						}
+					},
+					"then": { "$ref": "#/$defs/queried" }
+				}
+			]
+		}
+	}
+}

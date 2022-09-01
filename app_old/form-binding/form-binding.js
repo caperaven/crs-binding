@@ -5,7 +5,6 @@ export default class FormBinding extends ViewBase {
         await super.connectedCallback();
 
         window.addEventListener('popstate', function () {
-            debugger;
         });
     }
 

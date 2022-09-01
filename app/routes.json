@@ -21,6 +21,11 @@
       "view": "inflation-static"
     },
     {
+      "title": "for.inflate markup",
+      "hash": "#inflation-for",
+      "view": "inflation-for"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
