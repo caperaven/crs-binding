@@ -39,6 +39,7 @@ export async function parseElement(element, context, options) {
     const attributes = Array.from(element.attributes || []);
     const boundAttributes = attributes.filter(attr =>
         (attr.ownerElement.tagName.toLowerCase() == "template" && attr.name == "for") ||
+        (attr.name == "ref") ||
         (attr.name.indexOf(".") != -1) ||
         ((attr.value || "").indexOf("${") == 0) ||
         ((attr.value || "").indexOf("&{") == 0)
@@ -73,6 +74,11 @@ async function parseAttributes(collection, context, ctxName, parentId) {
 }
 
 async function parseAttribute(attr, context, ctxName, parentId) {
+    if (attr.name == "ref") {
+        crsbinding.data._context[context][attr.value] = attr.ownerElement;
+        return;
+    }
+
     const parts = attr.name.split(".");
     let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
     let prov = prop == "for" ? prop : parts[parts.length - 1];

@@ -25,7 +25,7 @@
     <button id="btnPartialUpdate" click.call="partialUpdate">Partial Update</button>
 </div>
 
-<ul>
+<ul ref="collection">
     <template for.inflate="item of data" data-id="test-for-inflate">
         <li data-value.attr="item.value" class="list-item" data-label="&{form.label}">
             <div>&{form.label}</div>

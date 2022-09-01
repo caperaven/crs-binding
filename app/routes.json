@@ -11,6 +11,11 @@
       "hasStyle": true
     },
     {
+      "title": "Ref",
+      "hash": "#ref",
+      "view": "ref"
+    },
+    {
       "title": "Form",
       "hash": "#form",
       "view": "form"

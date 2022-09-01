@@ -1,8 +1,4 @@
 export default class InflationStatic extends crsbinding.classes.ViewBase {
-    get ul() {
-        return this._element.querySelector("ul");
-    }
-
     load() {
         // 1. setup inflation manager
         const template = this._element.querySelector("template");
@@ -11,7 +7,7 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
         // 2. render initial list
         this.getData().then(data => {
             const fragment = crsbinding.inflationManager.get("list-items", data);
-            this.ul.appendChild(fragment);
+            this.container.appendChild(fragment);
         });
 
         // 3. allow super functions to proceed
@@ -37,7 +33,7 @@ export default class InflationStatic extends crsbinding.classes.ViewBase {
         const data = await this.getData();
 
         // 2. get the elements to update
-        const elements = this.ul.children;
+        const elements = this.container.children;
 
         // 3. update the elements with the new data
         crsbinding.inflationManager.get("list-items", data, elements);

@@ -1,0 +1,25 @@
+<style>
+    div {
+        padding: 0.5rem;
+        border: 1px solid silver;
+    }
+</style>
+
+<article>
+    <article>
+        <section>
+            <h2>${title}</h2>
+            <p>
+                Using the binding engine to set a property referencing to a element in the view.
+                This means that you can define a property on the binding context and property will point to the element.
+                In this example we are setting a div to be set on the binding context using a property by name of "changeElement".
+                The binding context then set's the text content.
+
+                You don't need to worry about removing the property as the binding engine will clean it up once the context is disposed.
+            </p>
+        </section>
+    </article>
+</article>
+
+<div id="lblChange" ref="changeElement"></div>
+
