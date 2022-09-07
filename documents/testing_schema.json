@@ -153,7 +153,12 @@
 									"text_content",
 									"text_value",
 									"selected",
-									"child_count"
+									"child_count",
+									"element_count",
+									"window_count",
+									"idle",
+									"has_attribute",
+									"has_not_attribute"
 								]
 							}
 						}

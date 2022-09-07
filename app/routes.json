@@ -21,6 +21,11 @@
       "view": "form"
     },
     {
+      "title": "Conditions",
+      "hash": "#conditions",
+      "view": "conditions"
+    },
+    {
       "title": "Inflation Static",
       "hash": "#inflation-static",
       "view": "inflation-static"

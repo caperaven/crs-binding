@@ -1,0 +1,338 @@
+{
+	"id": "conditions_tests",
+	
+	"main": {
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "navigate",
+				"args": {
+					"url": "${state.server}/#conditions"
+				},
+				"next_step": "validate_start_values"
+			},
+			"validate_start_values": {
+				"type": "system",
+				"action": "process",
+				"args": {
+					"process": "validate_start_values"
+				},
+				"next_step": "update_10"
+			},
+			"update_10": {
+				"type": "system",
+				"action": "process",
+				"args": {
+					"process": "update_value",
+					"parameters": {
+						"value": 10,
+						"attributes1": "true",
+						"attributes2": "true",
+						"classlist1": "red",
+						"classlist2": "red",
+						"style1": "color: red;",
+						"style2": "color: red;",
+						"case1": "color: red;",
+						"case2": "",
+						"case3": "red"
+					}
+				},
+				"next_step": "update_20"
+			},
+			"update_20": {
+				"type": "system",
+				"action": "process",
+				"args": {
+					"process": "update_value",
+					"parameters": {
+						"value": 20,
+						"attributes1": "true",
+						"attributes2": "true",
+						"classlist1": "red",
+						"classlist2": "red",
+						"style1": "color: red;",
+						"style2": "color: red;",
+						"case1": "color: blue;",
+						"case2": "",
+						"case3": "blue"
+					}
+				},
+				"next_step": "update_60"
+			},
+			"update_60": {
+				"type": "system",
+				"action": "process",
+				"args": {
+					"process": "update_value",
+					"parameters": {
+						"value": 60,
+						"attributes1": null,
+						"attributes2": "false",
+						"classlist1": "",
+						"classlist2": "blue",
+						"style1": "",
+						"style2": "color: blue;",
+						"case1": "color: green;",
+						"case2": "",
+						"case3": "green"
+					}
+				}
+			}
+		}
+	},
+	
+	"validate_start_values": {
+		"steps": {
+			"start": {
+				"type": "assert",
+				"action": "has_not_attribute",
+				"args": {
+					"query": "#attributes1",
+					"attr": "disabled"
+				},
+				"next_step": "attributes2"
+			},
+			"attributes2": {
+				"type": "assert",
+				"action": "attribute_eq",
+				"args": {
+					"query": "#attributes2",
+					"attr": "data-valid",
+					"value": "true"
+				},
+				"next_step": "classlist1"
+			},
+			"classlist1": {
+				"type": "assert",
+				"action": "has_not_class",
+				"args": {
+					"query": "#classlist1",
+					"class": "red"
+				},
+				"next_step": "classlist2"
+			},
+			"classlist2": {
+				"type": "assert",
+				"action": "attribute_eq",
+				"args": {
+					"query": "#classlist2",
+					"attr": "class",
+					"value": "blue"
+				},
+				"next_step": "style1"
+			},
+			"style1": {
+				"type": "assert",
+				"action": "has_not_attribute",
+				"args": {
+					"query": "#style1",
+					"attr": "style"
+				},
+				"next_step": "style2"
+			},
+			"style2": {
+				"type": "assert",
+				"action": "attribute_eq",
+				"args": {
+					"query": "#style2",
+					"attr": "style",
+					"value": "color: blue;"
+				},
+				"next_step": "case1"
+			},
+			"case1": {
+				"type": "assert",
+				"action": "attribute_eq",
+				"args": {
+					"query": "#case1",
+					"attr": "style",
+					"value": "color: green;"
+				},
+				"next_step": "case2"
+			},
+			"case2": {
+				"type": "assert",
+				"action": "attribute_eq",
+				"args": {
+					"query": "#case2",
+					"attr": "class",
+					"value": "green"
+				},
+				"next_step": "case3"
+			},
+			"case3": {
+				"type": "assert",
+				"action": "attribute_eq",
+				"args": {
+					"query": "#case3",
+					"attr": "data-value",
+					"value": "green"
+				}
+			}
+		}
+	},
+	
+	"update_value": {
+		"parameters_def": {
+			"value": { "required": true },
+			"attributes1": { "required": true },
+			"attributes2": { "required": true },
+			"classlist1": { "required": true },
+			"classlist2": { "required": true },
+			"style1": { "required": true },
+			"style2": { "required": true },
+			"case1": { "required": true },
+			"case2": { "required": true },
+			"case3": { "required": true }
+		},
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "type_text",
+				"args": {
+					"query": "#edtValue",
+					"value": "$parameters.value"
+				},
+				"next_step": "assert_attributes"
+			},
+			"assert_attributes": {
+				"type": "system",
+				"action": "process",
+				"args": {
+					"process": "assert_attributes",
+					"parameters": {
+						"attributes1": "$parameters.attributes1",
+						"attributes2": "$parameters.attributes2",
+						"classlist1": "$parameters.classlist1",
+						"classlist2": "$parameters.classlist2",
+						"style1": "$parameters.style1",
+						"style2": "$parameters.style2",
+						"case1": "$parameters.case1",
+						"case2": "$parameters.case2",
+						"case3": "$parameters.case3"
+					}
+				}
+			}
+		}
+	},
+	
+	"assert_attributes": {
+		"parameters_def": {
+			"attributes1": { "required": true },
+			"attributes2": { "required": true },
+			"classlist1": { "required": true },
+			"classlist2": { "required": true },
+			"style1": { "required": true },
+			"style2": { "required": true },
+			"case1": { "required": true },
+			"case2": { "required": true },
+			"case3": { "required": true }
+		},
+		"steps": {
+			"start": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#attributes1",
+					"attr": "disabled",
+					"value": "$parameters.attributes1",
+					"timeout": 2
+				},
+				"next_step": "attributes2"
+			},
+			"attributes2": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#attributes2",
+					"attr": "data-valid",
+					"value": "$parameters.attributes2",
+					"timeout": 2
+				},
+				"next_step": "classlist1"
+			},
+			
+			"classlist1": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#classlist1",
+					"attr": "class",
+					"value": "$parameters.classlist1",
+					"timeout": 2
+				},
+				"next_step": "classlist2"
+			},
+			
+			"classlist2": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#classlist2",
+					"attr": "class",
+					"value": "$parameters.classlist2",
+					"timeout": 2
+				},
+				"next_step": "style1"
+			},
+			
+			"style1": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#style1",
+					"attr": "style",
+					"value": "$parameters.style1",
+					"timeout": 2
+				},
+				"next_step": "style2"
+			},
+			
+			"style2": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#style2",
+					"attr": "style",
+					"value": "$parameters.style2",
+					"timeout": 2
+				},
+				"next_step": "case1"
+			},
+			
+			"case1": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#case1",
+					"attr": "style",
+					"value": "$parameters.case1",
+					"timeout": 2
+				},
+				"next_step": "case2"
+			},
+			"case2": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#case2",
+					"attr": "style",
+					"value": "$parameters.case2",
+					"timeout": 2
+				},
+				"next_step": "case3"
+			},
+			
+			"case3": {
+				"type": "wait",
+				"action": "attribute",
+				"args": {
+					"query": "#case3",
+					"attr": "data-value",
+					"value": "$parameters.case3",
+					"timeout": 2
+				}
+			}
+		}
+	}
+}

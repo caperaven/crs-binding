@@ -1,0 +1,93 @@
+<style>
+    figcaption {
+        text-decoration: underline;
+    }
+
+    code {
+        border: 1px solid silver;
+
+    }
+
+    .red {
+        color: red;
+    }
+
+    .blue {
+        color: blue;
+    }
+
+    .green {
+        color: green;
+    }
+
+    [disabled] {
+        background: gray;
+        color: white;
+    }
+</style>
+
+<article>
+    <section>
+        <h2>${title}</h2>
+        <p>
+            This page has a number of examples on how to use conditions in your binding. </br>
+        </p>
+        <ol>
+            <li>Conditional attributes</li>
+            <li>Changing classes</li>
+            <li>Setting style properties</li>
+            <li>Using multiple conditions</li>
+        </ol>
+    </section>
+</article>
+
+<hr/>
+
+<label>
+    <div>Value</div>
+    <input value.bind="value" id="edtValue">
+</label>
+
+<figure>
+    <figcaption>Conditional attributes</figcaption>
+    <ul>
+        <li id="attributes1" disabled.if="value <= 20">disabled.if="value <= 20"</li>
+        <li id="attributes2" data-valid.if="value <= 50 ? 'true' : 'false'">data-valid.if="value <= 50 ? 'true' : 'false'"</li>
+    </ul>
+    <p>
+        If you do not provide a else statement and the condition fails, the attribute is removed.
+    </p>
+</figure>
+
+<figure>
+    <figcaption>Changing classes</figcaption>
+    <ul>
+        <li id="classlist1" classlist.if="value < 50 ? 'red'">classlist.if="value < 50 ? 'red'"</li>
+        <li id="classlist2" classlist.if="value < 50 ? 'red' : 'blue'">classlist.if="value < 50 ? 'red' : 'blue'"</li>
+    </ul>
+    <p>
+        If you don't define a else statement, the class list is just removed. If you do the class is swapped out based on condition success.
+    </p>
+</figure>
+
+<figure>
+    <figcaption>Setting style properties</figcaption>
+    <ul>
+        <li id="style1" style.color.if="value < 50 ? 'red'">style.color.if="value < 50 ? 'red'"</li>
+        <li id="style2" style.color.if="value < 50 ? 'red' : 'blue'">style.color.if="value < 50 ? 'red' : 'blue'"</li>
+    </ul>
+</figure>
+
+<figure>
+    <figcaption>Using multiple conditions</figcaption>
+    <ul>
+        <li id="case1" style.color.case="value <= 10: 'red', value <= 20: 'blue', default: 'green'">style.color.case="value <= 10: 'red', value 20: 'blue', default: 'green'"</li>
+        <li id="case2" classlist.case="value <= 10: 'red', value <= 20: 'blue', default: 'green'">classlist.case="value <= 10: 'red', value <= 20: 'blue', default: 'green'"</li>
+        <li id="case3" data-value.case="value <= 10: 'red', value <= 20: 'blue', default: 'green'">data-value.case="value <= 10: 'red', value <= 20: 'blue', default: 'green'"</li>
+    </ul>
+
+    <p>
+        The "default" parameter is optional. </br>
+        If you leave it out, and no value matches it falls back to "inherited"
+    </p>
+</figure>
