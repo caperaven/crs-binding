@@ -1,4 +1,4 @@
-const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
+export const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 
 export function compileExp(exp, parameters, options) {
     parameters = parameters || [];

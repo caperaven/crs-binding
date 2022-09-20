@@ -1,0 +1,83 @@
+{
+	"id": "inflation-for-tests",
+	
+	"main": {
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "navigate",
+				"args": {
+					"url": "${state.server}/#inflation-for"
+				},
+				"next_step": "validate_first_set"
+			},
+			
+			"validate_first_set": {
+				"type": "wait",
+				"action": "child_count",
+				"args": {
+					"query": "crs-router ul",
+					"count": 5
+				},
+				"next_step": "increase_count"
+			},
+			
+			"increase_count": {
+				"type": "perform",
+				"action": "type_text",
+				"args": {
+					"query": "#edtCount",
+					"value": "10"
+				},
+				"next_step": "update_to_10"
+			},
+			
+			"update_to_10": {
+				"type": "perform",
+				"action": "click",
+				"args": {
+					"query": "#btnUpdate"
+				},
+				"next_step": "wait_for_10"
+			},
+			
+			"wait_for_10": {
+				"type": "wait",
+				"action": "child_count",
+				"args": {
+					"query": "crs-router ul",
+					"count": 10
+				},
+				"next_step": "decrease_count"
+			},
+			
+			"decrease_count": {
+				"type": "perform",
+				"action": "type_text",
+				"args": {
+					"query": "#edtCount",
+					"value": "6"
+				},
+				"next_step": "update_to_6"
+			},
+			
+			"update_to_6": {
+				"type": "perform",
+				"action": "click",
+				"args": {
+					"query": "#btnUpdate"
+				},
+				"next_step": "wait_for_6"
+			},
+			
+			"wait_for_6": {
+				"type": "wait",
+				"action": "child_count",
+				"args": {
+					"query": "crs-router ul",
+					"count": 6
+				}
+			}
+		}
+	}
+}

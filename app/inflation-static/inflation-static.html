@@ -1,0 +1,32 @@
+<style>
+    ul {
+        border: 1px solid silver;
+        width: max-content;
+        padding: 0.5rem;
+        list-style: none;
+    }
+</style>
+
+
+<article>
+    <section>
+        <h2>${title}</h2>
+        <p>
+            This demonstrates the use of the inflation manager. </br>
+            Instead of recreating the UI we recycle the elements that already exist. </br>
+            This is used in scenarios where you have a static number of elements but just want to update their values.
+        </p>
+    </section>
+</article>
+
+<template>
+    <li data-value.attr="value">${caption}</li>
+</template>
+
+<div role="toolbar">
+    <button id="btnUpdate" click.call="update">Update</button>
+</div>
+
+<ul ref="container">
+</ul>
+

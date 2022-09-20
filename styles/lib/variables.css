@@ -1,0 +1,9 @@
+html {
+    --text: #444444;
+    --cl-primary: #0098e0;
+    --cl-primary-alt: white;
+    --cl-primary-shadow: #005c87b5;
+    --cl-error: #e91e63;
+    --cl-border: #dadada;
+    --cl-focus: #0098e0;
+}

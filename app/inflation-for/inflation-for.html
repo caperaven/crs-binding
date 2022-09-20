@@ -1,0 +1,37 @@
+<style>
+    .red {
+        background: red;
+    }
+</style>
+
+<article>
+    <section>
+        <h2>${title}</h2>
+        <p>
+            Use inflation over a dynamic list. <br/>
+            The content of the list is static in that it does not update automatically. </br>
+            You can however recycle elements when the data collection changes.
+        </p>
+    </section>
+</article>
+
+<div role="toolbar">
+    <label>
+        <span>Count: </span>
+        <input id="edtCount" type="number" value.bind="count"/>
+    </label>
+
+    <button id="btnUpdate" click.call="update">Update</button>
+    <button id="btnPartialUpdate" click.call="partialUpdate">Partial Update</button>
+</div>
+
+<ul ref="collection">
+    <template for.inflate="item of data" data-id="test-for-inflate">
+        <li data-value.attr="item.value" class="list-item" data-label="&{form.label}">
+            <div>&{form.label}</div>
+            <div>${item.caption}</div>
+        </li>
+    </template>
+</ul>
+
+<div>Count: ${count}</div>

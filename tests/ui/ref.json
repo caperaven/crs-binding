@@ -1,0 +1,23 @@
+{
+	"id": "ref-tests",
+	"main": {
+		"steps": {
+			"start": {
+				"type": "perform",
+				"action": "navigate",
+				"args": {
+					"url": "${state.server}/#ref"
+				},
+				"next_step": "validate"
+			},
+			"validate": {
+				"type": "assert",
+				"action": "text_content_eq",
+				"args": {
+					"query": "#lblChange",
+					"value": "Hello World"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,57 @@
+<h2>${title}</h2>
+
+<div class="toolbar">
+    <select value.bind="currentView">
+        <option value="person-view">Person</option>
+        <option value="age">Age</option>
+    </select>
+</div>
+
+<test-form data-dataset="true">
+    <label>
+        <div>&{screen.firstName}</div>
+        <input data-field="firstName" />
+    </label>
+    <label>
+        <div>&{screen.lastName}</div>
+        <input data-field="lastName" />
+    </label>
+    <label>
+        <div>&{screen.age}</div>
+        <input data-field="age" />
+    </label>
+</test-form>
+
+
+<test-form data-dataset="true">
+    <button click.call="changeValues">Update Values</button>
+    <perspective-element data-dynamic="true" view.one-way="currentView" ctx.once="context" data-dataset="true">
+        <template data-id="person-view" data-default="true">
+            <h3>Person</h3>
+            <label>
+                <div>&{screen.firstName}</div>
+                <input data-field="firstName" />
+            </label>
+            <label>
+                <div>&{screen.lastName}</div>
+                <input data-field="lastName" />
+            </label>
+            <label>
+                <div>&{screen.age}</div>
+                <input data-field="age" />
+            </label>
+        </template>
+
+        <template data-id="age">
+            <h3>Age</h3>
+            <select data-field="age">
+                <option value="10">&{screen.young}</option>
+                <option value="20">&{screen.adults}</option>
+                <option value="30">&{screen.old}</option>
+                <option value="40">&{screen.older}</option>
+                <option value="50">&{screen.dead}</option>
+            </select>
+            <input data-field="age">
+        </template>
+    </perspective-element>
+</test-form>

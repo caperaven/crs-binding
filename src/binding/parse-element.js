@@ -24,6 +24,10 @@ export async function parseElement(element, context, options) {
     const nodeName = element.nodeName.toLowerCase();
     if (ignore.indexOf(nodeName) != -1) return;
 
+    if (element.dataset?.dataset != null) {
+        ProviderFactory["dataset"](element, context, null, null, ctxName, null, parentId);
+    }
+
     if ((nodeName != "template" && nodeName != "perspective-element") && element.children?.length > 0) {
         await parseElements(element.children, context, options);
     }
@@ -35,6 +39,7 @@ export async function parseElement(element, context, options) {
     const attributes = Array.from(element.attributes || []);
     const boundAttributes = attributes.filter(attr =>
         (attr.ownerElement.tagName.toLowerCase() == "template" && attr.name == "for") ||
+        (attr.name == "ref") ||
         (attr.name.indexOf(".") != -1) ||
         ((attr.value || "").indexOf("${") == 0) ||
         ((attr.value || "").indexOf("&{") == 0)
@@ -42,11 +47,15 @@ export async function parseElement(element, context, options) {
 
     await parseAttributes(boundAttributes, context, ctxName, parentId);
 
-    if (element.textContent.indexOf("&{") !== -1) {
-        element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
-    }
-    else if (element.children && element.children.length == 0 && (element.textContent || "").indexOf("${") != -1) {
-        ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
+    if (element.children && element.children.length == 0) {
+        const innerText = (element.textContent || "");
+
+        if (innerText.indexOf("&{") != -1) {
+            element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
+        }
+        else if (innerText.indexOf("${") != -1) {
+            ProviderFactory["inner"](element, context, null, null, ctxName, null, parentId);
+        }
     }
     else if (nodeName === "svg") {
         crsbinding.svgCustomElements.parse(element);
@@ -65,6 +74,11 @@ async function parseAttributes(collection, context, ctxName, parentId) {
 }
 
 async function parseAttribute(attr, context, ctxName, parentId) {
+    if (attr.name == "ref") {
+        crsbinding.data._context[context][attr.value] = attr.ownerElement;
+        return;
+    }
+
     const parts = attr.name.split(".");
     let prop = parts.length == 2 ? parts[0] : parts.slice(0, parts.length -1).join(".");
     let prov = prop == "for" ? prop : parts[parts.length - 1];
