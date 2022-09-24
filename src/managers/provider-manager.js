@@ -30,7 +30,7 @@ export class ProviderManager {
     }
 
     async releaseElement(element) {
-        if (element.nodeName.toLowerCase() == "svg") {
+        if (element.nodeName?.toLowerCase() == "svg") {
             crsbinding.svgCustomElements.release(element);
         }
 
