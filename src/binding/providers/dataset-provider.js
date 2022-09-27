@@ -9,7 +9,10 @@ export class DatasetProvider extends ProviderBase {
         this.clear();
 
         this._element.removeEventListener("change", this._changeHandler);
+        this._element.removeEventListener("click", this._clickHandler);
+
         this._changeHandler = null;
+        this._clickHandler = null;
         this._eventHandler = null;
 
         if (this._perspectiveElement != null) {
@@ -23,7 +26,11 @@ export class DatasetProvider extends ProviderBase {
 
     async initialize() {
         this._changeHandler = this._change.bind(this);
+        this._clickHandler = this._click.bind(this);
+
         this._element.addEventListener("change", this._changeHandler);
+        this._element.addEventListener("click", this._clickHandler);
+
         this._eventHandler = this.propertyChanged.bind(this);
 
         this._perspectiveElement = this._element.querySelector("perspective-element");
@@ -40,7 +47,7 @@ export class DatasetProvider extends ProviderBase {
         await this._initFields(this._perspectiveElement);
     }
 
-    _change(event) {
+    async _change(event) {
         const field = event.target.dataset.field;
         if (field == null) return;
 
@@ -49,6 +56,13 @@ export class DatasetProvider extends ProviderBase {
 
         crsbinding.data._setContextProperty(this._context, field, event.target.value, {oldValue: oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type});
         event.stopPropagation();
+    }
+
+    async _click(event) {
+        if (event.target.dataset.action != null) {
+            const context = crsbinding.data.getContext(this._context);
+            await context[event.target.dataset.action]?.(event);
+        }
     }
 
     async _initFields(element) {

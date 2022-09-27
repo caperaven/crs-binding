@@ -21,6 +21,11 @@
       "view": "form"
     },
     {
+      "title": "Dataset",
+      "hash": "#dataset",
+      "view": "dataset"
+    },
+    {
       "title": "Conditions",
       "hash": "#conditions",
       "view": "conditions"
