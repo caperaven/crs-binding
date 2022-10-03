@@ -22,7 +22,8 @@ export default class ValueConversion extends crsbinding.classes.ViewBase {
 
     async charChanged(newValue) {
         const element = this._element.querySelector("#display");
-        const fragment = crsbinding.inflationManager.get("display", { char: newValue }, element);
+        const elements = element == null ? null : [element];
+        const fragment = crsbinding.inflationManager.get("display", [{ char: newValue }], elements);
 
         if (fragment != null) {
             this._element.appendChild(fragment)

@@ -369,7 +369,6 @@ class InflationCodeGenerator {
 
         if (exp.indexOf("&amp;{") != -1) {
             const path = exp.replace("&amp;{", "").replace("}", "");
-
             const value = await crsbinding.translations.get(path);
             if (value == null) {
                 this.inflateSrc.push(`crsbinding.translations.get("${path}").then(result => ${this.path}.textContent = result);`);
@@ -379,29 +378,35 @@ class InflationCodeGenerator {
             }
         }
         else {
+            let converter = null;
+            if (exp.indexOf(":") != -1) {
+                const parts = exp.split(":");
+                exp = [parts[0], "}"].join("");
+                converter = parts[1].replace("}", "");
+            }
+
             const san = crsbinding.expression.sanitize(exp, this._ctxName);
             exp = san.expression;
 
             if (san.isHTML == true) {
                 target = "innerHTML";
             }
-            this.inflateSrc.push([`${this.path}.${target} = ` + "`" + exp + "`"].join(" "));
+
+            if (converter != null) {
+                exp = exp.replace("${", "").replace("}", "");
+                exp = `crsbinding.valueConvertersManager.convert(${exp}, "${converter}", "get")`;
+                this.inflateSrc.push(`${this.path}.${target} = ${exp}`);
+            }
+            else {
+                this.inflateSrc.push([`${this.path}.${target} = ` + "`" + exp + "`"].join(" "));
+            }
         }
 
         this.deflateSrc.push(`${this.path}.${target} = "";`);
     }
 
     async _processAttributes(element) {
-        const attributes = Array.from(element.attributes).filter(attr =>
-            attr.value.indexOf("${") != -1 ||
-            attr.value.indexOf("&{") != -1 ||
-            attr.name.indexOf(".if") != -1 ||
-            attr.name.indexOf(".attr") != -1 ||
-            attr.name.indexOf("style.") != -1 ||
-            attr.name.indexOf("classlist." != -1)
-        );
-
-        for (let attr of attributes) {
+        for (const attr of element.attributes) {
             if (attr.name.indexOf(".attr") != -1) {
                 this._processAttr(attr);
             }
@@ -411,8 +416,11 @@ class InflationCodeGenerator {
             else if (attr.value.indexOf("&{") != -1) {
                 await this._processTranslationValue(attr);
             }
-            else {
+            else if (attr.value.indexOf(".if") != -1) {
                 this._processAttrCondition(attr);
+            }
+            else {
+                this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", "${attr.value}")`);
             }
         }
     }
@@ -421,7 +429,7 @@ class InflationCodeGenerator {
         this.inflateSrc.push(`while(${this.path}.attributes.length > 0) { ${this.path}.removeAttribute(${this.path}.attributes[0].name) };`);
 
         const classes = element.getAttribute("class")
-        this.inflateSrc.push(`${this.path}.setAttribute("class", "${classes}");`)
+        this.inflateSrc.push(`${this.path}.removeAttribute("class");`);
     }
 
     _processAttr(attr) {
