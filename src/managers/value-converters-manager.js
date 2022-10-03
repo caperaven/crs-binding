@@ -35,9 +35,9 @@ export class ValueConvertersManager {
      * @param key {string} converter key
      * @param direction {string} get || set
      */
-    convert(value, key, direction) {
+    convert(value, key, direction, args) {
         const converter = this._converters.get(key);
         if (converter == null) return null;
-        return converter[direction](value);
+        return converter[direction](value, args);
     }
 }
