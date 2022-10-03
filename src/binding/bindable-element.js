@@ -1,3 +1,5 @@
+import {getHtmlPath} from "./html-loader.js";
+
 export class BindableElement extends HTMLElement {
     get hasOwnContext() {
         return true;
@@ -40,7 +42,7 @@ export class BindableElement extends HTMLElement {
         }
 
         if (this.html != null) {
-            this.innerHTML = await crsbinding.templates.get(this.constructor.name, this.html);
+            this.innerHTML = await crsbinding.templates.get(this.constructor.name, getHtmlPath(this));
 
             const path = crsbinding.utils.getPathOfFile(this.html);
             await crsbinding.parsers.parseElements(this.children, this._dataId, path ? {folder: path} : null);

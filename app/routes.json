@@ -41,6 +41,16 @@
       "view": "inflation-for"
     },
     {
+      "title": "Events",
+      "hash": "#events",
+      "view": "events"
+    },
+    {
+      "title": "Value Conversion",
+      "hash": "#value-conversion",
+      "view": "value-conversion"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
