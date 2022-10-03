@@ -35,7 +35,7 @@ export class BindProvider extends OneWayProvider {
 
         if (this._converter != null) {
             const converter = crsbinding.valueConvertersManager.get(this._converter);
-            value = converter.set(value);
+            value = converter.set(value, this._convertParameter);
         }
 
         const oldValue = crsbinding.data.getValue(this._context, this._value);

@@ -25,10 +25,21 @@ export class OneWayProvider extends ProviderBase {
             return setContext(this._element, this._property, this._context);
         }
 
-        if (this._value.indexOf(":" != -1)) {
+        if (this._value.indexOf(":") != -1) {
             const parts = this._value.split(":");
             this._value = parts[0];
-            this._converter = parts[1];
+
+            parts.splice(0, 1);
+
+            this._converter = parts.join(":");
+
+            if (this._converter.indexOf("(") != -1) {
+                const paramParts = this._converter.split("(");
+                this._converter = paramParts[0];
+                this._convertParameter = JSON.parse(paramParts[1]
+                    .split(")").join("")
+                    .split("'").join('"'));
+            }
         }
 
         this._eventHandler = this.propertyChanged.bind(this);
@@ -48,7 +59,7 @@ export class OneWayProvider extends ProviderBase {
 
         if (this._converter != null) {
             const converter = crsbinding.valueConvertersManager.get(this._converter);
-            value = converter.get(value);
+            value = converter.get(value, this._convertParameter);
         }
 
         if (value != null) {
@@ -66,7 +77,7 @@ export class OneWayProvider extends ProviderBase {
 
         if (this._converter != null) {
             const converter = crsbinding.valueConvertersManager.get(this._converter);
-            value = converter.get(value);
+            value = converter.get(value, this._convertParameter);
         }
 
         crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));

@@ -32,15 +32,29 @@ export default class ValueConversion extends crsbinding.classes.ViewBase {
 }
 
 const asciiConverter = {
-    set (value) {
+    set (value, args) {
+        if (args) {
+            console.log(args);
+        }
+
         return value.charCodeAt(0);
     },
 
-    get (value) {
+    get (value, args) {
         if (isNaN(value)) {
             return value;
         }
 
-        return String.fromCharCode(value);
+        let result = String.fromCharCode(value);
+
+        if (args?.case == "upper") {
+            result = result.toUpperCase();
+        }
+
+        if (args?.case == "lower") {
+            result = result.toLowerCase();
+        }
+
+        return result;
     }
 }
