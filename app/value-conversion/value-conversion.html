@@ -4,13 +4,15 @@
     <div id="display">
         <span class="test">${char}</span>
         <span> = </span>
-        <span>${char:ascii}</span>
+        <span>${char:ascii()}</span>
+        <span>${char:ascii({'case': 'upper'}).trim()}</span>
+        <span>${now:dateSplit().time}</span>
     </div>
 </template>
 
 <label>
     <div>Char</div>
-    <input value.bind="char:ascii" />
+    <input value.bind="char:ascii()" />
 </label>
 
 <label>
