@@ -1,5 +1,6 @@
 import {ProviderBase} from "./provider-base.js";
 import {getExpForProvider, setContext} from "./one-way-utils.js";
+import {getConverterParts} from "./../../lib/converter-parts.js";
 
 export class OneWayProvider extends ProviderBase {
     dispose() {
@@ -16,6 +17,7 @@ export class OneWayProvider extends ProviderBase {
         this._exp = null;
         this._eventHandler = null;
         this._converter = null;
+        this._getConvertFn = null;
 
         super.dispose();
     }
@@ -26,20 +28,9 @@ export class OneWayProvider extends ProviderBase {
         }
 
         if (this._value.indexOf(":") != -1) {
-            const parts = this._value.split(":");
-            this._value = parts[0];
-
-            parts.splice(0, 1);
-
-            this._converter = parts.join(":");
-
-            if (this._converter.indexOf("(") != -1) {
-                const paramParts = this._converter.split("(");
-                this._converter = paramParts[0];
-                this._convertParameter = JSON.parse(paramParts[1]
-                    .split(")").join("")
-                    .split("'").join('"'));
-            }
+            this._converter = getConverterParts(this._value);
+            const code = `return crsbinding.valueConvertersManager.convert(value, "${this._converter.converter}", "get", params)${this._converter.postExp}`;
+            this._getConvertFn = new Function("value", "params", code);
         }
 
         this._eventHandler = this.propertyChanged.bind(this);
@@ -47,7 +38,7 @@ export class OneWayProvider extends ProviderBase {
 
         this._expObj = crsbinding.expression.compile(this._exp, ["element", "value"], {sanitize: false, ctxName: this._ctxName});
 
-        let path = this._value;
+        let path = this._converter == null ? this._value : this._converter.path;
 
         if (this._isNamedContext == true) {
             path = this._value.split(`${this._ctxName}.`).join("");
@@ -57,9 +48,8 @@ export class OneWayProvider extends ProviderBase {
 
         let value = crsbinding.data.getValue(this._context, path);
 
-        if (this._converter != null) {
-            const converter = crsbinding.valueConvertersManager.get(this._converter);
-            value = converter.get(value, this._convertParameter);
+        if (this._getConvertFn != null) {
+            value = this._getConvertFn(value, this._converter.parameter);
         }
 
         if (value != null) {
@@ -75,9 +65,8 @@ export class OneWayProvider extends ProviderBase {
             this._isLinked = true;
         }
 
-        if (this._converter != null) {
-            const converter = crsbinding.valueConvertersManager.get(this._converter);
-            value = converter.get(value, this._convertParameter);
+        if (this._getConvertFn != null) {
+            value = this._getConvertFn(value, this._converter.parameter);
         }
 
         crsbinding.idleTaskManager.add(this._expObj.function(this.data, this._element, value));

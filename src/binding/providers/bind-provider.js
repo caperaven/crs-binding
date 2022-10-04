@@ -34,12 +34,13 @@ export class BindProvider extends OneWayProvider {
         }
 
         if (this._converter != null) {
-            const converter = crsbinding.valueConvertersManager.get(this._converter);
-            value = converter.set(value, this._convertParameter);
+            const converter = crsbinding.valueConvertersManager.get(this._converter.converter);
+            value = converter.set(value, this._converter.parameter);
         }
 
+        const path = this._converter == null ? this._value : this._converter.path;
         const oldValue = crsbinding.data.getValue(this._context, this._value);
-        crsbinding.data._setContextProperty(this._context, this._value, value, {oldValue: oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type});
+        crsbinding.data._setContextProperty(this._context, path, value, {oldValue: oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type});
 
         event.stopPropagation();
     }
