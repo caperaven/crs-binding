@@ -1,4 +1,5 @@
 import {ProviderBase} from "./provider-base.js";
+import {getConverterParts} from "../../lib/converter-parts.js";
 
 export class DatasetProvider extends ProviderBase {
     constructor(element, context, property, value, ctxName, parentId) {
@@ -48,13 +49,21 @@ export class DatasetProvider extends ProviderBase {
     }
 
     async _change(event) {
-        const field = event.target.dataset.field;
+        let field = event.target.dataset.field;
         if (field == null) return;
+
+        let value = event.target.value;
+
+        if (event.target._converter != null) {
+            field = event.target._converter.path;
+            const converter = crsbinding.valueConvertersManager.get(event.target._converter.converter);
+            value = converter.set(value, event.target._converter.parameter);
+        }
 
         const type = event.target.type || "text";
         const oldValue = crsbinding.data.getValue(this._context, field);
 
-        crsbinding.data._setContextProperty(this._context, field, event.target.value, {oldValue: oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type});
+        crsbinding.data._setContextProperty(this._context, field, value, {oldValue: oldValue, ctxName: this._ctxName, dataType: type == "text" ? "string" : type});
         event.stopPropagation();
     }
 
@@ -70,15 +79,36 @@ export class DatasetProvider extends ProviderBase {
         const inputs = element.querySelectorAll("[data-field]");
 
         for (const input of inputs) {
-            this.inputs[input.dataset.field] = input;
-            this.listenOnPath(input.dataset.field, this._eventHandler);
-            await crsbinding.data.updateUI(this._context, input.dataset.field);
+            let field = input.dataset.field;
+
+            if (input.dataset.field.indexOf(":") != -1) {
+                input._converter = getConverterParts(input.dataset.field);
+                field = input._converter.path;
+
+                let paramCode = "null";
+                if (input._converter.parameter != null) {
+                    paramCode = `JSON.parse('${JSON.stringify(input._converter.parameter)}')`;
+                }
+
+                const code = `return crsbinding.valueConvertersManager.convert(value, "${input._converter.converter}", "get", ${paramCode})${input._converter.postExp}`;
+                input._converter.fn = new Function("value", code);
+            }
+
+            this.inputs[field] = input;
+
+            this.listenOnPath(field, this._eventHandler);
+            await crsbinding.data.updateUI(this._context, field);
         }
     }
 
     propertyChanged(prop, value) {
         const element = this.inputs[prop];
         if (element != null && element.value != value) {
+
+            if (element._converter != null) {
+                value = element._converter.fn(value);
+            }
+
             element.value = value == null ? "" : value;
         }
     }
@@ -87,13 +117,16 @@ export class DatasetProvider extends ProviderBase {
         const keys = Object.keys(this.inputs);
         for (const key of keys) {
             this.removeCallback(key);
-            this.inputs[key] = null;
         }
         this.inputs = null;
     }
 
     removeCallback(path) {
         crsbinding.data.removeCallback(this._context, path, this._eventHandler);
+
+        this.inputs[path]._converter.fn = null;
+        this.inputs[path]._converter = null;
+
         delete this.inputs[path];
 
         const cleanEvent = this._cleanEvents.filter(item => item.path == path);
