@@ -24,6 +24,7 @@ import {SvgElementsManager} from "./managers/svg-elements-manager.js";
 import {SvgElement} from "./view/svg-element.js";
 import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate, loadFromElement, getTemplateById} from "./store/templates.js";
 import {TranslationsManager} from "./managers/translations-manager.js";
+import {getConverterParts} from "./lib/converter-parts.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -101,7 +102,8 @@ const crsbinding = {
         relativePathFrom: relativePathFrom,
         getPathOfFile: getPathOfFile,
         getValueOnPath: getValueOnPath,
-        flattenPropertyPath: flattenPropertyPath
+        flattenPropertyPath: flattenPropertyPath,
+        getConverterParts: getConverterParts
     },
 
     templates: {
