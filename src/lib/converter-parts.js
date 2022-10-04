@@ -1,10 +1,18 @@
 export function getConverterParts(exp) {
     const result = {
-        path: exp
+        path: exp.trim()
     };
+
+    clean(result);
     parseConverter(result);
     parseParameter(result);
     return result;
+}
+
+function clean(result) {
+    if (result.path[0] == "$" && result.path[1] == "{") {
+        result.path = result.path.substring(2, result.path.length - 1);
+    }
 }
 
 function parseConverter(result) {

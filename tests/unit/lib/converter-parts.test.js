@@ -10,6 +10,15 @@ Deno.test("converter parts - simple", async () => {
     assertEquals(parts.postExp, "");
 })
 
+Deno.test("converter parts - simple", async () => {
+    const parts = getConverterParts("${char:ascii()}");
+
+    assertEquals(parts.path, "char");
+    assertEquals(parts.converter, "ascii");
+    assertEquals(parts.parameter, null);
+    assertEquals(parts.postExp, "");
+})
+
 Deno.test("converter parts - simple with parameters", async () => {
     const parts = getConverterParts("char:ascii({'case': 'upper'})");
 

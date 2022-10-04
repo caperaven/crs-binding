@@ -1,4 +1,5 @@
 import {forStatementParts} from "./../lib/utils.js";
+import {getConverterParts} from "../lib/converter-parts.js";
 
 export class InflationManager {
     constructor() {
@@ -380,12 +381,10 @@ class InflationCodeGenerator {
         else {
             let converter = null;
             if (exp.indexOf(":") != -1) {
-                const parts = exp.split(":");
-                exp = [parts[0], "}"].join("");
-                converter = parts[1].replace("}", "");
+                converter = getConverterParts(exp);
             }
 
-            const san = crsbinding.expression.sanitize(exp, this._ctxName);
+            const san = crsbinding.expression.sanitize(converter?.path || exp, this._ctxName);
             exp = san.expression;
 
             if (san.isHTML == true) {
@@ -393,8 +392,15 @@ class InflationCodeGenerator {
             }
 
             if (converter != null) {
-                exp = exp.replace("${", "").replace("}", "");
-                exp = `crsbinding.valueConvertersManager.convert(${exp}, "${converter}", "get")`;
+
+                let paramCode = "null";
+
+                if (converter.parameter != null) {
+                    paramCode = `JSON.parse('${JSON.stringify(converter.parameter)}')`;
+                }
+
+                exp = `crsbinding.valueConvertersManager.convert(${san.expression}, "${converter.converter}", "get", ${paramCode})${converter.postExp}`;
+
                 this.inflateSrc.push(`${this.path}.${target} = ${exp}`);
             }
             else {
