@@ -8,6 +8,8 @@ export class BindableElement extends HTMLElement {
     constructor() {
         super();
 
+        this.attachShadow({ mode: "open" });
+
         if (this.hasOwnContext == true) {
             this._dataId = crsbinding.data.addObject(this.constructor.name);
             crsbinding.data.addContext(this._dataId, this);
@@ -42,7 +44,7 @@ export class BindableElement extends HTMLElement {
         }
 
         if (this.html != null) {
-            this.innerHTML = await crsbinding.templates.get(this.constructor.name, getHtmlPath(this));
+            this.shadowRoot.innerHTML = await crsbinding.templates.get(this.constructor.name, getHtmlPath(this));
 
             if (this.onHTML != null) {
                 await this.onHTML();
@@ -50,6 +52,7 @@ export class BindableElement extends HTMLElement {
 
             const path = crsbinding.utils.getPathOfFile(this.html);
             await crsbinding.parsers.parseElements(this.children, this._dataId, path ? {folder: path} : null);
+            await crsbinding.parsers.parseElements(this.shadowRoot.children, this._dataId, path ? {folder: path} : null);
         }
 
         requestAnimationFrame(() => {

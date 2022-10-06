@@ -51,6 +51,11 @@
       "view": "value-conversion"
     },
     {
+      "title": "Shadow Dom",
+      "hash": "#shadow-dom",
+      "view": "shadow-dom"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
