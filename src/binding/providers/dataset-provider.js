@@ -124,8 +124,10 @@ export class DatasetProvider extends ProviderBase {
     removeCallback(path) {
         crsbinding.data.removeCallback(this._context, path, this._eventHandler);
 
-        this.inputs[path]._converter.fn = null;
-        this.inputs[path]._converter = null;
+        if (this.inputs[path]._converter != null) {
+            this.inputs[path]._converter.fn = null;
+            this.inputs[path]._converter = null;
+        }
 
         delete this.inputs[path];
 
