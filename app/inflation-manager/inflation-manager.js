@@ -4,6 +4,8 @@ export default class InflationManager extends crsbinding.classes.ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
         await this.#render(dates.week1);
+        // await this.#render(dates.week2);
+        // await this.#render(dates.week3);
     }
 
     async preLoad(){
@@ -22,13 +24,13 @@ export default class InflationManager extends crsbinding.classes.ViewBase {
 
     async update() {
         const week = dates.week1;
-        week.day1.value = 8;
-        week.day2.value = 9;
-        week.day3.value = 10;
-        week.day4.value = 11;
-        week.day5.value = 12;
-        week.day6.value = 13;
-        week.day7.value = 14;
+        week.day1.value = 100;
+        week.day2.value = 101;
+        week.day3.value = 102;
+        week.day4.value = 103;
+        week.day5.value = 104;
+        week.day6.value = 105;
+        week.day7.value = 106;
 
         await this.#render(week);
     }
