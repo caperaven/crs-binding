@@ -1,6 +1,10 @@
 import {getHtmlPath} from "./html-loader.js";
 
 export class BindableElement extends HTMLElement {
+    get shadowDom() {
+        return false;
+    }
+
     get hasOwnContext() {
         return true;
     }
@@ -8,7 +12,9 @@ export class BindableElement extends HTMLElement {
     constructor() {
         super();
 
-        this.attachShadow({ mode: "open" });
+        if (this.shadowDom == true) {
+            this.attachShadow({ mode: "open" });
+        }
 
         if (this.hasOwnContext == true) {
             this._dataId = crsbinding.data.addObject(this.constructor.name);
@@ -44,7 +50,14 @@ export class BindableElement extends HTMLElement {
         }
 
         if (this.html != null) {
-            this.shadowRoot.innerHTML = await crsbinding.templates.get(this.constructor.name, getHtmlPath(this));
+            const html = await crsbinding.templates.get(this.constructor.name, getHtmlPath(this));
+
+            if (this.shadowRoot != null) {
+                this.shadowRoot.innerHTML = html;
+            }
+            else {
+                this.innerHTML = html;
+            }
 
             if (this.onHTML != null) {
                 await this.onHTML();
@@ -52,7 +65,10 @@ export class BindableElement extends HTMLElement {
 
             const path = crsbinding.utils.getPathOfFile(this.html);
             await crsbinding.parsers.parseElements(this.children, this._dataId, path ? {folder: path} : null);
-            await crsbinding.parsers.parseElements(this.shadowRoot.children, this._dataId, path ? {folder: path} : null);
+
+            if (this.shadowRoot != null) {
+                await crsbinding.parsers.parseElements(this.shadowRoot.children, this._dataId, path ? {folder: path} : null);
+            }
         }
 
         requestAnimationFrame(() => {

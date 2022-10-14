@@ -1,4 +1,5 @@
 import "./group-box.js"
+import "./my-component.js"
 
 export default class ShadowDom extends crsbinding.classes.ViewBase {
     get html() {
