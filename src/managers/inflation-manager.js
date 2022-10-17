@@ -425,6 +425,9 @@ class InflationCodeGenerator {
             else if (attr.value.indexOf(".if") != -1) {
                 this._processAttrCondition(attr);
             }
+            else if (attr.name.indexOf('.case') != -1) {
+                this._processCaseCondition(attr);
+            }
             else {
                 this.inflateSrc.push(`${this.path}.setAttribute("${attr.name}", "${attr.value}")`);
             }
@@ -546,5 +549,58 @@ class InflationCodeGenerator {
         this.deflateSrc.push(`${this.path}.removeAttribute("${attrName}")`);
 
         attr.ownerElement.removeAttribute(attr.name);
+    }
+
+    _processCaseCondition(attr) {
+        const statements = attr.value.split(",");
+
+        if (attr.name.indexOf("classlist.") != -1) {
+            return this._processCaseParts(attr, statements, this._processCaseClassList);
+        }
+
+        if (attr.name.indexOf("style.") != -1) {
+            return this._processCaseParts(attr, statements, this._processCaseStyle);
+        }
+
+        return this._processCaseParts(attr, statements, this._processCaseAttr);
+    }
+
+    _processCaseParts(attr, parts, callback) {
+        let count = 0;
+        for (const part of parts) {
+            const values = part.split(":");
+            const exp = crsbinding.expression.sanitize(values[0].trim(), this._ctxName).expression;
+            const value = values[1].trim();
+
+            if (count == 0) {
+                this.inflateSrc.push(`if (${exp}) {`)
+            }
+            else {
+                if (exp == "context.default") {
+                    this.inflateSrc.push(`else {`);
+                }
+                else {
+                    this.inflateSrc.push(`else if (${exp}) {`);
+                }
+            }
+
+            callback.call(this, attr, value);
+            this.inflateSrc.push(`}`)
+            count += 1;
+        }
+    }
+
+    _processCaseClassList(attr, value) {
+        this.inflateSrc.push(`  ${this.path}.classList.add(${value})`);
+    }
+
+    _processCaseStyle(attr, value) {
+        const parts = attr.name.split(".");
+        this.inflateSrc.push(`  ${this.path}.style.${parts[1]} = ${value}`);
+    }
+
+    _processCaseAttr(attr, value) {
+        const attrName = attr.name.replace(".case", "");
+        this.inflateSrc.push(`  ${this.path}.setAttribute('${attrName}', ${value})`);
     }
 }

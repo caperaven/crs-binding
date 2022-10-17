@@ -4,19 +4,56 @@
         height: 50px;
         border: 1px solid silver;
     }
+
+    .prior {
+        background: silver;
+    }
+
+    .after {
+        background: gray;
+    }
 </style>
+
 
 <button click.call="update">Update</button>
 
 <template id="tplWeek">
     <tr data-id.attr="week">
-        <td>${day1.value}</td>
-        <td>${day2.value}</td>
-        <td>${day3.value}</td>
-        <td>${day4.value}</td>
-        <td>${day5.value}</td>
-        <td>${day6.value}</td>
-        <td>${day7.value}</td>
+        <td
+            classlist.case="day1.type == 'prior': 'prior', day1.type == 'after': 'after'"
+            style.color.case="day1.type == 'prior': 'yellow', day1.type == 'after': 'green', default: 'blue'"
+            data-type.case="day1.type == 'prior': 'prior', day1.type == 'after': 'after', default: 'normal'"
+        >${day1.value}</td>
+        <td
+            classlist.case="day2.type == 'prior': 'prior', day2.type == 'after': 'after'"
+            style.color.case="day2.type == 'prior': 'yellow', day2.type == 'after': 'green', default: 'blue'"
+            data-type.case="day2.type == 'prior': 'prior', day2.type == 'after': 'after', default: 'normal'"
+        >${day2.value}</td>
+        <td
+            classlist.case="day3.type == 'prior': 'prior', day3.type == 'after': 'after'"
+            style.color.case="day3.type == 'prior': 'yellow', day3.type == 'after': 'green', default: 'blue'"
+            data-type.case="day3.type == 'prior': 'prior', day3.type == 'after': 'after', default: 'normal'"
+        >${day3.value}</td>
+        <td
+            classlist.case="day4.type == 'prior': 'prior', day4.type == 'after': 'after'"
+            style.color.case="day4.type == 'prior': 'yellow', day4.type == 'after': 'green', default: 'blue'"
+            data-type.case="day4.type == 'prior': 'prior', day4.type == 'after': 'after', default: 'normal'"
+        >${day4.value}</td>
+        <td
+            classlist.case="day5.type == 'prior': 'prior', day5.type == 'after': 'after'"
+            style.color.case="day5.type == 'prior': 'yellow', day5.type == 'after': 'green', default: 'blue'"
+            data-type.case="day5.type == 'prior': 'prior', day5.type == 'after': 'after', default: 'normal'"
+        >${day5.value}</td>
+        <td
+            classlist.case="day6.type == 'prior': 'prior', day6.type == 'after': 'after'"
+            style.color.case="day6.type == 'prior': 'yellow', day6.type == 'after': 'green', default: 'blue'"
+            data-type.case="day6.type == 'prior': 'prior', day6.type == 'after': 'after', default: 'normal'"
+        >${day6.value}</td>
+        <td
+            classlist.case="day7.type == 'prior': 'prior', day7.type == 'after': 'after'"
+            style.color.case="day7.type == 'prior': 'yellow', day7.type == 'after': 'green', default: 'blue'"
+            data-type.case="day7.type == 'prior': 'prior', day7.type == 'after': 'after', default: 'normal'"
+        >${day7.value}</td>
     </tr>
 </template>
 
