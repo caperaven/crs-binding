@@ -364,7 +364,7 @@ class InflationCodeGenerator {
     async _processTextContent(element) {
         if (element.children == null || element.children.length > 0 || (element.textContent.indexOf("${") == -1 && element.textContent.indexOf("&{") == -1)) return;
 
-        const text = (element.innerHTML || "").trim();
+        const text = (element.textContent || element.innerHTML || "").trim();
         let target = "textContent";
         let exp = text;
 

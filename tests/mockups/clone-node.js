@@ -11,11 +11,12 @@ export function cloneElementMock(mock) {
     instance.innerText = mock.innerText;
     instance.innerHTML = mock.innerHTML;
     instance.attributes = mock.attributes;
-    instance.children = mock.children;
+    instance.children = [];
     instance.dataset = mock.dataset;
 
     copyClasses(mock, instance);
     copyStyles(mock, instance);
+    cloneChildren(mock, instance);
 
     return instance;
 }
@@ -417,5 +418,12 @@ const styles = [
 function copyStyles(source, target) {
     for (let style of styles) {
         target[style] = source[style];
+    }
+}
+
+function cloneChildren(source, target) {
+    for (const child of source.children) {
+        const newChild = cloneElementMock(child);
+        target.children.push(newChild);
     }
 }

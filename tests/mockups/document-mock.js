@@ -1,25 +1,15 @@
 import {ElementMock, mockElement} from "./element-mock.js"
 
-/**
- * This represents the document in js terms.
- */
-class DocumentMock {
-    static createElement(tag) {
-        if (globalThis.__elementRegistry[tag] != null) {
-            return mockElement(new globalThis.__elementRegistry[tag]());
-        }
-        return new ElementMock(tag);
-    }
+globalThis.document = new ElementMock("document");
+globalThis.document.body = new ElementMock("body");
 
-    createDocumentFragment() {
-        return new ElementMock();
+globalThis.document.createElement = (tag) => {
+    if (globalThis.__elementRegistry[tag] != null) {
+        return mockElement(new globalThis.__elementRegistry[tag]());
     }
-
-    querySelector(query) {
-
-    }
+    return new ElementMock(tag);
 }
 
-
-globalThis.document = DocumentMock
-globalThis.document.body = new ElementMock("body");
+globalThis.document.createDocumentFragment = () => {
+    return new ElementMock();
+}

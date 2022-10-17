@@ -5,6 +5,13 @@ import {find, findAll, createQueryFunction} from "./query.js";
 import {EventMock} from "./event-mock.js";
 
 export class ElementMock {
+    static async from(tag, innerHTML, id, parentElement) {
+        const instance = new ElementMock(tag, id, parentElement);
+        instance.innerHTML = innerHTML;
+        createMockChildren(instance);
+        return instance;
+    }
+
     constructor(tag, id, parentElement) {
         mockElement(this, tag, id, parentElement);
 
@@ -25,7 +32,7 @@ export function mockElement(instance, tag, id) {
 
     instance.textContent = "";
     instance.innerText = "";
-    instance.innerHTML = "";
+    instance.innerHTML ||= "";
     instance.attributes = [];
     instance.children = [];
     instance.dataset = {};
