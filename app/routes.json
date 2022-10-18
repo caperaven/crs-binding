@@ -61,6 +61,11 @@
       "view": "shadow-dom"
     },
     {
+      "title": "Mobile",
+      "hash": "#mobile",
+      "view": "mobile"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",

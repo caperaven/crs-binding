@@ -3,8 +3,8 @@ class MyComponent extends crsbinding.classes.BindableElement {
         return import.meta.url.replace(".js", ".html");
     }
 
-    preLoad() {
-        this.setProperty("title", "My Component");
+    get mobi() {
+        return import.meta.url.replace(".js", ".mobi.html");
     }
 }
 
