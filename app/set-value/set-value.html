@@ -31,9 +31,9 @@
 </div>
 
 <div class="toolbar">
-    <button click.setvalue="prop1 = property(this, 'nodeName')">prop - this</button>
-    <button click.setvalue="prop2 = property('#input', 'value', true)">prop - selector</button>
-    <button click.setvalue="prop3 = property($event.target, 'nodeName')">prop - event.target</button>
+    <button id="btnTest" click.setvalue="prop1 = property(this, 'dataset.value')" data-value="Whazzaap!">prop - this</button>
+    <button click.setvalue="prop2 = property('#btnTest', 'dataset.value', true)">prop - selector</button>
+    <button click.setvalue="prop3 = property($event.target, 'dataset.value')" data-value="Test Value">prop - event.target</button>
 </div>
 
 <label>

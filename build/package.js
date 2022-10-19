@@ -53,5 +53,5 @@ async function bundle(file, output, minified) {
 
 
 await createFolderStructure();
-await bundle("./src/index.js", "./dist/crs-binding.old.js", false);
+await bundle("./src/index.js", "./dist/crs-binding.js", false);
 Deno.exit(0);

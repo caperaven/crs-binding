@@ -74,17 +74,31 @@ function processAttr(part) {
 function processProp(part) {
     const parts = part.replace("property(", "").replace(")", "").split(",");
     const left = parts[0].trim();
-    const attr = parts[1].trim();
+    let path = parts[1].trim();
+
+    let pathExp = `[${path}]`;
+    if (path.indexOf(".") != -1) {
+        path = path.split("'").join("").split('"').join('');
+
+        const pathParts = path.split(".");
+        const pathCollection = [];
+
+        for (const pathPart of pathParts) {
+            pathCollection.push(`["${pathPart}"]`);
+        }
+
+        pathExp = pathCollection.join("");
+    }
 
     if (left == "this") {
-        return `element[${attr}]`
+        return `element${pathExp}`
     }
 
     if (left.indexOf("$event") != -1) {
-        return `${left.replace("$", "")}[${attr}]`;
+        return `${left.replace("$", "")}${pathExp}`;
     }
 
-    return `${parts.length == 2 ? 'element': 'document'}.querySelector(${left})[${attr}]`;
+    return `${parts.length == 2 ? 'element': 'document'}.querySelector(${left})${pathExp}`;
 }
 
 function processLeftPart(part, value) {
