@@ -44,13 +44,6 @@ function createSourceFrom(exp) {
 }
 
 function processRightPart(part) {
-    // <!--change.setvalue="state = attribute(this, "data-value")"-->
-    // <!--state = attribute(this, "data-value")-->
-    // <!--state = attribute($event.target, "data-value")-->
-    // <!--state = property(#my-element, "firstName")-->
-
-    console.log(part);
-
     if (part.indexOf("attribute(") != -1) {
         return processAttr.call(this, part);
     }
@@ -75,7 +68,7 @@ function processAttr(part) {
         return `${left.replace("$", "")}.getAttribute(${attr})`;
     }
 
-    return `document.querySelector(${left}).getAttribute(${attr})`;
+    return `${parts.length == 2 ? 'element': 'document'}.querySelector(${left}).getAttribute(${attr})`;
 }
 
 function processProp(part) {
@@ -91,7 +84,7 @@ function processProp(part) {
         return `${left.replace("$", "")}[${attr}]`;
     }
 
-    return `document.querySelector(${left})[${attr}]`;
+    return `${parts.length == 2 ? 'element': 'document'}.querySelector(${left})[${attr}]`;
 }
 
 function processLeftPart(part, value) {
