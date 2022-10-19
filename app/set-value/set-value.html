@@ -1,0 +1,56 @@
+<style>
+    .block {
+        display: block;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid silver;
+        padding: 0.5rem;
+    }
+
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        background: #f2f2f2;
+        padding: 0.5rem;
+        border: 1px solid silver;
+        margin-bottom: 1rem;
+    }
+</style>
+<h2>${title}</h2>
+
+<div class="toolbar">
+    <button click.setvalue="$globals.value = 'Hello World'">Simple Global</button>
+    <button click.setvalue="value = 'hello world'">Simple Local</button>
+    <button click.setvalue="person = {firstName: 'John'}">Person</button>
+    <button click.setvalue="instance = new TestClass()">Class Instance</button>
+</div>
+
+<div class="toolbar">
+    <button click.setvalue="attr1 = attribute(this, 'data-value')" data-value="Attribute 1">attr - this</button>
+    <button click.setvalue="attr2 = attribute('#input', 'value')">attr - selector</button>
+    <button click.setvalue="attr3 = attribute($event.target, 'data-value')" data-value="Attribute 2">attr - event.target</button>
+</div>
+
+<div class="toolbar">
+    <button click.setvalue="prop1 = property(this, 'nodeName')">prop - this</button>
+    <button click.setvalue="prop2 = property('#input', 'value')">prop - selector</button>
+    <button click.setvalue="prop3 = property($event.target, 'nodeName')">prop - event.target</button>
+</div>
+
+<label>
+    <div>Number Value</div>
+    <input type="number" value="10" min="0" max="100">
+</label>
+
+<section>
+    <h2>Results</h2>
+    <div class="block"><span>Simple Global: </span><span>${$globals.value}</span></div>
+    <div class="block"><span>Simple Local: </span><span>${value}</span></div>
+    <div class="block"><span>Person: </span><span>${person.firstName}</span></div>
+    <div class="block"><span>Class Instance: </span><span>${instance.value}</span></div>
+    <div class="block"><span>attr - this: </span><span>${attr1}</span></div>
+    <div class="block"><span>attr - selector: </span><span>${attr2}</span></div>
+    <div class="block"><span>attr - event.target </span><span>${attr3}</span></div>
+    <div class="block"><span>prop - this: </span><span>${prop1}</span></div>
+    <div class="block"><span>prop - selector: </span><span>${prop2}</span></div>
+    <div class="block"><span>prop - event.target </span><span>${prop3}</span></div>
+</section>

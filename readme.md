@@ -54,7 +54,7 @@ Once on your hard drive, remember to run `npm install` in the commandline to ins
 If you don't want to use an existing template, you can easily set up your own project.
 
 1. install crs binding using npm `npm install crs-binding@latest`
-1. include it in your project `<script type="module" src="./node_modules/crs-binding/crs-binding.js"></script>`
+1. include it in your project `<script type="module" src="./node_modules/crs-binding/crs-binding.old.js"></script>`
 
 Once you have included the library, crsbinding is registered on globalThis for usage.  
 You can look at the [sample application](https://github.com/caperaven/crs-binding-examples) for details.

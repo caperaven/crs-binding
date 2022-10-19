@@ -31,6 +31,11 @@ export class SetValueProvider extends CallProvider {
     }
 
     _processRightPart(part) {
+        // <!--change.setvalue="state = attribute(this, "data-value")"-->
+        // <!--state = attribute(this, "data-value")-->
+        // <!--state = attribute($event.target, "data-value")-->
+        // <!--state = property(#my-element, "firstName")-->
+
         return crsbinding.expression.sanitize(part, this._ctxName, true).expression;
     }
 

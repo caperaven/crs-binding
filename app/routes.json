@@ -66,6 +66,11 @@
       "view": "mobile"
     },
     {
+      "title": "Set Value",
+      "hash": "#set-value",
+      "view": "set-value"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
