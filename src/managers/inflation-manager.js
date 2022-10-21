@@ -412,7 +412,7 @@ class InflationCodeGenerator {
     }
 
     async _processAttributes(element) {
-        for (const attr of element.attributes) {
+        for (const attr of Array.from(element.attributes)) {
             if (attr.name.indexOf(".attr") != -1) {
                 this._processAttr(attr);
             }
