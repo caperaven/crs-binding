@@ -1,0 +1,12 @@
+{
+  "name": "html_parser",
+  "version": "0.1.0",
+  "files": [
+    "html_parser_bg.wasm",
+    "html_parser.js",
+    "html_parser.d.ts"
+  ],
+  "module": "html_parser.js",
+  "types": "html_parser.d.ts",
+  "sideEffects": false
+}
