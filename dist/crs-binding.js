@@ -1934,7 +1934,7 @@ var ForRadioProvider = class extends ProviderBase {
     const singular = parts[0].trim();
     const plural = parts[1].trim();
     const key = `for-group-${singular}`;
-    crsbinding.inflationManager.register(key, this._element, singular);
+    await crsbinding.inflationManager.register(key, this._element, singular);
     const data = crsbinding.data.getValue(this._context, plural);
     const elements = crsbinding.inflationManager.get(key, data);
     crsbinding.inflationManager.unregister(key);
@@ -2442,7 +2442,7 @@ var InflationCodeGenerator = class {
     this.deflateSrc.push(`${this.path}.${target} = "";`);
   }
   async _processAttributes(element) {
-    for (const attr of element.attributes) {
+    for (const attr of Array.from(element.attributes)) {
       if (attr.name.indexOf(".attr") != -1) {
         this._processAttr(attr);
       } else if (attr.value.indexOf("${") != -1) {
@@ -3405,7 +3405,10 @@ var BindableElement = class extends HTMLElement {
     crsbinding.dom.disableEvents(this);
     const properties = Object.getOwnPropertyNames(this);
     for (let property of properties) {
-      delete this[property];
+      const descriptor = Object.getOwnPropertyDescriptor(this, property);
+      if (descriptor.configurable == true) {
+        delete this[property];
+      }
     }
   }
   async connectedCallback() {
