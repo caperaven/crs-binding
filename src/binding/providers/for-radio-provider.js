@@ -23,7 +23,7 @@ export class ForRadioProvider extends ProviderBase {
 
         const key = `for-group-${singular}`;
 
-        crsbinding.inflationManager.register(key, this._element, singular);
+        await crsbinding.inflationManager.register(key, this._element, singular);
 
         const data = crsbinding.data.getValue(this._context, plural);
         const elements = crsbinding.inflationManager.get(key, data);
