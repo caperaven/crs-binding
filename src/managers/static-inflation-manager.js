@@ -54,7 +54,7 @@ export class StaticInflationManager {
             }
 
             if (attribute.name.indexOf("style.") != -1) {
-                return;
+                return await this.#attrStyle(attribute, success);
             }
 
             await this.#attrIf(attribute, success);
@@ -63,11 +63,11 @@ export class StaticInflationManager {
         }
     }
 
-    async #attrIf(attribute, success) {
+    async #attrIf(attribute, value) {
         const attr = attribute.name.replace(".if", "");
 
         if (attribute.value.indexOf("?") == -1) {
-            if (success) {
+            if (value) {
                 attribute.ownerElement.setAttribute(attr, attr);
             }
             else {
@@ -76,12 +76,17 @@ export class StaticInflationManager {
             return;
         }
 
-        if (success == undefined) {
+        if (value == undefined) {
             attribute.ownerElement.removeAttribute(attr);
         }
         else {
-            attribute.ownerElement.setAttribute(attr, success);
+            attribute.ownerElement.setAttribute(attr, value);
         }
+    }
+
+    async #attrStyle(attribute, value) {
+        const prop = attribute.name.split(".")[1];
+        attribute.ownerElement.style[prop] = value || "";
     }
 
     async #attributeAttr(attribute, context) {

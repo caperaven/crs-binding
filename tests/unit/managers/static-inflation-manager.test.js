@@ -66,6 +66,28 @@ describe("static inflation manager", async () => {
         await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
         assert(element.getAttribute("data-code") == 'b');
     });
+
+    it ("attribute - if style", async () => {
+        const element = new ElementMock("div");
+        element.setAttribute("style.color.if", "code == 'A11' ? 'red'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assert(element.style.color == 'red');
+
+        element.setAttribute("style.color.if", "code == 'A11' ? 'red'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assert(element.style.color == '');
+    })
+
+    it ("attribute - if else style", async () => {
+        const element = new ElementMock("div");
+        element.setAttribute("style.color.if", "code == 'A11' ? 'red' : 'blue'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assert(element.style.color == 'red');
+
+        element.setAttribute("style.color.if", "code == 'A11' ? 'red' : 'blue'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assert(element.style.color == 'blue');
+    })
 })
 
 
