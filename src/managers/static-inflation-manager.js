@@ -25,9 +25,8 @@ export class StaticInflationManager {
         }
 
         if (element.textContent.indexOf("${") != -1) {
-            const exp = element.textContent.substring(2, element.textContent.length - 1);
-            const code = crsbinding.expression.sanitize(exp).expression;
-            const fn = new Function("context", `return ${code}`);
+            const code = crsbinding.expression.sanitize(element.textContent).expression;
+            const fn = new Function("context", ["return ", "`", code, "`"].join(""));
             element.textContent = fn(context);
         }
     }
@@ -39,6 +38,12 @@ export class StaticInflationManager {
     }
 
     async #parseAttribute(attribute, context) {
-
+        if (attribute.name.indexOf(".attr") != -1) {
+            const name = attribute.name.replace(".attr", "");
+            const code = crsbinding.expression.sanitize(attribute.value).expression;
+            const fn = new Function("context", ["return ", "`", code, "`"].join(""));
+            const value = fn(context);
+            attribute.ownerElement.setAttribute(name, value);
+        }
     }
 }

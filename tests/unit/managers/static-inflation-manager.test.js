@@ -5,22 +5,34 @@ import {init} from "./../../mockups/init.js";
 
 await init();
 
-Deno.test("static inflation manager - ${code}", async () => {
-    const element = new ElementMock("div");
-    element.textContent = "${code}";
+describe("static inflation manager", async () => {
+    it("text content - ${code}", async () => {
+        const element = new ElementMock("div");
+        element.textContent = "${code}";
 
-    crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
-    assertEquals(element.textContent, "A11");
-})
-
-Deno.test("static inflation manager - &{code} translation", async () => {
-    await crsbinding.translations.add({
-        "code": "Code"
+        crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assertEquals(element.textContent, "A11");
     })
 
-    const element = new ElementMock("div");
-    element.textContent = "&{code}";
+    it("text content - &{code} translation", async () => {
+        await crsbinding.translations.add({
+            "code": "Code"
+        })
 
-    await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
-    assertEquals(element.textContent, "Code");
+        const element = new ElementMock("div");
+        element.textContent = "&{code}";
+
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assertEquals(element.textContent, "Code");
+    })
+
+    it("attribute - .attr", async () => {
+        const element = new ElementMock("div");
+        element.setAttribute("value.attr", "test ${code}")
+
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assertEquals(element.getAttribute("value"), "test A11");
+    })
 })
+
+
