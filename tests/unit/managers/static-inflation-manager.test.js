@@ -108,16 +108,13 @@ describe("static inflation manager", async () => {
         assert(element.classList.contains('red') == true);
         assert(element.classList.contains('blue') == false);
 
-        element.setAttribute("style.color.if", "code == 'A11' ? 'red' : 'blue'");
+        element.setAttribute("classlist.if", "code == 'A11' ? 'red' : ['blue', 'white']");
         element.classList._clear();
         await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
         assert(element.classList.contains('red') == false);
         assert(element.classList.contains('blue') == true);
+        assert(element.classList.contains('white') == true);
     })
-    //
-    // it ("attribute - if classlist array", async () => {
-    //
-    // });
 })
 
 

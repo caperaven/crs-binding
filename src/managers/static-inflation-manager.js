@@ -94,7 +94,7 @@ export class StaticInflationManager {
             value = [value];
         }
 
-        attribute.ownerElement.classList.add(...value);
+        attribute.ownerElement.classList.add(value);
     }
 
     async #attributeAttr(attribute, context) {

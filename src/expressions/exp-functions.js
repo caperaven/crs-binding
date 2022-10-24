@@ -1,6 +1,6 @@
 export async function ifFunction(exp) {
     const code = [];
-    exp = await crsbinding.expression.sanitize(exp).expression;
+    exp = await crsbinding.expression.sanitize(exp).expression.replaceAll("context.[", "[");
 
     if (exp.indexOf("?") == -1) {
         return new Function("context", `return ${exp}`);
