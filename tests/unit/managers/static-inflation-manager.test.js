@@ -131,6 +131,47 @@ describe("static inflation manager", async () => {
         await crsbinding.staticInflationManager.inflateElement(element, {code: "A13"});
         assertEquals(element.getAttribute("data-value"), 'green');
     });
+
+    it ("attr - case style", async () => {
+        const element = new ElementMock("div");
+
+        element.setAttribute("style.color.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assertEquals(element.style.color, 'red');
+
+        element.setAttribute("style.color.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assertEquals(element.style.color, 'blue');
+
+        element.setAttribute("style.color.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A13"});
+        assertEquals(element.style.color, 'green');
+    });
+
+    it ("attr - case classlist", async () => {
+        const element = new ElementMock("div");
+
+        element.setAttribute("classlist.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        element.classList._clear();
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assert(element.classList.contains('red') == true);
+        assert(element.classList.contains('blue') == false);
+        assert(element.classList.contains('green') == false);
+
+        element.setAttribute("classlist.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        element.classList._clear();
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assert(element.classList.contains('red') == false);
+        assert(element.classList.contains('blue') == true);
+        assert(element.classList.contains('green') == false);
+
+        element.setAttribute("classlist.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        element.classList._clear();
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A13"});
+        assert(element.classList.contains('red') == false);
+        assert(element.classList.contains('blue') == false);
+        assert(element.classList.contains('green') == true);
+    });
 })
 
 
