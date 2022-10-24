@@ -25,6 +25,7 @@ import {SvgElement} from "./view/svg-element.js";
 import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTemplate, loadFromElement, getTemplateById} from "./store/templates.js";
 import {TranslationsManager} from "./managers/translations-manager.js";
 import {getConverterParts} from "./lib/converter-parts.js";
+import {StaticInflationManager} from "./managers/static-inflation-manager.js"
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -49,6 +50,7 @@ const crsbinding = {
     idleTaskManager: new IdleTaskManager(),
     providerManager: new ProviderManager(),
     inflationManager: new InflationManager(),
+    staticInflationManager: new StaticInflationManager(),
     elementStoreManager: new ElementStoreManager(),
     svgCustomElements: new SvgElementsManager(),
     valueConvertersManager: new ValueConvertersManager(),
