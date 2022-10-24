@@ -88,6 +88,36 @@ describe("static inflation manager", async () => {
         await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
         assert(element.style.color == 'blue');
     })
+
+    it ("attribute - if classlist", async () => {
+        const element = new ElementMock("div");
+        element.setAttribute("classlist.if", "code == 'A11' ? 'red'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assert(element.classList.contains("red") == true);
+
+        element.setAttribute("classlist.if", "code == 'A11' ? 'red'");
+        element.classList._clear();
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assert(element.classList.contains("red") == false);
+    })
+
+    it ("attribute - if else classtlist", async () => {
+        const element = new ElementMock("div");
+        element.setAttribute("classlist.if", "code == 'A11' ? 'red' : 'blue'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assert(element.classList.contains('red') == true);
+        assert(element.classList.contains('blue') == false);
+
+        element.setAttribute("style.color.if", "code == 'A11' ? 'red' : 'blue'");
+        element.classList._clear();
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assert(element.classList.contains('red') == false);
+        assert(element.classList.contains('blue') == true);
+    })
+    //
+    // it ("attribute - if classlist array", async () => {
+    //
+    // });
 })
 
 

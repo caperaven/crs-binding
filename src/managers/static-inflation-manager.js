@@ -50,7 +50,7 @@ export class StaticInflationManager {
             const success = fn(context);
 
             if (attribute.name.indexOf("classlist.if") != -1) {
-                return;
+                return await this.#attrClassList(attribute, success);
             }
 
             if (attribute.name.indexOf("style.") != -1) {
@@ -87,6 +87,14 @@ export class StaticInflationManager {
     async #attrStyle(attribute, value) {
         const prop = attribute.name.split(".")[1];
         attribute.ownerElement.style[prop] = value || "";
+    }
+
+    async #attrClassList(attribute, value) {
+        if (Array.isArray(value) == false) {
+            value = [value];
+        }
+
+        attribute.ownerElement.classList.add(...value);
     }
 
     async #attributeAttr(attribute, context) {
