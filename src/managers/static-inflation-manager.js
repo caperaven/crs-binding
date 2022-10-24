@@ -57,29 +57,31 @@ export class StaticInflationManager {
                 return;
             }
 
-            const attr = attribute.name.replace(".if", "");
-
-            if (attribute.value.indexOf("?") == -1) {
-                if (success) {
-                    attribute.ownerElement.setAttribute(attr, attr);
-                }
-                else {
-                    attribute.ownerElement.removeAttribute(attr);
-                }
-                return;
-            }
-
-            if (success == undefined) {
-                attribute.ownerElement.removeAttribute(attr);
-            }
-            else {
-                attribute.ownerElement.setAttribute(attr, success);
-            }
+            await this.#attrIf(attribute, success);
 
             attribute.ownerElement.removeAttribute(attribute.name);
         }
+    }
 
+    async #attrIf(attribute, success) {
+        const attr = attribute.name.replace(".if", "");
 
+        if (attribute.value.indexOf("?") == -1) {
+            if (success) {
+                attribute.ownerElement.setAttribute(attr, attr);
+            }
+            else {
+                attribute.ownerElement.removeAttribute(attr);
+            }
+            return;
+        }
+
+        if (success == undefined) {
+            attribute.ownerElement.removeAttribute(attr);
+        }
+        else {
+            attribute.ownerElement.setAttribute(attr, success);
+        }
     }
 
     async #attributeAttr(attribute, context) {
