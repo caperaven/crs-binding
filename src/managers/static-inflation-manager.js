@@ -39,11 +39,54 @@ export class StaticInflationManager {
 
     async #parseAttribute(attribute, context) {
         if (attribute.name.indexOf(".attr") != -1) {
-            const name = attribute.name.replace(".attr", "");
-            const code = crsbinding.expression.sanitize(attribute.value).expression;
-            const fn = new Function("context", ["return ", "`", code, "`"].join(""));
-            const value = fn(context);
-            attribute.ownerElement.setAttribute(name, value);
+            return this.#attributeAttr(attribute, context);
         }
+
+        // attr.if
+        // classlist.if
+        // style.color.if
+        if (attribute.name.indexOf(".if") != -1) {
+            const fn = await crsbinding.expression.ifFunction(attribute.value);
+            const success = fn(context);
+
+            if (attribute.name.indexOf("classlist.if") != -1) {
+                return;
+            }
+
+            if (attribute.name.indexOf("style.") != -1) {
+                return;
+            }
+
+            const attr = attribute.name.replace(".if", "");
+
+            if (attribute.value.indexOf("?") == -1) {
+                if (success) {
+                    attribute.ownerElement.setAttribute(attr, attr);
+                }
+                else {
+                    attribute.ownerElement.removeAttribute(attr);
+                }
+                return;
+            }
+
+            if (success == undefined) {
+                attribute.ownerElement.removeAttribute(attr);
+            }
+            else {
+                attribute.ownerElement.setAttribute(attr, success);
+            }
+
+            attribute.ownerElement.removeAttribute(attribute.name);
+        }
+
+
+    }
+
+    async #attributeAttr(attribute, context) {
+        const name = attribute.name.replace(".attr", "");
+        const code = crsbinding.expression.sanitize(attribute.value).expression;
+        const fn = new Function("context", ["return ", "`", code, "`"].join(""));
+        const value = fn(context);
+        attribute.ownerElement.setAttribute(name, value);
     }
 }

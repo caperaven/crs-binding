@@ -26,6 +26,7 @@ import {unloadTemplates, unloadAllTemplates, addTemplate, getTemplate, loadTempl
 import {TranslationsManager} from "./managers/translations-manager.js";
 import {getConverterParts} from "./lib/converter-parts.js";
 import {StaticInflationManager} from "./managers/static-inflation-manager.js"
+import {ifFunction, caseFunction} from "./expressions/exp-functions.js";
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -59,7 +60,9 @@ const crsbinding = {
     expression: {
         sanitize: sanitizeExp,
         compile: compileExp,
-        release: releaseExp
+        release: releaseExp,
+        ifFunction: ifFunction,
+        caseFunction: caseFunction
     },
 
     observation: {
