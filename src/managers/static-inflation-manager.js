@@ -94,10 +94,6 @@ export class StaticInflationManager {
     }
 
     async #attrClassList(attribute, value) {
-        if (Array.isArray(value) == false) {
-            value = [value];
-        }
-
         attribute.ownerElement.classList.add(value);
     }
 
