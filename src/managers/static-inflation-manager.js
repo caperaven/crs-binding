@@ -65,6 +65,8 @@ export class StaticInflationManager {
             await this.#attrIf(attribute, value);
             attribute.ownerElement.removeAttribute(attribute.name);
         }
+
+        fn = null;
     }
 
     async #attrIf(attribute, value) {

@@ -10,7 +10,7 @@ describe("static inflation manager", async () => {
         const element = new ElementMock("div");
         element.textContent = "${code}";
 
-        crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
         assertEquals(element.textContent, "A11");
     })
 
