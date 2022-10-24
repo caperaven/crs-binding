@@ -42,33 +42,37 @@ export class StaticInflationManager {
             return this.#attributeAttr(attribute, context);
         }
 
-        // attr.if
-        // classlist.if
-        // style.color.if
-        if (attribute.name.indexOf(".if") != -1) {
-            const fn = await crsbinding.expression.ifFunction(attribute.value);
-            const success = fn(context);
+        let fn;
 
-            if (attribute.name.indexOf("classlist.if") != -1) {
-                return await this.#attrClassList(attribute, success);
+        if (attribute.name.indexOf(".if") != -1) {
+            fn = await crsbinding.expression.ifFunction(attribute.value);
+        }
+        else if (attribute.name.indexOf(".case") != -1) {
+            fn = await crsbinding.expression.caseFunction(attribute.value);
+        }
+
+        if (fn != null) {
+            const value = fn(context);
+
+            if (attribute.name.indexOf("classlist.") != -1) {
+                return await this.#attrClassList(attribute, value);
             }
 
             if (attribute.name.indexOf("style.") != -1) {
-                return await this.#attrStyle(attribute, success);
+                return await this.#attrStyle(attribute, value);
             }
 
-            await this.#attrIf(attribute, success);
-
+            await this.#attrIf(attribute, value);
             attribute.ownerElement.removeAttribute(attribute.name);
         }
     }
 
     async #attrIf(attribute, value) {
-        const attr = attribute.name.replace(".if", "");
+        const attr = attribute.name.replace(".if", "").replace(".case", "");
 
         if (attribute.value.indexOf("?") == -1) {
             if (value) {
-                attribute.ownerElement.setAttribute(attr, attr);
+                attribute.ownerElement.setAttribute(attr, value);
             }
             else {
                 attribute.ownerElement.removeAttribute(attr);

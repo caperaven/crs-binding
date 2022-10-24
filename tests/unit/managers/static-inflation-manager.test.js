@@ -115,6 +115,22 @@ describe("static inflation manager", async () => {
         assert(element.classList.contains('blue') == true);
         assert(element.classList.contains('white') == true);
     })
+
+    it ("attr - case", async () => {
+        const element = new ElementMock("div");
+
+        element.setAttribute("data-value.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A11"});
+        assertEquals(element.getAttribute("data-value"), 'red');
+
+        element.setAttribute("data-value.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A12"});
+        assertEquals(element.getAttribute("data-value"), 'blue');
+
+        element.setAttribute("data-value.case", "code == 'A11': 'red', code == 'A12': 'blue', default: 'green'");
+        await crsbinding.staticInflationManager.inflateElement(element, {code: "A13"});
+        assertEquals(element.getAttribute("data-value"), 'green');
+    });
 })
 
 
