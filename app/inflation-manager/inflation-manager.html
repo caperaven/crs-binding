@@ -12,6 +12,11 @@
     .after {
         background: gray;
     }
+
+    .pink {
+        background: #ff0080;
+        color: white;
+    }
 </style>
 
 
@@ -20,7 +25,7 @@
 <template id="tplWeek">
     <tr data-id.attr="week">
         <td
-            classlist.case="day1.type == 'prior': 'prior', day1.type == 'after': 'after'"
+            classlist.if="day1.type == 'prior' ? 'pink'"
             style.color.case="day1.type == 'prior': 'yellow', day1.type == 'after': 'green', default: 'blue'"
             data-type.case="day1.type == 'prior': 'prior', day1.type == 'after': 'after', default: 'normal'"
         >${day1.value}</td>

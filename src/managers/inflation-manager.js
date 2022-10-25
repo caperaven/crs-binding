@@ -368,8 +368,8 @@ class InflationCodeGenerator {
         let target = "textContent";
         let exp = text;
 
-        if (exp.indexOf("&amp;{") != -1) {
-            const path = exp.replace("&amp;{", "").replace("}", "");
+        if (exp.indexOf("&amp;{") != -1 || exp.indexOf("&{") != -1) {
+            const path = exp.replace("${", "").replace("&amp;{", "").replace("}", "");
             const value = await crsbinding.translations.get(path);
             if (value == null) {
                 this.inflateSrc.push(`crsbinding.translations.get("${path}").then(result => ${this.path}.textContent = result);`);
@@ -422,7 +422,7 @@ class InflationCodeGenerator {
             else if (attr.value.indexOf("&{") != -1) {
                 await this._processTranslationValue(attr);
             }
-            else if (attr.value.indexOf(".if") != -1) {
+            else if (attr.name.indexOf(".if") != -1) {
                 this._processAttrCondition(attr);
             }
             else if (attr.name.indexOf('.case') != -1) {
