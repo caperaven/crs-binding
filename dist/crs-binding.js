@@ -2410,8 +2410,8 @@ var InflationCodeGenerator = class {
     const text = (element.textContent || element.innerHTML || "").trim();
     let target = "textContent";
     let exp = text;
-    if (exp.indexOf("&amp;{") != -1) {
-      const path2 = exp.replace("&amp;{", "").replace("}", "");
+    if (exp.indexOf("&amp;{") != -1 || exp.indexOf("&{") != -1) {
+      const path2 = exp.replace("${", "").replace("&amp;{", "").replace("}", "");
       const value = await crsbinding.translations.get(path2);
       if (value == null) {
         this.inflateSrc.push(`crsbinding.translations.get("${path2}").then(result => ${this.path}.textContent = result);`);
@@ -2449,7 +2449,7 @@ var InflationCodeGenerator = class {
         this._processAttrValue(attr);
       } else if (attr.value.indexOf("&{") != -1) {
         await this._processTranslationValue(attr);
-      } else if (attr.value.indexOf(".if") != -1) {
+      } else if (attr.name.indexOf(".if") != -1) {
         this._processAttrCondition(attr);
       } else if (attr.name.indexOf(".case") != -1) {
         this._processCaseCondition(attr);
@@ -4070,6 +4070,7 @@ var StaticInflationManager = class {
       await this.#attrIf(attribute, value);
       attribute.ownerElement.removeAttribute(attribute.name);
     }
+    fn = null;
   }
   async #attrIf(attribute, value) {
     const attr = attribute.name.replace(".if", "").replace(".case", "");
