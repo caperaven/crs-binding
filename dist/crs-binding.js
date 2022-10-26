@@ -1884,12 +1884,13 @@ function ForOnceProvider(element, context, property, value, ctxName = "context",
   const singular = parts.singular;
   const plural = parts.plural;
   const key = `for-once-${singular}`;
-  crsbinding.inflationManager.register(key, element, singular);
-  const data = crsbinding.data.getValue(context, plural);
-  const elements = crsbinding.inflationManager.get(key, data);
-  crsbinding.inflationManager.unregister(key);
-  element.parentElement.appendChild(elements);
-  element.parentElement.removeChild(element);
+  crsbinding.inflationManager.register(key, element, singular).then(() => {
+    const data = crsbinding.data.getValue(context, plural);
+    const elements = crsbinding.inflationManager.get(key, data);
+    crsbinding.inflationManager.unregister(key);
+    element.parentElement.appendChild(elements);
+    element.parentElement.removeChild(element);
+  });
 }
 
 // src/binding/providers/for-map-provider.js
@@ -4189,7 +4190,8 @@ var crsbinding2 = {
     ViewBase,
     RepeatBaseProvider,
     Widget,
-    SvgElement
+    SvgElement,
+    AsyncFunction
   },
   events: {
     listenOnPath,
