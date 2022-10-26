@@ -22,17 +22,21 @@ export class ElementMock {
 }
 
 export function mockElement(instance, tag, id) {
+    if (instance.__events != null) {
+        return instance;
+    }
+
     instance.__events = [];
     instance.queryResults = {};
 
     instance.nodeName = (tag || "div").toUpperCase();
-    instance.tagName = instance.nodeName;
     instance.id = id;
     instance.name = id;
+    instance.tagName = instance.nodeName;
 
     instance.textContent = "";
     instance.innerText = "";
-    instance.innerHTML ||= "";
+    instance.innerHTML = "";
     instance.attributes = [];
     instance.children = [];
     instance.dataset = {};
@@ -44,6 +48,7 @@ export function mockElement(instance, tag, id) {
     instance.removeAttribute = removeAttribute.bind(instance);
     instance.querySelector = querySelector.bind(instance);
     instance.querySelectorAll = querySelectorAll.bind(instance);
+    instance.getElementsByTagName = getElementsByTagName.bind(instance);
     instance.cloneNode = cloneNode.bind(instance);
     instance.appendChild = appendChild.bind(instance);
     instance.removeChild = removeChild.bind(instance);
@@ -52,8 +57,61 @@ export function mockElement(instance, tag, id) {
     instance.insertBefore = insertBefore.bind(instance);
     instance.replaceChild = replaceChild.bind(instance);
     instance.dispatchEvent = dispatchEvent.bind(instance);
-
     instance.performEvent = performEvent.bind(instance);
+    instance.attachShadow = attachShadow.bind(instance);
+    instance.getBoundingClientRect = getBoundingClientRect.bind(instance);
+
+    Object.defineProperty(instance, "firstElementChild", {
+        get() {
+            if (this.children == null) return null;
+            if (this.children.length == 0) return null;
+            return this.children[0];
+        }
+    })
+
+    Object.defineProperty(instance, "nextElementSibling", {
+        get() {
+            if (this.parentElement == null) return null;
+
+            const index = this.parentElement.children.indexOf(this);
+            return this.parentElement.children[index + 1];
+        }
+    })
+
+    Object.defineProperty(instance, "previousElementSibling", {
+        get() {
+            if (this.parentElement == null) return null;
+
+            const index = this.parentElement.children.indexOf(this);
+            return this.parentElement.children[index - 1];
+        }
+    })
+
+    Object.defineProperty(instance, "innerHTML", {
+        get() {
+            return this._innerHTML || "";
+        },
+
+        set(newValue) {
+            this._innerHTML = newValue;
+            if (newValue.trim().length == 0) {
+                this.children.length = 0;
+            }
+        }
+    })
+
+    Object.defineProperty(instance, "textContent", {
+        enumerable: true,
+        configurable: true,
+        get() {
+            const childText = this.children.map(c => c.textContent).join(" ");
+            return childText + (this._textContent ?? "");
+        },
+        set(newValue) {
+            this._textContent = newValue;
+            instance.children.length = 0;
+        }
+    });
 
     return instance;
 }
@@ -83,8 +141,7 @@ function setAttribute(attr, value) {
             ownerElement: this
         };
         hasAttr = false;
-    }
-    else {
+    } else {
         oldValue = attrObj.value;
         attrObj.value = value
     }
@@ -98,7 +155,7 @@ function setAttribute(attr, value) {
     }
 }
 
-function removeAttribute (attr) {
+function removeAttribute(attr) {
     const attrObj = this.attributes.find(item => item.name == attr);
 
     if (attrObj != null) {
@@ -123,6 +180,21 @@ function querySelectorAll(selector) {
     const callback = createQueryFunction(selector);
     const result = [];
     findAll(this, callback, result);
+    return result;
+}
+
+function getElementsByTagName(selector) {
+    if (this.queryResults[selector] != null) {
+        return this.queryResults[selector];
+    }
+
+    const result = [];
+    for (const child of this.children) {
+        if (child.nodeName.toLowerCase() == selector.toLowerCase()) {
+            result.push(child);
+        }
+    }
+
     return result;
 }
 
@@ -178,7 +250,10 @@ function replaceChild(node, child) {
 }
 
 function dispatchEvent(event, args) {
-    const events = this.__events.filter(item => item.event == event) || [];
+    const events = this.__events.filter(item => {
+        event = typeof item.event == "object" ? item.event.event : item.event
+        return item.event == event
+    }) || [];
     for (let eventItem of events) {
         eventItem.callback(args);
     }
@@ -191,4 +266,15 @@ function performEvent(event, target, options) {
         eventItem.callback(eventObj);
     }
     return eventObj;
+}
+
+function attachShadow(args) {
+    this.shadowRoot = new ElementMock("shadow-root");
+}
+
+function getBoundingClientRect() {
+    if (this.bounds == null) {
+        throw new Error("bounds on element mock must be set");
+    }
+    return this.bounds;
 }
