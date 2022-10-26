@@ -33,7 +33,11 @@ export class BindableElement extends HTMLElement {
 
         const properties = Object.getOwnPropertyNames(this);
         for (let property of properties) {
-            delete this[property];
+            const descriptor = Object.getOwnPropertyDescriptor(this, property);
+
+            if (descriptor.configurable == true) {
+                delete this[property];
+            }
         }
     }
 

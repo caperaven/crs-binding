@@ -1934,7 +1934,7 @@ var ForRadioProvider = class extends ProviderBase {
     const singular = parts[0].trim();
     const plural = parts[1].trim();
     const key = `for-group-${singular}`;
-    crsbinding.inflationManager.register(key, this._element, singular);
+    await crsbinding.inflationManager.register(key, this._element, singular);
     const data = crsbinding.data.getValue(this._context, plural);
     const elements = crsbinding.inflationManager.get(key, data);
     crsbinding.inflationManager.unregister(key);
@@ -2442,7 +2442,7 @@ var InflationCodeGenerator = class {
     this.deflateSrc.push(`${this.path}.${target} = "";`);
   }
   async _processAttributes(element) {
-    for (const attr of element.attributes) {
+    for (const attr of Array.from(element.attributes)) {
       if (attr.name.indexOf(".attr") != -1) {
         this._processAttr(attr);
       } else if (attr.value.indexOf("${") != -1) {
@@ -3405,7 +3405,10 @@ var BindableElement = class extends HTMLElement {
     crsbinding.dom.disableEvents(this);
     const properties = Object.getOwnPropertyNames(this);
     for (let property of properties) {
-      delete this[property];
+      const descriptor = Object.getOwnPropertyDescriptor(this, property);
+      if (descriptor.configurable == true) {
+        delete this[property];
+      }
     }
   }
   async connectedCallback() {
@@ -4019,6 +4022,125 @@ var TranslationsManager = class {
   }
 };
 
+// src/managers/static-inflation-manager.js
+var StaticInflationManager = class {
+  async inflateElements(elements, context) {
+    for (const element of elements) {
+      await this.inflateElement(element, context);
+    }
+  }
+  async inflateElement(element, context) {
+    await this.#parseTextContent(element, context);
+    await this.#parseAttributes(element, context);
+    await this.inflateElements(element.children, context);
+  }
+  async #parseTextContent(element, context) {
+    if (element.textContent.indexOf("&{") != -1) {
+      return element.textContent = await crsbinding.translations.get_with_markup(element.textContent);
+    }
+    if (element.textContent.indexOf("${") != -1) {
+      const code = crsbinding.expression.sanitize(element.textContent).expression;
+      const fn = new Function("context", ["return ", "`", code, "`"].join(""));
+      element.textContent = fn(context);
+    }
+  }
+  async #parseAttributes(element, context) {
+    for (const attribute of element.attributes) {
+      this.#parseAttribute(attribute, context);
+    }
+  }
+  async #parseAttribute(attribute, context) {
+    if (attribute.name.indexOf(".attr") != -1) {
+      return this.#attributeAttr(attribute, context);
+    }
+    let fn;
+    if (attribute.name.indexOf(".if") != -1) {
+      fn = await crsbinding.expression.ifFunction(attribute.value);
+    } else if (attribute.name.indexOf(".case") != -1) {
+      fn = await crsbinding.expression.caseFunction(attribute.value);
+    }
+    if (fn != null) {
+      const value = fn(context);
+      if (attribute.name.indexOf("classlist.") != -1) {
+        return await this.#attrClassList(attribute, value);
+      }
+      if (attribute.name.indexOf("style.") != -1) {
+        return await this.#attrStyle(attribute, value);
+      }
+      await this.#attrIf(attribute, value);
+      attribute.ownerElement.removeAttribute(attribute.name);
+    }
+  }
+  async #attrIf(attribute, value) {
+    const attr = attribute.name.replace(".if", "").replace(".case", "");
+    if (attribute.value.indexOf("?") == -1) {
+      if (value) {
+        attribute.ownerElement.setAttribute(attr, value);
+      } else {
+        attribute.ownerElement.removeAttribute(attr);
+      }
+      return;
+    }
+    if (value == void 0) {
+      attribute.ownerElement.removeAttribute(attr);
+    } else {
+      attribute.ownerElement.setAttribute(attr, value);
+    }
+  }
+  async #attrStyle(attribute, value) {
+    const prop = attribute.name.split(".")[1];
+    attribute.ownerElement.style[prop] = value || "";
+  }
+  async #attrClassList(attribute, value) {
+    attribute.ownerElement.classList.add(value);
+  }
+  async #attributeAttr(attribute, context) {
+    const name = attribute.name.replace(".attr", "");
+    const code = crsbinding.expression.sanitize(attribute.value).expression;
+    const fn = new Function("context", ["return ", "`", code, "`"].join(""));
+    const value = fn(context);
+    attribute.ownerElement.setAttribute(name, value);
+  }
+};
+
+// src/expressions/exp-functions.js
+async function ifFunction(exp) {
+  const code = [];
+  exp = await crsbinding.expression.sanitize(exp).expression.replaceAll("context.[", "[");
+  if (exp.indexOf("?") == -1) {
+    return new Function("context", `return ${exp}`);
+  }
+  const parts = exp.split("?").map((item) => item.trim());
+  const left = parts[0];
+  const right = parts[1];
+  const rightParts = right.split(":");
+  code.push(`if (${left}) {`);
+  code.push(`    return ${rightParts[0].trim()};`);
+  code.push("}");
+  if (rightParts.length > 1) {
+    code.push("else {");
+    code.push(`    return ${rightParts[1].trim()};`);
+    code.push("}");
+  }
+  return new Function("context", code.join("\n"));
+}
+async function caseFunction(exp) {
+  const code = [];
+  exp = await crsbinding.expression.sanitize(exp).expression;
+  const parts = exp.split(",");
+  for (let part of parts) {
+    const expParts = part.split(":").map((item) => item.trim());
+    if (expParts[0] == "context.default") {
+      code.push(`return ${expParts[1]};`);
+    } else {
+      code.push(`if (${expParts[0]}) {`);
+      code.push(`    return ${expParts[1]};`);
+      code.push("}");
+    }
+  }
+  return new Function("context", code.join("\n"));
+}
+
 // src/index.js
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
@@ -4040,6 +4162,7 @@ var crsbinding2 = {
   idleTaskManager: new IdleTaskManager(),
   providerManager: new ProviderManager(),
   inflationManager: new InflationManager(),
+  staticInflationManager: new StaticInflationManager(),
   elementStoreManager: new ElementStoreManager(),
   svgCustomElements: new SvgElementsManager(),
   valueConvertersManager: new ValueConvertersManager(),
@@ -4047,7 +4170,9 @@ var crsbinding2 = {
   expression: {
     sanitize: sanitizeExp,
     compile: compileExp,
-    release: releaseExp
+    release: releaseExp,
+    ifFunction,
+    caseFunction
   },
   observation: {
     releaseBinding,

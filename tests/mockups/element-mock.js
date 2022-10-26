@@ -72,25 +72,39 @@ function getAttribute(attr) {
 }
 
 function setAttribute(attr, value) {
-    const attrObj = {
-        name: attr,
-        value: value,
-        ownerElement: this
-    };
+    let hasAttr = true;
+    let attrObj = this.attributes.find(item => item.name == attr);
+    let oldValue = "";
 
-    const old = this.getAttribute(attr);
-    this.attributes.push(attrObj);
+    if (attrObj == null) {
+        attrObj = {
+            name: attr,
+            value: value,
+            ownerElement: this
+        };
+        hasAttr = false;
+    }
+    else {
+        oldValue = attrObj.value;
+        attrObj.value = value
+    }
+
+    if (hasAttr == false) {
+        this.attributes.push(attrObj);
+    }
 
     if (this["attributeChangedCallback"] != null) {
-        this["attributeChangedCallback"](attr, old.value, value);
+        this["attributeChangedCallback"](attr, oldValue, value);
     }
 }
 
 function removeAttribute (attr) {
-    const attrObj = this.getAttribute(attr);
+    const attrObj = this.attributes.find(item => item.name == attr);
 
     if (attrObj != null) {
         const index = this.attributes.indexOf(attrObj);
+        if (index == -1) return;
+
         this.attributes.splice(index, 1);
         attrObj.ownerElement = null;
     }

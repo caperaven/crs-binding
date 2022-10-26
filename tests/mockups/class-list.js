@@ -13,6 +13,10 @@ export class ClassList {
         this.#items = [];
     }
 
+    _clear() {
+        this.#items.length = 0;
+    }
+
     add(item) {
         if (Array.isArray(item)) {
             for (let i of item) {
