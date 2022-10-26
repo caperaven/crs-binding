@@ -172,6 +172,27 @@ describe("static inflation manager", async () => {
         assert(element.classList.contains('blue') == false);
         assert(element.classList.contains('green') == true);
     });
+
+    it("should inflate nested elements including translations", async () => {
+        // Arrange
+        const element = document.createElement("div");
+        element.setAttribute("hidden.if", "rootHidden == 'true'");
+        const childElement1 = document.createElement("span");
+        childElement1._textContent = "${test1}";
+        const childElement2 = document.createElement("span");
+        childElement2._textContent = "&{test1}";
+        element.appendChild(childElement1);
+        element.appendChild(childElement2);
+        await crsbinding.translations.add({test1: "Translated"})
+
+        // Act
+        await crsbinding.staticInflationManager.inflateElement(element, {rootHidden: "true", test1: "Hello"});
+
+        // Assert
+        assertEquals(childElement2.textContent, "Translated");
+        assertEquals(childElement1.textContent, "Hello");
+        assertEquals(element.getAttribute("hidden"),true);
+    })
 })
 
 
