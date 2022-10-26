@@ -1,0 +1,26 @@
+<h2>${title}</h2>
+
+<div class="toolbar">
+    <select value.bind="selectedView">
+        <option value="default">Default</option>
+        <option value="view1">View 1</option>
+        <option value="view2">View 2</option>
+    </select>
+</div>
+
+<perspective-element view.bind="selectedView" ctx.once="context" data-folder="/app/perspective-element/">
+    <template data-id="default" data-default="true">
+        <section>
+            <h2>Default View</h2>
+            <p>
+                Welcome to the default view, please select a view in the combobox to change the HTML that will display in this space.
+            </p>
+        </section>
+    </template>
+    <template data-id="view1">
+        <template src="./templates/view1.html"></template>
+    </template>
+    <template data-id="view2">
+        <template src="./templates/view2.html"></template>
+    </template>
+</perspective-element>

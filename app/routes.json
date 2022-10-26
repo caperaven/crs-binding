@@ -71,6 +71,11 @@
       "view": "set-value"
     },
     {
+      "title": "Perspective Element",
+      "hash": "#perspective-element",
+      "view": "perspective-element"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
