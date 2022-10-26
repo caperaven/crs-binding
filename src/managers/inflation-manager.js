@@ -422,7 +422,7 @@ class InflationCodeGenerator {
             else if (attr.value.indexOf("&{") != -1) {
                 await this._processTranslationValue(attr);
             }
-            else if (attr.value.indexOf(".if") != -1) {
+            else if (attr.name.indexOf(".if") != -1) {
                 this._processAttrCondition(attr);
             }
             else if (attr.name.indexOf('.case') != -1) {
