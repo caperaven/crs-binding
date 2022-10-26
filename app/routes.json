@@ -16,6 +16,11 @@
       "view": "ref"
     },
     {
+      "title": "For Once",
+      "hash": "#for-once",
+      "view": "for-once"
+    },
+    {
       "title": "Form",
       "hash": "#form",
       "view": "form"
