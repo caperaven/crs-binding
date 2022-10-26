@@ -1,4 +1,4 @@
-import {compileExp, releaseExp} from "./events/compiler.js";
+import {compileExp, releaseExp, AsyncFunction} from "./events/compiler.js";
 import {sanitizeExp} from "./expressions/exp-sanitizer.js";
 import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
@@ -81,7 +81,8 @@ const crsbinding = {
         ViewBase: ViewBase,
         RepeatBaseProvider: RepeatBaseProvider,
         Widget: Widget,
-        SvgElement: SvgElement
+        SvgElement: SvgElement,
+        AsyncFunction: AsyncFunction
     },
 
     events: {
