@@ -81,6 +81,11 @@
       "view": "perspective-element"
     },
     {
+      "title": "Click Process",
+      "hash": "#click.process",
+      "view": "click.process"
+    },
+    {
       "title": "About",
       "hash": "#about",
       "view": "about",
