@@ -13,9 +13,9 @@ export default class Component extends ViewBase {
     async connectedCallback() {
         await super.connectedCallback();
 
-        this._inflatePerson("person-template", "personContainer");
-        this._inflatePerson("person-template2", "personContainer2");
-        this._inflateCollection();
+        await this._inflatePerson("person-template", "personContainer");
+        await this._inflatePerson("person-template2", "personContainer2");
+        await this._inflateCollection();
     }
 
     preLoad() {
@@ -32,9 +32,9 @@ export default class Component extends ViewBase {
         super.disconnectedCallback();
     }
 
-    _inflatePerson(templateId, containerId) {
+    async _inflatePerson(templateId, containerId) {
         const template = this._element.querySelector(`#${templateId}`);
-        crsbinding.inflationManager.register("person", template);
+        await crsbinding.inflationManager.register("person", template);
 
         const fragment = crsbinding.inflationManager.get("person", {
             firstName: "John",
@@ -46,9 +46,9 @@ export default class Component extends ViewBase {
         crsbinding.inflationManager.unregister("person");
     }
 
-    _inflateCollection() {
+    async _inflateCollection() {
         const template = this._element.querySelector("#items-template");
-        crsbinding.inflationManager.register("items", template);
+        await crsbinding.inflationManager.register("items", template);
 
         const fragment = crsbinding.inflationManager.get("items", this.data);
         this._element.querySelector("#container").appendChild(fragment);

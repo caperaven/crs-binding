@@ -30,7 +30,7 @@ export class ForInflateProvider extends ProviderBase {
             return;
         }
 
-        crsbinding.inflationManager.register(this.key, this._element, this.singular);
+        await crsbinding.inflationManager.register(this.key, this._element, this.singular);
         this._collectionChangedHandler = this._collectionChanged.bind(this);
         this.listenOnPath(this.plural, this._collectionChangedHandler);
     }
