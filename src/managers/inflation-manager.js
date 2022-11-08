@@ -336,7 +336,7 @@ class InflationCodeGenerator {
             const child = element.children[i];
 
             if (child.nodeName == "TEMPLATE") {
-                this._processTemplate(child);
+                await this._processTemplate(child);
             }
             else {
                 this.path = `${path}.children[${i}]`;
@@ -345,7 +345,7 @@ class InflationCodeGenerator {
         }
     }
 
-    _processTemplate(element) {
+    async _processTemplate(element) {
         const key = `${this.parentKey}_${this.templateKeys.length + 1}`;
         this.templateKeys.push(key);
         element.dataset.key = key;
@@ -356,7 +356,7 @@ class InflationCodeGenerator {
             const code = `${this.path}.appendChild(crsbinding.inflationManager.get("${key}", ${parts.plural}));`;
             this.inflateSrc.push(code);
 
-            crsbinding.inflationManager.register(key, element, parts.singular);
+            await crsbinding.inflationManager.register(key, element, parts.singular);
             element.parentElement.removeChild(element);
         }
     }

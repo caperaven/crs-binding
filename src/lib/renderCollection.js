@@ -1,6 +1,6 @@
-export function renderCollection(template, data, elements = null, parentElement = null) {
+export async function renderCollection(template, data, elements = null, parentElement = null) {
     const id = "render-collection";
-    crsbinding.inflationManager.register(id, template);
+    await crsbinding.inflationManager.register(id, template);
 
     let fragment = crsbinding.inflationManager.get(id, data, elements, 0);
 

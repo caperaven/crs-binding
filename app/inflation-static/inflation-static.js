@@ -1,8 +1,8 @@
 export default class InflationStatic extends crsbinding.classes.ViewBase {
-    load() {
+    async load() {
         // 1. setup inflation manager
         const template = this._element.querySelector("template");
-        crsbinding.inflationManager.register("list-items", template);
+        await crsbinding.inflationManager.register("list-items", template);
 
         // 2. render initial list
         this.getData().then(data => {
