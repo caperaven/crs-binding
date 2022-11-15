@@ -15,52 +15,52 @@ export class ProcessProvider extends ProviderBase {
         super.dispose();
     }
 
-    event() {
+    event(event) {
         if (globalThis.crs?.process == null) {
             return console.error("crs-process-api not present or running at this time");
         }
 
         if (this._value[0] == "{") {
-            executeStep(this);
+            executeStep(this, event);
         }
         else {
             const left = this._value.split("{")[0];
             if (left.indexOf("[") == -1) {
-                executeFunction(this);
+                executeFunction(this, event);
             }
             else {
-                executeProcess(this);
+                executeProcess(this, event);
             }
         }
     }
 }
 
-function executeStep(provider) {
+function executeStep(provider, event) {
     const exp  = sanitize(provider._value, provider._context);
-    const step = getObject(exp, provider._context);
+    const step = getObject(exp, provider._context, event);
     const ctx  = crsbinding.data.getContext(provider._context);
 
     crs.process.runStep(step, ctx, null, null);
 }
 
-function executeFunction(provider) {
+function executeFunction(provider, event) {
     const exp     = sanitize(provider._value, provider._context);
     const parts   = exp.split("(");
     const fnParts = parts[0].split(".");
     const stepStr = `{type: "${fnParts[0]}", action: "${fnParts[1]}", args: ${parts[1]}}`.replace(")", "");
-    const step    = getObject(stepStr, provider._context);
+    const step    = getObject(stepStr, provider._context, event);
     const ctx     = crsbinding.data.getContext(provider._context);
 
     crs.process.runStep(step, ctx, null, null);
 }
 
-function executeProcess(provider) {
+function executeProcess(provider, event) {
     const exp          = sanitize(provider._value, provider._context);
     const schemaParts  = exp.split("[");
     const schema       = schemaParts[0];
     const processParts = schemaParts[1].replace("]", "").split("(");
     const process      = processParts[0];
-    const parameters   = getParameters(processParts[1].replace(")", "").trim(), provider._context);
+    const parameters   = getParameters(processParts[1].replace(")", "").trim(), provider._context, event);
     const ctx          = crsbinding.data.getContext(provider._context);
 
     const args = {
@@ -80,12 +80,12 @@ function executeProcess(provider) {
     crsbinding.events.emitter.emit("run-process", args);
 }
 
-function getObject(str, id) {
+function getObject(str, id, event) {
     if (str.indexOf("{") == -1) {
         str = `{${str}}`;
     }
 
-    const fn = new Function("context", `return ${str};`);
+    const fn = new Function("context", "$event", `return ${str};`);
 
     const context = crsbinding.data.getContext(id);
     const binding = crsbinding.data.getData(id).data;
@@ -94,15 +94,15 @@ function getObject(str, id) {
     Object.assign(ctx, binding);
     Object.assign(ctx, context);
 
-    const result = fn(ctx);
+    const result = fn(ctx, event);
     ctx = null;
 
     return result;
 }
 
-function getParameters(str, id) {
+function getParameters(str, id, event) {
     if (str.length == 0) return null;
-    return getObject(str, id);
+    return getObject(str, id, event);
 }
 
 function sanitize(str, bId) {
