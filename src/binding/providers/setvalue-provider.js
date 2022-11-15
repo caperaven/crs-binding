@@ -36,19 +36,38 @@ function createSource() {
 }
 
 function createSourceFrom(exp) {
+    const isExp = exp.indexOf("==") != -1;
     const parts = exp.split("=");
 
-    const value = processRightPart.call(this, parts[1].trim());
+    const value = isExp == true ? processRightExp.call(this, parts.slice(1, parts.length)) : processRightPart.call(this, parts[1].trim());
     const src = processLeftPart.call(this, parts[0].trim(), value);
     return src;
 }
 
+function processRightExp(parts) {
+    const firstPart = parts[0].trim();
+
+    if (firstPart.indexOf("attr(") != -1) {
+        parts[0] = processAttr.call(this, firstPart);
+    }
+    else if (firstPart.indexOf("prop(") != -1) {
+        parts[0] = processProp.call(this, firstPart);
+    }
+    else {
+        parts[0] = `crsbinding.data.getProperty(${this._context}, "${firstPart}")`
+    }
+
+    parts[1] = "==";
+
+    return parts.join(" ");
+}
+
 function processRightPart(part) {
-    if (part.indexOf("attribute(") != -1) {
+    if (part.indexOf("attr(") != -1) {
         return processAttr.call(this, part);
     }
 
-    if (part.indexOf("property(") != -1) {
+    if (part.indexOf("prop(") != -1) {
         return processProp.call(this, part);
     }
 
@@ -56,7 +75,7 @@ function processRightPart(part) {
 }
 
 function processAttr(part) {
-    const parts = part.replace("attribute(", "").replace(")", "").split(",");
+    const parts = part.replace("attr(", "").replace(")", "").split(",");
     const left = parts[0].trim();
     const attr = parts[1].trim();
 
@@ -72,7 +91,7 @@ function processAttr(part) {
 }
 
 function processProp(part) {
-    const parts = part.replace("property(", "").replace(")", "").split(",");
+    const parts = part.replace("prop(", "").replace(")", "").split(",");
     const left = parts[0].trim();
     let path = parts[1].trim();
 

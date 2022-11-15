@@ -25,15 +25,22 @@
 </div>
 
 <div class="toolbar">
-    <button click.setvalue="attr1 = attribute(this, 'data-value')" data-value="Attribute 1">attr - this</button>
-    <button click.setvalue="attr2 = attribute('#input', 'value', true)">attr - selector</button>
-    <button click.setvalue="attr3 = attribute($event.target, 'data-value')" data-value="Attribute 2">attr - event.target</button>
+    <button click.setvalue="attr1 = attr(this, 'data-value')" data-value="Attribute 1">attr - this</button>
+    <button click.setvalue="attr2 = attr('#input', 'value', true)">attr - selector</button>
+    <button click.setvalue="attr3 = attr($event.target, 'data-value')" data-value="Attribute 2">attr - event.target</button>
 </div>
 
 <div class="toolbar">
     <button id="btnTest" click.setvalue="prop1 = property(this, 'dataset.value')" data-value="Whazzaap!">prop - this</button>
-    <button click.setvalue="prop2 = property('#btnTest', 'dataset.value', true)">prop - selector</button>
-    <button click.setvalue="prop3 = property($event.target, 'dataset.value')" data-value="Test Value">prop - event.target</button>
+    <button click.setvalue="prop2 = prop('#btnTest', 'dataset.value', true)">prop - selector</button>
+    <button click.setvalue="prop3 = prop($event.target, 'dataset.value')" data-value="Test Value">prop - event.target</button>
+</div>
+
+<div class="toolbar">
+    <button click.setvalue="state = state == 'state1' ? 'state2' : 'state1'">Toggle Property</button>
+    <button click.setvalue="state = attr('#input', 'value', true) == '1' ? 'state1' : 'state2'">Toggle Property - Attr</button>
+    <button click.setvalue="state = prop('#input', 'value', true) == '1' ? 'state1' : 'state2'">Toggle Property - Prop</button>
+    <div>${state}</div>
 </div>
 
 <label>
