@@ -14,9 +14,9 @@ export default class ValueConversion extends crsbinding.classes.ViewBase {
         this.setProperty("char", 65);
     }
 
-    load() {
+    async load() {
         const template = this._element.querySelector("template");
-        crsbinding.inflationManager.register("display", template);
+        await crsbinding.inflationManager.register("display", template);
         super.load();
     }
 

@@ -19,9 +19,9 @@ export default class List extends ViewBase {
         this.setProperty("items", getData(1000));
     }
 
-    load() {
+    async load() {
         const template = document.querySelector("#tplItem");
-        crsbinding.inflationManager.register("list", template, "context", true);
+        await crsbinding.inflationManager.register("list", template, "context", true);
         this.pageNumber = 0;
         this.pageSize = 10;
 
