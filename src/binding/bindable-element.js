@@ -87,7 +87,7 @@ export class BindableElement extends HTMLElement {
         delete this.__properties;
 
         if (this.load != null) {
-            this.load();
+            await this.load();
         }
 
         this.isReady = true;
