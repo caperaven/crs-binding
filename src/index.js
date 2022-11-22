@@ -1,6 +1,6 @@
 import {compileExp, releaseExp, AsyncFunction} from "./events/compiler.js";
 import {sanitizeExp} from "./expressions/exp-sanitizer.js";
-import {parseElement, parseElements, releaseBinding, releaseChildBinding} from "./binding/parse-element.js";
+import {parseElement, parseElements, releaseBinding, releaseChildBinding, parseHTMLFragment} from "./binding/parse-element.js";
 import {ProviderManager} from "./managers/provider-manager.js";
 import {IdleTaskManager} from "./idle/idleTaskManager.js";
 import {listenOnPath, removeOnPath} from "./binding/listen-on.js";
@@ -112,6 +112,16 @@ const crsbinding = {
         getConverterParts: getConverterParts
     },
 
+    templateProviders: {
+        keys: [],
+        items: {},
+
+        add: (key, fn) => {
+            crsbinding.templateProviders.keys.push(key);
+            crsbinding.templateProviders.items[key] = fn;
+        }
+    },
+
     templates: {
         data: {},
         load: loadTemplate,
@@ -120,12 +130,14 @@ const crsbinding = {
         unload: unloadTemplates,
         unloadAll: unloadAllTemplates,
         loadFromElement: loadFromElement,
-        getById: getTemplateById,
+        getById: getTemplateById
     }
 };
 
 globalThis.crsbinding = crsbinding;
 crsbinding.$globals = crsbinding.data.addObject("globals");
 crsbinding.data.globals = crsbinding.data.getValue(crsbinding.$globals);
+
+crsbinding.templateProviders.add("src", parseHTMLFragment);
 
 globalThis.crsb = crsbinding;

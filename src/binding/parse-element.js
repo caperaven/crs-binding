@@ -32,8 +32,12 @@ export async function parseElement(element, context, options) {
         await parseElements(element.children, context, options);
     }
 
-    if (nodeName == "template" && element.getAttribute("src") != null) {
-        return await parseHTMLFragment(element, context, options);
+    if (nodeName == "template") {
+        for (const key of crsbinding.templateProviders.keys) {
+            if (element.getAttribute(key) != null) {
+                return await crsbinding.templateProviders.items[key](element, context, options);
+            }
+        }
     }
 
     const attributes = Array.from(element.attributes || []);
@@ -97,7 +101,7 @@ async function parseAttribute(attr, context, ctxName, parentId) {
     return provider;
 }
 
-async function parseHTMLFragment(element, context, options) {
+export async function parseHTMLFragment(element, context, options) {
     if (options?.folder == null) return;
 
     const file = crsbinding.utils.relativePathFrom(options.folder, element.getAttribute('src'));
