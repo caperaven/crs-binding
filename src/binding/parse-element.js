@@ -102,9 +102,8 @@ async function parseAttribute(attr, context, ctxName, parentId) {
 }
 
 export async function parseHTMLFragment(element, context, options) {
-    if (options?.folder == null) return;
-
-    const file = crsbinding.utils.relativePathFrom(options.folder, element.getAttribute('src'));
+    const folder = options?.folder || "/";
+    const file = crsbinding.utils.relativePathFrom(folder, element.getAttribute('src'));
 
     const tpl = document.createElement("template");
     tpl.innerHTML = await fetch(file).then(result => result.text());
