@@ -17,4 +17,9 @@
     <input value.bind="data.lastName">
 </label>
 
-<div id="summary" class="booking">Booking for ${data.firstName} ${data.lastName}</div>
+<label id="age">
+    <div>&{form.age}</div>
+    <input type="number" value.bind="data.age">
+</label>
+
+<div id="summary" class="booking">Booking for ${data.firstName} ${data.lastName} ${data.age != null ? 'who is ' + data.age : ''}</div>

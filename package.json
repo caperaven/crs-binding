@@ -9,7 +9,8 @@
     "scripts": {
         "test": "deno test --allow-read tests/unit",
         "testui": "ui_testing --folder ./tests/ui --auto-open --server http://localhost",
-        "bundle": "deno run --allow-read --allow-write --allow-env --allow-run ./build/package.js"
+        "bundle": "deno run --allow-read --allow-write --allow-env --allow-run ./build/package.js",
+        "run": "caddy run"
     },
     "keywords": [
         "binding"
