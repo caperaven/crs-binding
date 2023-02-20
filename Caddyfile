@@ -1,0 +1,11 @@
+{
+    admin off
+}
+
+localhost {
+    header {
+        Cache-Control "no-cache, no-store, must-revalidate"
+    }
+    encode zstd gzip
+    file_server browse
+}
