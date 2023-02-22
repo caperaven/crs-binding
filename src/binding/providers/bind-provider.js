@@ -46,7 +46,7 @@ export class BindProvider extends OneWayProvider {
     }
 
     _number(value) {
-        if (value == null || value == "") return null;
+        if (value == null || value === "") return null;
         return Number(value);
     }
 

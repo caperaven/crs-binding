@@ -39,4 +39,33 @@ describe("bind-provider", async () => {
             assertEquals(crsbinding.data.getProperty(id, "value"), null);
         }
     });
+
+    it("should allow 0 as input", async () => {
+        // Arrange
+        const id = crsbinding.data.addObject("value", {value: null});
+
+        const input = document.createElement("input");
+        input.type = "number";
+        instance = new module.BindProvider(input, id, "value", "value");
+
+        const addEventListener = input.addEventListener;
+        input.addEventListener = (event, callback) => {
+
+            addEventListener(event, callback);
+
+            // Act
+            input.value = "123";
+            input.performEvent("change", input);
+
+            // Assert
+            assertEquals(crsbinding.data.getProperty(id, "value"), 123);
+
+            // Act
+            input.value = "0";
+            input.performEvent("change", input);
+
+            // Assert
+            assertEquals(crsbinding.data.getProperty(id, "value"), 0);
+        }
+    });
 });

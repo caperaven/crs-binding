@@ -284,7 +284,7 @@ export class BindingData {
             value = Boolean(value);
         }
         else if (dataType === "number" || (dataType == null && typeof value !== "object" && (isNaN(value) == false && value != ""))) {
-            value = value == null || value == "" ? null : Number(value);
+            value = value == null || value === "" ? null : Number(value);
         }
 
         if (obj.type == "data") {
