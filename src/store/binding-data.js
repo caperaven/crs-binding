@@ -221,7 +221,7 @@ export class BindingData {
      * @param property {string} property path to set the value on
      * @param value {any} the value to set
      */
-    setProperty(id, property, value, convert = true) {
+    setProperty(id, property, value, convert = true, dataType = null) {
         id = this._getContextId(id);
 
         let oldValue = this.getProperty(id, property, false);
@@ -243,7 +243,7 @@ export class BindingData {
             oldValue && this._unlinkArrayItem(oldValue);
         }
 
-        this._setContextProperty(id, property, value, {oldValue: oldValue, convert: convert});
+        this._setContextProperty(id, property, value, {oldValue: oldValue, convert: convert, dataType: dataType});
 
         if (value && value.__uid) {
             this.linkToArrayItem(id, property, value.__uid);
